@@ -19,7 +19,7 @@ import EyeHiddenIcon from '@/Components/SvgIcons/EyeHidden';
 export default function Login({ status, canResetPassword }) {
     const [showPass, setShowPass] = useState(false)
 
-    
+
     const { data, setData, post, processing, errors, reset } = useForm({
         email: '',
         password: '',
@@ -40,11 +40,11 @@ export default function Login({ status, canResetPassword }) {
 
     return (
         <GuestLayout>
-            <Head title="Log in | Maketop.me" />
+            <Head title="Log in | E-Visa" />
 
             {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
 
-            <h3 className='text-center text-[25px] leading-[30px] text-text-primary mb-5 md:text-[43px] md:leading-[51px] md:mb-[30px] font-semibold '>Welcome Back</h3>
+            <h3 className='text-center text-[25px] leading-[30px] text-text-primary mb-4 md:text-[38px] md:leading-[48px] md:mb-5 font-semibold '>Welcome Back</h3>
 
             <form onSubmit={submit}>
 
@@ -59,20 +59,22 @@ export default function Login({ status, canResetPassword }) {
                         onChange={(e) => setData('email', e.target.value)}
                         iconPrev={<EmailIcon className='h-4 sm:h-5' />}
                         required
-                        autoComplete="username"
+                        placeholder="Enter Email Address"
+                        autoComplete="email"
 
                     />
 
-                    <ErrorField className="mt-[14px]" content={errors.email} />
+                    {errors.email && <ErrorField className="mt-[14px]" content={errors.email} />}
                 </div>
 
-                <div className='mt-4 md:mt-5'>
+                <div className='mt-4'>
                     <LabelField htmlFor="password" content="Password" />
 
                     <InputBox
                         id="password"
                         type={showPass ? 'text' : 'password'}
                         name="password"
+                        placeholder="Enter Password"
                         value={data.password}
                         className="mt-1 block w-full"
                         autoComplete="current-password"
@@ -124,6 +126,11 @@ export default function Login({ status, canResetPassword }) {
                     <Google className="h-4 md:h-5" />
                     Sign in with Google
                 </a>
+
+                {/*<a href={route('google.redirect')} className="w-full rounded md:rounded-md bg-side-and-button hover:bg-card-and-hover py-[7px] md:py-2 text-text-primary text-xs md:text-sm flex items-center justify-center ga-1.5 mt-2">*/}
+                {/*    <Google className="h-4 md:h-5" />*/}
+                {/*    Sign in with Facebook*/}
+                {/*</a>*/}
 
                 <p className='small-text mt-4 md:mt-5'>
                     Don't have an account?

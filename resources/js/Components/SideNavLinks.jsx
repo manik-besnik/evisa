@@ -1,7 +1,6 @@
 import {Link} from '@inertiajs/react';
 import ArrowUp from '@/Components/SvgIcons/ArrowUp';
 import ArrowRight from '@/Components/SvgIcons/ArrowRight';
-import DribbbleIcon from '@/Components/SvgIcons/Dribbble';
 import BehanceIcon from '@/Components/SvgIcons/Behance';
 import TwitterIcon from '@/Components/SvgIcons/Twitter';
 import YoutubeIcon from '@/Components/SvgIcons/Youtube';
@@ -13,249 +12,52 @@ import MediumIcon from '@/Components/SvgIcons/Medium';
 import {accountType, taskType} from "@/Components/Constant/index.js";
 import {useState} from 'react';
 import TiktokIcon from "@/Components/SvgIcons/Tiktok";
+import {GrVisa} from "react-icons/gr";
+import { PiNetworkXBold } from "react-icons/pi";
 
 export default function SideNavLinks() {
 
     const [products, setProducts] = useState([
         {
-            name: 'Dribbble',
+            name: 'Visa',
             accountType: accountType.dribbble,
-            icon: <DribbbleIcon/>,
+            icon: <GrVisa/>,
             isOpen: route().params.account_type === accountType.dribbble,
             links: [
                 {
-                    name: 'Follower',
+                    name: 'Visa List',
                     type: taskType.follow,
                 },
                 {
-                    name: 'Like',
+                    name: 'Add Visa',
                     type: taskType.like,
                 },
                 {
-                    name: 'Save',
+                    name: 'Applications',
                     type: taskType.save,
-                },
-                {
-                    name: 'Comments',
-                    type: taskType.comment,
                 },
             ]
         },
         {
-            name: 'Behance',
+            name: 'Jobs',
             accountType: accountType.behance,
-            icon: <BehanceIcon/>,
+            icon: <PiNetworkXBold />,
             isOpen: route().params.account_type === accountType.behance,
             links: [
                 {
-                    name: 'Follower',
+                    name: 'Job List',
                     type: taskType.follow,
                 },
                 {
-                    name: 'Like',
+                    name: 'Add Job',
                     type: taskType.like,
                 },
                 {
-                    name: 'Save',
+                    name: 'Applications',
                     type: taskType.save,
-                },
-                {
-                    name: 'Comments',
-                    type: taskType.comment,
-                },
-            ]
-        },
-        {
-            name: 'ArtStation',
-            accountType: accountType.artstation,
-            icon: <ArtstationIcon/>,
-            isOpen: route().params.account_type === accountType.artstation,
-            links: [
-                {
-                    name: 'Follower',
-                    type: taskType.follow,
-                },
-                {
-                    name: 'Like',
-                    type: taskType.like,
-                },
-                {
-                    name: 'Save',
-                    type: taskType.save,
-                },
-                {
-                    name: 'Comments',
-                    type: taskType.comment,
-                },
-            ]
-        },
-        {
-            name: 'Medium',
-            accountType: accountType.medium,
-            icon: <MediumIcon/>,
-            isOpen: route().params.account_type === accountType.medium,
-            links: [
-                {
-                    name: 'Follower',
-                    type: taskType.follow,
-                },
-                {
-                    name: 'Clap',
-                    type: taskType.clap,
-                },
-                {
-                    name: 'Save',
-                    type: taskType.save,
-                },
-                {
-                    name: 'Comments',
-                    type: taskType.comment,
-                },
-            ]
-        },
-        {
-            name: 'Youtube',
-            accountType: accountType.youtube,
-            icon: <YoutubeIcon/>,
-            isOpen: route().params.account_type === accountType.youtube,
-            links: [
-                {
-                    name: 'Subscriber',
-                    type: taskType.subscribe,
-                },
-                {
-                    name: 'Like',
-                    type: taskType.like,
-                },
-                {
-                    name: 'Comment',
-                    type: taskType.comment,
-                },
-            ]
-        },
-        {
-            name: 'Facebook',
-            accountType: accountType.facebook,
-            icon: <FacebookIcon/>,
-            isOpen: route().params.account_type === accountType.facebook,
-            links: [
-                {
-                    name: 'Follower',
-                    type: taskType.follow,
-                },
-                {
-                    name: 'Like',
-                    type: taskType.like,
-                },
-                {
-                    name: 'Save',
-                    type: taskType.save
-                },
-                {
-                    name: 'Comment',
-                    type: taskType.comment,
                 }
             ]
-        },
-        {
-            name: 'Instagram',
-            accountType: accountType.instagram,
-            icon: <InstagramIcon/>,
-            isOpen: route().params.account_type === accountType.instagram,
-            links: [
-                {
-                    name: 'Follower',
-                    type: taskType.follow,
-                },
-                {
-                    name: 'Like',
-                    type: taskType.like,
-                },
-                {
-                    name: 'Save',
-                    type: taskType.save
-                },
-                {
-                    name: 'Comment',
-                    type: taskType.comment,
-                }
-            ]
-        },
-        {
-            name: 'Linkedin',
-            accountType: accountType.linkedin,
-            icon: <LinkedinIcon/>,
-            isOpen: route().params.account_type === accountType.linkedin,
-            links: [
-                {
-                    name: 'Follower',
-                    type: taskType.follow,
-                },
-                {
-                    name: 'Like',
-                    type: taskType.like,
-                },
-                {
-                    name: 'Save',
-                    type: taskType.save
-                },
-                {
-                    name: 'Comment',
-                    type: taskType.comment,
-                }
-            ]
-        },
-        {
-            name: 'X (Twitter)',
-            accountType: accountType.twitter,
-            icon: <TwitterIcon/>,
-            isOpen: route().params.account_type === accountType.twitter,
-            links: [
-                {
-                    name: 'Follower',
-                    type: taskType.follow,
-                },
-                {
-                    name: 'Like',
-                    type: taskType.like,
-                },
-                {
-                    name: 'Save',
-                    type: taskType.save
-                },
-                {
-                    name: 'Comment',
-                    type: taskType.comment,
-                }
-            ]
-        },
-        {
-            name: 'Tiktok',
-            accountType: accountType.tiktok,
-            icon: <TiktokIcon/>,
-            isOpen: route().params.account_type === accountType.tiktok,
-            links: [
-                {
-                    name: 'Follower',
-                    type: taskType.follow,
-                },
-                {
-                    name: 'Like',
-                    type: taskType.like,
-                    isComing: true
-                },
-                {
-                    name: 'Save',
-                    type: taskType.save,
-                    isComing: true
-                },
-                {
-                    name: 'Comment',
-                    type: taskType.comment,
-                    isComing: true
-                }
-            ]
-        },
+        }
     ])
 
     const handleToggle = (index) => {
