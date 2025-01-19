@@ -8,16 +8,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * @property int $id
  * @property string $name
- * @property string $nationality
  */
-class Country extends Model
+class Language extends Model
 {
     use SoftDeletes;
 
-    protected $table = 'countries';
-
-    protected $fillable = [
-        'name',
-        'nationality'
-    ];
+    protected $table = 'languages';
 }
