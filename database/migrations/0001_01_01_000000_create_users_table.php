@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->unsignedTinyInteger('role')->nullable();
+            $table->unsignedTinyInteger('role_id')->default(2)->nullable();
             $table->string('provider_id')->nullable();
             $table->string('name');
             $table->string('email')->unique();
