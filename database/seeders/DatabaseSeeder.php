@@ -239,7 +239,7 @@ class DatabaseSeeder extends Seeder
 
             ['name' => 'Bangla', 'created_at' => now(), 'updated_at' => now()],
             ['name' => 'English', 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'Mandarin Chinese', 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Chinese', 'created_at' => now(), 'updated_at' => now()],
             ['name' => 'Hindi', 'created_at' => now(), 'updated_at' => now()],
             ['name' => 'Spanish', 'created_at' => now(), 'updated_at' => now()],
             ['name' => 'French', 'created_at' => now(), 'updated_at' => now()],
