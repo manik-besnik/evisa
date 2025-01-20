@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -25,12 +24,12 @@ return new class extends Migration
             $table->string('mother_name_arabic')->nullable();
             $table->string('father_name')->nullable();
             $table->string('father_name_arabic')->nullable();
+            $table->string('religion');
             $table->string('faith')->nullable();
             $table->string('qualification')->nullable();
             $table->string('profession')->nullable();
-            $table->unsignedTinyInteger('marital_status');
-            $table->unsignedTinyInteger('gender');
-            $table->unsignedTinyInteger('religion');
+            $table->unsignedTinyInteger('marital_status')->comment('\App\Enums\MaritalStatus');
+            $table->unsignedTinyInteger('gender')->comment('\App\Enums\Gender');
             $table->date('date_of_birth');
             $table->timestamps();
         });

@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Schema;
  * @property int $processing_type
  * @property int $visa_type
  * @property int $group
+ * @property int $status
  * @property string $name
  * @property string $documents
  */
@@ -28,9 +29,10 @@ return new class extends Migration {
             $table->foreignId('personal_info_id')->nullable();
             $table->foreignId('passport_id')->nullable();
             $table->foreignId('guarantor_id')->nullable();
-            $table->unsignedTinyInteger('processing_type');
-            $table->unsignedTinyInteger('visa_type');
-            $table->unsignedTinyInteger('group');
+            $table->unsignedTinyInteger('processing_type')->comment('\App\Enums\VisaProcessingType');
+            $table->unsignedTinyInteger('visa_type')->comment('\App\Enums\VisaType');
+            $table->unsignedTinyInteger('group')->comment('\App\Enums\Group');
+            $table->unsignedTinyInteger('status')->comment('\App\Enums\VisaStatus');
             $table->string('name');
             $table->json('documents')->nullable();
             $table->timestamps();
