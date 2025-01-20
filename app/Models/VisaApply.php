@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $group
  * @property string $name
  * @property string|array $documents
+ * @property int $status
  */
 class VisaApply extends Model
 {
@@ -31,5 +32,6 @@ class VisaApply extends Model
         'group',
         'name',
         'documents',
+        'status',
     ];
 }
