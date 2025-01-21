@@ -36,10 +36,9 @@ export const visaStatuses = [
 ];
 
 export const visaTypes = [
-    {id: 1, name: "Short Term"},
-    {id: 2, name: "Long Term"},
-    {id: 3, name: "Multiple 30 Days"},
-    {id: 4, name: "Only 14 Days"},
-    {id: 5, name: "Only 96 Hours"}
+    {id: 1, name: "Short Term Visa"},
+    {id: 2, name: "Long Term Visa"},
+    {id: 3, name: "Multiple 30 Days Visa"},
+    {id: 4, name: "14 Days Visa"},
+    {id: 5, name: "96 Hours Visa"}
 ];
-
