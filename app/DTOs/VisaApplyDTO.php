@@ -14,6 +14,7 @@ class VisaApplyDTO
 {
 
     /** Visa Info */
+    public int $userId;
     public string $personalName;
     public int $processingType;
     public int $visaType;
@@ -64,6 +65,7 @@ class VisaApplyDTO
     {
         $request->validate([
             /** Visa Info */
+            'user_id' => ['required'],
             'personal_name' => ['required', 'string', 'min:2'],
             'processing_type' => ['required', Rule::in(array_column(VisaProcessingType::cases(), 'value'))],
             'visa_type' => ['required', Rule::in(array_column(VisaType::cases(), 'value'))],
@@ -115,6 +117,7 @@ class VisaApplyDTO
         $instance = new self;
 
         /**  Visa Info */
+        $instance->userId = (int)$request->input('user_id');
         $instance->personalName = $request->input('personal_name');
         $instance->processingType = (int)$request->input('processing_type');
         $instance->visaType = (int)$request->input('visa_type');
