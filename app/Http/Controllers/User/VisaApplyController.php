@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
-use App\Models\VisaApply;
 use App\Http\Controllers\Controller;
+use App\Models\VisaApply;
 use Illuminate\Http\Request;
 
 class VisaApplyController extends Controller

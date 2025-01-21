@@ -2,6 +2,8 @@
 
 namespace App\DTOs;
 
+use Illuminate\Http\Request;
+
 class VisaApplyDTO
 {
 
@@ -51,4 +53,19 @@ class VisaApplyDTO
 
     /** Documents */
     public array $documents = [];
+
+    public static function fromRequest(Request $request): VisaApplyDTO
+    {
+        $request->validate([
+            'personal_name' => ['required', 'string', 'min:2']
+        ]);
+
+
+        $instance = new self;
+        $instance->personalName = $request->input('personal_name');
+
+        return $instance;
+
+
+    }
 }

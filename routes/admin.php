@@ -8,4 +8,6 @@ Route::prefix('admin.')->name('admin.')->group(function () {
     Route::get('dashboard',[DashboardController::class,'index'])
         ->name('dashboard.index');
 
+    Route::post('visa-apply',);
+
 })->middleware(['auth','admin']);

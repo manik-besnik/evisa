@@ -29,11 +29,13 @@ return new class extends Migration {
             $table->foreignId('personal_info_id')->nullable();
             $table->foreignId('passport_id')->nullable();
             $table->foreignId('guarantor_id')->nullable();
+            $table->foreignId('applied_by')->nullable();
             $table->unsignedTinyInteger('processing_type')->comment('\App\Enums\VisaProcessingType');
             $table->unsignedTinyInteger('visa_type')->comment('\App\Enums\VisaType');
             $table->unsignedTinyInteger('group')->comment('\App\Enums\Group');
-            $table->unsignedTinyInteger('status')->comment('\App\Enums\VisaStatus');
+            $table->unsignedTinyInteger('status')->comment('\App\Enums\VisaStatus')->default(\App\Enums\VisaStatus::PENDING->value);
             $table->string('name');
+            $table->string('visa_document')->nullable();
             $table->json('documents')->nullable();
             $table->timestamps();
         });
