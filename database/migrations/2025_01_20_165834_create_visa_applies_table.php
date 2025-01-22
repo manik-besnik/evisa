@@ -26,9 +26,6 @@ return new class extends Migration {
         Schema::create('visa_applies', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
-            $table->foreignId('personal_info_id')->nullable();
-            $table->foreignId('passport_id')->nullable();
-            $table->foreignId('guarantor_id')->nullable();
             $table->foreignId('applied_by')->nullable();
             $table->unsignedTinyInteger('processing_type')->comment('\App\Enums\VisaProcessingType');
             $table->unsignedTinyInteger('visa_type')->comment('\App\Enums\VisaType');

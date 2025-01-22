@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('guarantors', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('visa_apply_id')->nullable();
             $table->foreignId('nationality')->constrained('countries')->cascadeOnDelete();
             $table->string('name');
             $table->string('passport_no')->nullable();

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @property int $id
  * @property int $user_id
+ * @property int $visa_apply_id
  * @property int $passport_issue_country
  * @property string $passport_type
  * @property string $passport_no
@@ -22,6 +23,7 @@ class Passport extends Model
 
     protected $fillable = [
         'user_id',
+        'visa_apply_id',
         'passport_issue_country',
         'passport_type',
         'passport_no',

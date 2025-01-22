@@ -13,6 +13,7 @@ return new class extends Migration {
         Schema::create('personal_infos', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('visa_apply_id')->nullable();
             $table->foreignId('current_nationality')->constrained('countries')->cascadeOnDelete();
             $table->foreignId('prev_nationality')->constrained('countries')->cascadeOnDelete();
             $table->foreignId('birth_country')->constrained('countries')->cascadeOnDelete();

@@ -1,13 +1,14 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\VisaApplyController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin.')->name('admin.')->group(function () {
 
-    Route::get('dashboard',[DashboardController::class,'index'])
+    Route::get('dashboard', [DashboardController::class, 'index'])
         ->name('dashboard.index');
 
-    Route::post('visa-apply',);
+    Route::resource('visa-applies', VisaApplyController::class);
 
-})->middleware(['auth','admin']);
+})->middleware(['auth', 'admin']);
