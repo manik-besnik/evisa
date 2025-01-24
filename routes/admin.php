@@ -12,6 +12,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         ->name('dashboard.index');
 
     Route::resource('visa-applies', VisaApplyController::class);
+
     Route::get('admins', [AdminController::class, 'index'])->name('admins.index');
     Route::post('admins/store', [AdminController::class, 'store'])->name('admins.store');
     Route::put('admins/update/{id}', [AdminController::class, 'update'])->name('admins.update');

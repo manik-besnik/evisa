@@ -5,6 +5,7 @@ import ArrowRight from '@/Components/SvgIcons/ArrowRight';
 import {useState} from 'react';
 import {GrVisa} from "react-icons/gr";
 import {PiNetworkXBold} from "react-icons/pi";
+import {FaPeopleGroup, FaPeopleRoof} from "react-icons/fa6";
 
 export default function SideNavLinks() {
 
@@ -12,16 +13,14 @@ export default function SideNavLinks() {
         {
             name: 'Visa',
             icon: <GrVisa/>,
-            isOpen: false,
+            isOpen: route().current('admin.visa-applies.*'),
             links: [
                 {
-                    name: 'Visa List',
+                    name: 'Visa Apply List',
+                    route: route('admin.visa-applies.index')
                 },
                 {
-                    name: 'Add Visa',
-                },
-                {
-                    name: 'Applications',
+                    name: 'Add New Application',
                 },
             ]
         },
@@ -32,6 +31,38 @@ export default function SideNavLinks() {
             links: [
                 {
                     name: 'Job List',
+                },
+                {
+                    name: 'Add Job',
+                },
+                {
+                    name: 'Applications',
+                }
+            ]
+        },
+        {
+            name: 'Agency',
+            icon: <FaPeopleRoof/>,
+            isOpen: false,
+            links: [
+                {
+                    name: 'Agency List',
+                },
+                {
+                    name: 'Add Job',
+                },
+                {
+                    name: 'Applications',
+                }
+            ]
+        },
+        {
+            name: 'User',
+            icon: <FaPeopleGroup/>,
+            isOpen: false,
+            links: [
+                {
+                    name: 'User List',
                 },
                 {
                     name: 'Add Job',
@@ -81,28 +112,19 @@ export default function SideNavLinks() {
                         <ArrowUp class={`${product.isOpen ? 'rotate-0' : 'rotate-180'} transition-all duration-500`}/>
                     </div>
 
-                    {/* className={`transition-height border-t border-main-outline pt-[10px] mt-[10px] overflow-hidden ${product.isOpen ? 'max-h-screen duration-1000 ease-in-out' : 'max-h-0'}`}> */}
-
                     <div className={`overflow-hidden`}
                          style={{maxHeight: product.isOpen ? '500px' : '0', transition: 'max-height 0.5s ease-in-out'}}>
                         <div className='px-2.5 pb-2.5'>
                             <hr className='border-t border-t-main-outline pb-2.5'/>
                             {product.links.map((link, i) =>
-                                <Link key={i} href={route('task.create',
-                                    {account_type: product.accountType, task_type: link.type})}
-                                      className={`${link.isComing ? 'pointer-events-none' : ''} flex items-center justify-between mb-[10px] last:mb-0 text-medium text-sm text-font-medium text-text-primary`}>
+                                <Link key={i} href={link.route}
+                                      className={`flex items-center justify-between mb-[10px] last:mb-0 text-medium text-sm text-font-medium text-text-primary`}>
 
                                     <div className='flex items-center gap-[10px]'>
                                         <ArrowRight></ArrowRight>
                                         {link.name}
                                     </div>
 
-                                    {link.isComing ?
-                                        <div
-                                            className='border border-main-outline bg-main-and-focus rounded py-1 px-1.5 text-[10px] leading-3 text-text-primary'>
-                                            Coming Soon
-                                        </div> : null
-                                    }
 
                                 </Link>)}
                         </div>

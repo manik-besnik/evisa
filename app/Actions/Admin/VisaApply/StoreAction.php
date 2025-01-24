@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\Admin\Visa;
+namespace App\Actions\Admin\VisaApply;
 
 use App\DTOs\VisaApplyDTO;
 use App\Supports\VisaApplyAction;

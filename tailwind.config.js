@@ -25,8 +25,9 @@ export default {
                 'side-and-button': '#EFE9DB',
                 'focus-outline': '#E4DECC',
                 'main-outline': '#C7BDA8',
-                'coin': '#FFA600',
-                'warning': '#F95D6A',
+                'primary': '#B48723',
+                'primary-dark': '#9A741A',
+                'warning': '#EE2F2E',
                 'success': '#00B47D',
             },
 

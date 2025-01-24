@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Actions\Admin\VisaApply\IndexAction;
 use App\Http\Controllers\Controller;
 use App\Models\VisaApply;
 use Illuminate\Http\Request;
@@ -11,9 +12,9 @@ class VisaApplyController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(IndexAction $indexAction): \Inertia\Response
     {
-        //
+        return $indexAction->execute();
     }
 
     /**
