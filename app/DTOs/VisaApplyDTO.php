@@ -162,4 +162,5 @@ class VisaApplyDTO
         return $instance;
 
     }
+
 }

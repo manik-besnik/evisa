@@ -15,6 +15,17 @@ class VisaApplyAction
     {
         try {
 
+            $documents = [];
+
+            foreach ($visaApplyDTO->documents as $document) {
+                $fullPath = FileUpload::execute($document['file']);
+
+                $documents[] = [
+                    'name' => $document['name'],
+                    'url' => $fullPath,
+                ];
+            }
+
             /** Store Visa Info */
             $visaApply = new VisaApply();
             $visaApply->user_id = $visaApplyDTO->userId;
@@ -24,6 +35,7 @@ class VisaApplyAction
             $visaApply->group = $visaApplyDTO->group;
             $visaApply->status = VisaStatus::PENDING->value;
             $visaApply->applied_by = auth()->id();
+            $visaApply->documents = $documents;
             $visaApply->save();
 
             /** Personal Info Store */
