@@ -36,4 +36,5 @@ Route::get('google',function(){
 
 Route::get('admin/dashboard',[DashboardController::class,'index'])->name('admin.dashboard.index');
 
+
 require __DIR__.'/auth.php';
