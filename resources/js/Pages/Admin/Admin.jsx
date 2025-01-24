@@ -3,10 +3,11 @@ import {Head, router} from "@inertiajs/react";
 import CreateAdminModal from "@/Components/Admin/Admin/CreateAdminModal.jsx";
 import EditAdminModal from "@/Components/Admin/Admin/EditAdminModal.jsx";
 import {useState} from "react";
-import {FiEdit} from "react-icons/fi";
+import {FiEdit, FiPlus} from "react-icons/fi";
 import DeleteConfirmModal from "@/Components/DeleteConfirmModal.jsx";
 import {toast} from "react-toastify";
 import {FaTrashAlt} from "react-icons/fa";
+import DangerButton from "@/Components/DangerButton.jsx";
 
 const Admin = ({admins}) => {
 
@@ -45,7 +46,8 @@ const Admin = ({admins}) => {
 
         <div className="flex justify-between items-center mb-3">
             <h3 className=''>Admins</h3>
-            <button className='btn-primary' onClick={() => setShow(true)}>Add Admin</button>
+            <button className='btn-primary' onClick={() => setShow(true)}><FiPlus/> Add Admin
+            </button>
         </div>
 
         <div className="table-wrapper">
@@ -68,9 +70,10 @@ const Admin = ({admins}) => {
                             <button className='btn-primary' onClick={() => handleEdit(admin)}>
                                 <FiEdit/>
                             </button>
-                            <button className='btn-primary' onClick={() => handleDelete(admin)}>
+                            <DangerButton onClick={() => handleDelete(admin)}>
                                 <FaTrashAlt/>
-                            </button>
+                            </DangerButton>
+
                         </td>
                     </tr>
                 ))}

@@ -1,7 +1,7 @@
 import Authenticated from "@/Layouts/AuthenticatedLayout.jsx";
 import CreateRoleModal from "@/Components/Admin/Role/CreateRoleModal.jsx";
 import {useState} from "react";
-import {FiEdit} from "react-icons/fi";
+import {FiEdit, FiPlus} from "react-icons/fi";
 import EditRoleModal from "@/Components/Admin/Role/EditRoleModal.jsx";
 import {Head} from "@inertiajs/react";
 
@@ -17,11 +17,13 @@ const Role = ({roles}) => {
     }
 
     return <Authenticated>
-        <Head title="Role | Admin Dashboard" />
+        <Head title="Role | Admin Dashboard"/>
 
         <div className="flex justify-between items-center mb-3">
             <h3 className=''>Roles</h3>
-            <button className='btn-primary' onClick={() => setShow(true)}>Add New Role</button>
+            <button className='btn-primary' onClick={() => setShow(true)}><FiPlus/>
+                Add New Role
+            </button>
         </div>
 
         <div className="table-wrapper">
