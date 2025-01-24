@@ -14,7 +14,9 @@ use Illuminate\Notifications\Notifiable;
  * @property int|null $role_id
  * @property string|null $provider_id
  * @property string $name
- * @property string $username
+ * @property string|null $username
+ * @property string $password
+ * @property string|null $avatar
  * @property string $email
  */
 class User extends Authenticatable
@@ -32,6 +34,7 @@ class User extends Authenticatable
         'name',
         'email',
         'username',
+        'avatar',
         'password',
     ];
 

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->nullable();
             $table->string('name');
-            $table->text('name');
+            $table->text('url');
             $table->text('type');
             $table->float('size');
             $table->timestamps();

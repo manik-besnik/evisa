@@ -34,5 +34,6 @@ return [
             'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
         ],
     ],
+    'local_environment' => env('LOCAL_ENVIRONMENT',false)
 
 ];

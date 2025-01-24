@@ -1,6 +1,5 @@
 import {Link, usePage} from '@inertiajs/react';
 import Dropdown from '@/Components/Dropdown';
-import GoProIcon from '@/Components/SvgIcons/GoPro';
 import BarIcon from '@/Components/SvgIcons/Bar';
 import Avatar from "@/Components/SvgIcons/Avatar.jsx";
 
@@ -18,10 +17,10 @@ export default function NavBar({useToggleSideNav}) {
                       className={`${route().current() === 'google.redirect' && 'bg-card-and-hover'} px-3 py-2 text-[14px] font-medium leading-[20px] text-text-primary hover:bg-side-and-button rounded-md`}> Admins
                 </Link>
                 <Link href={route('google.redirect')}
-                      className={`${route().current() === 'google.redirect' && 'bg-card-and-hover'} px-3 py-2 text-[14px] font-medium leading-[20px] text-text-primary hover:bg-side-and-button rounded-md`}> Clients
+                      className={`${route().current() === 'google.redirect' && 'bg-card-and-hover'} px-3 py-2 text-[14px] font-medium leading-[20px] text-text-primary hover:bg-side-and-button rounded-md`}> Roles
                 </Link>
                 <Link href={route('google.redirect')}
-                      className={`${route().current() === 'google.redirect' && 'bg-card-and-hover'} px-3 py-2 text-[14px] font-medium leading-[20px] text-text-primary hover:bg-side-and-button rounded-md`}> General
+                      className={`${route().current() === 'google.redirect' && 'bg-card-and-hover'} px-3 py-2 text-[14px] font-medium leading-[20px] text-text-primary hover:bg-side-and-button rounded-md`}> Permissions
                     Users
                 </Link>
             </div>

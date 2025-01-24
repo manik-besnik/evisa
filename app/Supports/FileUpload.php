@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\File;
 
 class FileUpload
 {
-    public static function execute(UploadedFile $uploadedFile, string|null $oldFilePath = null, string|null $destinationPath = null): ?string
+    public static function execute(UploadedFile $uploadedFile, string|null $oldFilePath = null, string|null $destinationPath = null): string|null
     {
         $file = $uploadedFile;
 
@@ -26,12 +26,15 @@ class FileUpload
                 $destinationPath = 'uploads';
             }
 
+            if ((bool)config('services.local_environment')) {
+                $destinationPath = 'public/' . $destinationPath;
+            }
 
             $fileName = uniqid() . '-' . time() . '.' . $file->getClientOriginalExtension();
 
             $file->move(public_path($destinationPath), $fileName);
 
-            $filePath = 'public/' . $destinationPath . '/' . $fileName;
+            $filePath = $destinationPath . '/' . $fileName;
 
             return request()->getSchemeAndHttpHost() . '/' . $filePath;
 

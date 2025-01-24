@@ -1,60 +1,43 @@
 import {Link} from '@inertiajs/react';
 import ArrowUp from '@/Components/SvgIcons/ArrowUp';
 import ArrowRight from '@/Components/SvgIcons/ArrowRight';
-import BehanceIcon from '@/Components/SvgIcons/Behance';
-import TwitterIcon from '@/Components/SvgIcons/Twitter';
-import YoutubeIcon from '@/Components/SvgIcons/Youtube';
-import FacebookIcon from '@/Components/SvgIcons/Facebook';
-import InstagramIcon from '@/Components/SvgIcons/Instagram';
-import ArtstationIcon from '@/Components/SvgIcons/Artstation';
-import LinkedinIcon from '@/Components/SvgIcons/Linkedin';
-import MediumIcon from '@/Components/SvgIcons/Medium';
-import {accountType, taskType} from "@/Components/Constant/index.js";
+
 import {useState} from 'react';
-import TiktokIcon from "@/Components/SvgIcons/Tiktok";
 import {GrVisa} from "react-icons/gr";
-import { PiNetworkXBold } from "react-icons/pi";
+import {PiNetworkXBold} from "react-icons/pi";
 
 export default function SideNavLinks() {
 
     const [products, setProducts] = useState([
         {
             name: 'Visa',
-            accountType: accountType.dribbble,
             icon: <GrVisa/>,
-            isOpen: route().params.account_type === accountType.dribbble,
+            isOpen: false,
             links: [
                 {
                     name: 'Visa List',
-                    type: taskType.follow,
                 },
                 {
                     name: 'Add Visa',
-                    type: taskType.like,
                 },
                 {
                     name: 'Applications',
-                    type: taskType.save,
                 },
             ]
         },
         {
             name: 'Jobs',
-            accountType: accountType.behance,
-            icon: <PiNetworkXBold />,
-            isOpen: route().params.account_type === accountType.behance,
+            icon: <PiNetworkXBold/>,
+            isOpen: false,
             links: [
                 {
                     name: 'Job List',
-                    type: taskType.follow,
                 },
                 {
                     name: 'Add Job',
-                    type: taskType.like,
                 },
                 {
                     name: 'Applications',
-                    type: taskType.save,
                 }
             ]
         }
