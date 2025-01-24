@@ -12,13 +12,14 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $exam_name
  * @property string $passing_year
  * @property string $institute
+ * @property string|null $result
  * @property string $computer_skill
  * @property string $driving_license
  * @property string $driving_license_issue_date
  * @property string $driving_license_expire_date
- * @property int $english_expertise
- * @property int $arabic_expertise
- * @property int $urdu_expertise
+ * @property int $english_proficiency
+ * @property int $arabic_proficiency
+ * @property int $urdu_proficiency
  */
 class Education extends Model
 {
@@ -34,9 +35,9 @@ class Education extends Model
         'driving_license',
         'driving_license_issue_date',
         'driving_license_expire_date',
-        'english_expertise',
-        'arabic_expertise',
-        'urdu_expertise',
+        'english_proficiency',
+        'arabic_proficiency',
+        'urdu_proficiency',
     ];
 
 
