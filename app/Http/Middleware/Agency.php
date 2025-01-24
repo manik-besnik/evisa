@@ -16,6 +16,9 @@ class Agency
      */
     public function handle(Request $request, Closure $next): Response
     {
+        if (!auth()->check()) {
+            return to_route('agency.login');
+        }
         /** @var \App\Models\User $user */
         $user = auth()->user();
 

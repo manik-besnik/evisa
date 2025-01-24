@@ -16,10 +16,15 @@ class User
      */
     public function handle(Request $request, Closure $next): Response
     {
+
+        if (!auth()->check()) {
+            return to_route('login');
+        }
+
         /** @var \App\Models\User $user */
         $user = auth()->user();
 
-        if ($user->role !== Role::USER->value){
+        if ($user->role !== Role::USER->value) {
             return to_route('home');
         }
 

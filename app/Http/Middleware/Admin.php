@@ -16,13 +16,17 @@ class Admin
      */
     public function handle(Request $request, Closure $next): Response
     {
+        if (!auth()->check()) {
+            return to_route('admin.login');
+        }
+
         /** @var \App\Models\User $user */
         $user = auth()->user();
 
-        if ($user->role !== Role::ADMIN->value){
+        if ($user->role !== Role::ADMIN->value) {
             return to_route('home');
         }
-        
+
         return $next($request);
     }
 }

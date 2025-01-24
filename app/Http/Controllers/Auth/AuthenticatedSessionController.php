@@ -6,6 +6,7 @@ use App\Enums\Role;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Models\User;
+use App\Supports\UserPermission;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -40,6 +41,8 @@ class AuthenticatedSessionController extends Controller
         /** @var User $user */
         $user = auth()->user();
 
+        UserPermission::set();
+
         if ($user->role === Role::ADMIN->value) {
             return to_route('admin.dashboard.index');
         }
@@ -60,11 +63,16 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
+
+        $userId = auth()->id();
+
         Auth::guard('web')->logout();
 
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
+
+        UserPermission::forget($userId);
 
         return redirect('/');
     }

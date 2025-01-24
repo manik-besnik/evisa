@@ -20,15 +20,7 @@ export default forwardRef(function InputBox({
     }, []);
 
     return (
-        // <input
-        //     {...props}
-        //     type={type}
-        //     className={
-        //         'border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm ' +
-        //         className
-        //     }
-        //     ref={input}
-        // />
+
 
         <div
             className={`${classes} flex items-center rounded sm:rounded-[6px] h-[26px] sm:h-[36px] overflow-hidden`}>

@@ -2,6 +2,7 @@ import {useState} from 'react';
 import {usePage} from '@inertiajs/react';
 import SideNav from '@/Components/SideNav';
 import NavBar from '@/Components/NavBar';
+import {ToastContainer} from 'react-toastify';
 
 export default function Authenticated({header, children}) {
     const user = usePage().props.auth.user;
@@ -31,6 +32,7 @@ export default function Authenticated({header, children}) {
                     {children}
                 </div>
             </div>
+            <ToastContainer/>
         </div>
     );
 }

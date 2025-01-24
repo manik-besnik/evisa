@@ -5,13 +5,14 @@ namespace App\DTOs;
 use App\Enums\Role;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Validator;
 
 class UserDTO
 {
     public string $name;
     public string $email;
     public UploadedFile|string|null $avatar;
-    public string $password = "password";
+    public string|null $password = "password";
     public int $role = Role::USER->value;
     public int $roleId = 1;
 
@@ -43,11 +44,18 @@ class UserDTO
 
     public static function fromArray(array $user): UserDTO
     {
+        Validator::make($user, [
+            'name' => ['required', 'string', 'min:3'],
+            'email' => ['required', 'string', 'min:3'],
+            'avatar' => ['nullable', 'file', 'mimes:jpg,png,jpeg,webp', 'max:2048'],
+            'password' => ['required', 'string', 'min:8'],
+        ]);
+
         $instance = new self;
 
         $instance->name = $user['name'];
         $instance->email = $user['email'];
-        $instance->password = $user['password'];
+        $instance->password = $user['password'] ?? null;
 
         if ($user['role']) {
             $instance->role = Role::tryFrom((int)$user['role'])->value;

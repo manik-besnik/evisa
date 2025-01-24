@@ -30,11 +30,13 @@ Route::middleware(['auth','user'])->group(function () {
 Route::get('google/redirect',function(){
 
 })->name('google.redirect');
+
+Route::get('google/redirect3',function(){
+
+})->name('dashboard');
 Route::get('google',function(){
 
 })->name('task.create');
 
-Route::get('admin/dashboard',[DashboardController::class,'index'])->name('admin.dashboard.index');
-
-
 require __DIR__.'/auth.php';
+require __DIR__.'/admin.php';

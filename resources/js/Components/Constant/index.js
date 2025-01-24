@@ -42,3 +42,14 @@ export const visaTypes = [
     {id: 4, name: "14 Days Visa"},
     {id: 5, name: "96 Hours Visa"}
 ];
+
+export const permissions = [
+    {name: "View Admin", value: "admin.view"},
+    {name: "Create Admin", value: "admin.create"},
+    {name: "Edit Admin", value: "admin.edit"},
+    {name: "Delete Admin", value: "admin.delete"},
+    {name: "View Role", value: "role.view"},
+    {name: "Create Role", value: "role.create"},
+    {name: "Edit Role", value: "role.edit"},
+    {name: "Delete Role", value: "role.delete"}
+]

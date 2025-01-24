@@ -1,7 +1,14 @@
 import {Listbox, ListboxButton, ListboxOption, ListboxOptions, Transition} from '@headlessui/react'
 import ArrowDownSolid from './SvgIcons/ArrowDownSolid'
 
-export default function Select({items, selected, setSelected, handleValueChange,classes = ''}) {
+export default function Select({
+                                   items,
+                                   selected,
+                                   setSelected,
+                                   handleValueChange,
+                                   classes = '',
+                                   placeholder = "Select One"
+                               }) {
 
     const handleChange = (e) => {
         setSelected(e)
@@ -9,16 +16,27 @@ export default function Select({items, selected, setSelected, handleValueChange,
     }
 
     return (
-        <div className=" w-full">
+        <div className="w-full">
             <Listbox value={selected} onChange={handleChange}>
-                <ListboxButton
-                    className={`${classes} w-full flex items-center justify-between text-xs leading-[14px] text-text-primary`}
-                >
-                    {selected?.name}
+                {selected?.name ?
+                    <ListboxButton
+                        className={`${classes} rounded sm:rounded-[6px] h-[26px] sm:h-[36px] bg-side-and-button w-full flex items-center justify-between  leading-[14px] sm:leading-[20px]  text-xs sm:text-sm text-t-secondary text-text-primary px-3`}
+                    >
+                        {selected?.name}
 
-                    <ArrowDownSolid/>
+                        <ArrowDownSolid/>
 
-                </ListboxButton>
+                    </ListboxButton> :
+                    <ListboxButton
+                        className={`${classes} rounded sm:rounded-[6px] h-[26px] sm:h-[36px] bg-side-and-button w-full flex items-center justify-between  leading-[14px] sm:leading-[20px]  text-xs sm:text-sm text-t-secondary text-text-primary px-3`}
+                    >
+                        {placeholder}
+
+                        <ArrowDownSolid/>
+
+                    </ListboxButton>
+
+                }
                 <Transition leave="transition ease-in duration-100" leaveFrom="opacity-100" leaveTo="opacity-0">
                     <ListboxOptions
                         anchor="bottom"
