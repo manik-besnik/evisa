@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Supports\Country;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tighten\Ziggy\Ziggy;
@@ -35,10 +36,11 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => auth()->user(),
             ],
-            'ziggy' => fn () => [
+            'ziggy' => fn() => [
                 ...(new Ziggy)->toArray(),
                 'location' => $request->url(),
             ],
+            'countries' => Country::get()
         ];
     }
 }

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Agency;
 
 use App\Http\Controllers\Controller;
-use App\Models\Country;
 use App\Models\Language;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
@@ -12,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -30,11 +30,10 @@ class AgencyController extends Controller
      */
     public function create(): Response
     {
-        $countries = Country::query()->get();
+
         $languages = Language::query()->get();
 
         return Inertia::render('Agency/Register', [
-            'countries' => $countries,
             'languages' => $languages
         ]);
     }
@@ -42,7 +41,7 @@ class AgencyController extends Controller
     /**
      * Handle an incoming registration request.
      *
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function store(Request $request): RedirectResponse
     {
