@@ -6,32 +6,32 @@ const services = [
     {
         title: "Visa Apply",
         img: "images/visa-apply.png",
-        link: "home",
+        link: "visa.apply",
     },
     {
         title: "Job Apply",
-        img: "images/visa-apply.png",
+        img: "images/job-apply.png",
         link: "home",
     },
     {
         title: "Job Demand",
-        img: "images/visa-apply.png",
+        img: "images/job-demand.png",
         link: "home",
     },
     {
         title: "Business",
-        img: "images/visa-apply.png",
+        img: "images/business.png",
         link: "home",
     },
     {
         title: "Agency",
-        img: "images/visa-apply.png",
+        img: "images/agency.png",
         link: "home",
     },
     {
         title: "Others",
-        img: "images/visa-apply.png",
-        link: "home",
+        img: "images/others.png",
+        link: "others",
     }
 ]
 

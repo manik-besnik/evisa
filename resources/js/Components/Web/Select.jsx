@@ -9,7 +9,10 @@ export default function Select({
                                    handleValueChange,
                                    classes = '',
                                    placeholder = "Select One",
-                                   field = "name"
+                                   field = "name",
+                                   label = "",
+                                   labelClasses = "",
+
                                }) {
 
 
@@ -27,6 +30,9 @@ export default function Select({
 
     return (
         <div className="w-full">
+            {label && <label className={`text-sm font-medium text-text-primary mb-1 ${labelClasses}`}>
+                {label}
+            </label>}
             <Listbox value={selected} onChange={handleChange}>
                 {selected?.[field] ?
                     <ListboxButton

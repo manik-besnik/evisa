@@ -110,6 +110,28 @@
     animation: vertical-movement-left 2s ease-in infinite;
 }
 
+body::-webkit-scrollbar {
+    width: 8px;
+}
+
+body::-webkit-scrollbar-track {
+    background: #f4e1b4;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: rgb(180, 135, 35);
+    border-radius: 6px;
+    border: 2px solid #f4e1b4;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(150, 110, 30);
+}
+
+body {
+    scrollbar-color: rgb(180, 135, 35) #f4e1b4;
+    scrollbar-width: thin;
+}
 
 @keyframes vertical-movement-right {
     0% {

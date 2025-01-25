@@ -8,11 +8,12 @@ const TextInput = ({
                        id = 'input-field',
                        label = '',
                        divClasses = "",
-                       inputClasses = ''
+                       inputClasses = '',
+                       labelClasses = ""
                    }) => {
     return (
         <div className={`flex flex-col my-1 ${divClasses}`}>
-            {label && <label htmlFor={id} className="text-sm font-medium text-gray-200 mb-1">
+            {label && <label htmlFor={id} className={`text-sm font-medium text-gray-200 mb-1 ${labelClasses}`}>
                 {label}
             </label>}
 

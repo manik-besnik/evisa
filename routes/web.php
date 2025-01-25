@@ -31,7 +31,10 @@ Route::get('google', function () {
 
 })->name('task.create');
 
-Route::inertia('user-login','Other');
+Route::inertia('others', 'Other')->name('others');
+Route::inertia('visa-apply', 'VisaApply')->name('visa.apply');
+Route::inertia('search', 'Search');
 
 require __DIR__ . '/auth.php';
 require __DIR__ . '/admin.php';
+require __DIR__ . '/agency.php';
