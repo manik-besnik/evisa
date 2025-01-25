@@ -31,7 +31,7 @@ Route::get('google', function () {
 
 })->name('task.create');
 
-Route::inertia('user-login','Register');
+Route::inertia('user-login','Other');
 
 require __DIR__ . '/auth.php';
 require __DIR__ . '/admin.php';
