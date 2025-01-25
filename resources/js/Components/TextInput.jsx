@@ -1,11 +1,20 @@
 import React from "react";
 
-const TextInput = ({label, placeholder, type = "text", value, onChange, id = 'input-field',divClasses = "",inputClasses=''}) => {
+const TextInput = ({
+                       placeholder,
+                       type = "text",
+                       value,
+                       onChange,
+                       id = 'input-field',
+                       label = '',
+                       divClasses = "",
+                       inputClasses = ''
+                   }) => {
     return (
-        <div className={`flex flex-col ${divClasses}`}>
-            <label htmlFor={id} className="text-sm font-medium text-gray-200 mb-1">
+        <div className={`flex flex-col my-1 ${divClasses}`}>
+            {label && <label htmlFor={id} className="text-sm font-medium text-gray-200 mb-1">
                 {label}
-            </label>
+            </label>}
 
             <input
                 id={id}

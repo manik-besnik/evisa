@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Country;
+use App\Models\Language;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -20,7 +22,12 @@ class RegisteredUserController extends Controller
      */
     public function create(): Response
     {
-        return Inertia::render('Auth/Register');
+        $countries = Country::query()->get();
+        $languages = Language::query()->get();
+        return Inertia::render('Register',[
+            'countries' => $countries,
+            'languages' => $languages
+        ]);
     }
 
     /**

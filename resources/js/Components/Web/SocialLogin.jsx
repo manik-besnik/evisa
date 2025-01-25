@@ -7,7 +7,6 @@ const SocialLogin = ({classes}) => {
         <div className={`flex justify-end gap-x-4 text-white ${classes}`}>
             <img src={`${assetUrl +'images/google.svg'}`} alt="google" className="w-7 h-7"/>
             <Facebook className="w-7 h-7"/>
-
         </div>
     )
 }
