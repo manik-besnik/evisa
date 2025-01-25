@@ -1,17 +1,18 @@
-import React from 'react'
+import React from 'react';
 
 export default function Facebook(props) {
     return (
-        <svg {...props} width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g clipPath="url(#clip0_511_4013)">
-                <rect width="20" height="20" rx="4" fill="#1877F2" />
-                <path d="M12.1043 13.1391H14.5858L14.9755 10.3271H12.1043V8.79014C12.1043 7.62215 12.4466 6.58626 13.4261 6.58626H15V4.13263C14.7234 4.09091 14.1385 4 13.0334 4C10.7255 4 9.37263 5.35944 9.37263 8.45696V10.3277H7V13.1396H9.37215V20H10.8066H12.1043V13.1391Z" fill="white" />
-            </g>
-            <defs>
-                <clipPath id="clip0_511_4013">
-                    <rect width="20" height="20" rx="4" fill="white" />
-                </clipPath>
-            </defs>
+        <svg {...props} data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 111.68 111.82">
+            <path
+                d="M436.23 687h6.67v-13.55h-14.24c-10.45 0-19.75 7.61-19.75 18.07v15.91h-15.29v17h15.29v42.47h17v-42.48H440l2.76-17H425.9v-11.17c0-5.23 5.11-9.21 10.33-9.21"
+                transform="translate(-347.74 -655.08)"
+                style={{ fill: '#fff' }}
+            />
+            <path
+                d="M436.23 655.08h-64.36c-13.06 0-24.13 10.12-24.13 23.18v64.36a24.48 24.48 0 0 0 24.13 24.14h37.39v-42.59h-15.14v-16.09h15.14v-16.57c0-10.45 8.95-18.45 19.4-18.45h14.67v14.2h-7.1c-5.22 0-9.94 3.76-9.94 9v11.83h16.49L440 724.17h-13.71v42.59h9.94c13.07 0 23.19-11.07 23.19-24.14v-64.36a22.86 22.86 0 0 0-23.19-23.18"
+                transform="translate(-347.74 -655.08)"
+                style={{ fill: '#0095d7' }}
+            />
         </svg>
-    )
+    );
 }
