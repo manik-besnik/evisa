@@ -37,7 +37,7 @@ export default function Select({
             <Listbox value={selected} onChange={handleChange}>
                 {selected?.[field] ?
                     <ListboxButton
-                        className={` h-[26px] sm:h-[36px] bg-white w-full flex items-center justify-between  leading-[14px] sm:leading-[20px] text-gray-400 text-xs sm:text-sm px-3 border-0 border-l-4 border-red-500 ${classes} `}
+                        className={`${classes} h-[26px] sm:h-[36px] bg-white w-full flex items-center justify-between  leading-[14px] sm:leading-[20px] text-gray-400 text-xs sm:text-sm px-3 border-0 border-l-4 border-red-500`}
                     >
                         {selected?.[field]}
 
@@ -45,7 +45,7 @@ export default function Select({
 
                     </ListboxButton> :
                     <ListboxButton
-                        className={`h-[26px] sm:h-[36px] bg-white w-full flex items-center justify-between  leading-[14px] sm:leading-[20px] text-gray-400 text-xs sm:text-sm px-3 border-0 border-l-4 border-red-500 ${classes}`}
+                        className={`${classes} h-[26px] sm:h-[36px] bg-white w-full flex items-center justify-between  leading-[14px] sm:leading-[20px] text-gray-400 text-xs sm:text-sm px-3 border-0 border-l-4 border-red-500`}
                     >
                         {placeholder}
 
