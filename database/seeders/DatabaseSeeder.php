@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Country;
 use App\Models\Language;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -16,12 +17,36 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+
+        Role::query()->create([
+            'name' => 'Super Admin',
+            'is_super_admin' => 1,
+        ]);
 
         User::factory()->create([
             'name' => 'Test User',
-            'email' => 'test@example2.com',
-            'username' => 'test@example2.com',
+            'email' => 'admin@evisa.com',
+            'username' => 'admin@evisa.com',
+            'role' => 1,
+            'role_id' => 1,
+            'password' => bcrypt('password')
+        ]);
+
+
+        User::factory()->create([
+            'name' => 'Test User',
+            'email' => 'agency@evisa.com',
+            'username' => 'agency@evisa.com',
+            'role' => 2,
+            'role_id' => 1,
+            'password' => bcrypt('password')
+        ]);
+        User::factory()->create([
+            'name' => 'Test User',
+            'email' => 'user@evisa.com',
+            'username' => 'user@evisa.com',
+            'role' => 3,
+            'role_id' => 1,
             'password' => bcrypt('password')
         ]);
 
