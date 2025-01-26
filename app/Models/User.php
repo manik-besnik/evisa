@@ -84,17 +84,17 @@ class User extends Authenticatable
 
     public function nationality(): BelongsTo
     {
-        return $this->belongsTo(Country::class, 'nationality_id', 'id');
+        return $this->belongsTo(Country::class, 'nationality_id', 'id')->select(['id', 'nationality']);
     }
 
     public function livingCountry(): BelongsTo
     {
-        return $this->belongsTo(Country::class, 'living_country_id', 'id');
+        return $this->belongsTo(Country::class, 'living_country_id', 'id')->select(['id', 'name']);
     }
 
     public function preferredLanguage(): BelongsTo
     {
-        return $this->belongsTo(Language::class, 'language_id', 'id');
+        return $this->belongsTo(Language::class, 'language_id', 'id')->select(['id', 'name']);
     }
 
 
