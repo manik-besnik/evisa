@@ -24,7 +24,7 @@ const UserLogin = () => {
     }
 
     return (
-        <div className="bg-black/70 w-1/2 pr-5 pt-3 pb-8">
+        <div className="bg-black/70 min-h-[72vh] w-1/2 pr-5 pt-3 pb-8">
             <img className="w-full h-auto" src={`${assetUrl + 'images/sign-in.png'}`} alt=""/>
 
             <SocialLogin />
