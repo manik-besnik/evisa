@@ -35,7 +35,7 @@ const VisaApply = () => {
                                 items={visaProcessingTypes}
                                 selected={processingType}
                                 setSelected={setProcessingType}
-                                classes="bg-[#E0EBF8] border-l-primary focus:border-l-primary"/>
+                                defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"/>
 
                         <Select placeholder="Visa Type"
                                 label="Visa Type*"
