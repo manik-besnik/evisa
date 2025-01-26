@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('profession')->after('avatar')->nullable();
-            $table->foreignId('nationality')
+            $table->foreignId('nationality_id')
                 ->after('id')->nullable()
                 ->constrained('countries')->cascadeOnDelete();
-            $table->foreignId('living_country')
-                ->after('nationality')->nullable()
+            $table->foreignId('living_country_id')
+                ->after('nationality_id')->nullable()
                 ->constrained('countries')->cascadeOnDelete();
             $table->foreignId('language_id')
-                ->after('living_country')->nullable()
+                ->after('living_country_id')->nullable()
                 ->constrained('languages')->cascadeOnDelete();
             $table->string('city')->after('profession')->nullable();
             $table->boolean('is_signup_complete')->default(1)->after('password');

@@ -12,8 +12,8 @@ use Illuminate\Notifications\Notifiable;
 
 /**
  * @property int $id
- * @property int $nationality
- * @property int $living_country
+ * @property int $nationality_id
+ * @property int $living_country_id
  * @property int $language_id
  * @property int $role
  * @property int|null $role_id
@@ -38,8 +38,8 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'nationality',
-        'living_country',
+        'nationality_id',
+        'living_country_id',
         'language_id',
         'role_id',
         'name',
@@ -80,6 +80,21 @@ class User extends Authenticatable
     public function adminRole(): BelongsTo
     {
         return $this->belongsTo(Role::class, 'role_id', 'id');
+    }
+
+    public function nationality(): BelongsTo
+    {
+        return $this->belongsTo(Country::class, 'nationality_id', 'id');
+    }
+
+    public function livingCountry(): BelongsTo
+    {
+        return $this->belongsTo(Country::class, 'living_country_id', 'id');
+    }
+
+    public function preferredLanguage(): BelongsTo
+    {
+        return $this->belongsTo(Language::class, 'language_id', 'id');
     }
 
 
