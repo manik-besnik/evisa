@@ -23,9 +23,11 @@ const VisaApply = () => {
 
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-x-4 items-center">
 
-                        <TextInput id="personal-name" placeholder="Personal Name | Company Name"
+                        <TextInput
+                            id="personal-name"
+                            placeholder="Personal Name | Company Name"
                                    label="Personal Name | Company Name" divClasses="my-3"
-                                   inputClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
+                                   defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                                    labelClasses="text-text-primary"/>
 
                         <Select placeholder="Processing Type"
@@ -40,14 +42,14 @@ const VisaApply = () => {
                                 items={visaTypes}
                                 selected={processingType}
                                 setSelected={setProcessingType}
-                                classes="bg-[#E0EBF8] border-l-primary focus:border-l-primary"/>
+                                defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"/>
 
                         <Select placeholder="Select Group"
                                 label="Group Membership(if any)"
                                 items={groups}
                                 selected={processingType}
                                 setSelected={setProcessingType}
-                                classes="bg-[#E0EBF8] border-l-primary focus:border-l-primary"/>
+                                defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"/>
                     </div>
 
                     <h4 className="text-success mt-2 text-md">Personal Information</h4>
@@ -60,7 +62,7 @@ const VisaApply = () => {
                                 id="fullname-english"
                                 placeholder="Full Name English"
                                 label="Full Name (English)" divClasses="my-3"
-                                inputClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
+                                defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                                 labelClasses="text-text-primary"
                             />
 
@@ -69,7 +71,7 @@ const VisaApply = () => {
                                 id="fullname-arabic"
                                 placeholder="Full Name Arabic"
                                 label="Full Name (Arabic)" divClasses="my-3"
-                                inputClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
+                                defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                                 labelClasses="text-text-primary"
                             />
 
@@ -79,7 +81,7 @@ const VisaApply = () => {
                                 items={visaProcessingTypes}
                                 selected={processingType}
                                 setSelected={setProcessingType}
-                                classes="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
+                                defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                             />
 
                             <Select
@@ -88,7 +90,7 @@ const VisaApply = () => {
                                 items={visaTypes}
                                 selected={processingType}
                                 setSelected={setProcessingType}
-                                classes="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
+                                defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                             />
 
                             <Select
@@ -97,7 +99,7 @@ const VisaApply = () => {
                                 items={genders}
                                 selected={processingType}
                                 setSelected={setProcessingType}
-                                classes="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
+                                defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                             />
 
 
@@ -105,7 +107,7 @@ const VisaApply = () => {
                                 id="date-of-birth"
                                 placeholder="Date Of Birth"
                                 label="Date Of Birth" divClasses="my-3"
-                                inputClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
+                                defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                                 labelClasses="text-text-primary"
                                 type="date"
                             />
@@ -116,7 +118,7 @@ const VisaApply = () => {
                                 items={genders}
                                 selected={processingType}
                                 setSelected={setProcessingType}
-                                classes="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
+                                defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                             />
 
 
@@ -126,13 +128,13 @@ const VisaApply = () => {
                                 items={maritalStatuses}
                                 selected={processingType}
                                 setSelected={setProcessingType}
-                                classes="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
+                                defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                             />
                             <TextInput
                                 id="birth-place-english"
                                 placeholder="Birth Place English"
                                 label="Birth Place (English)" divClasses="my-3"
-                                inputClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
+                                defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                                 labelClasses="text-text-primary"
                             />
 
@@ -141,7 +143,7 @@ const VisaApply = () => {
                                 id="birth-place-arabic"
                                 placeholder="Birth Place Arabic"
                                 label="Birth Place (Arabic)" divClasses="my-3"
-                                inputClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
+                                defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                                 labelClasses="text-text-primary"
                             />
 
@@ -149,7 +151,7 @@ const VisaApply = () => {
                                 id="mother-english"
                                 placeholder="Mother Name English"
                                 label="Mother Name (English)" divClasses="my-3"
-                                inputClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
+                                defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                                 labelClasses="text-text-primary"
                             />
 
@@ -158,7 +160,7 @@ const VisaApply = () => {
                                 id="mother-arabic"
                                 placeholder="Mother Name Arabic"
                                 label="Mother Name (Arabic)" divClasses="my-3"
-                                inputClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
+                                defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                                 labelClasses="text-text-primary"
                             />
 
@@ -167,7 +169,7 @@ const VisaApply = () => {
                                 id="religion"
                                 placeholder="Religion"
                                 label="Religion" divClasses="my-3"
-                                inputClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
+                                defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                                 labelClasses="text-text-primary"
                             />
 
@@ -175,7 +177,7 @@ const VisaApply = () => {
                                 id="faith"
                                 placeholder="Faith"
                                 label="Faith" divClasses="my-3"
-                                inputClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
+                                defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                                 labelClasses="text-text-primary"
                             />
 
@@ -183,7 +185,7 @@ const VisaApply = () => {
                                 id="qualification"
                                 placeholder="Qualification"
                                 label="Qualification" divClasses="my-3"
-                                inputClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
+                                defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                                 labelClasses="text-text-primary"
                             />
 
@@ -191,7 +193,7 @@ const VisaApply = () => {
                                 id="profession"
                                 placeholder="Profession"
                                 label="Profession" divClasses="my-3"
-                                inputClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
+                                defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                                 labelClasses="text-text-primary"
                             />
 
@@ -209,7 +211,7 @@ const VisaApply = () => {
                             id="passport-type"
                             placeholder="Ex: Ordinary"
                             label="Passport Type" divClasses="my-3"
-                            inputClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
+                            defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                             labelClasses="text-text-primary"
                         />
 
@@ -217,7 +219,7 @@ const VisaApply = () => {
                             id="passport-no"
                             placeholder="Passport NO"
                             label="Passport NO*" divClasses="my-3"
-                            inputClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
+                            defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                             labelClasses="text-text-primary"
                         />
 
@@ -226,7 +228,7 @@ const VisaApply = () => {
                             id="passport-issue-date"
                             placeholder="Passport Issue Date"
                             label="Passport Issue Date" divClasses="my-3"
-                            inputClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
+                            defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                             labelClasses="text-text-primary"
                             type="date"
                         />
@@ -235,7 +237,7 @@ const VisaApply = () => {
                             id="passport-expire-date"
                             placeholder="Passport Expire Date"
                             label="Passport Expire Date" divClasses="my-3"
-                            inputClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
+                            defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                             labelClasses="text-text-primary"
                             type="date"
                         />
@@ -244,7 +246,7 @@ const VisaApply = () => {
                             id="passport-issue-place"
                             placeholder="Passport Issue Place"
                             label="Passport Issue Place*" divClasses="my-3"
-                            inputClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
+                            defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                             labelClasses="text-text-primary"
                         />
 
@@ -252,7 +254,7 @@ const VisaApply = () => {
                             id="passport-issue-place-arabic"
                             placeholder="Passport Issue Place Arabic"
                             label="Passport Issue Place(Arabic)*" divClasses="my-3"
-                            inputClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
+                            defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                             labelClasses="text-text-primary"
                         />
 
@@ -261,7 +263,7 @@ const VisaApply = () => {
                                 items={visaProcessingTypes}
                                 selected={processingType}
                                 setSelected={setProcessingType}
-                                classes="bg-[#E0EBF8] border-l-primary focus:border-l-primary"/>
+                                defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"/>
 
                     </div>
 
@@ -273,7 +275,7 @@ const VisaApply = () => {
                             id="guarntor-name"
                             placeholder="Ex: Jhon Deo"
                             label="Name*" divClasses="my-3"
-                            inputClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
+                            defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                             labelClasses="text-text-primary"
                         />
 
@@ -281,7 +283,7 @@ const VisaApply = () => {
                             id="guarantor-passport-no"
                             placeholder="Passport NO"
                             label="Passport No" divClasses="my-3"
-                            inputClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
+                            defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                             labelClasses="text-text-primary"
                         />
 
@@ -290,14 +292,14 @@ const VisaApply = () => {
                                 items={visaProcessingTypes}
                                 selected={processingType}
                                 setSelected={setProcessingType}
-                                classes="bg-[#E0EBF8] border-l-primary focus:border-l-primary"/>
+                                defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"/>
 
 
                         <TextInput
                             id="guarantor-phone"
                             placeholder="Mobile"
                             label="Mobile" divClasses="my-3"
-                            inputClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
+                            defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                             labelClasses="text-text-primary"
                         />
 
@@ -305,7 +307,7 @@ const VisaApply = () => {
                             id="guarantor-relation"
                             placeholder="Relation"
                             label="Relation" divClasses="my-3"
-                            inputClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
+                            defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                             labelClasses="text-text-primary"
                         />
 

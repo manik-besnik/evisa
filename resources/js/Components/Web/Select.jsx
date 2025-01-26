@@ -7,7 +7,8 @@ export default function Select({
                                    selected,
                                    setSelected,
                                    handleValueChange,
-                                   classes = 'bg-white border-red-500',
+                                   defaultClasses = 'bg-white border-red-500',
+                                   classes = '',
                                    placeholder = "Select One",
                                    field = "name",
                                    label = "",
@@ -36,7 +37,7 @@ export default function Select({
             <Listbox value={selected} onChange={handleChange}>
                 {selected?.[field] ?
                     <ListboxButton
-                        className={` h-[26px] sm:h-[36px] w-full flex items-center justify-between  leading-[14px] sm:leading-[20px] text-gray-400 text-xs sm:text-sm px-3 border-0  border-l-4 ${classes} `}
+                        className={` h-[26px] sm:h-[36px] w-full flex items-center justify-between  leading-[14px] sm:leading-[20px] text-gray-400 text-xs sm:text-sm px-3 border-0  border-l-4 ${defaultClasses} ${classes} `}
                     >
                         {selected?.[field]}
 
@@ -44,7 +45,7 @@ export default function Select({
 
                     </ListboxButton> :
                     <ListboxButton
-                        className={`h-[26px] sm:h-[36px] w-full flex items-center justify-between  leading-[14px] sm:leading-[20px] text-gray-400 text-xs sm:text-sm px-3 border-0  border-l-4 ${classes}`}
+                        className={`h-[26px] sm:h-[36px] w-full flex items-center justify-between  leading-[14px] sm:leading-[20px] text-gray-400 text-xs sm:text-sm px-3 border-0  border-l-4 ${defaultClasses} ${classes}`}
                     >
                         {placeholder}
 

@@ -8,7 +8,8 @@ const TextInput = ({
                        id = 'input-field',
                        label = '',
                        divClasses = "",
-                       inputClasses = 'bg-white focus:border-l-red-500 border-red-500',
+                       defaultClasses = "bg-white focus:border-l-red-500 border-red-500",
+                       inputClasses = '',
                        labelClasses = ""
                    }) => {
     return (
@@ -23,7 +24,7 @@ const TextInput = ({
                 placeholder={placeholder}
                 value={value}
                 onChange={onChange}
-                className={`w-full px-3 py-2 text-sm text-gray-800 placeholder-gray-400  border-0 border-l-4 focus:outline-none focus:ring-0  ${inputClasses}`}
+                className={`w-full px-3 py-2 text-sm text-gray-800 placeholder-gray-400  border-0 border-l-4 focus:outline-none focus:ring-0 ${defaultClasses} ${inputClasses}`}
             />
         </div>
     );
