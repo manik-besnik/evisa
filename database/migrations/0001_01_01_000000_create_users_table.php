@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedTinyInteger('role')->nullable();
             $table->unsignedTinyInteger('role_id')->default(2)->nullable();
             $table->string('provider_id')->nullable();
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->string('email')->unique();
             $table->string('username')->unique();
             $table->string('avatar')->nullable();

@@ -30,13 +30,11 @@ class AgencyController extends Controller
      */
     public function create(): Response
     {
+        return Inertia::render('Agency/Login');
 
-        $languages = Language::query()->get();
-
-        return Inertia::render('Agency/Register', [
-            'languages' => $languages
-        ]);
     }
+
+
 
     /**
      * Handle an incoming registration request.

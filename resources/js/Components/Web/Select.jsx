@@ -12,6 +12,7 @@ export default function Select({
                                    field = "name",
                                    label = "",
                                    labelClasses = "",
+                                   error = ""
 
                                }) {
 
@@ -53,6 +54,9 @@ export default function Select({
                     </ListboxButton>
 
                 }
+
+                {error && <p className="text-red-500 my-2 text-xs">{error}</p>}
+
                 <Transition leave="transition ease-in duration-100" leaveFrom="opacity-100" leaveTo="opacity-0">
                     <ListboxOptions
                         anchor="bottom"

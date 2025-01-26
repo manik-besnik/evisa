@@ -1,10 +1,9 @@
-import {Head} from "@inertiajs/react";
 import WebLayout from "@/Layouts/WebLayout.jsx";
+import {Head} from "@inertiajs/react";
 import SearchContainer from "@/Components/Web/SearchContainer.jsx";
-import AgencyLogin from "@/Components/Agency/AgencyLogin.jsx";
+import AgencyRegisterInfo from "@/Components/Agency/AgencyRegisterInfo.jsx";
 
-
-export default function Login() {
+const AgencyInfo = () => {
 
     return (
         <WebLayout showBgImage={true}>
@@ -12,9 +11,11 @@ export default function Login() {
             <div className="container">
                 <div className="grid grid-cols-2 gap-x-20">
                     <SearchContainer/>
-                    <AgencyLogin/>
+                    <AgencyRegisterInfo/>
                 </div>
             </div>
         </WebLayout>
     );
 }
+
+export default AgencyInfo

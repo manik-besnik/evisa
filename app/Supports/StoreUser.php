@@ -11,7 +11,12 @@ class StoreUser
     {
         try {
 
-            $avatar = FileUpload::execute($userDTO->avatar);
+            $avatar = null;
+
+            if ($userDTO->avatar) {
+                $avatar = FileUpload::execute($userDTO->avatar);
+            }
+
 
             $user = new User();
             $user->name = $userDTO->name;

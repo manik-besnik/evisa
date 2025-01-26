@@ -1,9 +1,10 @@
-import WebLayout from "@/Layouts/WebLayout.jsx";
 import {Head} from "@inertiajs/react";
+import WebLayout from "@/Layouts/WebLayout.jsx";
 import SearchContainer from "@/Components/Web/SearchContainer.jsx";
 import AgencyRegister from "@/Components/Agency/AgencyRegister.jsx";
 
-const Register = () => {
+
+export default function Register() {
 
     return (
         <WebLayout showBgImage={true}>
@@ -17,5 +18,3 @@ const Register = () => {
         </WebLayout>
     );
 }
-
-export default Register
