@@ -11,14 +11,21 @@ use Illuminate\Notifications\Notifiable;
 
 
 /**
+ * @property int $id
+ * @property int $nationality
+ * @property int $living_country
+ * @property int $language_id
  * @property int $role
  * @property int|null $role_id
  * @property string|null $provider_id
  * @property string $name
+ * @property string $email
  * @property string|null $username
  * @property string|null $avatar
+ * @property string|null $profession
+ * @property string|null $city
  * @property string $password
- * @property string $email
+ * @property bool|int $is_signup_complete
  */
 class User extends Authenticatable
 {
@@ -31,12 +38,18 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'provider_id',
+        'nationality',
+        'living_country',
+        'language_id',
+        'role_id',
         'name',
         'email',
         'username',
         'avatar',
+        'profession',
+        'city',
         'password',
+        'is_signup_complete',
     ];
 
     /**
@@ -60,6 +73,7 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'is_signup_complete' => 'boolean',
         ];
     }
 
