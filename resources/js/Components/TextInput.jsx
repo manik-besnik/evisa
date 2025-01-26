@@ -8,6 +8,7 @@ const TextInput = ({
                        id = 'input-field',
                        label = '',
                        divClasses = "",
+                       defaultClasses = "bg-white focus:border-l-red-500 border-red-500",
                        inputClasses = '',
                        labelClasses = "",
                        error = ""
@@ -24,7 +25,7 @@ const TextInput = ({
                 placeholder={placeholder}
                 value={value}
                 onChange={onChange}
-                className={`w-full px-3 py-2 text-sm text-gray-800 placeholder-gray-400 bg-white border-0 border-l-4 border-red-500 focus:outline-none focus:ring-0 focus:border-l-red-500 ${inputClasses}`}
+                className={`w-full px-3 py-2 text-sm text-gray-800 placeholder-gray-400  border-0 border-l-4 focus:outline-none focus:ring-0 ${defaultClasses} ${inputClasses}`}
             />
 
             {error && <p className="text-red-500 mt-2 text-xs">{error}</p>}

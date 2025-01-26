@@ -7,12 +7,12 @@ export default function Select({
                                    selected,
                                    setSelected,
                                    handleValueChange,
+                                   defaultClasses = 'bg-white border-red-500',
                                    classes = '',
                                    placeholder = "Select One",
                                    field = "name",
                                    label = "",
                                    labelClasses = "",
-                                   error = ""
 
                                }) {
 
@@ -37,7 +37,7 @@ export default function Select({
             <Listbox value={selected} onChange={handleChange}>
                 {selected?.[field] ?
                     <ListboxButton
-                        className={`${classes} h-[26px] sm:h-[36px] bg-white w-full flex items-center justify-between  leading-[14px] sm:leading-[20px] text-gray-400 text-xs sm:text-sm px-3 border-0 border-l-4 border-red-500`}
+                        className={` h-[26px] sm:h-[36px] w-full flex items-center justify-between  leading-[14px] sm:leading-[20px] text-gray-400 text-xs sm:text-sm px-3 border-0  border-l-4 ${defaultClasses} ${classes} `}
                     >
                         {selected?.[field]}
 
@@ -45,7 +45,7 @@ export default function Select({
 
                     </ListboxButton> :
                     <ListboxButton
-                        className={`${classes} h-[26px] sm:h-[36px] bg-white w-full flex items-center justify-between  leading-[14px] sm:leading-[20px] text-gray-400 text-xs sm:text-sm px-3 border-0 border-l-4 border-red-500`}
+                        className={`h-[26px] sm:h-[36px] w-full flex items-center justify-between  leading-[14px] sm:leading-[20px] text-gray-400 text-xs sm:text-sm px-3 border-0  border-l-4 ${defaultClasses} ${classes}`}
                     >
                         {placeholder}
 
@@ -54,9 +54,6 @@ export default function Select({
                     </ListboxButton>
 
                 }
-
-                {error && <p className="text-red-500 my-2 text-xs">{error}</p>}
-
                 <Transition leave="transition ease-in duration-100" leaveFrom="opacity-100" leaveTo="opacity-0">
                     <ListboxOptions
                         anchor="bottom"
