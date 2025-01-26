@@ -48,7 +48,7 @@ const AgencyRegisterInfo = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        post(route('register.agency-info.store'), {
+        post(route('agency.register.agency-info.store'), {
             onSuccess: () => {
                 toast.success("Your Agency Account Registration Completed")
             }
@@ -147,13 +147,13 @@ const AgencyRegisterInfo = () => {
                 <TextInput
                     id="passport-no" placeholder="Passport No"
                     inputClasses='text-xs'
-                    onChange={(e) => setData('uid_no', e.target.value)}
-                    error={errors.uid_no}
+                    onChange={(e) => setData('passport_no', e.target.value)}
+                    error={errors.passport_no}
                 />
 
                 <TextInput id="uid" placeholder="UID No" inputClasses='text-xs'
-                           onChange={(e) => setData('person_name', e.target.value)}
-                           error={errors.company_person_namename}/>
+                           onChange={(e) => setData('uid_no', e.target.value)}
+                           error={errors.uid_no}/>
 
                 <p className="text-white text-md mt-3">BANK Account Details</p>
 

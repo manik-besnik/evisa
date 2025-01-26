@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers\Agency;
 
+use App\DTOs\AgencyDTO;
 use App\DTOs\UserDTO;
 use App\Http\Controllers\Controller;
 use App\Models\Language;
 use App\Models\User;
+use App\Supports\StoreAgency;
 use App\Supports\StoreUser;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules;
-use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -77,6 +78,18 @@ class AuthController extends Controller
         return Inertia::render('Agency/AgencyInfo', [
             'languages' => $languages
         ]);
+    }
+
+
+    public function agencyInfoStore(Request $request): RedirectResponse
+    {
+        $agency = StoreAgency::execute(AgencyDTO::fromRequest($request));
+
+        if ($agency) {
+            return to_route('agency.dashboard.index');
+        }
+
+        return redirect()->back();
     }
 
 

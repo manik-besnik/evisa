@@ -27,8 +27,16 @@ class StoreAgency
             $user->is_signup_complete = 1;
             $user->update();
 
-            $agency = new Agency();
-            $agency->user_id = $user->id;
+            /** @var Agency|null $agency */
+            $agency = Agency::query()
+                ->where('user_id', $user->id)
+                ->first();
+
+            if (!$agency) {
+                $agency = new Agency();
+                $agency->user_id = $user->id;
+            }
+
             $agency->company_name = $agencyDTO->companyName;
             $agency->eid_no = $agencyDTO->eidNo;
             $agency->passport_no = $agencyDTO->passportNo;
