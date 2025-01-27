@@ -54,3 +54,18 @@ export const permissions = [
     {name: "Edit Role", value: "role.edit"},
     {name: "Delete Role", value: "role.delete"}
 ]
+
+export const documentTypes = {
+    passport: {type: "passport", name: "Passport Page 1"},
+    photo: {type: "photo", name: "Photo"},
+    deposit: {type: "deposit", name: "Deposit Paper"},
+    id: {type: "id", name: "ID Card"},
+    residence: {type: "residence", name: "Residence Letter"},
+    sponsor: {type: "sponsor", name: "Sponsor Letter"},
+    health: {type: "health", name: "Health Insurance"},
+    return_ticker: {type: "return_ticker", name: "Return Ticket"},
+    bank: {type: "bank", name: "Bank Statement"},
+    proof: {type: "proof", name: "Proof of Employment"},
+    additional1: {type: "additional1", name: "Additional Document 1"},
+    additional2: {type: "additional2", name: "Additional Document 2"}
+};
