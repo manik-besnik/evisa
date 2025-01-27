@@ -13,6 +13,7 @@ export default function Select({
                                    field = "name",
                                    label = "",
                                    labelClasses = "",
+                                   error = "",
 
                                }) {
 
@@ -54,6 +55,9 @@ export default function Select({
                     </ListboxButton>
 
                 }
+
+                {error && <p className="text-red-500  my-1">{error}</p>}
+
                 <Transition leave="transition ease-in duration-100" leaveFrom="opacity-100" leaveTo="opacity-0">
                     <ListboxOptions
                         anchor="bottom"
@@ -85,79 +89,4 @@ export default function Select({
         </div>
     )
 }
-//
-// import { useState } from 'react';
-// import { Listbox, ListboxButton, ListboxOption, ListboxOptions, Transition } from '@headlessui/react';
-// import ArrowDownSolid from "@/Components/SvgIcons/ArrowDownSolid.jsx";
-//
-// export default function Select({
-//                                    items,
-//                                    selected,
-//                                    setSelected,
-//                                    handleValueChange,
-//                                    classes = '',
-//                                    placeholder = "Select One",
-//                                    field = "name"
-//                                }) {
-//
-//     const [searchQuery, setSearchQuery] = useState('');
-//
-//     const handleChange = (e) => {
-//         setSelected(e)
-//         handleValueChange(e)
-//     }
-//
-//     // Filter items based on search query
-//     const filteredItems = items.filter((item) =>
-//         item[field]?.toLowerCase().includes(searchQuery.toLowerCase())
-//     );
-//
-//     return (
-//         <div className="w-full">
-//             <Listbox value={selected} onChange={handleChange}>
-//                 {selected?.[field] ?
-//                     <ListboxButton
-//                         className={`h-[26px] sm:h-[36px] bg-white w-full flex items-center justify-between leading-[14px] sm:leading-[20px] text-gray-400 text-xs sm:text-sm px-3 border-0 border-l-4 border-red-500 ${classes}`}
-//                     >
-//                         {selected?.[field]}
-//                         <ArrowDownSolid />
-//                     </ListboxButton> :
-//                     <ListboxButton
-//                         className={`h-[26px] sm:h-[36px] bg-white w-full flex items-center justify-between leading-[14px] sm:leading-[20px] text-gray-400 text-xs sm:text-sm px-3 border-0 border-l-4 border-red-500 ${classes}`}
-//                     >
-//                         {placeholder}
-//                         <ArrowDownSolid />
-//                     </ListboxButton>
-//                 }
-//                 <Transition leave="transition ease-in duration-100" leaveFrom="opacity-100" leaveTo="opacity-0">
-//                     <ListboxOptions
-//                         className="w-[var(--button-width)] border bg-white p-2.5 focus:outline-none max-h-[450px] overflow-y-scroll"
-//                     >
-//                         {/* Search input */}
-//                         <div className="p-2">
-//                             <input
-//                                 type="text"
-//                                 value={searchQuery}
-//                                 onChange={(e) => setSearchQuery(e.target.value)}
-//                                 placeholder="Search..."
-//                                 className="w-full p-2 border"
-//                             />
-//                         </div>
-//
-//                         {/* Display filtered items */}
-//                         {filteredItems.map((person, i) => (
-//                             <ListboxOption
-//                                 key={i}
-//                                 value={person}
-//                                 className="group flex items-center gap-2 rounded-md py-2 px-2.5 select-none cursor-pointer data-[focus]:bg-gray-200"
-//                             >
-//                                 <div className="text-xs leading-[14px] text-text-primary">{person?.[field]}</div>
-//                             </ListboxOption>
-//                         ))}
-//                     </ListboxOptions>
-//                 </Transition>
-//             </Listbox>
-//         </div>
-//     );
-// }
 
