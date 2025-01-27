@@ -20,6 +20,7 @@ class StoreUser
             $user->role = $userDTO->role;
             $user->role_id = $userDTO->roleId;
             $user->password = $userDTO->password;
+            $user->save();
             return $user;
 
         } catch (\Exception $exception) {
