@@ -4,6 +4,7 @@ import Select from "@/Components/Web/Select.jsx";
 import {genders, groups, maritalStatuses, visaProcessingTypes, visaTypes} from "@/Components/Constant/index.js";
 import {useState} from "react";
 import {Head, useForm, usePage} from "@inertiajs/react";
+import PrimaryBtn from "@/Components/Web/PrimaryBtn.jsx";
 
 const VisaApply = () => {
 
@@ -108,6 +109,10 @@ const VisaApply = () => {
         setData('guarantor_nationality', value.id)
     }
 
+    const handleSubmit = (e) => {
+        e.preventDefault()
+    }
+
 
     return (
 
@@ -118,7 +123,7 @@ const VisaApply = () => {
             <div className="container">
                 <h3 className="text-text-primary text-lg font-semibold mt-3">Apply Visa</h3>
 
-                <form>
+                <form onSubmit={handleSubmit}>
 
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-x-4 items-center">
 
@@ -513,6 +518,7 @@ const VisaApply = () => {
                         />
 
                     </div>
+                    <PrimaryBtn text="Save" type="submit" onClick={handleSubmit}/>
                 </form>
             </div>
         </WebLayout>
