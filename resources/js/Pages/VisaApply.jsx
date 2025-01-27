@@ -20,6 +20,10 @@ const VisaApply = () => {
 
     const countries = usePage().props.countries
 
+    const [isPassportRequired, setIsPassportRequired] = useState(false)
+    const [isPhotoRequired, setIsPhotoRequired] = useState(false)
+
+
     const [processingType, setProcessingType] = useState('')
     const [visaType, setVisaType] = useState('')
     const [group, setGroup] = useState('')
@@ -125,11 +129,27 @@ const VisaApply = () => {
             "type": fileType,
             "file": file
         }
-        console.log(data)
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
+
+        if (!data.documents['passport'].file && !data.documents['photo'].file){
+            setIsPhotoRequired(true)
+            setIsPassportRequired(true)
+            return
+        }
+
+        if (!data.documents['passport'].file) {
+            setIsPassportRequired(true)
+            return
+        }
+        if (!data.documents['photo'].file) {
+            setIsPhotoRequired(true)
+            return
+        }
+
+        post(route())
     }
 
 
@@ -475,6 +495,10 @@ const VisaApply = () => {
                                     />
                                 </div>
                             </div>
+
+                            {isPassportRequired && <p className="text-warning text-sm my-2">Passport Document is required</p>}
+
+                            {isPhotoRequired && <p className="text-warning text-sm">Photo Document is required</p>}
 
                         </div>
 
