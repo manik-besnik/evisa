@@ -49,6 +49,12 @@ class UserPermission
         });
     }
 
+    public static function generate(int|null $userId = null): void
+    {
+        self::forget($userId);
+        self::set($userId);
+    }
+
     public static function forget(int|null $userId = null): bool
     {
         return Cache::delete(self::cacheKey($userId));

@@ -29,7 +29,7 @@ export default function Login() {
 
     return (
         <AdminGuestLayout>
-            <Head title="Admin Login | Maketop.me"/>
+            <Head title="Admin Login | Dubai E-Visa"/>
 
             <h3 className='text-center text-[25px] leading-[30px] text-text-primary mb-5 md:text-[43px] md:leading-[51px] md:mb-[30px] font-semibold '>Welcome
                 Back</h3>

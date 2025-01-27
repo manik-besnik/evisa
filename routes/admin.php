@@ -1,10 +1,23 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\VisaApplyController;
 use Illuminate\Support\Facades\Route;
+
+
+Route::prefix('admin')->middleware('guest')->group(function () {
+
+    Route::get('login', [AuthController::class, 'create'])
+        ->name('admin.login');
+
+    Route::post('login/store', [AuthController::class, 'store'])
+        ->name('admin.login.store');
+
+});
+
 
 Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(function () {
 
