@@ -9,7 +9,6 @@ use App\Models\Language;
 use App\Models\User;
 use App\Supports\StoreAgency;
 use App\Supports\StoreUser;
-use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,6 +19,14 @@ use Inertia\Response;
 class AuthController extends Controller
 {
 
+
+    /**
+     * Display the registration view.
+     */
+    public function login(): Response
+    {
+        return Inertia::render('Agency/Login');
+    }
 
     /**
      * Display the registration view.
@@ -64,9 +71,7 @@ class AuthController extends Controller
 
         $user = StoreUser::execute(UserDTO::fromArray($userData));
 
-        event(new Registered($user));
-
-        Auth::login($user);
+        Auth::login($user,$request->input('remember'));
 
         return redirect(route('agency.register.agency-info'));
     }

@@ -13,6 +13,10 @@ Route::prefix('agency')->middleware('guest')->group(function () {
     Route::post('register', [AuthController::class, 'store'])
         ->name('agency.register.store');
 
+
+    Route::get('login', [AuthController::class, 'login'])
+        ->name('agency.login');
+
 });
 
 

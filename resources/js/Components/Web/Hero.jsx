@@ -69,7 +69,7 @@ const Hero = () => {
                 </div>
                 <div className="flex gap-x-2">
                     {services.map((service, i) => (
-                        <ServiceCard title={service.title} img={service.img} link={service.link}/>
+                        <ServiceCard key={i} title={service.title} img={service.img} link={service.link}/>
                     ))}
                 </div>
 
