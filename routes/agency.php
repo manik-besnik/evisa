@@ -5,7 +5,7 @@ use App\Http\Controllers\Agency\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::prefix('agency')->group(function () {
+Route::prefix('agency')->middleware('guest')->group(function () {
 
     Route::get('register', [AgencyController::class, 'login'])
         ->name('agency.register');
@@ -17,7 +17,7 @@ Route::prefix('agency')->group(function () {
         ->name('agency.register.agency-info');
 
 
-})->middleware('guest');
+});
 
 
 Route::prefix('agency')->name('agency.')->group(function () {
