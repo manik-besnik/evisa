@@ -123,7 +123,7 @@ const VisaApply = () => {
             <div className="container">
                 <h3 className="text-text-primary text-lg font-semibold mt-3">Apply Visa</h3>
 
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} className="mb-6">
 
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-x-4 items-center">
 
@@ -518,7 +518,9 @@ const VisaApply = () => {
                         />
 
                     </div>
-                    <PrimaryBtn text="Save" type="submit" onClick={handleSubmit}/>
+                    <div className="flex justify-center mt-2">
+                        <PrimaryBtn text="Save" type="submit" classes="w-[200px]" onClick={handleSubmit}/>
+                    </div>
                 </form>
             </div>
         </WebLayout>

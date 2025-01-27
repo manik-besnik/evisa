@@ -1,6 +1,6 @@
 export default function PrimaryBtn({text, onClick, type = 'button',classes='', btnClasses=''}) {
     return (
-        <div className={`"flex items-center justify-center" ${classes}`}>
+        <div className={`flex items-center justify-center ${classes}`}>
             <button
                 type={type}
                 onClick={onClick}
