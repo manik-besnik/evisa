@@ -16,8 +16,7 @@ class StoreUser
             if ($userDTO->avatar) {
                 $avatar = FileUpload::execute($userDTO->avatar);
             }
-
-
+            
             $user = new User();
             $user->name = $userDTO->name;
             $user->email = $userDTO->email;
@@ -26,7 +25,7 @@ class StoreUser
             $user->role_id = $userDTO->roleId;
             $user->password = $userDTO->password;
             $user->save();
-            
+
             return $user;
 
         } catch (\Exception $exception) {
