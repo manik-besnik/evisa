@@ -49,7 +49,7 @@ const ServiceCard = ({img, title, link}) => {
 }
 const Hero = () => {
     return (
-        <div className="w-11/12 mb-2">
+        <div>
             <div className="hero-top flex">
                 <div className="relative">
                     <img src={`${assetUrl + 'images/hero1.png'}`} alt="hero"/>
