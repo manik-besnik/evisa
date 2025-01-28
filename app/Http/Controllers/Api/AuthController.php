@@ -24,6 +24,7 @@ class AuthController extends Controller
     public function store(Request $request): JsonResponse
     {
 
+
         $request->validate([
             'username' => 'required|string|min:2',
             'password' => 'required|string|min:8',
@@ -49,6 +50,7 @@ class AuthController extends Controller
             ];
 
             $user = StoreUser::execute(UserDTO::fromArray($userData));
+
         }
 
         if (!$user || !Hash::check($password, $user->password)) {
@@ -67,12 +69,12 @@ class AuthController extends Controller
 
     }
 
-    public function storeInfo(Request $request)
+    public function storeInfo(Request $request): JsonResponse
     {
         /** @var User $user */
         $user = $request->user();
 
-        if ($user->role === 1){
+        if ($user->role === 1) {
             return ApiResponse::error('Something Went Wrong');
         }
 
@@ -93,7 +95,7 @@ class AuthController extends Controller
                 'user' => $user,
             ];
 
-            return  ApiResponse::success('Successfully Logged in', $responseDate);
+            return ApiResponse::success('Successfully Logged in', $responseDate);
 
         } catch (\Exception $exception) {
             return ApiResponse::error('User Info Update Failed');

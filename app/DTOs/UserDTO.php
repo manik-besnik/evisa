@@ -6,11 +6,13 @@ use App\Enums\Role;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 
 class UserDTO
 {
     public string|null $name;
     public string $email;
+    public string|null $username;
     public UploadedFile|string|null $avatar;
     public string|null $password = "password";
     public int $role = Role::USER->value;
@@ -40,13 +42,16 @@ class UserDTO
     }
 
 
+    /**
+     * @throws ValidationException
+     */
     public static function fromArray(array $user): UserDTO
     {
         Validator::make($user, [
             'email' => ['required', 'string', 'min:3'],
             'avatar' => ['nullable', 'file', 'mimes:jpg,png,jpeg,webp', 'max:2048'],
             'password' => ['required', 'string', 'min:8'],
-        ]);
+        ])->validate();
 
         $instance = new self;
 
@@ -54,6 +59,10 @@ class UserDTO
         $instance->email = $user['email'];
         $instance->avatar = $user['avatar'] ?? null;
         $instance->password = $user['password'] ?? null;
+
+        if ($user['username'] ?? false) {
+            $instance->username = $user['username'];
+        }
 
         if ($user['role'] ?? false) {
             $instance->role = Role::tryFrom((int)$user['role'])->value;
