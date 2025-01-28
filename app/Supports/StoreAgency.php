@@ -4,28 +4,17 @@ namespace App\Supports;
 
 use App\DTOs\AgencyDTO;
 use App\Models\Agency;
-use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
 class StoreAgency
 {
-    public static function execute(AgencyDTO $agencyDTO): bool
+    public static function execute(AgencyDTO $agencyDTO): Agency|null
     {
         DB::beginTransaction();
 
         try {
-            /** @var User $user */
-            $user = auth()->user();
-            $user->language_id = $agencyDTO->prefferLanguage;
-            $user->nationality_id = $agencyDTO->nationality;
-            $user->living_country_id = $agencyDTO->livingCountry;
-            $user->name = $agencyDTO->personName;
-            $user->email = $agencyDTO->email;
-            $user->phone = $agencyDTO->phone;
-            $user->profession = $agencyDTO->profession;
-            $user->city = $agencyDTO->city;
-            $user->is_signup_complete = 1;
-            $user->update();
+
+            $user = UserUpdate::execute($agencyDTO);
 
             /** @var Agency|null $agency */
             $agency = Agency::query()
@@ -48,11 +37,11 @@ class StoreAgency
 
             DB::commit();
 
-            return true;
+            return $agency;
 
         } catch (\Exception $exception) {
             DB::rollBack();
-            return false;
+            return null;
         }
     }
 }

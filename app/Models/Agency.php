@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property int $id
@@ -14,6 +15,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $bank_details
  * @property string|null $nominee_name
  * @property string|null $nominee_passport_no
+ *
+ * @mixin Model
+ * @property User $user
  */
 class Agency extends Model
 {
@@ -29,4 +33,9 @@ class Agency extends Model
         'nominee_name',
         'nominee_passport_no',
     ];
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 }
