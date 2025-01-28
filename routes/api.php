@@ -14,6 +14,14 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
+Route::get('countries', function () {
+    $data = [
+        'countries' => \App\Supports\Country::get(),
+        'languages' => \App\Models\Language::query()->get(),
+    ];
+    return \App\Supports\ApiResponse::success("Country and Language Data", $data);
+});
+
 Route::post('/login', [AuthController::class, 'store'])->name('api.login.store');
 
 Route::post('extreact-image', ExtreactTextController::class)->name('extreact-text');
