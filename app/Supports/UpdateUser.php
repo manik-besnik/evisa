@@ -6,7 +6,7 @@ use App\DTOs\AgencyDTO;
 use App\DTOs\UserUpdateDTO;
 use App\Models\User;
 
-class UserUpdate
+class UpdateUser
 {
     public static function execute(AgencyDTO|UserUpdateDTO $updateDTO): User
     {

@@ -10,7 +10,7 @@ use App\Models\User;
 use App\Supports\ApiResponse;
 use App\Supports\StoreAgency;
 use App\Supports\StoreUser;
-use App\Supports\UserUpdate;
+use App\Supports\UpdateUser;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -87,7 +87,7 @@ class AuthController extends Controller
     {
         try {
 
-            $user = UserUpdate::execute(UserUpdateDTO::fromRequest($request));
+            $user = UpdateUser::execute(UserUpdateDTO::fromRequest($request));
 
             $responseDate = [
                 'user' => $user,

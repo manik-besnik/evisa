@@ -14,7 +14,7 @@ class StoreAgency
 
         try {
 
-            $user = UserUpdate::execute($agencyDTO);
+            $user = UpdateUser::execute($agencyDTO);
 
             /** @var Agency|null $agency */
             $agency = Agency::query()
