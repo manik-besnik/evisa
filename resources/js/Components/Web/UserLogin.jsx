@@ -6,7 +6,7 @@ import PrimaryBtn from "@/Components/Web/PrimaryBtn.jsx";
 import React from "react";
 import SocialLogin from "@/Components/Web/SocialLogin.jsx";
 
-const UserLogin = () => {
+const UserLogin = ({isRegister = false}) => {
     const {data, setData, post, errors} = useForm({
         email: '',
         password: '',
@@ -19,6 +19,12 @@ const UserLogin = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+
+        if (isRegister) {
+
+            post(route('register.store'))
+            return
+        }
 
         post(route('user.login.store'))
     }
@@ -58,7 +64,9 @@ const UserLogin = () => {
                 <Link href={route('home')} className="block mt-4 text-sm font-semibold text-white">Forget
                     Password</Link>
 
-                <PrimaryBtn classes="mt-3" type="submit" text="Next" onClick={handleSubmit}/>
+                {isRegister && <PrimaryBtn classes="mt-3" type="submit" text="Next" onClick={handleSubmit}/>}
+
+                {!isRegister && <PrimaryBtn classes="mt-3" type="submit" text="Login" onClick={handleSubmit}/>}
             </form>
         </div>
     )

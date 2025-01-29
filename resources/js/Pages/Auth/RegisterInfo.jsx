@@ -3,7 +3,7 @@ import { Head } from "@inertiajs/react";
 import SearchContainer from "@/Components/Web/SearchContainer.jsx";
 import UserRegister from "@/Components/Web/UserRegister.jsx";
 
-const Register = () => {
+const RegisterInfo = () => {
     return (
         <WebLayout showBgImage={true}>
             <Head title="Register | Dubai E-Visa" />
@@ -17,4 +17,4 @@ const Register = () => {
     );
 };
 
-export default Register;
+export default RegisterInfo;

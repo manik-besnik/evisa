@@ -24,7 +24,7 @@ class RegisteredUserController extends Controller
     {
         $countries = Country::query()->get();
         $languages = Language::query()->get();
-        return Inertia::render('Register',[
+        return Inertia::render('Auth/Register', [
             'countries' => $countries,
             'languages' => $languages
         ]);
@@ -33,26 +33,26 @@ class RegisteredUserController extends Controller
     /**
      * Handle an incoming registration request.
      *
-     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'name' => 'nullable|string|max:255',
+            'email' => 'required|string|max:255|unique:users,username',
+            'password' => ['required', Rules\Password::defaults()],
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
+        $user = User::query()->create([
+            'name' => $request->input('name') ?? " ",
+            'email' => $request->input('email'),
+            'username' => $request->input('email'),
+            'password' => Hash::make($request->input('password')),
         ]);
 
         event(new Registered($user));
 
         Auth::login($user);
 
-        return redirect(route('dashboard', absolute: false));
+        return redirect(route('user.info.store', absolute: false));
     }
 }

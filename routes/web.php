@@ -14,13 +14,18 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware(['auth', 'user'])->group(function () {
+
+    Route::get('store-user-info', [ProfileController::class, 'userInfo'])->name('user.info');
+
+    Route::put('store-user-info', [ProfileController::class, 'storeInfo'])->name('user.info.store');
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('report',[VisaApplyController::class,'index'])->name('visa-apply.index');
+    Route::get('report', [VisaApplyController::class, 'index'])->name('visa-apply.index');
 
-    Route::get('visa-apply',[VisaApplyController::class,'create'])->name('visa-apply.create');
+    Route::get('visa-apply', [VisaApplyController::class, 'create'])->name('visa-apply.create');
 
     Route::get('dashboard', [\App\Http\Controllers\User\DashboardController::class, 'index'])->name('user.dashboard.index');
 });
