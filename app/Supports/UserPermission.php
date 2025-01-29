@@ -20,34 +20,31 @@ class UserPermission
     public static function set(int|null $userId = null): bool
     {
         /** @var User $user */
-
         $user = auth()->user();
 
-        return Cache::remember(self::cacheKey($userId), now()->addMinutes((int)config('session.lifetime')), function () use ($user) {
+        if (!$userId) {
+            $userId = $user->id;
+        }
 
-            /** @var Role $role */
+        $role = Role::query()->find($user->role_id);
 
-            $role = Role::query()->find($user->role_id);
-
-            return $role;
-        });
+        return Cache::put(self::cacheKey($userId), $role, now()->addMinutes((int)config('session.lifetime')));
     }
 
     public static function get(int|null $userId = null)
     {
         /** @var User $user */
-
         $user = auth()->user();
 
+        if (!$userId) {
+            $userId = $user->id;
+        }
+
         return Cache::remember(self::cacheKey($userId), now()->addMinutes((int)config('session.lifetime')), function () use ($user) {
-
-            /** @var Role $role */
-
-            $role = Role::query()->find($user->role_id);
-
-            return $role;
+            return Role::query()->find($user->role_id);
         });
     }
+
 
     public static function generate(int|null $userId = null): void
     {
