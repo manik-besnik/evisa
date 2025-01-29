@@ -23,7 +23,7 @@ class RegisteredUserController extends Controller
     public function create(): Response
     {
         $languages = Language::query()->get();
-        
+
         return Inertia::render('Auth/Register', [
             'languages' => $languages
         ]);
