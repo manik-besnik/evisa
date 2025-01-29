@@ -1,9 +1,11 @@
-import {Link} from '@inertiajs/react';
+import {Link, usePage} from '@inertiajs/react';
 import CloseIcon from '@/Components/SvgIcons/Close';
-import SideNavLinks from '@/Components/SideNavLinks';
+import SideNavLinks from '@/Components/Admin/SideNavLinks.jsx';
+import AgencySideNavLinks from '@/Components/Agency/AgencySideNavLinks.jsx';
 import React from "react";
 
 export default function SideNav({toggleSideNav, useToggleSideNav}) {
+    const user = usePage().props.auth.user;
 
     return (
         <div className='flex justify-between flex-col w-full p-4 lg:p-5 min-h-full gap-10'>
@@ -21,23 +23,20 @@ export default function SideNav({toggleSideNav, useToggleSideNav}) {
                 </div>
 
                 <div className='mb-5 lg:hidden'>
-                    <Link href={route('google.redirect')}
-                          className={`${route().current('google.redirect') && 'bg-card-and-hover'} flex items-center gap-[10px] rounded px-2.5 py-2 text-sm text-text-primary font-medium hover:bg-card-and-hover`}>
+                    <Link href={route('admin.admins.index')}
+                          className={`${route().current('admin.admins.index') && 'bg-card-and-hover'} flex items-center gap-[10px] rounded px-2.5 py-2 text-sm text-text-primary font-medium hover:bg-card-and-hover`}>
                         Admins
                     </Link>
-                    <Link href={route('google.redirect')}
-                          className={`${route().current('google.redirect') && 'bg-card-and-hover'} flex items-center gap-[10px] rounded px-2.5 py-2 text-sm text-text-primary font-medium hover:bg-card-and-hover`}>
-                        Agency
-                    </Link>
-                    <Link
-                        className='flex items-center gap-[10px] rounded px-2.5 py-2 text-sm text-text-primary font-medium hover:bg-card-and-hover'>
-                        General Users
+                    <Link href={route('admin.roles.index')}
+                          className={`${route().current('admin.roles.index') && 'bg-card-and-hover'} flex items-center gap-[10px] rounded px-2.5 py-2 text-sm text-text-primary font-medium hover:bg-card-and-hover`}>
+                        Roles
                     </Link>
                 </div>
 
                 <div>
 
-                    <SideNavLinks/>
+                    {user.role === 1 && <SideNavLinks/>}
+                    {user.role === 2 && <AgencySideNavLinks/>}
 
                 </div>
             </div>
