@@ -1,13 +1,12 @@
 import {Link} from '@inertiajs/react';
-import ArrowUp from '@/Components/SvgIcons/ArrowUp';
-import ArrowRight from '@/Components/SvgIcons/ArrowRight';
+import ArrowUp from '@/Components/SvgIcons/ArrowUp.jsx';
+import ArrowRight from '@/Components/SvgIcons/ArrowRight.jsx';
 
 import {useState} from 'react';
 import {GrVisa} from "react-icons/gr";
-import {PiNetworkXBold} from "react-icons/pi";
 import {FaPeopleGroup, FaPeopleRoof} from "react-icons/fa6";
 
-export default function SideNavLinks() {
+export default function AgencySideNavLinks() {
 
     const [products, setProducts] = useState([
         {
@@ -22,38 +21,6 @@ export default function SideNavLinks() {
                 {
                     name: 'Add New Application',
                 },
-            ]
-        },
-        {
-            name: 'Jobs',
-            icon: <PiNetworkXBold/>,
-            isOpen: false,
-            links: [
-                {
-                    name: 'Job List',
-                },
-                {
-                    name: 'Add Job',
-                },
-                {
-                    name: 'Applications',
-                }
-            ]
-        },
-        {
-            name: 'Agency',
-            icon: <FaPeopleRoof/>,
-            isOpen: false,
-            links: [
-                {
-                    name: 'Agency List',
-                },
-                {
-                    name: 'Add Job',
-                },
-                {
-                    name: 'Applications',
-                }
             ]
         },
         {

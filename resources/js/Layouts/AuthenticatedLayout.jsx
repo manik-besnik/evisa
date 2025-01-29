@@ -5,8 +5,6 @@ import NavBar from '@/Components/NavBar';
 import {ToastContainer} from 'react-toastify';
 
 export default function Authenticated({header, children}) {
-    const user = usePage().props.auth.user;
-
 
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
     const [toggleSideNav, useToggleSideNav] = useState(false)
