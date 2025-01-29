@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\DTOs\UserDTO;
 use App\Http\Controllers\Controller;
-use App\Models\Country;
 use App\Models\Language;
 use App\Supports\StoreUser;
 use Illuminate\Auth\Events\Registered;
@@ -23,10 +22,9 @@ class RegisteredUserController extends Controller
      */
     public function create(): Response
     {
-        $countries = Country::query()->get();
         $languages = Language::query()->get();
+        
         return Inertia::render('Auth/Register', [
-            'countries' => $countries,
             'languages' => $languages
         ]);
     }
