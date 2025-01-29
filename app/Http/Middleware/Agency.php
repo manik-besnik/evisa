@@ -26,6 +26,10 @@ class Agency
             return to_route('home');
         }
 
+        if (!$user->is_signup_complete && !$request->routeIs('agency.register.agency-info')) {
+            return to_route('agency.register.agency-info');
+        }
+
         return $next($request);
     }
 }

@@ -1,76 +1,103 @@
-import {assetUrl} from "@/Components/Constant/index.js";
 import TextInput from "@/Components/TextInput.jsx";
-import {useForm, usePage} from "@inertiajs/react";
+import Switch from "@/Components/Web/Switch.jsx";
+import {Link, useForm} from "@inertiajs/react";
 import PrimaryBtn from "@/Components/Web/PrimaryBtn.jsx";
-import React from "react";
-import Select from "@/Components/Web/Select.jsx";
-
+import React, {useState} from "react";
+import SocialLogin from "@/Components/Web/SocialLogin.jsx";
+import {FaCameraRetro} from "react-icons/fa";
 
 const AgencyRegister = () => {
-
-    const countries = usePage().props.countries;
-    const languages = usePage().props.languages;
 
     const {data, setData, post, errors} = useForm({
         email: '',
         password: '',
         remember: false,
+        avatar: null
     })
 
-    const updateNationality = (value) => {
+    const [avatar, setAvatar] = useState('')
+
+    const handleRemember = (value) => {
         setData('remember', value)
+    }
+
+    const handleUploadFile = (e) => {
+        const file = e.target.files[0]
+
+        if (file) {
+            const validTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/svg', 'image/webp', 'image/jpg'];
+            if (!validTypes.includes(file.type)) {
+
+                setAvatar('');
+                return;
+            }
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setAvatar(reader.result);
+            };
+
+            setData('avatar', file)
+            reader.readAsDataURL(file);
+        } else {
+            setAvatar('');
+        }
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
+
+        post(route('agency.register.store'))
+
     }
 
     return (
-        <div className="w-[60%] bg-black/70 px-5 h-[72vh] overflow-y-scroll">
+        <div className="bg-black/70 w-1/2 p-5 min-h-[72vh]">
+            <div className="flex gap-x-2 text-white">
+                <h4 className="text-white min-w-max">
+                    Agency
+                    <br/>Register</h4>
+                <label htmlFor="avatar" className="cursor-pointer">
+                    {avatar && <img className="h-28 w-28 rounded-full" src={avatar} alt="preview-avatar"/>}
 
-            <form onSubmit={handleSubmit} >
+                    {!avatar && <div
+                        className="flex items-center justify-center flex-col bg-[#1E374A] h-28 w-28 rounded-full">
+                        <FaCameraRetro size={42}/>
+                        <span className="text-[9px]">Upload Your Photo</span>
+                    </div>}
+                    <input id="avatar" onChange={(e) => handleUploadFile(e)} type="file" className="hidden"/>
+                </label>
 
-                <TextInput divClasses="mb-2 mt-5" id="name" placeholder="Name | Company Name" inputClasses='text-xs'/>
+            </div>
 
-                <TextInput divClasses="mb-2" id="contact-person" placeholder="Contact Person" inputClasses='text-xs'/>
+            <SocialLogin/>
 
-                <TextInput divClasses="mb-2" id="profession" placeholder="Profession" inputClasses='text-xs'/>
+            <form onSubmit={handleSubmit}>
 
-                <TextInput divClasses="mb-2" id="phone" placeholder="Whatsapp | Mobile With Country Code"
-                           inputClasses='text-xs'/>
+                <TextInput
+                    label="Username*"
+                    id="email" value={data.email}
+                    placeholder="Username"
+                    onChange={(e) => setData('email', e.target.value)}
+                />
 
-                <TextInput divClasses="mb-2" id="email" placeholder="Email Address"
-                           inputClasses='text-xs'/>
+                {errors.email && <p className="text-red-500 my-1 text-xs">{errors.email}</p>}
 
-                <Select classes="my-2 sm:text-xs" items={countries} selected={null} setSelected={updateNationality}
-                        handleValueChange={updateNationality}
-                        placeholder="Nationality" field='nationality'/>
+                <TextInput
+                    divClasses="my-2" label="Password*"
+                    type="password" id="password"
+                    placeholder="Password"
+                    onChange={(e) => setData('password', e.target.value)}
+                />
 
-                <Select classes="my-2 sm:text-xs" items={languages} selected={null} setSelected={updateNationality}
-                        handleValueChange={updateNationality}
-                        placeholder="Preffered Language"/>
-
-                <Select classes="my-2 sm:text-xs" items={countries} selected={null} setSelected={updateNationality}
-                        handleValueChange={updateNationality}
-                        placeholder="Living Country"/>
-
-                <TextInput id="city" placeholder="Enter City" inputClasses='text-xs'/>
-
-                <p className="text-white text-md mt-3">Inside UAE</p>
-                <TextInput id="eid" placeholder="EID No." inputClasses='text-xs'/>
-                <TextInput id="passport-no" placeholder="Passport No" inputClasses='text-xs'/>
-                <TextInput id="uid" placeholder="UID No" inputClasses='text-xs'/>
-
-                <p className="text-white text-md mt-3">BANK Account Details</p>
-                <TextInput id="eid" placeholder="EID No." inputClasses='text-xs h-20'/>
-
-                <p className="text-white text-md mt-3">Nominee</p>
-                <TextInput id="nominee-name" placeholder="Name" inputClasses='text-xs'/>
-                <TextInput id="nominee-passport-no" placeholder="Passport No" inputClasses='text-xs'/>
-
-                <PrimaryBtn text="Register" type="submit" btnClasses="uppercase mt-2 mb-5" />
+                {errors.password && <p className="text-red-500 my-1 text-xs">{errors.password}</p>}
 
 
+                <Switch classes=" justify-end mr-1 mt-4" value={data.remember} onChange={handleRemember}/>
+
+                <Link href={route('home')} className="block mt-4 text-sm font-semibold text-white">Forget
+                    Password</Link>
+
+                <PrimaryBtn classes="mt-3" type="submit" text="Next" onClick={handleSubmit}/>
             </form>
         </div>
     )

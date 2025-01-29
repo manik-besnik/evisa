@@ -14,13 +14,13 @@ return new class extends Migration
         Schema::create('agencies', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
-            $table->foreignId('nationality')->constrained('countries')->cascadeOnDelete();
-            $table->foreignId('current_country')->constrained('countries')->cascadeOnDelete();
-            $table->foreignId('language_id');
-            $table->string('name');
-            $table->string('phone',30);
-            $table->string('language',30);
-            $table->string('city')->nullable();
+            $table->string('company_name');
+            $table->string('eid_no')->nullable();
+            $table->string('passport_no')->nullable();
+            $table->string('uid_no')->nullable();
+            $table->text('bank_details')->nullable();
+            $table->text('nominee_name')->nullable();
+            $table->string('nominee_passport_no')->nullable();
             $table->timestamps();
         });
     }

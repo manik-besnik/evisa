@@ -11,18 +11,26 @@ class StoreUser
     {
         try {
 
-            $avatar = FileUpload::execute($userDTO->avatar);
+            $avatar = null;
+
+            if ($userDTO->avatar) {
+                $avatar = FileUpload::execute($userDTO->avatar);
+            }
 
             $user = new User();
             $user->name = $userDTO->name;
             $user->email = $userDTO->email;
+            $user->username = $userDTO->username;
             $user->avatar = $avatar;
             $user->role = $userDTO->role;
             $user->role_id = $userDTO->roleId;
             $user->password = $userDTO->password;
+            $user->save();
+
             return $user;
 
         } catch (\Exception $exception) {
+
             return false;
         }
     }

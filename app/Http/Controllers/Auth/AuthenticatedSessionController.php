@@ -41,9 +41,8 @@ class AuthenticatedSessionController extends Controller
         /** @var User $user */
         $user = auth()->user();
 
-        UserPermission::set();
-
         if ($user->role === Role::ADMIN->value) {
+            UserPermission::set();
             return to_route('admin.dashboard.index');
         }
 
