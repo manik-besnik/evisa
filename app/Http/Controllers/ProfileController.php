@@ -44,7 +44,7 @@ class ProfileController extends Controller
         return Redirect::route('profile.edit');
     }
 
-    public function userInfo(Request $request): Response
+    public function userInfo(): Response
     {
         $countries = Country::query()->get();
         $languages = Language::query()->get();

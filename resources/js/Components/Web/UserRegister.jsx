@@ -42,7 +42,7 @@ const UserRegister = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        put(route('storeInfo'), {
+        put(route('user.info.store'), {
             onSuccess: () => {
                 toast('Your Information saved successfully')
             }

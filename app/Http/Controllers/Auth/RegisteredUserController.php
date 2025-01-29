@@ -42,10 +42,12 @@ class RegisteredUserController extends Controller
             'password' => ['required', Rules\Password::defaults()],
         ]);
 
+
         $user = User::query()->create([
             'name' => $request->input('name') ?? " ",
             'email' => $request->input('email'),
             'username' => $request->input('email'),
+            'role' => 3,
             'password' => Hash::make($request->input('password')),
         ]);
 
@@ -53,6 +55,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(route('user.info.store', absolute: false));
+        return redirect(route('user.info', absolute: false));
     }
 }

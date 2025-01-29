@@ -15,7 +15,7 @@ Route::get('/dashboard', function () {
 
 Route::middleware(['auth', 'user'])->group(function () {
 
-    Route::get('store-user-info', [ProfileController::class, 'userInfo'])->name('user.info');
+    Route::get('user-info', [ProfileController::class, 'userInfo'])->name('user.info');
 
     Route::put('store-user-info', [ProfileController::class, 'storeInfo'])->name('user.info.store');
 
