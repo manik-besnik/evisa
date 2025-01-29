@@ -23,8 +23,9 @@ const Topbar = () => {
                         <span>English</span>
                     </div>
                     <div>
-                        <Link className="pr-2">Register</Link>
-                        <Link className='bg-primary px-4 py-1 text-2xl rounded font-semibold text-white '>Login</Link>
+                        <Link href={route('register')} className="pr-2">Register</Link>
+                        <Link href={route('login')}
+                              className='bg-primary px-4 py-1 text-2xl rounded font-semibold text-white '>Login</Link>
                     </div>
                 </div>
             </div>

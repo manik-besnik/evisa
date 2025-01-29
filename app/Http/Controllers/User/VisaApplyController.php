@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Actions\User\VisaApply\CreateAction;
+use App\Actions\User\VisaApply\IndexAction;
 use App\Http\Controllers\Controller;
 use App\Models\VisaApply;
 use Illuminate\Http\Request;
@@ -11,17 +13,17 @@ class VisaApplyController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(IndexAction $indexAction): \Inertia\Response
     {
-        //
+        return $indexAction->execute();
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(CreateAction $createAction): \Inertia\Response
     {
-        //
+        return $createAction->execute();
     }
 
     /**

@@ -3,7 +3,7 @@ import SearchForm from "@/Components/Web/SearchForm.jsx";
 import SearchResult from "@/Components/Web/SearchResult.jsx";
 import {Head} from "@inertiajs/react";
 
-const Search = () => {
+const Report = () => {
     return (
         <WebLayout showServiceImage={false} showBgImage={false}>
             <Head title="Search Result | Dubai E-Visa"/>
@@ -15,4 +15,4 @@ const Search = () => {
     )
 }
 
-export default Search
+export default Report
