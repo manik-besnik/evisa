@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\DTOs\UserDTO;
 use App\Http\Controllers\Controller;
 use App\Models\Country;
 use App\Models\Language;
-use App\Models\User;
+use App\Supports\StoreUser;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -33,6 +34,7 @@ class RegisteredUserController extends Controller
     /**
      * Handle an incoming registration request.
      *
+     * @throws ValidationException
      */
     public function store(Request $request): RedirectResponse
     {
@@ -42,16 +44,18 @@ class RegisteredUserController extends Controller
             'password' => ['required', Rules\Password::defaults()],
         ]);
 
-
-        $user = User::query()->create([
-            'name' => $request->input('name') ?? " ",
+        $userData = [
             'email' => $request->input('email'),
             'username' => $request->input('email'),
+            'password' => $request->input('password'),
+            'avatar' => $request->file('avatar'),
+            'sign_up_complete' => 0,
             'role' => 3,
-            'password' => Hash::make($request->input('password')),
-        ]);
+        ];
 
-        event(new Registered($user));
+        $user = StoreUser::execute(UserDTO::fromArray($userData));
+
+        event(new Registered($user), $request->input('remember'));
 
         Auth::login($user);
 
