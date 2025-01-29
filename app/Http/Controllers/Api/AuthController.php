@@ -21,43 +21,62 @@ class AuthController extends Controller
     /**
      * @throws ValidationException
      */
-    public function store(Request $request): JsonResponse
+    public function login(Request $request): JsonResponse
     {
 
 
         $request->validate([
             'username' => 'required|string|min:2',
             'password' => 'required|string|min:8',
-            'avatar' => ['nullable', 'file', 'mimes:jpg,png,jpeg,webp', 'max:2048'],
-            'is_agency' => 'nullable|boolean',
         ]);
 
         $userName = $request->input('username');
         $password = $request->input('password');
-        $isAgency = $request->input('is_agency', false);
 
         /** @var User|null $user */
         $user = User::query()->where('username', $userName)->first();
-
-        if (!$user) {
-            $userData = [
-                'email' => $userName,
-                'username' => $userName,
-                'password' => $password,
-                'avatar' => $request->file('avatar'),
-                'sign_up_complete' => 0,
-                'role' => $isAgency ? 2 : 3,
-            ];
-
-            $user = StoreUser::execute(UserDTO::fromArray($userData));
-
-        }
 
         if (!$user || !Hash::check($password, $user->password)) {
             throw ValidationException::withMessages([
                 'email' => ['The provided credentials are incorrect.'],
             ]);
         }
+
+        $responseDate = [
+            'user' => $user,
+            'access_token' => $user->createToken($userName)->plainTextToken,
+            'token_type' => "Bearer"
+        ];
+
+        return ApiResponse::success('Successfully Logged in', $responseDate);
+
+    }
+
+    /**
+     * @throws ValidationException
+     */
+    public function register(Request $request): JsonResponse
+    {
+
+        $request->validate([
+            'username' => 'required|string|max:255|unique:users,username',
+            'password' => 'required|string|min:8',
+        ]);
+
+        $userName = $request->input('username');
+        $password = $request->input('password');
+
+
+        $userData = [
+            'email' => $userName,
+            'username' => $userName,
+            'password' => $password,
+            'avatar' => $request->file('avatar'),
+            'sign_up_complete' => 0,
+            'role' => 3,
+        ];
+
+        $user = StoreUser::execute(UserDTO::fromArray($userData));
 
         $responseDate = [
             'user' => $user,

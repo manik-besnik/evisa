@@ -22,6 +22,7 @@ Route::get('countries', function () {
     return \App\Supports\ApiResponse::success("Country and Language Data", $data);
 });
 
-Route::post('/login', [AuthController::class, 'store'])->name('api.login.store');
+Route::post('/login', [AuthController::class, 'login'])->name('api.login.store');
+Route::post('/register', [AuthController::class, 'register'])->name('api.login.register');
 
 Route::post('extreact-image', ExtreactTextController::class)->name('extreact-text');
