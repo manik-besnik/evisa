@@ -31,7 +31,7 @@ const UserRegister = () => {
                 <img className="w-3/4 h-auto" src={`${assetUrl + 'images/logo.png'}`} alt=""/>
             </div>
 
-            <form onSubmit={handleSubmit} className="px-5 pt-4 pb-5 bg-primary">
+            <form onSubmit={handleSubmit} className="px-5 pt-4 pb-5 bg-primary h-[90.6%]">
                 <TextInput divClasses="mb-2" id="name" placeholder="Name" inputClasses='text-xs'/>
                 <TextInput divClasses="mb-2" id="profession" placeholder="Profession" inputClasses='text-xs'/>
                 <TextInput divClasses="mb-2" id="phone" placeholder="Whatsapp | Mobile With Country Code"

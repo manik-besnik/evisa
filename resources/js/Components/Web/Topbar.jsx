@@ -7,9 +7,9 @@ const Topbar = () => {
         <>
 
             <div className="container grid sm:grid-cols-1 md:sm:grid-cols-3 justify-center items-center py-2">
-                <div>
+                <Link href={route('home')}>
                     <img className="w-4/6" src={`${assetUrl + 'images/logo.png'}`} alt="logo"/>
-                </div>
+                </Link>
                 <div className="flex justify-center items-center">
                     <img className="w-20" src={`${assetUrl + 'images/logo2.png'}`} alt="logo"/>
                     <p className="flex items-center ml-6">
