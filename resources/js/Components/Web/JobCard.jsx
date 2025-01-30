@@ -1,6 +1,6 @@
 export default function JobCard() {
     return (
-        <div className="bg-pink-200 p-4 rounded-2xl shadow-lg border w-full">
+        <div className="bg-[#F8F5F2] p-4 rounded-2xl shadow-lg border w-full">
 
             <div className="flex justify-between items-center text-gray-600 text-sm">
                 <span>12 May, 2023</span>

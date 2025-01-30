@@ -5,7 +5,7 @@ import JobCard from "@/Components/Web/JobCard.jsx";
 const JobPost = () => {
     return (
         <WebLayout showServiceImage={false} showBgImage={false}>
-            <Head title="Search Result | Dubai E-Visa"/>
+            <Head title="Job Demand | Dubai E-Visa"/>
             <div className="container grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
                 <JobCard />
                 <JobCard />

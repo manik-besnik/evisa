@@ -13,6 +13,10 @@ Route::get('/job-demand', function () {
     return Inertia::render('JobPost');
 })->name('job-demand');
 
+Route::get('/job-details', function () {
+    return Inertia::render('JobDetails');
+})->name('job-details');
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
