@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\DTOs\UserUpdateDTO;
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Country;
+use App\Models\Language;
+use App\Supports\UpdateUser;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -38,6 +42,31 @@ class ProfileController extends Controller
         $request->user()->save();
 
         return Redirect::route('profile.edit');
+    }
+
+    public function userInfo(): Response
+    {
+        $countries = Country::query()->get();
+        $languages = Language::query()->get();
+
+        return Inertia::render('Auth/RegisterInfo', [
+            'countries' => $countries,
+            'languages' => $languages
+        ]);
+    }
+
+
+    public function storeInfo(Request $request): RedirectResponse
+    {
+        try {
+
+            UpdateUser::execute(UserUpdateDTO::fromRequest($request));
+
+            return to_route('home');
+
+        } catch (\Exception $exception) {
+            return redirect()->back()->withErrors(['message' => $exception->getMessage()]);
+        }
     }
 
     /**

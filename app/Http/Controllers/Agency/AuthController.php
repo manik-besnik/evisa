@@ -13,6 +13,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules;
+use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -39,6 +40,7 @@ class AuthController extends Controller
     /**
      * Handle an incoming registration request.
      *
+     * @throws ValidationException
      */
     public function store(Request $request): RedirectResponse
     {
