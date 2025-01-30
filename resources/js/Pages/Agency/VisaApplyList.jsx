@@ -3,11 +3,10 @@ import {Head, Link} from "@inertiajs/react";
 import {FiPlus} from "react-icons/fi";
 import VisaApplicationTable from "@/Components/VisaApplicationTable.jsx";
 
-const Index = () => {
-
+const VisaApplyList = () => {
     return <Authenticated>
 
-        <Head title="Visa Application List | E-Visa Dubai"/>
+        <Head title="Visa Application List | Dubai E-Visa"/>
 
         <div className="flex justify-between items-center mb-3">
             <h3 className=''>Visa Apply List</h3>
@@ -18,7 +17,6 @@ const Index = () => {
         <VisaApplicationTable/>
 
     </Authenticated>
-
 }
 
-export default Index;
+export default VisaApplyList;

@@ -4,7 +4,7 @@ import ArrowRight from '@/Components/SvgIcons/ArrowRight.jsx';
 
 import {useState} from 'react';
 import {GrVisa} from "react-icons/gr";
-import {FaPeopleGroup, FaPeopleRoof} from "react-icons/fa6";
+import {FaPeopleGroup} from "react-icons/fa6";
 
 export default function AgencySideNavLinks() {
 
@@ -12,11 +12,11 @@ export default function AgencySideNavLinks() {
         {
             name: 'Visa',
             icon: <GrVisa/>,
-            isOpen: route().current('admin.visa-applies.*'),
+            isOpen: route().current('agency.visa-applies.*'),
             links: [
                 {
                     name: 'Visa Apply List',
-                    route: route('admin.visa-applies.index')
+                    route: route('agency.visa-applies.index')
                 },
                 {
                     name: 'Add New Application',

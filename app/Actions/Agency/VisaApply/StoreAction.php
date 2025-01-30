@@ -1,20 +1,22 @@
 <?php
 
-namespace App\Actions\Admin\VisaApply;
+namespace App\Actions\Agency\VisaApply;
 
 use App\DTOs\VisaApplyDTO;
 use App\Supports\VisaApplyAction;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 
 class StoreAction
 {
-    public function execute(VisaApplyDTO $visaApplyDTO)
+    public function execute(VisaApplyDTO $visaApplyDTO): RedirectResponse
     {
         DB::beginTransaction();
 
         try {
 
             VisaApplyAction::execute($visaApplyDTO);
+
             DB::commit();
 
             return redirect()->back();

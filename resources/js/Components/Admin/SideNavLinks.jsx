@@ -21,6 +21,7 @@ export default function SideNavLinks() {
                 },
                 {
                     name: 'Add New Application',
+                    route: route('admin.visa-applies.create')
                 },
             ]
         },

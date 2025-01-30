@@ -13,46 +13,41 @@ class VisaApplyAction
 {
     public static function execute(VisaApplyDTO $visaApplyDTO): VisaApply|null
     {
-        try {
 
-            $documents = [];
+        $documents = [];
 
-            foreach ($visaApplyDTO->documents as $document) {
-                $fullPath = FileUpload::execute($document['file']);
+        foreach ($visaApplyDTO->documents as $document) {
+            $fullPath = FileUpload::execute($document['file']);
 
-                $documents[] = [
-                    'name' => $document['name'],
-                    'url' => $fullPath,
-                ];
-            }
-
-            /** Store Visa Info */
-            $visaApply = new VisaApply();
-            $visaApply->user_id = $visaApplyDTO->userId;
-            $visaApply->name = $visaApplyDTO->personalName;
-            $visaApply->processing_type = $visaApplyDTO->processingType;
-            $visaApply->visa_type = $visaApplyDTO->visaType;
-            $visaApply->group = $visaApplyDTO->group;
-            $visaApply->status = VisaStatus::PENDING->value;
-            $visaApply->applied_by = auth()->id();
-            $visaApply->documents = $documents;
-            $visaApply->save();
-
-            /** Personal Info Store */
-            self::storePersonalInfo($visaApplyDTO, $visaApply->id);
-
-            /** Passport Info Store */
-            self::storePassportInfo($visaApplyDTO, $visaApply->id);
-
-            /** Guarantor Info Store */
-            self::storeGuarantorInfo($visaApplyDTO, $visaApply->id);
-
-
-            return $visaApply;
-
-        } catch (\Exception $exception) {
-            return null;
+            $documents[] = [
+                'name' => $document['name'],
+                'url' => $fullPath,
+            ];
         }
+
+        /** Store Visa Info */
+        $visaApply = new VisaApply();
+        $visaApply->user_id = $visaApplyDTO->userId;
+        $visaApply->name = $visaApplyDTO->personalName;
+        $visaApply->processing_type = $visaApplyDTO->processingType;
+        $visaApply->visa_type = $visaApplyDTO->visaType;
+        $visaApply->group = $visaApplyDTO->group;
+        $visaApply->status = VisaStatus::PENDING->value;
+        $visaApply->applied_by = auth()->id();
+        $visaApply->documents = $documents;
+        $visaApply->save();
+
+        /** Personal Info Store */
+        self::storePersonalInfo($visaApplyDTO, $visaApply->id);
+
+        /** Passport Info Store */
+        self::storePassportInfo($visaApplyDTO, $visaApply->id);
+
+        /** Guarantor Info Store */
+        self::storeGuarantorInfo($visaApplyDTO, $visaApply->id);
+
+        return $visaApply;
+
     }
 
 

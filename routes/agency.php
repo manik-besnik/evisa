@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Agency\AuthController;
 use App\Http\Controllers\Agency\DashboardController;
+use App\Http\Controllers\Agency\VisaApplyController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -26,7 +27,11 @@ Route::prefix('agency')->middleware(['auth', 'agency'])->name('agency.')->group(
 
     Route::get('register/info', [AuthController::class, 'agencyInfo'])
         ->name('register.agency-info');
+
+
     Route::post('register/info-store', [AuthController::class, 'agencyInfoStore'])
         ->name('register.agency-info.store');
+
+    Route::resource('visa-applies', VisaApplyController::class);
 
 });
