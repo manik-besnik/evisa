@@ -4,6 +4,8 @@ namespace App\Http\Controllers\User;
 
 use App\Actions\User\VisaApply\CreateAction;
 use App\Actions\User\VisaApply\IndexAction;
+use App\Actions\User\VisaApply\StoreAction;
+use App\DTOs\VisaApplyDTO;
 use App\Http\Controllers\Controller;
 use App\Models\VisaApply;
 use Illuminate\Http\Request;
@@ -29,9 +31,11 @@ class VisaApplyController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, StoreAction $storeAction): \Illuminate\Http\RedirectResponse
     {
-        //
+        $request->merge(['user_id' => auth()->id()]);
+
+        return $storeAction->execute(VisaApplyDTO::fromRequest($request));
     }
 
     /**

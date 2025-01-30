@@ -33,7 +33,7 @@ const VisaApplyForm = ({submitUrl}) => {
     const [passportIssueCountry, setPassportIssueCountry] = useState('')
     const [guarantorNationality, setGuarantorNationality] = useState('')
 
-    const {data, setData, post, errors} = useForm({
+    const {data, setData, post, errors,processing} = useForm({
         'user_id': '',
         'personal_name': '',
         'processing_type': '',
@@ -659,7 +659,7 @@ const VisaApplyForm = ({submitUrl}) => {
                     </div>
 
                     <div className="flex justify-center mt-2">
-                        <button className="btn-primary" type="submit" onClick={handleSubmit}>Save</button>
+                        <button disabled={processing} className="btn-primary" type="submit" onClick={handleSubmit}>Save</button>
                     </div>
                 </form>
 

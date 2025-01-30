@@ -27,6 +27,8 @@ Route::middleware(['auth', 'user'])->group(function () {
 
     Route::get('visa-apply', [VisaApplyController::class, 'create'])->name('visa-apply.create');
 
+    Route::post('visa-apply/store', [VisaApplyController::class, 'store'])->name('visa-apply.store');
+
     Route::get('dashboard', [\App\Http\Controllers\User\DashboardController::class, 'index'])->name('user.dashboard.index');
 });
 
