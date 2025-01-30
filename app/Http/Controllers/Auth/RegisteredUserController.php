@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\DTOs\UserDTO;
 use App\Http\Controllers\Controller;
-use App\Models\Country;
 use App\Models\Language;
-use App\Models\User;
+use App\Supports\StoreUser;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -22,10 +22,9 @@ class RegisteredUserController extends Controller
      */
     public function create(): Response
     {
-        $countries = Country::query()->get();
         $languages = Language::query()->get();
-        return Inertia::render('Register',[
-            'countries' => $countries,
+
+        return Inertia::render('Auth/Register', [
             'languages' => $languages
         ]);
     }
@@ -33,26 +32,31 @@ class RegisteredUserController extends Controller
     /**
      * Handle an incoming registration request.
      *
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'name' => 'nullable|string|max:255',
+            'email' => 'required|string|max:255|unique:users,username',
+            'password' => ['required', Rules\Password::defaults()],
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+        $userData = [
+            'email' => $request->input('email'),
+            'username' => $request->input('email'),
+            'password' => $request->input('password'),
+            'avatar' => $request->file('avatar'),
+            'sign_up_complete' => 0,
+            'role' => 3,
+        ];
 
-        event(new Registered($user));
+        $user = StoreUser::execute(UserDTO::fromArray($userData));
+
+        event(new Registered($user), $request->input('remember'));
 
         Auth::login($user);
 
-        return redirect(route('dashboard', absolute: false));
+        return redirect(route('user.info', absolute: false));
     }
 }

@@ -109,18 +109,21 @@ class AuthController extends Controller
 
     private function storeUserInfo(Request $request): JsonResponse
     {
+        $user = UserUpdateDTO::fromRequest($request);
+
         try {
 
-            $user = UpdateUser::execute(UserUpdateDTO::fromRequest($request));
+            $user = UpdateUser::execute($user);
 
             $responseDate = [
                 'user' => $user,
             ];
 
-            return ApiResponse::success('Successfully Logged in', $responseDate);
+            return ApiResponse::success('User Info Updated Successfully', $responseDate);
 
         } catch (\Exception $exception) {
-            return ApiResponse::error('User Info Update Failed');
+
+            return ApiResponse::error('User Info Update Failed. Reason ' . $exception->getMessage());
         }
     }
 

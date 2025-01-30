@@ -6,7 +6,7 @@ const services = [
     {
         title: "Visa Apply",
         img: "images/visa-apply.png",
-        link: "visa.apply",
+        link: "visa-apply.create",
     },
     {
         title: "Job Apply",
@@ -26,7 +26,7 @@ const services = [
     {
         title: "Agency",
         img: "images/agency.png",
-        link: "home",
+        link: "agency.register",
     },
     {
         title: "Others",

@@ -51,7 +51,7 @@ class AuthenticatedSessionController extends Controller
         }
 
         if ($user->role === Role::USER->value) {
-            return to_route('user.dashboard.index');
+            return to_route('home');
         }
 
         return redirect()->intended(route('home', absolute: false));

@@ -44,6 +44,7 @@ class User extends Authenticatable
         'living_country_id',
         'language_id',
         'role_id',
+        'role',
         'name',
         'email',
         'phone',
