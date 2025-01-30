@@ -15,7 +15,7 @@ class CreateAction
             ->where('is_signup_complete', 1)
             ->get();
 
-        return Inertia::render('Agency/VisaApply/ApplyForm', [
+        return Inertia::render('Agency/ApplyForm', [
             'users' => $users
         ]);
     }

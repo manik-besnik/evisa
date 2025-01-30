@@ -11,6 +11,9 @@ export default forwardRef(function InputBox({
                                                 classes = '',
                                                 label = "",
                                                 error = "",
+                                                labelClasses = "",
+                                                defaultClasses = "",
+                                                divClasses= "",
                                                 ...props
                                             }, ref) {
     const input = ref ? ref : useRef();
@@ -26,7 +29,7 @@ export default forwardRef(function InputBox({
 
         <div
             className={`${classes} flex flex-col gap-y-2 justify-start overflow-hidden`}>
-            {label && <label className="text-left text-sm lg:text-md text-text-primary" htmlFor={id}>{label}</label>}
+            {label && <label className={`${labelClasses} text-left text-sm lg:text-md text-text-primary`} htmlFor={id}>{label}</label>}
             <input
                 {...props} type={type}
                 className='w-full h-[26px] rounded sm:rounded-[6px] sm:h-9 block border-none focus:ring-0 bg-side-and-button placeholder:text-t-secondary placeholder:text-xs sm:placeholder:text-sm placeholder:leading-[14px] sm:placeholder:leading-[20px] text-xs sm:text-sm text-t-secondary leading-[14px] sm:leading-[20px]'

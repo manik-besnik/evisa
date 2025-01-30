@@ -23,6 +23,8 @@ Route::prefix('agency')->middleware('guest')->group(function () {
 
 Route::prefix('agency')->middleware(['auth', 'agency'])->name('agency.')->group(function () {
 
+    Route::get('account-not-approved', [DashboardController::class, 'accountNotApproved'])->name('account-not-approved');
+
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 
     Route::get('register/info', [AuthController::class, 'agencyInfo'])

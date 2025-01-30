@@ -19,6 +19,7 @@ class Agency
         if (!auth()->check()) {
             return to_route('agency.login');
         }
+
         /** @var \App\Models\User $user */
         $user = auth()->user();
 
@@ -26,8 +27,22 @@ class Agency
             return to_route('home');
         }
 
-        if (!$user->is_signup_complete && !$request->routeIs('agency.register.agency-info')) {
+        $allowedSignupRoutes = [
+            'agency.register.agency-info',
+            'agency.register.agency-info.store',
+            'agency.account-not-approved',
+        ];
+
+        if (!$user->is_signup_complete && !in_array($request->route()->getName(), $allowedSignupRoutes)) {
             return to_route('agency.register.agency-info');
+        }
+
+        if (!$user->is_signup_complete && in_array($request->route()->getName(), $allowedSignupRoutes)) {
+            return $next($request);
+        }
+
+        if (!$user->agency->is_account_approved && !$request->routeIs('agency.account-not-approved')) {
+            return to_route('agency.account-not-approved');
         }
 
         return $next($request);
