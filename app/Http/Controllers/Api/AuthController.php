@@ -92,7 +92,8 @@ class AuthController extends Controller
     {
         /** @var User $user */
         $user = $request->user();
-
+        // dd($user);
+        
         if ($user->role === 1) {
             return ApiResponse::error('Something Went Wrong');
         }
@@ -103,6 +104,8 @@ class AuthController extends Controller
 
         return $this->storeUserInfo($request);
     }
+
+
 
     private function storeUserInfo(Request $request): JsonResponse
     {

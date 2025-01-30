@@ -17,6 +17,12 @@ Route::get('/user', function (Request $request) {
 Route::get('countries', function () {
     $data = [
         'countries' => \App\Supports\Country::get(),
+    ];
+    return \App\Supports\ApiResponse::success("Country and Language Data", $data);
+});
+
+Route::get('languages', function () {
+    $data = [
         'languages' => \App\Models\Language::query()->get(),
     ];
     return \App\Supports\ApiResponse::success("Country and Language Data", $data);
