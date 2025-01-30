@@ -11,7 +11,8 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('job_posts', function (Blueprint $table) {
-            $table->string('job_role')->after('title')->nullable();
+            $table->string('company')->after('title')->nullable();
+            $table->date('last_apply_date')->after('description')->nullable();
         });
     }
 
@@ -21,7 +22,7 @@ return new class extends Migration {
     public function down(): void
     {
         Schema::table('job_posts', function (Blueprint $table) {
-            $table->dropColumn(['job_role']);
+            $table->dropColumn(['company', 'last_apply_date']);
         });
     }
 };
