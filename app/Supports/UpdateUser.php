@@ -8,10 +8,13 @@ use App\Models\User;
 
 class UpdateUser
 {
-    public static function execute(AgencyDTO|UserUpdateDTO $updateDTO): User
+    public static function execute(AgencyDTO|UserUpdateDTO $updateDTO, User|null $user = null): User
     {
-        /** @var User $user */
-        $user = auth()->user();
+
+        if (!$user){
+            /** @var User $user */
+            $user = auth()->user();
+        }
 
         $user->language_id = $updateDTO->prefferLanguage;
         $user->nationality_id = $updateDTO->nationality;
