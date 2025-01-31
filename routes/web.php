@@ -17,6 +17,10 @@ Route::get('/job-details', function () {
     return Inertia::render('JobDetails');
 })->name('job-details');
 
+Route::get('/job-apply', function () {
+    return Inertia::render('JobApply');
+})->name('job-apply');
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
