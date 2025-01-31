@@ -29,7 +29,9 @@ const JobApply = () => {
     })
 
     const [jobPost, setJobPost] = useState(null)
-    const [motherLanguage, setMotherLanguage] = useState(null)
+    const [englishProficiency, setEnglishProficiency] = useState(null)
+    const [arabicProficiency, setArabicProficiency] = useState(null)
+    const [urduProficiency, setUrduProficiency] = useState(null)
 
     const updateJobPost = (value) => {
         setData('job_id', value.id)
