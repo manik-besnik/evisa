@@ -44,6 +44,15 @@ export const visaTypes = [
     {id: 5, name: "96 Hours Visa"}
 ];
 
+export const languageProficiency = [
+    { id: 1, name: "Beginner" },
+    { id: 2, name: "Intermediate" },
+    { id: 3, name: "Advanced" },
+    { id: 4, name: "Fluent" },
+    { id: 5, name: "Native" }
+];
+
+
 export const permissions = [
     {name: "View Admin", value: "admin.view"},
     {name: "Create Admin", value: "admin.create"},
