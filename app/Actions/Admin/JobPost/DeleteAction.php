@@ -15,7 +15,7 @@ class DeleteAction
             $job = JobPost::query()->findOrFail($id);
 
             FileUpload::delete($job->thumbnail);
-            
+
             $job->delete();
 
             return to_route('admin.job-posts.index')->with(['message' => "Job Post Deleted"]);

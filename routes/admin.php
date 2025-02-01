@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AgencyController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\JobPostController;
@@ -40,5 +41,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
     Route::put('roles/update/{id}', [RoleController::class, 'update'])->name('roles.update');
 
     Route::resource('job-posts', JobPostController::class);
+
+    Route::get('agencies', [AgencyController::class, 'index'])->name('agencies.index');
 
 });
