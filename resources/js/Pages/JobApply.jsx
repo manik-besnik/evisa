@@ -1,13 +1,18 @@
 import WebLayout from "@/Layouts/WebLayout.jsx";
-import {Head, useForm} from "@inertiajs/react";
+import {Head, useForm, usePage} from "@inertiajs/react";
 import TextInput from "@/Components/TextInput.jsx";
 import InputFile from "@/Components/Web/InputFile.jsx";
 import Select from "@/Components/Web/Select.jsx";
 import {useState} from "react";
+import {languageProficiency} from "@/Components/Constant/index.js";
+import {FaPlus} from "react-icons/fa6";
+import {FaTrashAlt} from "react-icons/fa";
 
 const JobApply = () => {
 
-    const jobs = [{id:1,name:"Software Engineer"}]
+    const countries = usePage().props.countries
+
+    const jobs = [{id: 1, name: "Software Engineer"}]
     const {data, setData, post, errors} = useForm({
         job_id: '',
         name: '',
@@ -26,20 +31,63 @@ const JobApply = () => {
         arabic_proficiency: '',
         urdu_proficiency: '',
         mother_language: '',
+        shirt_size: '',
+        pant_size: '',
+        show_size: '',
+        height: '',
+        weight: '',
+        nearest_airport: '',
+        summary: '',
+        documents: [],
+        job_experiences: [
+            {
+                position: "",
+                duration: "",
+                company: "",
+                country: "",
+                country_id: ""
+            }
+        ],
     })
 
+
     const [jobPost, setJobPost] = useState(null)
+    const [motherLanguage, setMotherLanguage] = useState(null)
     const [englishProficiency, setEnglishProficiency] = useState(null)
     const [arabicProficiency, setArabicProficiency] = useState(null)
     const [urduProficiency, setUrduProficiency] = useState(null)
 
-    const updateJobPost = (value) => {
-        setData('job_id', value.id)
-    }
-    const updateMotherLanguage = (value) => {
-        setData('mother_language', value.id)
+    const updateJobExperience = (index, key, value) => {
+        const updatedExperiences = [...data.job_experiences];
+        updatedExperiences[index] = {...updatedExperiences[index], [key]: value};
+        setData('job_experiences', updatedExperiences);
+    };
+
+    const deleteExperience = (i) => {
+
+        data.job_experiences.splice(i, 1)
+
+        setData('job_experiences', data.job_experiences)
+
     }
 
+
+    const addNewExperience = () => {
+        const experience = {
+            position: "",
+            duration: "",
+            company: "",
+            country: "",
+            country_id: ""
+        }
+
+        const experiences = [
+            ...data.job_experiences,
+            experience
+        ]
+
+        setData('job_experiences', experiences)
+    }
     const handleFileChange = () => {
 
     }
@@ -94,7 +142,7 @@ const JobApply = () => {
                                 items={jobs}
                                 selected={jobPost}
                                 setSelected={setJobPost}
-                                handleValueChange={updateJobPost}
+                                handleValueChange={(value) => setData('job_id', value.id)}
                                 error={errors.job_id}
                                 defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                             />
@@ -195,6 +243,185 @@ const JobApply = () => {
                             labelClasses="text-text-primary"
                             type="date"
                         />
+
+                        <Select
+                            placeholder="Select Label"
+                            label="English*"
+                            items={languageProficiency}
+                            selected={englishProficiency}
+                            setSelected={setEnglishProficiency}
+                            handleValueChange={(value) => setData('english_proficiency', value.id)}
+                            error={errors.english_proficiency}
+                            defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
+                        />
+                        <Select
+                            placeholder="Select Label"
+                            label="Arabic*"
+                            items={languageProficiency}
+                            selected={arabicProficiency}
+                            setSelected={setArabicProficiency}
+                            handleValueChange={(value) => setData('arabic_proficiency', value.id)}
+                            error={errors.arabic_proficiency}
+                            defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
+                        />
+                        <Select
+                            placeholder="Select Label"
+                            label="Urbu/Hindi*"
+                            items={languageProficiency}
+                            selected={urduProficiency}
+                            setSelected={setUrduProficiency}
+                            handleValueChange={(value) => setData('urdu_proficiency', value.id)}
+                            error={errors.urdu_proficiency}
+                            defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
+                        />
+
+                        <Select
+                            placeholder="Select Language"
+                            label="Mother Language*"
+                            items={languageProficiency}
+                            selected={motherLanguage}
+                            setSelected={setMotherLanguage}
+                            handleValueChange={(value) => setData('mother_language', value.id)}
+                            error={errors.mother_language}
+                            defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
+                        />
+                    </div>
+                    <div className="flex justify-between items-center mt-8">
+                        <h4 className="text-success text-md">Job Experiences</h4>
+                        <button type="button" onClick={addNewExperience}
+                                className="flex items-center gap-x-2 py-2 px-4 text-white bg-yellow-500 hover:bg-primary font-medium shadow-[2px_2px_4px_rgba(0,0,0,0.3)] text-xs hover:shadow-[2px_2px_6px_rgba(0,0,0,0.35)] transition-shadow duration-200">
+                            <FaPlus className="text-white"/> Add New Experience
+                        </button>
+                    </div>
+
+                    <div>
+                        {data.job_experiences.map((item, i) => (
+                            <div key={i} className="flex items-center gap-2">
+                                <div className="w-11/12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-2">
+                                    <TextInput
+                                        value={item.position}
+                                        onChange={(e) => updateJobExperience(i, "position", e.target.value)}
+                                        error={errors?.job_experiences ? errors?.job_experiences[i]?.position : ""}
+                                        id={`position-${i}`}
+                                        placeholder="EX: Software Enginner"
+                                        label="Position*"
+                                        defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
+                                        labelClasses="text-text-primary"
+                                    />
+                                    <TextInput
+                                        value={item.duration}
+                                        onChange={(e) => updateJobExperience(i, "duration", e.target.value)}
+                                        error={errors?.job_experiences ? errors?.job_experiences[i]?.duration : ""}// error={errors.passing_year}
+                                        id={`duration-${i}`}
+                                        placeholder="EX: 4 Years"
+                                        label="Duration*"
+                                        defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
+                                        labelClasses="text-text-primary"
+                                    />
+                                    <TextInput
+                                        value={item.company}
+                                        onChange={(e) => updateJobExperience(i, "company", e.target.value)}
+                                        error={errors?.job_experiences ? errors?.job_experiences[i]?.company : ""}
+                                        id={`company-${i}`}
+                                        placeholder="Company Name"
+                                        label="Company Name*"
+                                        defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
+                                        labelClasses="text-text-primary"
+                                    />
+
+                                    <Select
+                                        placeholder="Select Country"
+                                        label="Country*"
+                                        items={countries}
+                                        selected={item.country}
+                                        setSelected={(value) => updateJobExperience(i, "country", value)}
+                                        handleValueChange={(value) => updateJobExperience(i, "country_id", value.id)}
+                                        error={errors?.job_experiences ? errors?.job_experiences[i]?.country_id : ""}
+                                        defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
+                                        classes="mt-1"
+                                    />
+                                </div>
+
+
+                                {i > 0 && (<button type="button" onClick={() => deleteExperience(i)}
+                                                   className="bg-warning text-white text-sm w-9 text-center p-2.5 h-9 mt-5 flex item-center justify-between">
+                                    <FaTrashAlt/></button>)}
+                            </div>
+                        ))}
+
+                    </div>
+
+                    <h4 className="text-success text-md">Others Information</h4>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2">
+                        <TextInput
+                            value={data.shirt_size}
+                            onChange={(e) => setData('shirt_size', e.target.value)}
+                            error={errors.shirt_size}
+                            id="shirt-size"
+                            placeholder="Type Here"
+                            label="Shirt Size*"
+                            defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
+                            labelClasses="text-text-primary"
+                            type="text"
+                        />
+                        <TextInput
+                            value={data.weight}
+                            onChange={(e) => setData('weight', e.target.value)}
+                            error={errors.weight}
+                            id="weight"
+                            placeholder="Type Here"
+                            label="Weight (In KG)*"
+                            defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
+                            labelClasses="text-text-primary"
+                            type="text"
+                        />
+                        <TextInput
+                            value={data.pant_size}
+                            onChange={(e) => setData('pant_size', e.target.value)}
+                            error={errors.pant_size}
+                            id="pant-size"
+                            placeholder="Type Here"
+                            label="Pant Size(Waist)*"
+                            defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
+                            labelClasses="text-text-primary"
+                            type="text"
+                        />
+                        <TextInput
+                            value={data.height}
+                            onChange={(e) => setData('height', e.target.value)}
+                            error={errors.height}
+                            id="height-size"
+                            placeholder="Type Here"
+                            label="Height(in Centimeters)*"
+                            defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
+                            labelClasses="text-text-primary"
+                            type="text"
+                        />
+                        <TextInput
+                            value={data.show_size}
+                            onChange={(e) => setData('show_size', e.target.value)}
+                            error={errors.show_size}
+                            id="shoes-size"
+                            placeholder="Type Here"
+                            label="shoes Size*"
+                            defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
+                            labelClasses="text-text-primary"
+                            type="text"
+                        />
+                        <TextInput
+                            value={data.nearest_airport}
+                            onChange={(e) => setData('nearest_airport', e.target.value)}
+                            error={errors.nearest_airport}
+                            id="nearest_airport"
+                            placeholder="Type Here"
+                            label="Nearest Airport*"
+                            defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
+                            labelClasses="text-text-primary"
+                            type="text"
+                        />
+
+
                     </div>
 
                 </form>
