@@ -8,14 +8,14 @@ const Index = ({users}) => {
         <Authenticated>
             <Head title="Agencies | Dubai E-Visa"/>
             <TopSection title='Agencies'/>
-            <Table heading={['SL', 'Name', 'Username', 'Phone', 'Action']}>
+            <Table heading={['SL', 'Name', 'Username', 'Phone', 'Email Address']}>
                 {users.data.map((user, index) => (
                     <tr key={index}>
                         <td>{index + 1}</td>
                         <td>{user.name}</td>
                         <td>{user.username}</td>
                         <td>{user.phone}</td>
-                        <td></td>
+                        <td>{user.email}</td>
                     </tr>
                 ))}
 
