@@ -125,7 +125,9 @@ const CreateJobPost = () => {
                     <TinyEditor value={data.description} onChange={(value) => setData('description', value)}/>
 
                     <div className="flex justify-end mt-4">
-                        <button className="btn-primary" onClick={handleSubmit} disabled={processing} type="submit">Save</button>
+                        <button className="btn-primary" onClick={handleSubmit} disabled={processing}
+                                type="submit">Save
+                        </button>
                     </div>
                 </form>
             </div>

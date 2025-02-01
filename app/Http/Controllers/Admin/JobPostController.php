@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Actions\Admin\JobPost\CreateAction;
 use App\Actions\Admin\JobPost\IndexAction;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class JobPostController extends Controller
 {
@@ -16,5 +17,9 @@ class JobPostController extends Controller
     public function create(CreateAction $createAction): \Inertia\Response
     {
         return $createAction->execute();
+    }
+    public function store(Request $request)
+    {
+
     }
 }
