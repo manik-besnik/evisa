@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\JobPostController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\VisaApplyController;
 use Illuminate\Support\Facades\Route;
 
@@ -43,5 +44,6 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
     Route::resource('job-posts', JobPostController::class);
 
     Route::get('agencies', [AgencyController::class, 'index'])->name('agencies.index');
+    Route::get('users', [UserController::class, 'index'])->name('users.index');
 
 });

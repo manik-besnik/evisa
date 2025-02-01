@@ -10,7 +10,7 @@ class IndexAction
 {
     public function execute(): \Inertia\Response
     {
-        return Inertia::render('Admin/Agency/Show', [
+        return Inertia::render('Admin/Agency/Index', [
             'agencies' => User::query()->where('role', Role::AGENCY->value)->paginate()
         ]);
     }

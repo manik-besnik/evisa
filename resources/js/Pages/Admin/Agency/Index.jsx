@@ -10,7 +10,7 @@ const Index = ({agencies}) => {
             <TopSection title='Agencies'/>
             <Table heading={['SL', 'Name', 'Username', 'Phone', 'Action']}>
                 {agencies.data.map((agency, index) => (
-                    <tr>
+                    <tr key={index}>
                         <td>{index + 1}</td>
                         <td>{agency.name}</td>
                         <td>{agency.username}</td>
