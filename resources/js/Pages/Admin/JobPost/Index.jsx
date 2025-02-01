@@ -19,9 +19,13 @@ export const Index = ({job_posts}) => {
     }
 
     const handleConfirmDelete = () => {
-        router.delete(route('admin.job-posts.destroy', jobPost.id))
+        router.delete(route('admin.job-posts.destroy', jobPost.id), {
+            onSuccess: () => {
+                setShow(false)
+            }
+        })
     }
-    
+
     return (
         <Authenticated>
             <div className="flex justify-between items-center mb-3">
