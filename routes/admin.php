@@ -44,6 +44,11 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
     Route::resource('job-posts', JobPostController::class);
 
     Route::get('agencies', [AgencyController::class, 'index'])->name('agencies.index');
+
+    Route::get('agencies/{id}', [AgencyController::class, 'show'])->name('agencies.show');
+
+    Route::get('agencies/{id}/approve', [AgencyController::class, 'approve'])->name('agencies.approve');
+
     Route::get('users', [UserController::class, 'index'])->name('users.index');
 
 });

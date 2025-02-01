@@ -109,7 +109,7 @@ class User extends Authenticatable
 
     public function agency(): HasOne
     {
-        return $this->hasOne(Agency::class, 'user_id', 'id');
+        return $this->hasOne(Agency::class);
     }
 
 

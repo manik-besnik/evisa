@@ -2,12 +2,15 @@
 
 namespace App\Actions\Admin\Agency;
 
+use App\Models\User;
 use Inertia\Inertia;
 
 class ShowAction
 {
-    public function execute(): \Inertia\Response
+    public function execute(int $id): \Inertia\Response
     {
-        return Inertia::render('Admin/Agency/Index');
+        return Inertia::render('Admin/Agency/Show', [
+            'agency' => User::with('agency')->findOrFail($id)
+        ]);
     }
 }
