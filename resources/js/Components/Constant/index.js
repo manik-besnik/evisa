@@ -45,11 +45,11 @@ export const visaTypes = [
 ];
 
 export const languageProficiency = [
-    { id: 1, name: "Beginner" },
-    { id: 2, name: "Intermediate" },
-    { id: 3, name: "Advanced" },
-    { id: 4, name: "Fluent" },
-    { id: 5, name: "Native" }
+    {id: 1, name: "Beginner"},
+    {id: 2, name: "Intermediate"},
+    {id: 3, name: "Advanced"},
+    {id: 4, name: "Fluent"},
+    {id: 5, name: "Native"}
 ];
 
 
@@ -78,3 +78,4 @@ export const documentTypes = {
     additional1: {type: "additional1", name: "Additional Document 1"},
     additional2: {type: "additional2", name: "Additional Document 2"}
 };
+export const VisaApplyTableHeading = ['No', 'Name', 'Passport No', 'Status', 'Apply Date', 'Action']

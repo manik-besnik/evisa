@@ -32,12 +32,15 @@ export default function SideNavLinks() {
             links: [
                 {
                     name: 'Job List',
+                    route: route('admin.job-posts.index')
                 },
                 {
                     name: 'Add Job',
+                    route: route('admin.job-posts.create')
                 },
                 {
                     name: 'Applications',
+                    route: route('admin.job-posts.index')
                 }
             ]
         },
