@@ -6,6 +6,7 @@ import {useState} from "react";
 import InputBox from "@/Components/Admin/InputBox.jsx";
 import InputFile from "@/Components/Admin/InputFile.jsx";
 import {TinyEditor} from "@/Components/TinyEditor.jsx";
+import {post} from "axios";
 
 const CreateJobPost = () => {
 
@@ -26,8 +27,10 @@ const CreateJobPost = () => {
         setData('thumbnail', file)
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault()
 
+        post(route('admin.job-posts.store'))
     }
 
 
@@ -45,8 +48,8 @@ const CreateJobPost = () => {
                 <form onSubmit={handleSubmit} className="flex flex-col gap-y-2">
 
                     <Select
-                        placeholder="Select User"
-                        label="User*"
+                        placeholder="Select Type"
+                        label="Job Type(Full Time/Part Time)*"
                         items={jobTypes}
                         selected={type}
                         setSelected={setType}
@@ -119,7 +122,11 @@ const CreateJobPost = () => {
                         type="file"
                     />
 
-                    <TinyEditor value={data.description} onChange={(e) => setData('description', e.target.value)}/>
+                    <TinyEditor value={data.description} onChange={(value) => setData('description', value)}/>
+
+                    <div className="flex justify-end mt-4">
+                        <button className="btn-primary" onClick={handleSubmit} disabled={processing} type="submit">Save</button>
+                    </div>
                 </form>
             </div>
         </Authenticated>
