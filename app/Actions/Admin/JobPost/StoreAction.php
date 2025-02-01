@@ -30,7 +30,7 @@ class StoreAction
             $jobPost->thumbnail = $thumbnail;
             $jobPost->save();
 
-            return redirect()->back()->with(['success' => "New Job Post Added Successfully"]);
+            return to_route('admin.job-posts.index')->with('success', 'New Job Post Added Successfully');
 
         } catch (\Exception $exception) {
             return redirect()->back()->withErrors(['message' => $exception->getMessage()]);

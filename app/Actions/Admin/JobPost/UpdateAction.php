@@ -37,7 +37,7 @@ class UpdateAction
             $jobPost->thumbnail = $thumbnail;
             $jobPost->update();
 
-            return redirect()->back()->with(['success' => "Job Post Updated Successfully"]);
+            return to_route('admin.job-posts.index')->with('success', "Job Post Updated Successfully");
 
         } catch (\Exception $exception) {
             return redirect()->back()->withErrors(['message' => $exception->getMessage()]);

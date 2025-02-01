@@ -1,25 +1,25 @@
-import Authenticated from "@/Layouts/AuthenticatedLayout.jsx";
 import {Head, Link, useForm} from "@inertiajs/react";
+import Authenticated from "@/Layouts/AuthenticatedLayout.jsx";
 import Select from "@/Components/Select.jsx";
 import {jobTypes} from "@/Components/Constant/index.js";
-import {useState} from "react";
 import InputBox from "@/Components/Admin/InputBox.jsx";
 import InputFile from "@/Components/Admin/InputFile.jsx";
 import {TinyEditor} from "@/Components/TinyEditor.jsx";
+import {useState} from "react";
 
-const CreateJobPost = () => {
+const EditJobPost = ({job_post}) => {
 
-    const [type, setType] = useState(null);
+    const [type, setType] = useState(jobTypes.find(item => item.id === job_post.type));
 
-    const {data, setData, post, errors, processing} = useForm({
-        'type': '',
+    const {data, setData, put, errors, processing} = useForm({
+        'type': job_post.type,
         'thumbnail': '',
-        'title': '',
-        'company': '',
-        'salary_range': '',
-        'location': '',
-        'description': '',
-        'last_apply_date': '',
+        'title': job_post.tile,
+        'company': job_post.company,
+        'salary_range': job_post.salary_range,
+        'location': job_post.location,
+        'description': job_post.description,
+        'last_apply_date': job_post.last_apply_date,
     })
 
     const handleFileChange = (fileType, file) => {
@@ -29,7 +29,7 @@ const CreateJobPost = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        post(route('admin.job-posts.store'))
+        put(route('admin.job-posts.update', job_post.id))
     }
 
 
@@ -134,4 +134,4 @@ const CreateJobPost = () => {
     )
 }
 
-export default CreateJobPost
+export default EditJobPost
