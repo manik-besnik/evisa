@@ -20,7 +20,7 @@ class JobPostDTO
     {
         $request->validate([
             'type' => 'required|integer',
-            'thumbnail' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:10240', // Adjust validation for file uploads
+            'thumbnail' => 'nullable|file|mimes:jpg,jpeg,png|max:2048',
             'title' => 'required|string|max:255',
             'company' => 'required|string|max:255',
             'salary_range' => 'required|string|max:255',
