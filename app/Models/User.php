@@ -30,6 +30,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @property string|null $city
  * @property string $password
  * @property bool|int $is_signup_complete
+ * @property int $added_by
  *
  * @mixin Model
  *
@@ -60,6 +61,7 @@ class User extends Authenticatable
         'city',
         'password',
         'is_signup_complete',
+        'added_by',
     ];
 
     /**
