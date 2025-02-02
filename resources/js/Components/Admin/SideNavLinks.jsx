@@ -112,7 +112,7 @@ export default function SideNavLinks() {
 
                     <div className={`overflow-hidden`}
                          style={{maxHeight: product.isOpen ? '500px' : '0', transition: 'max-height 0.5s ease-in-out'}}>
-                        <div className='px-2.5 pb-2.5 ml-4'>
+                        <div className='px-2.5 pb-2.5'>
                             <hr className='border-t border-t-main-outline pb-2.5'/>
                             {product.links.map((link, i) =>
                                 <Link key={i} href={link.route}

@@ -20,6 +20,7 @@ export default function AgencySideNavLinks() {
                 },
                 {
                     name: 'Add New Application',
+                    route: route('agency.visa-applies.store')
                 },
             ]
         },
@@ -30,12 +31,11 @@ export default function AgencySideNavLinks() {
             links: [
                 {
                     name: 'User List',
+                    route: route('agency.users.index')
                 },
                 {
-                    name: 'Add Job',
-                },
-                {
-                    name: 'Applications',
+                    name: 'Add User',
+                    route: route('agency.users.create')
                 }
             ]
         }
