@@ -99,7 +99,7 @@ class ApplyJobAction
 
             if (isset($jobExperience['id'])) {
                 $experience = JobExperience::query()->find($jobExperience['id']);
-                $experience->country_id = $jobExperience['country'];
+                $experience->country_id = $jobExperience['country_id'];
                 $experience->position = $jobExperience['position'];
                 $experience->duration = $jobExperience['duration'];
                 $experience->company = $jobExperience['company'];
@@ -108,7 +108,7 @@ class ApplyJobAction
             } else {
                 $experiences[] = [
                     'user_id' => $userId,
-                    'country_id' => $jobExperience['country'],
+                    'country_id' => $jobExperience['country_id'],
                     'position' => $jobExperience['position'],
                     'duration' => $jobExperience['duration'],
                     'company' => $jobExperience['company'],

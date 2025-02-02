@@ -5,7 +5,9 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -28,6 +30,11 @@ use Laravel\Sanctum\HasApiTokens;
  * @property string|null $city
  * @property string $password
  * @property bool|int $is_signup_complete
+ * @property int $added_by
+ *
+ * @mixin Model
+ *
+ * @property Agency $agency
  */
 class User extends Authenticatable
 {
@@ -54,6 +61,7 @@ class User extends Authenticatable
         'city',
         'password',
         'is_signup_complete',
+        'added_by',
     ];
 
     /**
@@ -99,6 +107,11 @@ class User extends Authenticatable
     public function preferredLanguage(): BelongsTo
     {
         return $this->belongsTo(Language::class, 'language_id', 'id')->select(['id', 'name']);
+    }
+
+    public function agency(): HasOne
+    {
+        return $this->hasOne(Agency::class);
     }
 
 

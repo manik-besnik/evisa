@@ -3,56 +3,67 @@
 namespace App\Supports;
 
 use App\DTOs\VisaApplyDTO;
+use App\Enums\Role;
 use App\Enums\VisaStatus;
 use App\Models\Guarantor;
 use App\Models\Passport;
 use App\Models\PersonalInfo;
+use App\Models\User;
 use App\Models\VisaApply;
 
 class VisaApplyAction
 {
     public static function execute(VisaApplyDTO $visaApplyDTO): VisaApply|null
     {
-        try {
 
-            $documents = [];
+        $documents = [];
 
-            foreach ($visaApplyDTO->documents as $document) {
-                $fullPath = FileUpload::execute($document['file']);
+        foreach ($visaApplyDTO->documents as $document) {
+            $fullPath = FileUpload::execute($document['file']);
 
-                $documents[] = [
-                    'name' => $document['name'],
-                    'url' => $fullPath,
-                ];
-            }
-
-            /** Store Visa Info */
-            $visaApply = new VisaApply();
-            $visaApply->user_id = $visaApplyDTO->userId;
-            $visaApply->name = $visaApplyDTO->personalName;
-            $visaApply->processing_type = $visaApplyDTO->processingType;
-            $visaApply->visa_type = $visaApplyDTO->visaType;
-            $visaApply->group = $visaApplyDTO->group;
-            $visaApply->status = VisaStatus::PENDING->value;
-            $visaApply->applied_by = auth()->id();
-            $visaApply->documents = $documents;
-            $visaApply->save();
-
-            /** Personal Info Store */
-            self::storePersonalInfo($visaApplyDTO, $visaApply->id);
-
-            /** Passport Info Store */
-            self::storePassportInfo($visaApplyDTO, $visaApply->id);
-
-            /** Guarantor Info Store */
-            self::storeGuarantorInfo($visaApplyDTO, $visaApply->id);
-
-
-            return $visaApply;
-
-        } catch (\Exception $exception) {
-            return null;
+            $documents[] = [
+                'name' => $document['name'],
+                'url' => $fullPath,
+            ];
         }
+
+        $appId = uniqid() . "_" . now()->timestamp;
+
+        /** @var User $user */
+        $user = auth()->user();
+
+        if ($user->role === Role::USER->value) {
+            $appId = "USER_" . $appId;
+        }
+
+        if ($user->role === Role::AGENCY->value) {
+            $appId = "AGENCY_" . $appId;
+        }
+
+        /** Store Visa Info */
+        $visaApply = new VisaApply();
+        $visaApply->user_id = $visaApplyDTO->userId;
+        $visaApply->app_id = $appId;
+        $visaApply->name = $visaApplyDTO->personalName;
+        $visaApply->processing_type = $visaApplyDTO->processingType;
+        $visaApply->visa_type = $visaApplyDTO->visaType;
+        $visaApply->group = $visaApplyDTO->group;
+        $visaApply->status = VisaStatus::PENDING->value;
+        $visaApply->applied_by = auth()->id();
+        $visaApply->documents = $documents;
+        $visaApply->save();
+
+        /** Personal Info Store */
+        self::storePersonalInfo($visaApplyDTO, $visaApply->id);
+
+        /** Passport Info Store */
+        self::storePassportInfo($visaApplyDTO, $visaApply->id);
+
+        /** Guarantor Info Store */
+        self::storeGuarantorInfo($visaApplyDTO, $visaApply->id);
+
+        return $visaApply;
+
     }
 
 
@@ -65,7 +76,9 @@ class VisaApplyAction
     void
     {
         /** @var PersonalInfo|null $personalInfo */
-        $personalInfo = PersonalInfo::query()->where('user_id', $visaApplyDTO->userId)->first();
+        $personalInfo = PersonalInfo::query()
+            ->where('user_id', $visaApplyDTO->userId)
+            ->first();
 
         if (!$personalInfo) {
             $personalInfo = new PersonalInfo();

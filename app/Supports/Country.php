@@ -8,7 +8,7 @@ class Country
 {
     public static function get()
     {
-        return Cache::remember('countries', now()->addDays(5), function () {
+        return Cache::rememberForever('countries', function () {
             return \App\Models\Country::query()->get();
         });
     }

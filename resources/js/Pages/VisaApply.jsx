@@ -13,6 +13,7 @@ import {useState} from "react";
 import {Head, useForm, usePage} from "@inertiajs/react";
 import PrimaryBtn from "@/Components/Web/PrimaryBtn.jsx";
 import InputFile from "@/Components/Web/InputFile.jsx";
+import {toast} from "react-toastify";
 
 
 const VisaApply = () => {
@@ -35,7 +36,7 @@ const VisaApply = () => {
     const [passportIssueCountry, setPassportIssueCountry] = useState('')
     const [guarantorNationality, setGuarantorNationality] = useState('')
 
-    const {data, setData, post, errors} = useForm({
+    const {data, setData, post, errors,processing} = useForm({
         'personal_name': '',
         'processing_type': null,
         'visa_type': null,
@@ -134,7 +135,7 @@ const VisaApply = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        if (!data.documents['passport'].file && !data.documents['photo'].file){
+        if (!data.documents['passport'].file && !data.documents['photo'].file) {
             setIsPhotoRequired(true)
             setIsPassportRequired(true)
             return
@@ -149,7 +150,11 @@ const VisaApply = () => {
             return
         }
 
-        post(route())
+        post(route('visa-apply.store'), {
+            onSuccess: () => {
+                toast("your application submitted successfully")
+            }
+        })
     }
 
 
@@ -496,7 +501,8 @@ const VisaApply = () => {
                                 </div>
                             </div>
 
-                            {isPassportRequired && <p className="text-warning text-sm my-2">Passport Document is required</p>}
+                            {isPassportRequired &&
+                                <p className="text-warning text-sm my-2">Passport Document is required</p>}
 
                             {isPhotoRequired && <p className="text-warning text-sm">Photo Document is required</p>}
 
@@ -652,7 +658,7 @@ const VisaApply = () => {
 
                     </div>
                     <div className="flex justify-center mt-2">
-                        <PrimaryBtn text="Save" type="submit" classes="w-[200px]" onClick={handleSubmit}/>
+                        <PrimaryBtn text="Save" disabled={processing} type="submit" classes="w-[200px]" onClick={handleSubmit}/>
                     </div>
                 </form>
             </div>

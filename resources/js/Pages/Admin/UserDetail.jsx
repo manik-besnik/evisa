@@ -2,8 +2,6 @@ import React, {useState} from 'react';
 import {Head, Link, router, usePage} from '@inertiajs/react';
 import AdminLayout from '@/Layouts/AdminLayout';
 import TotalInfoCard from '@/Components/Admin/TotalInfoCard';
-import ModalUserDetails from "@/Components/Admin/ModalUserDetails.jsx";
-import ModalSocialAccounts from "@/Components/Admin/ModalSocialAccounts.jsx";
 
 
 const UserDetail = () => {
@@ -78,15 +76,6 @@ const UserDetail = () => {
                     }
                 </div>
                 <Link href={route('admin.index')} type="button" className='app-btn'>Back</Link>
-
-                <div className="p-[30px] relative">
-                    <div className="grid grid-cols-2 gap-[30px] mb-6">
-                        <ModalUserDetails user={data.user}  />
-
-                        <ModalSocialAccounts accounts={data.accounts}/>
-                    </div>
-
-                </div>
 
             </AdminLayout>
 

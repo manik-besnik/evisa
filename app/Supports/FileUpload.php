@@ -26,7 +26,7 @@ class FileUpload
                 $destinationPath = 'uploads';
             }
 
-            if ((bool)config('services.local_environment')) {
+            if (!(bool)config('services.local_environment')) {
                 $destinationPath = 'public/' . $destinationPath;
             }
 
@@ -41,5 +41,21 @@ class FileUpload
         } catch (\Exception $exception) {
             return $oldFilePath;
         }
+    }
+
+    public static function delete(string|null $file = null)
+    {
+        if ($file && strpos($file, request()->getSchemeAndHttpHost() != false)) {
+            $filePath = str_replace(request()->getSchemeAndHttpHost() . '/', '', $file);
+            $fullPath = public_path($filePath);
+
+            if (File::exists($fullPath)) {
+                File::delete($fullPath);
+            }
+
+            return true;
+        }
+
+        return false;
     }
 }

@@ -21,6 +21,7 @@ export default function SideNavLinks() {
                 },
                 {
                     name: 'Add New Application',
+                    route: route('admin.visa-applies.create')
                 },
             ]
         },
@@ -31,12 +32,15 @@ export default function SideNavLinks() {
             links: [
                 {
                     name: 'Job List',
+                    route: route('admin.job-posts.index')
                 },
                 {
                     name: 'Add Job',
+                    route: route('admin.job-posts.create')
                 },
                 {
                     name: 'Applications',
+                    route: route('admin.job-posts.index')
                 }
             ]
         },
@@ -47,12 +51,7 @@ export default function SideNavLinks() {
             links: [
                 {
                     name: 'Agency List',
-                },
-                {
-                    name: 'Add Job',
-                },
-                {
-                    name: 'Applications',
+                    route: route('admin.agencies.index')
                 }
             ]
         },
@@ -63,12 +62,11 @@ export default function SideNavLinks() {
             links: [
                 {
                     name: 'User List',
+                    route: route('admin.users.index')
                 },
                 {
-                    name: 'Add Job',
-                },
-                {
-                    name: 'Applications',
+                    name: 'Add User',
+                    route: route('admin.users.create')
                 }
             ]
         }

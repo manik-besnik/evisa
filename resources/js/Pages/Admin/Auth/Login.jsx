@@ -31,7 +31,7 @@ export default function Login() {
         <AdminGuestLayout>
             <Head title="Admin Login | Dubai E-Visa"/>
 
-            <h3 className='text-center text-[25px] leading-[30px] text-text-primary mb-5 md:text-[43px] md:leading-[51px] md:mb-[30px] font-semibold '>Welcome
+            <h3 className='text-center text-[25px] leading-[30px] text-text-primary mb-5 md:text-[43px] md:leading-[51px] md:mb-[30px] font-semibold'>Welcome
                 Back</h3>
 
             <form onSubmit={submit}>
@@ -47,7 +47,8 @@ export default function Login() {
                         onChange={(e) => setData('email', e.target.value)}
                         iconPrev={<EmailIcon className='h-4 sm:h-5'/>}
                         required
-                        autoComplete="username"
+                        autoComplete="email"
+                        placeholder="Email Address"
 
                     />
 
@@ -58,6 +59,7 @@ export default function Login() {
                     <LabelField htmlFor="password" content="Password"/>
 
                     <InputBox
+                        placeholder="Password"
                         id="password"
                         type="password"
                         name="password"

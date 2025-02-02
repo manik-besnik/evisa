@@ -56,7 +56,7 @@ const AgencyRegisterInfo = () => {
     }
 
     return (
-        <div className="w-[60%] bg-black/70 px-5 h-[72vh] overflow-y-scroll">
+        <div style={{ height: `calc(100vh - 140px)` }} className="w-[60%] bg-black/70 px-5 overflow-y-scroll">
 
             <form onSubmit={handleSubmit}>
 

@@ -7,7 +7,11 @@ export default function Select({
                                    setSelected,
                                    handleValueChange,
                                    classes = '',
-                                   placeholder = "Select One"
+                                   placeholder = "Select One",
+                                   label = "",
+                                   error = "",
+                                   field = "name",
+                                   labelClasses = ""
                                }) {
 
     const handleChange = (e) => {
@@ -18,11 +22,15 @@ export default function Select({
     return (
         <div className="w-full">
             <Listbox value={selected} onChange={handleChange}>
-                {selected?.name ?
+                {label && <label className={`block text-sm font-medium text-text-primary mb-2 ${labelClasses}`}>
+                    {label}
+                </label>}
+
+                {selected?.[field] ?
                     <ListboxButton
                         className={`${classes} rounded sm:rounded-[6px] h-[26px] sm:h-[36px] bg-side-and-button w-full flex items-center justify-between  leading-[14px] sm:leading-[20px]  text-xs sm:text-sm text-text-primary px-3`}
                     >
-                        {selected?.name}
+                        {selected?.[field]}
 
                         <ArrowDownSolid/>
 
@@ -37,6 +45,10 @@ export default function Select({
                     </ListboxButton>
 
                 }
+
+                {error && <p className="text-red-500  my-1">{error}</p>}
+
+
                 <Transition leave="transition ease-in duration-100" leaveFrom="opacity-100" leaveTo="opacity-0">
                     <ListboxOptions
                         anchor="bottom"

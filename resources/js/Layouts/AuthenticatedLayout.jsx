@@ -2,12 +2,20 @@ import {useState} from 'react';
 import {usePage} from '@inertiajs/react';
 import SideNav from '@/Components/SideNav';
 import NavBar from '@/Components/NavBar';
-import {ToastContainer} from 'react-toastify';
+import {toast, ToastContainer} from 'react-toastify';
 
 export default function Authenticated({header, children}) {
 
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
     const [toggleSideNav, useToggleSideNav] = useState(false)
+    const {flash, errors} = usePage();
+
+    if (flash?.success) {
+        toast.success(flash.success)
+    }
+    if (errors?.message) {
+        toast.error(errors.message)
+    }
 
     return (
         <div className='flex min-h-screen'>

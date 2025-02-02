@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string|null $bank_details
  * @property string|null $nominee_name
  * @property string|null $nominee_passport_no
+ * @property bool $is_account_approved
  *
  * @mixin Model
  * @property User $user
@@ -32,7 +33,10 @@ class Agency extends Model
         'bank_details',
         'nominee_name',
         'nominee_passport_no',
+        'is_account_approved',
     ];
+
+    protected $casts = ['is_account_approved' => "boolean"];
 
     public function user(): BelongsTo
     {

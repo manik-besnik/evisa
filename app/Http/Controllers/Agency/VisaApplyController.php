@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers\Agency;
 
+use App\Actions\Agency\VisaApply\CreateAction;
+use App\Actions\Agency\VisaApply\IndexAction;
+use App\Actions\Agency\VisaApply\StoreAction;
+use App\DTOs\VisaApplyDTO;
 use App\Http\Controllers\Controller;
 use App\Models\VisaApply;
 use Illuminate\Http\Request;
@@ -11,25 +15,25 @@ class VisaApplyController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(IndexAction $indexAction): \Inertia\Response
     {
-        //
+        return $indexAction->execute();
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(CreateAction $createAction): \Inertia\Response
     {
-        //
+        return $createAction->execute();
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, StoreAction $storeAction): \Illuminate\Http\RedirectResponse
     {
-        //
+        return $storeAction->execute(VisaApplyDTO::fromRequest($request));
     }
 
     /**

@@ -10,6 +10,18 @@ Route::get('/', function () {
     return Inertia::render('Home');
 })->name('home');
 
+Route::get('/job-demand', function () {
+    return Inertia::render('JobPost');
+})->name('job-demand');
+
+Route::get('/job-details', function () {
+    return Inertia::render('JobDetails');
+})->name('job-details');
+
+Route::get('/job-apply', function () {
+    return Inertia::render('JobApply');
+})->name('job-apply');
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -28,6 +40,8 @@ Route::middleware(['auth', 'user'])->group(function () {
 
     Route::get('visa-apply', [VisaApplyController::class, 'create'])->name('visa-apply.create');
     Route::get('job-demand', [JobDemandController::class, 'create'])->name('job-demand.create');
+
+    Route::post('visa-apply/store', [VisaApplyController::class, 'store'])->name('visa-apply.store');
 
     Route::get('dashboard', [\App\Http\Controllers\User\DashboardController::class, 'index'])->name('user.dashboard.index');
 });
