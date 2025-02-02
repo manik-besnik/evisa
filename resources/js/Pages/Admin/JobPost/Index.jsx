@@ -7,6 +7,7 @@ import DangerButton from "@/Components/DangerButton.jsx";
 import {FaTrashAlt} from "react-icons/fa";
 import {useState} from "react";
 import DeleteConfirmModal from "@/Components/DeleteConfirmModal.jsx";
+import TopSection from "@/Components/Admin/TopSection.jsx";
 
 export const Index = ({job_posts}) => {
 
@@ -28,11 +29,12 @@ export const Index = ({job_posts}) => {
 
     return (
         <Authenticated>
-            <div className="flex justify-between items-center mb-3">
-                <h3 className=''>Job Post List</h3>
+
+            <TopSection title='Job Post List'>
                 <Link href={route('admin.job-posts.create')} className='btn-primary'><FiPlus/> Add New Job
                 </Link>
-            </div>
+            </TopSection>
+
             <Table heading={['SL', 'Title', 'Post Date', 'Company', 'Action']}>
                 {job_posts.data.length > 0 && job_posts.data.map((jobPost, index) => (
                     <tr key={index}>

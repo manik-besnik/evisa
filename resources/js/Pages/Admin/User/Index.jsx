@@ -1,13 +1,18 @@
 import Authenticated from "@/Layouts/AuthenticatedLayout.jsx";
-import {Head} from "@inertiajs/react";
+import {Head, Link} from "@inertiajs/react";
 import TopSection from "@/Components/Admin/TopSection.jsx";
 import Table from "@/Components/Table.jsx";
+import {FiPlus} from "react-icons/fi";
 
 const Index = ({users}) => {
     return (
         <Authenticated>
             <Head title="Agencies | Dubai E-Visa"/>
-            <TopSection title='Agencies'/>
+            <TopSection title='Users'>
+                <Link href={route('admin.users.create')} className='btn-primary'><FiPlus/> Add New User
+                </Link>
+            </TopSection>
+
             <Table heading={['SL', 'Name', 'Username', 'Phone', 'Email Address']}>
                 {users.data.map((user, index) => (
                     <tr key={index}>

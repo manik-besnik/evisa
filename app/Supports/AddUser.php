@@ -3,6 +3,7 @@
 namespace App\Supports;
 
 use App\DTOs\AddUserDTO;
+use App\Enums\Role;
 use App\Models\User;
 
 /** This Class For Added User by Admin or Agency */
@@ -23,12 +24,15 @@ class AddUser
             $user->phone = $addUserDTO->phone;
             $user->profession = $addUserDTO->profession;
             $user->city = $addUserDTO->city;
+            $user->role = Role::USER->value;
             $user->is_signup_complete = 1;
             $user->added_by = auth()->id();
+            $user->save();
 
             return $user;
 
         } catch (\Exception $exception) {
+
             return $exception->getMessage();
         }
     }

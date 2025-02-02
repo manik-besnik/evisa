@@ -65,7 +65,8 @@ export default function SideNavLinks() {
                     route: route('admin.users.index')
                 },
                 {
-                    name: 'Add Job',
+                    name: 'Add User',
+                    route: route('admin.users.create')
                 }
             ]
         }

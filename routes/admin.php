@@ -50,6 +50,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
     Route::get('agencies/{id}/approve', [AgencyController::class, 'approve'])->name('agencies.approve');
 
     Route::get('users', [UserController::class, 'index'])->name('users.index');
-    Route::get('users/add', [UserController::class, 'add'])->name('users.add');
+    Route::get('users/create', [UserController::class, 'create'])->name('users.create');
+    Route::post('users/store', [UserController::class, 'store'])->name('users.store');
 
 });

@@ -6,6 +6,7 @@ import InputBox from "@/Components/Admin/InputBox.jsx";
 import InputFile from "@/Components/Admin/InputFile.jsx";
 import {TinyEditor} from "@/Components/TinyEditor.jsx";
 import {useState} from "react";
+import TopSection from "@/Components/Admin/TopSection.jsx";
 
 const EditJobPost = ({job_post}) => {
 
@@ -36,11 +37,11 @@ const EditJobPost = ({job_post}) => {
     return (
         <Authenticated>
             <Head title="Add New Job | Dubai E-Visa"/>
-            <div className="flex justify-between items-center mb-3">
-                <h3 className=''>Add New Job Post</h3>
+
+            <TopSection title='Add New Job Post'>
                 <Link href={route('admin.job-posts.index')} className='btn-primary'> Job Post List
                 </Link>
-            </div>
+            </TopSection>
 
             <div className="mt-1">
 
