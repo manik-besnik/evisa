@@ -69,3 +69,8 @@ export const documentTypes = {
     additional1: {type: "additional1", name: "Additional Document 1"},
     additional2: {type: "additional2", name: "Additional Document 2"}
 };
+
+export const joDemand = [
+    {id: 1, name: "Yes"},
+    {id: 2, name: "No"},
+];

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\VisaApplyController;
+use App\Http\Controllers\User\JobDemandController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -26,6 +27,7 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::get('report', [VisaApplyController::class, 'index'])->name('visa-apply.index');
 
     Route::get('visa-apply', [VisaApplyController::class, 'create'])->name('visa-apply.create');
+    Route::get('job-demand', [JobDemandController::class, 'create'])->name('job-demand.create');
 
     Route::get('dashboard', [\App\Http\Controllers\User\DashboardController::class, 'index'])->name('user.dashboard.index');
 });

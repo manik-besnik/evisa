@@ -16,7 +16,7 @@ const services = [
     {
         title: "Job Demand",
         img: "images/job-demand.png",
-        link: "home",
+        link: "job-demand.create",
     },
     {
         title: "Business",
