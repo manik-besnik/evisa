@@ -9,6 +9,6 @@ export const getFormattedDate = (dateTime) => {
 
 }
 
-export const getEnumValue = (items, id) => {
+export const getValue = (items, id) => {
     return items.find(item => item.id === id)?.name
 }
