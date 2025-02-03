@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 
 /**
@@ -32,4 +33,9 @@ class Passport extends Model
         'passport_issue_date',
         'passport_expire_date',
     ];
+
+    public function issueCountry(): BelongsTo
+    {
+        return $this->belongsTo(Country::class,'passport_issue_country','id');
+    }
 }

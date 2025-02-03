@@ -10,6 +10,7 @@ class IndexAction
     public function execute(): \Inertia\Response
     {
         $visaApplies = VisaApply::query()
+            ->with(['passport'])
             ->orderByDesc('id')
             ->paginate(20);
 

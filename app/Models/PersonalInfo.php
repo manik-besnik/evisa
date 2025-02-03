@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property int $id
@@ -53,4 +54,17 @@ class PersonalInfo extends Model
         'qualification',
         'profession',
     ];
+
+    public function currentNationality(): BelongsTo
+    {
+        return $this->belongsTo(Country::class,'current_nationality','id');
+    }
+    public function prevNationality(): BelongsTo
+    {
+        return $this->belongsTo(Country::class,'prev_nationality','id');
+    }
+    public function birthCountry(): BelongsTo
+    {
+        return $this->belongsTo(Country::class,'birth_country','id');
+    }
 }
