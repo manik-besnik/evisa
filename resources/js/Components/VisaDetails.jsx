@@ -46,6 +46,20 @@ export const VisaDetails = () => {
                         <InfoItem label="Qualification" value={visa_apply.person_info.qualification}/>
                         <InfoItem label="Profession" value={visa_apply.person_info.profession}/>
                     </InfoSection>
+
+                    <InfoSection title="Documents">
+                        {JSON.parse(visa_apply.documents) && JSON.parse(visa_apply.documents.length) > 0 ? (
+                            <ul className="list-disc list-inside text-gray-800">
+                                {JSON.parse(visa_apply.documents).map((doc, index) => (
+                                    <li key={index} className="mb-2">
+                                        {doc.name}
+                                    </li>
+                                ))}
+                            </ul>
+                        ) : (
+                            <p className="text-gray-600">No documents available</p>
+                        )}
+                    </InfoSection>
                 </div>
 
                 <div className="w-full lg:w-1/2">
@@ -78,19 +92,7 @@ export const VisaDetails = () => {
 
             </div>
 
-            <InfoSection title="Documents">
-                {JSON.parse(visa_apply.documents) && JSON.parse(visa_apply.documents.length) > 0 ? (
-                    <ul className="list-disc list-inside text-gray-800">
-                        {JSON.parse(visa_apply.documents).map((doc, index) => (
-                            <li key={index} className="mb-2">
-                                {doc.name}
-                            </li>
-                        ))}
-                    </ul>
-                ) : (
-                    <p className="text-gray-600">No documents available</p>
-                )}
-            </InfoSection>
+
         </div>
     )
 }
