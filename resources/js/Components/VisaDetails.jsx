@@ -1,4 +1,6 @@
 import {usePage} from "@inertiajs/react";
+import {getEnumValue} from "@/Components/Helper/index.js";
+import {genders, groups, maritalStatuses, visaProcessingTypes, visaTypes} from "@/Components/Constant/index.js";
 
 const InfoSection = ({title, children}) => (
     <div className="mb-8">
@@ -31,10 +33,10 @@ export const VisaDetails = () => {
                                   value={visa_apply.person_info.current_nationality.nationality}/>
                         <InfoItem label="Previous Nationality"
                                   value={visa_apply.person_info.prev_nationality.nationality}/>
-                        <InfoItem label="Gender" value={visa_apply.person_info.gender}/>
+                        <InfoItem label="Gender" value={getEnumValue(genders,visa_apply.person_info.gender)}/>
                         <InfoItem label="Date of Birth" value={visa_apply.person_info.date_of_birth}/>
                         <InfoItem label="Birth Country" value={visa_apply.person_info.birth_country.name}/>
-                        <InfoItem label="Marital Status" value={visa_apply.person_info.marital_status}/>
+                        <InfoItem label="Marital Status" value={getEnumValue(maritalStatuses,visa_apply.person_info.marital_status)}/>
                         <InfoItem label="Birth Place" value={visa_apply.person_info.birth_place}/>
                         <InfoItem label="Birth Place (Arabic)" value={visa_apply.person_info.birth_place_arabic}/>
                         <InfoItem label="Mother's Name" value={visa_apply.person_info.mother_name}/>
@@ -50,9 +52,9 @@ export const VisaDetails = () => {
                     <InfoSection title="Visa Info">
                         <InfoItem label="App ID" value={visa_apply.app_id}/>
                         <InfoItem label="Personal Name | Company Name" value={visa_apply.name}/>
-                        <InfoItem label="Processing Type" value={visa_apply.processing_type}/>
-                        <InfoItem label="Visa Type" value={visa_apply.visa_type}/>
-                        <InfoItem label="Group" value={visa_apply.visa_type}/>
+                        <InfoItem label="Processing Type" value={getEnumValue(visaProcessingTypes,visa_apply.processing_type)}/>
+                        <InfoItem label="Visa Type" value={getEnumValue(visaTypes,visa_apply.visa_type)}/>
+                        <InfoItem label="Group" value={getEnumValue(groups, visa_apply.group)}/>
                     </InfoSection>
 
                     <InfoSection title="Passport Info">

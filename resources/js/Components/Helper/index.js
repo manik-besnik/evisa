@@ -1,4 +1,3 @@
-
 export const getFormattedDate = (dateTime) => {
     const date = new Date(dateTime);
 
@@ -8,4 +7,8 @@ export const getFormattedDate = (dateTime) => {
 
     return `${day}/${month}/${year}`;
 
+}
+
+export const getEnumValue = (items, id) => {
+    return items.find(item => item.id === id)?.name
 }
