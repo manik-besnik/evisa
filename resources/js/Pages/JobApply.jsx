@@ -18,7 +18,7 @@ const JobApply = () => {
     const jobs = usePage().props.job_posts
 
 
-    const {data, setData, post, errors, processing} = useForm({
+    const {data, setData, post, errors, processing, reset} = useForm({
         job_post_id: route().params?.id ?? '',
         name: '',
         phone: '',
@@ -116,8 +116,11 @@ const JobApply = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(data);
-        post(route('job-posts.store'))
+        post(route('job-posts.store'), {
+            onSuccess: () => {
+                reset()
+            }
+        })
     }
 
 
