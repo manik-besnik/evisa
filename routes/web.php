@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\User\JobPostController;
 use App\Http\Controllers\User\VisaApplyController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -9,9 +10,6 @@ Route::get('/', function () {
     return Inertia::render('Home');
 })->name('home');
 
-Route::get('/job-demand', function () {
-    return Inertia::render('JobPost');
-})->name('job-demand');
 
 Route::get('/job-details', function () {
     return Inertia::render('JobDetails');
@@ -42,7 +40,12 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::post('visa-apply/store', [VisaApplyController::class, 'store'])->name('visa-apply.store');
 
     Route::get('dashboard', [\App\Http\Controllers\User\DashboardController::class, 'index'])->name('user.dashboard.index');
+
+
 });
+
+Route::get('job-demand',[JobPostController::class,'index'])->name('job-demand');
+Route::get('job-demand/{job}',[JobPostController::class,'show'])->name('job-demand.show');
 
 Route::get('google/redirect', function () {
 
