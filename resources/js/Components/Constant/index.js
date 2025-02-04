@@ -79,3 +79,9 @@ export const documentTypes = {
     additional2: {type: "additional2", name: "Additional Document 2"}
 };
 export const VisaApplyTableHeading = ['No', 'Name', 'Passport No', 'Status', 'Apply Date', 'Action']
+
+export const joDemand = [
+    {id: 1, name: "Yes"},
+    {id: 2, name: "No"},
+];
+

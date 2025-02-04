@@ -40,6 +40,7 @@ Route::middleware(['auth', 'user'])->group(function () {
 
     Route::get('visa-apply', [VisaApplyController::class, 'create'])->name('visa-apply.create');
     Route::get('job-demand', [JobDemandController::class, 'create'])->name('job-demand.create');
+    Route::post('/job-demand', [JobDemandController::class, 'store'])->name('job-demand.store');
 
     Route::post('visa-apply/store', [VisaApplyController::class, 'store'])->name('visa-apply.store');
 
