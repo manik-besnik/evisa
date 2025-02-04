@@ -1,5 +1,5 @@
 import Authenticated from "@/Layouts/AuthenticatedLayout.jsx";
-import {Link, router} from "@inertiajs/react";
+import {Head, Link, router} from "@inertiajs/react";
 import {FiEdit, FiPlus} from "react-icons/fi";
 import Table from "@/Components/Table.jsx";
 import {getFormattedDate} from "@/Components/Helper/index.js";
@@ -29,6 +29,8 @@ export const Index = ({job_posts}) => {
 
     return (
         <Authenticated>
+
+            <Head title="Add New Job | Dubai E-Visa" />
 
             <TopSection title='Job Post List'>
                 <Link href={route('admin.job-posts.create')} className='btn-primary'><FiPlus/> Add New Job

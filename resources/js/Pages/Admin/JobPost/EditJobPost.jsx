@@ -15,7 +15,7 @@ const EditJobPost = ({job_post}) => {
     const {data, setData, put, errors, processing} = useForm({
         'type': job_post.type,
         'thumbnail': '',
-        'title': job_post.tile,
+        'title': job_post.title,
         'company': job_post.company,
         'salary_range': job_post.salary_range,
         'location': job_post.location,
