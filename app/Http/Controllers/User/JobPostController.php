@@ -4,16 +4,19 @@ namespace App\Http\Controllers\User;
 
 use App\Actions\User\JobPost\IndexAction;
 use App\Actions\User\JobPost\ShowAction;
+use App\DTOs\JobApplyDTO;
 use App\Http\Controllers\Controller;
 use App\Models\JobPost;
+use App\Supports\JobApplyAction;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class JobPostController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(IndexAction $indexAction)
+    public function index(IndexAction $indexAction): \Inertia\Response
     {
         return $indexAction->execute();
     }
@@ -21,17 +24,33 @@ class JobPostController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): \Inertia\Response
     {
-        //
+        return Inertia::render('JobApply', [
+            'job_posts' => JobPost::query()->select(['id', 'title'])
+                ->whereDate('last_apply_date', '>=', now()->format('Y-m-d'))
+                ->get()
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): \Illuminate\Http\RedirectResponse
     {
-        //
+        try {
+
+            $apply = JobApplyAction::execute(auth()->id(), JobApplyDTO::fromRequest($request));
+
+            if ($apply) {
+                return redirect()->back()->with('success', 'Your application submitted');
+            }
+
+            return redirect()->back()->withErrors(['message' => "Application Submit Failed"]);
+
+        } catch (\Exception $exception) {
+            return redirect()->back()->withErrors(['message' => $exception->getMessage()]);
+        }
     }
 
     /**

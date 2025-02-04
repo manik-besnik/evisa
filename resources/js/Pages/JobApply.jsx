@@ -12,9 +12,11 @@ const JobApply = () => {
 
     const countries = usePage().props.countries
 
-    const jobs = [{id: 1, name: "Software Engineer"}]
+    const jobs = usePage().props.job_posts
+
+
     const {data, setData, post, errors} = useForm({
-        job_id: '',
+        job_id: route().params?.id ?? '',
         name: '',
         phone: '',
         email: '',
@@ -51,11 +53,12 @@ const JobApply = () => {
     })
 
 
-    const [jobPost, setJobPost] = useState(null)
+    const [jobPost, setJobPost] = useState(jobs.find(item => item.id === Number(route()?.params?.id)) ?? null)
     const [motherLanguage, setMotherLanguage] = useState(null)
     const [englishProficiency, setEnglishProficiency] = useState(null)
     const [arabicProficiency, setArabicProficiency] = useState(null)
     const [urduProficiency, setUrduProficiency] = useState(null)
+
 
     const updateJobExperience = (index, key, value) => {
         const updatedExperiences = [...data.job_experiences];
@@ -144,6 +147,7 @@ const JobApply = () => {
                                 setSelected={setJobPost}
                                 handleValueChange={(value) => setData('job_id', value.id)}
                                 error={errors.job_id}
+                                field='title'
                                 defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                             />
                         </div>

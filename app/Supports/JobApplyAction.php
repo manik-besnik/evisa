@@ -8,7 +8,7 @@ use App\Models\JobApply;
 use App\Models\JobExperience;
 use Illuminate\Support\Facades\DB;
 
-class ApplyJobAction
+class JobApplyAction
 {
     public static function execute(int $userId, JobApplyDTO $jobApplyDTO): ?JobApply
     {

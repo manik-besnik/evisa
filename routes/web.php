@@ -15,13 +15,16 @@ Route::get('/job-details', function () {
     return Inertia::render('JobDetails');
 })->name('job-details');
 
-Route::get('/job-apply', function () {
-    return Inertia::render('JobApply');
-})->name('job-apply');
+
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+
+Route::get('job-demand', [JobPostController::class, 'index'])->name('job-demand');
+Route::get('job-demand/{job}', [JobPostController::class, 'show'])->name('job-demand.show');
+
 
 Route::middleware(['auth', 'user'])->group(function () {
 
@@ -41,11 +44,11 @@ Route::middleware(['auth', 'user'])->group(function () {
 
     Route::get('dashboard', [\App\Http\Controllers\User\DashboardController::class, 'index'])->name('user.dashboard.index');
 
+    Route::get('job-apply', [JobPostController::class, 'create'])->name('job-posts.create');
+    Route::post('job-apply/store', [JobPostController::class, 'store'])->name('job-posts.store');
 
 });
 
-Route::get('job-demand',[JobPostController::class,'index'])->name('job-demand');
-Route::get('job-demand/{job}',[JobPostController::class,'show'])->name('job-demand.show');
 
 Route::get('google/redirect', function () {
 

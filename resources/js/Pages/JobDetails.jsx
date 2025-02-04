@@ -1,10 +1,13 @@
-import {Head} from "@inertiajs/react";
+import {Head, router} from "@inertiajs/react";
 import WebLayout from "@/Layouts/WebLayout.jsx";
 import {getValue} from "@/Components/Helper/index.js";
 import {jobTypes} from "@/Components/Constant/index.js";
 
 export default function JobDetails({job_post}) {
-    console.log(job_post)
+
+    const jobApply = () => {
+        return router.get(route('job-posts.create',{id:job_post.id}))
+    }
     return (
         <WebLayout showServiceImage={false} showBgImage={false}>
             <Head title="Job Demand | Dubai E-Visa"/>
@@ -14,10 +17,10 @@ export default function JobDetails({job_post}) {
                     <div className="flex items-center justify-between mb-6">
                         <h1 className="text-2xl font-semibold">{job_post.title}</h1>
                         <div className="flex items-center gap-3">
-                            <button className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-dark">Apply
+                            <button onClick={jobApply} className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-dark">Apply
                                 Now
                             </button>
-                            
+
                         </div>
                     </div>
 

@@ -4,7 +4,6 @@ import JobCard from "@/Components/Web/JobCard.jsx";
 
 const JobPost = ({job_posts}) => {
 
-    console.log(job_posts)
     return (
         <WebLayout showServiceImage={false} showBgImage={false}>
             <Head title="Job Demand | Dubai E-Visa"/>
