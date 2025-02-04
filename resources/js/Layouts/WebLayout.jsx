@@ -1,10 +1,26 @@
-import {ToastContainer} from 'react-toastify';
+import {toast, ToastContainer} from 'react-toastify';
 import Topbar from "@/Components/Web/Topbar.jsx";
 import Navbar from "@/Components/Web/Navbar.jsx";
 import ServiceImage from "@/Components/Web/ServiceImage.jsx";
 import {assetUrl} from "@/Components/Constant/index.js";
+import {usePage} from "@inertiajs/react";
+import {useEffect} from "react";
 
 export default function WebLayout({children, showServiceImage = true, showBgImage = false}) {
+
+    const {flash, errors} = usePage().props;
+
+    useEffect(() => {
+        if (flash?.success) {
+            toast.success(flash.success);
+        }
+        if (flash?.error) {
+            toast.error(flash.error);
+        }
+        if (errors?.message) {
+            toast.error(errors.message);
+        }
+    }, [flash, errors]);
 
     return (
         <div className='min-h-screen'>
