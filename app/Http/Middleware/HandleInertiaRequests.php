@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Supports\Country;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Inertia\Middleware;
 use Tighten\Ziggy\Ziggy;
 
@@ -40,7 +41,14 @@ class HandleInertiaRequests extends Middleware
                 ...(new Ziggy)->toArray(),
                 'location' => $request->url(),
             ],
-            'countries' => Country::get()
+            'countries' => Country::get(),
+            'flash' => function () {
+                return [
+                    'success' => Session::get('success'),
+                    'error' => Session::get('error'),
+                ];
+            },
+            'errors' => fn() => Session::get('errors') ? Session::get('errors')->getBag('default')->toArray() : (object)[],
         ];
     }
 }

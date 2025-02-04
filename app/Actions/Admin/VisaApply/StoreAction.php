@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class StoreAction
 {
-    public function execute(VisaApplyDTO $visaApplyDTO)
+    public function execute(VisaApplyDTO $visaApplyDTO): \Illuminate\Http\RedirectResponse
     {
         DB::beginTransaction();
 
@@ -17,7 +17,7 @@ class StoreAction
             VisaApplyAction::execute($visaApplyDTO);
             DB::commit();
 
-            return redirect()->back();
+            return to_route('admin.visa-applies.index')->with('success','Visa Application Saved');
 
         } catch (\Exception $exception) {
             DB::rollBack();

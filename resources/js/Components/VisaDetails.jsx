@@ -1,6 +1,7 @@
 import {usePage} from "@inertiajs/react";
 import {getValue} from "@/Components/Helper/index.js";
 import {genders, groups, maritalStatuses, visaProcessingTypes, visaTypes} from "@/Components/Constant/index.js";
+import { FaRegEye } from "react-icons/fa6";
 
 const InfoSection = ({title, children}) => (
     <div className="mb-8">
@@ -51,8 +52,13 @@ export const VisaDetails = () => {
                         {JSON.parse(visa_apply.documents) && JSON.parse(visa_apply.documents.length) > 0 ? (
                             <ul className="list-disc list-inside text-gray-800">
                                 {JSON.parse(visa_apply.documents).map((doc, index) => (
-                                    <li key={index} className="mb-2">
-                                        {doc.name}
+                                    <li key={index} className="mb-2 flex justify-between items-center">
+                                        <span>
+                                            {doc.name}
+                                        </span>
+                                        <a href={doc.url} target="_blank">
+                                            <FaRegEye />
+                                        </a>
                                     </li>
                                 ))}
                             </ul>

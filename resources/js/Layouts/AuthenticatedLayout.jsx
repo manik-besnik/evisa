@@ -4,9 +4,8 @@ import SideNav from '@/Components/SideNav';
 import NavBar from '@/Components/NavBar';
 import {toast, ToastContainer} from 'react-toastify';
 
-export default function Authenticated({header, children}) {
+export default function Authenticated({children}) {
 
-    const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
     const [toggleSideNav, useToggleSideNav] = useState(false)
     const {flash, errors} = usePage();
 

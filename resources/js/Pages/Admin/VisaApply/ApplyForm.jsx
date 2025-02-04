@@ -6,7 +6,7 @@ const ApplyForm = () => {
 
     return (
         <Authenticated>
-            <Head title="Agency Visa Apply | Dubai E-Visa" />
+            <Head title="Admin Visa Apply | Dubai E-Visa" />
             <div className="flex justify-between items-center">
                 <h3>Apply Form</h3>
                 <Link href={route('admin.visa-applies.index')} className="btn-primary">
