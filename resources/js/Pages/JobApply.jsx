@@ -4,7 +4,7 @@ import TextInput from "@/Components/TextInput.jsx";
 import InputFile from "@/Components/Web/InputFile.jsx";
 import Select from "@/Components/Web/Select.jsx";
 import {useState} from "react";
-import {languageProficiency} from "@/Components/Constant/index.js";
+import {jobApplyDocuments, languageProficiency} from "@/Components/Constant/index.js";
 import {FaPlus} from "react-icons/fa6";
 import {FaTrashAlt} from "react-icons/fa";
 
@@ -91,7 +91,7 @@ const JobApply = () => {
 
         setData('job_experiences', experiences)
     }
-    const handleFileChange = () => {
+    const handleFileChange = (fileType, file) => {
 
     }
 
@@ -355,7 +355,7 @@ const JobApply = () => {
 
                     </div>
 
-                    <h4 className="text-success text-md">Others Information</h4>
+                    <h4 className="text-success text-md my-4">Others Information</h4>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2">
                         <TextInput
@@ -426,6 +426,18 @@ const JobApply = () => {
                         />
 
 
+                    </div>
+
+                    <h4 className="text-success text-md my-4">Add Any Type of documents</h4>
+
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4  gap-2">
+                        {jobApplyDocuments.map((item, i) => (
+                            <InputFile
+                                defaultClasses="w-full h-10"
+                                key={i} fileType={item.type}
+                                onChange={(file) => handleFileChange(item.type, file)} placeholder={item.name}
+                            />
+                        ))}
                     </div>
 
                 </form>
