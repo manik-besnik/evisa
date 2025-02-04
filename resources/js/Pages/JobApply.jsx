@@ -8,6 +8,7 @@ import {jobApplyDocuments, languageProficiency} from "@/Components/Constant/inde
 import {FaPlus} from "react-icons/fa6";
 import {FaTrashAlt} from "react-icons/fa";
 import PrimaryBtn from "@/Components/Web/PrimaryBtn.jsx";
+import TextArea from "@/Components/TextArea.jsx";
 
 const JobApply = () => {
 
@@ -67,7 +68,7 @@ const JobApply = () => {
         updatedExperiences[index] = {
             ...updatedExperiences[index],
             [key]: value,
-            ...(key === "country" && { country_id: value?.id })
+            ...(key === "country" && {country_id: value?.id})
         };
 
         setData('job_experiences', updatedExperiences);
@@ -460,8 +461,20 @@ const JobApply = () => {
                         ))}
                     </div>
 
+                    <TextArea
+                        value={data.summary}
+                        onChange={(e) => setData('summary', e.target.value)}
+                        error={errors.summary}
+                        id="summary"
+                        placeholder="Write Here"
+                        label="Summary*"
+                        defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary mt-2"
+                        labelClasses="text-text-primary mt-4"
+                    />
+
                     <div className="flex w-full justify-center items-center mt-4">
-                        <PrimaryBtn classes="w-[300px]" disabled={processing} type="submit" text="Apply" onClick={handleSubmit}/>
+                        <PrimaryBtn classes="w-[300px]" disabled={processing} type="submit" text="Apply"
+                                    onClick={handleSubmit}/>
                     </div>
 
                 </form>
