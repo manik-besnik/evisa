@@ -52,7 +52,7 @@ class JobApplyDTO
             'weight' => ['required', 'string', 'max:200'],
             'height' => ['required', 'string', 'max:200'],
             'nearest_airport' => ['required', 'string', 'max:250'],
-//            'summary' => ['required', 'string', 'max:500'],
+            'summary' => ['nullable', 'string', 'max:500'],
             'documents' => ['required', 'array'],
 
             /** Education Details */
