@@ -7,6 +7,7 @@ use App\Actions\User\JobPost\ShowAction;
 use App\DTOs\JobApplyDTO;
 use App\Http\Controllers\Controller;
 use App\Models\JobPost;
+use App\Models\Language;
 use App\Supports\JobApplyAction;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -29,7 +30,8 @@ class JobPostController extends Controller
         return Inertia::render('JobApply', [
             'job_posts' => JobPost::query()->select(['id', 'title'])
                 ->whereDate('last_apply_date', '>=', now()->format('Y-m-d'))
-                ->get()
+                ->get(),
+            'languages' => Language::query()->get()
         ]);
     }
 

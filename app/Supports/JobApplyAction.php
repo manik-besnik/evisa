@@ -33,6 +33,7 @@ class JobApplyAction
 
             $jobApply = new JobApply();
             $jobApply->user_id = $userId;
+            $jobApply->job_post_id = $jobApplyDTO->jobPostId;
             $jobApply->education_id = $education->id;
             $jobApply->name = $jobApplyDTO->name;
             $jobApply->email = $jobApplyDTO->email;
@@ -52,7 +53,7 @@ class JobApplyAction
             return $jobApply;
 
         } catch (\Exception $exception) {
-
+dd($exception->getMessage());
             DB::rollBack();
             return null;
         }
@@ -79,6 +80,7 @@ class JobApplyAction
         $education->exam_name = $jobApplyDTO->examName;
         $education->passing_year = $jobApplyDTO->passingYear;
         $education->institute = $jobApplyDTO->institute;
+        $education->result = $jobApplyDTO->result;
         $education->computer_skill = $jobApplyDTO->computerSkill;
         $education->driving_license = $jobApplyDTO->drivingLicense;
         $education->driving_license_issue_date = $jobApplyDTO->drivingLicenseIssueDate;

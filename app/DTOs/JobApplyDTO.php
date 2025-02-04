@@ -43,16 +43,16 @@ class JobApplyDTO
     {
         $request->validate([
             'job_post_id' => ['required', 'integer', Rule::exists('job_posts', 'id')],
-            'name' => ['required', 'sting', 'min:2', 'max:250'],
-            'phone' => ['required', 'sting', 'min:9', 'max:20'],
-            'email' => ['required', 'sting', 'min:5', 'max:200'],
-            'shirt_size' => ['required', 'sting', 'min:5', 'max:200'],
-            'pant_size' => ['required', 'sting', 'max:200'],
-            'show_size' => ['required', 'sting', 'max:200'],
-            'weight' => ['required', 'sting', 'max:200'],
-            'height' => ['required', 'sting', 'max:200'],
-            'nearest_airport' => ['required', 'sting', 'max:250'],
-            'summary' => ['required', 'sting', 'max:500'],
+            'name' => ['required', 'string', 'min:2', 'max:250'],
+            'phone' => ['required', 'string', 'min:9', 'max:20'],
+            'email' => ['required', 'string', 'min:5', 'max:200'],
+            'shirt_size' => ['required', 'string', 'max:200'],
+            'pant_size' => ['required', 'string', 'max:200'],
+            'show_size' => ['required', 'string', 'max:200'],
+            'weight' => ['required', 'string', 'max:200'],
+            'height' => ['required', 'string', 'max:200'],
+            'nearest_airport' => ['required', 'string', 'max:250'],
+//            'summary' => ['required', 'string', 'max:500'],
             'documents' => ['required', 'array'],
 
             /** Education Details */
@@ -71,7 +71,7 @@ class JobApplyDTO
             /** Job Experience */
             'job_experiences' => ['required', 'array'],
             'job_experiences.*.id' => ['nullable', 'int'],
-            'job_experiences.*.country' => ['required', 'int'],
+            'job_experiences.*.country_id' => ['required', 'int'],
             'job_experiences.*.position' => ['required', 'string'],
             'job_experiences.*.duration' => ['required', 'string'],
             'job_experiences.*.company' => ['required', 'string'],
@@ -92,7 +92,7 @@ class JobApplyDTO
         $instance->height = $request->input('height');
         $instance->nearestAirport = $request->input('nearest_airport');
         $instance->summary = $request->input('summary');
-        $instance->documents = $request->input('documents');
+        $instance->documents = $request->all()['documents'] ?? [];
 
         /** Educational Details */
         $instance->examName = $request->input('exam_name');

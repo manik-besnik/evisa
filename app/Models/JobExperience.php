@@ -16,7 +16,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class JobExperience extends Model
 {
-    protected $table = 'educations';
+    protected $table = 'job_experiences';
 
     protected $fillable = [
         'user_id',
