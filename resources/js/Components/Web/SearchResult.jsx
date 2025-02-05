@@ -61,9 +61,9 @@ const SearchResult = () => {
                                     <button className="text-gray-600 hover:text-gray-800">
                                         <FiRefreshCw/>
                                     </button>
-                                    <button className="text-gray-600 hover:text-gray-800">
-                                        <FaRegEdit/>
-                                    </button>
+                                    {/*<button className="text-gray-600 hover:text-gray-800">*/}
+                                    {/*    <FaRegEdit/>*/}
+                                    {/*</button>*/}
                                 </div>
                             </td>
                         </tr>
