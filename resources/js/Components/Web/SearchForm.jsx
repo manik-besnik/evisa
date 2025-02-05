@@ -2,7 +2,6 @@ import TextInput from "@/Components/TextInput.jsx";
 import Select from "@/Components/Web/Select.jsx";
 import {groups, visaProcessingTypes, visaTypes} from "@/Components/Constant/index.js";
 import {useState} from "react";
-import PrimaryBtn from "@/Components/Web/PrimaryBtn.jsx";
 
 const SearchForm = () => {
 
@@ -23,6 +22,7 @@ const SearchForm = () => {
                         label="Personal Name" divClasses="my-3"
                         inputClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                         labelClasses="text-text-primary"
+                        defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                     />
 
                     <Select
@@ -31,6 +31,7 @@ const SearchForm = () => {
                         items={visaProcessingTypes}
                         selected={processingType}
                         setSelected={setProcessingType}
+                        defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                         classes="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                     />
 
@@ -40,6 +41,7 @@ const SearchForm = () => {
                         items={visaTypes}
                         selected={processingType}
                         setSelected={setProcessingType}
+                        defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                         classes="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                     />
 
@@ -50,6 +52,7 @@ const SearchForm = () => {
                         inputClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                         labelClasses="text-text-primary"
                         type='date'
+                        defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                     />
 
                     <TextInput
@@ -59,6 +62,7 @@ const SearchForm = () => {
                         inputClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                         labelClasses="text-text-primary"
                         type='date'
+                        defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                     />
 
                     <TextInput
@@ -67,7 +71,7 @@ const SearchForm = () => {
                         label="Name" divClasses="my-3"
                         inputClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                         labelClasses="text-text-primary"
-                        type='date'
+                        defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                     />
 
                     <TextInput
@@ -76,7 +80,7 @@ const SearchForm = () => {
                         label="Passport No" divClasses="my-3"
                         inputClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                         labelClasses="text-text-primary"
-                        type='date'
+                        defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                     />
 
 
@@ -86,7 +90,7 @@ const SearchForm = () => {
                         label="App ID" divClasses="my-3"
                         inputClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                         labelClasses="text-text-primary"
-                        type='date'
+                        defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                     />
 
                     <Select placeholder="Select Group"
@@ -94,6 +98,7 @@ const SearchForm = () => {
                             items={groups}
                             selected={processingType}
                             setSelected={setProcessingType}
+                            defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                             classes="bg-[#E0EBF8] border-l-primary focus:border-l-primary"/>
 
 
@@ -102,6 +107,7 @@ const SearchForm = () => {
                             items={groups}
                             selected={processingType}
                             setSelected={setProcessingType}
+                            defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                             classes="bg-[#E0EBF8] border-l-primary focus:border-l-primary"/>
 
                 </div>
