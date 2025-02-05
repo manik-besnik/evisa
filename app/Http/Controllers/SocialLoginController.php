@@ -24,6 +24,7 @@ class SocialLoginController extends Controller
         ], [
             'name' => $googleUser->name,
             'email' => $googleUser->email,
+            'username' => $googleUser->email,
         ]);
 
         Auth::login($user);
@@ -51,6 +52,7 @@ class SocialLoginController extends Controller
         ], [
             'name' => $facebookUser->name,
             'email' => $facebookUser->email,
+            'username' => $facebookUser->email,
         ]);
 
         Auth::login($user);
