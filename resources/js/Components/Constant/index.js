@@ -108,3 +108,8 @@ export const jobApplyDocuments = [
     { name: "Trade License | Others", type: "trade-license-others", file: null },
     { name: "Email | UAE Pass | Info", type: "email-uae-pass-info", file: null }
 ];
+
+export const joDemand = [
+    {id: 1, name: "Yes"},
+    {id: 2, name: "No"},
+];
