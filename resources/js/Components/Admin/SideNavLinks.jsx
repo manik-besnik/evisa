@@ -40,7 +40,7 @@ export default function SideNavLinks() {
                 },
                 {
                     name: 'Applications',
-                    route: route('admin.job-posts.index')
+                    route: route('admin.job-posts.applications')
                 }
             ]
         },

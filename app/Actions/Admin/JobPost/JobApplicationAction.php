@@ -11,7 +11,7 @@ class JobApplicationAction
     {
         $applications  = JobApply::query()->paginate(20);
 
-        return Inertia::render('Admin/JobPost/Apply',[
+        return Inertia::render('Admin/JobPost/JobApplications',[
             'job_applies' => $applications
         ]);
     }

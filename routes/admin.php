@@ -41,6 +41,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
     Route::post('roles/store', [RoleController::class, 'store'])->name('roles.store');
     Route::put('roles/update/{id}', [RoleController::class, 'update'])->name('roles.update');
 
+    Route::get('job-posts/applications', [JobPostController::class,'applications'])->name('job-posts.applications');
     Route::resource('job-posts', JobPostController::class);
 
     Route::get('agencies', [AgencyController::class, 'index'])->name('agencies.index');
