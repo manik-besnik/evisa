@@ -1,4 +1,5 @@
-export const assetUrl = "https://local.evisa.com/assets/"
+// export const assetUrl = "https://local.evisa.com/assets/"
+export const assetUrl = "http://dubaievisaservice.com/"
 export const genders = [
     {id: 1, name: "Male"},
     {id: 2, name: "Female"},
