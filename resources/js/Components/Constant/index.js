@@ -80,8 +80,31 @@ export const documentTypes = {
 };
 export const VisaApplyTableHeading = ['No', 'Name', 'Passport No', 'Status', 'Apply Date', 'Action']
 
-export const joDemand = [
-    {id: 1, name: "Yes"},
-    {id: 2, name: "No"},
+export const jobApplyDocuments = [
+    { name: "Passport Copy", type: "passport-copy", file: null },
+    { name: "Visa Copy", type: "visa-copy", file: null },
+    { name: "Apply Picture", type: "apply-picture", file: null },
+    { name: "National ID", type: "national-id", file: null },
+    { name: "Emirates ID", type: "emirates-id", file: null },
+    { name: "Change Status", type: "change-status", file: null },
+    { name: "Pre Medical Test", type: "pre-medical-test", file: null },
+    { name: "Vaccine Certificate", type: "vaccine-certificate", file: null },
+    { name: "MOL Paper", type: "mol-paper", file: null },
+    { name: "Labor Card", type: "labor-card", file: null },
+    { name: "eVisa", type: "e-visa", file: null },
+    { name: "Attested Visa", type: "attested-visa", file: null },
+    { name: "TTC Certificate", type: "ttc-certificate", file: null },
+    { name: "BMET Card", type: "bmet-card", file: null },
+    { name: "Ticket", type: "ticket", file: null },
+    { name: "Medical UAE", type: "medical-uae", file: null },
+    { name: "Stamping Visa", type: "stamping-visa", file: null },
+    { name: "Eye Test", type: "eye-test", file: null },
+    { name: "Company NOC", type: "company-noc", file: null },
+    { name: "License NOC", type: "license-noc", file: null },
+    { name: "Driving License", type: "driving-license", file: null },
+    { name: "Driving License (UAE)", type: "driving-license-uae", file: null },
+    { name: "Certificate (Academic)", type: "certificate-academic", file: null },
+    { name: "Certificate 2", type: "certificate-2", file: null },
+    { name: "Trade License | Others", type: "trade-license-others", file: null },
+    { name: "Email | UAE Pass | Info", type: "email-uae-pass-info", file: null }
 ];
-

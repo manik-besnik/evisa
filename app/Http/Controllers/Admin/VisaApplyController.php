@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Actions\Admin\VisaApply\CreateAction;
 use App\Actions\Admin\VisaApply\IndexAction;
+use App\Actions\Admin\VisaApply\ShowAction;
 use App\Actions\Admin\VisaApply\StoreAction;
 use App\DTOs\VisaApplyDTO;
 use App\Http\Controllers\Controller;
@@ -39,9 +40,9 @@ class VisaApplyController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(VisaApply $visaApply)
+    public function show(VisaApply $visaApply, ShowAction $showAction): \Inertia\Response
     {
-        //
+        return $showAction->execute($visaApply);
     }
 
     /**

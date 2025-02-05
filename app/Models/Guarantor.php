@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property int $id
@@ -14,7 +15,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $phone
  * @property string $relation
  */
-
 class Guarantor extends Model
 {
     protected $table = 'guarantors';
@@ -28,4 +28,9 @@ class Guarantor extends Model
         'phone',
         'relation',
     ];
+
+    public function guarantorNationality(): BelongsTo
+    {
+        return $this->belongsTo(Country::class, 'nationality', 'id');
+    }
 }

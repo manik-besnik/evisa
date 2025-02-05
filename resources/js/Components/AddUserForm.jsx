@@ -42,7 +42,7 @@ export const AddUserForm = ({submitRoute}) => {
 
         post(submitRoute, {
             onSuccess: () => {
-                toast('Your Information saved successfully')
+                toast.success('Your Information saved successfully')
             }
         })
     }

@@ -4,17 +4,22 @@ import TextInput from "@/Components/TextInput.jsx";
 import InputFile from "@/Components/Web/InputFile.jsx";
 import Select from "@/Components/Web/Select.jsx";
 import {useState} from "react";
-import {languageProficiency} from "@/Components/Constant/index.js";
+import {jobApplyDocuments, languageProficiency} from "@/Components/Constant/index.js";
 import {FaPlus} from "react-icons/fa6";
 import {FaTrashAlt} from "react-icons/fa";
+import PrimaryBtn from "@/Components/Web/PrimaryBtn.jsx";
+import TextArea from "@/Components/TextArea.jsx";
 
 const JobApply = () => {
 
     const countries = usePage().props.countries
+    const languages = usePage().props.languages
 
-    const jobs = [{id: 1, name: "Software Engineer"}]
-    const {data, setData, post, errors} = useForm({
-        job_id: '',
+    const jobs = usePage().props.job_posts
+
+
+    const {data, setData, post, errors, processing, reset} = useForm({
+        job_post_id: route().params?.id ?? '',
         name: '',
         phone: '',
         email: '',
@@ -51,7 +56,7 @@ const JobApply = () => {
     })
 
 
-    const [jobPost, setJobPost] = useState(null)
+    const [jobPost, setJobPost] = useState(jobs.find(item => item.id === Number(route()?.params?.id)) ?? null)
     const [motherLanguage, setMotherLanguage] = useState(null)
     const [englishProficiency, setEnglishProficiency] = useState(null)
     const [arabicProficiency, setArabicProficiency] = useState(null)
@@ -59,10 +64,15 @@ const JobApply = () => {
 
     const updateJobExperience = (index, key, value) => {
         const updatedExperiences = [...data.job_experiences];
-        updatedExperiences[index] = {...updatedExperiences[index], [key]: value};
+
+        updatedExperiences[index] = {
+            ...updatedExperiences[index],
+            [key]: value,
+            ...(key === "country" && {country_id: value?.id})
+        };
+
         setData('job_experiences', updatedExperiences);
     };
-
     const deleteExperience = (i) => {
 
         data.job_experiences.splice(i, 1)
@@ -88,12 +98,29 @@ const JobApply = () => {
 
         setData('job_experiences', experiences)
     }
-    const handleFileChange = () => {
+    const handleFileChange = (fileType, file) => {
+        const fileName = jobApplyDocuments.find((item) => item.type === fileType)?.name || "Unknown";
 
-    }
+        const updatedDocuments = {
+            ...data.documents,
+            [fileType]: {
+                name: fileName,
+                type: fileType,
+                file: file
+            }
+        };
 
-    const handleSubmit = () => {
+        setData('documents', updatedDocuments);
+    };
 
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        post(route('job-posts.store'), {
+            onSuccess: () => {
+                reset()
+            }
+        })
     }
 
 
@@ -144,12 +171,13 @@ const JobApply = () => {
                                 setSelected={setJobPost}
                                 handleValueChange={(value) => setData('job_id', value.id)}
                                 error={errors.job_id}
+                                field='title'
                                 defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                             />
                         </div>
                         <div className="w-full md:w-1/4">
                             <InputFile
-                                defaultClasses="w-full h-full"
+                                defaultClasses="w-[160px] h-[160px]"
                                 placeholder="Passport size pic"
                                 onChange={handleFileChange}
                                 fileType="avatar"
@@ -278,7 +306,7 @@ const JobApply = () => {
                         <Select
                             placeholder="Select Language"
                             label="Mother Language*"
-                            items={languageProficiency}
+                            items={languages}
                             selected={motherLanguage}
                             setSelected={setMotherLanguage}
                             handleValueChange={(value) => setData('mother_language', value.id)}
@@ -335,7 +363,7 @@ const JobApply = () => {
                                         items={countries}
                                         selected={item.country}
                                         setSelected={(value) => updateJobExperience(i, "country", value)}
-                                        handleValueChange={(value) => updateJobExperience(i, "country_id", value.id)}
+                                        handleValueChange={(value) => updateJobExperience(i, "country", value)}
                                         error={errors?.job_experiences ? errors?.job_experiences[i]?.country_id : ""}
                                         defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                                         classes="mt-1"
@@ -351,7 +379,7 @@ const JobApply = () => {
 
                     </div>
 
-                    <h4 className="text-success text-md">Others Information</h4>
+                    <h4 className="text-success text-md my-4">Others Information</h4>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2">
                         <TextInput
@@ -422,6 +450,34 @@ const JobApply = () => {
                         />
 
 
+                    </div>
+
+                    <h4 className="text-success text-md my-4">Add Any Type of documents</h4>
+
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4  gap-2">
+                        {jobApplyDocuments.map((item, i) => (
+                            <InputFile
+                                defaultClasses="w-full h-10"
+                                key={i} fileType={item.type}
+                                onChange={handleFileChange} placeholder={item.name}
+                            />
+                        ))}
+                    </div>
+
+                    <TextArea
+                        value={data.summary}
+                        onChange={(e) => setData('summary', e.target.value)}
+                        error={errors.summary}
+                        id="summary"
+                        placeholder="Write Here"
+                        label="Summary*"
+                        defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary mt-2"
+                        labelClasses="text-text-primary mt-4"
+                    />
+
+                    <div className="flex w-full justify-center items-center mt-4">
+                        <PrimaryBtn classes="w-[300px]" disabled={processing} type="submit" text="Apply"
+                                    onClick={handleSubmit}/>
                     </div>
 
                 </form>

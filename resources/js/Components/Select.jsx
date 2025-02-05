@@ -56,7 +56,7 @@ export default function Select({
                     >
                         {items.map((person) => (
                             <ListboxOption
-                                key={person?.name}
+                                key={person?.id}
                                 value={person}
                                 className="group flex cursor-default items-center gap-2 rounded-md py-2 px-2.5 select-none data-[focus]:bg-card-and-hover"
                             >

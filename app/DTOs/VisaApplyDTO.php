@@ -94,8 +94,8 @@ class VisaApplyDTO
             /** Passport Info */
             'passport_type' => ['required', 'string'],
             'passport_no' => ['required', 'string'],
-            'passport_issue_date' => ['required', 'date'],
-            'passport_expire_date' => ['required', 'date', 'after:passport_issue_date'],
+            'passport_issue_date' => ['required'],
+            'passport_expire_date' => ['required'],
             'passport_issue_place' => ['required', 'string'],
             'passport_issue_place_arabic' => ['required', 'string'],
             'passport_issue_country' => ['required', 'integer', Rule::exists('countries', 'id')->whereNull('deleted_at')],
@@ -128,6 +128,7 @@ class VisaApplyDTO
         $instance->nameArabic = $request->input('name_arabic');
         $instance->currentNationality = (int)$request->input('current_nationality');
         $instance->prevNationality = (int)$request->input('prev_nationality');
+        $instance->gender = (int)$request->input('gender');
         $instance->dateOfBirth = $request->input('date_of_birth');
         $instance->birthCountry = $request->input('birth_country');
         $instance->maritalStatus = (int)$request->input('marital_status');
@@ -155,9 +156,9 @@ class VisaApplyDTO
         $instance->guarantorName = $request->input('guarantor_name');
         $instance->guarantorPassportNO = $request->input('guarantor_passport_no');
         $instance->guarantorNationality = (int)$request->input('guarantor_nationality');
-        $instance->guarantorPhone = (int)$request->input('guarantor_phone');
-        $instance->guarantorRelation = (int)$request->input('guarantor_relation');
-        $instance->documents = $request->input('documents');
+        $instance->guarantorPhone = $request->input('guarantor_phone');
+        $instance->guarantorRelation = $request->input('guarantor_relation');
+        $instance->documents = $request->all()['documents'] ?? [];
 
         return $instance;
 

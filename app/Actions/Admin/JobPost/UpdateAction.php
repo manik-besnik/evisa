@@ -21,7 +21,7 @@ class UpdateAction
 
         try {
 
-            $thumbnail = null;
+            $thumbnail = $jobPost->thumbnail;
 
             if ($jobPostDTO->thumbnail) {
                 $thumbnail = FileUpload::execute($jobPostDTO->thumbnail, $jobPost->thumbnail);

@@ -19,6 +19,7 @@ class VisaApplyAction
         $documents = [];
 
         foreach ($visaApplyDTO->documents as $document) {
+
             $fullPath = FileUpload::execute($document['file']);
 
             $documents[] = [
@@ -50,7 +51,7 @@ class VisaApplyAction
         $visaApply->group = $visaApplyDTO->group;
         $visaApply->status = VisaStatus::PENDING->value;
         $visaApply->applied_by = auth()->id();
-        $visaApply->documents = $documents;
+        $visaApply->documents = json_encode($documents);
         $visaApply->save();
 
         /** Personal Info Store */

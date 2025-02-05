@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 
@@ -43,6 +44,10 @@ class VisaApply extends Model
         'status',
     ];
 
+    protected $casts = [
+        'documents' => 'array'
+    ];
+
     public function personInfo(): HasOne
     {
         return $this->hasOne(PersonalInfo::class, 'visa_apply_id', 'id');
@@ -56,5 +61,10 @@ class VisaApply extends Model
     public function guarantor(): HasOne
     {
         return $this->hasOne(Guarantor::class, 'visa_apply_id', 'id');
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }

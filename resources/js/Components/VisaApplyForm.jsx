@@ -152,7 +152,7 @@ const VisaApplyForm = ({submitUrl}) => {
             return
         }
 
-        post(route(submitUrl))
+        post(submitUrl)
     }
 
 
