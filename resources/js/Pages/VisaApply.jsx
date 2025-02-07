@@ -19,7 +19,7 @@ import {toast} from "react-toastify";
 const VisaApply = () => {
 
 
-    const countries = usePage().props.countries
+    const {countries, person_info, passport, guarantor} = usePage().props
 
     const [isPassportRequired, setIsPassportRequired] = useState(false)
     const [isPhotoRequired, setIsPhotoRequired] = useState(false)
@@ -36,40 +36,41 @@ const VisaApply = () => {
     const [passportIssueCountry, setPassportIssueCountry] = useState('')
     const [guarantorNationality, setGuarantorNationality] = useState('')
 
-    const {data, setData, post, errors,processing} = useForm({
-        'personal_name': '',
-        'processing_type': null,
-        'visa_type': null,
-        'group': null,
-        'name': '',
-        'name_arabic': '',
-        'current_nationality': '',
-        'prev_nationality': '',
-        'gender': '',
-        'date_of_birth': '',
-        'birth_country': '',
-        'marital_status': '',
-        'birth_place': '',
-        'birth_place_arabic': '',
-        'mother_name': '',
-        'mother_name_arabic': '',
-        'religion': '',
-        'faith': '',
-        'qualification': '',
-        'profession': '',
-        'passport_type': '',
-        'passport_no': '',
-        'passport_issue_date': '',
-        'passport_expire_date': '',
-        'passport_issue_place': '',
-        'passport_issue_place_arabic': '',
-        'passport_issue_country': '',
-        'guarantor_name': '',
-        'guarantor_passport_no': '',
-        'guarantor_nationality': '',
-        'guarantor_phone': '',
-        'guarantor_relation': '',
-        'documents': {
+    const {data, setData, post, errors, processing} = useForm({
+        personal_name: '',
+        processing_type: null,
+        visa_type: null,
+        group: null,
+        name: person_info?.name ? person_info.name : '',
+        name_arabic: person_info?.name_arabic ? person_info.name_arabic : '',
+        current_nationality: person_info?.current_nationality ? person_info.current_nationality : '',
+        prev_nationality: person_info?.prev_nationality ? person_info.prev_nationality : '',
+        gender: person_info?.gender ? person_info.gender : '',
+        date_of_birth: person_info?.date_of_birth ? person_info.date_of_birth : '',
+        birth_country: person_info?.birth_country ? person_info.birth_country : '',
+        marital_status: person_info?.marital_status ? person_info.marital_status : '',
+        birth_place: person_info?.birth_place ? person_info.birth_place : '',
+        birth_place_arabic: person_info?.birth_place_arabic ? person_info.birth_place_arabic : '',
+        mother_name: person_info?.mother_name ? person_info.mother_name : '',
+        mother_name_arabic: person_info?.mother_name_arabic ? person_info.mother_name_arabic : '',
+        religion: person_info?.religion ? person_info.religion : '',
+        faith: person_info?.faith ? person_info.faith : '',
+        qualification: person_info?.qualification ? person_info.qualification : '',
+        profession: person_info?.profession ? person_info.profession : '',
+
+        passport_type: passport?.passport_type ? passport.passport_type : '',
+        passport_no: passport?.passport_no ? passport.passport_no : '',
+        passport_issue_date: passport?.passport_issue_date ? passport.passport_issue_date : '',
+        passport_expire_date: passport?.passport_expire_date ? passport.passport_expire_date : '',
+        passport_issue_place: passport?.passport_issue_place ? passport.passport_issue_place : '',
+        passport_issue_place_arabic: passport?.passport_issue_place_arabic ? passport.passport_issue_place_arabic : '',
+        passport_issue_country: passport?.passport_issue_country ? passport.passport_issue_country : '',
+        guarantor_name: guarantor?.name ? guarantor.name : '',
+        guarantor_passport_no: guarantor?.passport_no ? guarantor.passport_no : '',
+        guarantor_nationality: guarantor?.name ? guarantor.name : '',
+        guarantor_phone: guarantor?.phone ? guarantor.phone : '',
+        guarantor_relation: guarantor?.relation ? guarantor.relation : '',
+        documents: {
             'passport': {
                 "name": "Passport",
                 "type": "passport",
@@ -658,7 +659,8 @@ const VisaApply = () => {
 
                     </div>
                     <div className="flex justify-center mt-2">
-                        <PrimaryBtn text="Save" disabled={processing} type="submit" classes="w-[200px]" onClick={handleSubmit}/>
+                        <PrimaryBtn text="Save" disabled={processing} type="submit" classes="w-[200px]"
+                                    onClick={handleSubmit}/>
                     </div>
                 </form>
             </div>
