@@ -2,6 +2,7 @@ import {FaWhatsapp,FaSearch} from "react-icons/fa";
 import {FaPhone} from "react-icons/fa6";
 import {BsFillChatDotsFill} from "react-icons/bs";
 import {useState} from "react";
+import {assetUrl} from "@/Components/Constant/index.js";
 
 const Search = () => {
 
@@ -16,13 +17,14 @@ const Search = () => {
         <>
             <div className="flex gap-x-1 items-center">
                 <div className="bg-primary p-2.5 text-2xl text-white">
-                    <BsFillChatDotsFill/>
+                    <img className="w-6 h-6" src={`${assetUrl}images/livechat.svg`} alt="Live chat"/>
+
                 </div>
                 <div className="bg-primary p-2.5 text-2xl text-white">
-                    <FaWhatsapp/>
+                    <img className="w-6 h-6" src={`${assetUrl}images/whatsapp.svg`} alt="Live chat"/>
                 </div>
                 <div className="bg-primary p-2.5 text-2xl text-white">
-                    <FaPhone/>
+                    <img className="w-6 h-6" src={`${assetUrl}images/call.svg`} alt="Live chat"/>
                 </div>
                 <div className="flex gap-x-2 bg-[#767A7C] p-1.5">
                     <input

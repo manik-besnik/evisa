@@ -30,6 +30,7 @@ const RightAuthPart = ({name}) => {
     const logOut = () => {
         router.post(route('logout'))
     }
+
     return (
         <>
             <div></div>
@@ -46,7 +47,9 @@ const RightAuthPart = ({name}) => {
     )
 }
 const Topbar = () => {
+
     const {auth} = usePage().props
+
     return (
         <>
 
