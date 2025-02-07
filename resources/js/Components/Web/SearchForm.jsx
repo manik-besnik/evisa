@@ -6,27 +6,74 @@ import {router, useForm} from "@inertiajs/react";
 
 const SearchForm = () => {
 
-    const [processingType, setProcessingType] = useState('')
-    const [visaType, setVisaType] = useState('')
-    const [group, setGroup] = useState('')
-    const [visaStatus, setVisaStatus] = useState('');
+    const queryParams = route()?.params
 
-    const [data, setData, processing, reset] = useForm({
-        name: '',
-        app_id: '',
-        processing_type: '',
-        visa_type: '',
-        from_date: '',
-        to_date: '',
-        personal_name: '',
-        passport_no: '',
-        group: '',
-        visa_status: '',
+    let visaProcessingType = ''
+
+    if (queryParams?.processing_type) {
+        visaProcessingType = visaProcessingTypes.find(item => item.id === Number(queryParams?.processing_type))
+    }
+
+    let type = ''
+
+    if (queryParams?.visa_type) {
+        type = visaTypes.find(item => item.id === Number(queryParams?.visa_type))
+    }
+
+    let visaGroup = ''
+
+    if (queryParams?.group) {
+        visaGroup = groups.find(item => item.id === Number(queryParams?.group))
+    }
+
+    let status = ''
+
+    if (queryParams?.visa_status) {
+        status = visaStatuses.find(item => item.id === Number(queryParams?.visa_status))
+    }
+
+    const [processingType, setProcessingType] = useState(visaProcessingType)
+    const [visaType, setVisaType] = useState(type)
+    const [group, setGroup] = useState(visaGroup)
+    const [visaStatus, setVisaStatus] = useState(status);
+
+    const {data, setData, processing, reset} = useForm({
+        name: queryParams?.name || '',
+        app_id: queryParams?.app_id || '',
+        processing_type: queryParams?.processing_type || '',
+        visa_type: queryParams?.visa_type || '',
+        from_date: queryParams?.from_date || '',
+        to_date: queryParams?.to_date || '',
+        personal_name: queryParams?.personal_name || '',
+        passport_no: queryParams?.passport_no || '',
+        group: queryParams?.group || '',
+        visa_status: queryParams?.visa_status || '',
     })
 
-    const handleSearch = () => {
-        router.get(route('visa-apply.index'), data)
+    const resetForm = () => {
+        setProcessingType('')
+        setVisaType('')
+        setGroup('')
+        setVisaStatus('')
+        reset('name',
+            'app_id',
+            'processing_type',
+            'visa_type',
+            'from_date',
+            'to_date',
+            'personal_name',
+            'passport_no',
+            'group',
+            'visa_status',)
     }
+
+    const handleSearch = () => {
+        const filteredData = Object.fromEntries(
+            Object.entries(data).filter(([_, value]) => value !== '' && value !== null)
+        );
+
+        router.get(route('visa-apply.index'), filteredData);
+    };
 
 
     return (
@@ -49,7 +96,7 @@ const SearchForm = () => {
 
                     <Select
                         placeholder="Processing Type"
-                        label="Processing Type*"
+                        label="Processing Type"
                         items={visaProcessingTypes}
                         selected={processingType}
                         setSelected={setProcessingType}
@@ -60,7 +107,7 @@ const SearchForm = () => {
 
                     <Select
                         placeholder="Visa Type"
-                        label="Visa Type*"
+                        label="Visa Type"
                         items={visaTypes}
                         selected={visaType}
                         setSelected={setVisaType}
@@ -164,7 +211,7 @@ const SearchForm = () => {
                         Search Visa
                     </button>
                     <button
-                        onClick={() => reset()}
+                        onClick={resetForm}
                         type="button"
                         className={`py-2 px-4 rounded bg-yellow-500 hover:bg-primary text-gray-800 font-medium shadow-[2px_2px_4px_rgba(0,0,0,0.3)]  hover:shadow-[2px_2px_6px_rgba(0,0,0,0.35)] transition-shadow duration-200 `}
                     >
