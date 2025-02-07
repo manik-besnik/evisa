@@ -2,7 +2,7 @@ import TextInput from "@/Components/TextInput.jsx";
 import Select from "@/Components/Web/Select.jsx";
 import {groups, visaProcessingTypes, visaStatuses, visaTypes} from "@/Components/Constant/index.js";
 import {useState} from "react";
-import {useForm} from "@inertiajs/react";
+import {router, useForm} from "@inertiajs/react";
 
 const SearchForm = () => {
 
@@ -23,6 +23,10 @@ const SearchForm = () => {
         group: '',
         visa_status: '',
     })
+
+    const handleSearch = () => {
+        router.get(route('visa-apply.index'), data)
+    }
 
 
     return (
@@ -48,7 +52,8 @@ const SearchForm = () => {
                         label="Processing Type*"
                         items={visaProcessingTypes}
                         selected={processingType}
-                        setSelected={(value) => setData('processing_type', value.id)}
+                        setSelected={setProcessingType}
+                        handleValueChange={(value) => setData('processing_type', value.id)}
                         defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                         classes="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                     />
@@ -140,7 +145,7 @@ const SearchForm = () => {
                         placeholder="Select Status"
                         label="Status"
                         items={visaStatuses}
-                        selected={processingType}
+                        selected={visaStatus}
                         setSelected={setVisaStatus}
                         handleValueChange={value => setData('visa_status', value.id)}
                         defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
@@ -151,6 +156,7 @@ const SearchForm = () => {
 
                 <div className="mb-8 flex gap-x-2">
                     <button
+                        onClick={handleSearch}
                         type="button"
                         className={`py-2 px-4 bg-warning rounded hover:bg-warning text-white font-medium shadow-[2px_2px_4px_rgba(0,0,0,0.3)]  hover:shadow-[2px_2px_6px_rgba(0,0,0,0.35)] transition-shadow duration-200 `}
                     >
