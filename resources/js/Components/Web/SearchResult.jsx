@@ -1,10 +1,10 @@
 import {MdOutlineRemoveRedEye} from "react-icons/md";
-import {FaDownload, FaRegEdit} from "react-icons/fa";
+import {FaDownload} from "react-icons/fa";
 import {FiRefreshCw} from "react-icons/fi";
 import {FaDownload as FaDownloadSecond} from "react-icons/fa6";
 import {getValue} from "@/Components/Helper/index.js";
 import {visaStatuses, visaTypes} from "@/Components/Constant/index.js";
-import {usePage} from "@inertiajs/react";
+import {Link, usePage} from "@inertiajs/react";
 
 const SearchResult = () => {
 
@@ -55,15 +55,15 @@ const SearchResult = () => {
                             </td>
                             <td className="px-3 py-2 text-center border-r border-b border-gray-200">
                                 <div className="flex justify-center space-x-2">
-                                    <button className="text-gray-600 hover:text-gray-800">
+                                    <Link href={route('visa-apply.show', row.id)}
+                                          className="text-gray-600 hover:text-gray-800">
                                         <MdOutlineRemoveRedEye size={18}/>
-                                    </button>
-                                    <button className="text-gray-600 hover:text-gray-800">
+                                    </Link>
+                                    <Link href={route('visa-apply.index')}
+                                          className="text-gray-600 hover:text-gray-800">
                                         <FiRefreshCw/>
-                                    </button>
-                                    {/*<button className="text-gray-600 hover:text-gray-800">*/}
-                                    {/*    <FaRegEdit/>*/}
-                                    {/*</button>*/}
+                                    </Link>
+
                                 </div>
                             </td>
                         </tr>

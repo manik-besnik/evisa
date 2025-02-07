@@ -1,21 +1,10 @@
 import {usePage} from "@inertiajs/react";
 import {getValue} from "@/Components/Helper/index.js";
 import {genders, groups, maritalStatuses, visaProcessingTypes, visaTypes} from "@/Components/Constant/index.js";
-import { FaRegEye } from "react-icons/fa6";
+import {FaRegEye} from "react-icons/fa6";
+import InfoSection from "@/Components/InfoSection.jsx";
+import InfoItem from "@/Components/Web/InfoItem.jsx";
 
-const InfoSection = ({title, children}) => (
-    <div className="mb-8">
-        <h2 className="text-xl text-gray-700 mb-4">{title}</h2>
-        <div className="bg-white rounded-lg shadow-md p-6">{children}</div>
-    </div>
-)
-
-const InfoItem = ({label, value}) => (
-    <div className="mb-4 last:mb-0">
-        <span className="text-sm text-gray-500">{label}</span>
-        <p className="text-gray-800">{value ?? "N/A"}</p>
-    </div>
-)
 
 export const VisaDetails = () => {
 
@@ -34,10 +23,11 @@ export const VisaDetails = () => {
                                   value={visa_apply.person_info.current_nationality.nationality}/>
                         <InfoItem label="Previous Nationality"
                                   value={visa_apply.person_info.prev_nationality.nationality}/>
-                        <InfoItem label="Gender" value={getValue(genders,visa_apply.person_info.gender)}/>
+                        <InfoItem label="Gender" value={getValue(genders, visa_apply.person_info.gender)}/>
                         <InfoItem label="Date of Birth" value={visa_apply.person_info.date_of_birth}/>
                         <InfoItem label="Birth Country" value={visa_apply.person_info.birth_country.name}/>
-                        <InfoItem label="Marital Status" value={getValue(maritalStatuses,visa_apply.person_info.marital_status)}/>
+                        <InfoItem label="Marital Status"
+                                  value={getValue(maritalStatuses, visa_apply.person_info.marital_status)}/>
                         <InfoItem label="Birth Place" value={visa_apply.person_info.birth_place}/>
                         <InfoItem label="Birth Place (Arabic)" value={visa_apply.person_info.birth_place_arabic}/>
                         <InfoItem label="Mother's Name" value={visa_apply.person_info.mother_name}/>
@@ -57,7 +47,7 @@ export const VisaDetails = () => {
                                             {doc.name}
                                         </span>
                                         <a href={doc.url} target="_blank">
-                                            <FaRegEye />
+                                            <FaRegEye/>
                                         </a>
                                     </li>
                                 ))}
@@ -72,8 +62,9 @@ export const VisaDetails = () => {
                     <InfoSection title="Visa Info">
                         <InfoItem label="App ID" value={visa_apply.app_id}/>
                         <InfoItem label="Personal Name | Company Name" value={visa_apply.name}/>
-                        <InfoItem label="Processing Type" value={getValue(visaProcessingTypes,visa_apply.processing_type)}/>
-                        <InfoItem label="Visa Type" value={getValue(visaTypes,visa_apply.visa_type)}/>
+                        <InfoItem label="Processing Type"
+                                  value={getValue(visaProcessingTypes, visa_apply.processing_type)}/>
+                        <InfoItem label="Visa Type" value={getValue(visaTypes, visa_apply.visa_type)}/>
                         <InfoItem label="Group" value={getValue(groups, visa_apply.group)}/>
                     </InfoSection>
 
@@ -89,7 +80,8 @@ export const VisaDetails = () => {
                     <InfoSection title="Guarantor Info">
                         <InfoItem label="Guarantor Name" value={visa_apply.guarantor.name}/>
                         <InfoItem label="Guarantor Passport Number" value={visa_apply.guarantor.passport_no}/>
-                        <InfoItem label="Guarantor Nationality" value={visa_apply.guarantor.guarantor_nationality.nationality}/>
+                        <InfoItem label="Guarantor Nationality"
+                                  value={visa_apply.guarantor.guarantor_nationality.nationality}/>
                         <InfoItem label="Guarantor Phone" value={visa_apply.guarantor.phone}/>
                         <InfoItem label="Guarantor Relation" value={visa_apply.guarantor.relation}/>
                     </InfoSection>

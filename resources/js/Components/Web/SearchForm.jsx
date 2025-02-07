@@ -37,7 +37,7 @@ const SearchForm = () => {
     const [group, setGroup] = useState(visaGroup)
     const [visaStatus, setVisaStatus] = useState(status);
 
-    const {data, setData, processing, reset} = useForm({
+    const {data, setData, processing} = useForm({
         name: queryParams?.name || '',
         app_id: queryParams?.app_id || '',
         processing_type: queryParams?.processing_type || '',
@@ -55,16 +55,17 @@ const SearchForm = () => {
         setVisaType('')
         setGroup('')
         setVisaStatus('')
-        reset('name',
-            'app_id',
-            'processing_type',
-            'visa_type',
-            'from_date',
-            'to_date',
-            'personal_name',
-            'passport_no',
-            'group',
-            'visa_status',)
+        setData('name','');
+        setData('app_id','');
+        setData('processing_type','');
+        setData('visa_type','');
+        setData('from_date','');
+        setData('to_date','');
+        setData('personal_name','');
+        setData('passport_no','');
+        setData('group','');
+        setData('visa_status','');
+
     }
 
     const handleSearch = () => {
