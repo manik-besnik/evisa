@@ -17,7 +17,7 @@ class CreateAction
 
 
         return Inertia::render('VisaApply', [
-            'person_info' => $personInfo,
+            'personal_info' => $personInfo,
             'passport' => $passport,
             'guarantor' => $guarantor,
         ]);

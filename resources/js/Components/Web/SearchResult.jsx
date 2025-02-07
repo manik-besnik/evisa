@@ -46,7 +46,7 @@ const SearchResult = () => {
 
                                 </div>
                             </td>
-                            
+
                             <td className="px-3 py-2 text-center border-r border-b border-gray-200">
                                 <div className="flex items-center justify-center space-x-2">
                                     <Link href={route('visa-apply.show', row.id)}

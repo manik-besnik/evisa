@@ -19,7 +19,41 @@ import {toast} from "react-toastify";
 const VisaApply = () => {
 
 
-    const {countries, person_info, passport, guarantor} = usePage().props
+    const {countries, personal_info, passport, guarantor} = usePage().props
+
+    let prevCurrentNationality = "";
+    if (personal_info.current_nationality) {
+        prevCurrentNationality = countries.find(item => item.id === personal_info.current_nationality)
+    }
+
+    let prevPrevNationality = '';
+    if (personal_info.prev_nationality) {
+        prevPrevNationality = countries.find(item => item.id === personal_info.prev_nationality)
+    }
+    let prevGender = ""
+    if (personal_info.gender) {
+        prevGender = genders.find(item => item.id === personal_info.gender)
+    }
+    let prevBirthCountry = ''
+    if (personal_info.birth_country) {
+        prevBirthCountry = countries.find(item => item.id === personal_info.birth_country)
+    }
+
+    let prevMaritalStatus = ""
+    if (personal_info.marital_status) {
+        prevMaritalStatus = maritalStatuses.find(item => item.id === personal_info.marital_status)
+    }
+
+    let prevPassportIssueCountry = ""
+    if (passport.passport_issue_country) {
+        prevPassportIssueCountry = countries.find(item => item.id === passport.passport_issue_country)
+    }
+
+    let guarantorPrevNationality = ''
+
+    if (guarantor.nationality) {
+        guarantorPrevNationality = countries.find(item => item.id === guarantor.nationality) ?? ''
+    }
 
     const [isPassportRequired, setIsPassportRequired] = useState(false)
     const [isPhotoRequired, setIsPhotoRequired] = useState(false)
@@ -28,35 +62,36 @@ const VisaApply = () => {
     const [processingType, setProcessingType] = useState('')
     const [visaType, setVisaType] = useState('')
     const [group, setGroup] = useState('')
-    const [currentNationality, setCurrentNationality] = useState('')
-    const [prevNationality, setPrevNationality] = useState('')
-    const [gender, setGender] = useState('')
-    const [birthCountry, setBirthCountry] = useState('')
-    const [maritalStatus, setMaritalStatus] = useState('')
-    const [passportIssueCountry, setPassportIssueCountry] = useState('')
-    const [guarantorNationality, setGuarantorNationality] = useState('')
+    const [currentNationality, setCurrentNationality] = useState(prevCurrentNationality)
+    const [prevNationality, setPrevNationality] = useState(prevPrevNationality)
+    const [gender, setGender] = useState(prevGender)
+    const [birthCountry, setBirthCountry] = useState(prevBirthCountry)
+    const [maritalStatus, setMaritalStatus] = useState(prevMaritalStatus)
+    const [passportIssueCountry, setPassportIssueCountry] = useState(prevPassportIssueCountry)
+    const [guarantorNationality, setGuarantorNationality] = useState(guarantorPrevNationality)
+
 
     const {data, setData, post, errors, processing} = useForm({
         personal_name: '',
         processing_type: null,
         visa_type: null,
         group: null,
-        name: person_info?.name ? person_info.name : '',
-        name_arabic: person_info?.name_arabic ? person_info.name_arabic : '',
-        current_nationality: person_info?.current_nationality ? person_info.current_nationality : '',
-        prev_nationality: person_info?.prev_nationality ? person_info.prev_nationality : '',
-        gender: person_info?.gender ? person_info.gender : '',
-        date_of_birth: person_info?.date_of_birth ? person_info.date_of_birth : '',
-        birth_country: person_info?.birth_country ? person_info.birth_country : '',
-        marital_status: person_info?.marital_status ? person_info.marital_status : '',
-        birth_place: person_info?.birth_place ? person_info.birth_place : '',
-        birth_place_arabic: person_info?.birth_place_arabic ? person_info.birth_place_arabic : '',
-        mother_name: person_info?.mother_name ? person_info.mother_name : '',
-        mother_name_arabic: person_info?.mother_name_arabic ? person_info.mother_name_arabic : '',
-        religion: person_info?.religion ? person_info.religion : '',
-        faith: person_info?.faith ? person_info.faith : '',
-        qualification: person_info?.qualification ? person_info.qualification : '',
-        profession: person_info?.profession ? person_info.profession : '',
+        name: personal_info?.name ? personal_info.name : '',
+        name_arabic: personal_info?.name_arabic ? personal_info.name_arabic : '',
+        current_nationality: personal_info?.current_nationality ? personal_info.current_nationality : '',
+        prev_nationality: personal_info?.prev_nationality ? personal_info.prev_nationality : '',
+        gender: personal_info?.gender ? personal_info.gender : '',
+        date_of_birth: personal_info?.date_of_birth ? personal_info.date_of_birth : '',
+        birth_country: personal_info?.birth_country ? personal_info.birth_country : '',
+        marital_status: personal_info?.marital_status ? personal_info.marital_status : '',
+        birth_place: personal_info?.birth_place ? personal_info.birth_place : '',
+        birth_place_arabic: personal_info?.birth_place_arabic ? personal_info.birth_place_arabic : '',
+        mother_name: personal_info?.mother_name ? personal_info.mother_name : '',
+        mother_name_arabic: personal_info?.mother_name_arabic ? personal_info.mother_name_arabic : '',
+        religion: personal_info?.religion ? personal_info.religion : '',
+        faith: personal_info?.faith ? personal_info.faith : '',
+        qualification: personal_info?.qualification ? personal_info.qualification : '',
+        profession: personal_info?.profession ? personal_info.profession : '',
 
         passport_type: passport?.passport_type ? passport.passport_type : '',
         passport_no: passport?.passport_no ? passport.passport_no : '',
