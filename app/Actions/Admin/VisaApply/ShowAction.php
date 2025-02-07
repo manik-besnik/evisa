@@ -11,7 +11,7 @@ class ShowAction
     {
         $visaApply->load([
             'passport.issueCountry',
-            'personInfo' => [
+            'personalInfo' => [
                 'currentNationality',
                 'prevNationality',
                 'birthCountry',

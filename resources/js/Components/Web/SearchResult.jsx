@@ -23,7 +23,6 @@ const SearchResult = () => {
                         <th className="px-3 py-2 text-left border-r border-t border-[#D4AF37]">Visa Type</th>
                         <th className="px-3 py-2 text-left border-r border-t border-[#D4AF37]">Status</th>
                         <th className="px-3 py-2 text-center border-r border-t border-[#D4AF37]">Visa</th>
-                        <th className="px-3 py-2 text-center border-r border-t border-[#D4AF37]">Insurance</th>
                         <th className="px-3 py-2 text-center border-r border-t border-[#D4AF37]">Action</th>
                     </tr>
                     </thead>
@@ -36,7 +35,7 @@ const SearchResult = () => {
                             <td className="px-3 py-2 text-sm border-l border-r border-b border-gray-200">{row.app_id}</td>
                             <td className="px-3 py-2 text-sm border-r border-b border-gray-200">{row.name}</td>
                             <td className="px-3 py-2 text-sm border-r border-b border-gray-200">{row.passport.passport_no}</td>
-                            <td className="px-3 py-2 text-sm border-r border-b border-gray-200">{row.person_info.current_nationality.nationality}</td>
+                            <td className="px-3 py-2 text-sm border-r border-b border-gray-200">{row.personal_info.current_nationality.nationality}</td>
                             <td className="px-3 py-2 text-sm border-r border-b border-gray-200">{getValue(visaTypes, row.visa_type)}</td>
                             <td className="px-3 py-2 text-sm border-r border-b border-gray-200">{getValue(visaStatuses, row.status)}</td>
                             <td className="px-3 py-2 text-center border-r border-b border-gray-200">
@@ -47,14 +46,9 @@ const SearchResult = () => {
 
                                 </div>
                             </td>
+                            
                             <td className="px-3 py-2 text-center border-r border-b border-gray-200">
-                                <button className="">
-                                    <FaDownloadSecond/>
-                                </button>
-
-                            </td>
-                            <td className="px-3 py-2 text-center border-r border-b border-gray-200">
-                                <div className="flex justify-center space-x-2">
+                                <div className="flex items-center justify-center space-x-2">
                                     <Link href={route('visa-apply.show', row.id)}
                                           className="text-gray-600 hover:text-gray-800">
                                         <MdOutlineRemoveRedEye size={18}/>

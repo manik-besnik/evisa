@@ -4,9 +4,9 @@ import VisaDetails from "@/Components/VisaDetails.jsx";
 
 const Report = () => {
     return (
-        <WebLayout showServiceImage={false} showBgImage={false}>
+        <WebLayout showServiceImage={false} showBgImage={true}>
             <Head title="Search Result | Dubai E-Visa"/>
-            <div className="bg-[#F5E1B9] pt-3">
+            <div className="pt-3">
 
                 <div className="container">
                     <h3 className="text-text-primary text-lg font-semibold">Visa Details</h3>

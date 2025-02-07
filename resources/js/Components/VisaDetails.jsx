@@ -17,25 +17,25 @@ export const VisaDetails = () => {
 
                 <div className="w-full md:w-1/2">
                     <InfoSection title="General Info">
-                        <InfoItem label="Name" value={visa_apply.person_info.name}/>
-                        <InfoItem label="Name (Arabic)" value={visa_apply.person_info.name_arabic}/>
+                        <InfoItem label="Name" value={visa_apply.personal_info.name}/>
+                        <InfoItem label="Name (Arabic)" value={visa_apply.personal_info.name_arabic}/>
                         <InfoItem label="Current Nationality"
-                                  value={visa_apply.person_info.current_nationality.nationality}/>
+                                  value={visa_apply.personal_info.current_nationality.nationality}/>
                         <InfoItem label="Previous Nationality"
-                                  value={visa_apply.person_info.prev_nationality.nationality}/>
-                        <InfoItem label="Gender" value={getValue(genders, visa_apply.person_info.gender)}/>
-                        <InfoItem label="Date of Birth" value={visa_apply.person_info.date_of_birth}/>
-                        <InfoItem label="Birth Country" value={visa_apply.person_info.birth_country.name}/>
+                                  value={visa_apply.personal_info.prev_nationality.nationality}/>
+                        <InfoItem label="Gender" value={getValue(genders, visa_apply.personal_info.gender)}/>
+                        <InfoItem label="Date of Birth" value={visa_apply.personal_info.date_of_birth}/>
+                        <InfoItem label="Birth Country" value={visa_apply.personal_info.birth_country.name}/>
                         <InfoItem label="Marital Status"
-                                  value={getValue(maritalStatuses, visa_apply.person_info.marital_status)}/>
-                        <InfoItem label="Birth Place" value={visa_apply.person_info.birth_place}/>
-                        <InfoItem label="Birth Place (Arabic)" value={visa_apply.person_info.birth_place_arabic}/>
-                        <InfoItem label="Mother's Name" value={visa_apply.person_info.mother_name}/>
-                        <InfoItem label="Mother's Name (Arabic)" value={visa_apply.person_info.mother_name_arabic}/>
-                        <InfoItem label="Religion" value={visa_apply.person_info.religion}/>
-                        <InfoItem label="Faith" value={visa_apply.person_info.faith}/>
-                        <InfoItem label="Qualification" value={visa_apply.person_info.qualification}/>
-                        <InfoItem label="Profession" value={visa_apply.person_info.profession}/>
+                                  value={getValue(maritalStatuses, visa_apply.personal_info.marital_status)}/>
+                        <InfoItem label="Birth Place" value={visa_apply.personal_info.birth_place}/>
+                        <InfoItem label="Birth Place (Arabic)" value={visa_apply.personal_info.birth_place_arabic}/>
+                        <InfoItem label="Mother's Name" value={visa_apply.personal_info.mother_name}/>
+                        <InfoItem label="Mother's Name (Arabic)" value={visa_apply.personal_info.mother_name_arabic}/>
+                        <InfoItem label="Religion" value={visa_apply.personal_info.religion}/>
+                        <InfoItem label="Faith" value={visa_apply.personal_info.faith}/>
+                        <InfoItem label="Qualification" value={visa_apply.personal_info.qualification}/>
+                        <InfoItem label="Profession" value={visa_apply.personal_info.profession}/>
                     </InfoSection>
 
                     <InfoSection title="Documents">

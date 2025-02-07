@@ -53,9 +53,9 @@ class VisaApply extends Model
         'documents' => 'array'
     ];
 
-    public function personInfo(): BelongsTo
+    public function personalInfo(): BelongsTo
     {
-        return $this->belongsTo(PersonalInfo::class, 'person_info_id', 'id');
+        return $this->belongsTo(PersonalInfo::class, 'personal_info_id', 'id');
     }
 
     public function passport(): BelongsTo

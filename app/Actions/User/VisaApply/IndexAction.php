@@ -23,7 +23,7 @@ class IndexAction
         $visaStatus = request()->input('visa_status');
 
         $visaApplies = VisaApply::query()
-            ->with(['personInfo.currentNationality', 'passport', 'guarantor'])
+            ->with(['personalInfo.currentNationality', 'passport', 'guarantor'])
             ->where('user_id', auth()->id())
             ->when($appId, fn($query) => $query->where('app_id', $appId))
             ->when($processingType, fn($query) => $query->where('processing_type', $processingType))
@@ -31,11 +31,10 @@ class IndexAction
             ->when($fromDate, fn($query) => $query->whereDate('created_at', '>=', Carbon::parse($fromDate)->format('Y-m-d')))
             ->when($toDate, fn($query) => $query->whereDate('created_at', '<=', Carbon::parse($toDate)->format('Y-m-d')))
             ->when($group, fn($query) => $query->where('group', $group))
-            ->when($visaStatus, fn($query) => $query->where('visa_status', $visaStatus))
-            ->when($personalName, fn($query) => $query->whereHas('personInfo', fn($q) => $q->where('name', $personalName)))
-            ->when($passportNo, fn($query) => $query->whereHas('passport', fn($q) => $q->where('passportNo', $passportNo)))
+            ->when($visaStatus, fn($query) => $query->where('status', $visaStatus))
+            ->when($personalName, fn($query) => $query->whereHas('personalInfo', fn($q) => $q->where('name', $personalName)))
+            ->when($passportNo, fn($query) => $query->whereHas('passport', fn($q) => $q->where('passport_no', $passportNo)))
             ->get();
-
 
         return Inertia::render('Report', ['visa_applies' => $visaApplies]);
     }

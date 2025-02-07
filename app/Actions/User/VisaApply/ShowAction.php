@@ -12,7 +12,7 @@ class ShowAction
         $visaApply = VisaApply::query()
             ->with([
                 'passport.issueCountry',
-                'personInfo' => [
+                'personalInfo' => [
                     'currentNationality',
                     'prevNationality',
                     'birthCountry',
