@@ -158,6 +158,7 @@ const SearchForm = () => {
                     <button
                         onClick={handleSearch}
                         type="button"
+                        disabled={processing}
                         className={`py-2 px-4 bg-warning rounded hover:bg-warning text-white font-medium shadow-[2px_2px_4px_rgba(0,0,0,0.3)]  hover:shadow-[2px_2px_6px_rgba(0,0,0,0.35)] transition-shadow duration-200 `}
                     >
                         Search Visa
