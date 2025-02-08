@@ -41,9 +41,21 @@ class VisaApplyAction
             $appId = "AGENCY_" . $appId;
         }
 
+        /** Personal Info Store */
+        $personalInfo = self::storePersonalInfo($visaApplyDTO);
+
+        /** Passport Info Store */
+        $passport = self::storePassportInfo($visaApplyDTO);
+
+        /** Guarantor Info Store */
+        $guarantor = self::storeGuarantorInfo($visaApplyDTO);
+
         /** Store Visa Info */
         $visaApply = new VisaApply();
         $visaApply->user_id = $visaApplyDTO->userId;
+        $visaApply->person_info_id = $personalInfo->id;
+        $visaApply->passport_id = $passport->id;
+        $visaApply->guarantor_id = $guarantor->id;
         $visaApply->app_id = $appId;
         $visaApply->name = $visaApplyDTO->personalName;
         $visaApply->processing_type = $visaApplyDTO->processingType;
@@ -54,14 +66,6 @@ class VisaApplyAction
         $visaApply->documents = json_encode($documents);
         $visaApply->save();
 
-        /** Personal Info Store */
-        self::storePersonalInfo($visaApplyDTO, $visaApply->id);
-
-        /** Passport Info Store */
-        self::storePassportInfo($visaApplyDTO, $visaApply->id);
-
-        /** Guarantor Info Store */
-        self::storeGuarantorInfo($visaApplyDTO, $visaApply->id);
 
         return $visaApply;
 
@@ -70,11 +74,10 @@ class VisaApplyAction
 
     /**
      * @param VisaApplyDTO $visaApplyDTO
-     * @param int $visaApplyId
-     * @return void
+     * @return PersonalInfo
      */
-    private static function storePersonalInfo(VisaApplyDTO $visaApplyDTO, int $visaApplyId):
-    void
+    private static function storePersonalInfo(VisaApplyDTO $visaApplyDTO):
+    PersonalInfo
     {
         /** @var PersonalInfo|null $personalInfo */
         $personalInfo = PersonalInfo::query()
@@ -86,7 +89,6 @@ class VisaApplyAction
         }
 
         $personalInfo->user_id = $visaApplyDTO->userId;
-        $personalInfo->visa_apply_id = $visaApplyId;
         $personalInfo->name = $visaApplyDTO->name;
         $personalInfo->name_arabic = $visaApplyDTO->nameArabic;
         $personalInfo->current_nationality = $visaApplyDTO->currentNationality;
@@ -106,16 +108,17 @@ class VisaApplyAction
         $personalInfo->profession = $visaApplyDTO->profession;
         $personalInfo->qualification = $visaApplyDTO->qualification;
         $personalInfo->save();
+
+        return $personalInfo;
     }
 
 
     /**
      * @param VisaApplyDTO $visaApplyDTO
-     * @param int $visaApplyId
-     * @return void
+     * @return Passport
      */
-    private static function storePassportInfo(VisaApplyDTO $visaApplyDTO, int $visaApplyId):
-    void
+    private static function storePassportInfo(VisaApplyDTO $visaApplyDTO):
+    Passport
     {
         /** @var Passport|null $passport */
         $passport = Passport::query()->where('user_id', $visaApplyDTO->userId)->first();
@@ -125,7 +128,7 @@ class VisaApplyAction
         }
 
         $passport->user_id = $visaApplyDTO->userId;
-        $passport->visa_apply_id = $visaApplyId;
+
         $passport->passport_type = $visaApplyDTO->passportType;
         $passport->passport_no = $visaApplyDTO->passportNO;
         $passport->passport_issue_date = $visaApplyDTO->passportIssueDate;
@@ -134,15 +137,16 @@ class VisaApplyAction
         $passport->passport_issue_place_arabic = $visaApplyDTO->passportIssuePlaceArabic;
         $passport->passport_issue_country = $visaApplyDTO->passportIssueCountry;
         $passport->save();
+
+        return $passport;
     }
 
     /**
      * @param VisaApplyDTO $visaApplyDTO
-     * @param int $visaApplyId
-     * @return void
+     * @return Guarantor
      */
-    private static function storeGuarantorInfo(VisaApplyDTO $visaApplyDTO, int $visaApplyId):
-    void
+    private static function storeGuarantorInfo(VisaApplyDTO $visaApplyDTO):
+    Guarantor
     {
         /** @var Guarantor|null $guarantor */
         $guarantor = Guarantor::query()->where('user_id', $visaApplyDTO->userId)->first();
@@ -152,12 +156,13 @@ class VisaApplyAction
         }
 
         $guarantor->user_id = $visaApplyDTO->userId;
-        $guarantor->visa_apply_id = $visaApplyId;
         $guarantor->name = $visaApplyDTO->guarantorName;
         $guarantor->passport_no = $visaApplyDTO->guarantorPassportNO;
         $guarantor->phone = $visaApplyDTO->guarantorPhone;
         $guarantor->nationality = $visaApplyDTO->guarantorNationality;
         $guarantor->relation = $visaApplyDTO->guarantorRelation;
         $guarantor->save();
+
+        return $guarantor;
     }
 }
