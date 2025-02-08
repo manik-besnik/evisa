@@ -161,6 +161,13 @@ const VisaApply = () => {
     }
 
     const handleFileChange = (fileType, file) => {
+
+        if (fileType === 'passport') {
+            setIsPhotoRequired(false)
+        }
+        if (fileType === 'photo') {
+            setIsPhotoRequired(false)
+        }
         data.documents[fileType] = {
             "name": documentTypes[fileType].name,
             "type": fileType,
