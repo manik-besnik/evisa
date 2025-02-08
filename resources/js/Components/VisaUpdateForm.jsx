@@ -15,136 +15,122 @@ import axios from "axios";
 
 const VisaApplyForm = ({submitUrl}) => {
 
-    const {countries, users} = usePage().props;
+    const {countries,visa_apply, personal_info, passport, guarantor} = usePage().props
 
-    const [user, setUser] = useState(null);
-
-    const [personalInfo, setPersonalInfo] = useState({});
-    const [passport, setPassport] = useState({});
-    const [guarantor, setGuarantor] = useState({});
-
-    useEffect(() => {
-        if (user?.id) {
-            const getVisaInfo = async () => {
-                try {
-                    const { data } = await axios.get(route('visa-info', user?.id));
-
-                    // Update local states first
-                    setPersonalInfo(data.personal_info || {});
-                    setPassport(data.passport || {});
-                    setGuarantor(data.guarantor || {});
-
-                    // Wait until state updates, then update derived states
-                    setTimeout(() => {
-                        setCurrentNationality(countries.find(item => item.id === data.personal_info?.current_nationality) || '');
-                        setPrevNationality(countries.find(item => item.id === data.personal_info?.prev_nationality) || '');
-                        setGender(genders.find(item => item.id === data.personal_info?.gender) || '');
-                        setBirthCountry(countries.find(item => item.id === data.personal_info?.birth_country) || '');
-                        setMaritalStatus(maritalStatuses.find(item => item.id === data.personal_info?.marital_status) || '');
-                        setPassportIssueCountry(countries.find(item => item.id === data.passport?.passport_issue_country) || '');
-                        setGuarantorNationality(countries.find(item => item.id === data.guarantor?.nationality) || '');
-                    }, 0);
-                } catch (error) {
-                    console.error("Error fetching visa info:", error);
-                }
-            };
-            getVisaInfo();
-        }
-    }, [user?.id]);
-
-
-    const [isPassportRequired, setIsPassportRequired] = useState(false);
-    const [isPhotoRequired, setIsPhotoRequired] = useState(false);
-
-    const [processingType, setProcessingType] = useState('');
-    const [visaType, setVisaType] = useState('');
-    const [group, setGroup] = useState('');
-    const [currentNationality, setCurrentNationality] = useState('');
-    const [prevNationality, setPrevNationality] = useState('');
-    const [gender, setGender] = useState('');
-    const [birthCountry, setBirthCountry] = useState('');
-    const [maritalStatus, setMaritalStatus] = useState('');
-    const [passportIssueCountry, setPassportIssueCountry] = useState('');
-    const [guarantorNationality, setGuarantorNationality] = useState('');
-
-    const {data, setData, post, errors, processing} = useForm({
-        user_id: '',
-        personal_name: '',
-        processing_type: null,
-        visa_type: null,
-        group: null,
-        name: '',
-        name_arabic: '',
-        current_nationality: '',
-        prev_nationality: '',
-        gender: '',
-        date_of_birth: '',
-        birth_country: '',
-        marital_status: '',
-        birth_place: '',
-        birth_place_arabic: '',
-        mother_name: '',
-        mother_name_arabic: '',
-        religion: '',
-        faith: '',
-        qualification: '',
-        profession: '',
-        passport_type: '',
-        passport_no: '',
-        passport_issue_date: '',
-        passport_expire_date: '',
-        passport_issue_place: '',
-        passport_issue_place_arabic: '',
-        passport_issue_country: '',
-        guarantor_name: '',
-        guarantor_passport_no: '',
-        guarantor_nationality: '',
-        guarantor_phone: '',
-        guarantor_relation: '',
-        documents: {
-            passport: {name: "Passport", type: "passport", file: null},
-            photo: {name: "Photo", type: "photo", file: null},
-        },
-    });
-    useEffect(() => {
-        if (Object.keys(personalInfo).length > 0 || Object.keys(passport).length > 0 || Object.keys(guarantor).length > 0) {
-            setData(prevData => ({
-                ...prevData,
-                name: personalInfo?.name || '',
-                name_arabic: personalInfo?.name_arabic || '',
-                current_nationality: personalInfo?.current_nationality || '',
-                prev_nationality: personalInfo?.prev_nationality || '',
-                gender: personalInfo?.gender || '',
-                date_of_birth: personalInfo?.date_of_birth || '',
-                birth_country: personalInfo?.birth_country || '',
-                marital_status: personalInfo?.marital_status || '',
-                birth_place: personalInfo?.birth_place || '',
-                birth_place_arabic: personalInfo?.birth_place_arabic || '',
-                mother_name: personalInfo?.mother_name || '',
-                mother_name_arabic: personalInfo?.mother_name_arabic || '',
-                religion: personalInfo?.religion || '',
-                faith: personalInfo?.faith || '',
-                qualification: personalInfo?.qualification || '',
-                profession: personalInfo?.profession || '',
-                passport_type: passport?.passport_type || '',
-                passport_no: passport?.passport_no || '',
-                passport_issue_date: passport?.passport_issue_date || '',
-                passport_expire_date: passport?.passport_expire_date || '',
-                passport_issue_place: passport?.passport_issue_place || '',
-                passport_issue_place_arabic: passport?.passport_issue_place_arabic || '',
-                passport_issue_country: passport?.passport_issue_country || '',
-                guarantor_name: guarantor?.name || '',
-                guarantor_passport_no: guarantor?.passport_no || '',
-                guarantor_nationality: guarantor?.nationality || '',
-                guarantor_phone: guarantor?.phone || '',
-                guarantor_relation: guarantor?.relation || '',
-            }));
-        }
-    }, [personalInfo, passport, guarantor]);
-    const updateUser = (value) => {
-        setData('user_id', value.id)
+    let prevProcessingType = "";
+    if (visa_apply?.processing_type) {
+        prevProcessingType = visaProcessingTypes.find(item => item.id === visa_apply.processing_type)
     }
 
+
+    let prevVisaType = "";
+    if (visa_apply?.visa_type) {
+        prevVisaType = visaTypes.find(item => item.id === visa_apply.visa_type)
+    }
+
+    let prevGroup = "";
+    if (visa_apply?.group) {
+        prevGroup = countries.find(item => item.id === visa_apply?.group)
+    }
+
+
+    let prevCurrentNationality = "";
+    if (personal_info?.current_nationality) {
+        prevCurrentNationality = countries.find(item => item.id === personal_info.current_nationality)
+    }
+
+    let prevPrevNationality = '';
+    if (personal_info?.prev_nationality) {
+        prevPrevNationality = countries.find(item => item.id === personal_info.prev_nationality)
+    }
+    let prevGender = ""
+    if (personal_info?.gender) {
+        prevGender = genders.find(item => item.id === personal_info.gender)
+    }
+    let prevBirthCountry = ''
+    if (personal_info?.birth_country) {
+        prevBirthCountry = countries.find(item => item.id === personal_info.birth_country)
+    }
+
+    let prevMaritalStatus = ""
+    if (personal_info?.marital_status) {
+        prevMaritalStatus = maritalStatuses.find(item => item.id === personal_info.marital_status)
+    }
+
+    let prevPassportIssueCountry = ""
+    if (passport?.passport_issue_country) {
+        prevPassportIssueCountry = countries.find(item => item.id === passport.passport_issue_country)
+    }
+
+    let guarantorPrevNationality = ''
+
+    if (guarantor?.nationality) {
+        guarantorPrevNationality = countries.find(item => item.id === guarantor.nationality) ?? ''
+    }
+
+    const [isPassportRequired, setIsPassportRequired] = useState(false)
+    const [isPhotoRequired, setIsPhotoRequired] = useState(false)
+
+
+    const [processingType, setProcessingType] = useState(prevProcessingType)
+    const [visaType, setVisaType] = useState(prevVisaType)
+    const [group, setGroup] = useState(prevGroup)
+    const [currentNationality, setCurrentNationality] = useState(prevCurrentNationality)
+    const [prevNationality, setPrevNationality] = useState(prevPrevNationality)
+    const [gender, setGender] = useState(prevGender)
+    const [birthCountry, setBirthCountry] = useState(prevBirthCountry)
+    const [maritalStatus, setMaritalStatus] = useState(prevMaritalStatus)
+    const [passportIssueCountry, setPassportIssueCountry] = useState(prevPassportIssueCountry)
+    const [guarantorNationality, setGuarantorNationality] = useState(guarantorPrevNationality)
+
+
+    const {data, setData, post, errors, processing} = useForm({
+        personal_name: visa_apply?.name || '',
+        processing_type: visa_apply?.processing_type || '',
+        visa_type: visa_apply?.visa_type || '',
+        group: visa_apply?.group || '',
+        name: personal_info?.name ? personal_info.name : '',
+        name_arabic: personal_info?.name_arabic ? personal_info.name_arabic : '',
+        current_nationality: personal_info?.current_nationality ? personal_info.current_nationality : '',
+        prev_nationality: personal_info?.prev_nationality ? personal_info.prev_nationality : '',
+        gender: personal_info?.gender ? personal_info.gender : '',
+        date_of_birth: personal_info?.date_of_birth ? personal_info.date_of_birth : '',
+        birth_country: personal_info?.birth_country ? personal_info.birth_country : '',
+        marital_status: personal_info?.marital_status ? personal_info.marital_status : '',
+        birth_place: personal_info?.birth_place ? personal_info.birth_place : '',
+        birth_place_arabic: personal_info?.birth_place_arabic ? personal_info.birth_place_arabic : '',
+        mother_name: personal_info?.mother_name ? personal_info.mother_name : '',
+        mother_name_arabic: personal_info?.mother_name_arabic ? personal_info.mother_name_arabic : '',
+        religion: personal_info?.religion ? personal_info.religion : '',
+        faith: personal_info?.faith ? personal_info.faith : '',
+        qualification: personal_info?.qualification ? personal_info.qualification : '',
+        profession: personal_info?.profession ? personal_info.profession : '',
+
+        passport_type: passport?.passport_type ? passport.passport_type : '',
+        passport_no: passport?.passport_no ? passport.passport_no : '',
+        passport_issue_date: passport?.passport_issue_date ? passport.passport_issue_date : '',
+        passport_expire_date: passport?.passport_expire_date ? passport.passport_expire_date : '',
+        passport_issue_place: passport?.passport_issue_place ? passport.passport_issue_place : '',
+        passport_issue_place_arabic: passport?.passport_issue_place_arabic ? passport.passport_issue_place_arabic : '',
+        passport_issue_country: passport?.passport_issue_country ? passport.passport_issue_country : '',
+        guarantor_name: guarantor?.name ? guarantor.name : '',
+        guarantor_passport_no: guarantor?.passport_no ? guarantor.passport_no : '',
+        guarantor_nationality: guarantor?.nationality ? guarantor.nationality : '',
+        guarantor_phone: guarantor?.phone ? guarantor.phone : '',
+        guarantor_relation: guarantor?.relation ? guarantor.relation : '',
+        documents: {
+            'passport': {
+                "name": "Passport",
+                "type": "passport",
+                "file": null
+            },
+            'photo': {
+                "name": "Photo",
+                "type": "photo",
+                "file": null
+            }
+        },
+    })
     const updateVisaProcessingType = (value) => {
         setData('processing_type', value.id)
     }
@@ -224,16 +210,6 @@ const VisaApplyForm = ({submitUrl}) => {
 
                     <div className="grid grid-cols-1 gap-y-2 md:grid-cols-2 lg:grid-cols-3 gap-x-4 items-center">
 
-                        <Select
-                            placeholder="Select User"
-                            label="User*"
-                            items={users}
-                            selected={user}
-                            setSelected={setUser}
-                            handleValueChange={updateUser}
-                            defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
-                            error={errors.user_id}
-                        />
 
                         <InputBox
                             value={data.personal_name}
