@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Actions\Admin\VisaApply\AddDocumentAction;
 use App\Actions\Admin\VisaApply\ChangeStatusAction;
 use App\Actions\Admin\VisaApply\CreateAction;
+use App\Actions\Admin\VisaApply\EditAction;
 use App\Actions\Admin\VisaApply\IndexAction;
 use App\Actions\Admin\VisaApply\ShowAction;
 use App\Actions\Admin\VisaApply\StoreAction;
@@ -55,9 +56,9 @@ class VisaApplyController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(VisaApply $visaApply)
+    public function edit(VisaApply $visaApply,EditAction $editAction): \Inertia\Response
     {
-        //
+        return $editAction->execute($visaApply);
     }
 
     /**

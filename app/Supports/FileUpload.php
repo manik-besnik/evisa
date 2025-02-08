@@ -43,7 +43,7 @@ class FileUpload
         }
     }
 
-    public static function delete(string|null $file = null)
+    public static function delete(string|null $file = null): bool
     {
         if ($file && strpos($file, request()->getSchemeAndHttpHost() != false)) {
             $filePath = str_replace(request()->getSchemeAndHttpHost() . '/', '', $file);

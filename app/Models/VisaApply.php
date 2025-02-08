@@ -24,7 +24,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *
  * @mixin Model
  *
- * @property PersonalInfo|null $personInfo
+ * @property PersonalInfo|null $personalInfo
  * @property Passport|null $passport
  * @property Guarantor|null $guarantor
  *
