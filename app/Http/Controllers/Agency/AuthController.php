@@ -6,7 +6,6 @@ use App\DTOs\AgencyDTO;
 use App\DTOs\UserDTO;
 use App\Http\Controllers\Controller;
 use App\Models\Language;
-use App\Models\User;
 use App\Supports\StoreAgency;
 use App\Supports\StoreUser;
 use Illuminate\Http\RedirectResponse;
@@ -45,15 +44,14 @@ class AuthController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'email' => 'required|string|lowercase|max:255|unique:' . User::class,
+            'username' => 'required|string|max:255|unique:users,username',
             'avatar' => ['nullable', 'file', 'mimes:jpg,png,jpeg,webp', 'max:2048'],
             'password' => ['required', Rules\Password::defaults()],
         ], [
-            'email.required' => 'The username field is required.',
-            'email.string' => 'The username must be a valid string.',
-            'email.lowercase' => 'The username must be in lowercase.',
-            'email.max' => 'The username may not be greater than 255 characters.',
-            'email.unique' => 'This username has already been taken.',
+            'username.required' => 'The username field is required.',
+            'username.string' => 'The username must be a valid string.',
+            'username.max' => 'The username may not be greater than 255 characters.',
+            'username.unique' => 'This username has already been taken.',
 
             'avatar.file' => 'The avatar must be a file.',
             'avatar.mimes' => 'The avatar must be a file of type: jpg, png, jpeg, webp.',
@@ -64,7 +62,7 @@ class AuthController extends Controller
 
 
         $userData = [
-            'email' => $request->input('email'),
+            'username' => $request->input('username'),
             'password' => $request->input('password'),
             'avatar' => $request->file('avatar'),
             'sign_up_complete' => 0,
@@ -73,7 +71,7 @@ class AuthController extends Controller
 
         $user = StoreUser::execute(UserDTO::fromArray($userData));
 
-        Auth::login($user,$request->input('remember'));
+        Auth::login($user, $request->input('remember'));
 
         return redirect(route('agency.register.agency-info'));
     }
