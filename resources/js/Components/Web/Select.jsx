@@ -56,7 +56,7 @@ export default function Select({
 
                 }
 
-                {error && <p className="text-red-500  my-1">{error}</p>}
+                {error && <p className="text-red-500 text-xs my-1">{error}</p>}
 
                 <Transition leave="transition ease-in duration-100" leaveFrom="opacity-100" leaveTo="opacity-0">
                     <ListboxOptions
