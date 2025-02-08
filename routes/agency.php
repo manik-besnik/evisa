@@ -35,6 +35,7 @@ Route::prefix('agency')->middleware(['auth', 'agency'])->name('agency.')->group(
     Route::post('register/info-store', [AuthController::class, 'agencyInfoStore'])
         ->name('register.agency-info.store');
 
+    Route::post('visa-applies/{visa_apply}', [VisaApplyController::class,'update'])->name('visa-applies.update');
     Route::resource('visa-applies', VisaApplyController::class);
 
     Route::get('users', [UserController::class, 'index'])->name('users.index');
