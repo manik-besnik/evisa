@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Actions\Admin\VisaApply\AddDocumentAction;
+use App\Actions\Admin\VisaApply\ChangeStatusAction;
 use App\Actions\Admin\VisaApply\CreateAction;
 use App\Actions\Admin\VisaApply\IndexAction;
 use App\Actions\Admin\VisaApply\ShowAction;
@@ -9,6 +11,7 @@ use App\Actions\Admin\VisaApply\StoreAction;
 use App\DTOs\VisaApplyDTO;
 use App\Http\Controllers\Controller;
 use App\Models\VisaApply;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class VisaApplyController extends Controller
@@ -32,7 +35,7 @@ class VisaApplyController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, StoreAction $storeAction)
+    public function store(Request $request, StoreAction $storeAction): RedirectResponse
     {
         return $storeAction->execute(VisaApplyDTO::fromRequest($request));
     }
@@ -67,5 +70,15 @@ class VisaApplyController extends Controller
     public function destroy(VisaApply $visaApply)
     {
         //
+    }
+
+    public function addDocument(Request $request, int $id, AddDocumentAction $addDocumentAction): RedirectResponse
+    {
+        return $addDocumentAction->execute($request, $id);
+    }
+
+    public function changeStatus(Request $request, int $id, ChangeStatusAction $changeStatusAction): RedirectResponse
+    {
+        return $changeStatusAction->execute($request, $id);
     }
 }
