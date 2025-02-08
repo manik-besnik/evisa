@@ -29,7 +29,9 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
         ->name('dashboard.index');
 
     Route::post('visa-applies/{id}/add-document', [VisaApplyController::class, 'addDocument'])->name('visa-applies.add-document');
+
     Route::put('visa-applies/{id}/change-status', [VisaApplyController::class, 'changeStatus'])->name('visa-applies.change-status');
+
     Route::resource('visa-applies', VisaApplyController::class);
 
     Route::get('admins', [AdminController::class, 'index'])->name('admins.index');

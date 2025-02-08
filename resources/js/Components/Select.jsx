@@ -58,7 +58,7 @@ export default function Select({
                             <ListboxOption
                                 key={person?.id}
                                 value={person}
-                                className="group flex cursor-default items-center gap-2 rounded-md py-2 px-2.5 select-none data-[focus]:bg-card-and-hover"
+                                className="group flex items-center gap-2 rounded-md py-2 px-2.5 select-none cursor-pointer data-[focus]:bg-card-and-hover"
                             >
                                 <div className="text-xs leading-[14px] text-text-primary">{person.name}</div>
                             </ListboxOption>

@@ -13,7 +13,7 @@ class AddDocumentAction
         $visaApply = VisaApply::query()->findOrFail($id);
 
         try {
-            $file = FileUpload::execute($request->file('visa'), $visaApply->visa_document);
+            $file = FileUpload::execute($request->file('visa_document'), $visaApply->visa_document);
 
             $visaApply->visa_document = $file;
             $visaApply->update();

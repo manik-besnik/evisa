@@ -1,14 +1,30 @@
-import {usePage} from "@inertiajs/react";
+import {router, usePage} from "@inertiajs/react";
 import {getValue} from "@/Components/Helper/index.js";
-import {genders, groups, maritalStatuses, visaProcessingTypes, visaTypes} from "@/Components/Constant/index.js";
+import {
+    genders,
+    groups,
+    maritalStatuses,
+    visaProcessingTypes,
+    visaStatuses,
+    visaTypes
+} from "@/Components/Constant/index.js";
 import {FaRegEye} from "react-icons/fa6";
 import InfoSection from "@/Components/InfoSection.jsx";
 import InfoItem from "@/Components/Web/InfoItem.jsx";
+import {useState} from "react";
+import Select from "@/Components/Select.jsx";
 
 
-export const VisaDetails = () => {
+export const VisaDetails = ({isAdmin}) => {
 
     const {visa_apply} = usePage().props;
+
+    const [status, setStatus] = useState(visaStatuses.find(item => item.id === visa_apply.status))
+
+    const changeStatus = (value) => {
+
+        router.put(route('admin.visa-applies.change-status', visa_apply.id), {status: value.id})
+    }
 
     return (
         <div className="min-h-screen">
@@ -66,6 +82,16 @@ export const VisaDetails = () => {
                                   value={getValue(visaProcessingTypes, visa_apply.processing_type)}/>
                         <InfoItem label="Visa Type" value={getValue(visaTypes, visa_apply.visa_type)}/>
                         <InfoItem label="Group" value={getValue(groups, visa_apply.group)}/>
+                        {isAdmin ?
+                            <Select
+                                items={visaStatuses}
+                                selected={status}
+                                label="Visa Status"
+                                setSelected={setStatus}
+                                handleValueChange={changeStatus}
+                                placeholder="Select Status"
+                            /> : <InfoItem label="Status" value={getValue(visaStatuses, visa_apply.status)}/>
+                        }
                     </InfoSection>
 
                     <InfoSection title="Passport Info">
