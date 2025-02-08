@@ -102,7 +102,7 @@ const VisaApply = () => {
         passport_issue_country: passport?.passport_issue_country ? passport.passport_issue_country : '',
         guarantor_name: guarantor?.name ? guarantor.name : '',
         guarantor_passport_no: guarantor?.passport_no ? guarantor.passport_no : '',
-        guarantor_nationality: guarantor?.name ? guarantor.name : '',
+        guarantor_nationality: guarantor?.nationality ? guarantor.nationality : '',
         guarantor_phone: guarantor?.phone ? guarantor.phone : '',
         guarantor_relation: guarantor?.relation ? guarantor.relation : '',
         documents: {

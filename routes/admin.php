@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AgencyController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\JobPostController;
+use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\VisaApplyController;
@@ -53,5 +54,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
     Route::get('users', [UserController::class, 'index'])->name('users.index');
     Route::get('users/create', [UserController::class, 'create'])->name('users.create');
     Route::post('users/store', [UserController::class, 'store'])->name('users.store');
+
+    Route::get('notifications/{id}',[NotificationController::class,'show'])->name('notifications.show');
 
 });
