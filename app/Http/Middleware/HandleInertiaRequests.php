@@ -2,6 +2,8 @@
 
 namespace App\Http\Middleware;
 
+use App\Enums\Role;
+use App\Models\Notification;
 use App\Supports\Country;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -32,6 +34,15 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
+        $notifications = null;
+
+        /** @var \App\Models\User $user */
+        $user = auth()->user();
+
+        if (auth()->check() && $user->role === Role::ADMIN->value) {
+            $notifications = Notification::query()->select(['id', 'title', 'created_at'])->get();
+        }
+
         return [
             ...parent::share($request),
             'auth' => [
@@ -41,6 +52,7 @@ class HandleInertiaRequests extends Middleware
                 ...(new Ziggy)->toArray(),
                 'location' => $request->url(),
             ],
+            'notifications' => $notifications,
             'countries' => Country::get(),
             'flash' => function () {
                 return [
