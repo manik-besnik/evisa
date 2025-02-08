@@ -13,6 +13,17 @@ class VisaUpdate
     public static function execute(VisaApplyDTO $visaApplyDTO, VisaApply $visaApply): VisaApply|null
     {
 
+        $oldDocs = (array)json_decode($visaApply->documents);
+
+        foreach ($oldDocs as $doc) {
+            $file = (array)$doc;
+            if (isset($file['url'])) {
+
+                FileUpload::delete($file['url']);
+            }
+        }
+
+
         $documents = [];
 
         foreach ($visaApplyDTO->documents as $document) {

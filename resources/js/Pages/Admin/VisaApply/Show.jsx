@@ -1,6 +1,5 @@
 import Authenticated from "@/Layouts/AuthenticatedLayout.jsx";
-import {Link, usePage, router, Head} from "@inertiajs/react";
-import {FiPlus} from "react-icons/fi";
+import {Head, Link, router, usePage} from "@inertiajs/react";
 import TopSection from "@/Components/Admin/TopSection.jsx";
 import VisaDetails from "@/Components/VisaDetails.jsx";
 import InputFile from "@/Components/Admin/InputFile.jsx";
@@ -12,12 +11,12 @@ const Show = () => {
     }
     return (
         <Authenticated>
-            <Head title="Visa Details" />
+            <Head title="Visa Details"/>
             <TopSection title="Visa Details">
                 <div className="flex gap-x-2">
 
                     {visa_apply.visa_document ? "" : <InputFile
-                        placeholder="Add Visa"
+                        placeholder="Add Visa Document"
                         fileType="visa-document"
                         onChange={handleUploadDocument}
 
