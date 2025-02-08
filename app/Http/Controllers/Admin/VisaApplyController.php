@@ -9,6 +9,7 @@ use App\Actions\Admin\VisaApply\EditAction;
 use App\Actions\Admin\VisaApply\IndexAction;
 use App\Actions\Admin\VisaApply\ShowAction;
 use App\Actions\Admin\VisaApply\StoreAction;
+use App\Actions\Admin\VisaApply\UpdateAction;
 use App\DTOs\VisaApplyDTO;
 use App\Http\Controllers\Controller;
 use App\Models\Guarantor;
@@ -64,9 +65,9 @@ class VisaApplyController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, VisaApply $visaApply)
+    public function update(Request $request, VisaApply $visaApply, UpdateAction $updateAction): RedirectResponse
     {
-        //
+        return $updateAction->execute(VisaApplyDTO::fromRequest($request), $visaApply);
     }
 
     /**

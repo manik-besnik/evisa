@@ -1,6 +1,6 @@
 import {useForm, usePage} from "@inertiajs/react";
 import Select from "@/Components/Select.jsx";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {
     documentTypes,
     genders,
@@ -11,11 +11,10 @@ import {
 } from "@/Components/Constant/index.js";
 import InputBox from "@/Components/Admin/InputBox.jsx";
 import InputFile from "@/Components/Admin/InputFile.jsx";
-import axios from "axios";
 
-const VisaApplyForm = ({submitUrl}) => {
+const VisaApplyForm = ({isAdmin = false}) => {
 
-    const {countries,visa_apply, personal_info, passport, guarantor} = usePage().props
+    const {countries, visa_apply, personal_info, passport, guarantor} = usePage().props
 
     let prevProcessingType = "";
     if (visa_apply?.processing_type) {
@@ -85,6 +84,7 @@ const VisaApplyForm = ({submitUrl}) => {
 
 
     const {data, setData, post, errors, processing} = useForm({
+        user_id: visa_apply.user_id | '',
         personal_name: visa_apply?.name || '',
         processing_type: visa_apply?.processing_type || '',
         visa_type: visa_apply?.visa_type || '',
@@ -197,8 +197,11 @@ const VisaApplyForm = ({submitUrl}) => {
             setIsPhotoRequired(true)
             return
         }
-
-        post(submitUrl)
+        if (isAdmin) {
+            post(route('admin.visa-applies.update', visa_apply))
+            return;
+        }
+        post(route('agency.visa-applies.update', visa_apply))
     }
 
 

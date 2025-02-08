@@ -6,12 +6,17 @@ import {VisaApplyTableHeading, visaStatuses} from "@/Components/Constant/index.j
 import {getFormattedDate, getValue} from "@/Components/Helper/index.js";
 import {FaRegEye} from "react-icons/fa6";
 import {useState} from "react";
+import { FaRegEdit } from "react-icons/fa";
 
 const VisaApplicationTable = ({isAdmin = false}) => {
 
     const visa_applies = usePage().props.visa_applies
 
     const handleEdit = (application) => {
+        if (isAdmin){
+            return router.get(route('admin.visa-applies.edit', application.id))
+        }
+        return router.get(route('agency.visa-applies.edit', application.id))
 
     }
     const handleDelete = (application) => {
@@ -42,6 +47,9 @@ const VisaApplicationTable = ({isAdmin = false}) => {
 
                         <button type="button" className='btn-primary' onClick={() => handleView(application)}>
                             <FaRegEye/>
+                        </button>
+                        <button type="button" className='btn-primary' onClick={() => handleEdit(application)}>
+                            <FaRegEdit/>
                         </button>
                         <DangerButton onClick={() => handleDelete(application)}>
                             <FaTrashAlt/>

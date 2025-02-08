@@ -3,21 +3,22 @@
 namespace App\Actions\Admin\VisaApply;
 
 use App\DTOs\VisaApplyDTO;
-use App\Supports\VisaApplyAction;
+use App\Models\VisaApply;
+use App\Supports\VisaUpdate;
 use Illuminate\Support\Facades\DB;
 
 class UpdateAction
 {
-    public function execute(VisaApplyDTO $visaApplyDTO): \Illuminate\Http\RedirectResponse
+    public function execute(VisaApplyDTO $visaApplyDTO, VisaApply $visaApply): \Illuminate\Http\RedirectResponse
     {
         DB::beginTransaction();
 
         try {
 
-            VisaApplyAction::execute($visaApplyDTO);
+            VisaUpdate::execute($visaApplyDTO, $visaApply);
             DB::commit();
 
-            return to_route('admin.visa-applies.index')->with('success','Visa Application Saved');
+            return to_route('admin.visa-applies.index')->with('success', 'Visa Application Updated');
 
         } catch (\Exception $exception) {
             DB::rollBack();
