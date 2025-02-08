@@ -53,7 +53,7 @@ class VisaApplyAction
         /** Store Visa Info */
         $visaApply = new VisaApply();
         $visaApply->user_id = $visaApplyDTO->userId;
-        $visaApply->person_info_id = $personalInfo->id;
+        $visaApply->personal_info_id = $personalInfo->id;
         $visaApply->passport_id = $passport->id;
         $visaApply->guarantor_id = $guarantor->id;
         $visaApply->app_id = $appId;

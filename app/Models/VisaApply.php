@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 /**
  * @property int $id
  * @property int $user_id
- * @property int $person_info_id
+ * @property int $personal_info_id
  * @property int $passport_id
  * @property int $guarantor_id
  * @property int $applied_by
@@ -35,7 +35,7 @@ class VisaApply extends Model
 
     protected $fillable = [
         'user_id',
-        'person_info_id',
+        'personal_info_id',
         'passport_id',
         'guarantor_id',
         'applied_by',
