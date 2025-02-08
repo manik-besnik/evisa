@@ -22,36 +22,36 @@ const VisaApply = () => {
     const {countries, personal_info, passport, guarantor} = usePage().props
 
     let prevCurrentNationality = "";
-    if (personal_info.current_nationality) {
+    if (personal_info?.current_nationality) {
         prevCurrentNationality = countries.find(item => item.id === personal_info.current_nationality)
     }
 
     let prevPrevNationality = '';
-    if (personal_info.prev_nationality) {
+    if (personal_info?.prev_nationality) {
         prevPrevNationality = countries.find(item => item.id === personal_info.prev_nationality)
     }
     let prevGender = ""
-    if (personal_info.gender) {
+    if (personal_info?.gender) {
         prevGender = genders.find(item => item.id === personal_info.gender)
     }
     let prevBirthCountry = ''
-    if (personal_info.birth_country) {
+    if (personal_info?.birth_country) {
         prevBirthCountry = countries.find(item => item.id === personal_info.birth_country)
     }
 
     let prevMaritalStatus = ""
-    if (personal_info.marital_status) {
+    if (personal_info?.marital_status) {
         prevMaritalStatus = maritalStatuses.find(item => item.id === personal_info.marital_status)
     }
 
     let prevPassportIssueCountry = ""
-    if (passport.passport_issue_country) {
+    if (passport?.passport_issue_country) {
         prevPassportIssueCountry = countries.find(item => item.id === passport.passport_issue_country)
     }
 
     let guarantorPrevNationality = ''
 
-    if (guarantor.nationality) {
+    if (guarantor?.nationality) {
         guarantorPrevNationality = countries.find(item => item.id === guarantor.nationality) ?? ''
     }
 
