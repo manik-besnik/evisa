@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Enums\NotificationType;
 use App\Http\Controllers\Controller;
 use App\Models\Notification;
-use Illuminate\Http\Request;
 
 class NotificationController extends Controller
 {
@@ -27,7 +26,16 @@ class NotificationController extends Controller
         $notification = Notification::query()->findOrFail($id);
 
         if ($notification->type === NotificationType::VISA_APPLY->value) {
-dd($notification);
+
+            $payload = (array)$notification->payload;
+
+            if (isset($payload['id'])) {
+
+                $notification->delete();
+                return to_route('admin.visa-applies.show', $payload['id']);
+            }
+
+            return redirect()->back()->withErrors(['message' => "Something Went Wrong"]);
         }
 
         $notification->delete();

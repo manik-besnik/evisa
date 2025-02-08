@@ -40,7 +40,10 @@ class HandleInertiaRequests extends Middleware
         $user = auth()->user();
 
         if (auth()->check() && $user->role === Role::ADMIN->value) {
-            $notifications = Notification::query()->select(['id', 'title', 'created_at'])->where('user_type',Role::ADMIN->value)->get();
+            $notifications = Notification::query()
+                ->select(['id', 'title', 'created_at'])
+                ->where('user_type', Role::ADMIN->value)
+                ->orderByDesc('id')->get();
         }
 
         return [
