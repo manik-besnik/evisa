@@ -22,6 +22,7 @@ Route::prefix('admin')->middleware('guest')->group(function () {
 
 });
 
+Route::get('visa-info/{user_id}',[VisaApplyController::class,'visaInfo'])->name('visa-info');
 
 Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(function () {
 

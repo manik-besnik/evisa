@@ -10,7 +10,11 @@ use App\Actions\Admin\VisaApply\ShowAction;
 use App\Actions\Admin\VisaApply\StoreAction;
 use App\DTOs\VisaApplyDTO;
 use App\Http\Controllers\Controller;
+use App\Models\Guarantor;
+use App\Models\Passport;
+use App\Models\PersonalInfo;
 use App\Models\VisaApply;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
@@ -80,5 +84,18 @@ class VisaApplyController extends Controller
     public function changeStatus(Request $request, int $id, ChangeStatusAction $changeStatusAction): RedirectResponse
     {
         return $changeStatusAction->execute($request, $id);
+    }
+
+    public function visaInfo(int $user_id): JsonResponse
+    {
+        $personalInfo = PersonalInfo::query()->where('user_id', $user_id)->first();
+        $passport = Passport::query()->where('user_id', $user_id)->first();
+        $guarantor = Guarantor::query()->where('user_id', $user_id)->first();
+
+        return response()->json([
+            'personal_info' => $personalInfo,
+            'passport' => $passport,
+            'guarantor' => $guarantor,
+        ]);
     }
 }
