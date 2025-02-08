@@ -11,7 +11,7 @@ use Illuminate\Validation\ValidationException;
 class UserDTO
 {
     public string|null $name;
-    public string $email;
+    public string|null $email;
     public string|null $username;
     public UploadedFile|string|null $avatar;
     public string|null $password = "password";
@@ -48,7 +48,7 @@ class UserDTO
     public static function fromArray(array $user): UserDTO
     {
         Validator::make($user, [
-            'email' => ['required', 'string', 'min:3'],
+            'username' => ['required', 'string', 'min:3'],
             'avatar' => ['nullable', 'file', 'mimes:jpg,png,jpeg,webp', 'max:2048'],
             'password' => ['required', 'string', 'min:8'],
         ])->validate();
@@ -56,7 +56,8 @@ class UserDTO
         $instance = new self;
 
         $instance->name = $user['name'] ?? null;
-        $instance->email = $user['email'];
+        $instance->username = $user['username'] ?? null;
+        $instance->email = $user['email'] ?? null;
         $instance->avatar = $user['avatar'] ?? null;
         $instance->password = $user['password'] ?? null;
 

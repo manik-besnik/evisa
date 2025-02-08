@@ -71,6 +71,10 @@ class AuthController extends Controller
 
         $user = StoreUser::execute(UserDTO::fromArray($userData));
 
+        if (!$user) {
+            return redirect()->back()->withErrors(['message' => "Something Went Wrong. Please try again"]);
+        }
+
         Auth::login($user, $request->input('remember'));
 
         return redirect(route('agency.register.agency-info'));
