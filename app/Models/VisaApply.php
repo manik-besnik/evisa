@@ -27,6 +27,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property PersonalInfo|null $personalInfo
  * @property Passport|null $passport
  * @property Guarantor|null $guarantor
+ * @property User|null $user
  *
  */
 class VisaApply extends Model
