@@ -1,5 +1,5 @@
 import {FaWhatsapp} from "react-icons/fa";
-import {Link, usePage, router} from "@inertiajs/react";
+import {Link, router, usePage} from "@inertiajs/react";
 import {assetUrl} from "@/Components/Constant/index.js";
 
 const RightNoneAuthPart = () => {
@@ -26,7 +26,7 @@ const RightNoneAuthPart = () => {
     </>)
 }
 
-const RightAuthPart = ({name}) => {
+const RightAuthPart = ({user}) => {
     const logOut = () => {
         router.post(route('logout'))
     }
@@ -34,8 +34,11 @@ const RightAuthPart = ({name}) => {
     return (
         <>
             <div></div>
-            <div className='flex justify-end items-center gap-x-2 text-primary'>
-                <span>{name}</span>
+            <div className='flex justify-end items-center gap-x-2 text-text-primary'>
+                <div>
+                    <p>{user?.name} | {user?.profession}</p>
+                    <p>Address: {user?.city}, {user?.living_country.name}</p>
+                </div>
 
                 <button
                     onClick={logOut}
@@ -58,7 +61,7 @@ const Topbar = () => {
                     <img className="w-4/6" src={`${assetUrl + 'images/logo.png'}`} alt="logo"/>
                 </Link>
 
-                {auth?.user ? <RightAuthPart name={auth?.user?.name}/> : <RightNoneAuthPart/>}
+                {auth?.user ? <RightAuthPart user={auth?.user}/> : <RightNoneAuthPart/>}
 
             </div>
         </>
