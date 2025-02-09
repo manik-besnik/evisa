@@ -46,10 +46,15 @@ class HandleInertiaRequests extends Middleware
                 ->orderByDesc('id')->get();
         }
 
+        /** @var \App\Models\User|null $user */
+        $user = auth()->user();
+
+        $user?->load(['livingCountry']);
+
         return [
             ...parent::share($request),
             'auth' => [
-                'user' => auth()->user(),
+                'user' => $user,
             ],
             'ziggy' => fn() => [
                 ...(new Ziggy)->toArray(),

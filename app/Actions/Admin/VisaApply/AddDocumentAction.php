@@ -32,7 +32,7 @@ class AddDocumentAction
             }
 
             return redirect()->back()->with('success', 'Document Added Successfully');
-            
+
         } catch (\Exception $exception) {
             return redirect()->back()->withErrors(['message' => 'Something went wrong']);
         }
