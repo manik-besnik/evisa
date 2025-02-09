@@ -34,7 +34,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
     Route::put('visa-applies/{id}/change-status', [VisaApplyController::class, 'changeStatus'])->name('visa-applies.change-status');
 
     Route::post('visa-applies/{visa_apply}', [VisaApplyController::class,'update'])->name('visa-applies.update');
-    Route::resource('visa-applies', VisaApplyController::class);
+    Route::resource('visa-applies', VisaApplyController::class)->except(['update']);
 
     Route::get('admins', [AdminController::class, 'index'])->name('admins.index');
 
