@@ -50,10 +50,6 @@ Route::middleware(['auth', 'user'])->group(function () {
 });
 
 
-Route::get('google/redirect', function () {
-
-})->name('google.redirect');
-
 Route::get('google/redirect3', function () {
 
 })->name('dashboard');
