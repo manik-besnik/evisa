@@ -14,7 +14,7 @@
         "laravel/tinker": "^2.9",
         "spatie/pdf-to-image": "^1.2",
         "thiagoalessio/tesseract_ocr": "^2.13",
-        "tightenco/ziggy": "^2.0"
+        "tightenco/ziggy": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
