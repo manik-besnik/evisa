@@ -9,10 +9,11 @@ const Notification = () => {
     return (
         <div className="text-right">
             {notifications && <Menu>
-                <MenuButton className="block">
+                <MenuButton className="flex gap-x-1 relative">
                     <span className="text-2xl mb-0">
                         <IoMdNotificationsOutline className="w-6 h-6"/>
                     </span>
+                    <span className="absolute -top-1/3 bg-side-and-button w-4 h-4 rounded-full  -right-1 text-xs">{notifications.length}</span>
                 </MenuButton>
 
                 <MenuItems
