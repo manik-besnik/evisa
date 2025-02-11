@@ -18,7 +18,7 @@ class ChangeStatusAction
 
         try {
 
-            $visaApply->visa_document = VisaStatus::tryFrom((int)$request->input('status'));
+            $visaApply->status = VisaStatus::tryFrom((int)$request->input('status'))->value;
             $visaApply->update();
 
             if ($visaApply->user?->email) {
@@ -34,6 +34,7 @@ class ChangeStatusAction
 
             return redirect()->back()->with('success', 'Status updated Successfully');
         } catch (\Exception $exception) {
+
             return redirect()->back()->withErrors(['message' => 'Something went wrong']);
         }
     }

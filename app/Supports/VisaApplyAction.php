@@ -19,7 +19,7 @@ class VisaApplyAction
         $documents = [];
 
         foreach ($visaApplyDTO->documents as $document) {
-            
+
             $fullPath = FileUpload::execute($document['file']);
 
             $documents[] = [
