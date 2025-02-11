@@ -22,6 +22,9 @@ class VisaUpdate
 
         $documents = [];
 
+        if ($visaApplyDTO->documents){
+
+
         foreach ($visaApplyDTO->documents as $document) {
             $fullPath = FileUpload::execute($document['file']);
 
@@ -37,8 +40,10 @@ class VisaUpdate
             ];
         }
 
+        }
+
         $mergedDocuments = array_merge($documents, array_values($oldDocsMap));
-dd($mergedDocuments);
+
         /** Personal Info Store */
         self::storePersonalInfo($visaApplyDTO, $visaApply->personal_info_id);
 
