@@ -63,7 +63,9 @@ class VisaApplyDTO
 
     public static function fromRequest(Request $request): VisaApplyDTO
     {
-        $request->validate([
+        $isUpdate = $request->route('visa_apply') !== null; // Check if updating
+
+        $rules = [
             /** Visa Info */
             'user_id' => ['required'],
             'personal_name' => ['required', 'string', 'min:2'],
@@ -106,31 +108,34 @@ class VisaApplyDTO
             'guarantor_nationality' => ['required', 'integer', Rule::exists('countries', 'id')->whereNull('deleted_at')],
             'guarantor_phone' => ['required', 'string', 'regex:/^\+?\d{10,15}$/'],
             'guarantor_relation' => ['required', 'string'],
+        ];
 
-            /** Documents */
-            'documents' => ['required', 'array'],
-            'documents.*.name' => ['required', 'string', 'min:2'],
-            'documents.*.file' => ['required', 'file', 'mimes:jpg,png,jpeg,pdf', 'max:2048'],
-        ]);
+        /** Documents should be required only when creating */
+        if (!$isUpdate) {
+            $rules['documents'] = ['required', 'array'];
+            $rules['documents.*.name'] = ['required', 'string', 'min:2'];
+            $rules['documents.*.file'] = ['required', 'file', 'mimes:jpg,png,jpeg,pdf', 'max:2048'];
+        }
 
+        $request->validate($rules);
 
         $instance = new self;
 
-        /**  Visa Info */
+        /** Visa Info */
         $instance->userId = (int)$request->input('user_id');
         $instance->personalName = $request->input('personal_name');
         $instance->processingType = (int)$request->input('processing_type');
         $instance->visaType = (int)$request->input('visa_type');
         $instance->group = (int)$request->input('group');
 
-        /**  Personal Info */
+        /** Personal Info */
         $instance->name = $request->input('name');
         $instance->nameArabic = $request->input('name_arabic');
         $instance->currentNationality = (int)$request->input('current_nationality');
         $instance->prevNationality = (int)$request->input('prev_nationality');
         $instance->gender = (int)$request->input('gender');
         $instance->dateOfBirth = $request->input('date_of_birth');
-        $instance->birthCountry = $request->input('birth_country');
+        $instance->birthCountry = (int)$request->input('birth_country');
         $instance->maritalStatus = (int)$request->input('marital_status');
         $instance->birthPlace = $request->input('birth_place');
         $instance->birthPlaceArabic = $request->input('birth_place_arabic');
@@ -143,7 +148,7 @@ class VisaApplyDTO
         $instance->qualification = $request->input('qualification');
         $instance->profession = $request->input('profession');
 
-        /**  Personal Info */
+        /** Passport Info */
         $instance->passportType = $request->input('passport_type');
         $instance->passportNO = $request->input('passport_no');
         $instance->passportIssueDate = $request->input('passport_issue_date');
@@ -152,16 +157,18 @@ class VisaApplyDTO
         $instance->passportIssuePlaceArabic = $request->input('passport_issue_place_arabic');
         $instance->passportIssueCountry = (int)$request->input('passport_issue_country');
 
-        /**  Guarantor Info */
+        /** Guarantor Info */
         $instance->guarantorName = $request->input('guarantor_name');
         $instance->guarantorPassportNO = $request->input('guarantor_passport_no');
         $instance->guarantorNationality = (int)$request->input('guarantor_nationality');
         $instance->guarantorPhone = $request->input('guarantor_phone');
         $instance->guarantorRelation = $request->input('guarantor_relation');
+
+        /** Documents */
         $instance->documents = $request->all()['documents'] ?? [];
 
         return $instance;
-
     }
+
 
 }

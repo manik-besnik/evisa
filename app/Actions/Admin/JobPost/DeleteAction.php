@@ -2,13 +2,18 @@
 
 namespace App\Actions\Admin\JobPost;
 
+use App\Enums\Permissions;
 use App\Models\JobPost;
 use App\Supports\FileUpload;
+use App\Supports\UserPermission;
+use Illuminate\Http\RedirectResponse;
 
 class DeleteAction
 {
-    public function execute(int $id): \Illuminate\Http\RedirectResponse
+    public function execute(int $id): RedirectResponse
     {
+        UserPermission::isPermitted(Permissions::DELETE_JOB_POST->value);
+
 
         try {
 

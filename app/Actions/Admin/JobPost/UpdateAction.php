@@ -4,13 +4,18 @@ namespace App\Actions\Admin\JobPost;
 
 use App\DTOs\JobPostDTO;
 use App\Enums\JobType;
+use App\Enums\Permissions;
 use App\Models\JobPost;
 use App\Supports\FileUpload;
+use App\Supports\UserPermission;
+use Illuminate\Http\RedirectResponse;
 
 class UpdateAction
 {
-    public function execute(int $id, JobPostDTO $jobPostDTO): \Illuminate\Http\RedirectResponse
+    public function execute(int $id, JobPostDTO $jobPostDTO): RedirectResponse
     {
+        UserPermission::isPermitted(Permissions::EDIT_JOB_POST->value);
+
         /** @var JobPost|null $jobPost */
         $jobPost = JobPost::query()->find($id);
 

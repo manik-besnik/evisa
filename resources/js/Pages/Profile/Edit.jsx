@@ -1,6 +1,5 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm';
-import VerifySocialForm from './Partials/VerifySocialForm';
 import { Head, Link } from '@inertiajs/react';
 import Footer from '@/Components/Footer';
 
@@ -25,10 +24,6 @@ export default function Edit({ auth, mustVerifyEmail, status }) {
                     <UpdateProfileInformationForm
                         mustVerifyEmail={mustVerifyEmail}
                         status={status}
-                        className="max-w-[932px] mb-5 md:mb-[30px]"
-                    />
-
-                    <VerifySocialForm
                         className="max-w-[932px] mb-5 md:mb-[30px]"
                     />
 

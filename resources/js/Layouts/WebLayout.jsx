@@ -12,7 +12,7 @@ export default function WebLayout({children, showServiceImage = true, showBgImag
 
     useEffect(() => {
         if (flash?.success) {
-            toast.success(flash.success);
+            toast(flash.success);
         }
         if (flash?.error) {
             toast.error(flash.error);

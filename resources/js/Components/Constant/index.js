@@ -51,18 +51,37 @@ export const languageProficiency = [
     {id: 4, name: "Fluent"},
     {id: 5, name: "Native"}
 ];
-
-
 export const permissions = [
-    {name: "View Admin", value: "admin.view"},
-    {name: "Create Admin", value: "admin.create"},
-    {name: "Edit Admin", value: "admin.edit"},
-    {name: "Delete Admin", value: "admin.delete"},
-    {name: "View Role", value: "role.view"},
-    {name: "Create Role", value: "role.create"},
-    {name: "Edit Role", value: "role.edit"},
-    {name: "Delete Role", value: "role.delete"}
-]
+    { name: "View Admin", value: "admin.view" },
+    { name: "Create Admin", value: "admin.create" },
+    { name: "Edit Admin", value: "admin.edit" },
+    { name: "Delete Admin", value: "admin.delete" },
+    { name: "View Role", value: "role.view" },
+    { name: "Create Role", value: "role.create" },
+    { name: "Edit Role", value: "role.edit" },
+    { name: "Delete Role", value: "role.delete" },
+    { name: "View Agency", value: "agency.view" },
+    { name: "Create Agency", value: "agency.create" },
+    { name: "Edit Agency", value: "agency.edit" },
+    { name: "Delete Agency", value: "agency.delete" },
+    { name: "View Single Agency", value: "agency.single-view" },
+    { name: "Approve Agency", value: "agency.approve" },
+    { name: "View Visa", value: "visa.view" },
+    { name: "View Single Visa", value: "visa.single-view" },
+    { name: "Create Visa", value: "visa.create" },
+    { name: "Edit Visa", value: "visa.edit" },
+    { name: "Delete Visa", value: "visa.delete" },
+    { name: "Add Document to Visa", value: "visa.add.document" },
+    { name: "Change Visa Status", value: "visa.status.change" },
+    { name: "View Job Post", value: "job-post.view" },
+    { name: "View Single Job Post", value: "job-post.single-view" },
+    { name: "Create Job Post", value: "job-post.create" },
+    { name: "Edit Job Post", value: "job-post.edit" },
+    { name: "Delete Job Post", value: "job-post.delete" },
+    { name: "View User", value: "user.view" },
+    { name: "Create User", value: "user.create" }
+];
+
 
 export const documentTypes = {
     passport: {type: "passport", name: "Passport Page 1"},

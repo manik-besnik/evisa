@@ -41,7 +41,7 @@ class Agency
             return $next($request);
         }
 
-        if (!$user->agency->is_account_approved && !$request->routeIs('agency.account-not-approved')) {
+        if (!$user?->agency?->is_account_approved && !$request->routeIs('agency.account-not-approved')) {
             return to_route('agency.account-not-approved');
         }
 

@@ -4,12 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
 
 /**
  * @property int $id
  * @property int $user_id
+ * @property int $personal_info_id
+ * @property int $passport_id
+ * @property int $guarantor_id
  * @property int $applied_by
  * @property int $processing_type
  * @property int $visa_type
@@ -22,9 +24,10 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  *
  * @mixin Model
  *
- * @property PersonalInfo|null $personInfo
+ * @property PersonalInfo|null $personalInfo
  * @property Passport|null $passport
  * @property Guarantor|null $guarantor
+ * @property User|null $user
  *
  */
 class VisaApply extends Model
@@ -33,6 +36,9 @@ class VisaApply extends Model
 
     protected $fillable = [
         'user_id',
+        'personal_info_id',
+        'passport_id',
+        'guarantor_id',
         'applied_by',
         'processing_type',
         'visa_type',
@@ -48,19 +54,19 @@ class VisaApply extends Model
         'documents' => 'array'
     ];
 
-    public function personInfo(): HasOne
+    public function personalInfo(): BelongsTo
     {
-        return $this->hasOne(PersonalInfo::class, 'visa_apply_id', 'id');
+        return $this->belongsTo(PersonalInfo::class, 'personal_info_id', 'id');
     }
 
-    public function passport(): HasOne
+    public function passport(): BelongsTo
     {
-        return $this->hasOne(Passport::class, 'visa_apply_id', 'id');
+        return $this->belongsTo(Passport::class, 'passport_id', 'id');
     }
 
-    public function guarantor(): HasOne
+    public function guarantor(): BelongsTo
     {
-        return $this->hasOne(Guarantor::class, 'visa_apply_id', 'id');
+        return $this->belongsTo(Guarantor::class, 'guarantor_id', 'id');
     }
 
     public function user(): BelongsTo

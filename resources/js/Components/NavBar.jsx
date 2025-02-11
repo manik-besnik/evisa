@@ -2,6 +2,7 @@ import {Link, usePage} from '@inertiajs/react';
 import Dropdown from '@/Components/Dropdown';
 import BarIcon from '@/Components/SvgIcons/Bar';
 import Avatar from "@/Components/SvgIcons/Avatar.jsx";
+import Notification from "@/Components/Admin/Notification.jsx";
 
 export default function NavBar({useToggleSideNav}) {
 
@@ -27,7 +28,7 @@ export default function NavBar({useToggleSideNav}) {
 
 
             <div className='flex items-center gap-5'>
-
+                <Notification/>
                 <Dropdown>
                     <Dropdown.Trigger>
                         <span className="inline-flex rounded-md">
@@ -49,9 +50,7 @@ export default function NavBar({useToggleSideNav}) {
                             Profile
                             <p className='text-xs text-t-secondary'>{user?.email}</p>
                         </Dropdown.Link>
-                        <Dropdown.Link href={route('google.redirect')}>
-                            Referrals
-                        </Dropdown.Link>
+
                         <Dropdown.Link href={route('logout')} method="post" as="button">
                             Log Out
                         </Dropdown.Link>

@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 /**
  * @property int $id
  * @property int $user_id
- * @property int $visa_apply_id
  * @property int $current_nationality
  * @property int $prev_nationality
  * @property int $birth_country
@@ -34,7 +33,6 @@ class PersonalInfo extends Model
 
     protected $fillable = [
         'user_id',
-        'visa_apply_id',
         'current_nationality',
         'prev_nationality',
         'birth_country',

@@ -4,13 +4,18 @@ namespace App\Actions\Admin\JobPost;
 
 use App\DTOs\JobPostDTO;
 use App\Enums\JobType;
+use App\Enums\Permissions;
 use App\Models\JobPost;
 use App\Supports\FileUpload;
+use App\Supports\UserPermission;
+use Illuminate\Http\RedirectResponse;
 
 class StoreAction
 {
-    public function execute(JobPostDTO $jobPostDTO): \Illuminate\Http\RedirectResponse
+    public function execute(JobPostDTO $jobPostDTO): RedirectResponse
     {
+        UserPermission::isPermitted(Permissions::CREATE_JOB_POST->value);
+
         try {
 
             $thumbnail = null;

@@ -17,7 +17,6 @@ Route::get('/job-details', function () {
 })->name('job-details');
 
 
-
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -38,6 +37,7 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('report', [VisaApplyController::class, 'index'])->name('visa-apply.index');
+    Route::get('visa-apply/{id}/details', [VisaApplyController::class, 'show'])->name('visa-apply.show');
 
     Route::get('visa-apply', [VisaApplyController::class, 'create'])->name('visa-apply.create');
     Route::get('job-demand', [JobDemandController::class, 'create'])->name('job-demand.create');
@@ -52,10 +52,6 @@ Route::middleware(['auth', 'user'])->group(function () {
 
 });
 
-
-Route::get('google/redirect', function () {
-
-})->name('google.redirect');
 
 Route::get('google/redirect3', function () {
 
