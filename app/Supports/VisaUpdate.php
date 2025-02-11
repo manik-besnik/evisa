@@ -15,42 +15,44 @@ class VisaUpdate
 
         $oldDocs = (array)json_decode($visaApply->documents);
 
+        $oldDocsMap = [];
         foreach ($oldDocs as $doc) {
-            $file = (array)$doc;
-            if (isset($file['url'])) {
-
-                FileUpload::delete($file['url']);
-            }
+            $oldDocsMap[$doc->type] = (array)$doc;
         }
-
 
         $documents = [];
 
         foreach ($visaApplyDTO->documents as $document) {
-
             $fullPath = FileUpload::execute($document['file']);
+
+            if (isset($oldDocsMap[$document['type']])) {
+                FileUpload::delete($oldDocsMap[$document['type']]['url']);
+                unset($oldDocsMap[$document['type']]);
+            }
 
             $documents[] = [
                 'name' => $document['name'],
+                'type' => $document['type'],
                 'url' => $fullPath,
             ];
         }
 
-
+        $mergedDocuments = array_merge($documents, array_values($oldDocsMap));
+dd($mergedDocuments);
         /** Personal Info Store */
-        $personalInfo = self::storePersonalInfo($visaApplyDTO, $visaApply->personal_info_id);
+        self::storePersonalInfo($visaApplyDTO, $visaApply->personal_info_id);
 
         /** Passport Info Store */
-        $passport = self::storePassportInfo($visaApplyDTO, $visaApply->passport_id);
+        self::storePassportInfo($visaApplyDTO, $visaApply->passport_id);
 
         /** Guarantor Info Store */
-        $guarantor = self::storeGuarantorInfo($visaApplyDTO, $visaApply->guarantor_id);
+        self::storeGuarantorInfo($visaApplyDTO, $visaApply->guarantor_id);
 
         $visaApply->name = $visaApplyDTO->personalName;
         $visaApply->processing_type = $visaApplyDTO->processingType;
         $visaApply->visa_type = $visaApplyDTO->visaType;
         $visaApply->group = $visaApplyDTO->group;
-        $visaApply->documents = json_encode($documents);
+        $visaApply->documents = json_encode($mergedDocuments);
         $visaApply->update();
 
 
@@ -62,10 +64,10 @@ class VisaUpdate
     /**
      * @param VisaApplyDTO $visaApplyDTO
      * @param int $id
-     * @return PersonalInfo
+     * @return void
      */
     private static function storePersonalInfo(VisaApplyDTO $visaApplyDTO, int $id):
-    PersonalInfo
+    void
     {
         /** @var PersonalInfo|null $personalInfo */
         $personalInfo = PersonalInfo::query()
@@ -91,17 +93,16 @@ class VisaUpdate
         $personalInfo->qualification = $visaApplyDTO->qualification;
         $personalInfo->update();
 
-        return $personalInfo;
     }
 
 
     /**
      * @param VisaApplyDTO $visaApplyDTO
      * @param int $id
-     * @return Passport
+     * @return void
      */
     private static function storePassportInfo(VisaApplyDTO $visaApplyDTO, int $id):
-    Passport
+    void
     {
         /** @var Passport|null $passport */
         $passport = Passport::query()->find($id);
@@ -115,16 +116,15 @@ class VisaUpdate
         $passport->passport_issue_country = $visaApplyDTO->passportIssueCountry;
         $passport->update();
 
-        return $passport;
     }
 
     /**
      * @param VisaApplyDTO $visaApplyDTO
      * @param int $id
-     * @return Guarantor
+     * @return void
      */
     private static function storeGuarantorInfo(VisaApplyDTO $visaApplyDTO, int $id):
-    Guarantor
+    void
     {
         /** @var Guarantor|null $guarantor */
         $guarantor = Guarantor::query()->find($id);
@@ -136,6 +136,17 @@ class VisaUpdate
         $guarantor->relation = $visaApplyDTO->guarantorRelation;
         $guarantor->update();
 
-        return $guarantor;
+    }
+
+    private static function getPrevFile(array $files, string $fileType): ?array
+    {
+        foreach ($files as $file) {
+            $file = (array)$file;
+            if (isset($file['type']) && $file['type'] === $fileType) {
+                return $file;
+            }
+        }
+
+        return null;
     }
 }
