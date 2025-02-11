@@ -234,7 +234,7 @@ export default function PlatformList() {
         setProducts(prevProducts => {
 
             return prevProducts.map((product, idx) => {
-                if (idx == index) {
+                if (idx === index) {
                     return {
                         ...product,
                         isOpen: !product.isOpen
@@ -272,39 +272,39 @@ export default function PlatformList() {
 
         <div className='columns-4 w-full'>
 
-            {products.map((product, i) => <div key={i} className={`${product.isOpen && 'bg-card-and-hover border border-main-outline'} rounded-[10px] mb-1.5 hover:bg-card-and-hover inline-block w-full`}>
-                <div onClick={() => handleToggle(i)} className='flex justify-between items-center gap-2 cursor-pointer p-[10px]'>
-                    <div className='flex items-center gap-[10px]'>
-                        {product.icon}
-                        <span className={`${product.isOpen && 'font-semibold'} font-medium text-sm text-text-primary`}>{product.name}</span>
-                    </div>
+            {/*{products.map((product, i) => <div key={i} className={`${product.isOpen && 'bg-card-and-hover border border-main-outline'} rounded-[10px] mb-1.5 hover:bg-card-and-hover inline-block w-full`}>*/}
+            {/*    <div onClick={() => handleToggle(i)} className='flex justify-between items-center gap-2 cursor-pointer p-[10px]'>*/}
+            {/*        <div className='flex items-center gap-[10px]'>*/}
+            {/*            {product.icon}*/}
+            {/*            <span className={`${product.isOpen && 'font-semibold'} font-medium text-sm text-text-primary`}>{product.name}</span>*/}
+            {/*        </div>*/}
 
-                    <ArrowUp class={`${product.isOpen ? 'rotate-0' : 'rotate-180'} transition-all duration-500`} />
-                </div>
+            {/*        <ArrowUp class={`${product.isOpen ? 'rotate-0' : 'rotate-180'} transition-all duration-500`} />*/}
+            {/*    </div>*/}
 
-                {/* className={`transition-height border-t border-main-outline pt-[10px] mt-[10px] overflow-hidden ${product.isOpen ? 'max-h-screen duration-1000 ease-in-out' : 'max-h-0'}`}> */}
+            {/*    /!* className={`transition-height border-t border-main-outline pt-[10px] mt-[10px] overflow-hidden ${product.isOpen ? 'max-h-screen duration-1000 ease-in-out' : 'max-h-0'}`}> *!/*/}
 
-                <div className={`overflow-hidden`} style={{ maxHeight: product.isOpen ? '500px' : '0', transition: 'max-height 0.5s ease-in-out' }}>
-                    <div className='px-2.5 pb-2.5'>
-                        <hr className='border-t border-t-main-outline pb-2.5' />
-                        {product.options.map((option, j) => <div key={j} className='flex justify-between items-center gap-[10px] mb-[10px] last:mb-0 text-medium text-sm text-font-medium text-text-primary'>
-                            {option.name}
+            {/*    <div className={`overflow-hidden`} style={{ maxHeight: product.isOpen ? '500px' : '0', transition: 'max-height 0.5s ease-in-out' }}>*/}
+            {/*        <div className='px-2.5 pb-2.5'>*/}
+            {/*            <hr className='border-t border-t-main-outline pb-2.5' />*/}
+            {/*            {product.options.map((option, j) => <div key={j} className='flex justify-between items-center gap-[10px] mb-[10px] last:mb-0 text-medium text-sm text-font-medium text-text-primary'>*/}
+            {/*                {option.name}*/}
 
-                            <Switch
-                                checked={option.isEnable}
-                                onChange={() => handleOptionToggle(i, j)}
-                                className="group relative flex h-3 w-5 cursor-pointer rounded-full bg-black/20 p-0.5 transition-colors duration-200 ease-in-out focus:outline-none data-[focus]:outline-1 data-[focus]:outline-black data-[checked]:bg-text-primary"
-                            >
-                                <span
-                                    aria-hidden="true"
-                                    className="pointer-events-none inline-block size-2 translate-x-0 rounded-full bg-white ring-0 shadow-lg transition duration-200 ease-in-out group-data-[checked]:translate-x-2"
-                                />
-                            </Switch>
-                        </div>)}
-                    </div>
-                </div>
+            {/*                <Switch*/}
+            {/*                    checked={option.isEnable}*/}
+            {/*                    onChange={() => handleOptionToggle(i, j)}*/}
+            {/*                    className="group relative flex h-3 w-5 cursor-pointer rounded-full bg-black/20 p-0.5 transition-colors duration-200 ease-in-out focus:outline-none data-[focus]:outline-1 data-[focus]:outline-black data-[checked]:bg-text-primary"*/}
+            {/*                >*/}
+            {/*                    <span*/}
+            {/*                        aria-hidden="true"*/}
+            {/*                        className="pointer-events-none inline-block size-2 translate-x-0 rounded-full bg-white ring-0 shadow-lg transition duration-200 ease-in-out group-data-[checked]:translate-x-2"*/}
+            {/*                    />*/}
+            {/*                </Switch>*/}
+            {/*            </div>)}*/}
+            {/*        </div>*/}
+            {/*    </div>*/}
 
-            </div>)}
+            {/*</div>)}*/}
         </div>
 
     );
