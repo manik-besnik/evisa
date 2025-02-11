@@ -11,6 +11,7 @@ import {
 } from "@/Components/Constant/index.js";
 import InputBox from "@/Components/Admin/InputBox.jsx";
 import InputFile from "@/Components/Admin/InputFile.jsx";
+import {FaRegEye} from "react-icons/fa6";
 
 const VisaApplyForm = ({isAdmin = false}) => {
 
@@ -179,6 +180,13 @@ const VisaApplyForm = ({isAdmin = false}) => {
             "file": file
         }
     }
+
+    const getDocument = (type) => {
+        const documents = JSON.parse(visa_apply.documents);
+        const document = documents.find(item => item.type === type);
+        return document ? document.url : null;
+    };
+
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -458,83 +466,170 @@ const VisaApplyForm = ({isAdmin = false}) => {
                         <h4 className="text-success mt-6 text-md mb-5">Documents</h4>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
 
-                            <InputFile
-                                placeholder="Passport Page 1"
-                                onChange={handleFileChange}
-                                fileType="passport"
-                                type="file"
-                            />
+                            <div className="flex gap-x-2">
+                                <div className="w-full">
+                                    <InputFile
+                                        placeholder="Passport Page 1"
+                                        onChange={handleFileChange}
+                                        fileType="passport"
+                                        type="file"
+                                    />
+                                </div>
+                                {getDocument("passport") &&
+                                    <a target="_blank" href={getDocument("passport")} className='btn-primary'>
+                                        <FaRegEye/>
+                                    </a>}
+                            </div>
+                            <div className="flex gap-x-2">
+                                <div className="w-full">
 
-                            <InputFile
-                                placeholder="Photo"
-                                onChange={handleFileChange}
-                                fileType="photo"
-                            />
+                                    <InputFile
+                                        placeholder="Photo"
+                                        onChange={handleFileChange}
+                                        fileType="photo"
+                                    />
+                                </div>
+                                {getDocument("photo") &&
+                                    <a target="_blank" href={getDocument("photo")} className='btn-primary'>
+                                        <FaRegEye/>
+                                    </a>}
+                            </div>
+                            <div className="flex gap-x-2">
+                                <div className="w-full">
 
-                            <InputFile
-                                placeholder="Deposit Paper"
-                                onChange={handleFileChange}
-                                fileType="deposit"
-                            />
+                                    <InputFile
+                                        placeholder="Deposit Paper"
+                                        onChange={handleFileChange}
+                                        fileType="deposit"
+                                    />
+                                </div>
+                                {getDocument("deposit") &&
+                                    <a target="_blank" href={getDocument("deposit")} className='btn-primary'>
+                                        <FaRegEye/>
+                                    </a>}
+                            </div>
+                            <div className="flex gap-x-2">
+                                <div className="w-full">
+                                    <InputFile
+                                        placeholder="ID Card"
+                                        onChange={handleFileChange}
+                                        fileType="id"
+                                    />
+                                </div>
+                                {getDocument("id") &&
+                                    <a target="_blank" href={getDocument("id")} className='btn-primary'>
+                                        <FaRegEye/>
+                                    </a>}
+                            </div>
+                            <div className="flex gap-x-2">
+                                <div className="w-full">
+                                    <InputFile
+                                        placeholder="Residence Letter"
+                                        onChange={handleFileChange}
+                                        fileType="residence"
+                                    /></div>
+                                {getDocument("residence") &&
+                                    <a target="_blank" href={getDocument("residence")} className='btn-primary'>
+                                        <FaRegEye/>
+                                    </a>}
+                            </div>
+                            <div className="flex gap-x-2">
+                                <div className="w-full">
 
-                            <InputFile
-                                placeholder="ID Card"
-                                onChange={handleFileChange}
-                                fileType="id"
-                            />
+                                    <InputFile
+                                        placeholder="Sponsor Letter"
+                                        onChange={handleFileChange}
+                                        fileType="sponsor"
+                                    />
+                                </div>
+                                {getDocument("sponsor") &&
+                                    <a target="_blank" href={getDocument("sponsor")} className='btn-primary'>
+                                        <FaRegEye/>
+                                    </a>}
+                            </div>
+                            <div className="flex gap-x-2">
+                                <div className="w-full">
+                                    <InputFile
+                                        placeholder="Health Insurance"
+                                        onChange={handleFileChange}
+                                        fileType="health"
+                                    />
+                                </div>
+                                {getDocument("health") &&
+                                    <a target="_blank" href={getDocument("health")} className='btn-primary'>
+                                        <FaRegEye/>
+                                    </a>}
+                            </div>
+                            <div className="flex gap-x-2">
+                                <div className="w-full">
 
-                            <InputFile
-                                placeholder="Residence Letter"
-                                onChange={handleFileChange}
-                                fileType="residence"
-                            />
+                                    <InputFile
+                                        placeholder="Return Ticket"
+                                        onChange={handleFileChange}
+                                        fileType="return_ticker"
+                                    />
 
-                            <InputFile
-                                placeholder="Sponsor Letter"
-                                onChange={handleFileChange}
-                                fileType="sponsor"
-                            />
-                            <InputFile
-                                placeholder="Health Insurance"
-                                onChange={handleFileChange}
-                                fileType="health"
-                            />
+                                </div>
+                                {getDocument("return_ticker") &&
+                                    <a target="_blank" href={getDocument("return_ticker")} className='btn-primary'>
+                                        <FaRegEye/>
+                                    </a>}
+                            </div>
+                            <div className="flex gap-x-2">
+                                <div className="w-full">
+                                    <InputFile
+                                        placeholder="Bank Statement"
+                                        onChange={handleFileChange}
+                                        fileType="bank"
+                                    />
 
+                                </div>
+                                {getDocument("bank") &&
+                                    <a target="_blank" href={getDocument("bank")} className='btn-primary'>
+                                        <FaRegEye/>
+                                    </a>}
+                            </div>
+                            <div className="flex gap-x-2">
+                                <div className="w-full">
+                                    <InputFile
+                                        placeholder="Proof of Employment"
+                                        onChange={handleFileChange}
+                                        fileType="proof"
+                                    />
 
-                            <InputFile
-                                placeholder="Return Ticket"
-                                onChange={handleFileChange}
-                                fileType="return_ticker"
-                            />
+                                </div>
+                                {getDocument("proof") &&
+                                    <a target="_blank" href={getDocument("proof")} className='btn-primary'>
+                                        <FaRegEye/>
+                                    </a>}
+                            </div>
+                            <div className="flex gap-x-2">
+                                <div className="w-full">
+                                    <InputFile
+                                        placeholder="Additional Document 1"
+                                        onChange={handleFileChange}
+                                        fileType="additional1"
+                                    />
 
-
-                            <InputFile
-                                placeholder="Bank Statement"
-                                onChange={handleFileChange}
-                                fileType="bank"
-                            />
-
-
-                            <InputFile
-                                placeholder="Proof of Employment"
-                                onChange={handleFileChange}
-                                fileType="proof"
-                            />
-
-
-                            <InputFile
-                                placeholder="Additional Document 1"
-                                onChange={handleFileChange}
-                                fileType="additional1"
-                            />
-
-
-                            <InputFile
-                                placeholder="Additional Document 2"
-                                onChange={handleFileChange}
-                                fileType="additional1"
-                            />
-
+                                </div>
+                                {getDocument("additional1") &&
+                                    <a target="_blank" href={getDocument("additional1")} className='btn-primary'>
+                                        <FaRegEye/>
+                                    </a>}
+                            </div>
+                            <div className="flex gap-x-2">
+                                <div className="w-full">
+                                    <InputFile
+                                        placeholder="Additional Document 2"
+                                        onChange={handleFileChange}
+                                        fileType="additional2"
+                                    />
+                                </div>
+                                {getDocument("additional2") &&
+                                    <a target="_blank" href={getDocument("additional2")} className='btn-primary'>
+                                        <FaRegEye/>
+                                    </a>}
+                            </div>
 
                             {isPassportRequired &&
                                 <p className="text-warning text-sm my-2">Passport Document is required</p>}
