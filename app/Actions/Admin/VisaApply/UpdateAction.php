@@ -3,14 +3,20 @@
 namespace App\Actions\Admin\VisaApply;
 
 use App\DTOs\VisaApplyDTO;
+use App\Enums\Permissions;
 use App\Models\VisaApply;
+use App\Supports\UserPermission;
 use App\Supports\VisaUpdate;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 
 class UpdateAction
 {
-    public function execute(VisaApplyDTO $visaApplyDTO, VisaApply $visaApply): \Illuminate\Http\RedirectResponse
+    public function execute(VisaApplyDTO $visaApplyDTO, VisaApply $visaApply): RedirectResponse
     {
+
+        UserPermission::isPermitted(Permissions::EDIT_VISA->value);
+
         DB::beginTransaction();
 
         try {
