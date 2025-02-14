@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\VisaApplyController;
 use App\Http\Controllers\ExtreactTextController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -8,6 +9,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth:sanctum'])->name('api.')->group(function () {
 
     Route::post('user/store-info', [AuthController::class, 'storeInfo'])->name('user.store-info');
+
+    Route::get('report', [VisaApplyController::class, 'index'])->name('visa-applies.index');
+    
 });
 
 Route::get('/user', function (Request $request) {
