@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AgencyController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\JobDemandController;
 use App\Http\Controllers\Admin\JobPostController;
 use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Controllers\Admin\RoleController;
@@ -49,7 +50,9 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
     Route::put('roles/update/{id}', [RoleController::class, 'update'])->name('roles.update');
 
     Route::get('job-posts/applications', [JobPostController::class, 'applications'])->name('job-posts.applications');
+    Route::get('job-demand/applications', [JobDemandController::class, 'jobDemandApplications'])->name('job-demand.applications');
     Route::resource('job-posts', JobPostController::class);
+    Route::resource('job-demand', JobPostController::class);
 
     Route::get('agencies', [AgencyController::class, 'index'])->name('agencies.index');
 

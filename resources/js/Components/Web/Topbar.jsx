@@ -1,13 +1,13 @@
-import {FaWhatsapp} from "react-icons/fa";
-import {Link, router, usePage} from "@inertiajs/react";
-import {assetUrl} from "@/Components/Constant/index.js";
+import { FaWhatsapp } from "react-icons/fa";
+import { Link, router, usePage } from "@inertiajs/react";
+import { assetUrl } from "@/Components/Constant/index.js";
 
 const RightNoneAuthPart = () => {
     return (<>
         <div className="flex justify-center items-center">
-            <img className="w-20" src={`${assetUrl + 'images/logo2.png'}`} alt="logo"/>
+            <img className="w-20" src={`${assetUrl + 'images/logo2.png'}`} alt="logo" />
             <p className="flex items-center ml-6">
-                <FaWhatsapp className="text-success"/>
+                <FaWhatsapp className="text-success" />
                 <span className="text-primary">600555555</span>
             </p>
         </div>
@@ -19,14 +19,14 @@ const RightNoneAuthPart = () => {
             <div>
                 <Link href={route('register')} className="pr-2">Register</Link>
                 <Link href={route('login')}
-                      className='bg-primary px-4 py-1 text-2xl rounded font-semibold text-white '>
+                    className='bg-primary px-4 py-1 text-2xl rounded font-semibold text-white '>
                     Login</Link>
             </div>
         </div>
     </>)
 }
 
-const RightAuthPart = ({user}) => {
+const RightAuthPart = ({ user }) => {
     const logOut = () => {
         router.post(route('logout'))
     }
@@ -51,17 +51,17 @@ const RightAuthPart = ({user}) => {
 }
 const Topbar = () => {
 
-    const {auth} = usePage().props
+    const { auth } = usePage().props
 
     return (
         <>
 
             <div className="container grid sm:grid-cols-1 md:grid-cols-3 justify-center items-center py-2">
                 <Link href={route('home')}>
-                    <img className="w-4/6" src={`${assetUrl + 'images/logo.png'}`} alt="logo"/>
+                    <img className="w-4/6" src={`${assetUrl + 'images/logo.png'}`} alt="logo" />
                 </Link>
 
-                {auth?.user ? <RightAuthPart user={auth?.user}/> : <RightNoneAuthPart/>}
+                {auth?.user ? <RightAuthPart user={auth?.user} /> : <RightNoneAuthPart />}
 
             </div>
         </>
