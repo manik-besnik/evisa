@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Actions\Admin\VisaApply\AddDocumentAction;
 use App\Actions\Admin\VisaApply\ChangeStatusAction;
 use App\Actions\Admin\VisaApply\CreateAction;
+use App\Actions\Admin\VisaApply\DeleteAction;
 use App\Actions\Admin\VisaApply\EditAction;
 use App\Actions\Admin\VisaApply\IndexAction;
 use App\Actions\Admin\VisaApply\ShowAction;
@@ -73,9 +74,9 @@ class VisaApplyController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(VisaApply $visaApply)
+    public function destroy(VisaApply $visaApply, DeleteAction $deleteAction)
     {
-        //
+        return $deleteAction->execute($visaApply);
     }
 
     public function addDocument(Request $request, int $id, AddDocumentAction $addDocumentAction): RedirectResponse
