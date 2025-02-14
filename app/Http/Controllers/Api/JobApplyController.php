@@ -39,9 +39,12 @@ class JobApplyController extends Controller
     public function availableJobs(): \Illuminate\Http\JsonResponse
     {
 
-        $jobPoss = JobPost::query()->whereDate('last_apply_date', '>=', now()->format('Y-m-d'))->get();
+        $jobPoss = JobPost::query()
+            ->select(['id', 'title'])
+            ->whereDate('last_apply_date', '>=', now()->format('Y-m-d'))
+            ->get();
 
-        return ApiResponse::success('Job post list',['job_posts' => $jobPoss]);
+        return ApiResponse::success('Job post list', ['job_posts' => $jobPoss]);
 
     }
 }

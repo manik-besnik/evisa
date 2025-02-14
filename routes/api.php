@@ -17,6 +17,9 @@ Route::middleware(['auth:sanctum'])->name('api.')->group(function () {
 
     Route::get('job-applies', [JobApplyController::class, 'index'])->name('job-applies.index');
 
+
+    Route::get('job-applies/available-jobs', [JobApplyController::class, 'availableJobs'])->name('job-applies.available-jobs');
+
     Route::post('job-apply', [JobApplyController::class, 'store'])->name('job-applies.store');
 
 });
