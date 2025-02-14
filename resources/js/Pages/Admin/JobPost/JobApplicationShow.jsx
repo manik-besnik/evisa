@@ -1,25 +1,15 @@
 import Authenticated from "@/Layouts/AuthenticatedLayout.jsx";
-import {Head, Link, router, usePage} from "@inertiajs/react";
+import {Head, Link, usePage} from "@inertiajs/react";
 import TopSection from "@/Components/Admin/TopSection.jsx";
-import InputFile from "@/Components/Admin/InputFile.jsx";
-import {getValue, isPermitted} from "@/Components/Helper/index.js";
-import {
-    genders,
-    groups,
-    maritalStatuses,
-    permissionEnums,
-    visaProcessingTypes,
-    visaStatuses,
-    visaTypes
-} from "@/Components/Constant/index.js";
+import {getValue} from "@/Components/Helper/index.js";
+import {languageProficiency} from "@/Components/Constant/index.js";
 import InfoSection from "@/Components/InfoSection.jsx";
 import InfoItem from "@/Components/Web/InfoItem.jsx";
 import {FaRegEye} from "react-icons/fa6";
-import Select from "@/Components/Select.jsx";
 
 const JobApplicationShow = () => {
 
-    const {visa_apply} = usePage().props;
+    const {job_apply, experiences} = usePage().props;
 
     return (
         <Authenticated>
@@ -38,33 +28,23 @@ const JobApplicationShow = () => {
 
                     <div className="w-full md:w-1/2">
                         <InfoSection title="General Info">
-                            <InfoItem label="Name" value={visa_apply.personal_info.name}/>
-                            <InfoItem label="Name (Arabic)" value={visa_apply.personal_info.name_arabic}/>
-                            <InfoItem label="Current Nationality"
-                                      value={visa_apply.personal_info.current_nationality.nationality}/>
-                            <InfoItem label="Previous Nationality"
-                                      value={visa_apply.personal_info.prev_nationality.nationality}/>
-                            <InfoItem label="Gender" value={getValue(genders, visa_apply.personal_info.gender)}/>
-                            <InfoItem label="Date of Birth" value={visa_apply.personal_info.date_of_birth}/>
-                            <InfoItem label="Birth Country" value={visa_apply.personal_info.birth_country.name}/>
-                            <InfoItem label="Marital Status"
-                                      value={getValue(maritalStatuses, visa_apply.personal_info.marital_status)}/>
-                            <InfoItem label="Birth Place" value={visa_apply.personal_info.birth_place}/>
-                            <InfoItem label="Birth Place (Arabic)" value={visa_apply.personal_info.birth_place_arabic}/>
-                            <InfoItem label="Mother's Name" value={visa_apply.personal_info.mother_name}/>
-                            <InfoItem label="Mother's Name (Arabic)"
-                                      value={visa_apply.personal_info.mother_name_arabic}/>
-                            <InfoItem label="Religion" value={visa_apply.personal_info.religion}/>
-                            <InfoItem label="Faith" value={visa_apply.personal_info.faith}/>
-                            <InfoItem label="Qualification" value={visa_apply.personal_info.qualification}/>
-                            <InfoItem label="Profession" value={visa_apply.personal_info.profession}/>
+                            <InfoItem label="Name" value={job_apply.name}/>
+                            <InfoItem label="Mobile Number" value={job_apply.phone}/>
+                            <InfoItem label="Email Address" value={job_apply.email}/>
+                            <InfoItem label="Shirt Size" value={job_apply.shirt_size}/>
+                            <InfoItem label="Weight(in kgs)" value={job_apply.weight}/>
+                            <InfoItem label="Height(in cm)" value={job_apply.height}/>
+                            <InfoItem label="Pant Size" value={job_apply.pant_size}/>
+                            <InfoItem label="Show Size" value={job_apply.show_size}/>
+                            <InfoItem label="Nearest Airport" value={job_apply.nearest_airport}/>
+                            <InfoItem label="Summary" value={job_apply.summary}/>
                         </InfoSection>
 
                         <InfoSection title="Documents">
-                            {JSON.parse(visa_apply.documents) && JSON.parse(visa_apply.documents.length) > 0 ? (
+                            {job_apply.documents && job_apply.documents.length > 0 ? (
                                 <ul className="list-disc list-inside text-gray-800">
-                                    {JSON.parse(visa_apply.documents).map((doc, index) => (
-                                        <li key={index} className="mb-2 flex justify-between items-center">
+                                    {job_apply.documents.map((doc, index) => (
+                                        <li key={index} className="mb-2 flex text-sm justify-between items-center">
                                         <span>
                                             {doc.name}
                                         </span>
@@ -81,43 +61,45 @@ const JobApplicationShow = () => {
                     </div>
 
                     <div className="w-full lg:w-1/2">
-                        <InfoSection title="Visa Info">
-                            <InfoItem label="App ID" value={visa_apply.app_id}/>
-                            <InfoItem label="Personal Name | Company Name" value={visa_apply.name}/>
-                            <InfoItem label="Processing Type"
-                                      value={getValue(visaProcessingTypes, visa_apply.processing_type)}/>
-                            <InfoItem label="Visa Type" value={getValue(visaTypes, visa_apply.visa_type)}/>
-                            <InfoItem label="Group" value={getValue(groups, visa_apply.group)}/>
-                            {isAdmin ?
-                                <Select
-                                    items={visaStatuses}
-                                    selected={status}
-                                    label="Visa Status"
-                                    setSelected={setStatus}
-                                    handleValueChange={changeStatus}
-                                    placeholder="Select Status"
-                                /> : <InfoItem label="Status" value={getValue(visaStatuses, visa_apply.status)}/>
-                            }
+                        <InfoSection title="Education">
+                            <InfoItem label="Certificate" value={job_apply.education.exam_name}/>
+                            <InfoItem label="Year" value={job_apply.education.passing_year}/>
+                            <InfoItem label="Board or University" value={job_apply.education.institute}/>
+                            <InfoItem label="Computer Skill" value={job_apply.education.computer_skill}/>
+                            <InfoItem label="Driving License" value={job_apply.education.driving_license}/>
+                            <InfoItem label="Issue Date" value={job_apply.education.driving_license_issue_date}/>
+                            <InfoItem label="Expire Date" value={job_apply.education.driving_license_expire_date}/>
+                            <InfoItem
+                                label="English"
+                                value={getValue(languageProficiency, job_apply.education.english_proficiency)}
+                            />
+                            <InfoItem
+                                label="Urdu/Hindi"
+                                value={getValue(languageProficiency, job_apply.education.urdu_proficiency)}
+                            />
+                            <InfoItem
+                                label="Arabic"
+                                value={getValue(languageProficiency, job_apply.education.arabic_proficiency)}
+                            />
+                            <InfoItem label="Mother Language" value={job_apply.education.language.name}/>
+
                         </InfoSection>
 
-                        <InfoSection title="Passport Info">
-                            <InfoItem label="Passport Type" value={visa_apply.passport.passport_type}/>
-                            <InfoItem label="Passport Number" value={visa_apply.passport.passport_no}/>
-                            <InfoItem label="Issue Date" value={visa_apply.passport.passport_issue_date}/>
-                            <InfoItem label="Expiry Date" value={visa_apply.passport.passport_expire_date}/>
-                            <InfoItem label="Issue Place" value={visa_apply.passport.passport_issue_place}/>
-                            <InfoItem label="Issue Place (Arabic)"
-                                      value={visa_apply.passport.passport_issue_place_arabic}/>
-                            <InfoItem label="Issue Country" value={visa_apply.passport.issue_country.name}/>
+                        <InfoSection title="Job Experiences">
+                            {
+                                experiences.map((item, i) => (
+                                    <div key={i} className="my-2">
+                                        <InfoItem label="Country" value={item.country.name}/>
+                                        <InfoItem label="Company" value={item.company}/>
+                                        <InfoItem label="Position" value={item.position}/>
+                                        <InfoItem label="Duration" value={item.duration}/>
+                                    </div>
+                                ))
+                            }
+
+
                         </InfoSection>
-                        <InfoSection title="Guarantor Info">
-                            <InfoItem label="Guarantor Name" value={visa_apply.guarantor.name}/>
-                            <InfoItem label="Guarantor Passport Number" value={visa_apply.guarantor.passport_no}/>
-                            <InfoItem label="Guarantor Nationality"
-                                      value={visa_apply.guarantor.guarantor_nationality.nationality}/>
-                            <InfoItem label="Guarantor Phone" value={visa_apply.guarantor.phone}/>
-                            <InfoItem label="Guarantor Relation" value={visa_apply.guarantor.relation}/>
-                        </InfoSection>
+
                     </div>
 
 

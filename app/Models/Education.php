@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 
 /**
@@ -20,6 +21,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $english_proficiency
  * @property int $arabic_proficiency
  * @property int $urdu_proficiency
+ *
+ * @mixin Model
+ * @property Language $language
  */
 class Education extends Model
 {
@@ -39,6 +43,11 @@ class Education extends Model
         'arabic_proficiency',
         'urdu_proficiency',
     ];
+
+    public function language(): BelongsTo
+    {
+        return $this->belongsTo(Language::class,'mother_language','id');
+    }
 
 
 }
