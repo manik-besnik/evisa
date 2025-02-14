@@ -13,7 +13,7 @@ class JobPostDTO
     public string $company;
     public string $salaryRange;
     public string $location;
-    public string $description;
+    public string|null $description;
     public string $lastApplyDate;
 
     public static function fromRequest(Request $request): JobPostDTO
