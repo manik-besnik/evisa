@@ -454,6 +454,8 @@ const JobApply = () => {
 
                     <h4 className="text-success text-md my-4">Add Any Type of documents</h4>
 
+                    {errors.documents && <span className='text-red-600 text-sm'>{errors.documents}</span>}
+
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4  gap-2">
                         {jobApplyDocuments.map((item, i) => (
                             <InputFile

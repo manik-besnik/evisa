@@ -22,23 +22,26 @@ class VisaUpdate
 
         $documents = [];
 
-        if ($visaApplyDTO->documents){
+        if ($visaApplyDTO->documents) {
 
 
-        foreach ($visaApplyDTO->documents as $document) {
-            $fullPath = FileUpload::execute($document['file']);
+            foreach ($visaApplyDTO->documents as $document) {
+                if (!$document['file']){
+                    continue;
+                }
+                $fullPath = FileUpload::execute($document['file']);
 
-            if (isset($oldDocsMap[$document['type']])) {
-                FileUpload::delete($oldDocsMap[$document['type']]['url']);
-                unset($oldDocsMap[$document['type']]);
+                if (isset($oldDocsMap[$document['type']])) {
+                    FileUpload::delete($oldDocsMap[$document['type']]['url']);
+                    unset($oldDocsMap[$document['type']]);
+                }
+
+                $documents[] = [
+                    'name' => $document['name'],
+                    'type' => $document['type'],
+                    'url' => $fullPath,
+                ];
             }
-
-            $documents[] = [
-                'name' => $document['name'],
-                'type' => $document['type'],
-                'url' => $fullPath,
-            ];
-        }
 
         }
 

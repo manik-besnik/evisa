@@ -9,6 +9,7 @@ import {useState} from "react";
 import DeleteConfirmModal from "@/Components/DeleteConfirmModal.jsx";
 import TopSection from "@/Components/Admin/TopSection.jsx";
 import {permissionEnums} from "@/Components/Constant/index.js";
+import Pagination from "@/Components/Admin/Pagination.jsx";
 
 export const Index = ({job_posts}) => {
 
@@ -59,6 +60,8 @@ export const Index = ({job_posts}) => {
                     </tr>
                 ))}
             </Table>
+
+            <Pagination links={job_posts.links} />
 
             <DeleteConfirmModal show={show} setShow={setShow} handleConfirmDelete={handleConfirmDelete}/>
         </Authenticated>

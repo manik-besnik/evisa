@@ -7,6 +7,7 @@ import {getFormattedDate, getValue, isPermitted} from "@/Components/Helper/index
 import {FaRegEye} from "react-icons/fa6";
 import {useState} from "react";
 import DeleteConfirmModal from "@/Components/DeleteConfirmModal.jsx";
+import Pagination from "@/Components/Admin/Pagination.jsx";
 
 const VisaApplicationTable = ({isAdmin = false}) => {
 
@@ -78,6 +79,9 @@ const VisaApplicationTable = ({isAdmin = false}) => {
                     </tr>
                 ))}
             </Table>
+
+            <Pagination links={visa_applies.links} />
+
             <DeleteConfirmModal
                 show={show}
                 setShow={setShow}
