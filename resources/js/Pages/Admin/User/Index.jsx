@@ -5,6 +5,7 @@ import Table from "@/Components/Table.jsx";
 import {FiPlus} from "react-icons/fi";
 import {isPermitted} from "@/Components/Helper/index.js";
 import {permissionEnums} from "@/Components/Constant/index.js";
+import Pagination from "@/Components/Admin/Pagination.jsx";
 
 const Index = ({users}) => {
     return (
@@ -28,6 +29,9 @@ const Index = ({users}) => {
                 ))}
 
             </Table>
+
+            <Pagination links={users.links} />
+
         </Authenticated>
     )
 }
