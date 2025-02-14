@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\JobApplyController;
 use App\Http\Controllers\Api\VisaApplyController;
 use App\Http\Controllers\ExtreactTextController;
 use Illuminate\Http\Request;
@@ -13,6 +14,10 @@ Route::middleware(['auth:sanctum'])->name('api.')->group(function () {
     Route::get('report', [VisaApplyController::class, 'index'])->name('visa-applies.index');
 
     Route::post('visa-apply', [VisaApplyController::class, 'store'])->name('visa-applies.store');
+
+    Route::get('job-applies', [JobApplyController::class, 'index'])->name('job-applies.index');
+
+    Route::post('job-apply', [JobApplyController::class, 'store'])->name('job-applies.store');
 
 });
 

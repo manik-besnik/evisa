@@ -47,7 +47,7 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::get('job-apply', [JobPostController::class, 'create'])->name('job-posts.create');
     Route::post('job-apply/store', [JobPostController::class, 'store'])->name('job-posts.store');
 
-    Route::get('job-apply-list', [JobPostController::class, 'jobApplyList'])->name('job-apply.list');
+    Route::get('job-applies', [JobPostController::class, 'jobApplyList'])->name('job-apply.list');
 
 });
 
