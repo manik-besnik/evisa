@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\DTOs\JobApplyDTO;
 use App\Http\Controllers\Controller;
+use App\Models\JobPost;
 use App\Supports\ApiResponse;
 use App\Supports\JobApplyAction;
 use App\Supports\JobApplyList;
@@ -33,5 +34,14 @@ class JobApplyController extends Controller
         } catch (\Exception $exception) {
             return ApiResponse::error($exception->getMessage());
         }
+    }
+
+    public function availableJobs(): \Illuminate\Http\JsonResponse
+    {
+
+        $jobPoss = JobPost::query()->whereDate('last_apply_date', '>=', now()->format('Y-m-d'))->get();
+
+        return ApiResponse::success('Job post list',['job_posts' => $jobPoss]);
+
     }
 }
