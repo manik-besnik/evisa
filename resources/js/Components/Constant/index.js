@@ -83,6 +83,37 @@ export const permissions = [
     { name: "Create User", value: "user.create" }
 ];
 
+export const permissionEnums = {
+    VIEW_ADMIN: "admin.view",
+    CREATE_ADMIN: "admin.create",
+    EDIT_ADMIN: "admin.edit",
+    DELETE_ADMIN: "admin.delete",
+    VIEW_ROLE: "role.view",
+    CREATE_ROLE: "role.create",
+    EDIT_ROLE: "role.edit",
+    DELETE_ROLE: "role.delete",
+    VIEW_AGENCY: "agency.view",
+    CREATE_AGENCY: "agency.create",
+    EDIT_AGENCY: "agency.edit",
+    DELETE_AGENCY: "agency.delete",
+    VIEW_SINGLE_AGENCY: "agency.single-view",
+    APPROVE_AGENCY: "agency.approve",
+    VIEW_VISA: "visa.view",
+    VIEW_SINGLE_VISA: "visa.single-view",
+    CREATE_VISA: "visa.create",
+    EDIT_VISA: "visa.edit",
+    DELETE_VISA: "visa.delete",
+    ADD_DOCUMENT_TO_VISA: "visa.add.document",
+    CHANGE_VISA_STATUS: "visa.status.change",
+    VIEW_JOB_POST: "job-post.view",
+    VIEW_SINGLE_JOB_POST: "job-post.single-view",
+    CREATE_JOB_POST: "job-post.create",
+    EDIT_JOB_POST: "job-post.edit",
+    DELETE_JOB_POST: "job-post.delete",
+    VIEW_USER: "user.view",
+    CREATE_USER: "user.create"
+};
+
 
 export const documentTypes = {
     passport: {type: "passport", name: "Passport Page 1"},
