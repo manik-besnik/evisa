@@ -30,8 +30,8 @@ const Navbar = () => {
                     <span className="text-sm font-medium">Reports</span>
                     <div className="absolute left-full w-0 h-0 border-t-[22px] border-b-[22px] border-l-[20px] border-t-transparent border-b-transparent border-primary z-[1000000]"></div>
                 </Link>
-                <Link href={route('job-demand')} className="relative flex items-center bg-primary-dark text-white pl-10 pr-8 py-3">
-                    <span className="text-sm font-medium">Job List</span>
+                <Link href={route('job-apply.list')} className="relative flex items-center bg-primary-dark text-white pl-10 pr-8 py-3">
+                    <span className="text-sm font-medium">Job Apply List</span>
                     <div className="absolute left-full w-0 h-0 border-t-[22px] border-b-[22px] border-l-[20px] border-t-transparent border-b-transparent border-primary-dark z-[1000000]"></div>
                 </Link>
             </div>

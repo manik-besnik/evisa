@@ -11,6 +11,7 @@ Route::middleware(['auth:sanctum'])->name('api.')->group(function () {
     Route::post('user/store-info', [AuthController::class, 'storeInfo'])->name('user.store-info');
 
     Route::get('report', [VisaApplyController::class, 'index'])->name('visa-applies.index');
+
     Route::post('visa-apply', [VisaApplyController::class, 'store'])->name('visa-applies.store');
 
 });

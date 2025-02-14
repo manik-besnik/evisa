@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Models\JobPost;
 use App\Models\Language;
 use App\Supports\JobApplyAction;
+use App\Supports\JobApplyList;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -85,5 +86,12 @@ class JobPostController extends Controller
     public function destroy(JobPost $jobPost)
     {
         //
+    }
+
+    public function jobApplyList(): \Inertia\Response
+    {
+        $jobApplyList = JobApplyList::execute();
+
+        return Inertia::render('JobApplyList', ['job_apply_list' => $jobApplyList]);
     }
 }
