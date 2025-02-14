@@ -2,7 +2,10 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 
 /**
@@ -21,6 +24,13 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $nearest_airport
  * @property array|string $documents
  * @property string $summary
+ *
+ * @mixin Model
+ *
+ * @property User|null $user
+ * @property JobPost|null $jobPost
+ * @property Education|null $education
+ * @property Collection<int, JobExperience> $experiences
  */
 class JobApply extends Model
 {
@@ -46,4 +56,25 @@ class JobApply extends Model
     protected $casts = [
         'documents' => 'array'
     ];
+
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function jobPost(): BelongsTo
+    {
+        return $this->belongsTo(JobPost::class);
+    }
+
+    public function education(): BelongsTo
+    {
+        return $this->belongsTo(Education::class);
+    }
+
+    public function experiences(): HasMany
+    {
+        return $this->hasMany(JobExperience::class);
+    }
 }

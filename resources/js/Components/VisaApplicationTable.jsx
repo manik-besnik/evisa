@@ -1,26 +1,37 @@
 import DangerButton from "@/Components/DangerButton.jsx";
-import {FaTrashAlt} from "react-icons/fa";
+import {FaRegEdit, FaTrashAlt} from "react-icons/fa";
 import {router, usePage} from "@inertiajs/react";
 import Table from "@/Components/Table.jsx";
-import {VisaApplyTableHeading, visaStatuses} from "@/Components/Constant/index.js";
-import {getFormattedDate, getValue} from "@/Components/Helper/index.js";
+import {permissionEnums, VisaApplyTableHeading, visaStatuses} from "@/Components/Constant/index.js";
+import {getFormattedDate, getValue, isPermitted} from "@/Components/Helper/index.js";
 import {FaRegEye} from "react-icons/fa6";
 import {useState} from "react";
-import { FaRegEdit } from "react-icons/fa";
+import DeleteConfirmModal from "@/Components/DeleteConfirmModal.jsx";
 
 const VisaApplicationTable = ({isAdmin = false}) => {
 
     const visa_applies = usePage().props.visa_applies
+    const [visaApply, setVisaApply] = useState(null)
+    const [show, setShow] = useState(false);
 
     const handleEdit = (application) => {
-        if (isAdmin){
+        if (isAdmin) {
             return router.get(route('admin.visa-applies.edit', application.id))
         }
         return router.get(route('agency.visa-applies.edit', application.id))
 
     }
-    const handleDelete = (application) => {
+    const handleDelete = (visaApply) => {
+        setVisaApply(visaApply)
+        setShow(true)
+    }
 
+    const handleConfirmDelete = () => {
+        router.delete(route('admin.visa-applies.destroy', visaApply), {
+            onSuccess: () => {
+                setShow(false)
+            }
+        })
     }
     const handleView = (application) => {
 
@@ -33,32 +44,47 @@ const VisaApplicationTable = ({isAdmin = false}) => {
 
 
     return (
-        <Table heading={VisaApplyTableHeading}>
-            {visa_applies.data.length > 0 && visa_applies.data.map((application, index) => (
-                <tr key={index}>
-                    <td>{index + 1}</td>
-                    <td>{application.name}</td>
-                    <td>{application?.passport?.passport_no}</td>
+        <>
 
-                    <td>{getValue(visaStatuses, application.status)}</td>
+            <Table heading={VisaApplyTableHeading}>
+                {visa_applies.data.length > 0 && visa_applies.data.map((application, index) => (
+                    <tr key={index}>
+                        <td>{index + 1}</td>
+                        <td>{application.name}</td>
+                        <td>{application?.passport?.passport_no}</td>
 
-                    <td>{getFormattedDate(application.created_at)}</td>
-                    <td className="flex gap-x-2">
+                        <td>{getValue(visaStatuses, application.status)}</td>
 
-                        <button type="button" className='btn-primary' onClick={() => handleView(application)}>
-                            <FaRegEye/>
-                        </button>
-                        <button type="button" className='btn-primary' onClick={() => handleEdit(application)}>
-                            <FaRegEdit/>
-                        </button>
-                        <DangerButton onClick={() => handleDelete(application)}>
-                            <FaTrashAlt/>
-                        </DangerButton>
+                        <td>{getFormattedDate(application.created_at)}</td>
+                        <td className="flex gap-x-2">
 
-                    </td>
-                </tr>
-            ))}
-        </Table>
+                            {isPermitted(permissionEnums.VIEW_SINGLE_VISA) &&
+                                <button type="button" className='btn-primary' onClick={() => handleView(application)}>
+                                    <FaRegEye/>
+                                </button>
+                            }
+                            {isPermitted(permissionEnums.EDIT_VISA) &&
+                                <button type="button" className='btn-primary' onClick={() => handleEdit(application)}>
+                                    <FaRegEdit/>
+                                </button>
+                            }
+                            {isPermitted(permissionEnums.DELETE_VISA) &&
+                                <DangerButton onClick={() => handleDelete(application)}>
+                                    <FaTrashAlt/>
+                                </DangerButton>
+                            }
+
+                        </td>
+                    </tr>
+                ))}
+            </Table>
+            <DeleteConfirmModal
+                show={show}
+                setShow={setShow}
+                handleConfirmDelete={handleConfirmDelete}
+                title="Delete Visa Application"
+            />
+        </>
 
     )
 }

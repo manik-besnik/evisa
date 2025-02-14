@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 
 /**
@@ -13,6 +14,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $position
  * @property string $duration
  * @property string $company
+ * @mixin Model
+ *
+ * @property Country $country
  */
 class JobExperience extends Model
 {
@@ -26,5 +30,10 @@ class JobExperience extends Model
         'duration',
         'company',
     ];
+
+    public function country(): BelongsTo
+    {
+        return $this->belongsTo(Country::class);
+    }
 
 }

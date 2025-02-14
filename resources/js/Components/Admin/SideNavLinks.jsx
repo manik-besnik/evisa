@@ -2,10 +2,12 @@ import { Link } from '@inertiajs/react';
 import ArrowUp from '@/Components/SvgIcons/ArrowUp.jsx';
 import ArrowRight from '@/Components/SvgIcons/ArrowRight.jsx';
 
-import { useState } from 'react';
-import { GrVisa } from "react-icons/gr";
-import { PiNetworkXBold } from "react-icons/pi";
-import { FaPeopleGroup, FaPeopleRoof } from "react-icons/fa6";
+import {useState} from 'react';
+import {GrVisa} from "react-icons/gr";
+import {PiNetworkXBold} from "react-icons/pi";
+import {FaPeopleGroup, FaPeopleRoof} from "react-icons/fa6";
+import {isPermitted} from "@/Components/Helper/index.js";
+import {permissionEnums} from "@/Components/Constant/index.js";
 
 export default function SideNavLinks() {
 
@@ -14,14 +16,17 @@ export default function SideNavLinks() {
             name: 'Visa',
             icon: <GrVisa />,
             isOpen: route().current('admin.visa-applies.*'),
+            isPermitted: isPermitted(permissionEnums.VIEW_VISA),
             links: [
                 {
                     name: 'Visa Apply List',
-                    route: route('admin.visa-applies.index')
+                    route: route('admin.visa-applies.index'),
+                    isPermitted: isPermitted(permissionEnums.VIEW_VISA),
                 },
                 {
                     name: 'Add New Application',
-                    route: route('admin.visa-applies.create')
+                    route: route('admin.visa-applies.create'),
+                    isPermitted: isPermitted(permissionEnums.CREATE_VISA),
                 },
             ]
         },
@@ -29,18 +34,22 @@ export default function SideNavLinks() {
             name: 'Jobs',
             icon: <PiNetworkXBold />,
             isOpen: false,
+            isPermitted: isPermitted(permissionEnums.VIEW_JOB_POST),
             links: [
                 {
                     name: 'Job List',
-                    route: route('admin.job-posts.index')
+                    route: route('admin.job-posts.index'),
+                    isPermitted: isPermitted(permissionEnums.VIEW_JOB_POST),
                 },
                 {
                     name: 'Add Job',
-                    route: route('admin.job-posts.create')
+                    route: route('admin.job-posts.create'),
+                    isPermitted: isPermitted(permissionEnums.CREATE_JOB_POST),
                 },
                 {
                     name: 'Applications',
-                    route: route('admin.job-posts.applications')
+                    route: route('admin.job-posts.applications'),
+                    isPermitted: isPermitted(permissionEnums.VIEW_JOB_POST),
                 }
             ]
         },
@@ -59,10 +68,12 @@ export default function SideNavLinks() {
             name: 'Agency',
             icon: <FaPeopleRoof />,
             isOpen: false,
+            isPermitted: isPermitted(permissionEnums.VIEW_AGENCY),
             links: [
                 {
                     name: 'Agency List',
-                    route: route('admin.agencies.index')
+                    route: route('admin.agencies.index'),
+                    isPermitted: isPermitted(permissionEnums.VIEW_AGENCY),
                 }
             ]
         },
@@ -70,14 +81,17 @@ export default function SideNavLinks() {
             name: 'User',
             icon: <FaPeopleGroup />,
             isOpen: false,
+            isPermitted: isPermitted(permissionEnums.VIEW_USER),
             links: [
                 {
                     name: 'User List',
-                    route: route('admin.users.index')
+                    route: route('admin.users.index'),
+                    isPermitted: isPermitted(permissionEnums.VIEW_USER),
                 },
                 {
                     name: 'Add User',
-                    route: route('admin.users.create')
+                    route: route('admin.users.create'),
+                    isPermitted: isPermitted(permissionEnums.CREATE_USER),
                 }
             ]
         }
@@ -108,8 +122,10 @@ export default function SideNavLinks() {
         <>
 
             {products.map((product, i) =>
+
                 <div key={i}
-                    className={`${(product.isOpen) && 'bg-card-and-hover border-main-outline'} rounded-[10px] mb-1.5 hover:bg-card-and-hover border hover:border-main-outline`}>
+                     className={`${(product.isOpen) && 'bg-card-and-hover border-main-outline'} rounded-[10px] mb-1.5 hover:bg-card-and-hover border hover:border-main-outline`}>
+
                     <div onClick={() => handleToggle(i)}
                         className='flex justify-between items-center gap-2 cursor-pointer p-[10px]'>
                         <div className='flex items-center gap-[10px]'>
@@ -118,28 +134,35 @@ export default function SideNavLinks() {
                                 className={`${product.isOpen || product.accountType === route().params.account_type && 'font-semibold'} font-medium text-sm text-text-primary`}>{product.name}</span>
                         </div>
 
-                        <ArrowUp class={`${product.isOpen ? 'rotate-0' : 'rotate-180'} transition-all duration-500`} />
+                        <ArrowUp
+                            class={`${product.isOpen ? 'rotate-0' : 'rotate-180'} transition-all duration-500`}/>
                     </div>
 
-                    <div className={`overflow-hidden`}
-                        style={{ maxHeight: product.isOpen ? '500px' : '0', transition: 'max-height 0.5s ease-in-out' }}>
-                        <div className='px-2.5 pb-2.5'>
-                            <hr className='border-t border-t-main-outline pb-2.5' />
-                            {product.links.map((link, i) =>
-                                <Link key={i} href={link.route}
-                                    className={`flex items-center justify-between mb-[10px] last:mb-0 text-medium text-sm text-font-medium text-text-primary`}>
+                    {product.isPermitted &&
+                        <div className={`overflow-hidden`}
+                             style={{
+                                 maxHeight: product.isOpen ? '500px' : '0',
+                                 transition: 'max-height 0.5s ease-in-out'
+                             }}>
+                            <div className='px-2.5 pb-2.5'>
+                                <hr className='border-t border-t-main-outline pb-2.5'/>
+                                {product.links.filter(item => item.isPermitted).map((link, i) =>
+                                    <Link key={i} href={link.route}
+                                          className={`flex items-center justify-between mb-[10px] last:mb-0 text-medium text-sm text-font-medium text-text-primary`}>
 
-                                    <div className='flex items-center gap-[10px]'>
-                                        <ArrowRight></ArrowRight>
-                                        {link.name}
-                                    </div>
+                                        <div className='flex items-center gap-[10px]'>
+                                            <ArrowRight></ArrowRight>
+                                            {link.name}
+                                        </div>
 
-
-                                </Link>)}
+                                    </Link>
+                                )}
+                            </div>
                         </div>
-                    </div>
+                    }
 
-                </div>)}
+                </div>
+            )}
         </>
 
     );

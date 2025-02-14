@@ -10,7 +10,6 @@ app/storage/
 # Laravel 5 & Lumen specific
 public/storage
 public/hot
-public/uploads
 
 # Laravel 5 & Lumen specific with changed public path
 public_html/storage
@@ -23,6 +22,7 @@ Homestead.json
 /.vagrant
 .phpunit.result.cache
 
+/public/uploads
 /public/build
 /storage/pail
 .env.backup

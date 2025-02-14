@@ -7,6 +7,7 @@ use App\Actions\Admin\JobPost\DeleteAction;
 use App\Actions\Admin\JobPost\EditAction;
 use App\Actions\Admin\JobPost\IndexAction;
 use App\Actions\Admin\JobPost\JobApplicationAction;
+use App\Actions\Admin\JobPost\SingleJobApplication;
 use App\Actions\Admin\JobPost\StoreAction;
 use App\Actions\Admin\JobPost\UpdateAction;
 use App\DTOs\JobPostDTO;
@@ -50,5 +51,10 @@ class JobPostController extends Controller
     public function applications(JobApplicationAction $jobApplicationAction): Response
     {
         return $jobApplicationAction->execute();
+    }
+
+    public function singleApplication(int $id, SingleJobApplication $singleJobApplication): Response
+    {
+        return $singleJobApplication->execute($id);
     }
 }

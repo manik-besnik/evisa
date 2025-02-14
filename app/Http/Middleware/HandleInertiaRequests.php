@@ -39,11 +39,15 @@ class HandleInertiaRequests extends Middleware
         /** @var \App\Models\User $user */
         $user = auth()->user();
 
+        $adminRole = null;
+
         if (auth()->check() && $user->role === Role::ADMIN->value) {
             $notifications = Notification::query()
                 ->select(['id', 'title', 'created_at'])
                 ->where('user_type', Role::ADMIN->value)
                 ->orderByDesc('id')->get();
+            $user->load('adminRole');
+            $adminRole = $user->adminRole;
         }
 
         /** @var \App\Models\User|null $user */
@@ -62,6 +66,7 @@ class HandleInertiaRequests extends Middleware
             ],
             'notifications' => $notifications,
             'countries' => Country::get(),
+            'admin_role' => $adminRole,
             'flash' => function () {
                 return [
                     'success' => Session::get('success'),

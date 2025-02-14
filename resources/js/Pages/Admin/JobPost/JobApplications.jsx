@@ -4,10 +4,11 @@ import {FiEdit, FiPlus} from "react-icons/fi";
 import Table from "@/Components/Table.jsx";
 import {getFormattedDate} from "@/Components/Helper/index.js";
 import DangerButton from "@/Components/DangerButton.jsx";
-import {FaTrashAlt} from "react-icons/fa";
+import { FaEye } from "react-icons/fa6";
 import {useState} from "react";
 import DeleteConfirmModal from "@/Components/DeleteConfirmModal.jsx";
 import TopSection from "@/Components/Admin/TopSection.jsx";
+import Pagination from "@/Components/Admin/Pagination.jsx";
 
 export const JobApplications = ({job_applies}) => {
 
@@ -37,24 +38,26 @@ export const JobApplications = ({job_applies}) => {
                 </Link>
             </TopSection>
 
-            <Table heading={['SL', 'Name', 'Mobile No', 'Apply Date']}>
+            <Table heading={['SL', 'Name', 'Mobile No', 'Apply Date','Action']}>
                 {job_applies.data.length > 0 && job_applies.data.map((item, index) => (
                     <tr key={index}>
                         <td>{(job_applies.current_page > 1 ? job_applies.current_page * job_applies.per_page : 0) + index + 1}</td>
                         <td>{item.name}</td>
                         <td>{item.phone}</td>
                         <td>{getFormattedDate(item.created_at)}</td>
-                        {/*<td className="flex gap-x-2">*/}
-                        {/*    <Link href={route('admin.job-posts.edit', jobPost.id)} className='btn-primary'>*/}
-                        {/*        <FiEdit/>*/}
-                        {/*    </Link>*/}
-                        {/*    <DangerButton onClick={() => handleDelete(jobPost)}>*/}
-                        {/*        <FaTrashAlt/>*/}
-                        {/*    </DangerButton>*/}
-                        {/*</td>*/}
+                        <td className="flex gap-x-2">
+                            <Link href={route('admin.job-posts.applications.show', item.id)} className='btn-primary'>
+                                <FaEye/>
+                            </Link>
+                            {/*<DangerButton onClick={() => handleDelete(jobPost)}>*/}
+                            {/*    <FaTrashAlt/>*/}
+                            {/*</DangerButton>*/}
+                        </td>
                     </tr>
                 ))}
             </Table>
+
+            <Pagination links={job_applies.links} />
 
             <DeleteConfirmModal show={show} setShow={setShow} handleConfirmDelete={handleConfirmDelete}/>
         </Authenticated>

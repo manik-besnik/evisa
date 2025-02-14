@@ -1,3 +1,5 @@
+import {usePage} from "@inertiajs/react";
+
 export const getFormattedDate = (dateTime) => {
     const date = new Date(dateTime);
 
@@ -12,3 +14,11 @@ export const getFormattedDate = (dateTime) => {
 export const getValue = (items, id) => {
     return items.find(item => item.id === id)?.name
 }
+export const isPermitted = (permission) => {
+    const role = usePage().props?.admin_role;
+
+    if (!role) return false;
+
+    return role.is_super_admin || role.permissions.includes(permission);
+};
+

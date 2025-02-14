@@ -13,7 +13,7 @@ const SearchResult = () => {
     return (
         <div className="">
             <div className="overflow-x-auto">
-                <table className="min-w-full bg-white text-sm">
+                <table className="min-w-full bg-white text-sm mb-4">
                     <thead>
                     <tr className="bg-[#B8860B] text-white">
                         <th className="px-3 py-2 text-left border-r border-l border-t border-[#D4AF37]">App ID</th>
@@ -27,7 +27,7 @@ const SearchResult = () => {
                     </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-200">
-                    {visa_applies.map((row, index) => (
+                    {visa_applies.length > 0 ? visa_applies.map((row, index) => (
                         <tr
                             key={row.id}
                             className={`${index % 2 === 0 ? "bg-white" : "bg-gray-50"} hover:bg-yellow-50 transition-colors duration-150`}
@@ -61,7 +61,7 @@ const SearchResult = () => {
                                 </div>
                             </td>
                         </tr>
-                    ))}
+                    )) : "Data Not Found"}
                     </tbody>
                 </table>
             </div>

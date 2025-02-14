@@ -37,7 +37,7 @@ const RightAuthPart = ({ user }) => {
             <div className='flex justify-end items-center gap-x-2 text-text-primary'>
                 <div>
                     <p>{user?.name} | {user?.profession}</p>
-                    <p>Address: {user?.city}, {user?.living_country.name}</p>
+                    <p>Address: {user?.city}, {user?.living_country?.name}</p>
                 </div>
 
                 <button

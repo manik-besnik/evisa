@@ -2,12 +2,13 @@ import Authenticated from "@/Layouts/AuthenticatedLayout.jsx";
 import {Head, Link, router} from "@inertiajs/react";
 import {FiEdit, FiPlus} from "react-icons/fi";
 import Table from "@/Components/Table.jsx";
-import {getFormattedDate} from "@/Components/Helper/index.js";
+import {getFormattedDate, isPermitted} from "@/Components/Helper/index.js";
 import DangerButton from "@/Components/DangerButton.jsx";
 import {FaTrashAlt} from "react-icons/fa";
 import {useState} from "react";
 import DeleteConfirmModal from "@/Components/DeleteConfirmModal.jsx";
 import TopSection from "@/Components/Admin/TopSection.jsx";
+import {permissionEnums} from "@/Components/Constant/index.js";
 
 export const Index = ({job_posts}) => {
 
@@ -30,11 +31,12 @@ export const Index = ({job_posts}) => {
     return (
         <Authenticated>
 
-            <Head title="Add New Job | Dubai E-Visa" />
+            <Head title="Add New Job | Dubai E-Visa"/>
 
             <TopSection title='Job Post List'>
-                <Link href={route('admin.job-posts.create')} className='btn-primary'><FiPlus/> Add New Job
-                </Link>
+                {isPermitted(permissionEnums.CREATE_JOB_POST) &&
+                    <Link href={route('admin.job-posts.create')} className='btn-primary'><FiPlus/> Add New Job
+                    </Link>}
             </TopSection>
 
             <Table heading={['SL', 'Title', 'Post Date', 'Company', 'Action']}>
@@ -45,12 +47,14 @@ export const Index = ({job_posts}) => {
                         <td>{getFormattedDate(jobPost.created_at)}</td>
                         <td>{jobPost.company}</td>
                         <td className="flex gap-x-2">
-                            <Link href={route('admin.job-posts.edit', jobPost.id)} className='btn-primary'>
-                                <FiEdit/>
-                            </Link>
-                            <DangerButton onClick={() => handleDelete(jobPost)}>
-                                <FaTrashAlt/>
-                            </DangerButton>
+                            {isPermitted(permissionEnums.EDIT_JOB_POST) &&
+                                <Link href={route('admin.job-posts.edit', jobPost.id)} className='btn-primary'>
+                                    <FiEdit/>
+                                </Link>}
+                            {isPermitted(permissionEnums.DELETE_JOB_POST) &&
+                                <DangerButton onClick={() => handleDelete(jobPost)}>
+                                    <FaTrashAlt/>
+                                </DangerButton>}
                         </td>
                     </tr>
                 ))}

@@ -1,18 +1,20 @@
 import Authenticated from "@/Layouts/AuthenticatedLayout.jsx";
-import {Link,  Head} from "@inertiajs/react";
+import {Head, Link} from "@inertiajs/react";
 import TopSection from "@/Components/Admin/TopSection.jsx";
 import VisaUpdateForm from "@/Components/VisaUpdateForm.jsx";
+import {isPermitted} from "@/Components/Helper/index.js";
+import {permissionEnums} from "@/Components/Constant/index.js";
 
 const Edit = () => {
 
     return (
         <Authenticated>
-            <Head title="Visa Edit | Dubai E-Visa" />
+            <Head title="Visa Edit | Dubai E-Visa"/>
             <TopSection title="Visa Application Edit">
                 <div className="flex gap-x-2">
-
-                    <Link href={route('admin.visa-applies.index')} className='btn-primary'>View Application List
-                    </Link>
+                    {isPermitted(permissionEnums.VIEW_VISA) &&
+                        <Link href={route('admin.visa-applies.index')} className='btn-primary'>View Application List
+                        </Link>}
                 </div>
             </TopSection>
 

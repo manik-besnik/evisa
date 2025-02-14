@@ -35,6 +35,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @mixin Model
  *
  * @property Agency $agency
+ * @property Role|null $adminRole
  */
 class User extends Authenticatable
 {

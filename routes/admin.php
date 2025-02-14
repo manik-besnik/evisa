@@ -20,10 +20,9 @@ Route::prefix('admin')->middleware('guest')->group(function () {
 
     Route::post('login/store', [AuthController::class, 'store'])
         ->name('admin.login.store');
-
 });
 
-Route::get('visa-info/{user_id}',[VisaApplyController::class,'visaInfo'])->name('visa-info');
+Route::get('visa-info/{user_id}', [VisaApplyController::class, 'visaInfo'])->name('visa-info');
 
 Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(function () {
 
@@ -34,7 +33,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
 
     Route::put('visa-applies/{id}/change-status', [VisaApplyController::class, 'changeStatus'])->name('visa-applies.change-status');
 
-    Route::post('visa-applies/{visa_apply}', [VisaApplyController::class,'update'])->name('visa-applies.update');
+    Route::post('visa-applies/{visa_apply}', [VisaApplyController::class, 'update'])->name('visa-applies.update');
     Route::resource('visa-applies', VisaApplyController::class)->except(['update']);
 
     Route::get('admins', [AdminController::class, 'index'])->name('admins.index');
@@ -65,5 +64,4 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
     Route::post('users/store', [UserController::class, 'store'])->name('users.store');
 
     Route::get('notifications/{id}', [NotificationController::class, 'show'])->name('notifications.show');
-
 });
