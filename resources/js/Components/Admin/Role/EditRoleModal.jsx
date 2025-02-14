@@ -41,7 +41,7 @@ const EditRoleModal = ({role, show, setShow}) => {
     }
 
     return (
-        <Modal show={show} maxWidth='xl' onClose={() => setShow(false)}>
+        <Modal show={show} maxWidth='2xl' onClose={() => setShow(false)}>
             <div className="p-[30px] relative min-h-[400px]">
                 <button className="absolute right-5 top-5 md:right-[30px] md:top-[30px]" onClick={() => setShow(false)}>
                     <Close className="h-6 w-6"/>
@@ -58,7 +58,7 @@ const EditRoleModal = ({role, show, setShow}) => {
                         </div>
 
                         <div>
-                            <div className='grid grid-cols-3 gap-2 mt-3'>
+                            <div className='h-[360px] grid grid-cols-3 gap-x-2 gap-y-1 mt-3'>
                                 {permissions.map((permission, index) => (
 
                                     <label key={index} htmlFor={`permission-${index}`}
@@ -74,7 +74,7 @@ const EditRoleModal = ({role, show, setShow}) => {
                                                 }
                                             }}
                                         />
-                                        <span>{permission.name}</span>
+                                        <span className="text-sm">{permission.name}</span>
                                     </label>
 
                                 ))}
