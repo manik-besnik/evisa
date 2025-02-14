@@ -25,7 +25,7 @@ class JobPostDTO
             'company' => 'required|string|max:255',
             'salary_range' => 'required|string|max:255',
             'location' => 'required|string|max:255',
-            'description' => 'required|string',
+            'description' => 'nullable|string',
             'last_apply_date' => 'required|date',
         ], [
             'type.required' => 'The job type is required.',
@@ -34,7 +34,6 @@ class JobPostDTO
             'company.required' => 'The company name is required.',
             'salary_range.required' => 'The salary range is required.',
             'location.required' => 'The location is required.',
-            'description.required' => 'The description is required.',
             'last_apply_date.required' => 'The last apply date is required.',
             'last_apply_date.date' => 'The last apply date must be a valid date.',
         ]);

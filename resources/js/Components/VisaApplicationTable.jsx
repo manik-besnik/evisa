@@ -1,19 +1,17 @@
 import DangerButton from "@/Components/DangerButton.jsx";
-import {FaTrashAlt} from "react-icons/fa";
+import {FaRegEdit, FaTrashAlt} from "react-icons/fa";
 import {router, usePage} from "@inertiajs/react";
 import Table from "@/Components/Table.jsx";
-import {VisaApplyTableHeading, visaStatuses} from "@/Components/Constant/index.js";
-import {getFormattedDate, getValue} from "@/Components/Helper/index.js";
+import {permissionEnums, VisaApplyTableHeading, visaStatuses} from "@/Components/Constant/index.js";
+import {getFormattedDate, getValue, isPermitted} from "@/Components/Helper/index.js";
 import {FaRegEye} from "react-icons/fa6";
-import {useState} from "react";
-import { FaRegEdit } from "react-icons/fa";
 
 const VisaApplicationTable = ({isAdmin = false}) => {
 
     const visa_applies = usePage().props.visa_applies
 
     const handleEdit = (application) => {
-        if (isAdmin){
+        if (isAdmin) {
             return router.get(route('admin.visa-applies.edit', application.id))
         }
         return router.get(route('agency.visa-applies.edit', application.id))
@@ -45,15 +43,21 @@ const VisaApplicationTable = ({isAdmin = false}) => {
                     <td>{getFormattedDate(application.created_at)}</td>
                     <td className="flex gap-x-2">
 
-                        <button type="button" className='btn-primary' onClick={() => handleView(application)}>
-                            <FaRegEye/>
-                        </button>
-                        <button type="button" className='btn-primary' onClick={() => handleEdit(application)}>
-                            <FaRegEdit/>
-                        </button>
-                        <DangerButton onClick={() => handleDelete(application)}>
-                            <FaTrashAlt/>
-                        </DangerButton>
+                        {isPermitted(permissionEnums.VIEW_SINGLE_VISA) &&
+                            <button type="button" className='btn-primary' onClick={() => handleView(application)}>
+                                <FaRegEye/>
+                            </button>
+                        }
+                        {isPermitted(permissionEnums.EDIT_VISA) &&
+                            <button type="button" className='btn-primary' onClick={() => handleEdit(application)}>
+                                <FaRegEdit/>
+                            </button>
+                        }
+                        {isPermitted(permissionEnums.DELETE_VISA) &&
+                            <DangerButton onClick={() => handleDelete(application)}>
+                                <FaTrashAlt/>
+                            </DangerButton>
+                        }
 
                     </td>
                 </tr>

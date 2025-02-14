@@ -1,5 +1,4 @@
-export const assetUrl = "https://local.evisa.com/assets/"
-// export const assetUrl = "http://dubaievisaservice.com/assets/"
+export const assetUrl = "https://dubaievisaservice.com/assets/"
 export const genders = [
     {id: 1, name: "Male"},
     {id: 2, name: "Female"},
@@ -75,7 +74,8 @@ export const permissions = [
     { name: "Add Document to Visa", value: "visa.add.document" },
     { name: "Change Visa Status", value: "visa.status.change" },
     { name: "View Job Post", value: "job-post.view" },
-    { name: "View Single Job Post", value: "job-post.single-view" },
+    { name: "View Job Apply", value: "job-post.single-view" },
+    { name: "View Single Job Apply", value: "job-apply.single-view" },
     { name: "Create Job Post", value: "job-post.create" },
     { name: "Edit Job Post", value: "job-post.edit" },
     { name: "Delete Job Post", value: "job-post.delete" },
@@ -107,6 +107,7 @@ export const permissionEnums = {
     CHANGE_VISA_STATUS: "visa.status.change",
     VIEW_JOB_POST: "job-post.view",
     VIEW_SINGLE_JOB_POST: "job-post.single-view",
+    VIEW_SINGLE_JOB_APPLY: "job-apply.single-view",
     CREATE_JOB_POST: "job-post.create",
     EDIT_JOB_POST: "job-post.edit",
     DELETE_JOB_POST: "job-post.delete",

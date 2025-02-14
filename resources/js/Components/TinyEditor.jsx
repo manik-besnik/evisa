@@ -9,7 +9,7 @@ export const TinyEditor = ({ value, onChange }) => {
             <span>Description</span>
             <Editor
 
-                apiKey="pllzzg6m9ix65jwo1mbcuv96wss5bqwp7ok6tjbhvv835ywe"
+                apiKey="4bbh9nrpcrnp2kigjvlhacukgfixsguxfqe6qvsm0ljv88kb"
                 onInit={(evt, editor) => (editorRef.current = editor)}
                 value={value} // Ensure it uses the correct value
                 init={{
