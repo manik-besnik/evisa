@@ -31,22 +31,17 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::get('countries', function () {
-
-    $data = [
+    return ApiResponse::success("Country Data", [
         'countries' => \App\Supports\Country::get(),
-    ];
-
-    return ApiResponse::success("Country Data", $data);
+    ]);
 });
 
 
 Route::get('languages', function () {
 
-    $data = [
+    return ApiResponse::success("Language Data", [
         'languages' => Language::query()->get(),
-    ];
-
-    return ApiResponse::success("Language Data", $data);
+    ]);
 });
 
 Route::post('/login', [AuthController::class, 'login'])->name('api.login.store');
