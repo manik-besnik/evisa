@@ -2,7 +2,12 @@
 
 namespace App\Actions\User\VisaApply;
 
+use App\DTOs\NotifyDTO;
 use App\DTOs\VisaApplyDTO;
+use App\Enums\NotificationType;
+use App\Enums\Role;
+use App\Models\User;
+use App\Supports\Notify;
 use App\Supports\VisaApplyAction;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
@@ -15,11 +20,17 @@ class StoreAction
 
         try {
 
-            VisaApplyAction::execute($visaApplyDTO);
+            $visaApply = VisaApplyAction::execute($visaApplyDTO);
+
+            /** @var User $user */
+            $user = auth()->user();
+            $title = "{$user->name} Applied for new Visa";
+
+            Notify::execute(new NotifyDTO(auth()->id(), 1, $title, NotificationType::VISA_APPLY->value, Role::ADMIN->value, $visaApply->toArray()));
 
             DB::commit();
 
-            return redirect()->back();
+            return to_route('visa-apply.index')->with('success', "Your Application Submitted Successfully");
 
         } catch (\Exception $exception) {
             DB::rollBack();

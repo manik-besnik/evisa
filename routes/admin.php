@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AgencyController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\JobPostController;
+use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\VisaApplyController;
@@ -21,13 +22,19 @@ Route::prefix('admin')->middleware('guest')->group(function () {
 
 });
 
+Route::get('visa-info/{user_id}',[VisaApplyController::class,'visaInfo'])->name('visa-info');
 
 Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(function () {
 
     Route::get('dashboard', [DashboardController::class, 'index'])
         ->name('dashboard.index');
 
-    Route::resource('visa-applies', VisaApplyController::class);
+    Route::post('visa-applies/{id}/add-document', [VisaApplyController::class, 'addDocument'])->name('visa-applies.add-document');
+
+    Route::put('visa-applies/{id}/change-status', [VisaApplyController::class, 'changeStatus'])->name('visa-applies.change-status');
+
+    Route::post('visa-applies/{visa_apply}', [VisaApplyController::class,'update'])->name('visa-applies.update');
+    Route::resource('visa-applies', VisaApplyController::class)->except(['update']);
 
     Route::get('admins', [AdminController::class, 'index'])->name('admins.index');
 
@@ -41,6 +48,10 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
     Route::post('roles/store', [RoleController::class, 'store'])->name('roles.store');
     Route::put('roles/update/{id}', [RoleController::class, 'update'])->name('roles.update');
 
+    Route::get('job-posts/applications', [JobPostController::class, 'applications'])->name('job-posts.applications');
+
+    Route::get('job-posts/applications/show/{id}', [JobPostController::class, 'singleApplication'])->name('job-posts.applications.show');
+
     Route::resource('job-posts', JobPostController::class);
 
     Route::get('agencies', [AgencyController::class, 'index'])->name('agencies.index');
@@ -52,5 +63,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
     Route::get('users', [UserController::class, 'index'])->name('users.index');
     Route::get('users/create', [UserController::class, 'create'])->name('users.create');
     Route::post('users/store', [UserController::class, 'store'])->name('users.store');
+
+    Route::get('notifications/{id}', [NotificationController::class, 'show'])->name('notifications.show');
 
 });

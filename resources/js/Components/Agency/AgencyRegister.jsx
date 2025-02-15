@@ -9,7 +9,7 @@ import {FaCameraRetro} from "react-icons/fa";
 const AgencyRegister = () => {
 
     const {data, setData, post, errors} = useForm({
-        email: '',
+        username: '',
         password: '',
         remember: false,
         avatar: null
@@ -75,12 +75,12 @@ const AgencyRegister = () => {
 
                 <TextInput
                     label="Username*"
-                    id="email" value={data.email}
+                    id="username" value={data.username}
                     placeholder="Username"
-                    onChange={(e) => setData('email', e.target.value)}
+                    onChange={(e) => setData('username', e.target.value)}
                 />
 
-                {errors.email && <p className="text-red-500 my-1 text-xs">{errors.email}</p>}
+                {errors.username && <p className="text-red-500 my-1 text-xs">{errors.username}</p>}
 
                 <TextInput
                     divClasses="my-2" label="Password*"

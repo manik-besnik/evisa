@@ -2,6 +2,9 @@ import Authenticated from "@/Layouts/AuthenticatedLayout.jsx";
 import {Head, Link} from "@inertiajs/react";
 import TopSection from "@/Components/Admin/TopSection.jsx";
 import Table from "@/Components/Table.jsx";
+import {isPermitted} from "@/Components/Helper/index.js";
+import {permissionEnums} from "@/Components/Constant/index.js";
+import Pagination from "@/Components/Admin/Pagination.jsx";
 
 const StatusNotComplete = () => {
     return (
@@ -51,19 +54,24 @@ const Index = ({agencies}) => {
                         <td className="text-white">{getStatusBadge(agency)}</td>
                         <td>
                             <div className="flex gap-x-2">
-                                {!agency?.agency?.is_account_approved &&
+                                {(!agency?.agency?.is_account_approved && isPermitted(permissionEnums.APPROVE_AGENCY)) &&
                                     <Link href={route('admin.agencies.approve', agency.id)} className="btn-primary">
                                         Approve Now
                                     </Link>}
-                                <Link href={route('admin.agencies.show', agency.id)} className="btn-primary">
-                                    View
-                                </Link>
+                                {isPermitted(permissionEnums.VIEW_SINGLE_AGENCY) &&
+                                    <Link href={route('admin.agencies.show', agency.id)} className="btn-primary">
+                                        View
+                                    </Link>}
                             </div>
                         </td>
                     </tr>
                 ))}
 
             </Table>
+
+            <Pagination links={agencies.links} />
+
+
         </Authenticated>
     )
 }

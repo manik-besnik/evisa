@@ -58,7 +58,7 @@ const EditAdminModal = ({admin, show, setShow}) => {
                 </button>
 
                 <div className="mb-6">
-                    <p>Edit Role</p>
+                    <p>Edit Admin</p>
                 </div>
                 <div>
                     <form className='flex flex-col gap-2' onSubmit={handleConfirmSubmit}>

@@ -53,7 +53,6 @@ class JobApplyAction
             return $jobApply;
 
         } catch (\Exception $exception) {
-dd($exception->getMessage());
             DB::rollBack();
             return null;
         }
@@ -97,9 +96,13 @@ dd($exception->getMessage());
     {
         $experiences = [];
 
+        $existIds = [];
+
         foreach ($jobApplyDTO->jobExperiences as $jobExperience) {
 
+
             if (isset($jobExperience['id'])) {
+                $existIds[] = $jobExperience['id'];
                 $experience = JobExperience::query()->find($jobExperience['id']);
                 $experience->country_id = $jobExperience['country_id'];
                 $experience->position = $jobExperience['position'];
@@ -119,6 +122,8 @@ dd($exception->getMessage());
                 ];
             }
         }
+
+        JobExperience::query()->whereNotIn('id', $existIds)->delete();
 
         JobExperience::query()->insert($experiences);
     }
