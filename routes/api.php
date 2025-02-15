@@ -4,6 +4,8 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\JobApplyController;
 use App\Http\Controllers\Api\VisaApplyController;
 use App\Http\Controllers\ExtreactTextController;
+use App\Models\Language;
+use App\Supports\ApiResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -34,17 +36,17 @@ Route::get('countries', function () {
         'countries' => \App\Supports\Country::get(),
     ];
 
-    return \App\Supports\ApiResponse::success("Country Data", $data);
+    return ApiResponse::success("Country Data", $data);
 });
 
 
 Route::get('languages', function () {
 
     $data = [
-        'languages' => \App\Models\Language::query()->get(),
+        'languages' => Language::query()->get(),
     ];
 
-    return \App\Supports\ApiResponse::success("Language Data", $data);
+    return ApiResponse::success("Language Data", $data);
 });
 
 Route::post('/login', [AuthController::class, 'login'])->name('api.login.store');
