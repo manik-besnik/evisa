@@ -11,9 +11,6 @@ const AllPlatform = () => {
                 <button className="app-btn">Save Now</button>
             </div>
 
-            <div>
-                <PlatformList />
-            </div>
         </>
     )
 }
