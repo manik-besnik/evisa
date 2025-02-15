@@ -34,6 +34,6 @@ class Passport extends Model
 
     public function issueCountry(): BelongsTo
     {
-        return $this->belongsTo(Country::class,'passport_issue_country','id');
+        return $this->belongsTo(Country::class,'passport_issue_country','id')->select(['id','name','nationality']);
     }
 }

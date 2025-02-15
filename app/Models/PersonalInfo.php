@@ -55,14 +55,14 @@ class PersonalInfo extends Model
 
     public function currentNationality(): BelongsTo
     {
-        return $this->belongsTo(Country::class,'current_nationality','id');
+        return $this->belongsTo(Country::class,'current_nationality','id')->select(['id','name','nationality']);
     }
     public function prevNationality(): BelongsTo
     {
-        return $this->belongsTo(Country::class,'prev_nationality','id');
+        return $this->belongsTo(Country::class,'prev_nationality','id')->select(['id','name','nationality']);
     }
     public function birthCountry(): BelongsTo
     {
-        return $this->belongsTo(Country::class,'birth_country','id');
+        return $this->belongsTo(Country::class,'birth_country','id')->select(['id','name','nationality']);
     }
 }

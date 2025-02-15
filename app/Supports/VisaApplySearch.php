@@ -22,7 +22,11 @@ class VisaApplySearch
         $visaStatus = request()->input('visa_status');
 
         return VisaApply::query()
-            ->with(['personalInfo.currentNationality', 'passport', 'guarantor'])
+            ->with([
+                'personalInfo' => ['currentNationality', 'prevNationality', 'birthCountry'],
+                'passport' => ['issueCountry'],
+                'guarantor' => ['guarantorNationality']
+            ])
             ->where('user_id', auth()->id())
             ->when($appId, fn($query) => $query->where('app_id', $appId))
             ->when($processingType, fn($query) => $query->where('processing_type', $processingType))
