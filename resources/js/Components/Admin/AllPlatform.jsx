@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import PlatformList from '@/Components/Admin/PlatformList'
 
 const AllPlatform = () => {
 
