@@ -32,8 +32,8 @@ class AddDocumentAction
 
             $docMaps = [];
 
-            foreach ($oldDocs as $doc){
-                $mapDoc = (array) $doc;
+            foreach ($oldDocs as $doc) {
+                $mapDoc = (array)$doc;
                 $docMaps[$mapDoc['name']] = $mapDoc;
             }
 
@@ -48,15 +48,19 @@ class AddDocumentAction
 
                 $oldFile = $docMaps[$document['name']]['url'] ?? null;
 
-                $file = FileUpload::execute($document['file'],$oldFile);
+                $file = FileUpload::execute($document['file'], $oldFile);
                 $documents[] = [
                     'name' => $document['name'],
                     'url' => $file,
                 ];
+                if (isset($docMaps[$document['name']])) {
+                    unset($docMaps[$document['name']]);
+                }
             }
 
+            $mergeDocs = [...$oldDocs,...$documents];
 
-            $visaApply->visa_document = json_encode($documents);
+            $visaApply->visa_document = json_encode($mergeDocs);
             $visaApply->update();
 
             if ($visaApply->user?->email) {
