@@ -1,14 +1,14 @@
 import {MdOutlineRemoveRedEye} from "react-icons/md";
 import {FaDownload} from "react-icons/fa";
 import {FiRefreshCw} from "react-icons/fi";
-import {FaDownload as FaDownloadSecond} from "react-icons/fa6";
-import {getValue} from "@/Components/Helper/index.js";
+import {getValue, visaDocuments} from "@/Components/Helper/index.js";
 import {visaStatuses, visaTypes} from "@/Components/Constant/index.js";
 import {Link, usePage} from "@inertiajs/react";
 
 const SearchResult = () => {
 
     const visa_applies = usePage().props.visa_applies
+
 
     return (
         <div className="">
@@ -40,9 +40,15 @@ const SearchResult = () => {
                             <td className="px-3 py-2 text-sm border-r border-b border-gray-200">{getValue(visaStatuses, row.status)}</td>
                             <td className="px-3 py-2 text-center border-r border-b border-gray-200">
                                 <div className="flex justify-center space-x-2">
-                                    <a href={row.visa_document} download={row.visa_document} className="">
-                                        <FaDownload/>
-                                    </a>
+                                    <ul>
+                                        {visaDocuments(row.visa_document).map((doc, index) => (
+                                            <li key={index} className="mb-2 flex justify-between items-center">
+                                                <a href={doc.url} download={doc.url} className="">
+                                                    <FaDownload/>
+                                                </a>
+                                            </li>
+                                        ))}
+                                    </ul>
 
                                 </div>
                             </td>

@@ -22,3 +22,23 @@ export const isPermitted = (permission) => {
     return role.is_super_admin || role.permissions.includes(permission);
 };
 
+export const visaDocuments = (docs) => {
+    if (!docs) {
+        return []
+    }
+
+    if (typeof docs === "string") {
+        return [
+            {
+                name: '',
+                url: docs
+            }
+        ]
+    }
+
+    try {
+        return JSON.parse(docs)
+    }catch (e){
+        return []
+    }
+}

@@ -1,5 +1,5 @@
 import {router, usePage} from "@inertiajs/react";
-import {getValue} from "@/Components/Helper/index.js";
+import {getValue, visaDocuments} from "@/Components/Helper/index.js";
 import {
     genders,
     groups,
@@ -56,7 +56,7 @@ export const VisaDetails = ({isAdmin}) => {
 
                     <InfoSection title="Documents">
                         {JSON.parse(visa_apply.documents) && JSON.parse(visa_apply.documents.length) > 0 ? (
-                            <ul className="list-disc list-inside text-gray-800">
+                            <ul className="list-disc list-inside text-gray-800 text-sm">
                                 {JSON.parse(visa_apply.documents).map((doc, index) => (
                                     <li key={index} className="mb-2 flex justify-between items-center">
                                         <span>
@@ -67,7 +67,24 @@ export const VisaDetails = ({isAdmin}) => {
                                         </a>
                                     </li>
                                 ))}
+                                <li className="mb-2 flex justify-between items-center">
+                                    <span>
+                                        Uploaded Fo By Admin
+                                    </span>
+
+                                </li>
+                                {visaDocuments(visa_apply.visa_document).map((doc, index) => (
+                                    <li key={index} className="mb-2 flex justify-between items-center">
+                                        <span>
+                                            {doc.name}
+                                        </span>
+                                        <a href={doc.url} target="_blank">
+                                            <FaRegEye/>
+                                        </a>
+                                    </li>
+                                ))}
                             </ul>
+
                         ) : (
                             <p className="text-gray-600">No documents available</p>
                         )}
