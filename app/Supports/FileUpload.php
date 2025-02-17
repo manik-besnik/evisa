@@ -25,7 +25,7 @@ class FileUpload
             if (!$destinationPath) {
                 $destinationPath = 'uploads';
             }
-            
+
 
             $fileName = uniqid() . '-' . time() . '.' . $file->getClientOriginalExtension();
 
