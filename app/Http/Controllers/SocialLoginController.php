@@ -12,7 +12,7 @@ class SocialLoginController extends Controller
 {
     public function googleRedirect(): RedirectResponse
     {
-        return Socialite::driver('github')->redirect();
+        return Socialite::driver('google')->redirect();
     }
 
     public function googleCallback(): RedirectResponse
