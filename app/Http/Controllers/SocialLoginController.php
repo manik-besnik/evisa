@@ -25,6 +25,7 @@ class SocialLoginController extends Controller
             'name' => $googleUser->name,
             'email' => $googleUser->email,
             'username' => $googleUser->email,
+            'role' => 3,
             'is_signup_complete' => 0,
         ]);
 
@@ -54,6 +55,7 @@ class SocialLoginController extends Controller
             'name' => $facebookUser->name,
             'email' => $facebookUser->email,
             'username' => $facebookUser->email,
+            'role' => 3,
             'is_signup_complete' => 0,
         ]);
 
