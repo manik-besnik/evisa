@@ -24,7 +24,7 @@ class User
         /** @var \App\Models\User $user */
         $user = auth()->user();
 
-        if (!$user->is_signup_complete && $request->routeIs('user.info.*')) {
+        if (!$user->is_signup_complete && !$request->routeIs('user.info.*')) {
             return to_route('user.info');
         }
 
