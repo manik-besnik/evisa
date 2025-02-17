@@ -13,7 +13,7 @@ import InfoSection from "@/Components/InfoSection.jsx";
 import InfoItem from "@/Components/Web/InfoItem.jsx";
 import {useState} from "react";
 import Select from "@/Components/Select.jsx";
-
+import {MdFileDownload} from "react-icons/md";
 
 export const VisaDetails = ({isAdmin}) => {
 
@@ -67,28 +67,39 @@ export const VisaDetails = ({isAdmin}) => {
                                         </a>
                                     </li>
                                 ))}
-                                <li className="mb-2 flex justify-between items-center">
-                                    <span>
-                                        Uploaded Fo By Admin
-                                    </span>
 
-                                </li>
-                                {visaDocuments(visa_apply.visa_document).map((doc, index) => (
-                                    <li key={index} className="mb-2 flex justify-between items-center">
-                                        <span>
-                                            {doc.name}
-                                        </span>
-                                        <a href={doc.url} target="_blank">
-                                            <FaRegEye/>
-                                        </a>
-                                    </li>
-                                ))}
                             </ul>
 
                         ) : (
                             <p className="text-gray-600">No documents available</p>
                         )}
                     </InfoSection>
+
+
+                    {visa_apply.visa_document && <InfoSection title="Downloads">
+
+                        <ul className="list-disc list-inside text-gray-800 text-sm">
+
+
+                            {visaDocuments(visa_apply.visa_document).map((doc, index) => (
+                                <li key={index} className="mb-2 flex justify-between items-center">
+                                    <span>
+                                        {doc.name}
+                                    </span>
+                                    <p className="flex gap-x-4">
+                                        <a href={doc.url} download={doc.url} target="_blank">
+                                        <MdFileDownload className="text-lg"/>
+                                    </a>
+                                        <a href={doc.url} target="_blank">
+                                            <FaRegEye/>
+                                        </a>
+                                    </p>
+                                </li>
+                            ))}
+                        </ul>
+
+                    </InfoSection>
+                    }
                 </div>
 
                 <div className="w-full lg:w-1/2">
