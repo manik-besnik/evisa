@@ -14,6 +14,7 @@ import {Head, useForm, usePage} from "@inertiajs/react";
 import PrimaryBtn from "@/Components/Web/PrimaryBtn.jsx";
 import InputFile from "@/Components/Web/InputFile.jsx";
 import {toast} from "react-toastify";
+import PassportInputFile from "@/Components/Web/PassportInputFile.jsx";
 
 
 const VisaApply = () => {
@@ -460,7 +461,7 @@ const VisaApply = () => {
                             <div className="flex gap-2 flex-wrap">
                                 <div className="flex gap-x-2">
                                     <div>
-                                        <InputFile
+                                        <PassportInputFile
                                             defaultClasses="w-[140px] h-[140px]"
                                             placeholder="Passport Page 1"
                                             onChange={handleFileChange}

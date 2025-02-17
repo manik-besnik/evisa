@@ -1,13 +1,14 @@
 import {useState} from "react";
+import {GrAttachment} from "react-icons/gr";
 
-const InputFile = ({
-                       defaultClasses = "w-[70px] h-[70px] ",
-                       classes = '',
-                       placeholder = '',
-                       onChange,
-                       fileType = '',
-                       error = ""
-                   }) => {
+const PassportInputFile = ({
+                               defaultClasses = "w-[70px] h-[70px] ",
+                               classes = '',
+                               placeholder = '',
+                               onChange,
+                               fileType = '',
+                               error = ""
+                           }) => {
 
     const [fileName, setFileName] = useState(placeholder);
 
@@ -31,7 +32,8 @@ const InputFile = ({
     }
 
     return (
-        <div className={`${defaultClasses} ${classes} bg-[#E0EBF8] border-l-4 border-l-primary p-2 ${fileName !== placeholder ? "bg-[#aec0d5]" : 'bg-[#E0EBF8]'}`}>
+        <div
+            className={`${defaultClasses} ${classes} border-l-4 border-l-primary p-2 ${fileName !== placeholder ? "bg-[#aec0d5]" : 'bg-[#E0EBF8]'}`}>
             <label className="flex items-center justify-center w-full h-full cursor-pointer"
                    htmlFor={`file-upload-${fileType}`}>
                 <input
@@ -41,7 +43,11 @@ const InputFile = ({
                     accept=".pdf,.png,.jpg,.jpeg,.webp"
                     className="hidden"
                 />
-                <p className="text-xs break-words">{fileName ? fileName : placeholder}</p>
+                <div className="flex flex-col items-center">
+                    <GrAttachment size={30}/>
+                    <p className="text-xs break-words mt-3">{fileName ? fileName : placeholder}</p>
+                </div>
+
                 {error && <p className="text-xs text-warning">{error}</p>}
             </label>
         </div>
@@ -49,4 +55,4 @@ const InputFile = ({
 }
 
 
-export default InputFile
+export default PassportInputFile
