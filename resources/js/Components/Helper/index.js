@@ -27,18 +27,17 @@ export const visaDocuments = (docs) => {
         return []
     }
 
-    if (typeof docs === "string") {
-        return [
-            {
-                name: '',
-                url: docs
-            }
-        ]
-    }
-
     try {
         return JSON.parse(docs)
-    }catch (e){
+    } catch (e) {
+        if (typeof docs === "string") {
+            return [
+                {
+                    name: '',
+                    url: docs
+                }
+            ]
+        }
         return []
     }
 }

@@ -13,7 +13,7 @@ const InputFile = ({
                        placeholder = '',
                        onChange,
                        fileType = '',
-                       error = ""
+                       error = "",
                    }) => {
 
     const [fileName, setFileName] = useState(placeholder);
@@ -83,13 +83,11 @@ const AddDocumentsModal = ({show, setShow}) => {
     }
 
     const deleteDocument = (i) => {
+        setData('documents', data.documents.filter((_, index) => index !== i));
+    };
 
-        data.documents.splice(i, 1)
-
-        setData('documents', data.documents)
-
-    }
     const updateDocuments = (index, key, value) => {
+
         const updatedDocuments = [...data.documents];
 
         updatedDocuments[index] = {
@@ -157,6 +155,7 @@ const AddDocumentsModal = ({show, setShow}) => {
                                         </div>
 
                                         <InputFile
+                                            fileType={`${i}-file`}
                                             classes="w-full h-9" placeholder="Select File"
                                             onChange={(fileType, file) => updateDocuments(i, 'file', file)}
                                         />

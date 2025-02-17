@@ -80,7 +80,6 @@ export const VisaDetails = ({isAdmin}) => {
 
                         <ul className="list-disc list-inside text-gray-800 text-sm">
 
-
                             {visaDocuments(visa_apply.visa_document).map((doc, index) => (
                                 <li key={index} className="mb-2 flex justify-between items-center">
                                     <span>
@@ -88,8 +87,8 @@ export const VisaDetails = ({isAdmin}) => {
                                     </span>
                                     <p className="flex gap-x-4">
                                         <a href={doc.url} download={doc.url} target="_blank">
-                                        <MdFileDownload className="text-lg"/>
-                                    </a>
+                                            <MdFileDownload className="text-lg"/>
+                                        </a>
                                         <a href={doc.url} target="_blank">
                                             <FaRegEye/>
                                         </a>
