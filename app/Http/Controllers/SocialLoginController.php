@@ -25,6 +25,7 @@ class SocialLoginController extends Controller
             'name' => $googleUser->name,
             'email' => $googleUser->email,
             'username' => $googleUser->email,
+            'is_signup_complete' => 0,
         ]);
 
         Auth::login($user);
@@ -53,6 +54,7 @@ class SocialLoginController extends Controller
             'name' => $facebookUser->name,
             'email' => $facebookUser->email,
             'username' => $facebookUser->email,
+            'is_signup_complete' => 0,
         ]);
 
         Auth::login($user);
