@@ -67,7 +67,7 @@ const Hero = () => {
                          src={`${assetUrl + 'images/hero-welcome.png'}`}
                          alt="welcome to dubai e-visa"/>
                 </div>
-                <div className="flex gap-x-2 2xl:ml-60">
+                <div className="flex gap-x-2 2xl:ml-80">
                     {services.map((service, i) => (
                         <ServiceCard key={i} title={service.title} img={service.img} link={service.link}/>
                     ))}
