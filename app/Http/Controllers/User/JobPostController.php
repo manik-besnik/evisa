@@ -46,7 +46,7 @@ class JobPostController extends Controller
         $jobApplied = JobApply::query()->where('user_id', auth()->id())->where('job_post_id', $request->input('job_post_id'))->first();
 
         if ($jobApplied) {
-            return redirect()->back()->withErrors(['message' => "Already applied this job"]);
+            return redirect()->back()->with('error', "Already applied this job");
         }
         try {
 

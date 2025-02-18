@@ -201,7 +201,7 @@ const JobApply = () => {
                             value={data.passing_year}
                             onChange={(e) => setData('passing_year', e.target.value)}
                             error={errors.passing_year}
-                            id="centificate"
+                            id="passing_year"
                             placeholder="EX: 2016"
                             label="Passing Year*"
                             defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
@@ -212,7 +212,7 @@ const JobApply = () => {
                             onChange={(e) => setData('institute', e.target.value)}
                             error={errors.institute}
                             id="institute"
-                            placeholder="EX: 2016"
+                            placeholder="EX: Dhaka University"
                             label="Board | Universaity*"
                             defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                             labelClasses="text-text-primary"
