@@ -8,7 +8,7 @@ class JobApplyList
     public static function execute(): \Illuminate\Database\Eloquent\Collection
     {
         return JobApply::query()
-            ->with(['jobPost:id,title,company,location,salary_range,'])
+            ->with(['jobPost:id,title,company,location,salary_range'])
             ->where('user_id', auth()
                 ->id())->get();
     }
