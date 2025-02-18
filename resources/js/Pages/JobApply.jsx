@@ -169,8 +169,8 @@ const JobApply = () => {
                                 items={jobs}
                                 selected={jobPost}
                                 setSelected={setJobPost}
-                                handleValueChange={(value) => setData('job_id', value.id)}
-                                error={errors.job_id}
+                                handleValueChange={(value) => setData('job_post_id', value.id)}
+                                error={errors.job_post_id}
                                 field='title'
                                 defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                             />
