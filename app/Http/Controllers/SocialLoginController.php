@@ -19,17 +19,21 @@ class SocialLoginController extends Controller
     {
         $googleUser = Socialite::driver('google')->user();
 
-        /** @var User $user */
-        $user = User::query()->updateOrCreate(
-            ['email' => $googleUser->email],
-            [
-                'name' => $googleUser->name,
-                'username' => $googleUser->email,
-                'role' => 3,
-                'is_signup_complete' => $user->is_signup_complete ?? 0,
-            ]
-        );
+        /** @var User|null $user */
+        $user = User::query()
+            ->where('email', $googleUser->email)
+            ->orWhere('username', $googleUser->email)
+            ->first();
 
+        if (!$user) {
+            $user = new User();
+            $user->email = $googleUser->email;
+            $user->name = $googleUser->name;
+            $user->username = $googleUser->email;
+            $user->role = 3;
+            $user->is_signup_complete = 0;
+            $user->save();
+        }
         Auth::login($user);
 
         if ($user->is_signup_complete) {
@@ -51,7 +55,10 @@ class SocialLoginController extends Controller
         $facebookUser = Socialite::driver('facebook')->user();
 
         /** @var User|null $user */
-        $user = User::query()->where('email', $facebookUser->email)->first();
+        $user = User::query()
+            ->where('email', $facebookUser->email)
+            ->orWhere('username', $facebookUser->email)
+            ->first();
 
         if (!$user) {
             $user = new User();
