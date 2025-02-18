@@ -16,7 +16,7 @@ php artisan optimize:clear
 php artisan ziggy:generate
 
 # Build frontend assets
-npm install --production
+npm install
 npm run build
 
 # Optimize Laravel application
