@@ -3,6 +3,9 @@
 # Navigate to the project directory
 cd /var/www/evisa || exit
 
+# Checkout Production branch
+git checkout production
+
 # Pull latest changes from production branch
 git pull origin production
 
