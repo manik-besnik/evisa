@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Supports\ApiResponse;
 use App\Supports\FileUpload;
+use App\Supports\PassportDataExtractor;
 use Illuminate\Http\Request;
 use thiagoalessio\TesseractOCR\TesseractOCR;
+use thiagoalessio\TesseractOCR\TesseractOcrException;
 
 
 class ExtreactTextController extends Controller
@@ -112,38 +114,17 @@ class ExtreactTextController extends Controller
 //    }
 
 
+    /**
+     * @throws TesseractOcrException
+     */
     private function extract(string $imageUrl): array
     {
         $tesseract = new TesseractOCR($imageUrl);
         $tesseract->lang('eng');
         $text = $tesseract->run();
 
-        // Clean up the text by removing any non-alphanumeric characters except for spaces and basic punctuation
-        $cleanedText = preg_replace('/[^\w\s:\/.-]/', '', $text);
-
-        // Debugging: check cleaned text (for development purposes)
-        // echo $cleanedText;
-
-        // Match the Passport Number (first word after "P BGD")
-        preg_match('/P BGD (\w+)/', $cleanedText, $passportMatch);
-        $passportNo = $passportMatch[1] ?? 'Not Found';
-
-        // Match the Issue Date (e.g., "13 NOV 2022")
-        preg_match('/Date of Issue\s*[:\-]?\s*(\d{1,2} [A-Z]{3} \d{4})/i', $cleanedText, $issueMatch);
-        $issueDate = $issueMatch[1] ?? 'Not Found';
-
-        // Match the Expiry Date (e.g., "12 NOV 2032")
-        preg_match('/Date of Expiry\s*[:\-]?\s*(\d{1,2} [A-Z]{3} \d{4})/i', $cleanedText, $expiryMatch);
-        $expiryDate = $expiryMatch[1] ?? 'Not Found';
-
-        return [
-            'passport_no' => $passportNo,
-            'issue_date' => $issueDate,
-            'expire_date' => $expiryDate,
-            'text' => $text,
-        ];
+        return (new PassportDataExtractor())->extractData($text);
     }
-
 
     private function extractText(array $filePaths): string
     {

@@ -189,15 +189,16 @@ const VisaApplyForm = ({submitUrl}) => {
         setData('guarantor_nationality', value.id)
     }
 
-    const handleStartProcessing = () => {
+    const handleFileProcessing = () => {
         setIsLoading(true)
     }
 
     const handleFileChange = (fileType, file) => {
 
         if (fileType === "passport") {
-            handleStartProcessing(file)
+            handleFileProcessing(file)
         }
+
         data.documents[fileType] = {
             "name": documentTypes[fileType].name,
             "type": fileType,
