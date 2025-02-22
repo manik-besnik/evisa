@@ -195,9 +195,9 @@ const VisaApplyForm = ({submitUrl}) => {
 
     const handleFileChange = (fileType, file) => {
 
-        if (fileType === "passport") {
-            handleFileProcessing(file)
-        }
+        // if (fileType === "passport") {
+        //     handleFileProcessing(file)
+        // }
 
         data.documents[fileType] = {
             "name": documentTypes[fileType].name,

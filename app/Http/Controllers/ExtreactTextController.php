@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Supports\ApiResponse;
-use App\Supports\FileUpload;
+use Illuminate\Support\Facades\Storage;
 use App\Supports\PassportDataExtractor;
 use Illuminate\Http\Request;
 use thiagoalessio\TesseractOCR\TesseractOCR;
 use thiagoalessio\TesseractOCR\TesseractOcrException;
-
+use Spatie\PdfToImage\Pdf;
 
 class ExtreactTextController extends Controller
 {
@@ -16,12 +16,9 @@ class ExtreactTextController extends Controller
      */
     public function __invoke(Request $request): \Illuminate\Http\JsonResponse
     {
-        // Validate the uploaded files
         $request->validate([
             'files.*' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048',
         ]);
-
-//        $paths = [];
 
         $file = $request->file('files');
 
@@ -30,19 +27,39 @@ class ExtreactTextController extends Controller
             $destinationPath = public_path('uploads/ocr');
             $file->move($destinationPath, $fileName);
 
-
             $filePath = 'uploads/ocr/' . $fileName;
-//        $paths[] = $filePath;
 
-            $data = $this->extract($filePath);
+            if ($file->getClientOriginalExtension() === 'pdf') {
+                $imagePaths = $this->convertPdfToImages($filePath);
+                $data = [];
+                foreach ($imagePaths as $imagePath) {
+                    $data[] = $this->extract($imagePath);
+                    unlink($imagePath);
+                }
+            } else {
+                $data = $this->extract($filePath);
+            }
 
-            FileUpload::delete($filePath);
+            unlink($filePath); // Remove uploaded file after processing
 
-
-            return ApiResponse::success('data process success', ['passport_data' => $data]);
+            return ApiResponse::success('Data processed successfully', ['passport_data' => $data]);
         } catch (\Exception $exception) {
-            return ApiResponse::error('passport file process failed');
+            return ApiResponse::error('Passport file processing failed');
         }
+    }
+
+    private function convertPdfToImages(string $pdfPath): array
+    {
+        $pdf = new Pdf($pdfPath);
+        $outputPaths = [];
+
+        for ($i = 1; $i <= $pdf->getNumberOfPages(); $i++) {
+            $imagePath = public_path("uploads/ocr/" . time() . "_page_{$i}.jpg");
+            $pdf->setPage($i)->saveImage($imagePath);
+            $outputPaths[] = $imagePath;
+        }
+
+        return $outputPaths;
     }
 
 //    /**
