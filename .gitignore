@@ -20,7 +20,9 @@ storage/*.key
 Homestead.yaml
 Homestead.json
 /.vagrant
-.phpunit.result.cache
+.phpunit.result.
+
+bootstrap/ssr
 
 /public/uploads
 /public/public
