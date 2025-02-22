@@ -6,6 +6,9 @@ cd /var/www/evisa || exit
 # Checkout Production branch
 git checkout production
 
+# Discard any local changes (reset to the latest commit)
+git reset --hard
+
 # Pull latest changes from production branch
 git pull origin production
 
@@ -24,7 +27,6 @@ npm run build
 
 # Optimize Laravel application
 php artisan optimize
-
 
 # Set correct permissions (optional, modify as needed)
 chmod -R 775 storage bootstrap/cache
