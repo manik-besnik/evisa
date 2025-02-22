@@ -6,8 +6,9 @@ cd /var/www/evisa || exit
 # Checkout Production branch
 git checkout production
 
-# Discard any local changes (reset to the latest commit)
+# Discard any local changes and remove untracked files
 git reset --hard
+git clean -fd
 
 # Pull latest changes from production branch
 git pull origin production
