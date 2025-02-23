@@ -28,6 +28,7 @@ bootstrap/ssr
 /public/public
 /public/build
 /storage/pail
+/storage
 .env.backup
 .env.production
 .phpactor.json
