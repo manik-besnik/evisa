@@ -1,4 +1,4 @@
-export const assetUrl = "https://dubaievisaservice.com/public/assets/"
+export const assetUrl = "https://dubaievisaservice.com/assets/"
 export const genders = [
     {id: 1, name: "Male"},
     {id: 2, name: "Female"},
