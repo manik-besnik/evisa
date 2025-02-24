@@ -4,8 +4,71 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "78e6db164f4b222fcafbfe9b9b2779a8",
+    "content-hash": "2c011c4940e0a12ab4ffcb082dda53e7",
     "packages": [
+        {
+            "name": "aymanrb/php-unstructured-text-parser",
+            "version": "v2.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/aymanrb/php-unstructured-text-parser.git",
+                "reference": "a0b29127d3c99135fe81e50142c4374a22084ee5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/aymanrb/php-unstructured-text-parser/zipball/a0b29127d3c99135fe81e50142c4374a22084ee5",
+                "reference": "a0b29127d3c99135fe81e50142c4374a22084ee5",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "php": ">=7.4.0",
+                "psr/log": "^1.0.1 || ^2.0 || ^3.0"
+            },
+            "require-dev": {
+                "php-coveralls/php-coveralls": "^2.1",
+                "phpunit/phpunit": "^8.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "aymanrb\\UnstructuredTextParser\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ayman R. Bedair",
+                    "email": "aymanrb@gmail.com",
+                    "homepage": "http://www.aymanrb.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Pavel",
+                    "homepage": "http://www.aisamiery.ru",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A PHP library to help extract text out of text documents",
+            "homepage": "https://github.com/aymanrb/php-unstructured-text-parser",
+            "keywords": [
+                "extract data",
+                "form parsing",
+                "php parser",
+                "regex parsing",
+                "templates parsing",
+                "text parse",
+                "text parser"
+            ],
+            "support": {
+                "issues": "https://github.com/aymanrb/php-unstructured-text-parser/issues",
+                "source": "https://github.com/aymanrb/php-unstructured-text-parser"
+            },
+            "time": "2023-11-10T08:52:26+00:00"
+        },
         {
             "name": "brick/math",
             "version": "0.12.1",

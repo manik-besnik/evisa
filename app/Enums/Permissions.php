@@ -24,6 +24,7 @@ enum Permissions: string
     case EDIT_VISA = 'visa.edit';
     case DELETE_VISA = 'visa.delete';
     case ADD_DOCUMENT_VISA = 'visa.add.document';
+    case DELETE_DOCUMENT_VISA = 'visa.delete.document';
     case STATUS_CHANGE_VISA = 'visa.status.change';
     case VIEW_JOB_POST = 'job-post.view';
     case VIEW_SINGLE_JOB_POST = 'job-post.single-view';

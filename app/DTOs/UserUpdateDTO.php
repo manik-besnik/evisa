@@ -22,7 +22,7 @@ class UserUpdateDTO
             'name' => 'required|string|max:255',
             'profession' => 'required|string|max:255',
             'phone' => 'required|string|max:20',
-            'email' => 'required|email|max:255',
+            'email' => 'required|email|max:255|unique:users,email',
             'preffer_language' => 'required|integer|exists:languages,id',
             'nationality' => 'required|integer|exists:countries,id',
             'living_country' => 'required|integer|exists:countries,id',

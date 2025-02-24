@@ -15,24 +15,25 @@ const InputFile = ({
         const file = e.target.files[0]
 
         if (file) {
-            const validTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/svg', 'image/webp', 'image/jpg' ,'application/pdf'];
+            const validTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/svg', 'image/webp', 'image/jpg', 'application/pdf'];
             if (!validTypes.includes(file.type)) {
 
                 setFileName(placeholder);
                 return;
             }
 
-            onChange(fileType,file)
+            onChange(fileType, file)
 
-            setFileName(file.name);
+            setFileName("Attached");
         } else {
             setFileName(placeholder);
         }
     }
 
     return (
-        <div className={`${defaultClasses} ${classes} bg-[#E0EBF8] border-l-4 border-l-primary p-2`}>
-            <label className="flex items-center justify-center w-full h-full cursor-pointer" htmlFor={`file-upload-${fileType}`}>
+        <div className={`${defaultClasses} ${classes} bg-[#E0EBF8] border-l-4 border-l-primary p-2 ${fileName !== placeholder ? "bg-[#aec0d5]" : 'bg-[#E0EBF8]'}`}>
+            <label className="flex items-center justify-center w-full h-full cursor-pointer"
+                   htmlFor={`file-upload-${fileType}`}>
                 <input
                     onChange={(e) => handleUploadFile(e)}
                     id={`file-upload-${fileType}`}

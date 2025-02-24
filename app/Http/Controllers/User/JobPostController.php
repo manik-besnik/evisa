@@ -6,6 +6,7 @@ use App\Actions\User\JobPost\IndexAction;
 use App\Actions\User\JobPost\ShowAction;
 use App\DTOs\JobApplyDTO;
 use App\Http\Controllers\Controller;
+use App\Models\JobApply;
 use App\Models\JobPost;
 use App\Models\Language;
 use App\Supports\JobApplyAction;
@@ -41,6 +42,12 @@ class JobPostController extends Controller
      */
     public function store(Request $request): \Illuminate\Http\RedirectResponse
     {
+        /** @var JobApply|null $jobApplied */
+        $jobApplied = JobApply::query()->where('user_id', auth()->id())->where('job_post_id', $request->input('job_post_id'))->first();
+
+        if ($jobApplied) {
+            return redirect()->back()->with('error', "Already applied this job");
+        }
         try {
 
             $apply = JobApplyAction::execute(auth()->id(), JobApplyDTO::fromRequest($request));

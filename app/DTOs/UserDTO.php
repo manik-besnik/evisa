@@ -60,6 +60,7 @@ class UserDTO
         $instance->email = $user['email'] ?? null;
         $instance->avatar = $user['avatar'] ?? null;
         $instance->password = $user['password'] ?? null;
+        $instance->signUpComplete = $user['sign_up_complete'] ?? 1;
 
         if ($user['username'] ?? false) {
             $instance->username = $user['username'];
@@ -70,9 +71,6 @@ class UserDTO
         }
         if ($user['role_id'] ?? false) {
             $instance->roleId = (int)$user['role_id'];
-        }
-        if ($user['sign_up_complete'] ?? false) {
-            $instance->signUpComplete = (int)$user['sign_up_complete'];
         }
 
         return $instance;

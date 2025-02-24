@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import PlatformList from '@/Components/Admin/PlatformList'
 
 const AllPlatform = () => {
 
@@ -11,9 +10,6 @@ const AllPlatform = () => {
                 <button className="app-btn">Save Now</button>
             </div>
 
-            <div>
-                <PlatformList />
-            </div>
         </>
     )
 }

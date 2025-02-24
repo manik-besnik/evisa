@@ -26,9 +26,6 @@ class FileUpload
                 $destinationPath = 'uploads';
             }
 
-            if (!(bool)config('services.local_environment')) {
-                $destinationPath = 'public/' . $destinationPath;
-            }
 
             $fileName = uniqid() . '-' . time() . '.' . $file->getClientOriginalExtension();
 

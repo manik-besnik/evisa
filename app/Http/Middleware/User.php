@@ -24,6 +24,10 @@ class User
         /** @var \App\Models\User $user */
         $user = auth()->user();
 
+        if (!$user->is_signup_complete && !($request->routeIs('user.info') || $request->routeIs('user.info.store'))) {
+            return to_route('user.info');
+        }
+
         if ($user->role !== Role::USER->value) {
             return to_route('home');
         }

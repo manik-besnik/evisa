@@ -1,9 +1,10 @@
 import {router, usePage} from "@inertiajs/react";
-import {getValue} from "@/Components/Helper/index.js";
+import {getValue, isPermitted, visaDocuments} from "@/Components/Helper/index.js";
 import {
     genders,
     groups,
     maritalStatuses,
+    permissionEnums,
     visaProcessingTypes,
     visaStatuses,
     visaTypes
@@ -13,17 +14,34 @@ import InfoSection from "@/Components/InfoSection.jsx";
 import InfoItem from "@/Components/Web/InfoItem.jsx";
 import {useState} from "react";
 import Select from "@/Components/Select.jsx";
-
+import {MdFileDownload} from "react-icons/md";
+import DangerButton from "@/Components/DangerButton.jsx";
+import {FaTrashAlt} from "react-icons/fa";
+import DeleteConfirmModal from "@/Components/DeleteConfirmModal.jsx";
 
 export const VisaDetails = ({isAdmin}) => {
 
     const {visa_apply} = usePage().props;
 
     const [status, setStatus] = useState(visaStatuses.find(item => item.id === visa_apply.status))
+    const [document, setDocument] = useState(null);
+    const [show, setShow] = useState(false);
 
     const changeStatus = (value) => {
 
         router.put(route('admin.visa-applies.change-status', visa_apply.id), {status: value.id})
+    }
+
+    const deleteDocument = (url) => {
+        setDocument(url)
+        setShow(true)
+    }
+    const confirmDeleteDocument = () => {
+        router.delete(route('admin.visa-applies.delete.document', {visa_apply: visa_apply.id, url: document}), {
+            onSuccess: () => {
+                setShow(false)
+            }
+        })
     }
 
     return (
@@ -56,7 +74,7 @@ export const VisaDetails = ({isAdmin}) => {
 
                     <InfoSection title="Documents">
                         {JSON.parse(visa_apply.documents) && JSON.parse(visa_apply.documents.length) > 0 ? (
-                            <ul className="list-disc list-inside text-gray-800">
+                            <ul className="list-disc list-inside text-gray-800 text-sm">
                                 {JSON.parse(visa_apply.documents).map((doc, index) => (
                                     <li key={index} className="mb-2 flex justify-between items-center">
                                         <span>
@@ -67,11 +85,44 @@ export const VisaDetails = ({isAdmin}) => {
                                         </a>
                                     </li>
                                 ))}
+
                             </ul>
+
                         ) : (
                             <p className="text-gray-600">No documents available</p>
                         )}
                     </InfoSection>
+
+
+                    {visa_apply.visa_document &&
+                        <InfoSection title="Downloads">
+
+                            <ul className="list-disc list-inside text-gray-800 text-sm">
+
+                                {visaDocuments(visa_apply.visa_document).map((doc, index) => (
+                                    <li key={index} className="mb-2 flex justify-between items-center">
+                                    <span>
+                                        {doc.name}
+                                    </span>
+                                        <p className="flex gap-x-4 items-center">
+                                            <a href={doc.url} download={doc.url} target="_blank">
+                                                <MdFileDownload className="text-lg"/>
+                                            </a>
+                                            <a href={doc.url} target="_blank">
+                                                <FaRegEye/>
+                                            </a>
+                                            {(isPermitted(permissionEnums.DELETE_DOCUMENT_VISA) && isAdmin) &&
+                                                <DangerButton onClick={() => deleteDocument(doc.url)}>
+                                                    <FaTrashAlt/>
+                                                </DangerButton>
+                                            }
+                                        </p>
+                                    </li>
+                                ))}
+                            </ul>
+
+                        </InfoSection>
+                    }
                 </div>
 
                 <div className="w-full lg:w-1/2">
@@ -115,6 +166,8 @@ export const VisaDetails = ({isAdmin}) => {
 
 
             </div>
+
+            <DeleteConfirmModal show={show} setShow={setShow} handleConfirmDelete={confirmDeleteDocument}/>
 
 
         </div>

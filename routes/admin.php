@@ -36,6 +36,8 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
     Route::post('visa-applies/{visa_apply}', [VisaApplyController::class, 'update'])->name('visa-applies.update');
     Route::resource('visa-applies', VisaApplyController::class)->except(['update']);
 
+    Route::delete('visa-applies/{visa_apply}/document-delete', [VisaApplyController::class, 'deleteDocument'])->name('visa-applies.delete.document');
+
     Route::get('admins', [AdminController::class, 'index'])->name('admins.index');
 
     Route::post('admins/store', [AdminController::class, 'store'])->name('admins.store');

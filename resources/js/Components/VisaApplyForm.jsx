@@ -12,6 +12,7 @@ import {
 import InputBox from "@/Components/Admin/InputBox.jsx";
 import InputFile from "@/Components/Admin/InputFile.jsx";
 import axios from "axios";
+import Loading from "@/Components/Loading.jsx";
 
 const VisaApplyForm = ({submitUrl}) => {
 
@@ -27,7 +28,7 @@ const VisaApplyForm = ({submitUrl}) => {
         if (user?.id) {
             const getVisaInfo = async () => {
                 try {
-                    const { data } = await axios.get(route('visa-info', user?.id));
+                    const {data} = await axios.get(route('visa-info', user?.id));
 
                     // Update local states first
                     setPersonalInfo(data.personal_info || {});
@@ -66,6 +67,8 @@ const VisaApplyForm = ({submitUrl}) => {
     const [maritalStatus, setMaritalStatus] = useState('');
     const [passportIssueCountry, setPassportIssueCountry] = useState('');
     const [guarantorNationality, setGuarantorNationality] = useState('');
+
+    const [isLoading, setIsLoading] = useState(false);
 
     const {data, setData, post, errors, processing} = useForm({
         user_id: '',
@@ -186,7 +189,16 @@ const VisaApplyForm = ({submitUrl}) => {
         setData('guarantor_nationality', value.id)
     }
 
+    const handleFileProcessing = () => {
+        setIsLoading(true)
+    }
+
     const handleFileChange = (fileType, file) => {
+
+        // if (fileType === "passport") {
+        //     handleFileProcessing(file)
+        // }
+
         data.documents[fileType] = {
             "name": documentTypes[fileType].name,
             "type": fileType,
@@ -726,6 +738,8 @@ const VisaApplyForm = ({submitUrl}) => {
                 </form>
 
             </div>
+
+            {isLoading && <Loading/>}
         </>
     )
 }

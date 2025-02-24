@@ -20,11 +20,15 @@ storage/*.key
 Homestead.yaml
 Homestead.json
 /.vagrant
-.phpunit.result.cache
+.phpunit.result.
+
+bootstrap/ssr
 
 /public/uploads
+/public/public
 /public/build
 /storage/pail
+/storage
 .env.backup
 .env.production
 .phpactor.json

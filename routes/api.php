@@ -4,6 +4,8 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\JobApplyController;
 use App\Http\Controllers\Api\VisaApplyController;
 use App\Http\Controllers\ExtreactTextController;
+use App\Models\Language;
+use App\Supports\ApiResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -29,17 +31,17 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::get('countries', function () {
-    $data = [
+    return ApiResponse::success("Country Data", [
         'countries' => \App\Supports\Country::get(),
-    ];
-    return \App\Supports\ApiResponse::success("Country and Language Data", $data);
+    ]);
 });
 
+
 Route::get('languages', function () {
-    $data = [
-        'languages' => \App\Models\Language::query()->get(),
-    ];
-    return \App\Supports\ApiResponse::success("Country and Language Data", $data);
+
+    return ApiResponse::success("Language Data", [
+        'languages' => Language::query()->get(),
+    ]);
 });
 
 

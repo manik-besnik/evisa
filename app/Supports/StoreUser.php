@@ -24,6 +24,7 @@ class StoreUser
             $user->avatar = $avatar;
             $user->role = $userDTO->role;
             $user->role_id = $userDTO->roleId;
+            $user->is_signup_complete = $userDTO->signUpComplete ?? 0;
             $user->password = $userDTO->password;
             $user->save();
 

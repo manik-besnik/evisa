@@ -6,6 +6,7 @@ use App\Actions\Admin\VisaApply\AddDocumentAction;
 use App\Actions\Admin\VisaApply\ChangeStatusAction;
 use App\Actions\Admin\VisaApply\CreateAction;
 use App\Actions\Admin\VisaApply\DeleteAction;
+use App\Actions\Admin\VisaApply\DeleteDocumentAction;
 use App\Actions\Admin\VisaApply\EditAction;
 use App\Actions\Admin\VisaApply\IndexAction;
 use App\Actions\Admin\VisaApply\ShowAction;
@@ -58,7 +59,7 @@ class VisaApplyController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(VisaApply $visaApply,EditAction $editAction): \Inertia\Response
+    public function edit(VisaApply $visaApply, EditAction $editAction): \Inertia\Response
     {
         return $editAction->execute($visaApply);
     }
@@ -74,7 +75,7 @@ class VisaApplyController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(VisaApply $visaApply, DeleteAction $deleteAction)
+    public function destroy(VisaApply $visaApply, DeleteAction $deleteAction): RedirectResponse
     {
         return $deleteAction->execute($visaApply);
     }
@@ -87,6 +88,12 @@ class VisaApplyController extends Controller
     public function changeStatus(Request $request, int $id, ChangeStatusAction $changeStatusAction): RedirectResponse
     {
         return $changeStatusAction->execute($request, $id);
+    }
+
+    public function deleteDocument(int $id, DeleteDocumentAction $deleteDocumentAction): RedirectResponse
+    {
+        $url = request()->input('url');
+        return $deleteDocumentAction->execute($id, $url);
     }
 
     public function visaInfo(int $user_id): JsonResponse

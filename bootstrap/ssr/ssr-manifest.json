@@ -1,0 +1,610 @@
+{
+  "node_modules/laravel-vite-plugin/inertia-helpers/index.js": [],
+  "public/images/alex.png": [
+    "/build/assets/Index-DJpCkDZX.js",
+    "/build/assets/alex-BwhYqOg1.png",
+    "/build/assets/kail-CHBuhfBG.png",
+    "/build/assets/liam-CkRLfEr_.png",
+    "/build/assets/emily-CLhHGURd.png",
+    "/build/assets/max-Bf_qvR-X.png"
+  ],
+  "public/images/emily.png": [
+    "/build/assets/Index-DJpCkDZX.js",
+    "/build/assets/alex-BwhYqOg1.png",
+    "/build/assets/kail-CHBuhfBG.png",
+    "/build/assets/liam-CkRLfEr_.png",
+    "/build/assets/emily-CLhHGURd.png",
+    "/build/assets/max-Bf_qvR-X.png"
+  ],
+  "public/images/error-img.png": [
+    "/build/assets/Error-DiLOAg0N.js",
+    "/build/assets/error-img-De_wkjt2.png"
+  ],
+  "public/images/kail.png": [
+    "/build/assets/Index-DJpCkDZX.js",
+    "/build/assets/alex-BwhYqOg1.png",
+    "/build/assets/kail-CHBuhfBG.png",
+    "/build/assets/liam-CkRLfEr_.png",
+    "/build/assets/emily-CLhHGURd.png",
+    "/build/assets/max-Bf_qvR-X.png"
+  ],
+  "public/images/liam.png": [
+    "/build/assets/Index-DJpCkDZX.js",
+    "/build/assets/alex-BwhYqOg1.png",
+    "/build/assets/kail-CHBuhfBG.png",
+    "/build/assets/liam-CkRLfEr_.png",
+    "/build/assets/emily-CLhHGURd.png",
+    "/build/assets/max-Bf_qvR-X.png"
+  ],
+  "public/images/max.png": [
+    "/build/assets/Index-DJpCkDZX.js",
+    "/build/assets/alex-BwhYqOg1.png",
+    "/build/assets/kail-CHBuhfBG.png",
+    "/build/assets/liam-CkRLfEr_.png",
+    "/build/assets/emily-CLhHGURd.png",
+    "/build/assets/max-Bf_qvR-X.png"
+  ],
+  "resources/js/Components/AddUserForm.jsx": [
+    "/build/assets/AddUserForm-B5YZat1U.js"
+  ],
+  "resources/js/Components/Admin/AddDocumentsModal.jsx": [
+    "/build/assets/Show-BRVrEomW.js"
+  ],
+  "resources/js/Components/Admin/Admin/CreateAdminModal.jsx": [
+    "/build/assets/Admin-dxTF50cI.js"
+  ],
+  "resources/js/Components/Admin/Admin/EditAdminModal.jsx": [
+    "/build/assets/Admin-dxTF50cI.js"
+  ],
+  "resources/js/Components/Admin/AllPlatform.jsx": [
+    "/build/assets/Platform-ChfkJ4a3.js"
+  ],
+  "resources/js/Components/Admin/InputBox.jsx": [
+    "/build/assets/InputBox-CqMgyXAz.js"
+  ],
+  "resources/js/Components/Admin/InputFile.jsx": [
+    "/build/assets/InputFile-Cn5gx5a_.js"
+  ],
+  "resources/js/Components/Admin/Notification.jsx": [
+    "/build/assets/AuthenticatedLayout-BxC39YU8.js"
+  ],
+  "resources/js/Components/Admin/Pagination.jsx": [
+    "/build/assets/Pagination-DNB83QUR.js"
+  ],
+  "resources/js/Components/Admin/Role/CreateRoleModal.jsx": [
+    "/build/assets/Role-B90OG3is.js"
+  ],
+  "resources/js/Components/Admin/Role/EditRoleModal.jsx": [
+    "/build/assets/Role-B90OG3is.js"
+  ],
+  "resources/js/Components/Admin/SideNav.jsx": [
+    "/build/assets/AdminLayout-BnjWKmf2.js"
+  ],
+  "resources/js/Components/Admin/SideNavLinks.jsx": [
+    "/build/assets/AuthenticatedLayout-BxC39YU8.js"
+  ],
+  "resources/js/Components/Admin/TopSection.jsx": [
+    "/build/assets/TopSection-CKNLCvmW.js"
+  ],
+  "resources/js/Components/Admin/TotalInfoCard.jsx": [
+    "/build/assets/Platform-ChfkJ4a3.js"
+  ],
+  "resources/js/Components/Agency/AgencyRegister.jsx": [
+    "/build/assets/Register-BZ2KusXr.js"
+  ],
+  "resources/js/Components/Agency/AgencyRegisterInfo.jsx": [
+    "/build/assets/AgencyInfo-ft6AkWnC.js"
+  ],
+  "resources/js/Components/Agency/AgencySideNavLinks.jsx": [
+    "/build/assets/AuthenticatedLayout-BxC39YU8.js"
+  ],
+  "resources/js/Components/Checkbox.jsx": [
+    "/build/assets/Checkbox-9lVmrZpR.js"
+  ],
+  "resources/js/Components/Constant/index.js": [
+    "/build/assets/index-B74Y7uk7.js"
+  ],
+  "resources/js/Components/DangerButton.jsx": [
+    "/build/assets/DangerButton-C_x1CXfY.js"
+  ],
+  "resources/js/Components/DeleteConfirmModal.jsx": [
+    "/build/assets/DeleteConfirmModal-Drh0rErj.js"
+  ],
+  "resources/js/Components/Dropdown.jsx": [
+    "/build/assets/AuthenticatedLayout-BxC39YU8.js"
+  ],
+  "resources/js/Components/ErrorField.jsx": [
+    "/build/assets/Email-BTwdfxTN.js"
+  ],
+  "resources/js/Components/Footer.jsx": [
+    "/build/assets/Footer-D8ZUUWgW.js"
+  ],
+  "resources/js/Components/Helper/index.js": [
+    "/build/assets/index-DbarwM_f.js"
+  ],
+  "resources/js/Components/InfoSection.jsx": [
+    "/build/assets/InfoItem-B7VJ6rrj.js"
+  ],
+  "resources/js/Components/InputBox.jsx": [
+    "/build/assets/InputBox-BrQDXsyy.js"
+  ],
+  "resources/js/Components/InputError.jsx": [
+    "/build/assets/InputError-cRVTeK4i.js"
+  ],
+  "resources/js/Components/InputLabel.jsx": [
+    "/build/assets/InputLabel-uXgJWz9w.js"
+  ],
+  "resources/js/Components/LabelField.jsx": [
+    "/build/assets/LabelField-DHhf-wOM.js"
+  ],
+  "resources/js/Components/LandingPage/Banner.jsx": [
+    "/build/assets/Index-DJpCkDZX.js",
+    "/build/assets/alex-BwhYqOg1.png",
+    "/build/assets/kail-CHBuhfBG.png",
+    "/build/assets/liam-CkRLfEr_.png",
+    "/build/assets/emily-CLhHGURd.png",
+    "/build/assets/max-Bf_qvR-X.png"
+  ],
+  "resources/js/Components/LandingPage/Company.jsx": [
+    "/build/assets/Index-DJpCkDZX.js",
+    "/build/assets/alex-BwhYqOg1.png",
+    "/build/assets/kail-CHBuhfBG.png",
+    "/build/assets/liam-CkRLfEr_.png",
+    "/build/assets/emily-CLhHGURd.png",
+    "/build/assets/max-Bf_qvR-X.png"
+  ],
+  "resources/js/Components/LandingPage/FAQ.jsx": [
+    "/build/assets/Index-DJpCkDZX.js",
+    "/build/assets/alex-BwhYqOg1.png",
+    "/build/assets/kail-CHBuhfBG.png",
+    "/build/assets/liam-CkRLfEr_.png",
+    "/build/assets/emily-CLhHGURd.png",
+    "/build/assets/max-Bf_qvR-X.png"
+  ],
+  "resources/js/Components/LandingPage/Footer.jsx": [
+    "/build/assets/Index-DJpCkDZX.js",
+    "/build/assets/alex-BwhYqOg1.png",
+    "/build/assets/kail-CHBuhfBG.png",
+    "/build/assets/liam-CkRLfEr_.png",
+    "/build/assets/emily-CLhHGURd.png",
+    "/build/assets/max-Bf_qvR-X.png"
+  ],
+  "resources/js/Components/LandingPage/Gateway.jsx": [
+    "/build/assets/Index-DJpCkDZX.js",
+    "/build/assets/alex-BwhYqOg1.png",
+    "/build/assets/kail-CHBuhfBG.png",
+    "/build/assets/liam-CkRLfEr_.png",
+    "/build/assets/emily-CLhHGURd.png",
+    "/build/assets/max-Bf_qvR-X.png"
+  ],
+  "resources/js/Components/LandingPage/Guide.jsx": [
+    "/build/assets/Index-DJpCkDZX.js",
+    "/build/assets/alex-BwhYqOg1.png",
+    "/build/assets/kail-CHBuhfBG.png",
+    "/build/assets/liam-CkRLfEr_.png",
+    "/build/assets/emily-CLhHGURd.png",
+    "/build/assets/max-Bf_qvR-X.png"
+  ],
+  "resources/js/Components/LandingPage/Navbar.jsx": [
+    "/build/assets/Index-DJpCkDZX.js",
+    "/build/assets/alex-BwhYqOg1.png",
+    "/build/assets/kail-CHBuhfBG.png",
+    "/build/assets/liam-CkRLfEr_.png",
+    "/build/assets/emily-CLhHGURd.png",
+    "/build/assets/max-Bf_qvR-X.png"
+  ],
+  "resources/js/Components/LandingPage/Principles.jsx": [
+    "/build/assets/Index-DJpCkDZX.js",
+    "/build/assets/alex-BwhYqOg1.png",
+    "/build/assets/kail-CHBuhfBG.png",
+    "/build/assets/liam-CkRLfEr_.png",
+    "/build/assets/emily-CLhHGURd.png",
+    "/build/assets/max-Bf_qvR-X.png"
+  ],
+  "resources/js/Components/LandingPage/PrivacyPolicy.jsx": [
+    "/build/assets/Index-DJpCkDZX.js",
+    "/build/assets/alex-BwhYqOg1.png",
+    "/build/assets/kail-CHBuhfBG.png",
+    "/build/assets/liam-CkRLfEr_.png",
+    "/build/assets/emily-CLhHGURd.png",
+    "/build/assets/max-Bf_qvR-X.png"
+  ],
+  "resources/js/Components/LandingPage/PublicOffer.jsx": [
+    "/build/assets/Index-DJpCkDZX.js",
+    "/build/assets/alex-BwhYqOg1.png",
+    "/build/assets/kail-CHBuhfBG.png",
+    "/build/assets/liam-CkRLfEr_.png",
+    "/build/assets/emily-CLhHGURd.png",
+    "/build/assets/max-Bf_qvR-X.png"
+  ],
+  "resources/js/Components/LandingPage/Statistics.jsx": [
+    "/build/assets/Index-DJpCkDZX.js",
+    "/build/assets/alex-BwhYqOg1.png",
+    "/build/assets/kail-CHBuhfBG.png",
+    "/build/assets/liam-CkRLfEr_.png",
+    "/build/assets/emily-CLhHGURd.png",
+    "/build/assets/max-Bf_qvR-X.png"
+  ],
+  "resources/js/Components/LandingPage/Testimonial.jsx": [
+    "/build/assets/Index-DJpCkDZX.js",
+    "/build/assets/alex-BwhYqOg1.png",
+    "/build/assets/kail-CHBuhfBG.png",
+    "/build/assets/liam-CkRLfEr_.png",
+    "/build/assets/emily-CLhHGURd.png",
+    "/build/assets/max-Bf_qvR-X.png"
+  ],
+  "resources/js/Components/Modal.jsx": [
+    "/build/assets/Modal-lsFLvQRk.js"
+  ],
+  "resources/js/Components/NavBar.jsx": [
+    "/build/assets/AuthenticatedLayout-BxC39YU8.js"
+  ],
+  "resources/js/Components/PrimaryButton.jsx": [
+    "/build/assets/PrimaryButton-C-TDjBGq.js"
+  ],
+  "resources/js/Components/SecondaryButton.jsx": [
+    "/build/assets/DeleteUserForm-CFFof-_Q.js"
+  ],
+  "resources/js/Components/Select.jsx": [
+    "/build/assets/Select-Cr-H89VX.js"
+  ],
+  "resources/js/Components/SideNav.jsx": [
+    "/build/assets/AuthenticatedLayout-BxC39YU8.js"
+  ],
+  "resources/js/Components/SvgIcons/ArrowDownSolid.jsx": [
+    "/build/assets/ArrowDownSolid-8ROrdjAq.js"
+  ],
+  "resources/js/Components/SvgIcons/ArrowLong.jsx": [
+    "/build/assets/Pagination-DNB83QUR.js"
+  ],
+  "resources/js/Components/SvgIcons/ArrowRight.jsx": [
+    "/build/assets/ArrowRight-DhMzUtK5.js"
+  ],
+  "resources/js/Components/SvgIcons/ArrowUp.jsx": [
+    "/build/assets/AuthenticatedLayout-BxC39YU8.js"
+  ],
+  "resources/js/Components/SvgIcons/Avatar.jsx": [
+    "/build/assets/Avatar-BwyzJcVZ.js"
+  ],
+  "resources/js/Components/SvgIcons/Bar.jsx": [
+    "/build/assets/AuthenticatedLayout-BxC39YU8.js"
+  ],
+  "resources/js/Components/SvgIcons/Check.jsx": [
+    "/build/assets/Check-6uFmuQtl.js"
+  ],
+  "resources/js/Components/SvgIcons/CheckRegular.jsx": [
+    "/build/assets/Platform-ChfkJ4a3.js"
+  ],
+  "resources/js/Components/SvgIcons/Close.jsx": [
+    "/build/assets/Close-DxNaVPET.js"
+  ],
+  "resources/js/Components/SvgIcons/Coin.jsx": [
+    "/build/assets/Coin-BkXhdH5z.js"
+  ],
+  "resources/js/Components/SvgIcons/Copy.jsx": [
+    "/build/assets/Refer-f1z5iIg7.js"
+  ],
+  "resources/js/Components/SvgIcons/Email.jsx": [
+    "/build/assets/Email-BTwdfxTN.js"
+  ],
+  "resources/js/Components/SvgIcons/Facebook.jsx": [
+    "/build/assets/SocialLogin-CUS6pYP4.js"
+  ],
+  "resources/js/Components/SvgIcons/Info.jsx": [
+    "/build/assets/UpdateProfileInformationForm-Cp9vKcCn.js"
+  ],
+  "resources/js/Components/SvgIcons/Instagram.jsx": [
+    "/build/assets/Index-DJpCkDZX.js",
+    "/build/assets/alex-BwhYqOg1.png",
+    "/build/assets/kail-CHBuhfBG.png",
+    "/build/assets/liam-CkRLfEr_.png",
+    "/build/assets/emily-CLhHGURd.png",
+    "/build/assets/max-Bf_qvR-X.png"
+  ],
+  "resources/js/Components/SvgIcons/LineDown.jsx": [
+    "/build/assets/Platform-ChfkJ4a3.js"
+  ],
+  "resources/js/Components/SvgIcons/LineUp.jsx": [
+    "/build/assets/Platform-ChfkJ4a3.js"
+  ],
+  "resources/js/Components/SvgIcons/List.jsx": [
+    "/build/assets/Platform-ChfkJ4a3.js"
+  ],
+  "resources/js/Components/SvgIcons/Lock.jsx": [
+    "/build/assets/Email-BTwdfxTN.js"
+  ],
+  "resources/js/Components/SvgIcons/Logo.jsx": [
+    "/build/assets/Logo-BrIzKzpY.js"
+  ],
+  "resources/js/Components/SvgIcons/Money.jsx": [
+    "/build/assets/Platform-ChfkJ4a3.js"
+  ],
+  "resources/js/Components/SvgIcons/Telegram.jsx": [
+    "/build/assets/Index-DJpCkDZX.js",
+    "/build/assets/alex-BwhYqOg1.png",
+    "/build/assets/kail-CHBuhfBG.png",
+    "/build/assets/liam-CkRLfEr_.png",
+    "/build/assets/emily-CLhHGURd.png",
+    "/build/assets/max-Bf_qvR-X.png"
+  ],
+  "resources/js/Components/SvgIcons/User.jsx": [
+    "/build/assets/User-Tg_4iFvd.js"
+  ],
+  "resources/js/Components/Table.jsx": [
+    "/build/assets/Table-A2qeV3ma.js"
+  ],
+  "resources/js/Components/TextArea.jsx": [
+    "/build/assets/JobApply-BldjYeUp.js"
+  ],
+  "resources/js/Components/TextInput.jsx": [
+    "/build/assets/TextInput-DakFYVas.js"
+  ],
+  "resources/js/Components/TinyEditor.jsx": [
+    "/build/assets/TinyEditor-BTm0VB73.js"
+  ],
+  "resources/js/Components/VisaApplicationTable.jsx": [
+    "/build/assets/VisaApplicationTable-CSce45as.js"
+  ],
+  "resources/js/Components/VisaApplyForm.jsx": [
+    "/build/assets/VisaApplyForm-DdXcYzZl.js"
+  ],
+  "resources/js/Components/VisaDetails.jsx": [
+    "/build/assets/VisaDetails-B4-YyPQ7.js"
+  ],
+  "resources/js/Components/VisaUpdateForm.jsx": [
+    "/build/assets/VisaUpdateForm-CwBSW4bX.js"
+  ],
+  "resources/js/Components/Web/Hero.jsx": [
+    "/build/assets/Home-DomApcsb.js"
+  ],
+  "resources/js/Components/Web/InfoItem.jsx": [
+    "/build/assets/InfoItem-B7VJ6rrj.js"
+  ],
+  "resources/js/Components/Web/InputFile.jsx": [
+    "/build/assets/InputFile-p-wlam7A.js"
+  ],
+  "resources/js/Components/Web/JobCard.jsx": [
+    "/build/assets/JobPost-CeZRAt9E.js"
+  ],
+  "resources/js/Components/Web/Navbar.jsx": [
+    "/build/assets/WebLayout-DC5r9kpE.js"
+  ],
+  "resources/js/Components/Web/PassportInputFile.jsx": [
+    "/build/assets/VisaApply-CphfNPXL.js"
+  ],
+  "resources/js/Components/Web/PrimaryBtn.jsx": [
+    "/build/assets/PrimaryBtn-BeKpKB4W.js"
+  ],
+  "resources/js/Components/Web/Search.jsx": [
+    "/build/assets/Search-CxuJE3gW.js"
+  ],
+  "resources/js/Components/Web/SearchContainer.jsx": [
+    "/build/assets/SearchContainer-F1-t464e.js"
+  ],
+  "resources/js/Components/Web/SearchForm.jsx": [
+    "/build/assets/Report-d5Ew5oBT.js"
+  ],
+  "resources/js/Components/Web/SearchResult.jsx": [
+    "/build/assets/Report-d5Ew5oBT.js"
+  ],
+  "resources/js/Components/Web/Select.jsx": [
+    "/build/assets/Select-6VSyQHkQ.js"
+  ],
+  "resources/js/Components/Web/ServiceImage.jsx": [
+    "/build/assets/WebLayout-DC5r9kpE.js"
+  ],
+  "resources/js/Components/Web/SocialLogin.jsx": [
+    "/build/assets/SocialLogin-CUS6pYP4.js"
+  ],
+  "resources/js/Components/Web/Switch.jsx": [
+    "/build/assets/SocialLogin-CUS6pYP4.js"
+  ],
+  "resources/js/Components/Web/Topbar.jsx": [
+    "/build/assets/WebLayout-DC5r9kpE.js"
+  ],
+  "resources/js/Components/Web/UserLogin.jsx": [
+    "/build/assets/UserLogin-d-KXvSlY.js"
+  ],
+  "resources/js/Components/Web/UserRegister.jsx": [
+    "/build/assets/RegisterInfo-DohVc5DF.js"
+  ],
+  "resources/js/Layouts/AdminGuestLayout.jsx": [
+    "/build/assets/AdminGuestLayout-CiwbI_-s.js"
+  ],
+  "resources/js/Layouts/AdminLayout.jsx": [
+    "/build/assets/AdminLayout-BnjWKmf2.js"
+  ],
+  "resources/js/Layouts/AuthenticatedLayout.jsx": [
+    "/build/assets/AuthenticatedLayout-BxC39YU8.js"
+  ],
+  "resources/js/Layouts/GuestLayout.jsx": [
+    "/build/assets/GuestLayout-D6t8LKBC.js"
+  ],
+  "resources/js/Layouts/WebLayout.jsx": [
+    "/build/assets/WebLayout-DC5r9kpE.js"
+  ],
+  "resources/js/Pages/Admin/Admin.jsx": [
+    "/build/assets/Admin-dxTF50cI.js"
+  ],
+  "resources/js/Pages/Admin/Agency/Index.jsx": [
+    "/build/assets/Index-DBvCcicZ.js"
+  ],
+  "resources/js/Pages/Admin/Agency/Show.jsx": [
+    "/build/assets/Show-DAsLCor-.js"
+  ],
+  "resources/js/Pages/Admin/Auth/Login.jsx": [
+    "/build/assets/Login-BSoayR01.js"
+  ],
+  "resources/js/Pages/Admin/Auth/TaskDetail.jsx": [
+    "/build/assets/TaskDetail-l0sNRNKZ.js"
+  ],
+  "resources/js/Pages/Admin/Dashboard.jsx": [
+    "/build/assets/Dashboard-CvaRb8QU.js"
+  ],
+  "resources/js/Pages/Admin/JobPost/CreateJobPost.jsx": [
+    "/build/assets/CreateJobPost-D800CNpw.js"
+  ],
+  "resources/js/Pages/Admin/JobPost/EditJobPost.jsx": [
+    "/build/assets/EditJobPost-AvEqDCkC.js"
+  ],
+  "resources/js/Pages/Admin/JobPost/Index.jsx": [
+    "/build/assets/Index-DMGZvPEz.js"
+  ],
+  "resources/js/Pages/Admin/JobPost/JobApplicationShow.jsx": [
+    "/build/assets/JobApplicationShow-C-R4Is0o.js"
+  ],
+  "resources/js/Pages/Admin/JobPost/JobApplications.jsx": [
+    "/build/assets/JobApplications-CYEFOYFR.js"
+  ],
+  "resources/js/Pages/Admin/Platform.jsx": [
+    "/build/assets/Platform-ChfkJ4a3.js"
+  ],
+  "resources/js/Pages/Admin/Role.jsx": [
+    "/build/assets/Role-B90OG3is.js"
+  ],
+  "resources/js/Pages/Admin/Setting.jsx": [
+    "/build/assets/Setting-cN0wmaf7.js"
+  ],
+  "resources/js/Pages/Admin/User/Create.jsx": [
+    "/build/assets/Create-KUxXRCfa.js"
+  ],
+  "resources/js/Pages/Admin/User/Index.jsx": [
+    "/build/assets/Index-CvWKBJ06.js"
+  ],
+  "resources/js/Pages/Admin/VisaApply/ApplyForm.jsx": [
+    "/build/assets/ApplyForm-B9UsQ71n.js"
+  ],
+  "resources/js/Pages/Admin/VisaApply/Edit.jsx": [
+    "/build/assets/Edit-D8P0Bdf7.js"
+  ],
+  "resources/js/Pages/Admin/VisaApply/Index.jsx": [
+    "/build/assets/Index-BFBwxmrD.js"
+  ],
+  "resources/js/Pages/Admin/VisaApply/Show.jsx": [
+    "/build/assets/Show-BRVrEomW.js"
+  ],
+  "resources/js/Pages/Agency/AccountNotApproved.jsx": [
+    "/build/assets/AccountNotApproved-mjTClLZT.js"
+  ],
+  "resources/js/Pages/Agency/AgencyInfo.jsx": [
+    "/build/assets/AgencyInfo-ft6AkWnC.js"
+  ],
+  "resources/js/Pages/Agency/ApplyForm.jsx": [
+    "/build/assets/ApplyForm-D5pBv5jr.js"
+  ],
+  "resources/js/Pages/Agency/Dashboard.jsx": [
+    "/build/assets/Dashboard-D-ZLYbzm.js"
+  ],
+  "resources/js/Pages/Agency/Login.jsx": [
+    "/build/assets/Login-BKPKP_x2.js"
+  ],
+  "resources/js/Pages/Agency/Register.jsx": [
+    "/build/assets/Register-BZ2KusXr.js"
+  ],
+  "resources/js/Pages/Agency/User/Create.jsx": [
+    "/build/assets/Create-BJw_TxgG.js"
+  ],
+  "resources/js/Pages/Agency/User/Index.jsx": [
+    "/build/assets/Index-DvLhGQKb.js"
+  ],
+  "resources/js/Pages/Agency/VisaApplyList.jsx": [
+    "/build/assets/VisaApplyList-Dox-LKR8.js"
+  ],
+  "resources/js/Pages/Agency/VisaEdit.jsx": [
+    "/build/assets/VisaEdit-DnVF0Rwc.js"
+  ],
+  "resources/js/Pages/Auth/ConfirmPassword.jsx": [
+    "/build/assets/ConfirmPassword-BIhoYRXR.js"
+  ],
+  "resources/js/Pages/Auth/ForgotPassword.jsx": [
+    "/build/assets/ForgotPassword-CeqbU6B6.js"
+  ],
+  "resources/js/Pages/Auth/Login.jsx": [
+    "/build/assets/Login-BxJD9B_L.js"
+  ],
+  "resources/js/Pages/Auth/Register.jsx": [
+    "/build/assets/Register-59DdXacu.js"
+  ],
+  "resources/js/Pages/Auth/RegisterInfo.jsx": [
+    "/build/assets/RegisterInfo-DohVc5DF.js"
+  ],
+  "resources/js/Pages/Auth/ResetPassword.jsx": [
+    "/build/assets/ResetPassword-CSFBqTnz.js"
+  ],
+  "resources/js/Pages/Auth/VerifyEmail.jsx": [
+    "/build/assets/VerifyEmail-rlWvlM-S.js"
+  ],
+  "resources/js/Pages/Dashboard.jsx": [
+    "/build/assets/Dashboard-Rh44U67N.js"
+  ],
+  "resources/js/Pages/Error.jsx": [
+    "/build/assets/Error-DiLOAg0N.js",
+    "/build/assets/error-img-De_wkjt2.png"
+  ],
+  "resources/js/Pages/Errors/NotFound.jsx": [
+    "/build/assets/NotFound-DeMD09Vw.js"
+  ],
+  "resources/js/Pages/Errors/PermissionDenied.jsx": [
+    "/build/assets/PermissionDenied-D9E19WpQ.js"
+  ],
+  "resources/js/Pages/Extension.jsx": [
+    "/build/assets/Extension-DrvdcN4r.js"
+  ],
+  "resources/js/Pages/Home.jsx": [
+    "/build/assets/Home-DomApcsb.js"
+  ],
+  "resources/js/Pages/Home/Index.jsx": [
+    "/build/assets/Index-DJpCkDZX.js",
+    "/build/assets/alex-BwhYqOg1.png",
+    "/build/assets/kail-CHBuhfBG.png",
+    "/build/assets/liam-CkRLfEr_.png",
+    "/build/assets/emily-CLhHGURd.png",
+    "/build/assets/max-Bf_qvR-X.png"
+  ],
+  "resources/js/Pages/JobApply.jsx": [
+    "/build/assets/JobApply-BldjYeUp.js"
+  ],
+  "resources/js/Pages/JobApplyList.jsx": [
+    "/build/assets/JobApplyList-CG8Ejbl0.js"
+  ],
+  "resources/js/Pages/JobDetails.jsx": [
+    "/build/assets/JobDetails-CJeK82lT.js"
+  ],
+  "resources/js/Pages/JobPost.jsx": [
+    "/build/assets/JobPost-CeZRAt9E.js"
+  ],
+  "resources/js/Pages/Login.jsx": [
+    "/build/assets/Login-HIwkenPL.js"
+  ],
+  "resources/js/Pages/Other.jsx": [
+    "/build/assets/Other-BLztMtzP.js"
+  ],
+  "resources/js/Pages/Profile/Edit.jsx": [
+    "/build/assets/Edit-DYQcZnvb.js"
+  ],
+  "resources/js/Pages/Profile/Partials/DeleteUserForm.jsx": [
+    "/build/assets/DeleteUserForm-CFFof-_Q.js"
+  ],
+  "resources/js/Pages/Profile/Partials/UpdatePasswordForm.jsx": [
+    "/build/assets/UpdatePasswordForm-CNHJcYIY.js"
+  ],
+  "resources/js/Pages/Profile/Partials/UpdateProfileInformationForm.jsx": [
+    "/build/assets/UpdateProfileInformationForm-Cp9vKcCn.js"
+  ],
+  "resources/js/Pages/Refer.jsx": [
+    "/build/assets/Refer-f1z5iIg7.js"
+  ],
+  "resources/js/Pages/Report.jsx": [
+    "/build/assets/Report-d5Ew5oBT.js"
+  ],
+  "resources/js/Pages/VisaApply.jsx": [
+    "/build/assets/VisaApply-CphfNPXL.js"
+  ],
+  "resources/js/Pages/VisaDetails.jsx": [
+    "/build/assets/VisaDetails-CaakNC9_.js"
+  ],
+  "resources/js/Pages/Welcome.jsx": [
+    "/build/assets/Welcome-ByNhCfvu.js"
+  ],
+  "resources/js/ssr.jsx": []
+}

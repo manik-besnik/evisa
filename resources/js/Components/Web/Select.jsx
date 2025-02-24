@@ -58,7 +58,7 @@ export default function Select({
 
                 {error && <p className="text-red-500 text-xs my-1">{error}</p>}
 
-                <Transition leave="transition ease-in duration-100" leaveFrom="opacity-100" leaveTo="opacity-0">
+                <Transition leave="transition ease-in duration-100 z-[1000]" leaveFrom="opacity-100" leaveTo="opacity-0">
                     <ListboxOptions
                         anchor="bottom"
                         className="w-[var(--button-width)] border bg-white p-2.5 [--anchor-gap:var(--spacing-1)] focus:outline-none max-h-[450px] overflow-y-scroll"
