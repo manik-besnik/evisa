@@ -25,8 +25,6 @@ Route::get('/dashboard', function () {
 // Route::get('job-demand', [JobPostController::class, 'index'])->name('job-demand');
 // Route::get('job-demand/{job}', [JobPostController::class, 'show'])->name('job-demand.show');
 
-//Hello
-
 Route::middleware(['auth', 'user'])->group(function () {
 
     Route::get('user-info', [ProfileController::class, 'userInfo'])->name('user.info');
