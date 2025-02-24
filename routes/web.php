@@ -22,11 +22,11 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
-Route::get('job-demand', [JobPostController::class, 'index'])->name('job-demand');
-Route::get('job-demand/{job}', [JobPostController::class, 'show'])->name('job-demand.show');
+// Route::get('job-demand', [JobPostController::class, 'index'])->name('job-demand');
+// Route::get('job-demand/{job}', [JobPostController::class, 'show'])->name('job-demand.show');
 
-Route::get('test',function(){
-   return "test";
+Route::get('test', function () {
+    return "test";
 });
 
 Route::middleware(['auth', 'user'])->group(function () {
@@ -54,16 +54,11 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::post('job-apply/store', [JobPostController::class, 'store'])->name('job-posts.store');
 
     Route::get('job-applies', [JobPostController::class, 'jobApplyList'])->name('job-apply.list');
-
 });
 
 
-Route::get('google/redirect3', function () {
-
-})->name('dashboard');
-Route::get('google', function () {
-
-})->name('task.create');
+Route::get('google/redirect3', function () {})->name('dashboard');
+Route::get('google', function () {})->name('task.create');
 
 Route::inertia('others', 'Other')->name('others');
 Route::inertia('search', 'Search');
