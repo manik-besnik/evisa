@@ -42,6 +42,7 @@ Route::get('languages', function () {
     return \App\Supports\ApiResponse::success("Country and Language Data", $data);
 });
 
+
 Route::post('/login', [AuthController::class, 'login'])->name('api.login.store');
 Route::post('/register', [AuthController::class, 'register'])->name('api.login.register');
 
