@@ -1,0 +1,11 @@
+pip install pytesseract opencv-python numpy
+
+
+pip install easyocr
+
+pip install paddleocr
+
+
+pip install textblob nltk
+
+pip install pymupdf
