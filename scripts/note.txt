@@ -7,3 +7,5 @@ pip install paddleocr
 
 
 pip install textblob nltk
+
+pip install pymupdf

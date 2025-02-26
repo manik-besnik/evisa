@@ -25,9 +25,9 @@ def extract_passport_number(ocr_text):
 
     # Regex patterns for passport number (handling variations in format)
     patterns = [
-        r'Passport\s?No[:\s]*([A-Za-z0-9]{9})\b',  # Matches Passport No with exactly 9 alphanumeric characters
-        r'Passport\s?Number[:\s]*([A-Za-z0-9]{9})\b',  # Matches Passport Number with exactly 9 alphanumeric characters
-        r'\b([A-Za-z0-9]{9})\b'  # Matches any 9-character alphanumeric string in the OCR text
+        r'Passport\s?Number\s*([A-Za-z0-9]{9})\b',  # Matches Passport Number with exactly 9 alphanumeric characters
+        r'Passport\s?Number\s*[A-Za-z0-9\s]*BGD\s*([A-Za-z0-9]{9})\b',  # Matches Passport Number with BGD and 9 alphanumeric characters
+        r'BGD\s*([A-Za-z0-9]{9})\b'  # Matches BGD followed by 9 alphanumeric characters
     ]
 
     # Look for valid passport numbers
@@ -38,6 +38,7 @@ def extract_passport_number(ocr_text):
             # Additional check to ensure the passport number is valid
             if re.match(r'^[A-Za-z0-9]{9}$', passport_number):
                 print("Matched Pattern:", pattern)
+                print("Extracted Passport Number:", passport_number)
                 return passport_number
 
     return "Passport number not found"
