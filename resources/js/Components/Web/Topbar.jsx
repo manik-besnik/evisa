@@ -8,7 +8,7 @@ const RightNoneAuthPart = () => {
             <img className="w-20" src={`${assetUrl + 'images/logo2.png'}`} alt="logo" />
             <p className="flex items-center ml-6">
                 <FaWhatsapp className="text-success" />
-                <span className="text-primary">600555555</span>
+                <span className="text-primary">000000000</span>
             </p>
         </div>
         <div className="flex justify-between items-center">
@@ -42,7 +42,7 @@ const RightAuthPart = ({ user }) => {
 
                 <button
                     onClick={logOut}
-                    className='bg-primary px-4 py-1 text-2xl rounded font-semibold text-white '
+                    className='bg-red-600 px-4 py-1 text-2xl rounded font-semibold text-white '
                 >Logout
                 </button>
             </div>

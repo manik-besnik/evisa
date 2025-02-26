@@ -1,4 +1,5 @@
 import {useState} from "react";
+import { GrAttachment } from "react-icons/gr";
 
 const InputFile = ({
                        defaultClasses = "w-[70px] h-[70px] ",
@@ -41,7 +42,11 @@ const InputFile = ({
                     accept=".pdf,.png,.jpg,.jpeg,.webp"
                     className="hidden"
                 />
-                <p className="text-xs break-words">{fileName ? fileName : placeholder}</p>
+                
+                <div className="flex flex-col items-center">
+                    <GrAttachment size={15}/>
+                    <p className="text-xs break-words">{fileName ? fileName : placeholder}</p>
+                </div>
                 {error && <p className="text-xs text-warning">{error}</p>}
             </label>
         </div>

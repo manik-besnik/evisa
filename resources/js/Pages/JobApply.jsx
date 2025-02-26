@@ -459,7 +459,7 @@ const JobApply = () => {
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4  gap-2">
                         {jobApplyDocuments.map((item, i) => (
                             <InputFile
-                                defaultClasses="w-full h-10"
+                                defaultClasses="w-full h-15"
                                 key={i} fileType={item.type}
                                 onChange={handleFileChange} placeholder={item.name}
                             />
