@@ -204,7 +204,7 @@ const VisaApply = () => {
 
     return (
 
-        <WebLayout showBgImage={false} showServiceImage={false}>
+        <WebLayout showBgImage={true} showServiceImage={false}>
 
             <Head title="Apply For New Visa | Dubai E-Visa"/>
 
