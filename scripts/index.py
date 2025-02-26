@@ -1,12 +1,20 @@
 import easyocr
 import re
+import fitz  # PyMuPDF
+from PIL import Image, ImageEnhance, ImageFilter
+import io
 
 # Initialize EasyOCR reader
 reader = easyocr.Reader(['en'])
 
+
+
 # Function to process OCR text and clean unwanted characters
 def get_text_from_image(image_path):
-    result = reader.readtext(image_path)
+    image = Image.open(image_path)
+    image = preprocess_image(image)
+    image.save("preprocessed_" + image_path)
+    result = reader.readtext("preprocessed_" + image_path)
 
     # Extract and join OCR text from the image
     ocr_text = ""
@@ -16,30 +24,30 @@ def get_text_from_image(image_path):
     print("Raw OCR Text:", ocr_text)
     return ocr_text
 
+
 # Function to extract passport number
-def extract_passport_number(ocr_text):
-    # Clean unwanted characters or noise from OCR text
-    ocr_text = re.sub(r'[<>]', '', ocr_text)  # Remove angle brackets and extraneous characters
-    ocr_text = re.sub(r'\s+', ' ', ocr_text)  # Normalize multiple spaces into one
-    ocr_text = re.sub(r'[A-Za-z]{1,2}[^A-Za-z0-9\s]{3,}', '', ocr_text)  # Remove strange alphanumeric noise
+def extract_passport_number(text):
+    # Clean unwanted characters or noise from text
+    text = re.sub(r'[<>]', '', text)  # Remove angle brackets and extraneous characters
+    text = re.sub(r'\s+', ' ', text)  # Normalize multiple spaces into one
+    text = re.sub(r'[A-Za-z]{1,2}[^A-Za-z0-9\s]{3,}', '', text)  # Remove strange alphanumeric noise
 
     # Regex patterns for passport number (handling variations in format)
     patterns = [
         r'Passport\s?Number\s*([A-Za-z0-9]{9})\b',  # Matches Passport Number with exactly 9 alphanumeric characters
         r'Passport\s?Number\s*[A-Za-z0-9\s]*BGD\s*([A-Za-z0-9]{9})\b',  # Matches Passport Number with BGD and 9 alphanumeric characters
-        r'BGD\s*([A-Za-z0-9]{9})\b'  # Matches BGD followed by 9 alphanumeric characters
+        r'BGD\s*([A-Za-z0-9]{9})\b',  # Matches BGD followed by 9 alphanumeric characters
+        r'\b([A-Za-z0-9]{9})\b'  # Matches any 9-character alphanumeric string in the OCR text
     ]
 
     # Look for valid passport numbers
     for pattern in patterns:
-        match = re.search(pattern, ocr_text)
-        if match:
-            passport_number = match.group(1).strip()
-            # Additional check to ensure the passport number is valid
-            if re.match(r'^[A-Za-z0-9]{9}$', passport_number):
+        matches = re.findall(pattern, text)
+        for match in matches:
+            if re.match(r'^[A-Za-z0-9]{9}$', match):
                 print("Matched Pattern:", pattern)
-                print("Extracted Passport Number:", passport_number)
-                return passport_number
+                print("Extracted Passport Number:", match)
+                return match
 
     return "Passport number not found"
 
@@ -53,8 +61,8 @@ patterns = {
     "birth_place": r"Place of Birth[:\s]*([A-Za-z\s]+)"  # Match Place of Birth (alphabetic)
 }
 
-# Extract text from image
-ocr_text = get_text_from_image('image.jpeg')
+# Extract text from PDF using OCR
+ocr_text = get_text_from_image('images.jpeg')
 
 # Filter out noise (optional step, based on observed patterns)
 ocr_text = re.sub(r'(EMERGENCKCONTACT|7feso|ARTII|R7Rtn|Ca)', '', ocr_text)
