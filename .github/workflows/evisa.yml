@@ -11,7 +11,7 @@ jobs:
 
     env:
       IMAGE_NAME: ghcr.io/${{ github.repository }}/laravel-app
-      CONTAINER_NAME: laravel_app
+      CONTAINER_NAME: evisa
       SERVER_USER: ubuntu  # Change to your server username
       SERVER_IP: your_server_ip  # Change to your server IP
 
@@ -49,7 +49,8 @@ jobs:
             docker run -d --name $CONTAINER_NAME \
               -p 8000:80 \
               --env-file .env \
-              -v /var/www/your-app:/var/www \
+              -v /var/www/evisa:/var/www \
+              -v /var/www/evisa/public/uploads:/var/www/public/uploads \
               $IMAGE_NAME:latest
 
             echo "Running Laravel tasks..."

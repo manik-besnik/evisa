@@ -10,6 +10,7 @@ services:
         working_dir: /var/www
         volumes:
             - .:/var/www
+            - uploads_volume:/var/www/public/uploads # Persist uploads
         networks:
             - laravel_network
         depends_on:
@@ -17,7 +18,7 @@ services:
         environment:
             - APP_ENV=local
             - APP_DEBUG=true
-            - DB_HOST=your_mysql_host # MySQL outside of Docker
+            - DB_HOST=your_mysql_host # MySQL is outside of Docker
 
     nginx:
         image: nginx:latest
@@ -44,3 +45,6 @@ services:
 networks:
     laravel_network:
         driver: bridge
+
+volumes:
+    uploads_volume: # Named volume for persisting uploads
