@@ -10,7 +10,7 @@ class ExtreactTextController extends Controller
     public function __invoke(Request $request): \Illuminate\Http\JsonResponse
     {
         $request->validate([
-            'file' => 'required|file|mimes:jpg,jpeg,png,pdf|max:200240',
+            'file' => 'required|file|mimes:jpg,jpeg,png,pdf|max:12500',
         ]);
 
         $file = $request->file('file');
