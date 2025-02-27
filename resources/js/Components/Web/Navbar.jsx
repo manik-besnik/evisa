@@ -45,7 +45,13 @@ const Navbar = () => {
                
                 
             </div>
-            <div className="pr-32">
+            <div className="flex items-center pr-32">
+                <Link href={route('visa-apply.index')}>
+                    <span className="block">
+                        Update News
+                    </span>
+                </Link>
+                <span className="p-2">|</span>
                 <Link href={route('visa-apply.index')}>
                     <span className="block">
                         CV Create
