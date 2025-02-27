@@ -27,7 +27,7 @@ class ExtreactTextController extends Controller
             unlink($filePath);
 
             $passportData = json_decode($data, true);
-            
+
             $expectedFields = ['name', 'passport_no', 'mother_name', 'birth_place', 'issue_date', 'expire_date'];
             foreach ($expectedFields as $field) {
                 if (!isset($passportData[$field])) {
