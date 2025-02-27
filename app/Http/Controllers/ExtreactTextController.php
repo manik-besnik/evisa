@@ -27,13 +27,15 @@ class ExtreactTextController extends Controller
             unlink($filePath);
 
             $passportData = json_decode($data, true);
-
+            
             $expectedFields = ['name', 'passport_no', 'mother_name', 'birth_place', 'issue_date', 'expire_date'];
             foreach ($expectedFields as $field) {
                 if (!isset($passportData[$field])) {
                     $passportData[$field] = null;
                 }
             }
+
+            $passportData = $this->cleanUpFields($passportData);
 
             return ApiResponse::success('Data processed successfully', ['passport_data' => $passportData]);
         } catch (\Exception $exception) {
@@ -43,6 +45,7 @@ class ExtreactTextController extends Controller
 
     public function extractText($filePath, $isPdf): false|string|null
     {
+
         $pythonScript = base_path('scripts/script.py');
         $escapedFilePath = escapeshellarg($filePath);
         $functionName = $isPdf ? 'extract_from_pdf' : 'extract_from_image';
@@ -51,5 +54,25 @@ class ExtreactTextController extends Controller
         return $output ?: null;
     }
 
+    /**
+     * Clean up extracted fields (remove Father, Spouse, and M/F from birth place)
+     */
+    public function cleanUpFields(array $passportData): array
+    {
 
+        if (isset($passportData['name'])) {
+            $passportData['name'] = preg_replace('/\s*Father$/', '', $passportData['name']);
+        }
+
+
+        if (isset($passportData['mother_name'])) {
+            $passportData['mother_name'] = preg_replace('/\s*Spouse$/', '', $passportData['mother_name']);
+        }
+
+        if (isset($passportData['birth_place'])) {
+            $passportData['birth_place'] = preg_replace('/^[FM]\s*/', '', $passportData['birth_place']);
+        }
+
+        return $passportData;
+    }
 }
