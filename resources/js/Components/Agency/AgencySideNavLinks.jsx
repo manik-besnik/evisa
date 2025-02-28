@@ -20,7 +20,7 @@ export default function AgencySideNavLinks() {
                 },
                 {
                     name: 'Add New Application',
-                    route: route('agency.visa-applies.store')
+                    route: route('agency.visa-applies.create')
                 },
             ]
         },

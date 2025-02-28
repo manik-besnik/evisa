@@ -45,6 +45,7 @@ class PassportExtractor:
         """Extract other fields from OCR text using regex patterns."""
         patterns = {
             "name": r"Name[:\s]*([A-Za-z\s]+)",
+            "father_name": r"Fathers? Name[:\s]*([A-Za-z\s]+)",
             "mother_name": r"Mothers? Name[:\s]*([A-Za-z\s]+)",
             "issue_date": r"Date of Issue[:\s]*([\d\w\s]+)",
             "expire_date": r"Date of Expiry[:\s]*([\d\w\s]+)",
