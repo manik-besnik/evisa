@@ -2,7 +2,7 @@ services:
     app:
         build:
             context: .
-            dockerfile: docker/Dockerfile
+            dockerfile: docker/php/Dockerfile
         container_name: evisa_app
         restart: unless-stopped
         working_dir: /var/www
