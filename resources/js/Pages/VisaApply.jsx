@@ -15,6 +15,9 @@ import PrimaryBtn from "@/Components/Web/PrimaryBtn.jsx";
 import InputFile from "@/Components/Web/InputFile.jsx";
 import {toast} from "react-toastify";
 import PassportInputFile from "@/Components/Web/PassportInputFile.jsx";
+import Loading from "@/Components/Loading.jsx";
+import PassportScanData from "@/Components/PassportScanData.jsx";
+import axios from "axios";
 
 
 const VisaApply = () => {
@@ -71,6 +74,9 @@ const VisaApply = () => {
     const [passportIssueCountry, setPassportIssueCountry] = useState(prevPassportIssueCountry)
     const [guarantorNationality, setGuarantorNationality] = useState(guarantorPrevNationality)
 
+    const [isLoading, setIsLoading] = useState(false);
+    const [show, setShow] = useState(false)
+    const [passportData, setPassportData] = useState({})
 
     const {data, setData, post, errors, processing} = useForm({
         personal_name: '',
@@ -161,9 +167,48 @@ const VisaApply = () => {
         setData('guarantor_nationality', value.id)
     }
 
-    const handleFileChange = (fileType, file) => {
+    const handleFileProcessing = async (file) => {
+        setIsLoading(true)
+        try {
+
+            const formData = new FormData();
+
+            formData.append('file', file);
+
+            const response = await axios.post(route('extreact-text'), formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                }
+            });
+            if (response.data.status_code === 200){
+                setIsLoading(false)
+                const passportData = response.data.passport_data
+                if (!passportData || !passportData.passport_no) {
+                    setIsLoading(false)
+                    toast.error("Necessary Data not found");
+                    return;
+                }
+                setShow(true)
+                setPassportData(passportData)
+                setIsLoading(false)
+                return
+            }
+
+            setIsLoading(false)
+            toast.error("Necessary Data not found");
+
+        } catch (e) {
+            console.log(e);
+            toast.error("Can't Read This passport.");
+        }
+
+        setIsLoading(false)
+    }
+
+    const handleFileChange = async (fileType, file) => {
 
         if (fileType === 'passport') {
+            await handleFileProcessing(file)
             setIsPassportRequired(false)
         }
         if (fileType === 'photo') {
@@ -707,6 +752,9 @@ const VisaApply = () => {
                     </div>
                 </form>
             </div>
+
+            {isLoading && <Loading/>}
+            <PassportScanData show={show} setShow={setShow} setData={setData} passportInfo={passportData} />
         </WebLayout>
     )
 }
