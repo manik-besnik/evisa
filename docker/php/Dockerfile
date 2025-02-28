@@ -14,6 +14,7 @@ RUN apt-get update && apt-get install -y \
     git \
     curl \
     python3 \
+    python3-venv \
     python3-pip \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install gd pdo pdo_mysql
@@ -27,8 +28,12 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Install Laravel Octane
 RUN composer require laravel/octane
 
-# Install Python dependencies (for your script)
-RUN pip install Pillow easyocr numpy pymupdf
+# Create a virtual environment for Python
+RUN python3 -m venv /var/www/venv
+
+# Activate the virtual environment and install Python dependencies
+RUN /var/www/venv/bin/pip install --upgrade pip && \
+    /var/www/venv/bin/pip install Pillow easyocr numpy pymupdf
 
 # Copy application files
 COPY . /var/www
