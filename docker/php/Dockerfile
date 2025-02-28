@@ -1,4 +1,4 @@
-# Use an official PHP runtime as a parent image
+# Use an official PHP image with FPM
 FROM php:8.4-fpm
 
 # Set working directory
@@ -13,19 +13,22 @@ RUN apt-get update && apt-get install -y \
     unzip \
     git \
     curl \
-    supervisor \
+    python3 \
+    python3-pip \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install gd pdo pdo_mysql
+
+# Install Swoole
+RUN pecl install swoole && docker-php-ext-enable swoole
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Install Node.js
-RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
-    && apt-get install -y nodejs
+# Install Laravel Octane
+RUN composer require laravel/octane
 
-# Install Swoole extension
-RUN pecl install swoole && docker-php-ext-enable swoole
+# Install Python dependencies (for your script)
+RUN pip install Pillow easyocr numpy pymupdf
 
 # Copy application files
 COPY . /var/www
@@ -33,5 +36,8 @@ COPY . /var/www
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader
 
-# Install Octane
-RUN composer require laravel/octane
+# Expose port for Swoole
+EXPOSE 8000
+
+# Run Octane with Swoole
+CMD ["php", "artisan", "octane:start", "--server=swoole", "--host=0.0.0.0", "--port=8000"]
