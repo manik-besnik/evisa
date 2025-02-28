@@ -15,6 +15,7 @@ services:
             - nginx
             - mysql
         environment:
+            - APP_NAME=DubaiEvisa
             - APP_ENV=production
             - APP_DEBUG=false
             - DB_HOST=mysql
