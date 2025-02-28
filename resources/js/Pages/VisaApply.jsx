@@ -198,11 +198,10 @@ const VisaApply = () => {
             toast.error("Necessary Data not found");
 
         } catch (e) {
-            console.log(e);
+            setIsLoading(false)
             toast.error("Can't Read This passport.");
         }
 
-        setIsLoading(false)
     }
 
     const handleFileChange = async (fileType, file) => {
@@ -214,11 +213,23 @@ const VisaApply = () => {
         if (fileType === 'photo') {
             setIsPhotoRequired(false)
         }
-        data.documents[fileType] = {
-            "name": documentTypes[fileType].name,
-            "type": fileType,
-            "file": file
-        }
+        // data.documents[fileType] = {
+        //     "name": documentTypes[fileType].name,
+        //     "type": fileType,
+        //     "file": file
+        // }
+        // console.log(data.documents)
+        setData(prevData => ({
+            ...prevData,
+            documents: {
+                ...prevData.documents,
+                [fileType]: {
+                    name: documentTypes[fileType].name,
+                    type: fileType,
+                    file: file,
+                },
+            },
+        }));
     }
 
     const handleSubmit = (e) => {
