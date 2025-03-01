@@ -20,7 +20,9 @@ const Search = () => {
         <>
             <div className="flex gap-x-1 items-center">
                 <div className="bg-primary p-2.5 text-2xl text-white">
-                    <img className="w-7 h-7" src={`${assetUrl}images/livechat.svg`} alt="Live chat"/>
+                    <a href="https://m.me/339940379192870" target="_blank">
+                        <img className="w-7 h-7" src={`${assetUrl}images/livechat.svg`} alt="Live chat"/>
+                    </a>
 
                 </div>
                 <div className="bg-primary p-2.5 text-2xl text-white">
