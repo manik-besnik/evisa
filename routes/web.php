@@ -12,6 +12,17 @@ Route::get('/', function () {
 })->name('home');
 
 
+Route::get('/privacy-policy', function () {
+    return Inertia::render('PrivacyPolicy');
+})->name('privacy-policy');
+
+
+
+Route::get('/terms-conditions', function () {
+    return Inertia::render('TermsConditions');
+})->name('terms-conditions');
+
+
 Route::get('/job-details', function () {
     return Inertia::render('JobDetails');
 })->name('job-details');
