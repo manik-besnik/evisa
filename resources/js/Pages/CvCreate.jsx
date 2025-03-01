@@ -165,18 +165,19 @@ const JobDemand = () => {
             <Head title="Job Application Form | Dubai E-Visa" />
 
             <div className="container mx-auto px-4 py-6">
-                <div className="bg-white rounded-lg shadow-lg p-6">
-                    <div className="flex items-center mb-6">
-                        <div className="bg-red-600 text-white text-center py-3 px-6 text-2xl font-bold">
-                            JOB<br />APPLICATION<br />
-                            <span className="bg-gray-400">FORM</span>
-                        </div>
-                    </div>
-
+                <div className="bg-white border-4 border-[#848585] p-6">
+                   
                     <form onSubmit={handleSubmit} className="mb-6">
                         {/* Apply From and Photo Upload */}
                         <div className="flex flex-col md:flex-row gap-6 mb-6">
                             <div className="md:w-1/3">
+                                <div className="flex items-center mb-6">
+                                    <div className="bg-red-600 text-white text-center py-3 px-6 text-2xl font-bold">
+                                        JOB<br />APPLICATION<br />
+                                        <span className="bg-gray-400">FORM</span>
+                                    </div>
+                                </div>
+
                                 <div className="flex items-center mb-4">
                                     <label className="text-xl font-bold mr-4">Apply From</label>
                                     <div className="flex-1">
@@ -195,7 +196,7 @@ const JobDemand = () => {
                             </div>
 
                             <div className="md:w-1/3 flex justify-center">
-                                <div className="border-2 border-gray-300 w-40 h-40 flex items-center justify-center">
+                                <div className="border-2 border-gray-300 w-56 h-full flex items-center justify-center">
                                     {passportPhoto ? (
                                         <img
                                             src={URL.createObjectURL(passportPhoto)}
@@ -243,27 +244,29 @@ const JobDemand = () => {
                                         required={true}
                                         defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
                                     />
+                                    
+                                </div>
+                                <div className="mb-6 mt-3">
+                                    <h2 className="text-red-600 text-xs font-bold mb-3">POST FOR APPLY</h2>
+                                    <div className="grid">
+                                        
+                                        <Select
+                                            placeholder="Select Here"
+                                            items={[]} // Add your nationality options
+                                            selected={nationality}
+                                            setSelected={setNationality}
+                                            handleValueChange={updateNationality}
+                                            error={errors.nationality}
+                                            required={true}
+                                            defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                        />
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
                         {/* Job Posts */}
-                        <div className="mb-6">
-                            <h2 className="text-red-600 text-xl font-bold mb-3">POST FOR APPLY</h2>
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                                {[0, 1, 2].map((index) => (
-                                    <Select
-                                        key={index}
-                                        placeholder={`Select Option -${index + 1}`}
-                                        items={[]} // Add your job post options here
-                                        selected={data.job_post[index]}
-                                        handleValueChange={(value) => handleJobPostChange(index, value)}
-                                        required={true}
-                                        defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
-                                    />
-                                ))}
-                            </div>
-                        </div>
+                        
 
                         {/* Personal Details */}
                         <div className="mb-6">
@@ -380,12 +383,12 @@ const JobDemand = () => {
                                 </div>
                             </div>
                         </div>
-
+                        <hr className="border-2 border-[#848585] mb-3" />
                         {/* Address */}
                         <div className="mb-6">
                             <div className="grid grid-cols-1 gap-3">
                                 <div className="flex items-center">
-                                    <label className="w-1/4 font-bold">Current Address</label>
+                                    <label className="w-[12.90rem] font-bold">Current Address</label>
                                     <span className="mx-2">:</span>
                                     <div className="flex-1 grid grid-cols-3 gap-2">
                                         <TextInput
@@ -416,7 +419,7 @@ const JobDemand = () => {
                                 </div>
 
                                 <div className="flex items-center">
-                                    <label className="w-1/4 font-bold">Permanent Address</label>
+                                    <label className="w-[12.90rem] font-bold">Permanent Address</label>
                                     <span className="mx-2">:</span>
                                     <div className="flex-1 grid grid-cols-3 gap-2">
                                         <Select
@@ -449,7 +452,7 @@ const JobDemand = () => {
                                 </div>
                             </div>
                         </div>
-
+                        <hr className="border-2 border-[#848585] mb-3" />
                         {/* Passport & Visa Information */}
                         <div className="mb-6">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
