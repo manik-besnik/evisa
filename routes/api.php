@@ -48,4 +48,4 @@ Route::get('languages', function () {
 Route::post('/login', [AuthController::class, 'login'])->name('api.login.store');
 Route::post('/register', [AuthController::class, 'register'])->name('api.login.register');
 
-Route::post('extreact-image', ExtreactTextController::class)->name('extreact-text');
+Route::post('extreact-image', ExtreactTextController::class)->name('extreact-text')->middleware('throttle');

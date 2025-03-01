@@ -1,6 +1,6 @@
 import sys
 from pdf2image import convert_from_path
-from pytesseract import image_to_string, pytesseract
+from pytesseract import image_to_string, tesseracts
 from PyPDF2 import PdfReader
 import cv2
 from PIL import Image

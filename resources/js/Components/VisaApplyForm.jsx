@@ -13,6 +13,8 @@ import InputBox from "@/Components/Admin/InputBox.jsx";
 import InputFile from "@/Components/Admin/InputFile.jsx";
 import axios from "axios";
 import Loading from "@/Components/Loading.jsx";
+import {toast} from "react-toastify";
+import PassportScanData from "@/Components/PassportScanData.jsx";
 
 const VisaApplyForm = ({submitUrl}) => {
 
@@ -49,7 +51,7 @@ const VisaApplyForm = ({submitUrl}) => {
                     console.error("Error fetching visa info:", error);
                 }
             };
-            getVisaInfo();
+            getVisaInfo().then(r => "ok");
         }
     }, [user?.id]);
 
@@ -69,6 +71,8 @@ const VisaApplyForm = ({submitUrl}) => {
     const [guarantorNationality, setGuarantorNationality] = useState('');
 
     const [isLoading, setIsLoading] = useState(false);
+    const [show, setShow] = useState(false)
+    const [passportData, setPassportData] = useState({})
 
     const {data, setData, post, errors, processing} = useForm({
         user_id: '',
@@ -189,15 +193,50 @@ const VisaApplyForm = ({submitUrl}) => {
         setData('guarantor_nationality', value.id)
     }
 
-    const handleFileProcessing = () => {
+    const handleFileProcessing = async (file) => {
         setIsLoading(true)
+        try {
+
+            const formData = new FormData();
+
+            formData.append('file', file);
+
+            const response = await axios.post(route('extreact-text'), formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                }
+            });
+            if (response.data.status_code === 200){
+                setIsLoading(false)
+                const passportData = response.data.passport_data
+                if (!passportData || !passportData.passport_no) {
+                    setIsLoading(false)
+                    toast.error("Necessary Data not found");
+                    return;
+                }
+                setShow(true)
+                setPassportData(passportData)
+                setIsLoading(false)
+                return
+            }
+
+            setIsLoading(false)
+            toast.error("Necessary Data not found");
+
+        } catch (e) {
+            console.log(e);
+            toast.error("Can't Read This passport.");
+        }
+
+        setIsLoading(false)
     }
 
-    const handleFileChange = (fileType, file) => {
 
-        // if (fileType === "passport") {
-        //     handleFileProcessing(file)
-        // }
+    const handleFileChange = async (fileType, file) => {
+
+        if (fileType === "passport") {
+            await handleFileProcessing(file)
+        }
 
         data.documents[fileType] = {
             "name": documentTypes[fileType].name,
@@ -740,6 +779,7 @@ const VisaApplyForm = ({submitUrl}) => {
             </div>
 
             {isLoading && <Loading/>}
+            <PassportScanData show={show} setShow={setShow} setData={setData} passportInfo={passportData} />
         </>
     )
 }

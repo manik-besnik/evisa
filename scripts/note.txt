@@ -9,3 +9,6 @@ pip install paddleocr
 pip install textblob nltk
 
 pip install pymupdf
+
+
+pip install Pillow easyocr numpy pymupdf pytesseract

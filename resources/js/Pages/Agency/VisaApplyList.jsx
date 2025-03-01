@@ -10,7 +10,7 @@ const VisaApplyList = () => {
 
         <div className="flex justify-between items-center mb-3">
             <h3 className=''>Visa Apply List</h3>
-            <Link href={route('admin.visa-applies.create')} className='btn-primary'><FiPlus/> Add New Application
+            <Link href={route('agency.visa-applies.create')} className='btn-primary'><FiPlus/> Add New Application
             </Link>
         </div>
 

@@ -1,21 +1,20 @@
 from PIL import Image
-import easyocr
+import pytesseract
 import re
 import numpy as np
 import fitz  # PyMuPDF
 import io
 
-class PassportExtractor:
-    def __init__(self):
-        self.reader = easyocr.Reader(['en'])
+class PassportExtractor2:
+    def __init__(self, tesseract_path="C:\\Program Files\\Tesseract-OCR\\tesseract.exe"):
+        pytesseract.pytesseract.tesseract_cmd = tesseract_path
 
     def get_text_from_image(self, image):
-        """Extract text from an image using OCR."""
+        """Extract text from an image using Tesseract OCR."""
         try:
             image_np = np.array(image)
-            result = self.reader.readtext(image_np)
-            ocr_text = " ".join([detection[1] for detection in result])
-            return ocr_text
+            ocr_text = pytesseract.image_to_string(image_np, lang="eng")
+            return ocr_text.strip()
         except Exception as e:
             print(f"Error processing image: {e}")
             return ""
@@ -99,3 +98,7 @@ class PassportExtractor:
 
         return passport_number, extracted_data
 
+
+result = PassportExtractor2()
+
+result.process_image('image.jpeg')

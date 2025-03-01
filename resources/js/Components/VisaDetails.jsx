@@ -18,6 +18,7 @@ import {MdFileDownload} from "react-icons/md";
 import DangerButton from "@/Components/DangerButton.jsx";
 import {FaTrashAlt} from "react-icons/fa";
 import DeleteConfirmModal from "@/Components/DeleteConfirmModal.jsx";
+import ImagePreviewModal from "@/Components/ImagePreviewModal.jsx";
 
 export const VisaDetails = ({isAdmin}) => {
 
@@ -26,6 +27,8 @@ export const VisaDetails = ({isAdmin}) => {
     const [status, setStatus] = useState(visaStatuses.find(item => item.id === visa_apply.status))
     const [document, setDocument] = useState(null);
     const [show, setShow] = useState(false);
+    const [previewDocument, setPreviewDocument] = useState(null)
+    const [showPreview, setShowPreview] = useState(false)
 
     const changeStatus = (value) => {
 
@@ -42,6 +45,11 @@ export const VisaDetails = ({isAdmin}) => {
                 setShow(false)
             }
         })
+    }
+
+    const previewImageDocument = (imageURL) => {
+        setPreviewDocument(imageURL)
+        setShowPreview(true)
     }
 
     return (
@@ -80,9 +88,15 @@ export const VisaDetails = ({isAdmin}) => {
                                         <span>
                                             {doc.name}
                                         </span>
-                                        <a href={doc.url} target="_blank">
-                                            <FaRegEye/>
-                                        </a>
+                                        {doc.url.endsWith('.pdf') ? (
+                                            <a href={doc.url} target="_blank" rel="noopener noreferrer">
+                                                <FaRegEye />
+                                            </a>
+                                        ) : (
+                                            <button onClick={() => previewImageDocument(doc.url)}>
+                                                <FaRegEye />
+                                            </button>
+                                        )}
                                     </li>
                                 ))}
 
@@ -108,9 +122,15 @@ export const VisaDetails = ({isAdmin}) => {
                                             <a href={doc.url} download={doc.url} target="_blank">
                                                 <MdFileDownload className="text-lg"/>
                                             </a>
-                                            <a href={doc.url} target="_blank">
-                                                <FaRegEye/>
-                                            </a>
+                                            {doc.url.endsWith('.pdf') ? (
+                                                <a href={doc.url} target="_blank" rel="noopener noreferrer">
+                                                    <FaRegEye />
+                                                </a>
+                                            ) : (
+                                                <button onClick={() => previewImageDocument(doc.url)}>
+                                                    <FaRegEye />
+                                                </button>
+                                            )}
                                             {(isPermitted(permissionEnums.DELETE_DOCUMENT_VISA) && isAdmin) &&
                                                 <DangerButton onClick={() => deleteDocument(doc.url)}>
                                                     <FaTrashAlt/>
@@ -169,7 +189,7 @@ export const VisaDetails = ({isAdmin}) => {
 
             <DeleteConfirmModal show={show} setShow={setShow} handleConfirmDelete={confirmDeleteDocument}/>
 
-
+            <ImagePreviewModal show={showPreview} setShow={setShowPreview} imageURL={previewDocument} />
         </div>
     )
 }

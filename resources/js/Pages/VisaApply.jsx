@@ -15,6 +15,10 @@ import PrimaryBtn from "@/Components/Web/PrimaryBtn.jsx";
 import InputFile from "@/Components/Web/InputFile.jsx";
 import {toast} from "react-toastify";
 import PassportInputFile from "@/Components/Web/PassportInputFile.jsx";
+import Loading from "@/Components/Loading.jsx";
+import PassportScanData from "@/Components/PassportScanData.jsx";
+import axios from "axios";
+import PreviewVisaApply from "@/Components/PreviewVisaApply.jsx";
 
 
 const VisaApply = () => {
@@ -71,6 +75,10 @@ const VisaApply = () => {
     const [passportIssueCountry, setPassportIssueCountry] = useState(prevPassportIssueCountry)
     const [guarantorNationality, setGuarantorNationality] = useState(guarantorPrevNationality)
 
+    const [isLoading, setIsLoading] = useState(false);
+    const [show, setShow] = useState(false)
+    const [preview, setPreview] = useState(false)
+    const [passportData, setPassportData] = useState({})
 
     const {data, setData, post, errors, processing} = useForm({
         personal_name: '',
@@ -161,24 +169,78 @@ const VisaApply = () => {
         setData('guarantor_nationality', value.id)
     }
 
-    const handleFileChange = (fileType, file) => {
+    const handleFileProcessing = async (file) => {
+        setIsLoading(true)
+        try {
+
+            const formData = new FormData();
+
+            formData.append('file', file);
+
+            const response = await axios.post(route('extreact-text'), formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                }
+            });
+            if (response.data.status_code === 200){
+                setIsLoading(false)
+                const passportData = response.data.passport_data
+                if (!passportData || !passportData.passport_no) {
+                    setIsLoading(false)
+                    toast.error("Necessary Data not found");
+                    return;
+                }
+                setShow(true)
+                setPassportData(passportData)
+                setIsLoading(false)
+                return
+            }
+
+            setIsLoading(false)
+            toast.error("Necessary Data not found");
+
+        } catch (e) {
+            setIsLoading(false)
+            toast.error("Can't Read This passport.");
+        }
+
+    }
+
+    const handleFileChange = async (fileType, file) => {
 
         if (fileType === 'passport') {
+            await handleFileProcessing(file)
             setIsPassportRequired(false)
         }
         if (fileType === 'photo') {
             setIsPhotoRequired(false)
         }
-        data.documents[fileType] = {
-            "name": documentTypes[fileType].name,
-            "type": fileType,
-            "file": file
-        }
+        // data.documents[fileType] = {
+        //     "name": documentTypes[fileType].name,
+        //     "type": fileType,
+        //     "file": file
+        // }
+        // console.log(data.documents)
+        setData(prevData => ({
+            ...prevData,
+            documents: {
+                ...prevData.documents,
+                [fileType]: {
+                    name: documentTypes[fileType].name,
+                    type: fileType,
+                    file: file,
+                },
+            },
+        }));
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
 
+        setPreview(true)
+    }
+
+    const handleConfirmSubmit = () => {
         if (!data.documents['passport'].file && !data.documents['photo'].file) {
             setIsPhotoRequired(true)
             setIsPassportRequired(true)
@@ -200,7 +262,6 @@ const VisaApply = () => {
             }
         })
     }
-
 
     return (
 
@@ -701,12 +762,30 @@ const VisaApply = () => {
                         />
 
                     </div>
-                    <div className="flex justify-center mt-2">
-                        <PrimaryBtn text="Save" disabled={processing} type="submit" classes="w-[200px]"
+                    <div className="flex justify-center gap-x-2 mt-2">
+                        <PrimaryBtn text="Preview" disabled={processing} type="submit" classes="w-[200px]"
                                     onClick={handleSubmit}/>
+                        <PrimaryBtn text="Save" disabled={processing} type="button" classes="w-[200px]"
+                                    onClick={handleConfirmSubmit}/>
                     </div>
                 </form>
             </div>
+
+            {isLoading && <Loading/>}
+            <PassportScanData
+                show={show}
+                setShow={setShow}
+                setData={setData}
+                passportInfo={passportData}
+            />
+            <PreviewVisaApply
+                show={preview}
+                setShow={setPreview}
+                visa_apply={data}
+                confirmSubmit={handleConfirmSubmit}
+                isPassportRequired={isPassportRequired}
+                isPhotoRequired={isPhotoRequired}
+            />
         </WebLayout>
     )
 }
