@@ -58,9 +58,11 @@ class ProfileController extends Controller
 
     public function storeInfo(Request $request): RedirectResponse
     {
+        $userDTO = UserUpdateDTO::fromRequest($request);
+
         try {
 
-            UpdateUser::execute(UserUpdateDTO::fromRequest($request));
+            UpdateUser::execute($userDTO);
 
             return to_route('home');
 

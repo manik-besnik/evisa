@@ -18,10 +18,16 @@ export const PreviewVisaApply = ({show, setShow, confirmSubmit, visa_apply,isPas
     const {countries} = usePage().props;
 
     const getNationality = (itemId) => {
-        return countries.find(item => item.id === itemId).nationality
+        if (!itemId){
+            return "";
+        }
+        return countries.find(item => item.id === itemId)?.nationality
     }
     const getCountry = (itemId) => {
-        return countries.find(item => item.id === itemId).name
+        if (!itemId){
+            return "";
+        }
+        return countries.find(item => item.id === itemId)?.name
     }
 
     return (
