@@ -32,8 +32,12 @@ export const PreviewVisaApply = ({show, setShow, confirmSubmit, visa_apply,isPas
                 </button>
                 <div className="mb-6">
                     <p>View Apply Preview</p>
+                    
                     {isPassportRequired &&
-                        <p className="text-warning text-sm my-2">Passport Document is required</p>}
+                        <p className="text-warning text-sm my-2">
+                            Passport Document is required
+                        </p>
+                    }
 
                     {isPhotoRequired && <p className="text-warning text-sm">Photo Document is required</p>}
 
