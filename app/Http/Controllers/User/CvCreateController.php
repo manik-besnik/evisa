@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Actions\User\JobDemand\CreateAction;
-use App\Actions\User\JobDemand\IndexAction;
+use App\Actions\User\CvCreate\CreateAction;
+use App\Actions\User\CvCreate\IndexAction;
 use App\Http\Controllers\Controller;
 use App\Models\VisaApply;
 use Illuminate\Http\Request;
 use App\Models\JobDemand;
 use Illuminate\Support\Facades\Storage;
 
-class JobDemandController extends Controller
+class CvCreateController extends Controller
 {
     /**
      * Display a listing of the resource.

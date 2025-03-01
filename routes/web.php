@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\JobPostController;
 use App\Http\Controllers\User\VisaApplyController;
 use App\Http\Controllers\User\JobDemandController;
+use App\Http\Controllers\User\CvCreateController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -50,6 +51,9 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::post('job-apply/store', [JobPostController::class, 'store'])->name('job-posts.store');
 
     Route::get('job-applies', [JobPostController::class, 'jobApplyList'])->name('job-apply.list');
+
+    //cvCreate
+    Route::get('cv-create', [CvCreateController::class, 'create'])->name('cv.create');
 });
 
 

@@ -46,13 +46,13 @@ const Navbar = () => {
                 
             </div>
             <div className="flex items-center pr-32">
-                <Link href={route('visa-apply.index')}>
+                <Link href='#'>
                     <span className="block">
                         Update News
                     </span>
                 </Link>
                 <span className="p-2">|</span>
-                <Link href={route('visa-apply.index')}>
+                <Link href={route('cv.create')}>
                     <span className="block">
                         CV Create
                     </span>
