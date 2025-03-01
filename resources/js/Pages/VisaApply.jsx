@@ -18,6 +18,7 @@ import PassportInputFile from "@/Components/Web/PassportInputFile.jsx";
 import Loading from "@/Components/Loading.jsx";
 import PassportScanData from "@/Components/PassportScanData.jsx";
 import axios from "axios";
+import PreviewVisaApply from "@/Components/PreviewVisaApply.jsx";
 
 
 const VisaApply = () => {
@@ -76,6 +77,7 @@ const VisaApply = () => {
 
     const [isLoading, setIsLoading] = useState(false);
     const [show, setShow] = useState(false)
+    const [preview, setPreview] = useState(false)
     const [passportData, setPassportData] = useState({})
 
     const {data, setData, post, errors, processing} = useForm({
@@ -235,6 +237,10 @@ const VisaApply = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
 
+        setPreview(true)
+    }
+
+    const handleConfirmSubmit = () => {
         if (!data.documents['passport'].file && !data.documents['photo'].file) {
             setIsPhotoRequired(true)
             setIsPassportRequired(true)
@@ -256,7 +262,6 @@ const VisaApply = () => {
             }
         })
     }
-
 
     return (
 
@@ -757,15 +762,30 @@ const VisaApply = () => {
                         />
 
                     </div>
-                    <div className="flex justify-center mt-2">
-                        <PrimaryBtn text="Save" disabled={processing} type="submit" classes="w-[200px]"
+                    <div className="flex justify-center gap-x-2 mt-2">
+                        <PrimaryBtn text="Preview" disabled={processing} type="submit" classes="w-[200px]"
                                     onClick={handleSubmit}/>
+                        <PrimaryBtn text="Save" disabled={processing} type="button" classes="w-[200px]"
+                                    onClick={handleConfirmSubmit}/>
                     </div>
                 </form>
             </div>
 
             {isLoading && <Loading/>}
-            <PassportScanData show={show} setShow={setShow} setData={setData} passportInfo={passportData} />
+            <PassportScanData
+                show={show}
+                setShow={setShow}
+                setData={setData}
+                passportInfo={passportData}
+            />
+            <PreviewVisaApply
+                show={preview}
+                setShow={setPreview}
+                visa_apply={data}
+                confirmSubmit={handleConfirmSubmit}
+                isPassportRequired={isPassportRequired}
+                isPhotoRequired={isPhotoRequired}
+            />
         </WebLayout>
     )
 }
