@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\User\JobPostController;
 use App\Http\Controllers\User\VisaApplyController;
 use App\Http\Controllers\User\JobDemandController;
@@ -12,12 +13,11 @@ Route::get('/', function () {
     return Inertia::render('Home');
 })->name('home');
 
+Route::get('search-visa', SearchController::class)->name('search');
 
 Route::get('/privacy-policy', function () {
     return Inertia::render('PrivacyPolicy');
 })->name('privacy-policy');
-
-
 
 Route::get('/terms-conditions', function () {
     return Inertia::render('TermsConditions');
@@ -31,10 +31,6 @@ Route::get('/job-details', function () {
     return Inertia::render('JobDetails');
 })->name('job-details');
 
-
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 
 // Route::get('job-demand', [JobPostController::class, 'index'])->name('job-demand');
