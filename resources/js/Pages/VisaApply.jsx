@@ -241,6 +241,9 @@ const VisaApply = () => {
     }
 
     const handleConfirmSubmit = () => {
+
+        setPreview(false)
+
         if (!data.documents['passport'].file && !data.documents['photo'].file) {
             setIsPhotoRequired(true)
             setIsPassportRequired(true)

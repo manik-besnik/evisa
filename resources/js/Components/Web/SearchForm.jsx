@@ -73,6 +73,10 @@ const SearchForm = () => {
             Object.entries(data).filter(([_, value]) => value !== '' && value !== null)
         );
 
+        if (Object.keys(filteredData).length === 0) {
+            return;
+        }
+
         router.get(route('visa-apply.index'), filteredData);
     };
 
