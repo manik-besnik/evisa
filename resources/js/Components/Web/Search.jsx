@@ -22,6 +22,11 @@ const Search = () => {
     }
 
     const handleSearch = async () => {
+
+        if (!passportNo && !country){
+            return;
+        }
+        
         setLoading(true);
 
         try {
