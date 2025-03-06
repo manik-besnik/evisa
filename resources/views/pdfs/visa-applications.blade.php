@@ -1,99 +1,65 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <meta charset="utf-8">
-    <title>Visa Applications</title>
+    <title>Visa Application Details - {{ $visaApply->id }}</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            font-size: 12px;
+            line-height: 1.6;
+            padding: 20px;
         }
-
-        .header {
-            text-align: center;
+        .section {
             margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
         }
-
-        .header h1 {
+        .section-title {
+            font-weight: bold;
             color: #333;
+            margin-bottom: 10px;
         }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-
-        table,
-        th,
-        td {
-            border: 1px solid #ddd;
-        }
-
-        th,
-        td {
-            padding: 8px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-
-        .application-details {
-            margin-bottom: 30px;
-            page-break-inside: avoid;
-        }
-
-        .footer {
-            text-align: center;
-            font-size: 10px;
-            color: #666;
-            margin-top: 20px;
+        .detail {
+            margin-bottom: 5px;
         }
     </style>
 </head>
-
 <body>
-    <div class="header">
-        <h1>Visa Applications</h1>
-        <p>Generated on: {{ date('Y-m-d H:i:s') }}</p>
+    <h1>Visa Application Details</h1>
+
+    <div class="section">
+        <div class="section-title">Personal Information</div>
+        <div class="detail">Name: {{ $visaApply->name }}</div>
+        <div class="detail">Passport Number: {{ $visaApply->passport->passport_no ?? 'N/A' }}</div>
+        <div class="detail">Status: {{ $visaApply->status }}</div>
     </div>
 
-    @foreach ($applications as $application)
-        <div class="application-details">
-            <h2>Application #{{ $application->id }} - {{ $application->name }}</h2>
+    @if($visaApply->personalInfo)
+    <div class="section">
+        <div class="section-title">Nationality Details</div>
+        <div class="detail">Current Nationality: {{ $visaApply->personalInfo->currentNationality->name ?? 'N/A' }}</div>
+        <div class="detail">Previous Nationality: {{ $visaApply->personalInfo->prevNationality->name ?? 'N/A' }}</div>
+        <div class="detail">Birth Country: {{ $visaApply->personalInfo->birthCountry->name ?? 'N/A' }}</div>
+    </div>
+    @endif
 
-            <table>
-                <tr>
-                    <th>Name</th>
-                    <td>{{ $application->name }}</td>
-                </tr>
-                <tr>
-                    <th>Passport Number</th>
-                    <td>{{ $application->passport->passport_no ?? 'N/A' }}</td>
-                </tr>
-                <tr>
-                    <th>Status</th>
-                    <td>{{ $application->status }}</td>
-                </tr>
-                <tr>
-                    <th>Created Date</th>
-                    <td>{{ $application->created_at->format('Y-m-d') }}</td>
-                </tr>
-                <!-- Add more fields as needed based on your application data -->
-            </table>
-        </div>
+    @if($visaApply->passport)
+    <div class="section">
+        <div class="section-title">Passport Details</div>
+        <div class="detail">Issue Country: {{ $visaApply->passport->issueCountry->name ?? 'N/A' }}</div>
+        <div class="detail">Passport Number: {{ $visaApply->passport->passport_no ?? 'N/A' }}</div>
+    </div>
+    @endif
 
-        @if (!$loop->last)
-            <div style="page-break-after: always;"></div>
-        @endif
-    @endforeach
+    @if($visaApply->guarantor)
+    <div class="section">
+        <div class="section-title">Guarantor Details</div>
+        <div class="detail">Guarantor Nationality: {{ $visaApply->guarantor->guarantorNationality->name ?? 'N/A' }}</div>
+    </div>
+    @endif
 
-    <div class="footer">
-        <p>E-Visa Dubai - Confidential</p>
+    <div class="section">
+        <div class="section-title">Application Details</div>
+        <div class="detail">Created At: {{ $visaApply->created_at->format('Y-m-d H:i:s') }}</div>
     </div>
 </body>
-
 </html>

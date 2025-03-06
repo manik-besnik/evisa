@@ -81,8 +81,9 @@ const VisaApplicationTable = ({
     };
 
     const handleDownloadSinglePdf = (application) => {
-        window.location.href = route('admin.visa-applies.download-pdf', {
-            ids:[application.id]
+        window.location.href = route('admin.visa-applies.show', {
+            visa_apply: application.id,
+            action: 'download'
         });
     };
 

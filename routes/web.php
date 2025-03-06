@@ -50,6 +50,7 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::get('visa-apply/{id}/details', [VisaApplyController::class, 'show'])->name('visa-apply.show');
 
     Route::get('visa-apply', [VisaApplyController::class, 'create'])->name('visa-apply.create');
+    Route::get('visa', [VisaApplyController::class, 'visa'])->name('visa.create');
     Route::get('job-demand', [JobDemandController::class, 'create'])->name('job-demand.create');
     Route::post('/job-demand', [JobDemandController::class, 'store'])->name('job-demand.store');
 
@@ -58,6 +59,8 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::get('dashboard', [\App\Http\Controllers\User\DashboardController::class, 'index'])->name('user.dashboard.index');
 
     Route::get('job-apply', [JobPostController::class, 'create'])->name('job-posts.create');
+    Route::get('job', [\App\Http\Controllers\User\JobPostController::class, 'job'])->name('job.create');
+    Route::get('job-directory', [\App\Http\Controllers\User\JobPostController::class, 'jobDirectory'])->name('job.directory');
     Route::post('job-apply/store', [JobPostController::class, 'store'])->name('job-posts.store');
 
     Route::get('job-applies', [JobPostController::class, 'jobApplyList'])->name('job-apply.list');

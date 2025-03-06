@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Actions\User\JobPost\JobAction;
+use App\Actions\User\JobPost\JobDirectoryAction;
 use App\Actions\User\JobPost\IndexAction;
 use App\Actions\User\JobPost\ShowAction;
 use App\DTOs\JobApplyDTO;
@@ -24,6 +26,14 @@ class JobPostController extends Controller
         return $indexAction->execute();
     }
 
+    public function job(JobAction $jobAction): \Inertia\Response
+    {
+        return $jobAction->execute();
+    }
+    public function jobDirectory(JobDirectoryAction $jobDirectoryAction): \Inertia\Response
+    {
+        return $jobDirectoryAction->execute();
+    }
     /**
      * Show the form for creating a new resource.
      */

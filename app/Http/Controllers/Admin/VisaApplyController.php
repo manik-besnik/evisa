@@ -53,9 +53,10 @@ class VisaApplyController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(VisaApply $visaApply, ShowAction $showAction): \Inertia\Response
+    public function show(VisaApply $visaApply, ShowAction $showAction, Request $request): \Illuminate\Http\Response|\Inertia\Response
     {
-        return $showAction->execute($visaApply);
+        $action = $request->input('action');
+        return $showAction->execute($visaApply, $action);
     }
 
     /**

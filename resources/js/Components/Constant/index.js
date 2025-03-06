@@ -1,4 +1,5 @@
-export const assetUrl = "https://dubaievisaservice.com/assets/"
+// export const assetUrl = "https://dubaievisaservice.com/assets/"
+export const assetUrl = "http://127.0.0.1:8000/assets/"
 export const genders = [
     {id: 1, name: "Male"},
     {id: 2, name: "Female"},
@@ -37,11 +38,26 @@ export const visaStatuses = [
 ];
 
 export const visaTypes = [
-    {id: 1, name: "Short Term Visa"},
-    {id: 2, name: "Long Term Visa"},
-    {id: 3, name: "Multiple 30 Days Visa"},
-    {id: 4, name: "14 Days Visa"},
-    {id: 5, name: "96 Hours Visa"}
+    { id: 1, name: "VISIT VISA" },
+    { id: 2, name: "EMPLOYMENT VISA" },
+    { id: 3, name: "INVESTOR / PARTNER VISA" },
+    { id: 4, name: "DOMESTIC WORKER" },
+    { id: 5, name: "FREE ZONE / FREELANCER" },
+    { id: 6, name: "FAMILY VISA" },
+    { id: 7, name: "STUDENT VISA" }
+];
+
+export const jobDirectory = [
+    { id: 1, name: "READY JOB" },
+    { id: 2, name: "NEW JOB" },
+    { id: 3, name: "DUBAI" },
+    { id: 4, name: "ABUDHABI" },
+    { id: 5, name: "SHARJAH" },
+    { id: 6, name: "AJMAN" },
+    { id: 7, name: "UMM AL QWAIN" },
+    { id: 8, name: "RAS AL KHAIMA" },
+    { id: 9, name: "FUJAYRAH" },
+    { id: 10, name: "AL AIN" },
 ];
 
 export const languageProficiency = [
