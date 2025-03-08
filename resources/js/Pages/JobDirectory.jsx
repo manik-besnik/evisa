@@ -8,7 +8,7 @@ import {
 import { usePage, router } from "@inertiajs/react";
 const Job = () => {
     const handleVisaClick = (visa) => {
-        router.get(route('job-posts.create'));
+        router.get(route('job.view'));
         };
 
     return (

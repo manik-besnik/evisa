@@ -52,6 +52,8 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::get('visa-apply', [VisaApplyController::class, 'create'])->name('visa-apply.create');
     Route::get('visa', [VisaApplyController::class, 'visa'])->name('visa.create');
     Route::get('job-demand', [JobDemandController::class, 'create'])->name('job-demand.create');
+    Route::get('single-job-demand', [JobDemandController::class, 'singleJobDemand'])->name('single-job-demand.create');
+    Route::get('more-job-demand', [JobDemandController::class, 'moreJobDemand'])->name('more-job-demand.create');
     Route::post('/job-demand', [JobDemandController::class, 'store'])->name('job-demand.store');
 
     Route::post('visa-apply/store', [VisaApplyController::class, 'store'])->name('visa-apply.store');
@@ -60,7 +62,10 @@ Route::middleware(['auth', 'user'])->group(function () {
 
     Route::get('job-apply', [JobPostController::class, 'create'])->name('job-posts.create');
     Route::get('job', [\App\Http\Controllers\User\JobPostController::class, 'job'])->name('job.create');
+    Route::get('jobs/{id}/details', [\App\Http\Controllers\User\JobPostController::class, 'jobsDetails'])->name('job.details');
+    Route::get('/job-pdf/{id}', [\App\Http\Controllers\User\JobPostController::class, 'generatePdf'])->name('job.pdf');
     Route::get('job-directory', [\App\Http\Controllers\User\JobPostController::class, 'jobDirectory'])->name('job.directory');
+    Route::get('job-view', [\App\Http\Controllers\User\JobPostController::class, 'jobView'])->name('job.view');
     Route::post('job-apply/store', [JobPostController::class, 'store'])->name('job-posts.store');
 
     Route::get('job-applies', [JobPostController::class, 'jobApplyList'])->name('job-apply.list');

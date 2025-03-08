@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\User;
 
 use App\Actions\User\JobDemand\CreateAction;
+use App\Actions\User\JobDemand\SingleJobDemandAction;
+use App\Actions\User\JobDemand\MoreJobDemandAction;
 use App\Actions\User\JobDemand\IndexAction;
 use App\Http\Controllers\Controller;
 use App\Models\VisaApply;
@@ -19,6 +21,17 @@ class JobDemandController extends Controller
     {
         return $indexAction->execute();
     }
+
+    public function singleJobDemand(SingleJobDemandAction $singleJobDemandAction): \Inertia\Response
+    {
+        return $singleJobDemandAction->execute();
+    }
+
+    public function moreJobDemand(MoreJobDemandAction $moreJobDemandAction): \Inertia\Response
+    {
+        return $moreJobDemandAction->execute();
+    }
+
 
     /**
      * Show the form for creating a new resource.
