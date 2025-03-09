@@ -183,3 +183,8 @@ export const joDemand = [
     {id: 1, name: "Yes"},
     {id: 2, name: "No"},
 ];
+
+export const applyFrom = [
+    {id: 1, name: "Inside UAE"},
+    {id: 2, name: "Outside UAE"},
+];

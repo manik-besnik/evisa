@@ -109,7 +109,7 @@ const SingleJobDemand = () => {
                         <div className="w-full">
                             <div className="grid mt-5">
                                 <div className="flex gap-4">
-                                    <div className="p2 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right  flex items-center justify-end">
+                                    <div className="pr-2 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right  flex items-center justify-end">
                                            Job Location 
                                     </div>
                                     <div className="w-full border-2 border-[#8A9298] bg-white">
@@ -124,7 +124,7 @@ const SingleJobDemand = () => {
                                     </div>
                                 </div>
                                 <div className="flex gap-4">
-                                    <div className="p2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                    <div className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                         Visa validity
                                     </div>
                                     <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
@@ -138,7 +138,7 @@ const SingleJobDemand = () => {
                                     </div>
                                 </div>
                                 <div className="flex gap-4">
-                                    <div className="p2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                    <div className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                         Accommodation
                                     </div>
                                     <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
@@ -152,7 +152,7 @@ const SingleJobDemand = () => {
                                     </div>
                                 </div>
                                 <div className="flex gap-4">
-                                    <div className="p2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                    <div className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                         Transport
                                     </div>
                                     <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
@@ -166,7 +166,7 @@ const SingleJobDemand = () => {
                                     </div>
                                 </div>
                                 <div className="flex gap-4">
-                                    <div className="p2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                    <div className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                         Food
                                     </div>
                                     <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
@@ -180,7 +180,7 @@ const SingleJobDemand = () => {
                                     </div>
                                 </div>
                                 <div className="flex gap-4">
-                                    <div className="p2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                    <div className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                         Medical Insurance
                                     </div>
                                     <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
@@ -194,7 +194,7 @@ const SingleJobDemand = () => {
                                     </div>
                                 </div>
                                 <div className="flex gap-4">
-                                    <div className="p2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                    <div className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                         Daily working hours
                                     </div>
                                     <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
@@ -208,7 +208,7 @@ const SingleJobDemand = () => {
                                     </div>
                                 </div>
                                 <div className="flex gap-4">
-                                    <div className="p2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                    <div className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                         Salary
                                     </div>
                                     <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
@@ -222,7 +222,7 @@ const SingleJobDemand = () => {
                                     </div>
                                 </div>
                                 <div className="flex gap-4">
-                                    <div className="p2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                    <div className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                         Vacation benefits
                                     </div>
                                     <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
@@ -236,7 +236,7 @@ const SingleJobDemand = () => {
                                     </div>
                                 </div>
                                 <div className="flex gap-4">
-                                    <div className="p2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                    <div className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                         Age limits
                                     </div>
                                     <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
@@ -250,7 +250,7 @@ const SingleJobDemand = () => {
                                     </div>
                                 </div>
                                 <div className="flex gap-4">
-                                    <div className="p2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                    <div className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                         In-demand workers
                                     </div>
                                     <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
@@ -264,7 +264,7 @@ const SingleJobDemand = () => {
                                     </div>
                                 </div>
                                 <div className="flex gap-4">
-                                    <div className="p2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                    <div className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                         Education
                                     </div>
                                     <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
@@ -278,7 +278,7 @@ const SingleJobDemand = () => {
                                     </div>
                                 </div>
                                 <div className="flex gap-4">
-                                    <div className="p2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                    <div className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                         Company activities
                                     </div>
                                     <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">

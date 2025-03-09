@@ -45,7 +45,7 @@ const Job = () => {
                             </div>
                         </Link>
                             {/* General Apply Card */}
-                            <Link href={route('job-demand.create')} className="block mb-8">
+                            <Link href={route('job-posts.create')} className="block mb-8">
                             <div className="flex flex-col items-center">
                                 <div className="bg-white p-4 w-32 h-30 flex justify-center items-center">
                                     <img

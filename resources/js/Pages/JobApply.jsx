@@ -9,7 +9,7 @@ import {
     joDemand,
     visaTypes
 } from "@/Components/Constant/index.js";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Head, useForm, usePage } from "@inertiajs/react";
 import PrimaryBtn from "@/Components/Web/PrimaryBtn.jsx";
 import { FaCameraRetro } from "react-icons/fa";
@@ -28,11 +28,31 @@ const JobDemand = () => {
     const [bloodGroup, setBloodGroup] = useState('');
     const [maritalStatus, setMaritalStatus] = useState('');
     const [district, setDistrict] = useState('');
-    const [applyCountry, setApplyCountry] = useState('');
+    const [applySource, setApplySource] = useState(''); // Inside UAE or Outside UAE
+    const [applyLocation, setApplyLocation] = useState(''); // For specific location
     const [businessPhoto, setBusinessPhoto] = useState('');
     const [passportPhoto, setPassportPhoto] = useState(null);
 
-    // Form initial state
+    // Define UAE locations
+    const uaeLocations = [
+        { id: 'dubai', name: 'DUBAI' },
+        { id: 'abudhabi', name: 'ABUDHABI' },
+        { id: 'sharjah', name: 'SHARJAH' },
+        { id: 'ajman', name: 'AJMAN' },
+        { id: 'umm_al_quwain', name: 'UMM AL QWAIN' },
+        { id: 'ras_al_khaimah', name: 'RAS AL KHAIMA' },
+        { id: 'fujairah', name: 'FUJAYRAH' },
+        { id: 'al_ain', name: 'AL AIN' }
+    ];
+
+
+    const [locationsToDisplay, setLocationsToDisplay] = useState([]);
+
+    const applySourceOptions = [
+        { id: 'inside_uae', name: 'Inside UAE' },
+        { id: 'outside_uae', name: 'Outside UAE' }
+    ];
+
     const initialState = {
         // Personal Details
         name: '',
@@ -65,13 +85,54 @@ const JobDemand = () => {
         education_certificate: '',
         education_year: '',
         education_board: '',
+        computer_skills: '',
+        driving_license: '',
+        driving_license_issue_date: '',
+        driving_license_expiry_date: '',
+        english_proficiency: '',
+        arabic_proficiency: '',
+        other_languages: [],
+        mother_language: '',
+
+        // Job Experience
+        job_experiences: [
+            { position: '', duration: '', company_name: '', country: '' },
+            { position: '', duration: '', company_name: '', country: '' }
+        ],
+
+        // Physical details
+        shirt_size: '',
+        pant_size: '',
+        shoes_size: '',
+        weight: '',
+        height: '',
+        nearest_airport: '',
+
+        // Summary
+        application_summary: '',
 
         // Job details
-        apply_from: '',
+        apply_from_source: '', 
+        apply_location: '', 
         job_post: ['', '', '']
     };
 
     const { data, setData, post, processing, errors, reset } = useForm(initialState);
+
+  
+    useEffect(() => {
+        if (applySource && applySource.id === 'inside_uae') {
+            setLocationsToDisplay(uaeLocations);
+        } else if (applySource && applySource.id === 'outside_uae') {
+            setLocationsToDisplay(countries);
+        } else {
+            setLocationsToDisplay([]);
+        }
+
+        // Reset the location when source changes
+        setApplyLocation('');
+        setData('apply_location', '');
+    }, [applySource]);
 
     const resetForm = () => {
         reset();
@@ -81,7 +142,8 @@ const JobDemand = () => {
         setBloodGroup('');
         setMaritalStatus('');
         setDistrict('');
-        setApplyCountry('');
+        setApplySource('');
+        setApplyLocation('');
         setBusinessPhoto('');
         setPassportPhoto(null);
         setData(initialState);
@@ -90,10 +152,10 @@ const JobDemand = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        // Create FormData object for file uploads
+       
         const formData = new FormData();
 
-        // Append all form fields to FormData
+       
         Object.keys(data).forEach(key => {
             if (key === 'job_post') {
                 // Handle array data
@@ -105,13 +167,13 @@ const JobDemand = () => {
             }
         });
 
-        // Append passport photo if selected
+       
         if (passportPhoto) {
             formData.append('passport_photo', passportPhoto);
         }
 
-        // Post to the store route
-        post(route('job-demand.store'), {
+        
+        post(route('job-posts.store'), {
             data: formData,
             forceFormData: true,
             onSuccess: () => {
@@ -125,9 +187,14 @@ const JobDemand = () => {
     };
 
     // Handle select changes
-    const updateApplyCountry = (value) => {
-        setApplyCountry(value);
-        setData('apply_from', value.id);
+    const updateApplySource = (value) => {
+        setApplySource(value);
+        setData('apply_from_source', value.id);
+    };
+
+    const updateApplyLocation = (value) => {
+        setApplyLocation(value);
+        setData('apply_location', value.id);
     };
 
     const updateNationality = (value) => {
@@ -183,16 +250,35 @@ const JobDemand = () => {
                                     <div className="flex-1">
                                         <Select
                                             placeholder="Select Here"
-                                            items={countries}
-                                            selected={applyCountry}
-                                            setSelected={setApplyCountry}
-                                            handleValueChange={updateApplyCountry}
-                                            error={errors.apply_from}
+                                            items={applySourceOptions}
+                                            selected={applySource}
+                                            setSelected={setApplySource}
+                                            handleValueChange={updateApplySource}
+                                            error={errors.apply_from_source}
                                             required={true}
                                             defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
                                         />
                                     </div>
                                 </div>
+                                {applySource && (
+                                    <div className="flex items-center mb-4">
+                                        <label className="text-xl font-bold mr- w-4/12">
+                                            {applySource.id === 'inside_uae' ? 'Location' : 'Country'}
+                                        </label>
+                                        <div className="flex-1">
+                                            <Select
+                                                placeholder="Select Here"
+                                                items={locationsToDisplay}
+                                                selected={applyLocation}
+                                                setSelected={setApplyLocation}
+                                                handleValueChange={updateApplyLocation}
+                                                error={errors.apply_location}
+                                                required={true}
+                                                defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                            />
+                                        </div>
+                                    </div>
+                                )}
                             </div>
 
                             <div className="md:w-1/3 flex justify-center">
@@ -553,17 +639,20 @@ const JobDemand = () => {
                             </div>
                         </div>
 
-                        {/* Education */}
+                       
+                        {/* Education - Enhanced Section */}
                         <div className="mb-6">
                             <h2 className="text-xl font-bold mb-3 border-l-4 border-red-600 pl-2">EDUCATION DETAILS</h2>
-                            <div className="grid grid-cols-12 gap-3">
+
+                            {/* Original education fields */}
+                            <div className="grid grid-cols-12 gap-3 mb-4">
                                 <div className="col-span-3">
                                     <TextInput
                                         placeholder="Certificate"
                                         value={data.education_certificate}
                                         onChange={(e) => setData('education_certificate', e.target.value)}
                                         error={errors.education_certificate}
-                                        defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                        defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
                                     />
                                 </div>
                                 <div className="col-span-2">
@@ -572,7 +661,7 @@ const JobDemand = () => {
                                         value={data.education_year}
                                         onChange={(e) => setData('education_year', e.target.value)}
                                         error={errors.education_year}
-                                        defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                        defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
                                     />
                                 </div>
                                 <div className="col-span-7">
@@ -581,27 +670,320 @@ const JobDemand = () => {
                                         value={data.education_board}
                                         onChange={(e) => setData('education_board', e.target.value)}
                                         error={errors.education_board}
+                                        defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
+                                    />
+                                </div>
+                            </div>
+
+                            {/* Computer Skills */}
+                            <div className="grid grid-cols-12 gap-3 mb-4">
+                                <div className="col-span-3">
+                                    <p className="p-[7px] border-2 border-[#848585]">Computer Skills</p>
+                                </div>
+                                <div className="col-span-9">
+                                    <TextInput
+                                        placeholder="Typing Here"
+                                        value={data.computer_skills_details}
+                                        onChange={(e) => setData('computer_skills_details', e.target.value)}
+                                        error={errors.computer_skills_details}
+                                        defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
+                                    />
+                                </div>
+                            </div>
+
+                            {/* Driving License */}
+                            <div className="grid grid-cols-12 gap-3 mb-4">
+                                <div className="col-span-3">
+                                    <p className="p-[7px] border-2 border-[#848585]">Driving License</p>
+                                    
+                                </div>
+                                <div className="col-span-3">
+                                    <Select
+                                        placeholder="Select"
+                                        items={[
+                                            { id: 'yes', name: 'Yes' },
+                                            { id: 'no', name: 'No' }
+                                        ]}
+                                        selected={data.has_driving_license}
+                                        setSelected={(value) => setData('has_driving_license', value)}
+                                        handleValueChange={(value) => setData('has_driving_license', value.id)}
+                                        error={errors.has_driving_license}
+                                        defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
+                                    />
+                                </div>
+                                <div className="col-span-3">
+                                    <TextInput
+                                        type="date"
+                                        placeholder="Issue Date"
+                                        value={data.driving_license_issue_date}
+                                        onChange={(e) => setData('driving_license_issue_date', e.target.value)}
+                                        error={errors.driving_license_issue_date}
+                                        defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
+                                    />
+                                </div>
+                                <div className="col-span-3">
+                                    <TextInput
+                                        type="date"
+                                        placeholder="Expire Date"
+                                        value={data.driving_license_expiry_date}
+                                        onChange={(e) => setData('driving_license_expiry_date', e.target.value)}
+                                        error={errors.driving_license_expiry_date}
+                                        defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
+                                    />
+                                </div>
+                            </div>
+
+                            {/* Language Proficiency */}
+                            <div className="grid grid-cols-12 gap-3 mb-4">
+                                <div className="col-span-3">
+                                    <p className="p-[7px] border-2 border-[#848585]">English</p>
+                                    
+                                </div>
+                                <div className="col-span-3">
+                                    <Select
+                                        placeholder="Good | Fair | Poor"
+                                        items={[
+                                            { id: 'good', name: 'Good' },
+                                            { id: 'fair', name: 'Fair' },
+                                            { id: 'poor', name: 'Poor' }
+                                        ]}
+                                        selected={data.english_proficiency}
+                                        setSelected={(value) => setData('english_proficiency', value)}
+                                        handleValueChange={(value) => setData('english_proficiency', value.id)}
+                                        error={errors.english_proficiency}
+                                        defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
+                                    />
+                                </div>
+                                <div className="col-span-3">
+                                    <p className="p-[7px] border-2 border-[#848585]">Urdu | Hindi</p>
+                                </div>
+                                <div className="col-span-3">
+                                    <Select
+                                        placeholder="Good | Fair | Poor"
+                                        items={[
+                                            { id: 'good', name: 'Good' },
+                                            { id: 'fair', name: 'Fair' },
+                                            { id: 'poor', name: 'Poor' }
+                                        ]}
+                                        selected={data.other_languages_proficiency}
+                                        setSelected={(value) => setData('other_languages_proficiency', value)}
+                                        handleValueChange={(value) => setData('other_languages_proficiency', value.id)}
+                                        error={errors.other_languages_proficiency}
+                                        defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="grid grid-cols-12 gap-3 mb-4">
+                                <div className="col-span-3">
+                                    
+                                    <p className="p-[7px] border-2 border-[#848585]">Arabic</p>
+                                </div>
+                                <div className="col-span-3">
+                                    <Select
+                                        placeholder="Good | Fair | Poor"
+                                        items={[
+                                            { id: 'good', name: 'Good' },
+                                            { id: 'fair', name: 'Fair' },
+                                            { id: 'poor', name: 'Poor' }
+                                        ]}
+                                        selected={data.arabic_proficiency}
+                                        setSelected={(value) => setData('arabic_proficiency', value)}
+                                        handleValueChange={(value) => setData('arabic_proficiency', value.id)}
+                                        error={errors.arabic_proficiency}
+                                        defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
+                                    />
+                                </div>
+                                <div className="col-span-3">
+                                    <p className="p-[7px] border-2 border-[#848585]">Mother Language</p>
+                                </div>
+                                <div className="col-span-3">
+                                    <TextInput
+                                        placeholder="Typing Here"
+                                        value={data.mother_language}
+                                        onChange={(e) => setData('mother_language', e.target.value)}
+                                        error={errors.mother_language}
+                                        defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Job Experience */}
+                        <div className="mb-6">
+                            <h2 className="text-xl font-bold mb-3 border-l-4 border-red-600 pl-2">JOB EXPERIENCE</h2>
+
+                            {data.job_experiences.map((experience, index) => (
+                                <div key={index} className="grid grid-cols-12 gap-3 mb-4">
+                                    <div className="col-span-3">
+                                        <TextInput
+                                            placeholder="Position"
+                                            value={experience.position}
+                                            onChange={(e) => {
+                                                const updated = [...data.job_experiences];
+                                                updated[index].position = e.target.value;
+                                                setData('job_experiences', updated);
+                                            }}
+                                            error={errors[`job_experiences.${index}.position`]}
+                                            defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                        />
+                                    </div>
+                                    <div className="col-span-3">
+                                        <TextInput
+                                            placeholder="Duration"
+                                            value={experience.duration}
+                                            onChange={(e) => {
+                                                const updated = [...data.job_experiences];
+                                                updated[index].duration = e.target.value;
+                                                setData('job_experiences', updated);
+                                            }}
+                                            error={errors[`job_experiences.${index}.duration`]}
+                                            defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                        />
+                                    </div>
+                                    <div className="col-span-3">
+                                        <TextInput
+                                            placeholder="Company Name"
+                                            value={experience.company_name}
+                                            onChange={(e) => {
+                                                const updated = [...data.job_experiences];
+                                                updated[index].company_name = e.target.value;
+                                                setData('job_experiences', updated);
+                                            }}
+                                            error={errors[`job_experiences.${index}.company_name`]}
+                                            defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                        />
+                                    </div>
+                                    <div className="col-span-3">
+                                        <TextInput
+                                            placeholder="Country"
+                                            value={experience.country}
+                                            onChange={(e) => {
+                                                const updated = [...data.job_experiences];
+                                                updated[index].country = e.target.value;
+                                                setData('job_experiences', updated);
+                                            }}
+                                            error={errors[`job_experiences.${index}.country`]}
+                                            defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                        />
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* Summary for application */}
+                        <div className="mb-6">
+                            <div className="bg-yellow-300 p-4">
+                                <div className="font-bold mb-2">Summary for application | _</div>
+                                <Textarea
+                                    value={data.application_summary}
+                                    onChange={(e) => setData('application_summary', e.target.value)}
+                                    rows={6}
+                                    className="w-full border-2 border-[#848585] focus:border-[#848585]"
+                                />
+                            </div>
+                        </div>
+
+                        {/* Physical Details */}
+                        <div className="mb-6">
+                            <div className="grid grid-cols-12 gap-3 mb-1">
+                                <div className="col-span-2 flex items-center">
+                                    <span className="font-bold">Shirt Size</span>
+                                    <span className="mx-2">:</span>
+                                </div>
+                                <div className="col-span-3">
+                                    <Select
+                                        placeholder="Select Here"
+                                        items={[
+                                            { id: 'S', name: 'S' },
+                                            { id: 'M', name: 'M' },
+                                            { id: 'L', name: 'L' },
+                                            { id: 'XL', name: 'XL' },
+                                            { id: 'XXL', name: 'XXL' }
+                                        ]}
+                                        selected={data.shirt_size}
+                                        setSelected={(value) => setData('shirt_size', value)}
+                                        handleValueChange={(value) => setData('shirt_size', value.id)}
+                                        error={errors.shirt_size}
+                                        defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                    />
+                                </div>
+                                <div className="col-span-3 flex items-center">
+                                    <span className="font-bold">Weight (In Kgs)</span>
+                                    <span className="mx-2">:</span>
+                                </div>
+                                <div className="col-span-4">
+                                    <TextInput
+                                        placeholder="Typing Here"
+                                        value={data.weight}
+                                        onChange={(e) => setData('weight', e.target.value)}
+                                        error={errors.weight}
+                                        required={true}
+                                        defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="grid grid-cols-12 gap-3 mb-1">
+                                <div className="col-span-2 flex items-center">
+                                    <span className="font-bold">Pant Size (Waist)</span>
+                                    <span className="mx-2">:</span>
+                                </div>
+                                <div className="col-span-3">
+                                    <TextInput
+                                        placeholder="Typing Here"
+                                        value={data.pant_size}
+                                        onChange={(e) => setData('pant_size', e.target.value)}
+                                        error={errors.pant_size}
+                                        defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                    />
+                                </div>
+                                <div className="col-span-3 flex items-center">
+                                    <span className="font-bold">Height (In Centimeters)</span>
+                                    <span className="mx-2">:</span>
+                                </div>
+                                <div className="col-span-4">
+                                    <TextInput
+                                        placeholder="Typing Here"
+                                        value={data.height}
+                                        onChange={(e) => setData('height', e.target.value)}
+                                        error={errors.height}
+                                        required={true}
+                                        defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="grid grid-cols-12 gap-3 mb-1">
+                                <div className="col-span-2 flex items-center">
+                                    <span className="font-bold">Shoes Size</span>
+                                    <span className="mx-2">:</span>
+                                </div>
+                                <div className="col-span-3">
+                                    <TextInput
+                                        placeholder="Typing Here"
+                                        value={data.shoes_size}
+                                        onChange={(e) => setData('shoes_size', e.target.value)}
+                                        error={errors.shoes_size}
+                                        defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                    />
+                                </div>
+                                <div className="col-span-3 flex items-center">
+                                    <span className="font-bold">Nearest Airport</span>
+                                    <span className="mx-2">:</span>
+                                </div>
+                                <div className="col-span-4">
+                                    <TextInput
+                                        placeholder="Typing Here"
+                                        value={data.nearest_airport}
+                                        onChange={(e) => setData('nearest_airport', e.target.value)}
+                                        error={errors.nearest_airport}
                                         defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
                                     />
                                 </div>
                             </div>
                         </div>
 
-                        {/* File Upload for Passport Photo */}
-                        <div className="mb-6">
-                            <label className="block font-bold mb-2">Upload Passport Photo</label>
-                            <input
-                                type="file"
-                                accept="image/*"
-                                onChange={handlePhotoChange}
-                                className="block w-full text-sm text-gray-500
-                                    file:mr-4 file:py-2 file:px-4
-                                    file:rounded-md file:border-0
-                                    file:text-sm file:font-semibold
-                                    file:bg-blue-50 file:text-blue-700
-                                    hover:file:bg-blue-100"
-                            />
-                        </div>
 
                         {/* Submit Button */}
                         <div className="flex justify-center mt-6">
