@@ -15,12 +15,16 @@ import PrimaryBtn from "@/Components/Web/PrimaryBtn.jsx";
 import { FaCameraRetro } from "react-icons/fa";
 import { Textarea } from "flowbite-react";
 import { toast } from "react-toastify";
+import PreviewPopup from "../Components/PreviewPopup.jsx";
 
 
 const SingleJobDemand = () => {
+    const [showPreview, setShowPreview] = useState(false);
+
     // Create form with useForm
     const { data, setData, post, processing, errors } = useForm({
         // Job details
+        typeOfWork: 'Security', // Default value
         jobLocation: '',
         visaValidity: '',
         accommodation: '',
@@ -68,9 +72,20 @@ const SingleJobDemand = () => {
         });
     };
 
+    // Toggle preview popup
+    const togglePreview = () => {
+        setShowPreview(!showPreview);
+    };
+
     return (
         <WebLayout showBgImage={true} showServiceImage={false}>
             <Head title="Job Demand | Dubai E-Visa" />
+
+            <PreviewPopup
+                isOpen={showPreview}
+                onClose={togglePreview}
+                data={data}
+            />
 
             <div className="container mx-auto px-4 py-8">
                 <form onSubmit={handleSubmit}>
@@ -501,6 +516,7 @@ const SingleJobDemand = () => {
                             </button>
                             <button
                                 type="button"
+                                onClick={togglePreview}
                                 className="bg-blue-600 text-white px-4 py-2 rounded font-bold flex items-center"
                             >
                                 <span className="mr-2">Preview</span>
