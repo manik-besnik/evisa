@@ -4,6 +4,32 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+
+/**
+ * @property int $id
+ * @property int $user_id
+ * @property int $company_id
+ * @property string $date
+ * @property string $job_code
+ * @property string $apply_from
+ * @property string $type_of_work
+ * @property string $visa_validity
+ * @property string $salary
+ * @property string $worker_quantity
+ * @property string $duty_hours
+ * @property string $over_time
+ * @property string $weekly_work
+ * @property string $age_limit
+ * @property string $qualifications
+ * @property string $company_activities
+ * @property string $food
+ * @property string $accommodation
+ * @property string $transport
+ * @property string $yearly_ticket
+ * @property string $holiday_benefits
+ * @property string $note
+ */
+
 class JobDemand extends Model
 {
     protected $table = 'job_demands';
