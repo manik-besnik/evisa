@@ -10,6 +10,7 @@ class JobDemand extends Model
 
     protected $fillable = [
         'user_id',
+        'company_id',
         'date',
         'job_code',
         'apply_from',
