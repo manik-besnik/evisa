@@ -2,7 +2,8 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 import { Link } from '@inertiajs/react';
 
-export default function Dashboard({ auth, total_visa_applies }) {
+export default function Dashboard({ auth, data }) {
+    
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -27,7 +28,7 @@ export default function Dashboard({ auth, total_visa_applies }) {
                     <div class="mt-3 flex items-end justify-between">
                         <div>
                             <h4 class="text-2xl font-bold text-gray-800 dark:text-white/90">
-                               120
+                                {data.agent}
                             </h4>
                         </div>
 
@@ -43,7 +44,7 @@ export default function Dashboard({ auth, total_visa_applies }) {
                     <div class="mt-3 flex items-end justify-between">
                         <div>
                             <h4 class="text-2xl font-bold text-gray-800 dark:text-white/90">
-                                {total_visa_applies}
+                                    {data.visaAppliesCount}
                             </h4>
                         </div>
 
