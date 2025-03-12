@@ -9,7 +9,7 @@ class VisaApplySearch
 {
     public static function execute(): \Illuminate\Database\Eloquent\Collection
     {
-        
+
         $appId = request()->input('app_id');
         $currentNationality = request()->input('current_nationality');
         $processingType = request()->input('processing_type');
