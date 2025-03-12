@@ -54,7 +54,7 @@ const PreviewPopup = ({ isOpen, onClose, data }) => {
                                 Job Location
                             </div>
                             <div className="w-full border-2 p-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white">
-                                {data.jobLocation || "Dubai"}
+                                {data.jobLocation || " "}
                             </div>
                         </div>
                         <div className="flex gap-4">
@@ -62,7 +62,7 @@ const PreviewPopup = ({ isOpen, onClose, data }) => {
                                 Visa validity
                             </div>
                             <div className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 p-2">
-                                {data.visaValidity || "02 years"}
+                                {data.visaValidity || " "}
                             </div>
                         </div>
                         <div className="flex gap-4">
@@ -70,7 +70,7 @@ const PreviewPopup = ({ isOpen, onClose, data }) => {
                                 Accommodation
                             </div>
                             <div className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 p-2">
-                                {data.accommodation || "The Company"}
+                                {data.accommodation || " "}
                             </div>
                         </div>
                         <div className="flex gap-4">
@@ -78,7 +78,7 @@ const PreviewPopup = ({ isOpen, onClose, data }) => {
                                 Transport
                             </div>
                             <div className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 p-2">
-                                {data.transport || "The Company"}
+                                {data.transport || " "}
                             </div>
                         </div>
                         <div className="flex gap-4">
@@ -86,7 +86,7 @@ const PreviewPopup = ({ isOpen, onClose, data }) => {
                                 Food
                             </div>
                             <div className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 p-2">
-                                {data.food || "Self"}
+                                {data.food || " "}
                             </div>
                         </div>
                         <div className="flex gap-4">
@@ -94,7 +94,7 @@ const PreviewPopup = ({ isOpen, onClose, data }) => {
                                 Medical Insurance
                             </div>
                             <div className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 p-2">
-                                {data.medicalInsurance || "As per UAE labour laws"}
+                                {data.medicalInsurance || " "}
                             </div>
                         </div>
                         <div className="flex gap-4">
@@ -102,7 +102,7 @@ const PreviewPopup = ({ isOpen, onClose, data }) => {
                                 Daily working hours
                             </div>
                             <div className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 p-2">
-                                {data.workingHours || "8 Hours"} (As per Company Policy)
+                                {data.workingHours || " "} (As per Company Policy)
                             </div>
                         </div>
                         <div className="flex gap-4">
@@ -110,7 +110,7 @@ const PreviewPopup = ({ isOpen, onClose, data }) => {
                                 Salary
                             </div>
                             <div className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 p-2">
-                                {data.salary || "1850-2500"} AED
+                                {data.salary || " "} AED
                             </div>
                         </div>
                         <div className="flex gap-4">
@@ -118,7 +118,7 @@ const PreviewPopup = ({ isOpen, onClose, data }) => {
                                 Vacation benefits
                             </div>
                             <div className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 p-2">
-                                {data.vacationBenefits || "As per UAE labour laws"}
+                                {data.vacationBenefits || " "}
                             </div>
                         </div>
                         <div className="flex gap-4">
@@ -126,7 +126,7 @@ const PreviewPopup = ({ isOpen, onClose, data }) => {
                                 Age limits
                             </div>
                             <div className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 p-2">
-                                {data.ageLimits || "20-32"}
+                                {data.ageLimits || " "}
                             </div>
                         </div>
                         <div className="flex gap-4">
@@ -134,7 +134,7 @@ const PreviewPopup = ({ isOpen, onClose, data }) => {
                                 In-demand workers
                             </div>
                             <div className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 p-2">
-                                {data.inDemandWorkers || "50 People"}
+                                {data.inDemandWorkers || " "}
                             </div>
                         </div>
                         <div className="flex gap-4">
@@ -142,7 +142,7 @@ const PreviewPopup = ({ isOpen, onClose, data }) => {
                                 Education
                             </div>
                             <div className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 p-2">
-                                {data.education || "Must have ability to read and write English"}
+                                {data.education || " "}
                             </div>
                         </div>
                         <div className="flex gap-4">
@@ -150,7 +150,7 @@ const PreviewPopup = ({ isOpen, onClose, data }) => {
                                 Company activities
                             </div>
                             <div className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 p-2">
-                                {data.companyActivities || "Established security service company"}
+                                {data.companyActivities || " "}
                             </div>
                         </div>
 
@@ -159,13 +159,13 @@ const PreviewPopup = ({ isOpen, onClose, data }) => {
 
                 {/* Contact Information */}
                 <div className="bg-gray-200 p-3 font-bold text-center text-lg">
-                    +971 {data.contactNo || "528260909"} <FaWhatsapp className="inline text-green-600 ml-2" /> {data.whatsappNo || "0508074795, 0501289360"}
+                    +971 {data.contactNo || " "} <FaWhatsapp className="inline text-green-600 ml-2" /> {data.whatsappNo || "0508074795, 0501289360"}
                 </div>
 
                 {/* Application Requirements */}
                 <div className="p-4">
                     <h3 className="font-bold text-lg">Application Requirements:</h3>
-                    <p className="my-2">{data.applicationRequirements || "passport, white background photo, clear visit visa copy or cancellation copy and CV as per our format. Apply today, interview required."}</p>
+                    <p className="my-2">{data.applicationRequirements || " "}</p>
                 </div>
 
                 

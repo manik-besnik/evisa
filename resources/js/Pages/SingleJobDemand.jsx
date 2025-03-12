@@ -55,16 +55,13 @@ const SingleJobDemand = () => {
         applicationRequirements: ''
     });
 
-    // Handle input changes
     const handleChange = (e) => {
         const { name, value } = e.target;
         setData(name, value);
     };
 
-    // Handle form submission
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Handle form submission logic here
         post(route('job-demand.store'), {
             onSuccess: () => {
                 toast.success('Job demand submitted successfully');
