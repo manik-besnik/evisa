@@ -3,11 +3,16 @@
 namespace App\Actions\Admin\Dashboard;
 
 use Inertia\Inertia;
+use App\Models\VisaApply;
 
 class IndexAction
 {
     public function execute(): \Inertia\Response
     {
-        return Inertia::render('Admin/Dashboard');
+        $visaAppliesCount = VisaApply::count();
+
+        return Inertia::render('Admin/Dashboard', [
+            'total_visa_applies' => $visaAppliesCount 
+        ]);
     }
 }
