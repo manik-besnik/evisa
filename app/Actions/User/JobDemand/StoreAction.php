@@ -6,6 +6,7 @@ use App\DTOs\JobDemandDTO;
 use App\Models\Company;
 use App\Models\JobDemand;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class StoreAction
 {
@@ -20,7 +21,10 @@ class StoreAction
             $jobDemand = new JobDemand();
             $jobDemand->company_id = $company->id;
             $jobDemand->user_id = auth()->id();
+            $jobDemand->job_code = uniqid() . now()->timestamp;
+            $jobDemand->transport = $jobDemandDTO->transport;
             $jobDemand->note = $jobDemandDTO->note;
+            $jobDemand->accommodation = $jobDemandDTO->accommodation;
             $jobDemand->save();
 
 

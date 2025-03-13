@@ -15,6 +15,7 @@ class JobDemandDTO
     public string $email;
     public string $currentAddress;
     public string $city;
+    public string $area;
     public string $jobLocation;
     public string $typeOfWork;
     public string $salary;
@@ -30,7 +31,6 @@ class JobDemandDTO
     public string $note;
     public string $companyActivities;
     public string $workerQuantity;
-    public string $area;
 
     public static function fromRequest(Request $request): JobDemandDTO
     {
