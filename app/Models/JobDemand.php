@@ -56,13 +56,5 @@ class JobDemand extends Model
         'yearly_ticket',
         'holiday_benefits',
         'note',
-        'company_name',
-        'contact_person',
-        'contact_no',
-        'whatsapp_no',
-        'email',
-        'current_address',
-        'city',
-        'area'
     ];
 }

@@ -9,12 +9,12 @@ import {
     joDemand,
     visaTypes
 } from "@/Components/Constant/index.js";
-import { useState } from "react";
-import { Head, useForm, usePage } from "@inertiajs/react";
+import {useState} from "react";
+import {Head, useForm, usePage} from "@inertiajs/react";
 import PrimaryBtn from "@/Components/Web/PrimaryBtn.jsx";
-import { FaCameraRetro } from "react-icons/fa";
-import { Textarea } from "flowbite-react";
-import { toast } from "react-toastify";
+import {FaCameraRetro} from "react-icons/fa";
+import {Textarea} from "flowbite-react";
+import {toast} from "react-toastify";
 import PreviewPopup from "../Components/PreviewPopup.jsx";
 
 
@@ -22,7 +22,7 @@ const SingleJobDemand = () => {
     const [showPreview, setShowPreview] = useState(false);
 
     // Create form with useForm
-    const { data, setData, post, processing, errors } = useForm({
+    const {data, setData, post, processing, errors} = useForm({
         // Job details
         type_of_work: 'Security', // Default value
         job_location: '',
@@ -52,12 +52,12 @@ const SingleJobDemand = () => {
         area: '',
 
         // Application requirements
-        application_requirements: ''
+        note: ''
     });
 
     // Handle input changes
     const handleChange = (e) => {
-        const { name, value } = e.target;
+        const {name, value} = e.target;
         setData(name, value);
     };
 
@@ -80,7 +80,7 @@ const SingleJobDemand = () => {
 
     return (
         <WebLayout showBgImage={true} showServiceImage={false}>
-            <Head title="Job Demand | Dubai E-Visa" />
+            <Head title="Job Demand | Dubai E-Visa"/>
 
             <PreviewPopup
                 isOpen={showPreview}
@@ -105,7 +105,7 @@ const SingleJobDemand = () => {
                         {/* Camera Icon Space */}
                         <div className="relative h-32 bg-gray-500">
                             <div className="absolute bottom-4 right-4 text-white">
-                                <FaCameraRetro size={30} className="text-white" />
+                                <FaCameraRetro size={30} className="text-white"/>
                             </div>
                         </div>
 
@@ -125,8 +125,9 @@ const SingleJobDemand = () => {
                         <div className="w-full">
                             <div className="grid mt-5">
                                 <div className="flex gap-4">
-                                    <div className="pr-2 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right  flex items-center justify-end">
-                                           Job Location
+                                    <div
+                                        className="pr-2 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right  flex items-center justify-end">
+                                        Job Location
                                     </div>
                                     <div className="w-full border-2 border-[#8A9298] bg-white">
 
@@ -140,7 +141,8 @@ const SingleJobDemand = () => {
                                     </div>
                                 </div>
                                 <div className="flex gap-4">
-                                    <div className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                    <div
+                                        className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                         Visa validity
                                     </div>
                                     <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
@@ -154,7 +156,8 @@ const SingleJobDemand = () => {
                                     </div>
                                 </div>
                                 <div className="flex gap-4">
-                                    <div className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                    <div
+                                        className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                         Accommodation
                                     </div>
                                     <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
@@ -168,7 +171,8 @@ const SingleJobDemand = () => {
                                     </div>
                                 </div>
                                 <div className="flex gap-4">
-                                    <div className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                    <div
+                                        className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                         Transport
                                     </div>
                                     <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
@@ -182,7 +186,8 @@ const SingleJobDemand = () => {
                                     </div>
                                 </div>
                                 <div className="flex gap-4">
-                                    <div className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                    <div
+                                        className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                         Food
                                     </div>
                                     <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
@@ -196,7 +201,8 @@ const SingleJobDemand = () => {
                                     </div>
                                 </div>
                                 <div className="flex gap-4">
-                                    <div className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                    <div
+                                        className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                         Medical Insurance
                                     </div>
                                     <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
@@ -210,7 +216,8 @@ const SingleJobDemand = () => {
                                     </div>
                                 </div>
                                 <div className="flex gap-4">
-                                    <div className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                    <div
+                                        className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                         Daily working hours
                                     </div>
                                     <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
@@ -224,7 +231,8 @@ const SingleJobDemand = () => {
                                     </div>
                                 </div>
                                 <div className="flex gap-4">
-                                    <div className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                    <div
+                                        className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                         Salary
                                     </div>
                                     <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
@@ -238,7 +246,8 @@ const SingleJobDemand = () => {
                                     </div>
                                 </div>
                                 <div className="flex gap-4">
-                                    <div className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                    <div
+                                        className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                         Vacation benefits
                                     </div>
                                     <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
@@ -252,7 +261,8 @@ const SingleJobDemand = () => {
                                     </div>
                                 </div>
                                 <div className="flex gap-4">
-                                    <div className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                    <div
+                                        className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                         Age limits
                                     </div>
                                     <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
@@ -266,7 +276,8 @@ const SingleJobDemand = () => {
                                     </div>
                                 </div>
                                 <div className="flex gap-4">
-                                    <div className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                    <div
+                                        className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                         In-demand workers
                                     </div>
                                     <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
@@ -280,7 +291,8 @@ const SingleJobDemand = () => {
                                     </div>
                                 </div>
                                 <div className="flex gap-4">
-                                    <div className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                    <div
+                                        className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                         Education
                                     </div>
                                     <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
@@ -294,7 +306,8 @@ const SingleJobDemand = () => {
                                     </div>
                                 </div>
                                 <div className="flex gap-4">
-                                    <div className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                    <div
+                                        className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                         Company activities
                                     </div>
                                     <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
@@ -322,10 +335,10 @@ const SingleJobDemand = () => {
                         </div>
                         <div className="px-4 py-2 border-l-4 border-red-500 mb-4 ml-28">
                              <textarea
-                                 id="application_requirements"
-                                 name="application_requirements"
-                                 value={data.application_requirements}
-                                 onChange={handleChange}
+                                 id="note"
+                                 name="note"
+                                 value={data.note}
+                                 onChange={(e) => setData('note', e.target.value)}
                                  className="w-full rounded"
                                  rows={4}
                              ></textarea>
@@ -338,7 +351,7 @@ const SingleJobDemand = () => {
                                 <h3 className="relative text-lg font-bold text-white bg-[#5D5E5E] py-2 px-4">
                                     <span
                                         className="absolute right-0 top-0 h-full w-4/12 bg-red-600"
-                                        style={{ clipPath: "polygon(10% 0, 100% 0, 100% 100%, 20% 100%)" }}
+                                        style={{clipPath: "polygon(10% 0, 100% 0, 100% 100%, 20% 100%)"}}
                                     ></span>
                                     COMPANY DETAILS
                                 </h3>
@@ -448,7 +461,7 @@ const SingleJobDemand = () => {
                                 <h3 className="relative text-lg font-bold text-white bg-[#5D5E5E] py-2 px-4">
                                     <span
                                         className="absolute right-0 top-0 h-full w-4/12 bg-red-600"
-                                        style={{ clipPath: "polygon(10% 0, 100% 0, 100% 100%, 20% 100%)" }}
+                                        style={{clipPath: "polygon(10% 0, 100% 0, 100% 100%, 20% 100%)"}}
                                     ></span>
                                     ADRESS
                                 </h3>
@@ -522,9 +535,12 @@ const SingleJobDemand = () => {
                             >
                                 <span className="mr-2">Preview</span>
                                 <span className="flex items-center justify-center w-6 h-6 bg-white rounded-full">
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-blue-600"
+                                         fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                                              d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                                              d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
                                     </svg>
                                 </span>
                             </button>

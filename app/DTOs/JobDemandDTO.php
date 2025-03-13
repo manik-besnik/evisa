@@ -27,7 +27,7 @@ class JobDemandDTO
     public string $vacationBenefits;
     public string $education;
     public string $ageLimits;
-    public string $applicationRequirements;
+    public string $note;
     public string $companyActivities;
     public string $workerQuantity;
     public string $area;
@@ -55,7 +55,7 @@ class JobDemandDTO
             'vacation_benefits' => 'required|string|max:255',
             'education' => 'required|string|max:255',
             'age_limits' => 'required|string|max:255',
-            'application_requirements' => 'required|string|max:255',
+            'note' => 'required|string|max:255',
             'company_activities' => 'required|string|max:255',
             'worker_quantity' => 'required|string|max:255',
             'area' => 'required|string|max:255',
@@ -83,7 +83,7 @@ class JobDemandDTO
         $instance->vacationBenefits = $request->input('vacation_benefits');
         $instance->education = $request->input('education');
         $instance->ageLimits = $request->input('age_limits');
-        $instance->applicationRequirements = $request->input('application_requirements');
+        $instance->note = $request->input('note');
         $instance->companyActivities = $request->input('company_activities');
         $instance->workerQuantity = $request->input('worker_quantity');
         $instance->area = $request->input('area');
