@@ -24,35 +24,35 @@ const SingleJobDemand = () => {
     // Create form with useForm
     const { data, setData, post, processing, errors } = useForm({
         // Job details
-        typeOfWork: 'Security', // Default value
-        jobLocation: '',
-        visaValidity: '',
+        type_of_work: 'Security', // Default value
+        job_location: '',
+        visa_validity: '',
         accommodation: '',
         transport: '',
         food: '',
-        medicalInsurance: '',
-        workingHours: '',
+        medical_insurance: '',
+        working_hours: '',
         salary: '',
-        vacationBenefits: '',
-        ageLimits: '',
-        inDemandWorkers: '',
+        vacation_benefits: '',
+        age_limits: '',
+        worker_quantity: '',
         education: '',
-        companyActivities: '',
+        company_activities: '',
 
         // Company details
-        companyName: '',
-        contactPerson: '',
-        contactNo: '',
-        whatsappNo: '',
+        company_name: '',
+        contact_person: '',
+        phone_no: '',
+        whatsapp_no: '',
         email: '',
 
         // Address
-        currentAddress: '',
+        current_address: '',
         city: '',
         area: '',
 
         // Application requirements
-        applicationRequirements: ''
+        application_requirements: ''
     });
 
     // Handle input changes
@@ -64,6 +64,7 @@ const SingleJobDemand = () => {
     // Handle form submission
     const handleSubmit = (e) => {
         e.preventDefault();
+
         // Handle form submission logic here
         post(route('job-demand.store'), {
             onSuccess: () => {
@@ -111,9 +112,9 @@ const SingleJobDemand = () => {
                         {/* Salary and Code Section */}
                         <div className="p-4 w-4/12">
                             <TextInput
-                                value={data.typeOfWork}
-                                onChange={(e) => setData("typeOfWork", e.target.value)}
-                                error={errors.typeOfWork}
+                                value={data.type_of_work}
+                                onChange={(e) => setData("type_of_work", e.target.value)}
+                                error={errors.type_of_work}
                                 placeholder="Type of Work"
                                 defaultClasses="border-2 border-[#8A9298] focus:outline-none focus:ring-0"
                             />
@@ -125,15 +126,15 @@ const SingleJobDemand = () => {
                             <div className="grid mt-5">
                                 <div className="flex gap-4">
                                     <div className="pr-2 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right  flex items-center justify-end">
-                                           Job Location 
+                                           Job Location
                                     </div>
                                     <div className="w-full border-2 border-[#8A9298] bg-white">
 
                                         <TextInput
-                                            id="jobLocation"
-                                            value={data.jobLocation}
-                                            onChange={(e) => setData("jobLocation", e.target.value)}
-                                            error={errors.jobLocation}
+                                            id="job_location"
+                                            value={data.job_location}
+                                            onChange={(e) => setData("job_location", e.target.value)}
+                                            error={errors.job_location}
                                             placeholder="Type Here"
                                         />
                                     </div>
@@ -144,10 +145,10 @@ const SingleJobDemand = () => {
                                     </div>
                                     <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
                                         <TextInput
-                                            id="visaValidity"
-                                            value={data.visaValidity}
-                                            onChange={(e) => setData("visaValidity", e.target.value)}
-                                            error={errors.visaValidity}
+                                            id="visa_validity"
+                                            value={data.visa_validity}
+                                            onChange={(e) => setData("visa_validity", e.target.value)}
+                                            error={errors.visa_validity}
                                             placeholder="Type Here"
                                         />
                                     </div>
@@ -200,10 +201,10 @@ const SingleJobDemand = () => {
                                     </div>
                                     <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
                                         <TextInput
-                                            id="medicalInsurance"
-                                            value={data.medicalInsurance}
-                                            onChange={(e) => setData("medicalInsurance", e.target.value)}
-                                            error={errors.medicalInsurance}
+                                            id="medical_insurance"
+                                            value={data.medical_insurance}
+                                            onChange={(e) => setData("medical_insurance", e.target.value)}
+                                            error={errors.medical_insurance}
                                             placeholder="Type Here"
                                         />
                                     </div>
@@ -214,10 +215,10 @@ const SingleJobDemand = () => {
                                     </div>
                                     <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
                                         <TextInput
-                                            id="workingHours"
-                                            value={data.workingHours}
-                                            onChange={(e) => setData("workingHours", e.target.value)}
-                                            error={errors.workingHours}
+                                            id="working_hours"
+                                            value={data.working_hours}
+                                            onChange={(e) => setData("working_hours", e.target.value)}
+                                            error={errors.working_hours}
                                             placeholder="Type Here"
                                         />
                                     </div>
@@ -242,10 +243,10 @@ const SingleJobDemand = () => {
                                     </div>
                                     <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
                                         <TextInput
-                                            id="vacationBenefits"
-                                            value={data.vacationBenefits}
-                                            onChange={(e) => setData("vacationBenefits", e.target.value)}
-                                            error={errors.vacationBenefits}
+                                            id="vacation_benefits"
+                                            value={data.vacation_benefits}
+                                            onChange={(e) => setData("vacation_benefits", e.target.value)}
+                                            error={errors.vacation_benefits}
                                             placeholder="Type Here"
                                         />
                                     </div>
@@ -256,10 +257,10 @@ const SingleJobDemand = () => {
                                     </div>
                                     <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
                                         <TextInput
-                                            id="ageLimits"
-                                            value={data.ageLimits}
-                                            onChange={(e) => setData("ageLimits", e.target.value)}
-                                            error={errors.ageLimits}
+                                            id="age_limits"
+                                            value={data.age_limits}
+                                            onChange={(e) => setData("age_limits", e.target.value)}
+                                            error={errors.age_limits}
                                             placeholder="Type Here"
                                         />
                                     </div>
@@ -270,10 +271,10 @@ const SingleJobDemand = () => {
                                     </div>
                                     <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
                                         <TextInput
-                                            id="inDemandWorkers"
-                                            value={data.inDemandWorkers}
-                                            onChange={(e) => setData("inDemandWorkers", e.target.value)}
-                                            error={errors.inDemandWorkers}
+                                            id="worker_quantity"
+                                            value={data.worker_quantity}
+                                            onChange={(e) => setData("worker_quantity", e.target.value)}
+                                            error={errors.worker_quantity}
                                             placeholder="Type Here"
                                         />
                                     </div>
@@ -298,10 +299,10 @@ const SingleJobDemand = () => {
                                     </div>
                                     <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
                                         <TextInput
-                                            id="companyActivities"
-                                            value={data.companyActivities}
-                                            onChange={(e) => setData("companyActivities", e.target.value)}
-                                            error={errors.companyActivities}
+                                            id="company_activities"
+                                            value={data.company_activities}
+                                            onChange={(e) => setData("company_activities", e.target.value)}
+                                            error={errors.company_activities}
                                             placeholder="Type Here"
                                         />
                                     </div>
@@ -320,14 +321,14 @@ const SingleJobDemand = () => {
                             </div>
                         </div>
                         <div className="px-4 py-2 border-l-4 border-red-500 mb-4 ml-28">
-                            <Textarea
-                                id="applicationRequirements"
-                                name="applicationRequirements"
-                                value={data.applicationRequirements}
-                                onChange={handleChange}
-                                className="w-full"
-                                rows={4}
-                            />
+                             <textarea
+                                 id="application_requirements"
+                                 name="application_requirements"
+                                 value={data.application_requirements}
+                                 onChange={handleChange}
+                                 className="w-full rounded"
+                                 rows={4}
+                             ></textarea>
                         </div>
 
                         {/* Company Details */}
@@ -352,12 +353,12 @@ const SingleJobDemand = () => {
                             </div>
                             <div className="flex-1 p-0 relative border-2 border-[#8A9298]">
                                 <div className="absolute top-0 bottom-0 left-0 w-1 bg-red-500"></div>
-                                
+
                                 <TextInput
-                                    id="companyName"
-                                    value={data.companyName}
-                                    onChange={(e) => setData("companyName", e.target.value)}
-                                    error={errors.companyName}
+                                    id="company_name"
+                                    value={data.company_name}
+                                    onChange={(e) => setData("company_name", e.target.value)}
+                                    error={errors.company_name}
                                     placeholder="Type Here"
                                 />
                             </div>
@@ -371,12 +372,12 @@ const SingleJobDemand = () => {
                             </div>
                             <div className="flex-1 p-0 relative border-2 border-[#8A9298]">
                                 <div className="absolute top-0 bottom-0 left-0 w-1 bg-red-500"></div>
-                                
+
                                 <TextInput
-                                    id="contactPerson"
-                                    value={data.contactPerson}
-                                    onChange={(e) => setData("contactPerson", e.target.value)}
-                                    error={errors.contactPerson}
+                                    id="contact_person"
+                                    value={data.contact_person}
+                                    onChange={(e) => setData("contact_person", e.target.value)}
+                                    error={errors.contact_person}
                                     placeholder="Type Here"
                                 />
                             </div>
@@ -390,13 +391,13 @@ const SingleJobDemand = () => {
                             </div>
                             <div className="flex-1 p-0 relative border-2 border-[#8A9298]">
                                 <div className="absolute top-0 bottom-0 left-0 w-1 bg-red-500"></div>
-                                
+
 
                                 <TextInput
-                                    id="contactNo"
-                                    value={data.contactNo}
-                                    onChange={(e) => setData("contactNo", e.target.value)}
-                                    error={errors.contactNo}
+                                    id="phone_no"
+                                    value={data.phone_no}
+                                    onChange={(e) => setData("phone_no", e.target.value)}
+                                    error={errors.phone_no}
                                     placeholder="Type Here"
                                 />
                             </div>
@@ -410,12 +411,12 @@ const SingleJobDemand = () => {
                             </div>
                             <div className="flex-1 p-0 relative border-2 border-[#8A9298]">
                                 <div className="absolute top-0 bottom-0 left-0 w-1 bg-red-500"></div>
-                                
+
                                 <TextInput
-                                    id="whatsappNo"
-                                    value={data.whatsappNo}
-                                    onChange={(e) => setData("whatsappNo", e.target.value)}
-                                    error={errors.whatsappNo}
+                                    id="whatsapp_no"
+                                    value={data.whatsapp_no}
+                                    onChange={(e) => setData("whatsapp_no", e.target.value)}
+                                    error={errors.whatsapp_no}
                                     placeholder="Type Here"
                                 />
 
@@ -430,7 +431,7 @@ const SingleJobDemand = () => {
                             </div>
                             <div className="flex-1 p-0 relative border-2 border-[#8A9298]">
                                 <div className="absolute top-0 bottom-0 left-0 w-1 bg-red-500"></div>
-                                
+
                                 <TextInput
                                     id="email"
                                     value={data.email}
@@ -461,12 +462,12 @@ const SingleJobDemand = () => {
                             </div>
                             <div className="flex-1 p-0 relative border-2 border-[#8A9298]">
                                 <div className="absolute top-0 bottom-0 left-0 w-1 bg-red-500"></div>
-                                
+
                                 <TextInput
-                                    id="currentAddress"
-                                    value={data.currentAddress}
-                                    onChange={(e) => setData("currentAddress", e.target.value)}
-                                    error={errors.currentAddress}
+                                    id="current_address"
+                                    value={data.current_address}
+                                    onChange={(e) => setData("current_address", e.target.value)}
+                                    error={errors.current_address}
                                     placeholder="Type Here"
                                 />
                             </div>
@@ -477,7 +478,7 @@ const SingleJobDemand = () => {
                             <div className="w-48"></div>
                             <div className="flex-1 p-0 relative border-2 border-[#8A9298]">
                                 <div className="absolute top-0 bottom-0 left-0 w-1 bg-red-500"></div>
-                                
+
                                 <TextInput
                                     id="city"
                                     value={data.city}
@@ -494,7 +495,7 @@ const SingleJobDemand = () => {
                             <div className="w-48"></div>
                             <div className="flex-1 p-0 relative border-2 border-[#8A9298]">
                                 <div className="absolute top-0 bottom-0 left-0 w-1 bg-red-500"></div>
-                               
+
                                 <TextInput
                                     id="area"
                                     value={data.area}
