@@ -55,12 +55,6 @@ const SingleJobDemand = () => {
         note: ''
     });
 
-    // Handle input changes
-    const handleChange = (e) => {
-        const {name, value} = e.target;
-        setData(name, value);
-    };
-
     // Handle form submission
     const handleSubmit = (e) => {
         e.preventDefault();
