@@ -6,6 +6,8 @@ use App\Actions\User\JobDemand\CreateAction;
 use App\Actions\User\JobDemand\SingleJobDemandAction;
 use App\Actions\User\JobDemand\MoreJobDemandAction;
 use App\Actions\User\JobDemand\IndexAction;
+use App\Actions\User\JobDemand\StoreAction;
+use App\DTOs\JobDemandDTO;
 use App\Http\Controllers\Controller;
 use App\Models\VisaApply;
 use Illuminate\Http\Request;
@@ -44,29 +46,9 @@ class JobDemandController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, StoreAction $storeAction): \Inertia\Response
     {
-        $validated = $request->validate([
-            'date' => 'required|date',
-            'apply_from' => 'required',
-            'type_of_work' => 'required',
-            'businessPhoto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'visa_validity' => 'required',
-        ]);
-
-        // Handle file upload
-        if ($request->hasFile('businessPhoto')) {
-            $path = $request->file('businessPhoto')->store('business-photos', 'public');
-            $validated['businessPhoto'] = $path;
-        }
-
-        // Add user_id to request
-        $request->merge(['user_id' => auth()->id()]);
-
-        // Create job demand with all data
-        JobDemand::create($request->all());
-
-        return redirect()->back()->with('success', 'Job demand created successfully!');
+        return $storeAction->execute(JobDemandDTO::fromRequest($request));
     }
 
     /**
