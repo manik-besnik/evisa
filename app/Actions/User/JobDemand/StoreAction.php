@@ -18,22 +18,6 @@ class StoreAction
 
             $company = $this->createCompany($jobDemandDTO);
 
-
-//    public string $jobLocation;
-//    public string $typeOfWork;
-//    public string $salary;
-//    public string $workingHours;
-//    public string $visaValidity;
-//    public string $medicalInsurance;
-//    public string $food;
-//    public string $transport;
-//    public string $accommodation;
-//    public string $vacationBenefits;
-//    public string $education;
-//    public string $ageLimits;
-//    public string $companyActivities;
-//    public string $workerQuantity;
-
             $thumbnail = null;
 
             if ($jobDemandDTO->thumbnail){
