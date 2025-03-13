@@ -3,12 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 
 /**
  * @property int $id
  * @property int $user_id
  * @property int $company_id
+ * @property int $location_id
  * @property string $date
  * @property string $job_code
  * @property string $apply_from
@@ -29,7 +31,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $holiday_benefits
  * @property string $note
  */
-
 class JobDemand extends Model
 {
     protected $table = 'job_demands';
@@ -37,6 +38,7 @@ class JobDemand extends Model
     protected $fillable = [
         'user_id',
         'company_id',
+        'location_id',
         'date',
         'job_code',
         'apply_from',
@@ -57,4 +59,19 @@ class JobDemand extends Model
         'holiday_benefits',
         'note',
     ];
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function company(): BelongsTo
+    {
+        return $this->belongsTo(Company::class);
+    }
+
+    public function location(): BelongsTo
+    {
+        return $this->belongsTo(Location::class);
+    }
 }
