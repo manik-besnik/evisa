@@ -5,8 +5,8 @@ namespace App\Actions\User\JobDemand;
 use App\DTOs\JobDemandDTO;
 use App\Models\Company;
 use App\Models\JobDemand;
+use App\Supports\FileUpload;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
 class StoreAction
 {
@@ -18,6 +18,28 @@ class StoreAction
 
             $company = $this->createCompany($jobDemandDTO);
 
+
+//    public string $jobLocation;
+//    public string $typeOfWork;
+//    public string $salary;
+//    public string $workingHours;
+//    public string $visaValidity;
+//    public string $medicalInsurance;
+//    public string $food;
+//    public string $transport;
+//    public string $accommodation;
+//    public string $vacationBenefits;
+//    public string $education;
+//    public string $ageLimits;
+//    public string $companyActivities;
+//    public string $workerQuantity;
+
+            $thumbnail = null;
+
+            if ($jobDemandDTO->thumbnail){
+                $thumbnail = FileUpload::execute($jobDemandDTO->thumbnail);
+            }
+
             $jobDemand = new JobDemand();
             $jobDemand->company_id = $company->id;
             $jobDemand->user_id = auth()->id();
@@ -25,6 +47,17 @@ class StoreAction
             $jobDemand->transport = $jobDemandDTO->transport;
             $jobDemand->note = $jobDemandDTO->note;
             $jobDemand->accommodation = $jobDemandDTO->accommodation;
+            $jobDemand->thumbnail = $thumbnail;
+//            $jobDemand->date = $jobDemandDTO->;
+            $jobDemand->type_of_work = $jobDemandDTO->typeOfWork;
+            $jobDemand->salary = $jobDemandDTO->salary;
+            $jobDemand->worker_quantity = $jobDemandDTO->workerQuantity;
+            $jobDemand->duty_hours = $jobDemandDTO->workingHours;
+            $jobDemand->visa_validity = $jobDemandDTO->visaValidity;
+            $jobDemand->food = $jobDemandDTO->food;
+            $jobDemand->age_limit = $jobDemandDTO->ageLimits;
+            $jobDemand->company_activities = $jobDemandDTO->companyActivities;
+            $jobDemand->education = $jobDemandDTO->education;
             $jobDemand->save();
 
 
