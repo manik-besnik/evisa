@@ -1,6 +1,7 @@
 import WebLayout from "@/Layouts/WebLayout.jsx";
 import TextInput from "@/Components/TextInput.jsx";
 import Select from "@/Components/Web/Select.jsx";
+import InputFile from "@/Components/Web/InputFile.jsx";
 import {
     documentTypes,
     genders,
@@ -15,6 +16,7 @@ import PrimaryBtn from "@/Components/Web/PrimaryBtn.jsx";
 import { FaCameraRetro } from "react-icons/fa";
 import { Textarea } from "flowbite-react";
 import { toast } from "react-toastify";
+import { jobApplyDocuments, languageProficiency } from "@/Components/Constant/index.js";
 
 
 const JobDemand = () => {
@@ -225,6 +227,21 @@ const JobDemand = () => {
         const updatedPosts = [...data.job_post];
         updatedPosts[index] = value.id;
         setData('job_post', updatedPosts);
+    };
+
+    const handleFileChange = (fileType, file) => {
+        const fileName = jobApplyDocuments.find((item) => item.type === fileType)?.name || "Unknown";
+
+        const updatedDocuments = {
+            ...data.documents,
+            [fileType]: {
+                name: fileName,
+                type: fileType,
+                file: file
+            }
+        };
+
+        setData('documents', updatedDocuments);
     };
 
     return (
@@ -984,15 +1001,33 @@ const JobDemand = () => {
                             </div>
                         </div>
 
+                        <h4 className="text-success text-md my-4">Add Any Type of documents</h4>
+
+                        {errors.documents && <span className='text-red-600 text-sm'>{errors.documents}</span>}
+
+                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4  gap-2">
+                            {jobApplyDocuments.map((item, i) => (
+                                <InputFile
+                                    defaultClasses="w-full h-15"
+                                    key={i} fileType={item.type}
+                                    onChange={handleFileChange} placeholder={item.name}
+                                />
+                            ))}
+                        </div>
 
                         {/* Submit Button */}
-                        <div className="flex justify-center mt-6">
+                        <div className="flex justify-center mt-6 gap-3">
                             <PrimaryBtn
                                 text="Submit Application"
                                 type="submit"
-                                classes="w-full md:w-1/3 py-3"
+                                classes="w-full md:w-2/12 py-3"
                                 onClick={handleSubmit}
                                 disabled={processing}
+                            />
+                            <PrimaryBtn
+                                text="Preview"
+                                type="submit"
+                                classes="w-full md:w-2/12 py-3"
                             />
                         </div>
                     </form>
