@@ -1,24 +1,20 @@
 import WebLayout from "@/Layouts/WebLayout.jsx";
 import TextInput from "@/Components/TextInput.jsx";
 import Select from "@/Components/Web/Select.jsx";
-import {
-    documentTypes,
-    genders,
-    groups,
-    maritalStatuses,
-    joDemand,
-    visaTypes
-} from "@/Components/Constant/index.js";
-import { useState } from "react";
-import { Head, useForm, usePage } from "@inertiajs/react";
-import PrimaryBtn from "@/Components/Web/PrimaryBtn.jsx";
-import { FaCameraRetro } from "react-icons/fa";
-import { Textarea } from "flowbite-react";
-import { toast } from "react-toastify";
+import {useState} from "react";
+import {Head, useForm, usePage} from "@inertiajs/react";
+import {FaCameraRetro} from "react-icons/fa";
+import {Textarea} from "flowbite-react";
+import {toast} from "react-toastify";
 
 const MoreJobDemand = () => {
+
+    const {locations} = usePage().props
+    const [location, setLocation] = useState(null)
+
+
     // Create form with useForm
-    const { data, setData, post, processing, errors } = useForm({
+    const {data, setData, post, processing, errors} = useForm({
         // Job details
         typeOfWork: '',
         jobLocation: '',
@@ -29,7 +25,7 @@ const MoreJobDemand = () => {
         demandedQty: '',
         // Category rows data
         categoryRows: [
-            { category: '', qt: '', salaryRange: '', note: '' }
+            {category: '', qt: '', salaryRange: '', note: ''}
         ],
         // Company details
         companyName: '',
@@ -44,29 +40,21 @@ const MoreJobDemand = () => {
         area: '',
 
         // Application requirements
-        applicationRequirements: ''
+        note: ''
     });
 
-    // Handle input changes
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setData(name, value);
-    };
 
-    // Handle changes in the category row fields
     const handleCategoryRowChange = (index, field, value) => {
         const updatedRows = [...data.categoryRows];
         updatedRows[index][field] = value;
         setData('categoryRows', updatedRows);
     };
 
-    // Add a new category row
     const addCategoryRow = () => {
-        const newRow = { category: '', qt: '', salaryRange: '', note: '' };
+        const newRow = {category: '', qt: '', salaryRange: '', note: ''};
         setData('categoryRows', [...data.categoryRows, newRow]);
     };
 
-    // Remove a category row
     const removeCategoryRow = (index) => {
         const updatedRows = [...data.categoryRows];
         updatedRows.splice(index, 1);
@@ -86,7 +74,7 @@ const MoreJobDemand = () => {
 
     return (
         <WebLayout showBgImage={true} showServiceImage={false}>
-            <Head title="Job Demand | Dubai E-Visa" />
+            <Head title="Job Demand | Dubai E-Visa"/>
 
             <div className="container mx-auto px-4 py-8">
                 <form onSubmit={handleSubmit}>
@@ -105,7 +93,7 @@ const MoreJobDemand = () => {
                         {/* Camera Icon Space */}
                         <div className="relative h-32 bg-gray-500">
                             <div className="absolute bottom-4 right-4 text-white">
-                                <FaCameraRetro size={30} className="text-white" />
+                                <FaCameraRetro size={30} className="text-white"/>
                             </div>
                         </div>
 
@@ -124,21 +112,25 @@ const MoreJobDemand = () => {
                         <div className="w-full">
                             <div className="grid mt-5">
                                 <div className="flex gap-4">
-                                    <div className="pr-2 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                    <div
+                                        className="pr-2 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                         Job Location
                                     </div>
                                     <div className="w-full border-2 border-[#8A9298] bg-white">
 
-                                        <TextInput
-                                            value={data.jobLocation}
-                                            onChange={(e) => setData("jobLocation", e.target.value)}
-                                            error={errors.jobLocation}
-                                            placeholder="Type Here"
+                                        <Select
+                                            items={locations}
+                                            selected={location}
+                                            setSelected={setLocation}
+                                            handleValueChange={(value) => setData('location_id', value.id)}
+                                            error={errors.location_id}
+
                                         />
                                     </div>
                                 </div>
                                 <div className="flex gap-4">
-                                    <div className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                    <div
+                                        className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                         Visa validity
                                     </div>
                                     <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
@@ -151,7 +143,8 @@ const MoreJobDemand = () => {
                                     </div>
                                 </div>
                                 <div className="flex gap-4">
-                                    <div className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                    <div
+                                        className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                         Accommodation
                                     </div>
                                     <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
@@ -164,7 +157,8 @@ const MoreJobDemand = () => {
                                     </div>
                                 </div>
                                 <div className="flex gap-4">
-                                    <div className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                    <div
+                                        className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                         Transport
                                     </div>
                                     <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
@@ -177,7 +171,8 @@ const MoreJobDemand = () => {
                                     </div>
                                 </div>
                                 <div className="flex gap-4">
-                                    <div className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                    <div
+                                        className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                         Food
                                     </div>
                                     <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
@@ -190,7 +185,8 @@ const MoreJobDemand = () => {
                                     </div>
                                 </div>
                                 <div className="flex gap-4">
-                                    <div className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                    <div
+                                        className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                         Demanded Qty.
                                     </div>
                                     <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
@@ -202,90 +198,88 @@ const MoreJobDemand = () => {
                                         />
                                     </div>
                                 </div>
-                                
+
                             </div>
 
                             {/* Category, Qty, Salary Range, Note table section */}
                             <table className="w-full mt-4">
                                 <thead>
-                                    <tr>
-                                        <th className="px-2 border-2 border-[#8A9298] font-semibold bg-red-600 text-white text-center">
-                                            CATEGORY
-                                        </th>
-                                        <th className="px-2 border-2 border-[#8A9298] font-semibold bg-red-600 text-white text-center w-[150px]">
-                                            QT
-                                        </th>
-                                        <th className="px-2 border-2 border-[#8A9298] font-semibold bg-red-600 text-white text-center">
-                                            SALARY RANGE
-                                        </th>
-                                        <th className="px-2 border-2 border-[#8A9298] font-semibold bg-red-600 text-white text-center">
-                                            NOTE
-                                        </th>
-                                        <th className="px-2 border-2 border-[#8A9298] font-semibold bg-red-600 text-white text-center w-[80px]">
-                                            ACTION
-                                        </th>
-                                    </tr>
+                                <tr>
+                                    <th className="px-2 border-2 border-[#8A9298] font-semibold bg-red-600 text-white text-center">
+                                        CATEGORY
+                                    </th>
+                                    <th className="px-2 border-2 border-[#8A9298] font-semibold bg-red-600 text-white text-center w-[150px]">
+                                        QT
+                                    </th>
+                                    <th className="px-2 border-2 border-[#8A9298] font-semibold bg-red-600 text-white text-center">
+                                        SALARY RANGE
+                                    </th>
+                                    <th className="px-2 border-2 border-[#8A9298] font-semibold bg-red-600 text-white text-center">
+                                        NOTE
+                                    </th>
+                                    <th className="px-2 border-2 border-[#8A9298] font-semibold bg-red-600 text-white text-center w-[80px]">
+                                        ACTION
+                                    </th>
+                                </tr>
                                 </thead>
                                 <tbody>
-                                    {data.categoryRows.map((row, index) => (
-                                        <tr key={index}>
-                                            <td className="px-2 border-2 border-[#8A9298] bg-[#EFD79D]">
-                                                <TextInput
-                                                    value={row.category}
-                                                    onChange={(e) => handleCategoryRowChange(index, 'category', e.target.value)}
-                                                    placeholder="Category"
-                                                />
-                                            </td>
-                                            <td className="px-2 border-2 border-[#8A9298] bg-[#EFD79D]">
-                                                <TextInput
-                                                    value={row.qt}
-                                                    onChange={(e) => handleCategoryRowChange(index, 'qt', e.target.value)}
-                                                    placeholder="Qt"
-                                                />
-                                            </td>
-                                            <td className="px-2 border-2 border-[#8A9298] bg-[#EFD79D]">
-                                                <TextInput
-                                                    value={row.salaryRange}
-                                                    onChange={(e) => handleCategoryRowChange(index, 'salaryRange', e.target.value)}
-                                                    placeholder="Salary Range"
-                                                />
-                                            </td>
-                                            <td className="px-2 border-2 border-[#8A9298] bg-[#EFD79D]">
-                                                <TextInput
-                                                    value={row.note}
-                                                    onChange={(e) => handleCategoryRowChange(index, 'note', e.target.value)}
-                                                    placeholder="Note"
-                                                />
-                                            </td>
-                                            <td className="px-2 border-2 border-[#8A9298] bg-[#EFD79D] text-center">
-                                                <div className="flex justify-center space-x-2">
-                                                    {index === data.categoryRows.length - 1 && (
-                                                        <button
-                                                            type="button"
-                                                            onClick={addCategoryRow}
-                                                            className="bg-green-500 text-white w-6 h-6 rounded-full flex items-center justify-center"
-                                                        >
-                                                            +
-                                                        </button>
-                                                    )}
-                                                    {data.categoryRows.length > 1 && (
-                                                        <button
-                                                            type="button"
-                                                            onClick={() => removeCategoryRow(index)}
-                                                            className="bg-red-500 text-white w-6 h-6 rounded-full flex items-center justify-center"
-                                                        >
-                                                            -
-                                                        </button>
-                                                    )}
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    ))}
+                                {data.categoryRows.map((row, index) => (
+                                    <tr key={index}>
+                                        <td className="px-2 border-2 border-[#8A9298] bg-[#EFD79D]">
+                                            <TextInput
+                                                value={row.category}
+                                                onChange={(e) => handleCategoryRowChange(index, 'category', e.target.value)}
+                                                placeholder="Category"
+                                            />
+                                        </td>
+                                        <td className="px-2 border-2 border-[#8A9298] bg-[#EFD79D]">
+                                            <TextInput
+                                                value={row.qt}
+                                                onChange={(e) => handleCategoryRowChange(index, 'qt', e.target.value)}
+                                                placeholder="Qt"
+                                            />
+                                        </td>
+                                        <td className="px-2 border-2 border-[#8A9298] bg-[#EFD79D]">
+                                            <TextInput
+                                                value={row.salaryRange}
+                                                onChange={(e) => handleCategoryRowChange(index, 'salaryRange', e.target.value)}
+                                                placeholder="Salary Range"
+                                            />
+                                        </td>
+                                        <td className="px-2 border-2 border-[#8A9298] bg-[#EFD79D]">
+                                            <TextInput
+                                                value={row.note}
+                                                onChange={(e) => handleCategoryRowChange(index, 'note', e.target.value)}
+                                                placeholder="Note"
+                                            />
+                                        </td>
+                                        <td className="px-2 border-2 border-[#8A9298] bg-[#EFD79D] text-center">
+                                            <div className="flex justify-center space-x-2">
+                                                {index === data.categoryRows.length - 1 && (
+                                                    <button
+                                                        type="button"
+                                                        onClick={addCategoryRow}
+                                                        className="bg-green-500 text-white w-6 h-6 rounded-full flex items-center justify-center"
+                                                    >
+                                                        +
+                                                    </button>
+                                                )}
+                                                {data.categoryRows.length > 1 && (
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => removeCategoryRow(index)}
+                                                        className="bg-red-500 text-white w-6 h-6 rounded-full flex items-center justify-center"
+                                                    >
+                                                        -
+                                                    </button>
+                                                )}
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))}
                                 </tbody>
                             </table>
 
-
-                            {/* Application Requirements */}
                             {/* Application Requirements */}
                             <div className="flex mt-8 mb-4">
                                 <div className="bg-gray-600 text-white px-8 flex items-center">
@@ -296,14 +290,16 @@ const MoreJobDemand = () => {
                                 </div>
                             </div>
                             <div className="px-4 py-2 border-l-4 border-red-500 mb-4 ml-28">
-                                <Textarea
-                                    id="applicationRequirements"
-                                    name="applicationRequirements"
-                                    value={data.applicationRequirements}
-                                    onChange={handleChange}
-                                    className="w-full"
+
+                                <textarea
+                                    id="note"
+                                    name="note"
+                                    value={data.note}
+                                    onChange={(e) => setData('note', e.target.value)}
+                                    className="w-full rounded"
+
                                     rows={4}
-                                />
+                                ></textarea>
                             </div>
 
                             {/* Company Details */}
@@ -313,7 +309,7 @@ const MoreJobDemand = () => {
                                     <h3 className="relative text-lg font-bold text-white bg-[#5D5E5E] py-2 px-4">
                                         <span
                                             className="absolute right-0 top-0 h-full w-4/12 bg-red-600"
-                                            style={{ clipPath: "polygon(10% 0, 100% 0, 100% 100%, 20% 100%)" }}
+                                            style={{clipPath: "polygon(10% 0, 100% 0, 100% 100%, 20% 100%)"}}
                                         ></span>
                                         COMPANY DETAILS
                                     </h3>
@@ -423,7 +419,7 @@ const MoreJobDemand = () => {
                                     <h3 className="relative text-lg font-bold text-white bg-[#5D5E5E] py-2 px-4">
                                         <span
                                             className="absolute right-0 top-0 h-full w-4/12 bg-red-600"
-                                            style={{ clipPath: "polygon(10% 0, 100% 0, 100% 100%, 20% 100%)" }}
+                                            style={{clipPath: "polygon(10% 0, 100% 0, 100% 100%, 20% 100%)"}}
                                         ></span>
                                         ADRESS
                                     </h3>
@@ -498,9 +494,12 @@ const MoreJobDemand = () => {
                             >
                                 <span className="mr-2">Preview</span>
                                 <span className="flex items-center justify-center w-6 h-6 bg-white rounded-full">
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-blue-600"
+                                         fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                                              d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                                              d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
                                     </svg>
                                 </span>
                             </button>
