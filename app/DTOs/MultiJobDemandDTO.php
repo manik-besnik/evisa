@@ -61,9 +61,12 @@ class MultiJobDemandDTO
             'demand_items.*.salary' => 'required|numeric',
             'demand_items.*.worker_quantity' => 'required|integer|min:1',
             'demand_items.*.note' => 'required|string|max:255',
-        ],[
+        ], [
             'location_id.required' => 'Job Location is required.',
             'location_id.exists' => 'Job Location does not exist.',
+            'demand_items.*.type_of_work.required' => 'Job Demand Category is required.',
+            'demand_items.*.salary.required' => 'Salary Range is required.',
+            'demand_items.*.worker_quantity.required' => 'Worker Quantity is required.',
         ]);
 
         $instance = new self;
