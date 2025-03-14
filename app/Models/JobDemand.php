@@ -3,13 +3,51 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+
+/**
+ * @property int $id
+ * @property int $user_id
+ * @property int $company_id
+ * @property int $location_id
+ * @property string|null $job_location
+ * @property string $date
+ * @property string $job_code
+ * @property string $apply_from
+ * @property string $type_of_work
+ * @property string $visa_validity
+ * @property string $salary
+ * @property string $worker_quantity
+ * @property string $duty_hours
+ * @property string $over_time
+ * @property string $weekly_work
+ * @property string $age_limit
+ * @property string $qualifications
+ * @property string $company_activities
+ * @property string $food
+ * @property string $accommodation
+ * @property string $transport
+ * @property string $yearly_ticket
+ * @property string $holiday_benefits
+ * @property string $education
+ * @property string|null $thumbnail
+ * @property string|null $note
+ * @property string|null $requirements
+ * @property boolean|int $is_new
+ * @property boolean|int $is_approved
+ * @property boolean|int $is_on_demand
+ */
 class JobDemand extends Model
 {
     protected $table = 'job_demands';
 
+
+
     protected $fillable = [
         'user_id',
+        'company_id',
+        'location_id',
         'date',
         'job_code',
         'apply_from',
@@ -28,14 +66,33 @@ class JobDemand extends Model
         'transport',
         'yearly_ticket',
         'holiday_benefits',
+        'education',
+        'thumbnail',
         'note',
-        'company_name',
-        'contact_person',
-        'contact_no',
-        'whatsapp_no',
-        'email',
-        'current_address',
-        'city',
-        'area'
+        'requirements',
+        'is_approved',
+        'is_new',
+        'is_on_demand',
     ];
+
+    protected $casts = [
+        'is_approved' => 'boolean',
+        'is_new' => 'boolean',
+        'is_on_demand' => 'boolean',
+    ];
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function company(): BelongsTo
+    {
+        return $this->belongsTo(Company::class);
+    }
+
+    public function location(): BelongsTo
+    {
+        return $this->belongsTo(Location::class);
+    }
 }

@@ -8,8 +8,9 @@
     "require": {
         "php": "^8.2",
         "aymanrb/php-unstructured-text-parser": "^2.5",
+        "barryvdh/laravel-dompdf": "^3.1",
         "inertiajs/inertia-laravel": "^2.0",
-        "laravel/framework": "^11.31",
+        "laravel/framework": "^v12.1.0",
         "laravel/sanctum": "^4.0",
         "laravel/socialite": "^5.17",
         "laravel/tinker": "^2.9",

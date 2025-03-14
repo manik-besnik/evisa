@@ -26,6 +26,14 @@ const VisaApply = () => {
 
     const {countries, personal_info, passport, guarantor} = usePage().props
 
+    const params = new URLSearchParams(window.location.search);
+    const urlVisaType = params.get('visaType');
+
+    
+    const selectedVisaTypeObj = urlVisaType ?
+        visaTypes.find(type => type.id.toString() === urlVisaType) || '' :
+        '';
+
     let prevCurrentNationality = "";
     if (personal_info?.current_nationality) {
         prevCurrentNationality = countries.find(item => item.id === personal_info.current_nationality)
@@ -65,7 +73,7 @@ const VisaApply = () => {
 
 
     const [processingType, setProcessingType] = useState('')
-    const [visaType, setVisaType] = useState('')
+    const [visaType, setVisaType] = useState(selectedVisaTypeObj);
     const [group, setGroup] = useState('')
     const [currentNationality, setCurrentNationality] = useState(prevCurrentNationality)
     const [prevNationality, setPrevNationality] = useState(prevPrevNationality)
@@ -83,7 +91,7 @@ const VisaApply = () => {
     const {data, setData, post, errors, processing} = useForm({
         personal_name: '',
         processing_type: null,
-        visa_type: null,
+        visa_type: urlVisaType || null,
         group: null,
         name: personal_info?.name ? personal_info.name : '',
         name_arabic: personal_info?.name_arabic ? personal_info.name_arabic : '',
