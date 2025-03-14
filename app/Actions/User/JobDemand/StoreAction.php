@@ -4,8 +4,6 @@ namespace App\Actions\User\JobDemand;
 
 use App\DTOs\JobDemandDTO;
 use App\Models\Company;
-use App\Models\JobDemand;
-use App\Supports\FileUpload;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 
@@ -17,35 +15,8 @@ class StoreAction
 
         try {
 
-            $company = $this->createCompany($jobDemandDTO);
-
-            $thumbnail = null;
-
-            if ($jobDemandDTO->thumbnail) {
-                $thumbnail = FileUpload::execute($jobDemandDTO->thumbnail);
-            }
-
-            $jobDemand = new JobDemand();
-            $jobDemand->company_id = $company->id;
-            $jobDemand->user_id = auth()->id();
-            $jobDemand->job_code = uniqid() . now()->timestamp;
-            $jobDemand->location_id = $jobDemandDTO->locationId;
-            $jobDemand->transport = $jobDemandDTO->transport;
-            $jobDemand->note = $jobDemandDTO->note;
-            $jobDemand->accommodation = $jobDemandDTO->accommodation;
-            $jobDemand->thumbnail = $thumbnail;
-//            $jobDemand->date = $jobDemandDTO->visaValidity;
-            $jobDemand->type_of_work = $jobDemandDTO->typeOfWork;
-            $jobDemand->salary = $jobDemandDTO->salary;
-            $jobDemand->worker_quantity = $jobDemandDTO->workerQuantity;
-            $jobDemand->duty_hours = $jobDemandDTO->workingHours;
-            $jobDemand->visa_validity = $jobDemandDTO->visaValidity;
-            $jobDemand->food = $jobDemandDTO->food;
-            $jobDemand->age_limit = $jobDemandDTO->ageLimits;
-            $jobDemand->company_activities = $jobDemandDTO->companyActivities;
-            $jobDemand->education = $jobDemandDTO->education;
-            $jobDemand->save();
-
+            $company = \App\Supports\JobDemand::storeCompany($jobDemandDTO);
+            \App\Supports\JobDemand::storeJobDemand($jobDemandDTO, $company->id);
 
             DB::commit();
             return redirect()->back();
