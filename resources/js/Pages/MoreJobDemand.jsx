@@ -16,7 +16,6 @@ const MoreJobDemand = () => {
     // Create form with useForm
     const {data, setData, post, processing, errors} = useForm({
         // Job details
-        typeOfWork: '',
         jobLocation: '',
         location_id: '',
         visaValidity: '',
@@ -25,8 +24,8 @@ const MoreJobDemand = () => {
         food: '',
         demandedQty: '',
         // Category rows data
-        categoryRows: [
-            {category: '', qt: '', salaryRange: '', note: ''}
+        demand_items: [
+            {type_of_work: '', worker_quantity: '', salary: '', note: ''}
         ],
         // Company details
         companyName: '',
@@ -46,20 +45,20 @@ const MoreJobDemand = () => {
 
 
     const handleCategoryRowChange = (index, field, value) => {
-        const updatedRows = [...data.categoryRows];
+        const updatedRows = [...data.demand_items];
         updatedRows[index][field] = value;
-        setData('categoryRows', updatedRows);
+        setData('demand_items', updatedRows);
     };
 
     const addCategoryRow = () => {
         const newRow = {category: '', qt: '', salaryRange: '', note: ''};
-        setData('categoryRows', [...data.categoryRows, newRow]);
+        setData('demand_items', [...data.demand_items, newRow]);
     };
 
     const removeCategoryRow = (index) => {
-        const updatedRows = [...data.categoryRows];
+        const updatedRows = [...data.demand_items];
         updatedRows.splice(index, 1);
-        setData('categoryRows', updatedRows);
+        setData('demand_items', updatedRows);
     };
 
     // Handle form submission
@@ -214,26 +213,26 @@ const MoreJobDemand = () => {
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {data.categoryRows.map((row, index) => (
+                                {data.demand_items.map((row, index) => (
                                     <tr key={index}>
                                         <td className="px-2 border-2 border-[#8A9298] bg-[#EFD79D]">
                                             <TextInput
                                                 value={row.category}
-                                                onChange={(e) => handleCategoryRowChange(index, 'category', e.target.value)}
+                                                onChange={(e) => handleCategoryRowChange(index, 'type_of_work', e.target.value)}
                                                 placeholder="Category"
                                             />
                                         </td>
                                         <td className="px-2 border-2 border-[#8A9298] bg-[#EFD79D]">
                                             <TextInput
                                                 value={row.qt}
-                                                onChange={(e) => handleCategoryRowChange(index, 'qt', e.target.value)}
+                                                onChange={(e) => handleCategoryRowChange(index, 'worker_quantity', e.target.value)}
                                                 placeholder="Qt"
                                             />
                                         </td>
                                         <td className="px-2 border-2 border-[#8A9298] bg-[#EFD79D]">
                                             <TextInput
                                                 value={row.salaryRange}
-                                                onChange={(e) => handleCategoryRowChange(index, 'salaryRange', e.target.value)}
+                                                onChange={(e) => handleCategoryRowChange(index, 'salary', e.target.value)}
                                                 placeholder="Salary Range"
                                             />
                                         </td>
@@ -246,7 +245,7 @@ const MoreJobDemand = () => {
                                         </td>
                                         <td className="px-2 border-2 border-[#8A9298] bg-[#EFD79D] text-center">
                                             <div className="flex justify-center space-x-2">
-                                                {index === data.categoryRows.length - 1 && (
+                                                {index === data.demand_items.length - 1 && (
                                                     <button
                                                         type="button"
                                                         onClick={addCategoryRow}
@@ -255,7 +254,7 @@ const MoreJobDemand = () => {
                                                         +
                                                     </button>
                                                 )}
-                                                {data.categoryRows.length > 1 && (
+                                                {data.demand_items.length > 1 && (
                                                     <button
                                                         type="button"
                                                         onClick={() => removeCategoryRow(index)}
