@@ -18,8 +18,6 @@ class MultiJobDemandDTO
     public string $area;
     public string|null $jobLocation;
     public string|int $locationId;
-    public string $typeOfWork;
-    public string $salary;
     public string $workingHours;
     public string $visaValidity;
     public string $medicalInsurance;
@@ -31,7 +29,8 @@ class MultiJobDemandDTO
     public string $ageLimits;
     public string $note;
     public string $companyActivities;
-    public string $workerQuantity;
+
+    public array $demandItems = [];
 
     public static function fromRequest(Request $request): MultiJobDemandDTO
     {
@@ -46,8 +45,6 @@ class MultiJobDemandDTO
             'current_address' => 'required|string|max:255',
             'city' => 'required|string|max:255',
             'area' => 'required|string|max:255',
-            'type_of_work' => 'required|string|max:255',
-            'salary' => 'required|numeric|max:255',
             'working_hours' => 'required|string|max:255',
             'visa_validity' => 'required|string|max:255',
             'medical_insurance' => 'required|string|max:255',
@@ -59,7 +56,11 @@ class MultiJobDemandDTO
             'age_limits' => 'required|string|max:255',
             'note' => 'required|string|max:255',
             'company_activities' => 'required|string|max:255',
-            'worker_quantity' => 'required|integer|min:1',
+            'demand_items' => 'required|array',
+            'demand_items.*.type_of_work' => 'required|string|max:255',
+            'demand_items.*.salary' => 'required|numeric',
+            'demand_items.*.worker_quantity' => 'required|integer|min:1',
+            'demand_items.*.note' => 'required|string|max:255',
         ],[
             'location_id.required' => 'Job Location is required.',
             'location_id.exists' => 'Job Location does not exist.',
@@ -77,8 +78,6 @@ class MultiJobDemandDTO
         $instance->city = $request->input('city');
         $instance->jobLocation = $request->input('job_location');
         $instance->locationId = $request->input('location_id');
-        $instance->typeOfWork = $request->input('type_of_work');
-        $instance->salary = $request->input('salary');
         $instance->workingHours = $request->input('working_hours');
         $instance->visaValidity = $request->input('visa_validity');
         $instance->medicalInsurance = $request->input('medical_insurance');
@@ -90,8 +89,8 @@ class MultiJobDemandDTO
         $instance->ageLimits = $request->input('age_limits');
         $instance->note = $request->input('note');
         $instance->companyActivities = $request->input('company_activities');
-        $instance->workerQuantity = $request->input('worker_quantity');
         $instance->area = $request->input('area');
+        $instance->demandItems = $request->input('demand_items');
 
         return $instance;
     }

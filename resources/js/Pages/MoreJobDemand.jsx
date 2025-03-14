@@ -18,6 +18,7 @@ const MoreJobDemand = () => {
         // Job details
         typeOfWork: '',
         jobLocation: '',
+        location_id: '',
         visaValidity: '',
         accommodation: '',
         transport: '',
@@ -97,16 +98,6 @@ const MoreJobDemand = () => {
                             </div>
                         </div>
 
-                        {/* Type of Work Section */}
-                        <div className="border-b p-4 w-4/12">
-                            <TextInput
-                                value={data.typeOfWork}
-                                onChange={(e) => setData("typeOfWork", e.target.value)}
-                                error={errors.typeOfWork}
-                                placeholder="Type of Work"
-                                defaultClasses="border-2 border-[#8A9298] focus:outline-none focus:ring-0"
-                            />
-                        </div>
 
                         {/* Job Details Table with TextInput */}
                         <div className="w-full">
