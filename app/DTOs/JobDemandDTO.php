@@ -17,7 +17,7 @@ class JobDemandDTO
     public string $city;
     public string $area;
     public string|null $jobLocation;
-    public string|int $locationId;
+    public string|int|null $locationId;
     public string $typeOfWork;
     public string $salary;
     public string $workingHours;
@@ -36,7 +36,9 @@ class JobDemandDTO
     public static function fromRequest(Request $request): JobDemandDTO
     {
         $request->validate([
-            'location_id' => 'required|exists:locations,id',
+            'region' => 'required|integer',
+            'location_id' => 'nullable|exists:locations,id',
+            'job_location' => 'required_if:region,2|string|max:255',
             'thumbnail' => 'nullable|file|mimes:jpg,jpeg,png|max:2048',
             'company_name' => 'required|string|max:255',
             'contact_person' => 'required|string|max:255',

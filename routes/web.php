@@ -55,6 +55,7 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::get('single-job-demand', [JobDemandController::class, 'singleJobDemand'])->name('single-job-demand.create');
     Route::get('more-job-demand', [JobDemandController::class, 'moreJobDemand'])->name('more-job-demand.create');
     Route::post('/job-demand', [JobDemandController::class, 'store'])->name('job-demand.store');
+    Route::post('/job-demand/store-multiple', [JobDemandController::class, 'storeMultiple'])->name('job-demand.store.multiple');
 
     Route::post('visa-apply/store', [VisaApplyController::class, 'store'])->name('visa-apply.store');
 

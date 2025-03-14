@@ -68,7 +68,7 @@ const MoreJobDemand = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         // Handle form submission logic here
-        post(route('job-demand.store'), {
+        post(route('job-demand.store.multiple'), {
             onSuccess: () => {
                 toast.success('Job demand submitted successfully');
             }
@@ -431,10 +431,10 @@ const MoreJobDemand = () => {
                                     <div className="absolute top-0 bottom-0 left-0 w-1 bg-red-500"></div>
 
                                     <TextInput
-                                        id="companyName"
-                                        value={data.companyName}
-                                        onChange={(e) => setData("companyName", e.target.value)}
-                                        error={errors.companyName}
+                                        id="company_name"
+                                        value={data.company_name}
+                                        onChange={(e) => setData("company_name", e.target.value)}
+                                        error={errors.company_name}
                                         placeholder="Type Here"
                                     />
                                 </div>
@@ -450,10 +450,10 @@ const MoreJobDemand = () => {
                                     <div className="absolute top-0 bottom-0 left-0 w-1 bg-red-500"></div>
 
                                     <TextInput
-                                        id="contactPerson"
-                                        value={data.contactPerson}
-                                        onChange={(e) => setData("contactPerson", e.target.value)}
-                                        error={errors.contactPerson}
+                                        id="contact_person"
+                                        value={data.contact_person}
+                                        onChange={(e) => setData("contact_person", e.target.value)}
+                                        error={errors.contact_person}
                                         placeholder="Type Here"
                                     />
                                 </div>
@@ -470,10 +470,10 @@ const MoreJobDemand = () => {
 
 
                                     <TextInput
-                                        id="contactNo"
-                                        value={data.contactNo}
-                                        onChange={(e) => setData("contactNo", e.target.value)}
-                                        error={errors.contactNo}
+                                        id="phone_no"
+                                        value={data.phone_no}
+                                        onChange={(e) => setData("phone_no", e.target.value)}
+                                        error={errors.phone_no}
                                         placeholder="Type Here"
                                     />
                                 </div>
@@ -489,10 +489,10 @@ const MoreJobDemand = () => {
                                     <div className="absolute top-0 bottom-0 left-0 w-1 bg-red-500"></div>
 
                                     <TextInput
-                                        id="whatsappNo"
-                                        value={data.whatsappNo}
-                                        onChange={(e) => setData("whatsappNo", e.target.value)}
-                                        error={errors.whatsappNo}
+                                        id="whatsapp_no"
+                                        value={data.whatsapp_no}
+                                        onChange={(e) => setData("whatsapp_no", e.target.value)}
+                                        error={errors.whatsapp_no}
                                         placeholder="Type Here"
                                     />
 
@@ -526,7 +526,7 @@ const MoreJobDemand = () => {
                                             className="absolute right-0 top-0 h-full w-4/12 bg-red-600"
                                             style={{clipPath: "polygon(10% 0, 100% 0, 100% 100%, 20% 100%)"}}
                                         ></span>
-                                        ADRESS
+                                        ADDRESS
                                     </h3>
                                 </div>
                             </div>
@@ -534,16 +534,16 @@ const MoreJobDemand = () => {
                             {/* Current Address */}
                             <div className="flex gap-4">
                                 <div className="bg-gray-600 text-white p-2 w-48 flex items-center">
-                                    <span className="font-bold">CURRENT ADRESS</span>
+                                    <span className="font-bold">CURRENT ADDRESS</span>
                                 </div>
                                 <div className="flex-1 p-0 relative border-2 border-[#8A9298]">
                                     <div className="absolute top-0 bottom-0 left-0 w-1 bg-red-500"></div>
 
                                     <TextInput
-                                        id="currentAddress"
-                                        value={data.currentAddress}
-                                        onChange={(e) => setData("currentAddress", e.target.value)}
-                                        error={errors.currentAddress}
+                                        id="current_address"
+                                        value={data.current_address}
+                                        onChange={(e) => setData("current_address", e.target.value)}
+                                        error={errors.current_address}
                                         placeholder="Type Here"
                                     />
                                 </div>

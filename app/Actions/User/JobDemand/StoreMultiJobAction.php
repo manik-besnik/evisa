@@ -39,6 +39,7 @@ class StoreMultiJobAction
                     'worker_quantity' => $demandItem['worker_quantity'],
                     'note' => $demandItem['note'],
                     'accommodation' => $jobDemandDTO->accommodation,
+                    'job_location' => $jobDemandDTO->jobLocation,
                     'duty_hours' => $jobDemandDTO->workingHours,
                     'visa_validity' => $jobDemandDTO->visaValidity,
                     'food' => $jobDemandDTO->food,
