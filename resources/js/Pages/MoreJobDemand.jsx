@@ -332,21 +332,21 @@ const MoreJobDemand = () => {
                                     <tr key={index}>
                                         <td className="px-2 border-2 border-[#8A9298] bg-[#EFD79D]">
                                             <TextInput
-                                                value={row.category}
+                                                value={row.type_of_work}
                                                 onChange={(e) => handleCategoryRowChange(index, 'type_of_work', e.target.value)}
                                                 placeholder="Category"
                                             />
                                         </td>
                                         <td className="px-2 border-2 border-[#8A9298] bg-[#EFD79D]">
                                             <TextInput
-                                                value={row.qt}
+                                                value={row.worker_quantity}
                                                 onChange={(e) => handleCategoryRowChange(index, 'worker_quantity', e.target.value)}
                                                 placeholder="Qt"
                                             />
                                         </td>
                                         <td className="px-2 border-2 border-[#8A9298] bg-[#EFD79D]">
                                             <TextInput
-                                                value={row.salaryRange}
+                                                value={row.salary}
                                                 onChange={(e) => handleCategoryRowChange(index, 'salary', e.target.value)}
                                                 placeholder="Salary Range"
                                             />
