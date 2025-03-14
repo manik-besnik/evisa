@@ -15,32 +15,40 @@ const MoreJobDemand = () => {
 
     // Create form with useForm
     const {data, setData, post, processing, errors} = useForm({
-        // Job details
-        jobLocation: '',
+        job_location: '',
         location_id: '',
-        visaValidity: '',
+        visa_validity: '',
         accommodation: '',
         transport: '',
         food: '',
-        demandedQty: '',
-        // Category rows data
-        demand_items: [
-            {type_of_work: '', worker_quantity: '', salary: '', note: ''}
-        ],
+        medical_insurance: '',
+        working_hours: '',
+        salary: '',
+        vacation_benefits: '',
+        age_limits: '',
+        worker_quantity: '',
+        education: '',
+        company_activities: '',
+
         // Company details
-        companyName: '',
-        contactPerson: '',
-        contactNo: '',
-        whatsappNo: '',
+        company_name: '',
+        contact_person: '',
+        phone_no: '',
+        whatsapp_no: '',
         email: '',
 
         // Address
-        currentAddress: '',
+        current_address: '',
         city: '',
         area: '',
 
         // Application requirements
-        note: ''
+        note: '',
+        demand_items: [
+            {type_of_work: '', worker_quantity: '', salary: '', note: ''}
+        ],
+        // Company details
+
     });
 
 
@@ -103,7 +111,7 @@ const MoreJobDemand = () => {
                             <div className="grid mt-5">
                                 <div className="flex gap-4">
                                     <div
-                                        className="pr-2 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                        className="pr-2 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right  flex items-center justify-end">
                                         Job Location
                                     </div>
                                     <div className="w-full border-2 border-[#8A9298] bg-white">
@@ -125,9 +133,10 @@ const MoreJobDemand = () => {
                                     </div>
                                     <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
                                         <TextInput
-                                            value={data.visaValidity}
-                                            onChange={(e) => setData("visaValidity", e.target.value)}
-                                            error={errors.visaValidity}
+                                            id="visa_validity"
+                                            value={data.visa_validity}
+                                            onChange={(e) => setData("visa_validity", e.target.value)}
+                                            error={errors.visa_validity}
                                             placeholder="Type Here"
                                         />
                                     </div>
@@ -139,6 +148,7 @@ const MoreJobDemand = () => {
                                     </div>
                                     <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
                                         <TextInput
+                                            id="accommodation"
                                             value={data.accommodation}
                                             onChange={(e) => setData("accommodation", e.target.value)}
                                             error={errors.accommodation}
@@ -153,6 +163,7 @@ const MoreJobDemand = () => {
                                     </div>
                                     <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
                                         <TextInput
+                                            id="transport"
                                             value={data.transport}
                                             onChange={(e) => setData("transport", e.target.value)}
                                             error={errors.transport}
@@ -167,6 +178,7 @@ const MoreJobDemand = () => {
                                     </div>
                                     <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
                                         <TextInput
+                                            id="food"
                                             value={data.food}
                                             onChange={(e) => setData("food", e.target.value)}
                                             error={errors.food}
@@ -177,18 +189,95 @@ const MoreJobDemand = () => {
                                 <div className="flex gap-4">
                                     <div
                                         className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
-                                        Demanded Qty.
+                                        Medical Insurance
                                     </div>
                                     <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
                                         <TextInput
-                                            value={data.demandedQty}
-                                            onChange={(e) => setData("demandedQty", e.target.value)}
-                                            error={errors.demandedQty}
+                                            id="medical_insurance"
+                                            value={data.medical_insurance}
+                                            onChange={(e) => setData("medical_insurance", e.target.value)}
+                                            error={errors.medical_insurance}
+                                            placeholder="Type Here"
+                                        />
+                                    </div>
+                                </div>
+                                <div className="flex gap-4">
+                                    <div
+                                        className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                        Daily working hours
+                                    </div>
+                                    <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
+                                        <TextInput
+                                            id="working_hours"
+                                            value={data.working_hours}
+                                            onChange={(e) => setData("working_hours", e.target.value)}
+                                            error={errors.working_hours}
                                             placeholder="Type Here"
                                         />
                                     </div>
                                 </div>
 
+                                <div className="flex gap-4">
+                                    <div
+                                        className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                        Vacation benefits
+                                    </div>
+                                    <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
+                                        <TextInput
+                                            id="vacation_benefits"
+                                            value={data.vacation_benefits}
+                                            onChange={(e) => setData("vacation_benefits", e.target.value)}
+                                            error={errors.vacation_benefits}
+                                            placeholder="Type Here"
+                                        />
+                                    </div>
+                                </div>
+                                <div className="flex gap-4">
+                                    <div
+                                        className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                        Age limits
+                                    </div>
+                                    <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
+                                        <TextInput
+                                            id="age_limits"
+                                            value={data.age_limits}
+                                            onChange={(e) => setData("age_limits", e.target.value)}
+                                            error={errors.age_limits}
+                                            placeholder="Type Here"
+                                        />
+                                    </div>
+                                </div>
+                               
+                                <div className="flex gap-4">
+                                    <div
+                                        className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                        Education
+                                    </div>
+                                    <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
+                                        <TextInput
+                                            id="education"
+                                            value={data.education}
+                                            onChange={(e) => setData("education", e.target.value)}
+                                            error={errors.education}
+                                            placeholder="Type Here"
+                                        />
+                                    </div>
+                                </div>
+                                <div className="flex gap-4">
+                                    <div
+                                        className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                        Company activities
+                                    </div>
+                                    <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
+                                        <TextInput
+                                            id="company_activities"
+                                            value={data.company_activities}
+                                            onChange={(e) => setData("company_activities", e.target.value)}
+                                            error={errors.company_activities}
+                                            placeholder="Type Here"
+                                        />
+                                    </div>
+                                </div>
                             </div>
 
                             {/* Category, Qty, Salary Range, Note table section */}
