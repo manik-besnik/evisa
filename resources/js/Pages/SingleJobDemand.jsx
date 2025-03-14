@@ -7,7 +7,7 @@ import {
     groups,
     maritalStatuses,
     joDemand,
-    visaTypes
+    visaTypes, regions
 } from "@/Components/Constant/index.js";
 import {useState} from "react";
 import {Head, useForm, usePage} from "@inertiajs/react";
@@ -22,11 +22,14 @@ const SingleJobDemand = () => {
     const {locations} = usePage().props
     const [showPreview, setShowPreview] = useState(false);
     const [location, setLocation] = useState(null)
+    const [region, setRegion] = useState(regions[0])
+
 
     // Create form with useForm
     const {data, setData, post, processing, errors} = useForm({
         // Job details
         type_of_work: 'Security', // Default value
+        region: 1, // Default value
         job_location: '',
         location_id: '',
         visa_validity: '',
@@ -123,26 +126,47 @@ const SingleJobDemand = () => {
                             <div className="grid mt-5">
                                 <div className="flex gap-4">
                                     <div
+                                        className="pr-2 border-2 border-b-0 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right  flex items-center justify-end">
+                                        Region
+                                    </div>
+                                    <div className="w-full border-2 border-b-0 border-[#8A9298] bg-white">
+
+                                        <Select
+                                            items={regions}
+                                            selected={region}
+                                            setSelected={setRegion}
+                                            handleValueChange={(value) => setData('region', value.id)}
+                                            error={errors.region}
+
+                                        />
+                                    </div>
+                                </div>
+                                <div className="flex gap-4">
+                                    <div
                                         className="pr-2 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right  flex items-center justify-end">
                                         Job Location
                                     </div>
                                     <div className="w-full border-2 border-[#8A9298] bg-white">
+                                        {region.id === 1 && (
+                                            <Select
+                                                items={locations}
+                                                selected={location}
+                                                setSelected={setLocation}
+                                                handleValueChange={(value) => setData('location_id', value.id)}
+                                                error={errors.location_id}
 
-                                        {/*<TextInput*/}
-                                        {/*    id="job_location"*/}
-                                        {/*    value={data.job_location}*/}
-                                        {/*    onChange={(e) => setData("job_location", e.target.value)}*/}
-                                        {/*    error={errors.job_location}*/}
-                                        {/*    placeholder="Type Here"*/}
-                                        {/*/>*/}
-                                        <Select
-                                            items={locations}
-                                            selected={location}
-                                            setSelected={setLocation}
-                                            handleValueChange={(value) => setData('location_id', value.id)}
-                                            error={errors.location_id}
+                                            />)}
+                                        {region.id === 2 && (
+                                            <TextInput
+                                                id="job_location"
+                                                value={data.job_location}
+                                                onChange={(e) => setData("job_location", e.target.value)}
+                                                error={errors.job_location}
+                                                placeholder="Type Here"
+                                            />
+                                        )}
 
-                                        />
+
                                     </div>
                                 </div>
                                 <div className="flex gap-4">
