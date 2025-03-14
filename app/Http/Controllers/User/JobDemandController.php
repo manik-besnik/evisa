@@ -10,6 +10,7 @@ use App\Actions\User\JobDemand\StoreAction;
 use App\DTOs\JobDemandDTO;
 use App\Http\Controllers\Controller;
 use App\Models\VisaApply;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\JobDemand;
 use Illuminate\Support\Facades\Storage;
@@ -46,7 +47,7 @@ class JobDemandController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, StoreAction $storeAction): \Inertia\Response
+    public function store(Request $request, StoreAction $storeAction): RedirectResponse
     {
         return $storeAction->execute(JobDemandDTO::fromRequest($request));
     }

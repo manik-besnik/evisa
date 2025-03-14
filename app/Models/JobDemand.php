@@ -31,6 +31,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string $holiday_benefits
  * @property string $education
  * @property string|null $thumbnail
+ * @property string|null $note
  */
 class JobDemand extends Model
 {
@@ -60,6 +61,7 @@ class JobDemand extends Model
         'holiday_benefits',
         'education',
         'thumbnail',
+        'note',
     ];
 
     public function user(): BelongsTo

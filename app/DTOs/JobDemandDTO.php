@@ -16,7 +16,8 @@ class JobDemandDTO
     public string $currentAddress;
     public string $city;
     public string $area;
-    public string $jobLocation;
+    public string|null $jobLocation;
+    public string|int $locationId;
     public string $typeOfWork;
     public string $salary;
     public string $workingHours;
@@ -35,6 +36,7 @@ class JobDemandDTO
     public static function fromRequest(Request $request): JobDemandDTO
     {
         $request->validate([
+            'location_id' => 'required|exists:locations,id',
             'thumbnail' => 'nullable|file|mimes:jpg,jpeg,png|max:2048',
             'company_name' => 'required|string|max:255',
             'contact_person' => 'required|string|max:255',
@@ -43,9 +45,9 @@ class JobDemandDTO
             'email' => 'required|email|max:255',
             'current_address' => 'required|string|max:255',
             'city' => 'required|string|max:255',
-            'job_location' => 'required|string|max:255',
+            'area' => 'required|string|max:255',
             'type_of_work' => 'required|string|max:255',
-            'salary' => 'required|string|max:255',
+            'salary' => 'required|numeric|max:255',
             'working_hours' => 'required|string|max:255',
             'visa_validity' => 'required|string|max:255',
             'medical_insurance' => 'required|string|max:255',
@@ -57,8 +59,10 @@ class JobDemandDTO
             'age_limits' => 'required|string|max:255',
             'note' => 'required|string|max:255',
             'company_activities' => 'required|string|max:255',
-            'worker_quantity' => 'required|string|max:255',
-            'area' => 'required|string|max:255',
+            'worker_quantity' => 'required|integer|min:1',
+        ],[
+            'location_id.required' => 'Job Location is required.',
+            'location_id.exists' => 'Job Location does not exist.',
         ]);
 
         $instance = new self;
@@ -72,6 +76,7 @@ class JobDemandDTO
         $instance->currentAddress = $request->input('current_address');
         $instance->city = $request->input('city');
         $instance->jobLocation = $request->input('job_location');
+        $instance->locationId = $request->input('location_id');
         $instance->typeOfWork = $request->input('type_of_work');
         $instance->salary = $request->input('salary');
         $instance->workingHours = $request->input('working_hours');

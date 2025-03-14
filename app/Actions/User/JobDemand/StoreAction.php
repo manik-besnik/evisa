@@ -6,11 +6,12 @@ use App\DTOs\JobDemandDTO;
 use App\Models\Company;
 use App\Models\JobDemand;
 use App\Supports\FileUpload;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 
 class StoreAction
 {
-    public function execute(JobDemandDTO $jobDemandDTO)
+    public function execute(JobDemandDTO $jobDemandDTO): RedirectResponse
     {
         DB::beginTransaction();
 
@@ -20,7 +21,7 @@ class StoreAction
 
             $thumbnail = null;
 
-            if ($jobDemandDTO->thumbnail){
+            if ($jobDemandDTO->thumbnail) {
                 $thumbnail = FileUpload::execute($jobDemandDTO->thumbnail);
             }
 
@@ -28,11 +29,12 @@ class StoreAction
             $jobDemand->company_id = $company->id;
             $jobDemand->user_id = auth()->id();
             $jobDemand->job_code = uniqid() . now()->timestamp;
+            $jobDemand->location_id = $jobDemandDTO->locationId;
             $jobDemand->transport = $jobDemandDTO->transport;
             $jobDemand->note = $jobDemandDTO->note;
             $jobDemand->accommodation = $jobDemandDTO->accommodation;
             $jobDemand->thumbnail = $thumbnail;
-//            $jobDemand->date = $jobDemandDTO->;
+//            $jobDemand->date = $jobDemandDTO->visaValidity;
             $jobDemand->type_of_work = $jobDemandDTO->typeOfWork;
             $jobDemand->salary = $jobDemandDTO->salary;
             $jobDemand->worker_quantity = $jobDemandDTO->workerQuantity;

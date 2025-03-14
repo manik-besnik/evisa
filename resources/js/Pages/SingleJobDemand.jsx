@@ -13,19 +13,22 @@ import {useState} from "react";
 import {Head, useForm, usePage} from "@inertiajs/react";
 import PrimaryBtn from "@/Components/Web/PrimaryBtn.jsx";
 import {FaCameraRetro} from "react-icons/fa";
-import {Textarea} from "flowbite-react";
 import {toast} from "react-toastify";
 import PreviewPopup from "../Components/PreviewPopup.jsx";
 
 
 const SingleJobDemand = () => {
+
+    const {locations} = usePage().props
     const [showPreview, setShowPreview] = useState(false);
+    const [location, setLocation] = useState(null)
 
     // Create form with useForm
     const {data, setData, post, processing, errors} = useForm({
         // Job details
         type_of_work: 'Security', // Default value
         job_location: '',
+        location_id: '',
         visa_validity: '',
         accommodation: '',
         transport: '',
@@ -125,12 +128,20 @@ const SingleJobDemand = () => {
                                     </div>
                                     <div className="w-full border-2 border-[#8A9298] bg-white">
 
-                                        <TextInput
-                                            id="job_location"
-                                            value={data.job_location}
-                                            onChange={(e) => setData("job_location", e.target.value)}
-                                            error={errors.job_location}
-                                            placeholder="Type Here"
+                                        {/*<TextInput*/}
+                                        {/*    id="job_location"*/}
+                                        {/*    value={data.job_location}*/}
+                                        {/*    onChange={(e) => setData("job_location", e.target.value)}*/}
+                                        {/*    error={errors.job_location}*/}
+                                        {/*    placeholder="Type Here"*/}
+                                        {/*/>*/}
+                                        <Select
+                                            items={locations}
+                                            selected={location}
+                                            setSelected={setLocation}
+                                            handleValueChange={(value) => setData('location_id', value.id)}
+                                            error={errors.location_id}
+
                                         />
                                     </div>
                                 </div>
