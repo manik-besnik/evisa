@@ -58,6 +58,8 @@ class StoreMultiJobAction
 
             JobDemand::query()->insert($jobDemands);
 
+            JobDemand::deleteCache();
+
             DB::commit();
 
             return redirect()->back();
