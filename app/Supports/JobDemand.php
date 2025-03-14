@@ -68,7 +68,8 @@ class JobDemand
     {
         /** @var \App\Models\JobDemand|null $jobDemand */
         $jobDemand = \App\Models\JobDemand::query()
-            ->select(['id'])->orderBy('id', 'desc')
+            ->select(['id'])
+            ->orderBy('id', 'desc')
             ->first();
 
         if ($jobDemand) {
