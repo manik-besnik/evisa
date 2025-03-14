@@ -28,6 +28,7 @@ class JobDemand
         $jobDemand->transport = $jobDemandDTO->transport;
         $jobDemand->requirements = $jobDemandDTO->note;
         $jobDemand->accommodation = $jobDemandDTO->accommodation;
+        $jobDemand->job_location = $jobDemandDTO->jobLocation;
         $jobDemand->thumbnail = $thumbnail;
         $jobDemand->type_of_work = $jobDemandDTO->typeOfWork;
         $jobDemand->salary = $jobDemandDTO->salary;
@@ -67,8 +68,9 @@ class JobDemand
     {
         /** @var \App\Models\JobDemand|null $jobDemand */
         $jobDemand = \App\Models\JobDemand::query()
-            ->select(['id'])->orderBy('id', 'desc')
-            ->first()->id;
+            ->select(['id'])
+            ->orderBy('id', 'desc')
+            ->first();
 
         if ($jobDemand) {
             return $jobDemand->id;
