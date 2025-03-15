@@ -11,6 +11,7 @@ use App\Actions\User\JobPost\ShowAction;
 use App\DTOs\JobApplyDTO;
 use App\Http\Controllers\Controller;
 use App\Models\JobApply;
+use App\Models\JobDemand;
 use App\Models\JobPost;
 use App\Models\Language;
 use App\Supports\JobApplyAction;
@@ -33,6 +34,7 @@ class JobPostController extends Controller
     {
         return $jobAction->execute();
     }
+
     public function jobDirectory(JobDirectoryAction $jobDirectoryAction): \Inertia\Response
     {
         return $jobDirectoryAction->execute();
@@ -54,8 +56,8 @@ class JobPostController extends Controller
     public function create(): \Inertia\Response
     {
         return Inertia::render('JobApply', [
-            'job_posts' => JobPost::query()->select(['id', 'title'])
-                ->whereDate('last_apply_date', '>=', now()->format('Y-m-d'))
+            'job_posts' => JobDemand::query()->select(['id', 'type_of_work'])
+                ->where('available_job', '>=', 1)
                 ->get(),
             'languages' => Language::query()->get()
         ]);
@@ -67,24 +69,22 @@ class JobPostController extends Controller
     public function store(Request $request): \Illuminate\Http\RedirectResponse
     {
         /** @var JobApply|null $jobApplied */
-        $jobApplied = JobApply::query()->where('user_id', auth()->id())->where('job_post_id', $request->input('job_post_id'))->first();
+        $jobApplied = JobApply::query()
+            ->where('user_id', auth()->id())
+            ->where('job_post_id', $request->input('job_post_id'))
+            ->first();
 
         if ($jobApplied) {
             return redirect()->back()->with('error', "Already applied this job");
         }
-        try {
 
-            $apply = JobApplyAction::execute(auth()->id(), JobApplyDTO::fromRequest($request));
+        $apply = JobApplyAction::execute(auth()->id(), JobApplyDTO::fromRequest($request));
 
-            if ($apply) {
-                return redirect()->back()->with('success', 'Your application submitted');
-            }
-
-            return redirect()->back()->withErrors(['message' => "Application Submit Failed"]);
-
-        } catch (\Exception $exception) {
-            return redirect()->back()->withErrors(['message' => $exception->getMessage()]);
+        if ($apply) {
+            return redirect()->back()->with('success', 'Your application submitted');
         }
+
+        return redirect()->back()->withErrors(['message' => "Application Submit Failed"]);
     }
 
     /**
@@ -128,37 +128,36 @@ class JobPostController extends Controller
 
     public function generatePdf($id)
     {
-        
 
-        // If you're using hardcoded data like in your React component, 
-       
-            $job = (object)[
-                'id' => 1,
-                'title' => "Security",
-                'salary' => "AED 2200",
-                'salaryRange' => "1850-2500 AED",
-                'code' => "0000003",
-                'location' => "Dubai",
-                'image' => "images/secu.png",
-                'category' => "Ready Job",
-                'visaValidity' => "02 years",
-                'accommodation' => "The Company",
-                'transport' => "The Company",
-                'food' => "Self",
-                'medicalInsurance' => "As per UAE labour laws",
-                'workingHours' => "8 Hours (As per Company Policy)",
-                'vacationBenefits' => "As per UAE labour laws",
-                'ageLimits' => "20-32",
-                'inDemandWorkers' => "50 People",
-                'education' => "Must have ability to read and write English",
-                'companyActivities' => "Established security service company",
-                'contactNumber' => "+971 528260909",
-                'alternateNumbers' => "0508074795, 0501289360",
-                'applicationRequirements' => "passport, white background photo, clear visit visa copy or cancellation copy and to be in our format."
-            ];
 
-    
-       
+        // If you're using hardcoded data like in your React component,
+
+        $job = (object)[
+            'id' => 1,
+            'title' => "Security",
+            'salary' => "AED 2200",
+            'salaryRange' => "1850-2500 AED",
+            'code' => "0000003",
+            'location' => "Dubai",
+            'image' => "images/secu.png",
+            'category' => "Ready Job",
+            'visaValidity' => "02 years",
+            'accommodation' => "The Company",
+            'transport' => "The Company",
+            'food' => "Self",
+            'medicalInsurance' => "As per UAE labour laws",
+            'workingHours' => "8 Hours (As per Company Policy)",
+            'vacationBenefits' => "As per UAE labour laws",
+            'ageLimits' => "20-32",
+            'inDemandWorkers' => "50 People",
+            'education' => "Must have ability to read and write English",
+            'companyActivities' => "Established security service company",
+            'contactNumber' => "+971 528260909",
+            'alternateNumbers' => "0508074795, 0501289360",
+            'applicationRequirements' => "passport, white background photo, clear visit visa copy or cancellation copy and to be in our format."
+        ];
+
+
         $pdf = DomPDF::loadView('pdfs.jobs', compact('job'));
 
         $pdf->setPaper('a4', 'portrait');

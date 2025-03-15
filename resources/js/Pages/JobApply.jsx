@@ -20,8 +20,8 @@ import { jobApplyDocuments, languageProficiency } from "@/Components/Constant/in
 
 
 const JobDemand = () => {
-    const { auth } = usePage().props;
-    const countries = usePage().props.countries;
+    const { auth,countries } = usePage().props;
+    ;
 
     // States for form elements
     const [nationality, setNationality] = useState('');
