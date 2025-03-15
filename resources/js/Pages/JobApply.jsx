@@ -8,7 +8,10 @@ import {
     groups,
     maritalStatuses,
     joDemand,
-    visaTypes
+    visaTypes,
+    bloodGroups,
+    jobApplyDocuments,
+    regions
 } from "@/Components/Constant/index.js";
 import {useState, useEffect} from "react";
 import {Head, useForm, usePage} from "@inertiajs/react";
@@ -16,13 +19,13 @@ import PrimaryBtn from "@/Components/Web/PrimaryBtn.jsx";
 import {FaCameraRetro} from "react-icons/fa";
 import {Textarea} from "flowbite-react";
 import {toast} from "react-toastify";
-import {jobApplyDocuments, languageProficiency} from "@/Components/Constant/index.js";
 import MultiSelect from "@/Components/Web/MultiSelect.jsx";
+import {value} from "lodash/seq.js";
 
 
 const JobDemand = () => {
 
-    const {auth, countries, job_demands} = usePage().props;
+    const {auth, countries, job_demands, locations, languages} = usePage().props;
 
 
     const [nationality, setNationality] = useState('');
@@ -32,117 +35,115 @@ const JobDemand = () => {
     const [bloodGroup, setBloodGroup] = useState('');
     const [maritalStatus, setMaritalStatus] = useState('');
     const [district, setDistrict] = useState('');
-    const [applySource, setApplySource] = useState(''); // Inside UAE or Outside UAE
-    const [applyLocation, setApplyLocation] = useState(''); // For specific location
+    const [applySource, setApplySource] = useState('');
+    const [applyLocation, setApplyLocation] = useState('');
     const [businessPhoto, setBusinessPhoto] = useState('');
     const [passportPhoto, setPassportPhoto] = useState(null);
-
-    console.log(jobDemands)
-
-    // Define UAE locations
-    const uaeLocations = [
-        {id: 'dubai', name: 'DUBAI'},
-        {id: 'abudhabi', name: 'ABUDHABI'},
-        {id: 'sharjah', name: 'SHARJAH'},
-        {id: 'ajman', name: 'AJMAN'},
-        {id: 'umm_al_quwain', name: 'UMM AL QWAIN'},
-        {id: 'ras_al_khaimah', name: 'RAS AL KHAIMA'},
-        {id: 'fujairah', name: 'FUJAYRAH'},
-        {id: 'al_ain', name: 'AL AIN'}
-    ];
 
 
     const [locationsToDisplay, setLocationsToDisplay] = useState([]);
 
-    const applySourceOptions = [
-        {id: 'inside_uae', name: 'Inside UAE'},
-        {id: 'outside_uae', name: 'Outside UAE'}
-    ];
+    const [region, setRegion] = useState(null)
 
-    const initialState = {
+
+    const {data, setData, post, errors, processing, reset} = useForm({
+        job_post_id: route().params?.id ?? '',
+        region: '',
+        location: "",
         name: '',
-        mobile: '',
+        phone: '',
         email: '',
-        nationality: '',
-        date_of_birth: '',
-        gender: '',
-        religion: '',
-        blood_group: '',
-        marital_status: '',
-        job_demands: [],
-        current_address_state: '',
-        current_address_city: '',
-        current_address_area: '',
-        permanent_address_district: '',
-        permanent_address_thana: '',
-        permanent_address_village: '',
-        passport_no: '',
-        passport_expiry: '',
-        country_contact_no: '',
-        visa_status: '',
-        visa_expiry: '',
-        whatsapp_no: '',
-        education_certificate: '',
-        education_year: '',
-        education_board: '',
-        computer_skills: '',
+        avatar: '',
+        exam_name: '',
+        passing_year: '',
+        institute: '',
+        result: '',
+        computer_skill: '',
         driving_license: '',
         driving_license_issue_date: '',
-        driving_license_expiry_date: '',
+        driving_license_expire_date: '',
         english_proficiency: '',
         arabic_proficiency: '',
-        other_languages: [],
+        urdu_proficiency: '',
         mother_language: '',
-        job_experiences: [
-            {position: '', duration: '', company_name: '', country: ''},
-            {position: '', duration: '', company_name: '', country: ''}
-        ],
         shirt_size: '',
         pant_size: '',
-        shoes_size: '',
-        weight: '',
+        show_size: '',
         height: '',
+        weight: '',
         nearest_airport: '',
-        application_summary: '',
-        apply_from_source: '',
-        apply_location: '',
-    };
-
-    const {data, setData, post, processing, errors, reset} = useForm(initialState);
+        summary: '',
+        documents: [],
+        job_demands: [],
+        job_experiences: [
+            {
+                position: "",
+                duration: "",
+                company: "",
+                country: "",
+                country_id: ""
+            }
+        ],
+    })
 
     const updateJobDemands = (values) => {
-        console.log(values)
+        const ids = values.map(item => item.id)
+        setData('job_demands', ids)
+    }
+
+    const updateJobExperience = (index, key, value) => {
+        const updatedExperiences = [...data.job_experiences];
+
+        updatedExperiences[index] = {
+            ...updatedExperiences[index],
+            [key]: value,
+            ...(key === "country" && {country_id: value?.id})
+        };
+
+        setData('job_experiences', updatedExperiences);
+    };
+    const deleteExperience = (i) => {
+
+        data.job_experiences.splice(i, 1)
+
+        setData('job_experiences', data.job_experiences)
+
     }
 
 
-    useEffect(() => {
-        if (applySource && applySource.id === 'inside_uae') {
-            setLocationsToDisplay(uaeLocations);
-        } else if (applySource && applySource.id === 'outside_uae') {
-            setLocationsToDisplay(countries);
-        } else {
-            setLocationsToDisplay([]);
+    const addNewExperience = () => {
+        const experience = {
+            position: "",
+            duration: "",
+            company: "",
+            country: "",
+            country_id: ""
         }
 
-        // Reset the location when source changes
-        setApplyLocation('');
-        setData('apply_location', '');
-    }, [applySource]);
+        const experiences = [
+            ...data.job_experiences,
+            experience
+        ]
 
-    const resetForm = () => {
-        reset();
-        setNationality('');
-        setGender('');
-        setReligion('');
-        setBloodGroup('');
-        setMaritalStatus('');
-        setDistrict('');
-        setApplySource('');
-        setApplyLocation('');
-        setBusinessPhoto('');
-        setPassportPhoto(null);
-        setData(initialState);
+        setData('job_experiences', experiences)
+    }
+
+
+    const handleFileChange = (fileType, file) => {
+        const fileName = jobApplyDocuments.find((item) => item.type === fileType)?.name || "Unknown";
+
+        const updatedDocuments = {
+            ...data.documents,
+            [fileType]: {
+                name: fileName,
+                type: fileType,
+                file: file
+            }
+        };
+
+        setData('documents', updatedDocuments);
     };
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -172,24 +173,12 @@ const JobDemand = () => {
             data: formData,
             forceFormData: true,
             onSuccess: () => {
-                resetForm();
                 toast("Job application submitted successfully!");
             },
             onError: () => {
                 alert('Error submitting job application. Please check the form.');
             }
         });
-    };
-
-    // Handle select changes
-    const updateApplySource = (value) => {
-        setApplySource(value);
-        setData('apply_from_source', value.id);
-    };
-
-    const updateApplyLocation = (value) => {
-        setApplyLocation(value);
-        setData('apply_location', value.id);
     };
 
     const updateNationality = (value) => {
@@ -207,35 +196,6 @@ const JobDemand = () => {
         setData('permanent_address_district', value.id);
     };
 
-    // Handle file input change
-    const handlePhotoChange = (e) => {
-        const file = e.target.files[0];
-        if (file) {
-            setPassportPhoto(file);
-        }
-    };
-
-    // Handle job post selection change
-    const handleJobPostChange = (index, value) => {
-        const updatedPosts = [...data.job_post];
-        updatedPosts[index] = value.id;
-        setData('job_post', updatedPosts);
-    };
-
-    const handleFileChange = (fileType, file) => {
-        const fileName = jobApplyDocuments.find((item) => item.type === fileType)?.name || "Unknown";
-
-        const updatedDocuments = {
-            ...data.documents,
-            [fileType]: {
-                name: fileName,
-                type: fileType,
-                file: file
-            }
-        };
-
-        setData('documents', updatedDocuments);
-    };
 
     return (
         <WebLayout showBgImage={true} showServiceImage={false}>
@@ -260,32 +220,42 @@ const JobDemand = () => {
                                     <div className="flex-1">
                                         <Select
                                             placeholder="Select Here"
-                                            items={applySourceOptions}
-                                            selected={applySource}
-                                            setSelected={setApplySource}
-                                            handleValueChange={updateApplySource}
-                                            error={errors.apply_from_source}
+                                            items={regions}
+                                            selected={region}
+                                            setSelected={setRegion}
+                                            handleValueChange={(value) => setData('region', value.name)}
+                                            error={errors.region}
                                             required={true}
                                             defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
                                         />
                                     </div>
                                 </div>
-                                {applySource && (
+
+                                {region && (
                                     <div className="flex items-center mb-4">
                                         <label className="text-xl font-bold mr- w-4/12">
-                                            {applySource.id === 'inside_uae' ? 'Location' : 'Country'}
+                                            {region.id === 1 ? 'Location' : 'Country'}
                                         </label>
                                         <div className="flex-1">
-                                            <Select
+                                            {region.id === 1 ? <Select
                                                 placeholder="Select Here"
-                                                items={locationsToDisplay}
+                                                items={locations}
                                                 selected={applyLocation}
                                                 setSelected={setApplyLocation}
-                                                handleValueChange={updateApplyLocation}
-                                                error={errors.apply_location}
+                                                handleValueChange={(value) => setData('location', value.name)}
+                                                error={errors.location}
                                                 required={true}
                                                 defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
-                                            />
+                                            /> : <Select
+                                                placeholder="Select Here"
+                                                items={countries}
+                                                selected={applyLocation}
+                                                setSelected={setApplyLocation}
+                                                handleValueChange={(value) => setData('location', value.name)}
+                                                error={errors.location}
+                                                required={true}
+                                                defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                            />}
                                         </div>
                                     </div>
                                 )}
@@ -323,13 +293,16 @@ const JobDemand = () => {
                                         onChange={(e) => setData('name', e.target.value)}
                                         error={errors.name}
                                         placeholder="Your Name"
+                                        id="name"
                                         required={true}
                                         defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+
                                     />
                                     <TextInput
-                                        value={data.mobile}
-                                        onChange={(e) => setData('mobile', e.target.value)}
-                                        error={errors.mobile}
+                                        value={data.phone}
+                                        onChange={(e) => setData('phone', e.target.value)}
+                                        error={errors.phone}
+                                        id="phone"
                                         placeholder="Mobile No. with country Code"
                                         required={true}
                                         defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
@@ -340,6 +313,7 @@ const JobDemand = () => {
                                         error={errors.email}
                                         placeholder="e-mail ID"
                                         type="email"
+                                        id="email"
                                         required={true}
                                         defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
                                     />
@@ -451,7 +425,7 @@ const JobDemand = () => {
                                         <div className="flex-1">
                                             <Select
                                                 placeholder="Select"
-                                                items={[]} // Add blood group options
+                                                items={bloodGroups} // Add blood group options
                                                 selected={bloodGroup}
                                                 setSelected={setBloodGroup}
                                                 handleValueChange={(value) => setData('blood_group', value.id)}

@@ -15,7 +15,7 @@ export default function Select({
                                    label = "",
                                    labelClasses = "",
                                    error = "",
-                                   selectLimit = 10000
+                                   selectLimit = 1000
                                }) {
 
     const [searchQuery, setSearchQuery] = useState('');
