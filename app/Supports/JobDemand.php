@@ -45,6 +45,7 @@ class JobDemand
         $jobDemand->age_limit = $jobDemandDTO->ageLimits;
         $jobDemand->company_activities = $jobDemandDTO->companyActivities;
         $jobDemand->education = $jobDemandDTO->education;
+        $jobDemand->medical_insurance = $jobDemandDTO->medicalInsurance;
         if ($jobDemandDTO->isOnDemand) {
             $jobDemand->is_on_demand = true;
         }

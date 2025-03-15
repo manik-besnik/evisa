@@ -47,6 +47,7 @@ class StoreMultiJobAction
                     'company_activities' => $jobDemandDTO->companyActivities,
                     'education' => $jobDemandDTO->education,
                     'requirements' => $jobDemandDTO->note,
+                    'medical_insurance' => $jobDemandDTO->medicalInsurance,
                     'thumbnail' => $thumbnail,
                     'created_at' => now(),
                     'updated_at' => now(),

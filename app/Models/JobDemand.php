@@ -36,6 +36,7 @@ use Illuminate\Support\Facades\Cache;
  * @property string|null $thumbnail
  * @property string|null $note
  * @property string|null $requirements
+ * @property string|null $medical_insurance
  * @property boolean|int $is_new
  * @property boolean|int $is_approved
  * @property boolean|int $is_on_demand
@@ -77,6 +78,7 @@ class JobDemand extends Model
         'thumbnail',
         'note',
         'requirements',
+        'medical_insurance',
         'is_approved',
         'is_new',
         'is_on_demand',

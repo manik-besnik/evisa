@@ -14,7 +14,7 @@ class EditAction
     {
         UserPermission::isPermitted(Permissions::EDIT_JOB_POST->value);
 
-        $jobPost = JobDemand::query()->findOrFail($id);
+        $jobPost = JobDemand::query()->with(['company'])->findOrFail($id);
 
         return Inertia::render('Admin/JobDemand/Edit', [
             'job_demand' => $jobPost,
