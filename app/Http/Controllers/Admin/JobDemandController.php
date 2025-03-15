@@ -8,7 +8,7 @@ use App\Actions\Admin\JobDemand\EditAction;
 use App\Actions\Admin\JobDemand\IndexAction;
 use App\Actions\Admin\JobDemand\JobDemandApplicationAction;
 use App\Actions\Admin\JobDemand\StoreAction;
-use App\Actions\Admin\JobPost\UpdateAction;
+use App\Actions\Admin\JobDemand\UpdateAction;
 use App\DTOs\AdminJobDemandDTO;
 use App\DTOs\JobPostDTO;
 use App\Http\Controllers\Controller;
@@ -40,7 +40,7 @@ class JobDemandController extends Controller
 
     public function update(Request $request, int $id, UpdateAction $updateAction): RedirectResponse
     {
-        return $updateAction->execute($id, JobPostDTO::fromRequest($request));
+        return $updateAction->execute($id, AdminJobDemandDTO::fromRequest($request));
     }
 
     public function destroy(int $id, DeleteAction $deleteAction): RedirectResponse

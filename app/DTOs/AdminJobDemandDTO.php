@@ -96,6 +96,7 @@ class AdminJobDemandDTO
         $instance->area = $request->input('area');
         $instance->isOnDemand = $request->input('is_on_demand');
         $instance->isNewJob = $request->input('is_new_job');
+        $instance->approved = $request->input('is_approved');
 
         return $instance;
     }

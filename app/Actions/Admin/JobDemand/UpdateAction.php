@@ -18,7 +18,7 @@ class UpdateAction
     {
         UserPermission::isPermitted(Permissions::EDIT_JOB_POST->value);
 
-        /** @var JobDemand|null $jobPost */
+        /** @var JobDemand|null $jobDemand */
         $jobDemand = JobDemand::query()->with(['company'])->find($id);
 
         if (!$jobDemand) {
@@ -38,7 +38,7 @@ class UpdateAction
 
             $this->updateCompany($jobDemandDTO, $company);
 
-            $thumbnail = $jobPost->thumbnail;
+            $thumbnail = $jobDemand->thumbnail;
 
             if ($jobDemandDTO->thumbnail) {
                 $thumbnail = FileUpload::execute($jobDemandDTO->thumbnail, $jobDemand->thumbnail);

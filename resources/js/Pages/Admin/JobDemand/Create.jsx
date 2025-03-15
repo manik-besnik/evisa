@@ -52,6 +52,7 @@ const CreateJobPost = () => {
         note: '',
         is_on_demand: false,
         is_new_job: false,
+        is_approved: true,
     });
 
 

@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::table('job_demands', function (Blueprint $table) {
             $table->string('medical_insurance')->after('education')->nullable();
+            $table->string('vacation_benefits')->after('medical_insurance')->nullable();
         });
     }
 
@@ -22,7 +23,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('job_demands', function (Blueprint $table) {
-            $table->dropColumn('medical_insurance');
+            $table->dropColumn(['medical_insurance','vacation_benefits']);
         });
     }
 };

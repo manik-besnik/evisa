@@ -22,22 +22,37 @@ const Edit = () => {
         ],
         ...locations
     ]
-    const [location, setLocation] = useState(null)
+    const setJobLocation = () => {
+
+        if (job_demand.is_on_demand) {
+            return jobLocations.find(item => item.id === 'ready_job')
+        }
+
+        if (job_demand.is_new) {
+            return jobLocations.find(item => item.id === 'new_job')
+        }
+        return jobLocations.find(item => item.id === job_demand.location_id)
+
+
+    }
+
+    const [location, setLocation] = useState(setJobLocation())
+
 
     const {data, setData, post, processing, errors} = useForm({
         // Job details
         type_of_work: job_demand.type_of_work, // Default value
         job_location: '',
-        location_id: '',
+        location_id: job_demand.location_id,
         visa_validity: job_demand.visa_validity,
         accommodation: job_demand.accommodation,
         transport: job_demand.transport,
         food: job_demand.food,
         medical_insurance: job_demand.medical_insurance,
-        working_hours: job_demand.working_hours,
+        working_hours: job_demand.duty_hours,
         salary: job_demand.salary,
         vacation_benefits: job_demand.vacation_benefits,
-        age_limits: job_demand.age_limits,
+        age_limits: job_demand.age_limit,
         worker_quantity: job_demand.worker_quantity,
         education: job_demand.education,
         company_activities: job_demand.company_activities,
@@ -50,14 +65,19 @@ const Edit = () => {
         city: job_demand.company.city,
         area: job_demand.company.area,
         note: job_demand.requirements,
-        is_on_demand: false,
-        is_new_job: false,
+        is_on_demand: job_demand.is_on_demand,
+        is_new_job: job_demand.is_new_job,
+        is_approved: job_demand.is_approved,
     });
 
 
     const handleSubmit = (e) => {
         e.preventDefault()
 
+        confirmFormSubmit()
+    }
+
+    const confirmFormSubmit = () => {
         if (data.location_id === 'ready_job') {
             setData('location_id', null)
             setData('is_on_demand', true)
