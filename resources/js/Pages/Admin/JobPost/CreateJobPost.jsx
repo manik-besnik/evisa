@@ -18,7 +18,7 @@ const CreateJobPost = () => {
 
     const {data, setData, post, processing, errors} = useForm({
         // Job details
-        type_of_work: 'Security', // Default value
+        type_of_work: '', // Default value
         region: 1, // Default value
         job_location: '',
         location_id: '',

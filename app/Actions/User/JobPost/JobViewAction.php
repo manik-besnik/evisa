@@ -23,7 +23,7 @@ class JobViewAction
     {
         return Cache::remember('on_demand_jobs', now()->addDays(5), function () {
             return JobDemand::query()
-                ->where('on_demand', true)
+                ->where('is_on_demand', true)
                 ->where('available_job', '>', 0)
                 ->get();
         });
@@ -44,7 +44,7 @@ class JobViewAction
         return Cache::remember('location_job_demands', now()->addDays(5), function () {
             return Location::query()
                 ->with(['jobs' => function ($query) {
-                    $query->where('on_demand', false)
+                    $query->where('is_on_demand', false)
                         ->where('is_new', false)
                         ->where('available_job', '>', 0);
                 }])
