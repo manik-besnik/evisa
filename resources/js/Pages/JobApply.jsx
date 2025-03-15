@@ -7,44 +7,40 @@ import {
     genders,
     groups,
     maritalStatuses,
-    joDemand,
     visaTypes,
     bloodGroups,
     jobApplyDocuments,
     regions,
-    postForApply
+    postForApply, shirtSizes, languageProficiency, drivingLicenses, drivingLicense
 } from "@/Components/Constant/index.js";
 import {useState, useEffect} from "react";
 import {Head, useForm, usePage} from "@inertiajs/react";
 import PrimaryBtn from "@/Components/Web/PrimaryBtn.jsx";
-import {FaCameraRetro, FaTrashAlt} from "react-icons/fa";
-import {Textarea} from "flowbite-react";
+import {FaTrashAlt} from "react-icons/fa";
 import {toast} from "react-toastify";
 import MultiSelect from "@/Components/Web/MultiSelect.jsx";
-import {value} from "lodash/seq.js";
 import FileUpload from "@/Components/Web/FileUpload.jsx";
 import {FaPlus} from "react-icons/fa6";
 
 
 const JobDemand = () => {
 
-    const {auth, countries, job_demands, locations, languages} = usePage().props;
+    const {auth, countries, locations, languages} = usePage().props;
 
 
     const [nationality, setNationality] = useState('');
     const [jobDemands, setJobDemands] = useState([])
+    const [motherLanguage, setMotherLanguage] = useState(null)
     const [gender, setGender] = useState('');
     const [religion, setReligion] = useState('');
     const [bloodGroup, setBloodGroup] = useState('');
     const [maritalStatus, setMaritalStatus] = useState('');
-    const [district, setDistrict] = useState('');
-    const [applySource, setApplySource] = useState('');
     const [applyLocation, setApplyLocation] = useState('');
-    const [businessPhoto, setBusinessPhoto] = useState('');
-    const [passportPhoto, setPassportPhoto] = useState(null);
+    const [englishProficiency, setEnglishProficiency] = useState(null)
+    const [arabicProficiency, setArabicProficiency] = useState(null)
+    const [urduProficiency, setUrduProficiency] = useState(null)
+    const [drivingLicense, setDrivingLicense] = useState(null)
 
-
-    const [locationsToDisplay, setLocationsToDisplay] = useState([]);
 
     const [region, setRegion] = useState(null)
 
@@ -177,11 +173,6 @@ const JobDemand = () => {
                 formData.append(key, data[key]);
             }
         });
-
-
-        if (passportPhoto) {
-            formData.append('passport_photo', passportPhoto);
-        }
 
 
         post(route('job-posts.store'), {
@@ -691,18 +682,9 @@ const JobDemand = () => {
                                 <div className="col-span-3">
                                     <Select
                                         placeholder="Select"
-                                        items={[
-                                            {id: '1', name: 'light motor vehicle (Manual)'},
-                                            {id: '2', name: 'light motor vehicle (Auto)'},
-                                            {id: '3', name: 'Motorcycle'},
-                                            {id: '4', name: 'Heavy truck'},
-                                            {id: '5', name: 'Mini bus'},
-                                            {id: '6', name: 'Heavy bus'},
-                                            {id: '7', name: 'Fork lift'},
-                                            {id: '8', name: 'Shovel'},
-                                        ]}
-                                        selected={data.driving_license}
-                                        setSelected={(value) => setData('driving_license', value)}
+                                        items={drivingLicenses}
+                                        selected={drivingLicense}
+                                        setSelected={setDrivingLicense}
                                         handleValueChange={(value) => setData('driving_license', value)}
                                         error={errors.driving_license}
                                         defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
@@ -740,13 +722,9 @@ const JobDemand = () => {
                                 <div className="col-span-3">
                                     <Select
                                         placeholder="Good | Fair | Poor"
-                                        items={[
-                                            {id: 'good', name: 'Good'},
-                                            {id: 'fair', name: 'Fair'},
-                                            {id: 'poor', name: 'Poor'}
-                                        ]}
-                                        selected={data.english_proficiency}
-                                        setSelected={(value) => setData('english_proficiency', value)}
+                                        items={languageProficiency}
+                                        selected={englishProficiency}
+                                        setSelected={setEnglishProficiency}
                                         handleValueChange={(value) => setData('english_proficiency', value.id)}
                                         error={errors.english_proficiency}
                                         defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
@@ -758,13 +736,9 @@ const JobDemand = () => {
                                 <div className="col-span-3">
                                     <Select
                                         placeholder="Good | Fair | Poor"
-                                        items={[
-                                            {id: 'good', name: 'Good'},
-                                            {id: 'fair', name: 'Fair'},
-                                            {id: 'poor', name: 'Poor'}
-                                        ]}
-                                        selected={data.urdu_proficiency}
-                                        setSelected={(value) => setData('urdu_proficiency', value)}
+                                        items={languageProficiency}
+                                        selected={urduProficiency}
+                                        setSelected={setUrduProficiency}
                                         handleValueChange={(value) => setData('urdu_proficiency', value.id)}
                                         error={errors.urdu_proficiency}
                                         defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
@@ -780,13 +754,9 @@ const JobDemand = () => {
                                 <div className="col-span-3">
                                     <Select
                                         placeholder="Good | Fair | Poor"
-                                        items={[
-                                            {id: 'good', name: 'Good'},
-                                            {id: 'fair', name: 'Fair'},
-                                            {id: 'poor', name: 'Poor'}
-                                        ]}
-                                        selected={data.arabic_proficiency}
-                                        setSelected={(value) => setData('arabic_proficiency', value)}
+                                        items={languageProficiency}
+                                        selected={arabicProficiency}
+                                        setSelected={setArabicProficiency}
                                         handleValueChange={(value) => setData('arabic_proficiency', value.id)}
                                         error={errors.arabic_proficiency}
                                         defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
@@ -796,12 +766,15 @@ const JobDemand = () => {
                                     <p className="p-[7px] border-2 border-[#848585]">Mother Language</p>
                                 </div>
                                 <div className="col-span-3">
-                                    <TextInput
-                                        placeholder="Typing Here"
-                                        value={data.mother_language}
-                                        onChange={(e) => setData('mother_language', e.target.value)}
+                                    <Select
+                                        placeholder="Select Language"
+                                        label="Mother Language*"
+                                        items={languages}
+                                        selected={motherLanguage}
+                                        setSelected={setMotherLanguage}
+                                        handleValueChange={(value) => setData('mother_language', value.id)}
                                         error={errors.mother_language}
-                                        defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
+                                        defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                                     />
                                 </div>
                             </div>
@@ -868,9 +841,10 @@ const JobDemand = () => {
                                             defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
                                         />
                                     </div>
-                                    {data.job_experiences.length > 1 && (<button type="button" onClick={() => deleteExperience(i)}
-                                                       className="bg-warning text-white text-sm w-9 text-center p-2.5 h-9 mt-5 flex item-center justify-between">
-                                        <FaTrashAlt/></button>)}
+                                    {data.job_experiences.length > 1 && (
+                                        <button type="button" onClick={() => deleteExperience(i)}
+                                                className="bg-warning text-white text-sm w-9 text-center p-2.5 h-9 mt-5 flex item-center justify-between">
+                                            <FaTrashAlt/></button>)}
                                 </div>
                             ))}
                         </div>
@@ -899,13 +873,7 @@ const JobDemand = () => {
                                 <div className="col-span-3">
                                     <Select
                                         placeholder="Select Here"
-                                        items={[
-                                            {id: 'S', name: 'S'},
-                                            {id: 'M', name: 'M'},
-                                            {id: 'L', name: 'L'},
-                                            {id: 'XL', name: 'XL'},
-                                            {id: 'XXL', name: 'XXL'}
-                                        ]}
+                                        items={shirtSizes}
                                         selected={data.shirt_size}
                                         setSelected={(value) => setData('shirt_size', value)}
                                         handleValueChange={(value) => setData('shirt_size', value.id)}
@@ -967,9 +935,10 @@ const JobDemand = () => {
                                 <div className="col-span-3">
                                     <TextInput
                                         placeholder="Typing Here"
-                                        value={data.shoes_size}
-                                        onChange={(e) => setData('shoes_size', e.target.value)}
-                                        error={errors.shoes_size}
+                                        value={data.show_size}
+                                        onChange={(e) => setData('show_size', e.target.value)}
+                                        error={errors.show_size}
+                                        id="show-size"
                                         defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
                                     />
                                 </div>

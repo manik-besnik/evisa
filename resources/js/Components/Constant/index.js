@@ -73,11 +73,9 @@ export const jobDirectory = [
 ];
 
 export const languageProficiency = [
-    {id: 1, name: "Beginner"},
-    {id: 2, name: "Intermediate"},
-    {id: 3, name: "Advanced"},
-    {id: 4, name: "Fluent"},
-    {id: 5, name: "Native"}
+    {id: 1, name: 'Good'},
+    {id: 2, name: 'Fair'},
+    {id: 3, name: 'Poor'}
 ];
 export const permissions = [
     {name: "View Admin", value: "admin.view"},
@@ -201,6 +199,13 @@ export const regions = [
     {id: 2, name: "Outside UAE"},
 ];
 
+export const shirtSizes = [
+    {id: 'S', name: 'S'},
+    {id: 'M', name: 'M'},
+    {id: 'L', name: 'L'},
+    {id: 'XL', name: 'XL'},
+    {id: 'XXL', name: 'XXL'}
+];
 
 export const postForApply = [
     {id: 1, value: "drivers", name: "Drivers"},
@@ -289,9 +294,9 @@ export const postForApply = [
 ];
 
 
-export const drivingLicense = [
-    {id: 1, name: "light motor vehicle (Manual)"},
-    {id: 2, name: "light motor vehicle (Auto)"},
+export const drivingLicenses = [
+    {id: 1, name: "Light motor vehicle (Manual)"},
+    {id: 2, name: "Light motor vehicle (Auto)"},
     {id: 3, name: "Motorcycle"},
     {id: 4, name: "Heavy truck"},
     {id: 5, name: "Mini bus"},
