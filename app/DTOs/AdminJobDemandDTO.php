@@ -95,6 +95,7 @@ class AdminJobDemandDTO
         $instance->companyActivities = $request->input('company_activities');
         $instance->workerQuantity = $request->input('worker_quantity');
         $instance->area = $request->input('area');
+        $instance->isOnDemand = $request->input('is_on_demand');
 
         return $instance;
     }
