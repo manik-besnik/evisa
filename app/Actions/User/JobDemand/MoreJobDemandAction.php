@@ -2,12 +2,15 @@
 
 namespace App\Actions\User\JobDemand;
 
+use App\Models\Location;
 use Inertia\Inertia;
 
 class MoreJobDemandAction
 {
     public function execute(): \Inertia\Response
     {
-        return Inertia::render('MoreJobDemand');
+        return Inertia::render('MoreJobDemand', [
+            'locations' => Location::query()->select(['id', 'name'])->get()
+        ]);
     }
 }

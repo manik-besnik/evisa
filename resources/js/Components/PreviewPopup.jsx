@@ -19,7 +19,7 @@ const PreviewPopup = ({ isOpen, onClose, data }) => {
 
                 {/* Header with Security and Camera Icon */}
                 <div className="bg-gray-500 text-white p-4 flex justify-between items-center">
-                    <div className="text-2xl font-bold">Security</div>
+                    <div className="text-2xl font-bold">{data.type_of_work}</div>
                 </div>
 
                 {/* Camera Space */}
@@ -36,7 +36,7 @@ const PreviewPopup = ({ isOpen, onClose, data }) => {
                 <div className="border-b border-gray-300 p-4">
                     <div className="flex justify-between items-center">
                         <div>
-                            <h1 className="text-2xl font-bold text-green-800">{data.typeOfWork || "Security"}</h1>
+                            <h1 className="text-2xl font-bold text-green-800">{data.type_of_work || "Security"}</h1>
                             <p className="text-lg">Salary <span className="font-bold">AED {data.salary || "2200"}</span></p>
                         </div>
                         <div className="text-right">
@@ -54,7 +54,7 @@ const PreviewPopup = ({ isOpen, onClose, data }) => {
                                 Job Location
                             </div>
                             <div className="w-full border-2 p-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white">
-                                {data.jobLocation || " "}
+                                {data.job_location || "Dubai"}
                             </div>
                         </div>
                         <div className="flex gap-4">
@@ -62,7 +62,7 @@ const PreviewPopup = ({ isOpen, onClose, data }) => {
                                 Visa validity
                             </div>
                             <div className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 p-2">
-                                {data.visaValidity || " "}
+                                {data.visa_validity || "02 years"}
                             </div>
                         </div>
                         <div className="flex gap-4">
@@ -94,7 +94,7 @@ const PreviewPopup = ({ isOpen, onClose, data }) => {
                                 Medical Insurance
                             </div>
                             <div className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 p-2">
-                                {data.medicalInsurance || " "}
+                                {data.medical_insurance || "As per UAE labour laws"}
                             </div>
                         </div>
                         <div className="flex gap-4">
@@ -102,7 +102,7 @@ const PreviewPopup = ({ isOpen, onClose, data }) => {
                                 Daily working hours
                             </div>
                             <div className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 p-2">
-                                {data.workingHours || " "} (As per Company Policy)
+                                {data.working_hours || "8 Hours"} (As per Company Policy)
                             </div>
                         </div>
                         <div className="flex gap-4">
@@ -118,7 +118,7 @@ const PreviewPopup = ({ isOpen, onClose, data }) => {
                                 Vacation benefits
                             </div>
                             <div className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 p-2">
-                                {data.vacationBenefits || " "}
+                                {data.vacation_benefits || "As per UAE labour laws"}
                             </div>
                         </div>
                         <div className="flex gap-4">
@@ -126,7 +126,7 @@ const PreviewPopup = ({ isOpen, onClose, data }) => {
                                 Age limits
                             </div>
                             <div className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 p-2">
-                                {data.ageLimits || " "}
+                                {data.age_limits || "20-32"}
                             </div>
                         </div>
                         <div className="flex gap-4">
@@ -134,7 +134,7 @@ const PreviewPopup = ({ isOpen, onClose, data }) => {
                                 In-demand workers
                             </div>
                             <div className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 p-2">
-                                {data.inDemandWorkers || " "}
+                                {data.worker_quantity || "50 People"}
                             </div>
                         </div>
                         <div className="flex gap-4">
@@ -150,7 +150,7 @@ const PreviewPopup = ({ isOpen, onClose, data }) => {
                                 Company activities
                             </div>
                             <div className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 p-2">
-                                {data.companyActivities || " "}
+                                {data.company_activities || "Established security service company"}
                             </div>
                         </div>
 
@@ -159,16 +159,16 @@ const PreviewPopup = ({ isOpen, onClose, data }) => {
 
                 {/* Contact Information */}
                 <div className="bg-gray-200 p-3 font-bold text-center text-lg">
-                    +971 {data.contactNo || " "} <FaWhatsapp className="inline text-green-600 ml-2" /> {data.whatsappNo || "0508074795, 0501289360"}
+                    +971 {data.phone_no || "528260909"} <FaWhatsapp className="inline text-green-600 ml-2" /> {data.whatsapp_no}
                 </div>
 
                 {/* Application Requirements */}
                 <div className="p-4">
                     <h3 className="font-bold text-lg">Application Requirements:</h3>
-                    <p className="my-2">{data.applicationRequirements || " "}</p>
+                    <p className="my-2">{data.note}</p>
                 </div>
 
-                
+
 
                 {/* Footer */}
                 <div className="bg-[#3C4344] text-white p-4 flex justify-between items-center">
