@@ -14,6 +14,7 @@ use App\Models\JobApply;
 use App\Models\JobDemand;
 use App\Models\JobPost;
 use App\Models\Language;
+use App\Models\Location;
 use App\Supports\JobApplyAction;
 use App\Supports\JobApplyList;
 use Illuminate\Http\Request;
@@ -56,10 +57,12 @@ class JobPostController extends Controller
     public function create(): \Inertia\Response
     {
         return Inertia::render('JobApply', [
-            'job_posts' => JobDemand::query()->select(['id', 'type_of_work'])
-                ->where('available_job', '>=', 1)
+            'job_demands' => JobDemand::query()
+                ->select(['id', 'type_of_work'])
+//                ->where('available_job', '>', 0)
                 ->get(),
-            'languages' => Language::query()->get()
+            'languages' => Language::query()->get(),
+            'locations' => Location::query()->select(['id', 'name'])->get(),
         ]);
     }
 

@@ -10,21 +10,23 @@ import {
     joDemand,
     visaTypes
 } from "@/Components/Constant/index.js";
-import { useState, useEffect } from "react";
-import { Head, useForm, usePage } from "@inertiajs/react";
+import {useState, useEffect} from "react";
+import {Head, useForm, usePage} from "@inertiajs/react";
 import PrimaryBtn from "@/Components/Web/PrimaryBtn.jsx";
-import { FaCameraRetro } from "react-icons/fa";
-import { Textarea } from "flowbite-react";
-import { toast } from "react-toastify";
-import { jobApplyDocuments, languageProficiency } from "@/Components/Constant/index.js";
+import {FaCameraRetro} from "react-icons/fa";
+import {Textarea} from "flowbite-react";
+import {toast} from "react-toastify";
+import {jobApplyDocuments, languageProficiency} from "@/Components/Constant/index.js";
+import MultiSelect from "@/Components/Web/MultiSelect.jsx";
 
 
 const JobDemand = () => {
-    const { auth,countries } = usePage().props;
-    ;
 
-    // States for form elements
+    const {auth, countries, job_demands} = usePage().props;
+
+
     const [nationality, setNationality] = useState('');
+    const [jobDemands, setJobDemands] = useState([])
     const [gender, setGender] = useState('');
     const [religion, setReligion] = useState('');
     const [bloodGroup, setBloodGroup] = useState('');
@@ -35,28 +37,29 @@ const JobDemand = () => {
     const [businessPhoto, setBusinessPhoto] = useState('');
     const [passportPhoto, setPassportPhoto] = useState(null);
 
+    console.log(jobDemands)
+
     // Define UAE locations
     const uaeLocations = [
-        { id: 'dubai', name: 'DUBAI' },
-        { id: 'abudhabi', name: 'ABUDHABI' },
-        { id: 'sharjah', name: 'SHARJAH' },
-        { id: 'ajman', name: 'AJMAN' },
-        { id: 'umm_al_quwain', name: 'UMM AL QWAIN' },
-        { id: 'ras_al_khaimah', name: 'RAS AL KHAIMA' },
-        { id: 'fujairah', name: 'FUJAYRAH' },
-        { id: 'al_ain', name: 'AL AIN' }
+        {id: 'dubai', name: 'DUBAI'},
+        {id: 'abudhabi', name: 'ABUDHABI'},
+        {id: 'sharjah', name: 'SHARJAH'},
+        {id: 'ajman', name: 'AJMAN'},
+        {id: 'umm_al_quwain', name: 'UMM AL QWAIN'},
+        {id: 'ras_al_khaimah', name: 'RAS AL KHAIMA'},
+        {id: 'fujairah', name: 'FUJAYRAH'},
+        {id: 'al_ain', name: 'AL AIN'}
     ];
 
 
     const [locationsToDisplay, setLocationsToDisplay] = useState([]);
 
     const applySourceOptions = [
-        { id: 'inside_uae', name: 'Inside UAE' },
-        { id: 'outside_uae', name: 'Outside UAE' }
+        {id: 'inside_uae', name: 'Inside UAE'},
+        {id: 'outside_uae', name: 'Outside UAE'}
     ];
 
     const initialState = {
-        // Personal Details
         name: '',
         mobile: '',
         email: '',
@@ -66,24 +69,19 @@ const JobDemand = () => {
         religion: '',
         blood_group: '',
         marital_status: '',
-
-        // Address
+        job_demands: [],
         current_address_state: '',
         current_address_city: '',
         current_address_area: '',
         permanent_address_district: '',
         permanent_address_thana: '',
         permanent_address_village: '',
-
-        // Passport & Visa
         passport_no: '',
         passport_expiry: '',
         country_contact_no: '',
         visa_status: '',
         visa_expiry: '',
         whatsapp_no: '',
-
-        // Education
         education_certificate: '',
         education_year: '',
         education_board: '',
@@ -95,31 +93,26 @@ const JobDemand = () => {
         arabic_proficiency: '',
         other_languages: [],
         mother_language: '',
-
-        // Job Experience
         job_experiences: [
-            { position: '', duration: '', company_name: '', country: '' },
-            { position: '', duration: '', company_name: '', country: '' }
+            {position: '', duration: '', company_name: '', country: ''},
+            {position: '', duration: '', company_name: '', country: ''}
         ],
-
-        // Physical details
         shirt_size: '',
         pant_size: '',
         shoes_size: '',
         weight: '',
         height: '',
         nearest_airport: '',
-
-        // Summary
         application_summary: '',
-
-        // Job details
         apply_from_source: '',
         apply_location: '',
-        job_post: ['', '', '']
     };
 
-    const { data, setData, post, processing, errors, reset } = useForm(initialState);
+    const {data, setData, post, processing, errors, reset} = useForm(initialState);
+
+    const updateJobDemands = (values) => {
+        console.log(values)
+    }
 
 
     useEffect(() => {
@@ -246,7 +239,7 @@ const JobDemand = () => {
 
     return (
         <WebLayout showBgImage={true} showServiceImage={false}>
-            <Head title="Job Application Form | Dubai E-Visa" />
+            <Head title="Job Application Form | Dubai E-Visa"/>
 
             <div className="container mx-auto px-4 py-6">
                 <div className="bg-white border-4 border-[#848585] p-6">
@@ -257,7 +250,7 @@ const JobDemand = () => {
                             <div className="md:w-1/3">
                                 <div className="flex items-center mb-6">
                                     <div className="bg-red-600 text-white text-center py-3 px-6 text-2xl font-bold">
-                                        JOB<br />APPLICATION<br />
+                                        JOB<br/>APPLICATION<br/>
                                         <span className="bg-gray-400">FORM</span>
                                     </div>
                                 </div>
@@ -309,8 +302,11 @@ const JobDemand = () => {
                                     ) : (
                                         <div className="text-center">
                                             <div className="flex justify-center">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                                                    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64"
+                                                     viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                     strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                                                    <path
+                                                        d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
                                                     <circle cx="12" cy="13" r="4"></circle>
                                                 </svg>
                                             </div>
@@ -353,14 +349,16 @@ const JobDemand = () => {
                                     <h2 className="text-red-600 text-xs font-bold mb-3">POST FOR APPLY</h2>
                                     <div className="grid">
 
-                                        <Select
+                                        <MultiSelect
                                             placeholder="Select Here"
-                                            items={[]} // Add your nationality options
-                                            selected={nationality}
-                                            setSelected={setNationality}
-                                            handleValueChange={updateNationality}
-                                            error={errors.nationality}
+                                            items={job_demands}
+                                            selected={jobDemands}
+                                            setSelected={setJobDemands}
+                                            handleValueChange={updateJobDemands}
+                                            error={errors.job_demands}
                                             required={true}
+                                            field="type_of_work"
+                                            selectLimit="3"
                                             defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
                                         />
                                     </div>
@@ -415,9 +413,9 @@ const JobDemand = () => {
                                             <Select
                                                 placeholder="Select Here"
                                                 items={[
-                                                    { id: 'male', name: 'Male' },
-                                                    { id: 'female', name: 'Female' },
-                                                    { id: 'other', name: 'Other' }
+                                                    {id: 'male', name: 'Male'},
+                                                    {id: 'female', name: 'Female'},
+                                                    {id: 'other', name: 'Other'}
                                                 ]}
                                                 selected={gender}
                                                 setSelected={setGender}
@@ -470,10 +468,10 @@ const JobDemand = () => {
                                             <Select
                                                 placeholder="Select"
                                                 items={[
-                                                    { id: 'single', name: 'Single' },
-                                                    { id: 'married', name: 'Married' },
-                                                    { id: 'divorced', name: 'Divorced' },
-                                                    { id: 'widowed', name: 'Widowed' }
+                                                    {id: 'single', name: 'Single'},
+                                                    {id: 'married', name: 'Married'},
+                                                    {id: 'divorced', name: 'Divorced'},
+                                                    {id: 'widowed', name: 'Widowed'}
                                                 ]}
                                                 selected={maritalStatus}
                                                 setSelected={setMaritalStatus}
@@ -486,7 +484,7 @@ const JobDemand = () => {
                                 </div>
                             </div>
                         </div>
-                        <hr className="border-2 border-[#848585] mb-3" />
+                        <hr className="border-2 border-[#848585] mb-3"/>
                         {/* Address */}
                         <div className="mb-6">
                             <div className="grid grid-cols-1 gap-3">
@@ -555,7 +553,7 @@ const JobDemand = () => {
                                 </div>
                             </div>
                         </div>
-                        <hr className="border-2 border-[#848585] mb-3" />
+                        <hr className="border-2 border-[#848585] mb-3"/>
                         {/* Passport & Visa Information */}
                         <div className="mb-6">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -718,14 +716,14 @@ const JobDemand = () => {
                                     <Select
                                         placeholder="Select"
                                         items={[
-                                            { id: '1', name: 'light motor vehicle (Manual)' },
-                                            { id: '2', name: 'light motor vehicle (Auto)' },
-                                            { id: '3', name: 'Motorcycle' },
-                                            { id: '4', name: 'Heavy truck' },
-                                            { id: '5', name: 'Mini bus' },
-                                            { id: '6', name: 'Heavy bus' },
-                                            { id: '7', name: 'Fork lift' },
-                                            { id: '8', name: 'Shovel' },
+                                            {id: '1', name: 'light motor vehicle (Manual)'},
+                                            {id: '2', name: 'light motor vehicle (Auto)'},
+                                            {id: '3', name: 'Motorcycle'},
+                                            {id: '4', name: 'Heavy truck'},
+                                            {id: '5', name: 'Mini bus'},
+                                            {id: '6', name: 'Heavy bus'},
+                                            {id: '7', name: 'Fork lift'},
+                                            {id: '8', name: 'Shovel'},
                                         ]}
                                         selected={data.has_driving_license}
                                         setSelected={(value) => setData('has_driving_license', value)}
@@ -766,9 +764,9 @@ const JobDemand = () => {
                                     <Select
                                         placeholder="Good | Fair | Poor"
                                         items={[
-                                            { id: 'good', name: 'Good' },
-                                            { id: 'fair', name: 'Fair' },
-                                            { id: 'poor', name: 'Poor' }
+                                            {id: 'good', name: 'Good'},
+                                            {id: 'fair', name: 'Fair'},
+                                            {id: 'poor', name: 'Poor'}
                                         ]}
                                         selected={data.english_proficiency}
                                         setSelected={(value) => setData('english_proficiency', value)}
@@ -784,9 +782,9 @@ const JobDemand = () => {
                                     <Select
                                         placeholder="Good | Fair | Poor"
                                         items={[
-                                            { id: 'good', name: 'Good' },
-                                            { id: 'fair', name: 'Fair' },
-                                            { id: 'poor', name: 'Poor' }
+                                            {id: 'good', name: 'Good'},
+                                            {id: 'fair', name: 'Fair'},
+                                            {id: 'poor', name: 'Poor'}
                                         ]}
                                         selected={data.other_languages_proficiency}
                                         setSelected={(value) => setData('other_languages_proficiency', value)}
@@ -806,9 +804,9 @@ const JobDemand = () => {
                                     <Select
                                         placeholder="Good | Fair | Poor"
                                         items={[
-                                            { id: 'good', name: 'Good' },
-                                            { id: 'fair', name: 'Fair' },
-                                            { id: 'poor', name: 'Poor' }
+                                            {id: 'good', name: 'Good'},
+                                            {id: 'fair', name: 'Fair'},
+                                            {id: 'poor', name: 'Poor'}
                                         ]}
                                         selected={data.arabic_proficiency}
                                         setSelected={(value) => setData('arabic_proficiency', value)}
@@ -918,11 +916,11 @@ const JobDemand = () => {
                                     <Select
                                         placeholder="Select Here"
                                         items={[
-                                            { id: 'S', name: 'S' },
-                                            { id: 'M', name: 'M' },
-                                            { id: 'L', name: 'L' },
-                                            { id: 'XL', name: 'XL' },
-                                            { id: 'XXL', name: 'XXL' }
+                                            {id: 'S', name: 'S'},
+                                            {id: 'M', name: 'M'},
+                                            {id: 'L', name: 'L'},
+                                            {id: 'XL', name: 'XL'},
+                                            {id: 'XXL', name: 'XXL'}
                                         ]}
                                         selected={data.shirt_size}
                                         setSelected={(value) => setData('shirt_size', value)}
