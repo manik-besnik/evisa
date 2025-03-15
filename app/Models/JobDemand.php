@@ -42,6 +42,8 @@ use Illuminate\Support\Facades\Cache;
  *
  * @mixin Model
  * @property Company|null $company
+ * @property User|null $user
+ * @property Location|null $location
  */
 class JobDemand extends Model
 {
