@@ -114,14 +114,14 @@ const JobDemand = () => {
         application_summary: '',
 
         // Job details
-        apply_from_source: '', 
-        apply_location: '', 
+        apply_from_source: '',
+        apply_location: '',
         job_post: ['', '', '']
     };
 
     const { data, setData, post, processing, errors, reset } = useForm(initialState);
 
-  
+
     useEffect(() => {
         if (applySource && applySource.id === 'inside_uae') {
             setLocationsToDisplay(uaeLocations);
@@ -154,10 +154,10 @@ const JobDemand = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-       
+
         const formData = new FormData();
 
-       
+
         Object.keys(data).forEach(key => {
             if (key === 'job_post') {
                 // Handle array data
@@ -169,12 +169,12 @@ const JobDemand = () => {
             }
         });
 
-       
+
         if (passportPhoto) {
             formData.append('passport_photo', passportPhoto);
         }
 
-        
+
         post(route('job-posts.store'), {
             data: formData,
             forceFormData: true,
@@ -656,7 +656,7 @@ const JobDemand = () => {
                             </div>
                         </div>
 
-                       
+
                         {/* Education - Enhanced Section */}
                         <div className="mb-6">
                             <h2 className="text-xl font-bold mb-3 border-l-4 border-red-600 pl-2">EDUCATION DETAILS</h2>
@@ -712,14 +712,20 @@ const JobDemand = () => {
                             <div className="grid grid-cols-12 gap-3 mb-4">
                                 <div className="col-span-3">
                                     <p className="p-[7px] border-2 border-[#848585]">Driving License</p>
-                                    
+
                                 </div>
                                 <div className="col-span-3">
                                     <Select
                                         placeholder="Select"
                                         items={[
-                                            { id: 'yes', name: 'Yes' },
-                                            { id: 'no', name: 'No' }
+                                            { id: '1', name: 'light motor vehicle (Manual)' },
+                                            { id: '2', name: 'light motor vehicle (Auto)' },
+                                            { id: '3', name: 'Motorcycle' },
+                                            { id: '4', name: 'Heavy truck' },
+                                            { id: '5', name: 'Mini bus' },
+                                            { id: '6', name: 'Heavy bus' },
+                                            { id: '7', name: 'Fork lift' },
+                                            { id: '8', name: 'Shovel' },
                                         ]}
                                         selected={data.has_driving_license}
                                         setSelected={(value) => setData('has_driving_license', value)}
@@ -754,7 +760,7 @@ const JobDemand = () => {
                             <div className="grid grid-cols-12 gap-3 mb-4">
                                 <div className="col-span-3">
                                     <p className="p-[7px] border-2 border-[#848585]">English</p>
-                                    
+
                                 </div>
                                 <div className="col-span-3">
                                     <Select
@@ -793,7 +799,7 @@ const JobDemand = () => {
 
                             <div className="grid grid-cols-12 gap-3 mb-4">
                                 <div className="col-span-3">
-                                    
+
                                     <p className="p-[7px] border-2 border-[#848585]">Arabic</p>
                                 </div>
                                 <div className="col-span-3">
