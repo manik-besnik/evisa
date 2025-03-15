@@ -42,7 +42,7 @@ class JobApplyDTO
     public static function fromRequest(Request $request): JobApplyDTO
     {
         $request->validate([
-            'job_post_id' => ['required', 'integer', Rule::exists('job_posts', 'id')],
+            'job_post_id' => ['nullable'],
             'name' => ['required', 'string', 'min:2', 'max:250'],
             'phone' => ['required', 'string', 'min:9', 'max:20'],
             'email' => ['required', 'string', 'min:5', 'max:200'],

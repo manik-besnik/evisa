@@ -11,7 +11,7 @@ import {
     bloodGroups,
     jobApplyDocuments,
     regions,
-    postForApply, shirtSizes, languageProficiency, drivingLicenses, drivingLicense
+    postForApply, shirtSizes, languageProficiency, drivingLicenses
 } from "@/Components/Constant/index.js";
 import {useState, useEffect} from "react";
 import {Head, useForm, usePage} from "@inertiajs/react";
@@ -61,7 +61,7 @@ const JobDemand = () => {
         current_address_state: "",
         current_address_city: "",
         current_address_area: "",
-        parmanent_district: "",
+        permanent_district: "",
         permanent_thana: "",
         permanent_village: "",
         passport_no: "",
@@ -483,9 +483,9 @@ const JobDemand = () => {
                                     <div className="flex-1 grid grid-cols-3 gap-2">
                                         <TextInput
                                             placeholder="District"
-                                            value={data.parmanent_district}
-                                            onChange={(e) => setData('parmanent_district', e.target.value)}
-                                            error={errors.parmanent_district}
+                                            value={data.permanent_district}
+                                            onChange={(e) => setData('permanent_district', e.target.value)}
+                                            error={errors.permanent_district}
                                             required={true}
                                             defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
                                         />
@@ -768,13 +768,12 @@ const JobDemand = () => {
                                 <div className="col-span-3">
                                     <Select
                                         placeholder="Select Language"
-                                        label="Mother Language*"
                                         items={languages}
                                         selected={motherLanguage}
                                         setSelected={setMotherLanguage}
                                         handleValueChange={(value) => setData('mother_language', value.id)}
                                         error={errors.mother_language}
-                                        defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
+                                        defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
                                     />
                                 </div>
                             </div>
