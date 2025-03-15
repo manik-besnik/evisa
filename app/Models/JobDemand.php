@@ -39,6 +39,9 @@ use Illuminate\Support\Facades\Cache;
  * @property boolean|int $is_new
  * @property boolean|int $is_approved
  * @property boolean|int $is_on_demand
+ *
+ * @mixin Model
+ * @property Company|null $company
  */
 class JobDemand extends Model
 {
