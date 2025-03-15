@@ -54,7 +54,9 @@ const InputFile = ({
                 />
 
                 {readFile ? (
-                    <img src={readFile} className="w-full h-auto" alt="Uploaded file"/>
+                    <div className="flex items-center justify-center">
+                        <img src={readFile} className="w-auto h-40 text-center" alt="Uploaded file"/>
+                    </div>
                 ) : (
                     children ? children : (
                         <div className="flex flex-col items-center">
