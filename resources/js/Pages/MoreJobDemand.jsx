@@ -6,11 +6,13 @@ import {Head, useForm, usePage} from "@inertiajs/react";
 import {FaCameraRetro} from "react-icons/fa";
 import {regions} from "@/Components/Constant"
 import {toast} from "react-toastify";
+import PreviewMoreJobDemandPopup from "../Components/PreviewMoreJobDemandPopup.jsx";
 
 const MoreJobDemand = () => {
 
     const {locations} = usePage().props
     const [location, setLocation] = useState(null)
+    const [showPreview, setShowPreview] = useState(false);
 
     const [region, setRegion] = useState(regions[0])
 
@@ -75,10 +77,19 @@ const MoreJobDemand = () => {
         });
     };
 
+    // Toggle preview popup
+    const togglePreview = () => {
+        setShowPreview(!showPreview);
+    };
+
     return (
         <WebLayout showBgImage={true} showServiceImage={false}>
             <Head title="Job Demand | Dubai E-Visa"/>
-
+            <PreviewMoreJobDemandPopup
+                isOpen={showPreview}
+                onClose={togglePreview}
+                data={data}
+            />
             <div className="container mx-auto px-4 py-8">
                 <form onSubmit={handleSubmit}>
                     <div className="bg-white rounded-lg shadow-lg overflow-hidden p-16">
@@ -595,6 +606,7 @@ const MoreJobDemand = () => {
                             </button>
                             <button
                                 type="button"
+                                onClick={togglePreview}
                                 className="bg-blue-600 text-white px-4 py-2 rounded font-bold flex items-center"
                             >
                                 <span className="mr-2">Preview</span>

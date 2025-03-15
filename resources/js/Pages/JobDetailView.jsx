@@ -42,11 +42,11 @@ const JobDetailView = ({ job }) => {
                             alt={jobDetails.title}
                             className="w-full h-full object-cover"
                         />
-                        
+
                         <div className="absolute bottom-0 left-0 p-4">
                             <h1 className="text-white text-4xl font-bold">{jobDetails.title}</h1>
                         </div>
-                        
+
                     </div>
 
                     {/* Job Title and Code Section */}
@@ -187,15 +187,15 @@ const JobDetailView = ({ job }) => {
 
                     {/* Application Requirements */}
                     <div className="p-4 bg-white flex">
-                       <div className="w-10/12">
+                        <div className="w-10/12">
                             <h3 className="text-lg font-bold mb-2">Application Requirements:</h3>
                             <p>{jobDetails.applicationRequirements}</p>
                             <p className="mt-2 mb-4 font-semibold">Apply today, interview required.</p>
 
-                       </div>
+                        </div>
                         <div className="mt-2 w-2/12">
                             <button onClick={() => window.location.href = `/job-apply`} className="bg-red-600 text-white px-8 py-2 rounded-md font-bold w-8/12 mb-3 ml-3">Apply</button>
-                            
+
                             <button
                                 onClick={() => window.location.href = `/job-pdf/${jobDetails.id}`}
                                 className="bg-green-600 text-white px-6 py-2 rounded-full flex items-center"
