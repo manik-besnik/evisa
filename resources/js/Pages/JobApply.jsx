@@ -11,7 +11,11 @@ import {
     bloodGroups,
     jobApplyDocuments,
     regions,
-    postForApply, shirtSizes, languageProficiency, drivingLicenses
+    postForApply,
+    shirtSizes,
+    languageProficiency,
+    drivingLicenses,
+    religions
 } from "@/Components/Constant/index.js";
 import {useState, useEffect} from "react";
 import {Head, useForm, usePage} from "@inertiajs/react";
@@ -398,7 +402,7 @@ const JobDemand = () => {
                                         <div className="flex-1">
                                             <Select
                                                 placeholder="Select"
-                                                items={[]} // Add religion options
+                                                items={religions} 
                                                 selected={religion}
                                                 setSelected={setReligion}
                                                 handleValueChange={(value) => setData('religion', value.id)}

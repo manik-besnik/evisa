@@ -304,3 +304,12 @@ export const drivingLicenses = [
     {id: 7, name: "Fork lift"},
     {id: 8, name: "Shovel"},
 ];
+
+export const religions = [
+    {id: 1, name: "Sunni Muslim"},
+    {id: 2, name: "Shiite Muslim"},
+    {id: 3, name: "Christian"},
+    {id: 4, name: "Hindu"},
+    {id: 5, name: "Sikh"},
+    {id: 6, name: "Buddhist"}
+];
