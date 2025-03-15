@@ -58,9 +58,9 @@ const JobDemand = () => {
         religion: "",
         blood_group: "",
         marital_status: "",
-        current_address_state: "",
-        current_address_city: "",
-        current_address_area: "",
+        current_state: "",
+        current_city: "",
+        current_area: "",
         permanent_district: "",
         permanent_thana: "",
         permanent_village: "",
@@ -452,25 +452,25 @@ const JobDemand = () => {
                                     <div className="flex-1 grid grid-cols-3 gap-2">
                                         <TextInput
                                             placeholder="State"
-                                            value={data.current_address_state}
-                                            onChange={(e) => setData('current_address_state', e.target.value)}
-                                            error={errors.current_address_state}
+                                            value={data.current_state}
+                                            onChange={(e) => setData('current_state', e.target.value)}
+                                            error={errors.current_state}
                                             required={true}
                                             defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
                                         />
                                         <TextInput
                                             placeholder="City"
-                                            value={data.current_address_city}
-                                            onChange={(e) => setData('current_address_city', e.target.value)}
-                                            error={errors.current_address_city}
+                                            value={data.current_city}
+                                            onChange={(e) => setData('current_city', e.target.value)}
+                                            error={errors.current_city}
                                             required={true}
                                             defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
                                         />
                                         <TextInput
                                             placeholder="Area"
-                                            value={data.current_address_area}
-                                            onChange={(e) => setData('current_address_area', e.target.value)}
-                                            error={errors.current_address_area}
+                                            value={data.current_area}
+                                            onChange={(e) => setData('current_area', e.target.value)}
+                                            error={errors.current_area}
                                             required={true}
                                             defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
                                         />
