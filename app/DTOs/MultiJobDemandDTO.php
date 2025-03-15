@@ -60,8 +60,8 @@ class MultiJobDemandDTO
             'company_activities' => 'required|string|max:255',
             'demand_items' => 'required|array',
             'demand_items.*.type_of_work' => 'required|string|max:255',
-            'demand_items.*.salary' => 'required|numeric',
-            'demand_items.*.worker_quantity' => 'required|integer|min:1',
+            'demand_items.*.salary' => 'required|string',
+            'demand_items.*.worker_quantity' => 'required|string|min:1',
             'demand_items.*.note' => 'required|string|max:255',
         ], [
             'location_id.required' => 'Job Location is required.',

@@ -49,7 +49,7 @@ class JobDemandDTO
             'city' => 'required|string|max:255',
             'area' => 'required|string|max:255',
             'type_of_work' => 'required|string|max:255',
-            'salary' => 'required|numeric|max:255',
+            'salary' => 'required|string|max:255',
             'working_hours' => 'required|string|max:255',
             'visa_validity' => 'required|string|max:255',
             'medical_insurance' => 'required|string|max:255',
@@ -61,7 +61,7 @@ class JobDemandDTO
             'age_limits' => 'required|string|max:255',
             'note' => 'required|string|max:255',
             'company_activities' => 'required|string|max:255',
-            'worker_quantity' => 'required|integer|min:1',
+            'worker_quantity' => 'required|string|min:1',
         ],[
             'location_id.required' => 'Job Location is required.',
             'location_id.exists' => 'Job Location does not exist.',
