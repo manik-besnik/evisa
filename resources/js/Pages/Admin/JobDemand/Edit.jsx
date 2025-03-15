@@ -555,9 +555,9 @@ const Edit = () => {
                                 type="button"
                                 onClick={handleApprove}
                                 disabled={processing}
-                                className="bg-red-600 text-white px-8 py-2 rounded font-bold"
+                                className="bg-green-600 text-white px-8 py-2 rounded font-bold ml-4"
                             >
-                                Update & Approve
+                                Save & Approve
                             </button>
                         </div>
                     </div>
