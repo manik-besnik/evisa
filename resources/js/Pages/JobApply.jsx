@@ -11,16 +11,19 @@ import {
     visaTypes,
     bloodGroups,
     jobApplyDocuments,
-    regions
+    regions,
+    postForApply
 } from "@/Components/Constant/index.js";
 import {useState, useEffect} from "react";
 import {Head, useForm, usePage} from "@inertiajs/react";
 import PrimaryBtn from "@/Components/Web/PrimaryBtn.jsx";
-import {FaCameraRetro} from "react-icons/fa";
+import {FaCameraRetro, FaTrashAlt} from "react-icons/fa";
 import {Textarea} from "flowbite-react";
 import {toast} from "react-toastify";
 import MultiSelect from "@/Components/Web/MultiSelect.jsx";
 import {value} from "lodash/seq.js";
+import FileUpload from "@/Components/Web/FileUpload.jsx";
+import {FaPlus} from "react-icons/fa6";
 
 
 const JobDemand = () => {
@@ -102,11 +105,6 @@ const JobDemand = () => {
             }
         ],
     })
-
-    const updateJobDemands = (values) => {
-        const ids = values.map(item => item.id)
-        setData('job_demands', ids)
-    }
 
     const updateJobExperience = (index, key, value) => {
         const updatedExperiences = [...data.job_experiences];
@@ -198,21 +196,6 @@ const JobDemand = () => {
         });
     };
 
-    const updateNationality = (value) => {
-        setNationality(value);
-        setData('nationality', value.id);
-    };
-
-    const updateGender = (value) => {
-        setGender(value);
-        setData('gender', value.id);
-    };
-
-    const updateDistrict = (value) => {
-        setDistrict(value);
-        setData('permanent_address_district', value.id);
-    };
-
 
     return (
         <WebLayout showBgImage={true} showServiceImage={false}>
@@ -280,13 +263,12 @@ const JobDemand = () => {
 
                             <div className="md:w-1/3 flex justify-center">
                                 <div className="border-2 border-gray-300 w-56 h-full flex items-center justify-center">
-                                    {passportPhoto ? (
-                                        <img
-                                            src={URL.createObjectURL(passportPhoto)}
-                                            alt="Passport"
-                                            className="max-w-full max-h-full"
-                                        />
-                                    ) : (
+
+                                    <FileUpload
+                                        fileType="avatar"
+                                        onChange={handleFileChange}
+
+                                    >
                                         <div className="text-center">
                                             <div className="flex justify-center">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64"
@@ -299,7 +281,8 @@ const JobDemand = () => {
                                             </div>
                                             <p className="mt-2 text-sm">Passport Size Pic</p>
                                         </div>
-                                    )}
+                                    </FileUpload>
+
                                 </div>
                             </div>
 
@@ -342,13 +325,13 @@ const JobDemand = () => {
 
                                         <MultiSelect
                                             placeholder="Select Here"
-                                            items={job_demands}
+                                            items={postForApply}
                                             selected={jobDemands}
                                             setSelected={setJobDemands}
-                                            handleValueChange={updateJobDemands}
+                                            handleValueChange={(values) => setData('job_demands', values)}
                                             error={errors.job_demands}
                                             required={true}
-                                            field="type_of_work"
+                                            field="name"
                                             selectLimit="3"
                                             defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
                                         />
@@ -408,7 +391,7 @@ const JobDemand = () => {
                                                 items={genders}
                                                 selected={gender}
                                                 setSelected={setGender}
-                                                handleValueChange={(value) => setData('gender',value.id)}
+                                                handleValueChange={(value) => setData('gender', value.id)}
                                                 error={errors.gender}
                                                 required={true}
                                                 defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
@@ -826,62 +809,68 @@ const JobDemand = () => {
 
                         {/* Job Experience */}
                         <div className="mb-6">
-                            <h2 className="text-xl font-bold mb-3 border-l-4 border-red-600 pl-2">JOB EXPERIENCE</h2>
+                            <div className="flex justify-between items-center mt-8">
+                                <h2 className="text-xl font-bold mb-3 border-l-4 border-red-600 pl-2">JOB
+                                    EXPERIENCE</h2>
+                                <button type="button" onClick={addNewExperience}
+                                        className="flex items-center gap-x-2 py-2 px-4 text-white bg-yellow-500 hover:bg-primary font-medium shadow-[2px_2px_4px_rgba(0,0,0,0.3)] text-xs hover:shadow-[2px_2px_6px_rgba(0,0,0,0.35)] transition-shadow duration-200">
+                                    <FaPlus className="text-white"/> Add New Experience
+                                </button>
+                            </div>
 
-                            {data.job_experiences.map((experience, index) => (
-                                <div key={index} className="grid grid-cols-12 gap-3 mb-4">
-                                    <div className="col-span-3">
+                            {data.job_experiences.map((item, i) => (
+                                <div key={i} className="flex items-center gap-3 mb-4">
+                                    <div className="w-1/4">
                                         <TextInput
-                                            placeholder="Position"
-                                            value={experience.position}
-                                            onChange={(e) => {
-                                                const updated = [...data.job_experiences];
-                                                updated[index].position = e.target.value;
-                                                setData('job_experiences', updated);
-                                            }}
-                                            error={errors[`job_experiences.${index}.position`]}
-                                            defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                            value={item.position}
+                                            onChange={(e) => updateJobExperience(i, "position", e.target.value)}
+                                            error={errors?.job_experiences ? errors?.job_experiences[i]?.position : ""}
+                                            id={`position-${i}`}
+                                            placeholder="EX: Software Enginner"
+                                            label="Position*"
+                                            defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
+                                            labelClasses="text-text-primary"
                                         />
                                     </div>
-                                    <div className="col-span-3">
+                                    <div className="w-1/4">
                                         <TextInput
-                                            placeholder="Duration"
-                                            value={experience.duration}
-                                            onChange={(e) => {
-                                                const updated = [...data.job_experiences];
-                                                updated[index].duration = e.target.value;
-                                                setData('job_experiences', updated);
-                                            }}
-                                            error={errors[`job_experiences.${index}.duration`]}
-                                            defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                            value={item.duration}
+                                            onChange={(e) => updateJobExperience(i, "duration", e.target.value)}
+                                            error={errors?.job_experiences ? errors?.job_experiences[i]?.duration : ""}// error={errors.passing_year}
+                                            id={`duration-${i}`}
+                                            placeholder="EX: 4 Years"
+                                            label="Duration*"
+                                            defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
+                                            labelClasses="text-text-primary"
                                         />
                                     </div>
-                                    <div className="col-span-3">
+                                    <div className="w-1/4">
                                         <TextInput
+                                            value={item.company}
+                                            onChange={(e) => updateJobExperience(i, "company", e.target.value)}
+                                            error={errors?.job_experiences ? errors?.job_experiences[i]?.company : ""}
+                                            id={`company-${i}`}
                                             placeholder="Company Name"
-                                            value={experience.company_name}
-                                            onChange={(e) => {
-                                                const updated = [...data.job_experiences];
-                                                updated[index].company_name = e.target.value;
-                                                setData('job_experiences', updated);
-                                            }}
-                                            error={errors[`job_experiences.${index}.company_name`]}
-                                            defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                            label="Company Name*"
+                                            defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
+                                            labelClasses="text-text-primary"
                                         />
                                     </div>
-                                    <div className="col-span-3">
-                                        <TextInput
-                                            placeholder="Country"
-                                            value={experience.country}
-                                            onChange={(e) => {
-                                                const updated = [...data.job_experiences];
-                                                updated[index].country = e.target.value;
-                                                setData('job_experiences', updated);
-                                            }}
-                                            error={errors[`job_experiences.${index}.country`]}
-                                            defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                    <div className="w-1/4">
+                                        <Select
+                                            placeholder="Select Country"
+                                            label="Country*"
+                                            items={countries}
+                                            selected={item.country}
+                                            setSelected={(value) => updateJobExperience(i, "country", value)}
+                                            handleValueChange={(value) => updateJobExperience(i, "country", value)}
+                                            error={errors?.job_experiences ? errors?.job_experiences[i]?.country_id : ""}
+                                            defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
                                         />
                                     </div>
+                                    {data.job_experiences.length > 1 && (<button type="button" onClick={() => deleteExperience(i)}
+                                                       className="bg-warning text-white text-sm w-9 text-center p-2.5 h-9 mt-5 flex item-center justify-between">
+                                        <FaTrashAlt/></button>)}
                                 </div>
                             ))}
                         </div>
