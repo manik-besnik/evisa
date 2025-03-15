@@ -9,7 +9,7 @@ class Country
     public static function get()
     {
         return Cache::rememberForever('countries', function () {
-            return \App\Models\Country::query()->get();
+            return \App\Models\Country::query()->select(['id','name','nationality'])->get();
         });
     }
 }
