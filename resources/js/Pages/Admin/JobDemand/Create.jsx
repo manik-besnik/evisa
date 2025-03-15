@@ -1,35 +1,32 @@
-import WebLayout from "@/Layouts/WebLayout.jsx";
-import TextInput from "@/Components/TextInput.jsx";
+import Authenticated from "@/Layouts/AuthenticatedLayout.jsx";
+import {Head, Link, useForm} from "@inertiajs/react";
 import Select from "@/Components/Web/Select.jsx";
-import {
-    documentTypes,
-    genders,
-    groups,
-    maritalStatuses,
-    joDemand,
-    visaTypes, regions
-} from "@/Components/Constant/index.js";
 import {useState} from "react";
-import {Head, useForm, usePage} from "@inertiajs/react";
-import PrimaryBtn from "@/Components/Web/PrimaryBtn.jsx";
+import TopSection from "@/Components/Admin/TopSection.jsx";
+import TextInput from "@/Components/TextInput.jsx";
 import {FaCameraRetro} from "react-icons/fa";
-import {toast} from "react-toastify";
-import PreviewPopup from "../Components/PreviewPopup.jsx";
+import {usePage} from "@inertiajs/react";
 
-
-const SingleJobDemand = () => {
+const CreateJobPost = () => {
 
     const {locations} = usePage().props
-    const [showPreview, setShowPreview] = useState(false);
+    const jobLocations = [
+        ...[
+            {
+                id: "ready_job",
+                name: "READY JOB",
+            }, {
+                id: "new_job",
+                name: "NEW JOB",
+            }
+        ],
+        ...locations
+    ]
     const [location, setLocation] = useState(null)
-    const [region, setRegion] = useState(regions[0])
 
-
-    // Create form with useForm
     const {data, setData, post, processing, errors} = useForm({
         // Job details
         type_of_work: '', // Default value
-        region: 1, // Default value
         job_location: '',
         location_id: '',
         visa_validity: '',
@@ -44,53 +41,51 @@ const SingleJobDemand = () => {
         worker_quantity: '',
         education: '',
         company_activities: '',
-
-        // Company details
         company_name: '',
         contact_person: '',
         phone_no: '',
         whatsapp_no: '',
         email: '',
-
-        // Address
         current_address: '',
         city: '',
         area: '',
-
-        // Application requirements
-        note: ''
+        note: '',
+        is_on_demand: false,
+        is_new_job: false,
+        is_approved: true,
     });
 
-    // Handle form submission
+
     const handleSubmit = (e) => {
-        e.preventDefault();
+        e.preventDefault()
 
-        // Handle form submission logic here
-        post(route('job-demand.store'), {
-            onSuccess: () => {
-                toast.success('Job demand submitted successfully');
-            }
-        });
-    };
+        if (data.location_id === 'ready_job') {
+            setData('location_id', null)
+            setData('is_on_demand', true)
+        }
+        if (data.location_id === 'new_job') {
+            setData('location_id', null)
+            setData('is_new_job', true)
+        }
 
-    // Toggle preview popup
-    const togglePreview = () => {
-        setShowPreview(!showPreview);
-    };
+        post(route('admin.job-demands.store'))
+    }
+
 
     return (
-        <WebLayout showBgImage={true} showServiceImage={false}>
-            <Head title="Job Demand | Dubai E-Visa"/>
+        <Authenticated>
+            <Head title="Add New Job | Dubai E-Visa"/>
 
-            <PreviewPopup
-                isOpen={showPreview}
-                onClose={togglePreview}
-                data={data}
-            />
+            <TopSection title='Add New Job Post'>
+                <Link href={route('admin.job-demands.index')} className='btn-primary'> Job Post List
+                </Link>
+            </TopSection>
 
-            <div className="container mx-auto px-4 py-8">
-                <form onSubmit={handleSubmit}>
-                    <div className="bg-white rounded-lg shadow-lg overflow-hidden p-16">
+            <div className="mt-1">
+
+                <form onSubmit={handleSubmit} className="flex flex-col gap-y-2">
+                    <div className="p-10 h-full overflow-y-auto bg-white">
+
                         {/* Header with "Security" and Camera Icon */}
                         <div className="bg-gray-500 text-white p-4 flex justify-between items-center">
                             <div className="flex items-center space-x-4">
@@ -124,48 +119,22 @@ const SingleJobDemand = () => {
                         {/* Job Details Table with TextInput */}
                         <div className="w-full">
                             <div className="grid mt-5">
-                                <div className="flex gap-4">
-                                    <div
-                                        className="pr-2 border-2 border-b-0 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right  flex items-center justify-end">
-                                        Region
-                                    </div>
-                                    <div className="w-full border-2 border-b-0 border-[#8A9298] bg-white">
 
-                                        <Select
-                                            items={regions}
-                                            selected={region}
-                                            setSelected={setRegion}
-                                            handleValueChange={(value) => setData('region', value.id)}
-                                            error={errors.region}
-
-                                        />
-                                    </div>
-                                </div>
                                 <div className="flex gap-4">
                                     <div
                                         className="pr-2 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right  flex items-center justify-end">
                                         Job Location
                                     </div>
                                     <div className="w-full border-2 border-[#8A9298] bg-white">
-                                        {region.id === 1 && (
-                                            <Select
-                                                items={locations}
-                                                selected={location}
-                                                setSelected={setLocation}
-                                                handleValueChange={(value) => setData('location_id', value.id)}
-                                                error={errors.location_id}
 
-                                            />)}
-                                        {region.id === 2 && (
-                                            <TextInput
-                                                id="job_location"
-                                                value={data.job_location}
-                                                onChange={(e) => setData("job_location", e.target.value)}
-                                                error={errors.job_location}
-                                                placeholder="Type Here"
-                                            />
-                                        )}
+                                        <Select
+                                            items={jobLocations}
+                                            selected={location}
+                                            setSelected={setLocation}
+                                            handleValueChange={(value) => setData('location_id', value.id)}
+                                            error={errors.location_id}
 
+                                        />
 
                                     </div>
                                 </div>
@@ -492,7 +461,7 @@ const SingleJobDemand = () => {
                                         className="absolute right-0 top-0 h-full w-4/12 bg-red-600"
                                         style={{clipPath: "polygon(10% 0, 100% 0, 100% 100%, 20% 100%)"}}
                                     ></span>
-                                    ADRESS
+                                    ADDRESS
                                 </h3>
                             </div>
                         </div>
@@ -500,7 +469,7 @@ const SingleJobDemand = () => {
                         {/* Current Address */}
                         <div className="flex gap-4">
                             <div className="bg-gray-600 text-white p-2 w-48 flex items-center">
-                                <span className="font-bold">CURRENT ADRESS</span>
+                                <span className="font-bold">CURRENT ADDRESS</span>
                             </div>
                             <div className="flex-1 p-0 relative border-2 border-[#8A9298]">
                                 <div className="absolute top-0 bottom-0 left-0 w-1 bg-red-500"></div>
@@ -548,8 +517,7 @@ const SingleJobDemand = () => {
                             </div>
                         </div>
 
-                        {/* Submit and Preview Buttons */}
-                        <div className="p-4 flex justify-end space-x-4">
+                        <div className="flex justify-end mt-4">
                             <button
                                 type="submit"
                                 disabled={processing}
@@ -557,28 +525,13 @@ const SingleJobDemand = () => {
                             >
                                 Submit
                             </button>
-                            <button
-                                type="button"
-                                onClick={togglePreview}
-                                className="bg-blue-600 text-white px-4 py-2 rounded font-bold flex items-center"
-                            >
-                                <span className="mr-2">Preview</span>
-                                <span className="flex items-center justify-center w-6 h-6 bg-white rounded-full">
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-blue-600"
-                                         fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                                              d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                                              d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                                    </svg>
-                                </span>
-                            </button>
                         </div>
                     </div>
+
                 </form>
             </div>
-        </WebLayout>
+        </Authenticated>
     )
 }
 
-export default SingleJobDemand;
+export default CreateJobPost

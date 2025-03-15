@@ -1,22 +1,22 @@
-import { Link } from '@inertiajs/react';
+import {Link} from '@inertiajs/react';
 import ArrowUp from '@/Components/SvgIcons/ArrowUp.jsx';
 import ArrowRight from '@/Components/SvgIcons/ArrowRight.jsx';
 
 import {useState} from 'react';
 import {GrVisa} from "react-icons/gr";
 import {PiNetworkXBold} from "react-icons/pi";
-import { FaPeopleGroup, FaPeopleRoof, FaDesktop } from "react-icons/fa6";
+import {FaPeopleGroup, FaPeopleRoof, FaDesktop} from "react-icons/fa6";
 import {isPermitted} from "@/Components/Helper/index.js";
 import {permissionEnums} from "@/Components/Constant/index.js";
 
 export default function SideNavLinks() {
 
     const [products, setProducts] = useState([
-        
+
 
         {
             name: 'Visa',
-            icon: <GrVisa />,
+            icon: <GrVisa/>,
             isOpen: route().current('admin.visa-applies.*'),
             isPermitted: isPermitted(permissionEnums.VIEW_VISA),
             links: [
@@ -34,7 +34,7 @@ export default function SideNavLinks() {
         },
         {
             name: 'Jobs',
-            icon: <PiNetworkXBold />,
+            icon: <PiNetworkXBold/>,
             isOpen: false,
             isPermitted: isPermitted(permissionEnums.VIEW_JOB_POST),
             links: [
@@ -42,11 +42,6 @@ export default function SideNavLinks() {
                     name: 'Job List',
                     route: route('admin.job-posts.index'),
                     isPermitted: isPermitted(permissionEnums.VIEW_JOB_POST),
-                },
-                {
-                    name: 'Add Job',
-                    route: route('admin.job-posts.create'),
-                    isPermitted: isPermitted(permissionEnums.CREATE_JOB_POST),
                 },
                 {
                     name: 'Applications',
@@ -57,20 +52,25 @@ export default function SideNavLinks() {
         },
         {
             name: 'Job Demand',
-            icon: <PiNetworkXBold />,
+            icon: <PiNetworkXBold/>,
             isOpen: false,
             isPermitted: isPermitted(permissionEnums.VIEW_JOB_POST),
             links: [
                 {
                     name: 'Job Demand List',
-                    route: route('admin.job-demand.applications'),
+                    route: route('admin.job-demands.index'),
                     isPermitted: isPermitted(permissionEnums.VIEW_JOB_POST),
+                },
+                {
+                    name: 'Add Job',
+                    route: route('admin.job-demands.create'),
+                    isPermitted: isPermitted(permissionEnums.CREATE_JOB_POST),
                 },
             ]
         },
         {
             name: 'Agency',
-            icon: <FaPeopleRoof />,
+            icon: <FaPeopleRoof/>,
             isOpen: false,
             isPermitted: isPermitted(permissionEnums.VIEW_AGENCY),
             links: [
@@ -83,7 +83,7 @@ export default function SideNavLinks() {
         },
         {
             name: 'User',
-            icon: <FaPeopleGroup />,
+            icon: <FaPeopleGroup/>,
             isOpen: false,
             isPermitted: isPermitted(permissionEnums.VIEW_USER),
             links: [
@@ -127,24 +127,24 @@ export default function SideNavLinks() {
 
             <div className='flex justify-between items-center gap-2 cursor-pointer p-[10px]'>
                 <Link href={route('admin.dashboard.index')}>
-                <div className='flex items-center gap-[10px]'>
-                    <FaDesktop />
-                    <span
-                        className= "font-semibold" > Dashbord</span>
-                </div>
-            </Link>
+                    <div className='flex items-center gap-[10px]'>
+                        <FaDesktop/>
+                        <span
+                            className="font-semibold"> Dashboard</span>
+                    </div>
+                </Link>
             </div>
 
             {products.map((product, i) =>
                 <div key={i}
                      className={`${(product.isOpen) && 'bg-card-and-hover border-main-outline'} rounded-[10px] mb-1.5 hover:bg-card-and-hover border hover:border-main-outline`}>
-                        
+
                     <div onClick={() => handleToggle(i)}
-                        className='flex justify-between items-center gap-2 cursor-pointer p-[10px]'>
+                         className='flex justify-between items-center gap-2 cursor-pointer p-[10px]'>
                         <div className='flex items-center gap-[10px]'>
                             {product.icon}
                             <span
-                                className={`${product.isOpen || product.accountType === route().params.account_type && 'font-semibold'} font-medium text-sm text-text-primary`}>{product.name}</span>
+                                className={`${product.isOpen && 'font-semibold'} font-medium text-sm text-text-primary`}>{product.name}</span>
                         </div>
 
                         <ArrowUp

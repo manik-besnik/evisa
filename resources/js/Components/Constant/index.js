@@ -91,12 +91,12 @@ export const permissions = [
     {name: "Add Document to Visa", value: "visa.add.document"},
     {name: "Delete Visa Document", value: "visa.delete.document"},
     {name: "Change Visa Status", value: "visa.status.change"},
-    {name: "View Job Post", value: "job-post.view"},
+    {name: "View Job Demand", value: "job-post.view"},
     {name: "View Job Apply", value: "job-post.single-view"},
     {name: "View Single Job Apply", value: "job-apply.single-view"},
-    {name: "Create Job Post", value: "job-post.create"},
-    {name: "Edit Job Post", value: "job-post.edit"},
-    {name: "Delete Job Post", value: "job-post.delete"},
+    {name: "Create Job Demand", value: "job-post.create"},
+    {name: "Edit Job Demand", value: "job-post.edit"},
+    {name: "Delete Job Demand", value: "job-post.delete"},
     {name: "View User", value: "user.view"},
     {name: "Create User", value: "user.create"}
 ];

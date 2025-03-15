@@ -36,9 +36,16 @@ use Illuminate\Support\Facades\Cache;
  * @property string|null $thumbnail
  * @property string|null $note
  * @property string|null $requirements
+ * @property string|null $medical_insurance
+ * @property string|null $vacation_benefits
  * @property boolean|int $is_new
  * @property boolean|int $is_approved
  * @property boolean|int $is_on_demand
+ *
+ * @mixin Model
+ * @property Company|null $company
+ * @property User|null $user
+ * @property Location|null $location
  */
 class JobDemand extends Model
 {
@@ -72,6 +79,8 @@ class JobDemand extends Model
         'thumbnail',
         'note',
         'requirements',
+        'medical_insurance',
+        'vacation_benefits',
         'is_approved',
         'is_new',
         'is_on_demand',
