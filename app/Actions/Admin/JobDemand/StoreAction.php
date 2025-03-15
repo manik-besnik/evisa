@@ -20,7 +20,7 @@ class StoreAction
 
             JobDemand::storeJobDemand($adminJobDemandDTO, $company->id);
 
-            return to_route('admin.job-posts.index')->with('success', 'New Job Demand Added Successfully');
+            return to_route('admin.job-demands.index')->with('success', 'New Job Demand Added Successfully');
 
         } catch (\Exception $exception) {
             return redirect()->back()->withErrors(['message' => $exception->getMessage()]);
