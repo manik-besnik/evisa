@@ -33,3 +33,4 @@ bootstrap/ssr
 .env.production
 .phpactor.json
 auth.json
+.qodo

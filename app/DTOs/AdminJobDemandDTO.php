@@ -5,7 +5,7 @@ namespace App\DTOs;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 
-class JobDemandDTO
+class AdminJobDemandDTO
 {
     public UploadedFile|string|null $thumbnail;
     public string $companyName;
@@ -16,8 +16,8 @@ class JobDemandDTO
     public string $currentAddress;
     public string $city;
     public string $area;
-    public string|null $jobLocation;
     public string|int|null $locationId;
+    public string|null $jobLocation = null;
     public string $typeOfWork;
     public string $salary;
     public string $workingHours;
@@ -32,13 +32,14 @@ class JobDemandDTO
     public string $note;
     public string $companyActivities;
     public string $workerQuantity;
+    public bool|null $isOnDemand = false;
+    public bool|null $isNewJob = false;
+    public bool|null $approved = true;
 
-    public static function fromRequest(Request $request): JobDemandDTO
+    public static function fromRequest(Request $request): AdminJobDemandDTO
     {
         $request->validate([
-            'region' => 'required|integer',
-            'location_id' => 'nullable|exists:locations,id',
-            'job_location' => 'required_if:region,2|string|max:255',
+            'location_id' => 'nullable',
             'thumbnail' => 'nullable|file|mimes:jpg,jpeg,png|max:2048',
             'company_name' => 'required|string|max:255',
             'contact_person' => 'required|string|max:255',
@@ -62,7 +63,7 @@ class JobDemandDTO
             'note' => 'required|string|max:255',
             'company_activities' => 'required|string|max:255',
             'worker_quantity' => 'required|integer|min:1',
-        ],[
+        ], [
             'location_id.required' => 'Job Location is required.',
             'location_id.exists' => 'Job Location does not exist.',
         ]);
@@ -77,7 +78,6 @@ class JobDemandDTO
         $instance->email = $request->input('email');
         $instance->currentAddress = $request->input('current_address');
         $instance->city = $request->input('city');
-        $instance->jobLocation = $request->input('job_location');
         $instance->locationId = $request->input('location_id');
         $instance->typeOfWork = $request->input('type_of_work');
         $instance->salary = $request->input('salary');
@@ -94,6 +94,9 @@ class JobDemandDTO
         $instance->companyActivities = $request->input('company_activities');
         $instance->workerQuantity = $request->input('worker_quantity');
         $instance->area = $request->input('area');
+        $instance->isOnDemand = $request->input('is_on_demand');
+        $instance->isNewJob = $request->input('is_new_job');
+        $instance->approved = $request->input('is_approved');
 
         return $instance;
     }

@@ -1,96 +1,115 @@
-import WebLayout from "@/Layouts/WebLayout.jsx";
-import TextInput from "@/Components/TextInput.jsx";
+import Authenticated from "@/Layouts/AuthenticatedLayout.jsx";
+import {Head, Link, useForm} from "@inertiajs/react";
 import Select from "@/Components/Web/Select.jsx";
-import {
-    documentTypes,
-    genders,
-    groups,
-    maritalStatuses,
-    joDemand,
-    visaTypes, regions
-} from "@/Components/Constant/index.js";
 import {useState} from "react";
-import {Head, useForm, usePage} from "@inertiajs/react";
-import PrimaryBtn from "@/Components/Web/PrimaryBtn.jsx";
+import TopSection from "@/Components/Admin/TopSection.jsx";
+import TextInput from "@/Components/TextInput.jsx";
 import {FaCameraRetro} from "react-icons/fa";
-import {toast} from "react-toastify";
-import PreviewPopup from "../Components/PreviewPopup.jsx";
+import {usePage} from "@inertiajs/react";
+
+const Edit = () => {
+
+    const {locations, job_demand} = usePage().props
+    const jobLocations = [
+        ...[
+            {
+                id: "ready_job",
+                name: "READY JOB",
+            }, {
+                id: "new_job",
+                name: "NEW JOB",
+            }
+        ],
+        ...locations
+    ]
+    const setJobLocation = () => {
+
+        if (job_demand.is_on_demand) {
+            return jobLocations.find(item => item.id === 'ready_job')
+        }
+
+        if (job_demand.is_new) {
+            return jobLocations.find(item => item.id === 'new_job')
+        }
+        return jobLocations.find(item => item.id === job_demand.location_id)
 
 
-const SingleJobDemand = () => {
+    }
 
-    const {locations} = usePage().props
-    const [showPreview, setShowPreview] = useState(false);
-    const [location, setLocation] = useState(null)
-    const [region, setRegion] = useState(regions[0])
+    const [location, setLocation] = useState(setJobLocation())
 
 
-    // Create form with useForm
     const {data, setData, post, processing, errors} = useForm({
         // Job details
-        type_of_work: '', // Default value
-        region: 1, // Default value
+        type_of_work: job_demand.type_of_work, // Default value
         job_location: '',
-        location_id: '',
-        visa_validity: '',
-        accommodation: '',
-        transport: '',
-        food: '',
-        medical_insurance: '',
-        working_hours: '',
-        salary: '',
-        vacation_benefits: '',
-        age_limits: '',
-        worker_quantity: '',
-        education: '',
-        company_activities: '',
-
-        // Company details
-        company_name: '',
-        contact_person: '',
-        phone_no: '',
-        whatsapp_no: '',
-        email: '',
-
-        // Address
-        current_address: '',
-        city: '',
-        area: '',
-
-        // Application requirements
-        note: ''
+        location_id: job_demand.location_id,
+        visa_validity: job_demand.visa_validity,
+        accommodation: job_demand.accommodation,
+        transport: job_demand.transport,
+        food: job_demand.food,
+        medical_insurance: job_demand.medical_insurance,
+        working_hours: job_demand.duty_hours,
+        salary: job_demand.salary,
+        vacation_benefits: job_demand.vacation_benefits,
+        age_limits: job_demand.age_limit,
+        worker_quantity: job_demand.worker_quantity,
+        education: job_demand.education,
+        company_activities: job_demand.company_activities,
+        company_name: job_demand.company.name,
+        contact_person: job_demand.company.contact_person,
+        phone_no: job_demand.company.phone_no,
+        whatsapp_no: job_demand.company.whatsapp_no,
+        email: job_demand.company.email,
+        current_address: job_demand.company.address,
+        city: job_demand.company.city,
+        area: job_demand.company.area,
+        note: job_demand.requirements,
+        is_on_demand: job_demand.is_on_demand,
+        is_new_job: job_demand.is_new_job,
+        is_approved: job_demand.is_approved,
     });
 
-    // Handle form submission
+
     const handleSubmit = (e) => {
-        e.preventDefault();
+        e.preventDefault()
 
-        // Handle form submission logic here
-        post(route('job-demand.store'), {
-            onSuccess: () => {
-                toast.success('Job demand submitted successfully');
-            }
-        });
-    };
+        confirmFormSubmit()
+    }
 
-    // Toggle preview popup
-    const togglePreview = () => {
-        setShowPreview(!showPreview);
-    };
+    const handleApprove = () => {
+
+        setData('is_approved', true)
+        confirmFormSubmit()
+    }
+    const confirmFormSubmit = () => {
+        if (data.location_id === 'ready_job') {
+            setData('location_id', null)
+            setData('is_on_demand', true)
+        }
+        if (data.location_id === 'new_job') {
+            setData('location_id', null)
+            setData('is_new_job', true)
+        }
+
+        post(route('admin.job-demands.update', job_demand.id))
+    }
+
 
     return (
-        <WebLayout showBgImage={true} showServiceImage={false}>
-            <Head title="Job Demand | Dubai E-Visa"/>
+        <Authenticated>
+            <Head title="Edit Job Demand | Dubai E-Visa"/>
 
-            <PreviewPopup
-                isOpen={showPreview}
-                onClose={togglePreview}
-                data={data}
-            />
+            <TopSection title='Edit Job Demand'>
+                <Link href={route('admin.job-demands.index')} className='btn-primary'> Job Demand List
+                </Link>
+            </TopSection>
 
-            <div className="container mx-auto px-4 py-8">
-                <form onSubmit={handleSubmit}>
-                    <div className="bg-white rounded-lg shadow-lg overflow-hidden p-16">
+            <div className="mt-1">
+
+                <form onSubmit={handleSubmit} className="flex flex-col gap-y-2">
+                    <div className="p-10 h-full overflow-y-auto bg-white">
+
                         {/* Header with "Security" and Camera Icon */}
                         <div className="bg-gray-500 text-white p-4 flex justify-between items-center">
                             <div className="flex items-center space-x-4">
@@ -124,48 +143,22 @@ const SingleJobDemand = () => {
                         {/* Job Details Table with TextInput */}
                         <div className="w-full">
                             <div className="grid mt-5">
-                                <div className="flex gap-4">
-                                    <div
-                                        className="pr-2 border-2 border-b-0 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right  flex items-center justify-end">
-                                        Region
-                                    </div>
-                                    <div className="w-full border-2 border-b-0 border-[#8A9298] bg-white">
 
-                                        <Select
-                                            items={regions}
-                                            selected={region}
-                                            setSelected={setRegion}
-                                            handleValueChange={(value) => setData('region', value.id)}
-                                            error={errors.region}
-
-                                        />
-                                    </div>
-                                </div>
                                 <div className="flex gap-4">
                                     <div
                                         className="pr-2 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right  flex items-center justify-end">
                                         Job Location
                                     </div>
                                     <div className="w-full border-2 border-[#8A9298] bg-white">
-                                        {region.id === 1 && (
-                                            <Select
-                                                items={locations}
-                                                selected={location}
-                                                setSelected={setLocation}
-                                                handleValueChange={(value) => setData('location_id', value.id)}
-                                                error={errors.location_id}
 
-                                            />)}
-                                        {region.id === 2 && (
-                                            <TextInput
-                                                id="job_location"
-                                                value={data.job_location}
-                                                onChange={(e) => setData("job_location", e.target.value)}
-                                                error={errors.job_location}
-                                                placeholder="Type Here"
-                                            />
-                                        )}
+                                        <Select
+                                            items={jobLocations}
+                                            selected={location}
+                                            setSelected={setLocation}
+                                            handleValueChange={(value) => setData('location_id', value.id)}
+                                            error={errors.location_id}
 
+                                        />
 
                                     </div>
                                 </div>
@@ -492,7 +485,7 @@ const SingleJobDemand = () => {
                                         className="absolute right-0 top-0 h-full w-4/12 bg-red-600"
                                         style={{clipPath: "polygon(10% 0, 100% 0, 100% 100%, 20% 100%)"}}
                                     ></span>
-                                    ADRESS
+                                    ADDRESS
                                 </h3>
                             </div>
                         </div>
@@ -500,7 +493,7 @@ const SingleJobDemand = () => {
                         {/* Current Address */}
                         <div className="flex gap-4">
                             <div className="bg-gray-600 text-white p-2 w-48 flex items-center">
-                                <span className="font-bold">CURRENT ADRESS</span>
+                                <span className="font-bold">CURRENT ADDRESS</span>
                             </div>
                             <div className="flex-1 p-0 relative border-2 border-[#8A9298]">
                                 <div className="absolute top-0 bottom-0 left-0 w-1 bg-red-500"></div>
@@ -548,37 +541,31 @@ const SingleJobDemand = () => {
                             </div>
                         </div>
 
-                        {/* Submit and Preview Buttons */}
-                        <div className="p-4 flex justify-end space-x-4">
+                        <div className="flex justify-end mt-4">
                             <button
                                 type="submit"
                                 disabled={processing}
                                 className="bg-red-600 text-white px-8 py-2 rounded font-bold"
                             >
-                                Submit
+                                Save Changes
                             </button>
+
+
                             <button
                                 type="button"
-                                onClick={togglePreview}
-                                className="bg-blue-600 text-white px-4 py-2 rounded font-bold flex items-center"
+                                onClick={handleApprove}
+                                disabled={processing}
+                                className="bg-green-600 text-white px-8 py-2 rounded font-bold ml-4"
                             >
-                                <span className="mr-2">Preview</span>
-                                <span className="flex items-center justify-center w-6 h-6 bg-white rounded-full">
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-blue-600"
-                                         fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                                              d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                                              d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                                    </svg>
-                                </span>
+                                Save & Approve
                             </button>
                         </div>
                     </div>
+
                 </form>
             </div>
-        </WebLayout>
+        </Authenticated>
     )
 }
 
-export default SingleJobDemand;
+export default Edit

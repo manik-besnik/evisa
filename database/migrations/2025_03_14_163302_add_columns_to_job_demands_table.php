@@ -11,6 +11,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('job_demands', function (Blueprint $table) {
+            $table->unsignedBigInteger('available_job')->after('worker_quantity')->default(0);
             $table->string('job_location')->after('location_id')->nullable();
             $table->text('requirements')->after('thumbnail')->nullable();
             $table->boolean('is_approved')->after('requirements')->default(false);

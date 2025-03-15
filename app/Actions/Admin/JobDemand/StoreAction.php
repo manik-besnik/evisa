@@ -1,41 +1,26 @@
 <?php
 
-namespace App\Actions\Admin\JobPost;
+namespace App\Actions\Admin\JobDemand;
 
-use App\DTOs\JobPostDTO;
-use App\Enums\JobType;
+use App\DTOs\AdminJobDemandDTO;
 use App\Enums\Permissions;
-use App\Models\JobPost;
-use App\Supports\FileUpload;
+use App\Supports\JobDemand;
 use App\Supports\UserPermission;
 use Illuminate\Http\RedirectResponse;
 
 class StoreAction
 {
-    public function execute(JobPostDTO $jobPostDTO): RedirectResponse
+    public function execute(AdminJobDemandDTO $adminJobDemandDTO): RedirectResponse
     {
         UserPermission::isPermitted(Permissions::CREATE_JOB_POST->value);
 
         try {
 
-            $thumbnail = null;
+            $company = JobDemand::storeCompany($adminJobDemandDTO);
 
-            if ($jobPostDTO->thumbnail) {
-                $thumbnail = FileUpload::execute($jobPostDTO->thumbnail);
-            }
+            JobDemand::storeJobDemand($adminJobDemandDTO, $company->id);
 
-            $jobPost = new JobPost();
-            $jobPost->type = JobType::tryFrom($jobPostDTO->type)->value;
-            $jobPost->title = $jobPostDTO->title;
-            $jobPost->company = $jobPostDTO->company;
-            $jobPost->salary_range = $jobPostDTO->salaryRange;
-            $jobPost->location = $jobPostDTO->location;
-            $jobPost->last_apply_date = $jobPostDTO->lastApplyDate;
-            $jobPost->description = $jobPostDTO->description;
-            $jobPost->thumbnail = $thumbnail;
-            $jobPost->save();
-
-            return to_route('admin.job-posts.index')->with('success', 'New Job Post Added Successfully');
+            return to_route('admin.job-demands.index')->with('success', 'New Job Demand Added Successfully');
 
         } catch (\Exception $exception) {
             return redirect()->back()->withErrors(['message' => $exception->getMessage()]);

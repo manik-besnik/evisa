@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Actions\Admin\JobPost;
+namespace App\Actions\Admin\JobDemand;
 
 use App\Enums\Permissions;
-use App\Models\JobPost;
+use App\Models\JobDemand;
 use App\Supports\UserPermission;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -15,10 +15,10 @@ class IndexAction
 
         UserPermission::isPermitted(Permissions::VIEW_JOB_POST->value);
 
-        $jobPosts = JobPost::query()->paginate(20);
+        $jobDemands = JobDemand::query()->with(['company'])->paginate(20);
 
-        return Inertia::render('Admin/JobPost/Index', [
-            'job_posts' => $jobPosts
+        return Inertia::render('Admin/JobDemand/Index', [
+            'job_demands' => $jobDemands
         ]);
     }
 }

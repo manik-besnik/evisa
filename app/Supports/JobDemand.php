@@ -2,6 +2,7 @@
 
 namespace App\Supports;
 
+use App\DTOs\AdminJobDemandDTO;
 use App\DTOs\JobDemandDTO;
 use App\DTOs\MultiJobDemandDTO;
 use App\Models\Company;
@@ -9,7 +10,12 @@ use App\Models\Company;
 class JobDemand
 {
 
-    public static function storeJobDemand(JobDemandDTO $jobDemandDTO, int $companyId): void
+    /**
+     * @param JobDemandDTO|AdminJobDemandDTO $jobDemandDTO
+     * @param int $companyId
+     * @return void
+     */
+    public static function storeJobDemand(JobDemandDTO|AdminJobDemandDTO $jobDemandDTO, int $companyId): void
     {
 
         $thumbnail = null;
@@ -39,14 +45,25 @@ class JobDemand
         $jobDemand->age_limit = $jobDemandDTO->ageLimits;
         $jobDemand->company_activities = $jobDemandDTO->companyActivities;
         $jobDemand->education = $jobDemandDTO->education;
+        $jobDemand->medical_insurance = $jobDemandDTO->medicalInsurance;
+        $jobDemand->vacation_benefits = $jobDemandDTO->vacationBenefits;
+        if ($jobDemandDTO->isOnDemand) {
+            $jobDemand->is_on_demand = true;
+        }
+        if ($jobDemandDTO->isNewJob) {
+            $jobDemand->is_new = true;
+        }
+        if ($jobDemandDTO->approved) {
+            $jobDemand->is_approved = true;
+        }
         $jobDemand->save();
     }
 
     /**
-     * @param JobDemandDTO|MultiJobDemandDTO $jobDemandDTO
+     * @param JobDemandDTO|MultiJobDemandDTO|AdminJobDemandDTO $jobDemandDTO
      * @return Company
      */
-    public static function storeCompany(JobDemandDTO|MultiJobDemandDTO $jobDemandDTO): Company
+    public static function storeCompany(JobDemandDTO|MultiJobDemandDTO|AdminJobDemandDTO $jobDemandDTO): Company
     {
 
         $company = new Company();
