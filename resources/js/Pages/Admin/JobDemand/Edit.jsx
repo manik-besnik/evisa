@@ -77,6 +77,11 @@ const Edit = () => {
         confirmFormSubmit()
     }
 
+    const handleApprove = () => {
+
+        setData('is_approved', true)
+        confirmFormSubmit()
+    }
     const confirmFormSubmit = () => {
         if (data.location_id === 'ready_job') {
             setData('location_id', null)
@@ -542,7 +547,17 @@ const Edit = () => {
                                 disabled={processing}
                                 className="bg-red-600 text-white px-8 py-2 rounded font-bold"
                             >
-                                Submit
+                                Save Changes
+                            </button>
+
+
+                            <button
+                                type="button"
+                                onClick={handleApprove}
+                                disabled={processing}
+                                className="bg-red-600 text-white px-8 py-2 rounded font-bold"
+                            >
+                                Update & Approve
                             </button>
                         </div>
                     </div>
