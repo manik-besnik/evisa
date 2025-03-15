@@ -5,7 +5,7 @@ namespace App\DTOs;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 
-class JobDemandDTO
+class AdminJobDemandDTO
 {
     public UploadedFile|string|null $thumbnail;
     public string $companyName;
@@ -32,12 +32,13 @@ class JobDemandDTO
     public string $note;
     public string $companyActivities;
     public string $workerQuantity;
+    public bool|null $isOnDemand = true;
 
-    public static function fromRequest(Request $request): JobDemandDTO
+    public static function fromRequest(Request $request): AdminJobDemandDTO
     {
         $request->validate([
             'region' => 'required|integer',
-            'location_id' => 'required_if:region,1|exists:locations,id',
+            'location_id' => 'nullable|exists:locations,id',
             'job_location' => 'required_if:region,2|string|max:255',
             'thumbnail' => 'nullable|file|mimes:jpg,jpeg,png|max:2048',
             'company_name' => 'required|string|max:255',

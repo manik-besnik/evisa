@@ -36,7 +36,7 @@ class MultiJobDemandDTO
     {
         $request->validate([
             'region' => 'required|integer',
-            'location_id' => 'nullable|exists:locations,id',
+            'location_id' => 'required_if:region,1|exists:locations,id',
             'job_location' => 'required_if:region,2|string|max:255',
             'thumbnail' => 'nullable|file|mimes:jpg,jpeg,png|max:2048',
             'company_name' => 'required|string|max:255',
