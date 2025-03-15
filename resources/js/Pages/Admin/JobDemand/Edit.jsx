@@ -7,7 +7,7 @@ import TextInput from "@/Components/TextInput.jsx";
 import {FaCameraRetro} from "react-icons/fa";
 import {usePage} from "@inertiajs/react";
 
-const CreateJobPost = () => {
+const Edit = () => {
 
     const {locations, job_demand} = usePage().props
     const jobLocations = [
@@ -73,10 +73,10 @@ const CreateJobPost = () => {
 
     return (
         <Authenticated>
-            <Head title="Add New Job | Dubai E-Visa"/>
+            <Head title="Edit Job Demand | Dubai E-Visa"/>
 
-            <TopSection title='Add New Job Post'>
-                <Link href={route('admin.job-demands.index')} className='btn-primary'> Job Post List
+            <TopSection title='Edit Job Demand'>
+                <Link href={route('admin.job-demands.index')} className='btn-primary'> Job Demand List
                 </Link>
             </TopSection>
 
@@ -533,4 +533,4 @@ const CreateJobPost = () => {
     )
 }
 
-export default CreateJobPost
+export default Edit
