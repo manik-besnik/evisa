@@ -1,18 +1,15 @@
 import Authenticated from "@/Layouts/AuthenticatedLayout.jsx";
 import {Head, Link, useForm} from "@inertiajs/react";
 import Select from "@/Components/Web/Select.jsx";
-import {regions} from "@/Components/Constant/index.js";
 import {useState} from "react";
 import TopSection from "@/Components/Admin/TopSection.jsx";
 import TextInput from "@/Components/TextInput.jsx";
 import {FaCameraRetro} from "react-icons/fa";
 import {usePage} from "@inertiajs/react";
 
-const locations = []
-
 const CreateJobPost = () => {
 
-    // const {locations} = usePage().props ?? []
+    const {locations} = usePage().props
     const [location, setLocation] = useState(null)
 
     const {data, setData, post, processing, errors} = useForm({

@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Actions\Admin\JobPost\CreateAction;
-use App\Actions\Admin\JobPost\DeleteAction;
-use App\Actions\Admin\JobPost\EditAction;
-use App\Actions\Admin\JobPost\IndexAction;
+use App\Actions\Admin\JobDemand\CreateAction;
+use App\Actions\Admin\JobDemand\DeleteAction;
+use App\Actions\Admin\JobDemand\EditAction;
+use App\Actions\Admin\JobDemand\IndexAction;
 use App\Actions\Admin\JobDemand\JobDemandApplicationAction;
-use App\Actions\Admin\JobPost\StoreAction;
+use App\Actions\Admin\JobDemand\StoreAction;
 use App\Actions\Admin\JobPost\UpdateAction;
+use App\DTOs\AdminJobDemandDTO;
 use App\DTOs\JobPostDTO;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
@@ -29,7 +30,7 @@ class JobDemandController extends Controller
 
     public function store(Request $request, StoreAction $storeAction): RedirectResponse
     {
-        return $storeAction->execute(JobPostDTO::fromRequest($request));
+        return $storeAction->execute(AdminJobDemandDTO::fromRequest($request));
     }
 
     public function edit(int $id, EditAction $editAction): Response

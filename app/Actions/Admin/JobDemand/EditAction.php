@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\Admin\JobPost;
+namespace App\Actions\Admin\JobDemand;
 
 use App\Enums\Permissions;
 use App\Models\JobPost;

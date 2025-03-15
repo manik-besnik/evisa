@@ -35,7 +35,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
 
     Route::post('visa-applies/{visa_apply}', [VisaApplyController::class, 'update'])->name('visa-applies.update');
     Route::resource('visa-applies', VisaApplyController::class)->except(['update']);
-    
+
     Route::get('visa-applies/download-pdf', [VisaApplyController::class, 'downloadPdf'])->name('visa-applies.download-pdf');
 
     Route::delete('visa-applies/{visa_apply}/document-delete', [VisaApplyController::class, 'deleteDocument'])->name('visa-applies.delete.document');
@@ -55,7 +55,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
     Route::get('job-posts/applications', [JobPostController::class, 'applications'])->name('job-posts.applications');
     Route::get('job-demand/applications', [JobDemandController::class, 'jobDemandApplications'])->name('job-demand.applications');
     Route::resource('job-posts', JobPostController::class);
-    Route::resource('job-demand', JobPostController::class);
+    Route::resource('job-demands', JobDemandController::class);
 
     Route::get('agencies', [AgencyController::class, 'index'])->name('agencies.index');
 
