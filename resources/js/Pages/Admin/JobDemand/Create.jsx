@@ -10,6 +10,18 @@ import {usePage} from "@inertiajs/react";
 const CreateJobPost = () => {
 
     const {locations} = usePage().props
+    const jobLocations = [
+        ...[
+            {
+                id: "ready_job",
+                name: "READY JOB",
+            }, {
+                id: "new_job",
+                name: "NEW JOB",
+            }
+        ],
+        ...locations
+    ]
     const [location, setLocation] = useState(null)
 
     const {data, setData, post, processing, errors} = useForm({
@@ -29,26 +41,31 @@ const CreateJobPost = () => {
         worker_quantity: '',
         education: '',
         company_activities: '',
-
-        // Company details
         company_name: '',
         contact_person: '',
         phone_no: '',
         whatsapp_no: '',
         email: '',
-
-        // Address
         current_address: '',
         city: '',
         area: '',
-
-        // Application requirements
-        note: ''
+        note: '',
+        is_on_demand: false,
+        is_new_job: false,
     });
 
 
     const handleSubmit = (e) => {
         e.preventDefault()
+
+        if (data.location_id === 'ready_job') {
+            setData('location_id', null)
+            setData('is_on_demand', true)
+        }
+        if (data.location_id === 'new_job') {
+            setData('location_id', null)
+            setData('is_new_job', true)
+        }
 
         post(route('admin.job-demands.store'))
     }
@@ -110,7 +127,7 @@ const CreateJobPost = () => {
                                     <div className="w-full border-2 border-[#8A9298] bg-white">
 
                                         <Select
-                                            items={locations}
+                                            items={jobLocations}
                                             selected={location}
                                             setSelected={setLocation}
                                             handleValueChange={(value) => setData('location_id', value.id)}
