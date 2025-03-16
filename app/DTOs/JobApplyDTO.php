@@ -21,9 +21,18 @@ class JobApplyDTO
     public string $religion;
     public string $bloodGroup;
     public string $maritalStatus;
+    public string $passportNo;
+    public string $passportExpiry;
+    public string $countryContactNo;
+    public string $visaStatus;
+    public string $visaExpiry;
+    public string $whatsappNo;
     public string $currentState;
     public string $currentCity;
     public string $currentArea;
+    public string $permanentDistrict;
+    public string $permanentThana;
+    public string $permanentVillage;
     public string|null $shirtSize;
     public string|null $pantSize;
     public string|null $showSize;
@@ -65,9 +74,18 @@ class JobApplyDTO
             'religion' => ['required', 'string', 'min:5', 'max:200'],
             'blood_group' => ['required', 'string', 'min:5', 'max:200'],
             'marital_status' => ['required', 'string', 'min:5', 'max:200'],
+            'passport_no' => ['required', 'string', 'min:5', 'max:200'],
+            'passport_expiry' => ['required', 'string', 'min:5', 'max:200'],
+            'country_contact_no' => ['required', 'string', 'min:5', 'max:200'],
+            'visa_status' => ['required', 'string', 'min:5', 'max:200'],
+            'visa_expiry' => ['required', 'string', 'min:5', 'max:200'],
+            'whatsapp_no' => ['required', 'string', 'min:5', 'max:200'],
             'current_state' => ['required', 'string', 'min:5', 'max:200'],
             'current_city' => ['required', 'string', 'min:5', 'max:200'],
             'current_area' => ['required', 'string', 'min:5', 'max:200'],
+            'permanent_district' => ['required', 'string', 'min:5', 'max:200'],
+            'permanent_thana' => ['required', 'string', 'min:5', 'max:200'],
+            'permanent_village' => ['required', 'string', 'min:5', 'max:200'],
             'shirt_size' => ['required', 'string', 'max:200'],
             'pant_size' => ['required', 'string', 'max:200'],
             'show_size' => ['required', 'string', 'max:200'],
@@ -105,19 +123,28 @@ class JobApplyDTO
 
         $instance->jobDemandId = (int)$request->input('job_demand_id');
         $instance->avatar = $request->hasFile('avatar') ? $request->file('avatar') : null;
-        $instance->region= $request->input('region');
-        $instance->location= $request->input('location');
-        $instance->nationality= $request->input('nationality');
+        $instance->region = $request->input('region');
+        $instance->location = $request->input('location');
+        $instance->nationality = $request->input('nationality');
         $instance->name = $request->input('name');
         $instance->phone = $request->input('phone');
         $instance->email = $request->input('email');
-        $instance->gender= $request->input('gender');
-        $instance->religion= $request->input('religion');
-        $instance->bloodGroup= $request->input('blood_group');
-        $instance->maritalStatus= $request->input('marital_status');
-        $instance->currentState= $request->input('current_state');
-        $instance->currentCity= $request->input('current_city');
-        $instance->currentArea= $request->input('current_area');
+        $instance->gender = $request->input('gender');
+        $instance->religion = $request->input('religion');
+        $instance->bloodGroup = $request->input('blood_group');
+        $instance->maritalStatus = $request->input('marital_status');
+        $instance->passportNo = $request->input('passport_no');
+        $instance->passportExpiry = $request->input('passport_expiry');
+        $instance->countryContactNo = $request->input('country_contact_no');
+        $instance->visaStatus = $request->input('visa_status');
+        $instance->visaExpiry = $request->input('visa_expiry');
+        $instance->whatsappNo = $request->input('whatsapp_no');
+        $instance->currentState = $request->input('current_state');
+        $instance->currentCity = $request->input('current_city');
+        $instance->currentArea = $request->input('current_area');
+        $instance->permanentDistrict = $request->input('permanent_district');
+        $instance->permanentThana = $request->input('permanent_thana');
+        $instance->permanentVillage = $request->input('permanent_village');
         $instance->shirtSize = $request->input('shirt_size');
         $instance->pantSize = $request->input('pant_size');
         $instance->showSize = $request->input('show_size');
