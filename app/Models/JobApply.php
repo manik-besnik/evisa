@@ -35,6 +35,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string|null $current_area
  * @property string|null $permanent_district
  * @property string|null $permanent_thana
+ * @property string|null $permanent_village
  * @property string|null $passport_no
  * @property string|null $country_contact_no
  * @property string|null $visa_status

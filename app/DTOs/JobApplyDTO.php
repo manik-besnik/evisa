@@ -41,6 +41,7 @@ class JobApplyDTO
     public string|null $nearestAirport;
     public string|null $summary = null;
     public array|null $documents = [];
+    public array|null $jobDemands = [];
 
     /** Education Details */
     public string $examName;
@@ -94,6 +95,7 @@ class JobApplyDTO
             'nearest_airport' => ['required', 'string', 'max:250'],
             'summary' => ['nullable', 'string', 'max:500'],
             'documents' => ['required', 'array'],
+            'job_demands' => ['required', 'array'],
 
             /** Education Details */
             'exam_name' => ['required', 'string', 'min:2', 'max:200'],
@@ -153,6 +155,7 @@ class JobApplyDTO
         $instance->nearestAirport = $request->input('nearest_airport');
         $instance->summary = $request->input('summary');
         $instance->documents = $request->all()['documents'] ?? [];
+        $instance->documents = $request->all()['job_demands'] ?? [];
 
         /** Educational Details */
         $instance->examName = $request->input('exam_name');
