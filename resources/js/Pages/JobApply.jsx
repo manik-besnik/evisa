@@ -402,7 +402,7 @@ const JobDemand = () => {
                                         <div className="flex-1">
                                             <Select
                                                 placeholder="Select"
-                                                items={religions} 
+                                                items={religions}
                                                 selected={religion}
                                                 setSelected={setReligion}
                                                 handleValueChange={(value) => setData('religion', value.id)}

@@ -11,6 +11,8 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('job_applies', function (Blueprint $table) {
+            $table->dropForeign(['job_post_id']);
+            $table->dropColumn('job_post_id');
             $table->foreignId('nationality')->nullable()->after('education_id');
             $table->foreignId('job_demand_id')->nullable()->after('nationality');
             $table->json('job_posts')->nullable()->after('nearest_airport');
@@ -41,6 +43,7 @@ return new class extends Migration {
     public function down(): void
     {
         Schema::table('job_applies', function (Blueprint $table) {
+            $table->foreignId('job_post_id')->nullable()->after('education_id');
             $table->dropColumn(['nationality', 'nationality', 'job_posts', 'region', 'location', 'gender', 'religion', 'blood_group', 'marital_status', 'current_state', 'current_city', 'current_area', 'permanent_district',]);
         });
     }

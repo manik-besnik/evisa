@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 /**
  * @property int $id
  * @property int $user_id
- * @property int|null $job_post_id
  * @property int|null $job_demand_id
  * @property int $education_id
  * @property int $nationality
@@ -59,7 +58,7 @@ class JobApply extends Model
 
     protected $fillable = [
         'user_id',
-        'job_post_id',
+        'job_demand_id',
         'education_id',
         'name',
         'phone',
