@@ -84,7 +84,6 @@ class JobPostController extends Controller
             }
         }
 
-
         $result = JobApplyAction::execute(auth()->id(), JobApplyDTO::fromRequest($request));
 
         if ($result instanceof \Exception) {

@@ -25,7 +25,8 @@ class JobApplyAction
 
             $documents = [];
 
-            foreach ($jobApplyDTO->documents as $document) {
+            foreach (request()->all()['documents'] as $document) {
+
                 $fullPath = FileUpload::execute($document['file']);
 
                 $documents[] = [

@@ -163,31 +163,10 @@ const JobDemand = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-
-        const formData = new FormData();
-
-
-        Object.keys(data).forEach(key => {
-            if (key === 'job_post') {
-                // Handle array data
-                data[key].forEach((value, index) => {
-                    formData.append(`job_post[${index}]`, value);
-                });
-            } else {
-                formData.append(key, data[key]);
-            }
-        });
-
-
         post(route('job-posts.store'), {
-            data: formData,
-            forceFormData: true,
             onSuccess: () => {
-                toast("Job application submitted successfully!");
+                reset()
             },
-            onError: () => {
-                alert('Error submitting job application. Please check the form.');
-            }
         });
     };
 
@@ -690,7 +669,7 @@ const JobDemand = () => {
                                         items={drivingLicenses}
                                         selected={drivingLicense}
                                         setSelected={setDrivingLicense}
-                                        handleValueChange={(value) => setData('driving_license', value)}
+                                        handleValueChange={(value) => setData('driving_license', value.id)}
                                         error={errors.driving_license}
                                         defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
                                     />
