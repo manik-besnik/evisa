@@ -261,7 +261,8 @@ const JobDemand = () => {
 
                                     <FileUpload
                                         fileType="avatar"
-                                        onChange={handleFileChange}
+                                        onChange={(value) => setData('avatar', value)}
+                                        error={errors.avatar}
 
                                     >
                                         <div className="text-center">

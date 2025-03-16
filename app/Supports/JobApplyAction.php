@@ -33,7 +33,7 @@ class JobApplyAction
 
             $jobApply = new JobApply();
             $jobApply->user_id = $userId;
-            $jobApply->job_post_id = $jobApplyDTO->jobPostId;
+            $jobApply->job_post_id = $jobApplyDTO->jobDemandId;
             $jobApply->education_id = $education->id;
             $jobApply->name = $jobApplyDTO->name;
             $jobApply->email = $jobApplyDTO->email;
