@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Cache;
  * @property string $type_of_work
  * @property string $visa_validity
  * @property string $salary
- * @property string $worker_quantity
+ * @property string|int $worker_quantity
  * @property int $available_job
  * @property string $duty_hours
  * @property string $over_time

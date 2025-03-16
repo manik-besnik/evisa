@@ -61,7 +61,7 @@ class JobDemandDTO
             'age_limits' => 'required|string|max:255',
             'note' => 'required|string|max:255',
             'company_activities' => 'required|string|max:255',
-            'worker_quantity' => 'required|string|min:1',
+            'worker_quantity' => 'required|integer|min:1',
         ],[
             'location_id.required' => 'Job Location is required.',
             'location_id.exists' => 'Job Location does not exist.',

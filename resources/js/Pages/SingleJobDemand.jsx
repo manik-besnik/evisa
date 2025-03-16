@@ -15,6 +15,8 @@ import PrimaryBtn from "@/Components/Web/PrimaryBtn.jsx";
 import {FaCameraRetro} from "react-icons/fa";
 import {toast} from "react-toastify";
 import PreviewPopup from "../Components/PreviewPopup.jsx";
+import JobDemandBanner from "@/Components/Web/JobDemandBanner.jsx";
+import FileUpload from "@/Components/Web/FileUpload.jsx";
 
 
 const SingleJobDemand = () => {
@@ -27,9 +29,8 @@ const SingleJobDemand = () => {
 
     // Create form with useForm
     const {data, setData, post, processing, errors} = useForm({
-        // Job details
-        type_of_work: '', // Default value
-        region: 1, // Default value
+        type_of_work: '',
+        region: 1,
         job_location: '',
         location_id: '',
         visa_validity: '',
@@ -44,20 +45,15 @@ const SingleJobDemand = () => {
         worker_quantity: '',
         education: '',
         company_activities: '',
-
-        // Company details
+        thumbnail: "",
         company_name: '',
         contact_person: '',
         phone_no: '',
         whatsapp_no: '',
         email: '',
-
-        // Address
         current_address: '',
         city: '',
         area: '',
-
-        // Application requirements
         note: ''
     });
 
@@ -92,22 +88,13 @@ const SingleJobDemand = () => {
                 <form onSubmit={handleSubmit}>
                     <div className="bg-white rounded-lg shadow-lg overflow-hidden p-16">
                         {/* Header with "Security" and Camera Icon */}
-                        <div className="bg-gray-500 text-white p-4 flex justify-between items-center">
-                            <div className="flex items-center space-x-4">
-                                <div className="flex">
-                                    <div className="h-6 w-3 bg-yellow-500 mr-0.5"></div>
-                                    <div className="h-6 w-3 bg-yellow-500 mr-0.5"></div>
-                                    <div className="h-6 w-3 bg-yellow-500"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Camera Icon Space */}
-                        <div className="relative h-32 bg-gray-500">
-                            <div className="absolute bottom-4 right-4 text-white">
-                                <FaCameraRetro size={30} className="text-white"/>
-                            </div>
-                        </div>
+                        <FileUpload
+                            onChange={(value) => setData('thumbnail', value)}
+                            error={errors.thumbnail}
+                            fileType="thumbnail"
+                        >
+                            <JobDemandBanner/>
+                        </FileUpload>
 
                         {/* Salary and Code Section */}
                         <div className="p-4 w-4/12">
