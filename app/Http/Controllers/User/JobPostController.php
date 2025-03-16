@@ -83,7 +83,7 @@ class JobPostController extends Controller
                 return redirect()->back()->with('error', "Already applied this job");
             }
         }
-        
+
 
         $result = JobApplyAction::execute(auth()->id(), JobApplyDTO::fromRequest($request));
 
