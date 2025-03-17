@@ -160,30 +160,3 @@ body {
         transform: translateX(0%);
     }
 }
-
-/* =============== slider start ==================  */
-
-/* .slick-active {
-  width: 80px !important;
-  height: 80px !important;
-  background-color: blue;
-} */
-
-.slick-track {
-    display: flex;
-    align-items: center;
-    width: 100% !important;
-}
-
-
-/* @media screen and (max-width: 740px) {
-  .slick-prev {
-    left: 0 !important;
-  }
-  .slick-next {
-    right: 0 !important;
-  }
-} */
-
-
-/* ========================= slider end ====================== */
