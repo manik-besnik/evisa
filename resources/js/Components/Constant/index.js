@@ -62,14 +62,6 @@ export const visaTypes = [
 export const jobDirectory = [
     {id: 1, name: "READY JOB"},
     {id: 2, name: "NEW JOB"},
-    {id: 3, name: "DUBAI"},
-    {id: 4, name: "ABUDHABI"},
-    {id: 5, name: "SHARJAH"},
-    {id: 6, name: "AJMAN"},
-    {id: 7, name: "UMM AL QWAIN"},
-    {id: 8, name: "RAS AL KHAIMA"},
-    {id: 9, name: "FUJAYRAH"},
-    {id: 10, name: "AL AIN"},
 ];
 
 export const languageProficiency = [
