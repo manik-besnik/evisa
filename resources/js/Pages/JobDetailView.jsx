@@ -1,9 +1,26 @@
 import WebLayout from "@/Layouts/WebLayout.jsx";
-import {Head, Link} from "@inertiajs/react";
+import {Head} from "@inertiajs/react";
 import {assetUrl} from "@/Components/Constant/index.js";
-import {useState, useEffect} from "react";
+import {toast} from "react-toastify";
 
 const JobDetailView = ({job}) => {
+
+    const shareUrl = route('job.details', job.id)
+    const handleFacebookShare = () => {
+        const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
+        window.open(url, '_blank', 'noopener,noreferrer');
+    };
+
+    const handleWhatsAppShare = () => {
+        const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareUrl)}`;
+        window.open(url, '_blank', 'noopener,noreferrer');
+    };
+
+    const handleCopyLink = () => {
+        navigator.clipboard.writeText(shareUrl).then(() => {
+            toast('Link copied to clipboard!');
+        });
+    };
 
 
     return (
@@ -233,9 +250,27 @@ const JobDetailView = ({job}) => {
                             />
                         </div>
                         <div className="flex space-x-2">
-                            <div className="bg-blue-600 w-8 h-8 rounded-full flex items-center justify-center">f</div>
-                            <div className="bg-green-600 w-8 h-8 rounded-full flex items-center justify-center">w</div>
-                            <div className="bg-gray-600 w-8 h-8 rounded-full flex items-center justify-center">s</div>
+                            <button
+                                type="button"
+                                onClick={handleFacebookShare}
+                                className="bg-blue-600 w-8 h-8 rounded-full flex items-center justify-center text-white"
+                            >
+                                f
+                            </button>
+                            <button
+                                type="button"
+                                onClick={handleWhatsAppShare}
+                                className="bg-green-600 w-8 h-8 rounded-full flex items-center justify-center text-white"
+                            >
+                                w
+                            </button>
+                            <button
+                                type="button"
+                                onClick={handleCopyLink}
+                                className="bg-gray-600 w-8 h-8 rounded-full flex items-center justify-center text-white"
+                            >
+                                s
+                            </button>
                         </div>
                     </div>
                 </div>
