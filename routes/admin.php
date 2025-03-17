@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\VisaApplyController;
+use App\Http\Controllers\Admin\CvController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -68,6 +69,8 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
     Route::get('users', [UserController::class, 'index'])->name('users.index');
     Route::get('users/create', [UserController::class, 'create'])->name('users.create');
     Route::post('users/store', [UserController::class, 'store'])->name('users.store');
+
+    Route::resource('cv-list', CvController::class);
 
     Route::get('notifications/{id}', [NotificationController::class, 'show'])->name('notifications.show');
 });

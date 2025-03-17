@@ -69,6 +69,20 @@ export default function SideNavLinks() {
             ]
         },
         {
+            name: 'CV',
+            icon: <PiNetworkXBold />,
+            isOpen: false,
+            isPermitted: isPermitted(permissionEnums.VIEW_JOB_POST),
+            links: [
+                {
+                    name: 'CV List',
+                    route: route('admin.cv-list.index'),
+                    isPermitted: isPermitted(permissionEnums.VIEW_JOB_POST),
+                },
+                
+            ]
+        },
+        {
             name: 'Agency',
             icon: <FaPeopleRoof/>,
             isOpen: false,
