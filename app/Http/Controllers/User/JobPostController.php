@@ -56,11 +56,15 @@ class JobPostController extends Controller
      */
     public function create(): \Inertia\Response
     {
-        return Inertia::render('JobApply', [
-            'job_demands' => JobDemand::query()
+        $applyFor = null;
+
+        if (request()->has('job_demand_id')) {
+            $applyFor = JobDemand::query()
                 ->select(['id', 'type_of_work'])
-//                ->where('available_job', '>', 0)
-                ->get(),
+                ->findOrFail(request()->input('job_demand_id'));
+        }
+        return Inertia::render('JobApply', [
+            'apply_for' => $applyFor,
             'languages' => Language::query()->get(),
             'locations' => Location::query()->select(['id', 'name'])->get(),
         ]);

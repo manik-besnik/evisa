@@ -29,7 +29,7 @@ import {FaPlus} from "react-icons/fa6";
 
 const JobDemand = () => {
 
-    const {auth, countries, locations, languages} = usePage().props;
+    const {apply_for, countries, locations, languages} = usePage().props;
 
 
     const [nationality, setNationality] = useState('');
@@ -44,6 +44,7 @@ const JobDemand = () => {
     const [arabicProficiency, setArabicProficiency] = useState(null)
     const [urduProficiency, setUrduProficiency] = useState(null)
     const [drivingLicense, setDrivingLicense] = useState(null)
+    const [applyFor, setApplyFor] = useState(apply_for)
 
 
     const [region, setRegion] = useState(null)
@@ -51,6 +52,7 @@ const JobDemand = () => {
 
     const {data, setData, post, errors, processing, reset} = useForm({
         job_post_id: route().params?.id ?? '',
+        job_demand_id: apply_for.id ?? '',
         region: '',
         location: "",
         name: '',
@@ -298,18 +300,27 @@ const JobDemand = () => {
                                     <h2 className="text-red-600 text-xs font-bold mb-3">POST FOR APPLY</h2>
                                     <div className="grid">
 
-                                        <MultiSelect
-                                            placeholder="Select Here"
-                                            items={postForApply}
-                                            selected={jobDemands}
-                                            setSelected={setJobDemands}
-                                            handleValueChange={(values) => setData('job_demands', values)}
-                                            error={errors.job_demands}
-                                            required={true}
-                                            field="name"
-                                            selectLimit="3"
-                                            defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
-                                        />
+                                        {applyFor ? <Select
+                                                items={[]}
+                                                selected={applyFor}
+                                                setSelected={setApplyFor}
+                                                handleValueChange={(value) => setData('job_demand_id', value.id)}
+                                                field="type_of_work"
+                                                defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                            /> :
+                                            <MultiSelect
+                                                placeholder="Select Here"
+                                                items={postForApply}
+                                                selected={jobDemands}
+                                                setSelected={setJobDemands}
+                                                handleValueChange={(values) => setData('job_demands', values)}
+                                                error={errors.job_demands}
+                                                required={true}
+                                                field="name"
+                                                selectLimit="3"
+                                                defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                            />}
+
                                     </div>
                                 </div>
                             </div>

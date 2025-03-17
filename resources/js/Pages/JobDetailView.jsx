@@ -1,5 +1,5 @@
 import WebLayout from "@/Layouts/WebLayout.jsx";
-import {Head} from "@inertiajs/react";
+import {Head, Link} from "@inertiajs/react";
 import {assetUrl} from "@/Components/Constant/index.js";
 import {toast} from "react-toastify";
 
@@ -214,10 +214,12 @@ const JobDetailView = ({job}) => {
                             <p className="mt-2 mb-4 font-semibold">Apply today, interview required.</p>
 
                         </div>
-                        <div className="mt-2 w-2/12">
-                            <button onClick={() => window.location.href = `/job-apply`}
-                                    className="bg-red-600 text-white px-8 py-2 rounded-md font-bold w-8/12 mb-3 ml-3">Apply
-                            </button>
+                        <div className="flex flex-col mt-2 w-2/12">
+                            <div
+                                className="bg-red-600 text-white px-8 py-2 rounded-md font-bold w-8/12 mb-3 ml-3">
+                                <Link href={route('job-posts.create', {job_demand_id: job.id})}>Apply
+                                </Link>
+                            </div>
 
                             <button
                                 onClick={() => window.location.href = `/job-pdf/${job.id}`}
