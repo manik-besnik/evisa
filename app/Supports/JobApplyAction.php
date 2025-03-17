@@ -37,8 +37,6 @@ class JobApplyAction
 
             $education = self::storeEduction($userId, $jobApplyDTO);
 
-            self::storeJobExperience($userId, $jobApplyDTO);
-
             $jobApply = new JobApply();
             $jobApply->user_id = $userId;
             $jobApply->job_demand_id = $jobApplyDTO->jobDemandId;
@@ -76,6 +74,8 @@ class JobApplyAction
             $jobApply->job_posts = $jobApplyDTO->jobDemands;
             $jobApply->save();
 
+            self::storeJobExperience($userId, $jobApplyDTO, $jobApply->id);
+
             DB::commit();
 
             return $jobApply;
@@ -95,14 +95,9 @@ class JobApplyAction
     private static function storeEduction(int $userId, JobApplyDTO $jobApplyDTO): Education
     {
 
-        /** @var Education|null $education */
-        $education = Education::query()->where('user_id', $userId)->first();
 
-        if (!$education) {
-            $education = new Education();
-            $education->user_id = $userId;
-        }
-
+        $education = new Education();
+        $education->user_id = $userId;
         $education->mother_language = $jobApplyDTO->motherLanguage;
         $education->exam_name = $jobApplyDTO->examName;
         $education->passing_year = $jobApplyDTO->passingYear;
@@ -120,7 +115,7 @@ class JobApplyAction
         return $education;
     }
 
-    private static function storeJobExperience(int $userId, JobApplyDTO $jobApplyDTO): void
+    private static function storeJobExperience(int $userId, JobApplyDTO $jobApplyDTO, int $jobApplyId): void
     {
         $experiences = [];
 
@@ -141,6 +136,7 @@ class JobApplyAction
             } else {
                 $experiences[] = [
                     'user_id' => $userId,
+                    'job_apply_id' => $jobApplyId,
                     'country_id' => $jobExperience['country_id'],
                     'position' => $jobExperience['position'],
                     'duration' => $jobExperience['duration'],
