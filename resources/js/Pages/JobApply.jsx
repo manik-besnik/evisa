@@ -307,6 +307,7 @@ const JobDemand = () => {
                                                 handleValueChange={(value) => setData('job_demand_id', value.id)}
                                                 field="type_of_work"
                                                 defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                                disabled={true}
                                             /> :
                                             <MultiSelect
                                                 placeholder="Select Here"
