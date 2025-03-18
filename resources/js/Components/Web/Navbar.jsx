@@ -1,5 +1,6 @@
 import React from "react";
 import { RiHome2Fill } from "react-icons/ri";
+import { IoPersonCircleOutline } from "react-icons/io5";
 import {Link} from "@inertiajs/react"
 
 const Navbar = () => {
@@ -7,38 +8,44 @@ const Navbar = () => {
         <div className="flex justify-between items-center bg-primary text-white">
 
             <div className="flex items-center">
-                <button type="button" onClick={() => window.history.back()} className="relative flex items-center bg-warning text-white pl-20 py-2 pr-4">
-                    <span className="p-1 bg-warning rounded-full border border-white">
+                <button type="button" onClick={() => window.history.back()}
+                        className={`nav-item group hover:bg-warning pl-20 py-2 pr-4 ${route().current('home') ? 'bg-warning' : 'bg-primary'}`}>
+                    <span className={`p-1 rounded-full border group-hover:bg-warning border-white ${route().current('home') ? 'bg-warning' : 'bg-primary'}`}>
                         <RiHome2Fill />
                     </span>
 
-                    <div className="absolute left-full w-0 h-0 border-t-[22px] border-b-[22px] border-l-[20px] border-t-transparent border-b-transparent border-warning z-[10]"></div>
+                    <div className={`navbar-triangle z-10 ${route().current('home') ? 'border-warning' : 'border-primary'}`}></div>
 
                 </button>
-                <Link href={route('visa.create')} className="relative flex items-center bg-primary-dark text-white pl-10 py-3 pr-4">
+                <Link href={route('visa.create')}
+                      className={`nav-item group hover:bg-warning pl-10 py-3 pr-4 ${route().current('visa.create') ? 'bg-warning' : 'bg-primary-dark'}`}>
                     <span className="text-sm font-medium">Visa</span>
 
-                    <div className="absolute left-full w-0 h-0 border-t-[22px] border-b-[22px] border-l-[20px] border-t-transparent border-b-transparent border-primary-dark z-[10]"></div>
+                    <div className={`navbar-triangle z-10 ${route().current('visa.create') ? 'border-warning' : 'border-primary-dark'}`}></div>
 
                 </Link>
-                <Link href={route('job.create')} className="relative flex items-center bg-primary text-white pl-10 pr-8 py-3">
+                <Link href={route('job.create')}
+                      className={`nav-item hover:bg-warning group pl-10 pr-8 py-3 ${route().current('job.create') ? 'bg-warning' : 'bg-primary'}`}>
                     <span className="text-sm font-medium">Job</span>
-                    <div className="absolute left-full w-0 h-0 border-t-[22px] border-b-[22px] border-l-[20px] border-t-transparent border-b-transparent border-primary z-[10]"></div>
-                </Link>
-                
-                <Link className="relative flex items-center bg-primary-dark text-white pl-10 pr-8 py-3">
-                    <span className="text-sm font-medium">Ticket</span>
-                    <div className="absolute left-full w-0 h-0 border-t-[22px] border-b-[22px] border-l-[20px] border-t-transparent border-b-transparent border-primary-dark z-[10]"></div>
-                </Link>
-                
-                <Link href={route('visa-apply.index')} className="relative flex items-center bg-primary text-white pl-10 pr-8 py-3">
-                    <span className="text-sm font-medium">Reports</span>
-                    <div className="absolute left-full w-0 h-0 border-t-[22px] border-b-[22px] border-l-[20px] border-t-transparent border-b-transparent border-primary z-[10]"></div>
+                    <div className={`navbar-triangle z-10 ${route().current('job.create') ? 'border-warning' : 'border-primary'}`}></div>
                 </Link>
 
-                <Link href={route('job-apply.list')} className="relative flex items-center bg-primary-dark text-white pl-10 pr-8 py-3">
+                <Link
+                    className="nav-item bg-primary-dark group hover:bg-warning text-white pl-10 pr-8 py-3">
+                    <span className="text-sm font-medium">Ticket</span>
+                    <div className="navbar-triangle z-[10] border-primary-dark"></div>
+                </Link>
+
+                <Link href={route('visa-apply.index')}
+                      className={`nav-item hover:bg-warning group pl-10 pr-8 py-3 ${route().current('visa-apply.index') ? 'bg-warning' : 'bg-primary'}`}>
+                    <span className="text-sm font-medium">Reports</span>
+                    <div className={`navbar-triangle z-10 ${route().current('visa-apply.index') ? 'border-warning' : 'border-primary'}`}></div>
+                </Link>
+
+                <Link href={route('job-apply.list')}
+                      className={`nav-item group hover:bg-warning pl-10 pr-8 py-3 ${route().current('job-apply.list') ? 'bg-warning' : 'bg-primary-dark'}`}>
                     <span className="text-sm font-medium">Apply List</span>
-                    <div className="absolute left-full w-0 h-0 border-t-[22px] border-b-[22px] border-l-[20px] border-t-transparent border-b-transparent border-primary-dark z-[10]"></div>
+                    <div className={`navbar-triangle z-10 ${route().current('job-apply.list') ? 'border-warning' : 'border-primary-dark'}`}></div>
                 </Link>
                {/*
                 <Link href={route('visa-apply.index')} className="relative flex items-center bg-primary text-white pl-10 pr-8 py-3">
@@ -50,16 +57,22 @@ const Navbar = () => {
 
             </div>
             <div className="flex items-center pr-32">
-                <Link href='#'>
-                    <span className="block">
-                        Update News
-                    </span>
+                <Link href="#"
+                    className="nav-item bg-primary-dark group hover:bg-warning text-white pl-10 pr-8 py-3">
+                    <div className="navbar-triangle-left"></div>
+                    <span className="text-sm font-medium">Update News</span>
+                    <div className="navbar-triangle z-[10] border-primary-dark"></div>
                 </Link>
-                <span className="p-2">|</span>
-                <Link href={route('cv.create')}>
-                    <span className="block">
-                        CV Create
-                    </span>
+
+                <Link href="#"
+                    className="nav-item bg-primary group hover:bg-warning text-white pl-10 pr-8 py-2">
+                    <IoPersonCircleOutline size={28} />
+                    <div className="navbar-triangle z-[10] border-primary"></div>
+                </Link>
+                <Link href={route('cv.create')}
+                      className={`nav-item group hover:bg-warning pl-10 pr-8 py-3 ${route().current('cv.create') ? 'bg-warning' : 'bg-primary-dark'}`}>
+                    <span className="text-sm font-medium">Apply List</span>
+                    <div className={`navbar-triangle z-10 ${route().current('cv.create') ? 'border-warning' : 'border-primary-dark'}`}></div>
                 </Link>
             </div>
         </div>
