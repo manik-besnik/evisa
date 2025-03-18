@@ -1,32 +1,44 @@
 import Authenticated from "@/Layouts/AuthenticatedLayout.jsx";
-import {Head, Link, router} from "@inertiajs/react";
-import {FiEdit, FiPlus} from "react-icons/fi";
+import {Head, Link, usePage} from "@inertiajs/react";
 import Table from "@/Components/Table.jsx";
 import {getFormattedDate} from "@/Components/Helper/index.js";
-import DangerButton from "@/Components/DangerButton.jsx";
-import {FaTrashAlt} from "react-icons/fa";
-import {useState} from "react";
-import DeleteConfirmModal from "@/Components/DeleteConfirmModal.jsx";
+import {FaRegEye} from "react-icons/fa6";
 import TopSection from "@/Components/Admin/TopSection.jsx";
+import Pagination from "@/Components/Admin/Pagination.jsx";
 
-export const JobDemandApplications = ({job_applies}) => {
+export const JobDemandApplications = () => {
 
-    const [jobPost, setJobPost] = useState(null);
-    const [show, setShow] = useState(false);
+    const {job_applies} = usePage().props
+
 
     return (
         <Authenticated>
 
-            <Head title="Job Demand List | Dubai E-Visa" />
+            <Head title="Job Apply List | Dubai E-Visa"/>
 
-            <TopSection title='Job Demand List'>
-               
+            <TopSection title='Job Apply List'>
+
             </TopSection>
 
-            <Table heading={['SL', 'Company Name', 'Mobile No', 'Demand Worker', 'Location', 'Apply Date']}>
-                
+            <Table heading={['SL', 'Name', 'Mobile No', 'Categories', 'Location', 'Apply Date', "Action"]}>
+                {job_applies.data.length > 0 && job_applies.data.map((jobApply, index) => (
+                    <tr key={index}>
+                        <td>{(job_applies.current_page > 1 ? job_applies.current_page * job_applies.per_page : 0) + index + 1}</td>
+                        <td>{jobApply.name}</td>
+                        <td>{jobApply.phone}</td>
+                        <td>{jobApply.job_demand?.type_of_work ? jobApply.job_demand?.type_of_work : jobApply.job_posts?.map(item => item.name).join(', ')}</td>
+                        <td>{jobApply.location}</td>
+                        <td>{getFormattedDate(jobApply.created_at)}</td>
+                        <td className="flex gap-x-2">
+                            <Link href={route('admin.job-demands.edit', jobApply.id)} className='btn-primary'>
+                                <FaRegEye/>
+                            </Link>
+                        </td>
+                    </tr>
+                ))}
             </Table>
 
+            <Pagination links={job_applies.links}/>
         </Authenticated>
     )
 }
