@@ -40,7 +40,7 @@ class AdminJobDemandDTO
     {
         $request->validate([
             'location_id' => 'nullable',
-            'thumbnail' => 'nullable|file|mimes:jpg,jpeg,png|max:2048',
+            'thumbnail' => 'required|file|mimes:jpg,jpeg,png,webp,svg|max:2048',
             'company_name' => 'required|string|max:255',
             'contact_person' => 'required|string|max:255',
             'phone_no' => 'required|string|max:255',
