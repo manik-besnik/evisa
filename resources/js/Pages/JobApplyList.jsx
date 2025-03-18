@@ -1,7 +1,7 @@
 import WebLayout from "@/Layouts/WebLayout.jsx";
 import {Head, usePage} from "@inertiajs/react";
 import {getFormattedDate} from "@/Components/Helper/index.js";
-
+import { FaDownload } from "react-icons/fa6";
 const JobApplyList = () => {
 
     const {job_apply_list} = usePage().props
@@ -17,9 +17,10 @@ const JobApplyList = () => {
                         <tr className="bg-[#B8860B] text-white">
                             <th className="px-3 py-2 text-left border-r border-l border-t border-[#D4AF37]">ID</th>
                             <th className="px-3 py-2 text-left border-r border-t border-[#D4AF37]">Job Title</th>
-                            <th className="px-3 py-2 text-left border-r border-t border-[#D4AF37]">Company</th>
+                            <th className="px-3 py-2 text-left border-r border-t border-[#D4AF37]">Region</th>
                             <th className="px-3 py-2 text-left border-r border-t border-[#D4AF37]">Location</th>
                             <th className="px-3 py-2 text-left border-r border-t border-[#D4AF37]">Apply Date</th>
+                            <th className="px-3 py-2 text-left border-r border-t border-[#D4AF37]">Download</th>
 
                         </tr>
                         </thead>
@@ -30,10 +31,15 @@ const JobApplyList = () => {
                                 className={`${index % 2 === 0 ? "bg-white" : "bg-gray-50"} hover:bg-yellow-50 transition-colors duration-150`}
                             >
                                 <td className="px-3 py-2 text-sm border-l border-r border-b border-gray-200">{row.id}</td>
-                                <td className="px-3 py-2 text-sm border-r border-b border-gray-200">{row.job_demand?.type_of_work}</td>
-                                <td className="px-3 py-2 text-sm border-r border-b border-gray-200">{row.job_demand?.company?.name}</td>
+                                <td className="px-3 py-2 text-sm border-r border-b border-gray-200">
+                                    {row.job_demand?.type_of_work ? row.job_demand?.type_of_work : row.job_posts?.map(item => item.name).join(', ')}
+                                </td>
+                                <td className="px-3 py-2 text-sm border-r border-b border-gray-200">{row.region}</td>
                                 <td className="px-3 py-2 text-sm border-r border-b border-gray-200">{row?.location}</td>
                                 <td className="px-3 py-2 text-sm border-r border-b border-gray-200">{getFormattedDate(row.created_at)}</td>
+                                <td className="px-3 py-2 text-sm border-r border-b border-gray-200 text-center">
+                                    <FaDownload />
+                                </td>
                             </tr>
                         )) : <p>Data Not Found</p>}
                         </tbody>
