@@ -114,7 +114,7 @@ const Edit = () => {
                     <div className="p-10 h-full overflow-y-auto bg-white">
 
                         <FileUpload
-                            onChange={(value) => setData('thumbnail', value)}
+                            onChange={(fileType,value) => setData('thumbnail', value)}
                             error={errors.thumbnail}
                             fileType="thumbnail"
                         >

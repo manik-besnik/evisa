@@ -98,7 +98,7 @@ const MoreJobDemand = () => {
                     <div className="bg-white rounded-lg shadow-lg overflow-hidden p-16">
                         {/* Header with "Security" and Camera Icon */}
                         <FileUpload
-                            onChange={(value) => setData('thumbnail', value)}
+                            onChange={(fileType,value) => setData('thumbnail', value)}
                             error={errors.thumbnail}
                             fileType="thumbnail"
                         >

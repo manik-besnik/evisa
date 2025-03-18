@@ -2,8 +2,13 @@ import { useState } from "react";
 import { FaWhatsapp, FaDownload, FaShare, FaFacebook } from "react-icons/fa";
 import { assetUrl } from "@/Components/Constant/index.js";
 
-const PreviewPopup = ({ isOpen, onClose, data }) => {
+const PreviewPopup = ({ isOpen, onClose, data,confirmSubmit }) => {
     if (!isOpen) return null;
+
+    const handleFormSubmit = () => {
+        onClose()
+        confirmSubmit()
+    }
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -41,7 +46,7 @@ const PreviewPopup = ({ isOpen, onClose, data }) => {
                         </div>
                         <div className="text-right">
                             <p className="text-sm">Code No.</p>
-                            <p className="text-xl text-red-700 font-bold">00000003</p>
+                            <p className="text-xl text-red-700 font-bold">------</p>
                         </div>
                     </div>
                 </div>
@@ -54,7 +59,7 @@ const PreviewPopup = ({ isOpen, onClose, data }) => {
                                 Job Location
                             </div>
                             <div className="w-full border-2 p-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white">
-                                {data.job_location || "Dubai"}
+                                {data.job_location }
                             </div>
                         </div>
                         <div className="flex gap-4">
@@ -62,7 +67,7 @@ const PreviewPopup = ({ isOpen, onClose, data }) => {
                                 Visa validity
                             </div>
                             <div className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 p-2">
-                                {data.visa_validity || "02 years"}
+                                {data.visa_validity}
                             </div>
                         </div>
                         <div className="flex gap-4">
@@ -70,7 +75,7 @@ const PreviewPopup = ({ isOpen, onClose, data }) => {
                                 Accommodation
                             </div>
                             <div className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 p-2">
-                                {data.accommodation || " "}
+                                {data.accommodation}
                             </div>
                         </div>
                         <div className="flex gap-4">
@@ -78,7 +83,7 @@ const PreviewPopup = ({ isOpen, onClose, data }) => {
                                 Transport
                             </div>
                             <div className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 p-2">
-                                {data.transport || " "}
+                                {data.transport }
                             </div>
                         </div>
                         <div className="flex gap-4">
@@ -86,7 +91,7 @@ const PreviewPopup = ({ isOpen, onClose, data }) => {
                                 Food
                             </div>
                             <div className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 p-2">
-                                {data.food || " "}
+                                {data.food }
                             </div>
                         </div>
                         <div className="flex gap-4">
@@ -94,7 +99,7 @@ const PreviewPopup = ({ isOpen, onClose, data }) => {
                                 Medical Insurance
                             </div>
                             <div className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 p-2">
-                                {data.medical_insurance || "As per UAE labour laws"}
+                                {data.medical_insurance }
                             </div>
                         </div>
                         <div className="flex gap-4">
@@ -102,7 +107,7 @@ const PreviewPopup = ({ isOpen, onClose, data }) => {
                                 Daily working hours
                             </div>
                             <div className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 p-2">
-                                {data.working_hours || "8 Hours"} (As per Company Policy)
+                                {data.working_hours } (As per Company Policy)
                             </div>
                         </div>
                         <div className="flex gap-4">
@@ -110,7 +115,7 @@ const PreviewPopup = ({ isOpen, onClose, data }) => {
                                 Salary
                             </div>
                             <div className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 p-2">
-                                {data.salary || " "} AED
+                                {data.salary } AED
                             </div>
                         </div>
                         <div className="flex gap-4">
@@ -118,7 +123,7 @@ const PreviewPopup = ({ isOpen, onClose, data }) => {
                                 Vacation benefits
                             </div>
                             <div className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 p-2">
-                                {data.vacation_benefits || "As per UAE labour laws"}
+                                {data.vacation_benefits }
                             </div>
                         </div>
                         <div className="flex gap-4">
@@ -195,7 +200,7 @@ const PreviewPopup = ({ isOpen, onClose, data }) => {
 
                 {/* Apply Button */}
                 <div className="flex justify-center my-4">
-                    <button className="bg-red-600 text-white font-bold py-2 px-8 rounded">
+                    <button onClick={handleFormSubmit} className="bg-red-600 text-white font-bold py-2 px-8 rounded">
                         Submit
                     </button>
                     <button className="ml-2 bg-green-600 text-white flex items-center px-4 py-2 rounded">
