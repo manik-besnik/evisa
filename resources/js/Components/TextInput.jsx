@@ -14,7 +14,7 @@ const TextInput = ({
                        error = ""
                    }) => {
     return (
-        <div className={`flex flex-col my-1 ${divClasses}`}>
+        <div className={`flex flex-col ${divClasses}`}>
             {label && <label htmlFor={id} className={`text-sm font-medium text-gray-200 mb-1 ${labelClasses}`}>
                 {label}
             </label>}

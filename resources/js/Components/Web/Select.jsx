@@ -14,6 +14,7 @@ export default function Select({
                                    label = "",
                                    labelClasses = "",
                                    error = "",
+                                   disabled = false
 
                                }) {
 
@@ -31,11 +32,11 @@ export default function Select({
     );
 
     return (
-        <div className="w-full">
+        <div className={`w-full ${disabled ? 'pointer-events-none opacity-50' : ''}`} >
             {label && <label className={`text-sm font-medium text-text-primary mb-1 ${labelClasses}`}>
                 {label}
             </label>}
-            <Listbox value={selected} onChange={handleChange}>
+            <Listbox value={selected} onChange={handleChange} disabled={disabled}>
                 {selected?.[field] ?
                     <ListboxButton
                         className={` h-[26px] sm:h-[36px] w-full flex items-center justify-between  leading-[14px] sm:leading-[20px] text-xs sm:text-sm px-3 border-0  border-l-4 ${defaultClasses} ${classes} `}
@@ -58,7 +59,8 @@ export default function Select({
 
                 {error && <p className="text-red-500 text-xs my-1">{error}</p>}
 
-                <Transition leave="transition ease-in duration-100 z-[1000]" leaveFrom="opacity-100" leaveTo="opacity-0">
+                <Transition leave="transition ease-in duration-100 z-[1000]" leaveFrom="opacity-100"
+                            leaveTo="opacity-0">
                     <ListboxOptions
                         anchor="bottom"
                         className="w-[var(--button-width)] border bg-white p-2.5 [--anchor-gap:var(--spacing-1)] focus:outline-none max-h-[450px] overflow-y-scroll"

@@ -8,8 +8,9 @@ import {FaTrashAlt} from "react-icons/fa";
 import {useState} from "react";
 import DeleteConfirmModal from "@/Components/DeleteConfirmModal.jsx";
 import TopSection from "@/Components/Admin/TopSection.jsx";
+import Pagination from "@/Components/Admin/Pagination.jsx";
 
-export const Index = ({job_posts}) => {
+export const Index = ({job_demands}) => {
 
     const [jobPost, setJobPost] = useState(null);
     const [show, setShow] = useState(false);
@@ -20,7 +21,7 @@ export const Index = ({job_posts}) => {
     }
 
     const handleConfirmDelete = () => {
-        router.delete(route('admin.job-posts.destroy', jobPost.id), {
+        router.delete(route('admin.job-demands.destroy', jobPost.id), {
             onSuccess: () => {
                 setShow(false)
             }
@@ -30,22 +31,23 @@ export const Index = ({job_posts}) => {
     return (
         <Authenticated>
 
-            <Head title="Add New Job | Dubai E-Visa" />
+            <Head title="Job Demand List | Dubai E-Visa"/>
 
-            <TopSection title='Job Post List'>
-                <Link href={route('admin.job-posts.create')} className='btn-primary'><FiPlus/> Add New Job
+            <TopSection title='Job Demand List'>
+                <Link href={route('admin.job-demands.create')} className='btn-primary'><FiPlus/> Add New Job Demand
                 </Link>
             </TopSection>
 
-            <Table heading={['SL', 'Title', 'Post Date', 'Company', 'Action']}>
-                {job_posts.data.length > 0 && job_posts.data.map((jobPost, index) => (
+            <Table heading={['SL', 'Category', 'Company Name', 'Worker Quantity', 'Post Date', 'Action']}>
+                {job_demands.data.length > 0 && job_demands.data.map((jobPost, index) => (
                     <tr key={index}>
-                        <td>{(job_posts.current_page > 1 ? job_posts.current_page * job_posts.per_page : 0) + index + 1}</td>
-                        <td>{jobPost.title}</td>
+                        <td>{(job_demands.current_page > 1 ? job_demands.current_page * job_demands.per_page : 0) + index + 1}</td>
+                        <td>{jobPost.type_of_work}</td>
+                        <td>{jobPost.company.name}</td>
+                        <td>{jobPost.worker_quantity}</td>
                         <td>{getFormattedDate(jobPost.created_at)}</td>
-                        <td>{jobPost.company}</td>
                         <td className="flex gap-x-2">
-                            <Link href={route('admin.job-posts.edit', jobPost.id)} className='btn-primary'>
+                            <Link href={route('admin.job-demands.edit', jobPost.id)} className='btn-primary'>
                                 <FiEdit/>
                             </Link>
                             <DangerButton onClick={() => handleDelete(jobPost)}>
@@ -56,6 +58,7 @@ export const Index = ({job_posts}) => {
                 ))}
             </Table>
 
+            <Pagination links={job_demands.links}/>
             <DeleteConfirmModal show={show} setShow={setShow} handleConfirmDelete={handleConfirmDelete}/>
         </Authenticated>
     )

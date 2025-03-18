@@ -21,6 +21,8 @@ use App\Models\VisaApply;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf as DomPDF;
+
 
 class VisaApplyController extends Controller
 {
@@ -51,9 +53,10 @@ class VisaApplyController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(VisaApply $visaApply, ShowAction $showAction): \Inertia\Response
+    public function show(VisaApply $visaApply, ShowAction $showAction, Request $request): \Illuminate\Http\Response|\Inertia\Response
     {
-        return $showAction->execute($visaApply);
+        $action = $request->input('action');
+        return $showAction->execute($visaApply, $action);
     }
 
     /**
@@ -107,5 +110,35 @@ class VisaApplyController extends Controller
             'passport' => $passport,
             'guarantor' => $guarantor,
         ]);
+    }
+
+    public function downloadPdf(Request $request)
+    {
+        dd($request);
+        $applicationIds = $request->input('ids', []);
+
+        // Validate that IDs are provided
+        if (empty($applicationIds)) {
+            return redirect()->back()->with('error', 'No applications selected for download');
+        }
+
+        // Get the applications
+        $applications = VisaApply::with('passport')
+            ->whereIn('id', $applicationIds)
+            ->get();
+
+        if ($applications->isEmpty()) {
+            return redirect()->back()->with('error', 'Selected applications not found');
+        }
+
+        // Generate PDF
+        $pdf = DomPDF::loadView('pdfs.visa-applications', ['applications' => $applications]);
+
+        // Set filename based on number of applications
+        $filename = count($applicationIds) > 1
+            ? 'visa-applications-' . date('Y-m-d') . '.pdf'
+            : 'visa-application-' . $applications->first()->id . '.pdf';
+
+        return $pdf->download($filename);
     }
 }
