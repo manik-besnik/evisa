@@ -65,6 +65,7 @@ class JobApplyDTO
     {
         $request->validate([
             'job_demand_id' => ['nullable'],
+            'job_demands' => ['required_without:job_demand_id', 'array'],
             'region' => ['required', 'string', 'min:2', 'max:250'],
             'location' => ['required', 'string', 'min:2', 'max:250'],
             'nationality' => ['required', 'min:1', 'max:250'],
@@ -95,7 +96,6 @@ class JobApplyDTO
             'nearest_airport' => ['required', 'string', 'max:250'],
             'summary' => ['nullable', 'string', 'max:500'],
             'documents' => ['required', 'array'],
-            'job_demands' => ['required', 'array'],
 
             /** Education Details */
             'exam_name' => ['required', 'string', 'min:2', 'max:200'],
