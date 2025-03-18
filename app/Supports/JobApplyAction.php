@@ -35,6 +35,16 @@ class JobApplyAction
                 ];
             }
 
+            if ($jobApplyDTO->jobDemandId) {
+                /** @var \App\Models\JobDemand|null $jobDemand */
+                $jobDemand = \App\Models\JobDemand::query()->find($jobApplyDTO->jobDemandId);
+
+                if ($jobDemand) {
+                    $jobDemand->available_job = $jobDemand->available_job - 1;
+                    $jobDemand->update();
+                }
+            }
+
             $education = self::storeEduction($userId, $jobApplyDTO);
 
             $jobApply = new JobApply();
