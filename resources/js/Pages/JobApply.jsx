@@ -969,7 +969,7 @@ const JobDemand = () => {
                                     onChange={handleFileChange}
                                     placeholder={item.name}
                                 />}
-                                    
+
                                 </div>
                             ))}
                         </div>
