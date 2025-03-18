@@ -50,6 +50,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *
  * @property User|null $user
  * @property JobPost|null $jobPost
+ * @property JobDemand|null $jobDemand
  * @property Education|null $education
  * @property Collection<int, JobExperience> $experiences
  */
@@ -108,6 +109,11 @@ class JobApply extends Model
     public function jobPost(): BelongsTo
     {
         return $this->belongsTo(JobPost::class);
+    }
+
+    public function jobDemand(): BelongsTo
+    {
+        return $this->belongsTo(JobDemand::class);
     }
 
     public function education(): BelongsTo

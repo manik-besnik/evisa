@@ -134,7 +134,6 @@ class JobPostController extends Controller
     public function jobApplyList(): \Inertia\Response
     {
         $jobApplyList = JobApplyList::execute();
-
         return Inertia::render('JobApplyList', ['job_apply_list' => $jobApplyList]);
     }
 

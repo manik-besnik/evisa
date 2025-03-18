@@ -30,9 +30,9 @@ const JobApplyList = () => {
                                 className={`${index % 2 === 0 ? "bg-white" : "bg-gray-50"} hover:bg-yellow-50 transition-colors duration-150`}
                             >
                                 <td className="px-3 py-2 text-sm border-l border-r border-b border-gray-200">{row.id}</td>
-                                <td className="px-3 py-2 text-sm border-r border-b border-gray-200">{row.job_post?.title}</td>
-                                <td className="px-3 py-2 text-sm border-r border-b border-gray-200">{row.job_post?.company}</td>
-                                <td className="px-3 py-2 text-sm border-r border-b border-gray-200">{row.job_post?.location}</td>
+                                <td className="px-3 py-2 text-sm border-r border-b border-gray-200">{row.job_demand?.type_of_work}</td>
+                                <td className="px-3 py-2 text-sm border-r border-b border-gray-200">{row.job_demand?.company?.name}</td>
+                                <td className="px-3 py-2 text-sm border-r border-b border-gray-200">{row?.location}</td>
                                 <td className="px-3 py-2 text-sm border-r border-b border-gray-200">{getFormattedDate(row.created_at)}</td>
                             </tr>
                         )) : <p>Data Not Found</p>}

@@ -45,6 +45,7 @@ const JobDemand = () => {
     const [urduProficiency, setUrduProficiency] = useState(null)
     const [drivingLicense, setDrivingLicense] = useState(null)
     const [applyFor, setApplyFor] = useState(apply_for)
+    const [shirtSize, setShirtSize] = useState(null)
 
 
     const [region, setRegion] = useState(null)
@@ -52,7 +53,7 @@ const JobDemand = () => {
 
     const {data, setData, post, errors, processing, reset} = useForm({
         job_post_id: route().params?.id ?? '',
-        job_demand_id: apply_for.id ?? '',
+        job_demand_id: apply_for?.id ?? '',
         region: '',
         location: "",
         name: '',
@@ -869,8 +870,8 @@ const JobDemand = () => {
                                     <Select
                                         placeholder="Select Here"
                                         items={shirtSizes}
-                                        selected={data.shirt_size}
-                                        setSelected={(value) => setData('shirt_size', value)}
+                                        selected={shirtSize}
+                                        setSelected={setShirtSize}
                                         handleValueChange={(value) => setData('shirt_size', value.id)}
                                         error={errors.shirt_size}
                                         defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
