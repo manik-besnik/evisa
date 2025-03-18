@@ -155,7 +155,7 @@ class JobApplyDTO
         $instance->nearestAirport = $request->input('nearest_airport');
         $instance->summary = $request->input('summary');
         $instance->documents = $request->all()['documents'] ?? [];
-        $instance->documents = $request->all()['job_demands'] ?? [];
+        $instance->jobDemands = $request->all()['job_demands'] ?? [];
 
         /** Educational Details */
         $instance->examName = $request->input('exam_name');

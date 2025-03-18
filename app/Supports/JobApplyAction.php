@@ -46,6 +46,7 @@ class JobApplyAction
             $jobApply->phone = $jobApplyDTO->phone;
             $jobApply->avatar = $avatar;
             $jobApply->gender = $jobApplyDTO->gender;
+            $jobApply->location = $jobApplyDTO->location;
             $jobApply->region = $jobApplyDTO->region;
             $jobApply->religion = $jobApplyDTO->religion;
             $jobApply->blood_group = $jobApplyDTO->bloodGroup;
