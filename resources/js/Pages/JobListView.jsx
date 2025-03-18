@@ -27,14 +27,14 @@ const JobListView = () => {
                     <JobListSlider jobs={on_demand_jobs} infinite={false}/>
                 </div>
 
-                {new_job_demands.length > 0 && <div className="mb-12">
+                 <div className="mb-12">
                     <div className="relative mb-6">
                         <div className="bg-red-600 text-white font-bold py-2 px-8 inline-block rounded-r-full">
                             New Job
                         </div>
                     </div>
                     <JobListSlider jobs={new_job_demands}/>
-                </div> }
+                </div> 
 
                 {location_job_demands.length > 0 && location_job_demands.map((item) => {
                     return (
