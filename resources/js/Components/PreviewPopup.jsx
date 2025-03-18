@@ -36,8 +36,8 @@ const PreviewPopup = ({ isOpen, onClose, data }) => {
                 <div className="border-b border-gray-300 p-4">
                     <div className="flex justify-between items-center">
                         <div>
-                            <h1 className="text-2xl font-bold text-green-800">{data.type_of_work || "Security"}</h1>
-                            <p className="text-lg">Salary <span className="font-bold">AED {data.salary || "2200"}</span></p>
+                            <h1 className="text-2xl font-bold text-green-800">{data.type_of_work || " "}</h1>
+                            <p className="text-lg">Salary <span className="font-bold">AED {data.salary || " "}</span></p>
                         </div>
                         <div className="text-right">
                             <p className="text-sm">Code No.</p>

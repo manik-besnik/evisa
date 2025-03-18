@@ -49,6 +49,16 @@ export const visaStatuses = [
     {id: 4, name: "Reject"}
 ];
 
+export const visaTypesApply = [
+    {id: 1, name: "VISIT VISA"},
+    {id: 2, name: "EMPLOYMENT VISA"},
+    {id: 3, name: "INVESTOR / PARTNER VISA"},
+    {id: 4, name: "DOMESTIC WORKER"},
+    {id: 5, name: "FREE ZONE / FREELANCER"},
+    {id: 6, name: "FAMILY VISA"},
+    {id: 7, name: "STUDENT VISA"},
+];
+
 export const visaTypes = [
     {id: 1, name: "VISIT VISA"},
     {id: 2, name: "EMPLOYMENT VISA"},
@@ -56,7 +66,9 @@ export const visaTypes = [
     {id: 4, name: "DOMESTIC WORKER"},
     {id: 5, name: "FREE ZONE / FREELANCER"},
     {id: 6, name: "FAMILY VISA"},
-    {id: 7, name: "STUDENT VISA"}
+    {id: 7, name: "STUDENT VISA"},
+    {id: 8, name: "GOLDEN VISA"},
+    {id: 9, name: "GREEN VISA"}
 ];
 
 export const jobDirectory = [

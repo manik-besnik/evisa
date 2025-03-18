@@ -17,46 +17,50 @@ const Job = () => {
                             {/* Job Directory Card 1 */}
                             <Link href={route('job.directory')} className="block mb-8">
                             <div className="flex flex-col items-center mb-8">
-                                <div className="bg-white p-4 w-32 h-30 flex justify-center items-center">
+                                    <div className="bg-white w-36 h-36 relative rounded-[6px] border-2 border-[#5A5B5A]">
                                     <img
                                         src={`${assetUrl + 'images/jobdirectory.png'}`}
                                         alt="Job Directory"
-                                        className="w-24 h-24"
+                                        className="m-auto mt-2"
                                     />
+
+                                        <div className="bg-red-600 p-2 text-white w-full text-center absolute bottom-0 rounded-bl-[4px] rounded-br-[4px]">
+                                            <span className="font-bold text-[18px]">Job Directory</span>
+                                    </div>
                                 </div>
-                                <div className="bg-red-600 text-white py-2 px-4 w-30 text-center">
-                                    <span className="font-bold text-[16.5px]">Job Directory</span>
-                                </div>
+                                
                             </div>
                           </Link>
                             {/* Job Directory Card 2 */}
                             <Link href={route('job-demand.create')} className="block mb-8">
                             <div className="flex flex-col items-center mb-8">
-                                <div className="bg-white p-4 w-32 h-30 flex justify-center items-center">
+                                    <div className="bg-white w-36 h-36 relative rounded-[6px] border-2 border-[#5A5B5A]">
                                     <img
                                         src={`${assetUrl + 'images/jodemand.png'}`}
                                         alt="Job Directory"
-                                        className="w-24 h-24"
+                                        className="m-auto mt-2"
                                     />
+                                        <div className="bg-red-600 p-2 text-white w-full text-center  absolute bottom-0 rounded-bl-[4px] rounded-br-[4px]">
+                                            <span className="font-bold text-[18px]">Job Demand</span>
+                                        </div>
                                 </div>
-                                <div className="bg-red-600 text-white py-2 px-4 w-30 text-center">
-                                    <span className="font-bold ">Job Demand</span>
-                                </div>
+                                
                             </div>
                         </Link>
                             {/* General Apply Card */}
                             <Link href={route('job-posts.create')} className="block mb-8">
                             <div className="flex flex-col items-center">
-                                <div className="bg-white p-4 w-32 h-30 flex justify-center items-center">
+                                    <div className="bg-white w-36 h-32 relative rounded-[6px] border-2 border-[#5A5B5A]">
                                     <img
                                         src={`${assetUrl + 'images/generalapply.png'}`}
                                         alt="General Apply"
-                                        className="w-20 h-20"
+                                        className="m-auto mt-4"
                                     />
+                                        <div className="bg-green-600 p-2 text-white w-full text-center absolute bottom-0 rounded-bl-[4px] rounded-br-[4px]">
+                                            <span className="font-bold text-[18px]">General Apply</span>
+                                        </div>
                                 </div>
-                                <div className="bg-green-600 text-white py-2 px-4 w-30 text-center">
-                                    <span className="font-bold text-[15.5px]">General Apply</span>
-                                </div>
+                                
                             </div>
                             </Link>
                         </div>
