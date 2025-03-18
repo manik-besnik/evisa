@@ -958,15 +958,22 @@ const JobDemand = () => {
 
                         {errors.documents && <span className='text-red-600 text-sm'>{errors.documents}</span>}
 
-                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4  gap-2">
+                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 place-items-center gap-2">
                             {jobApplyDocuments.map((item, i) => (
-                                <InputFile
-                                    defaultClasses="w-full h-15"
-                                    key={i} fileType={item.type}
-                                    onChange={handleFileChange} placeholder={item.name}
-                                />
+                                <div
+                                    key={i}
+                                    className="flex items-center justify-center w-full h-full"
+                                >{i !== 24 && <InputFile
+                                    defaultClasses="w-full h-12"
+                                    fileType={item.type}
+                                    onChange={handleFileChange}
+                                    placeholder={item.name}
+                                />}
+                                    
+                                </div>
                             ))}
                         </div>
+
 
                         {/* Submit Button */}
                         <div className="flex justify-center mt-6 gap-3">

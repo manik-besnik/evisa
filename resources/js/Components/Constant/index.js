@@ -177,6 +177,7 @@ export const jobApplyDocuments = [
     {name: "Driving License (UAE)", type: "driving-license-uae", file: null},
     {name: "Certificate (Academic)", type: "certificate-academic", file: null},
     {name: "Certificate 2", type: "certificate-2", file: null},
+    {},
     {name: "Trade License | Others", type: "trade-license-others", file: null},
     {name: "Email | UAE Pass | Info", type: "email-uae-pass-info", file: null}
 ];
