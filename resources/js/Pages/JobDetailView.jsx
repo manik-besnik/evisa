@@ -66,7 +66,7 @@ const JobDetailView = ({job}) => {
                                 </div>
                                 <div
                                     className="w-full border-2 p-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white">
-                                    {job.location.name ?? job.job_location}
+                                    {job?.location?.name ? job?.location?.name : job.job_location}
                                 </div>
                             </div>
                             <div className="flex gap-4">
