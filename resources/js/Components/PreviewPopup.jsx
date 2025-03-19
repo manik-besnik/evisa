@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FaWhatsapp, FaDownload, FaShare, FaFacebook } from "react-icons/fa";
+import { FaWhatsapp, FaDownload } from "react-icons/fa";
 import { assetUrl } from "@/Components/Constant/index.js";
 
 const PreviewPopup = ({ isOpen, onClose, data,confirmSubmit }) => {

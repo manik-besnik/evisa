@@ -5,7 +5,7 @@ import { regions } from "@/Components/Constant/index.js";
 import {useState} from "react";
 import {Head, useForm, usePage} from "@inertiajs/react";
 import {toast} from "react-toastify";
-import PreviewPopup from "../Components/PreviewPopup.jsx";
+import PreviewPopup from "@/Components/PreviewPopup.jsx";
 import JobDemandBanner from "@/Components/Web/JobDemandBanner.jsx";
 import FileUpload from "@/Components/Web/FileUpload.jsx";
 
