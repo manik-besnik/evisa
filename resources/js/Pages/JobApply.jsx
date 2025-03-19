@@ -25,6 +25,7 @@ import {toast} from "react-toastify";
 import MultiSelect from "@/Components/Web/MultiSelect.jsx";
 import FileUpload from "@/Components/Web/FileUpload.jsx";
 import {FaPlus} from "react-icons/fa6";
+import PreviewJobApply from "../Components/PreviewJobApply.jsx";
 
 
 const JobDemand = () => {
@@ -46,6 +47,7 @@ const JobDemand = () => {
     const [drivingLicense, setDrivingLicense] = useState(null)
     const [applyFor, setApplyFor] = useState(apply_for)
     const [shirtSize, setShirtSize] = useState(null)
+    const [showPreview, setShowPreview] = useState(false);
 
 
     const [region, setRegion] = useState(null)
@@ -173,10 +175,35 @@ const JobDemand = () => {
         });
     };
 
+    const handlePreview = (e) => {
+        e.preventDefault();
+        setShowPreview(true);
+    };
+
+    const getPreviewData = () => {
+        return {
+            ...data,
+            nationalityName: nationality?.nationality || "",
+            religionName: religion?.name || "",
+            bloodGroupName: bloodGroup?.name || "",
+            maritalStatusName: maritalStatus?.name || "",
+            genderName: gender?.name || "",
+            jobDemandsArray: jobDemands.map(job => job.name),
+            englishProficiencyName: englishProficiency?.name || "",
+            arabicProficiencyName: arabicProficiency?.name || "",
+            urduProficiencyName: urduProficiency?.name || "",
+        };
+    };
+    
 
     return (
         <WebLayout showBgImage={true} showServiceImage={false}>
             <Head title="Job Application Form | Dubai E-Visa"/>
+            <PreviewJobApply
+                isOpen={showPreview}
+                onClose={() => setShowPreview(false)}
+                data={getPreviewData()}
+            />
 
             <div className="container mx-auto px-4 py-6">
                 <div className="bg-white border-4 border-[#848585] p-6">
@@ -243,7 +270,7 @@ const JobDemand = () => {
 
                                     <FileUpload
                                         fileType="avatar"
-                                        onChange={(value) => setData('avatar', value)}
+                                        onChange={(fileType,value) => setData('avatar', value)}
                                         error={errors.avatar}
 
                                     >
@@ -986,8 +1013,9 @@ const JobDemand = () => {
                             />
                             <PrimaryBtn
                                 text="Preview"
-                                type="submit"
+                                type="button"
                                 classes="w-full md:w-2/12 py-3"
+                                onClick={handlePreview}
                             />
                         </div>
                     </form>
