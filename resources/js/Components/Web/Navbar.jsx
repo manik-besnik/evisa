@@ -71,7 +71,7 @@ const Navbar = () => {
                 </Link>
                 <Link href={route('cv.create')}
                       className={`nav-item group hover:bg-warning pl-10 pr-8 py-3 ${route().current('cv.create') ? 'bg-warning' : 'bg-primary-dark'}`}>
-                    <span className="text-sm font-medium">Apply List</span>
+                    <span className="text-sm font-medium">CV Create</span>
                     <div className={`navbar-triangle z-10 ${route().current('cv.create') ? 'border-warning' : 'border-primary-dark'}`}></div>
                 </Link>
             </div>

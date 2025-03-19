@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('mother_language')->constrained('languages')->cascadeOnDelete();
+            $table->foreignId('nationality')->nullable()->constrained('countries')->cascadeOnDelete();
             $table->string('name');
             $table->string('phone', 20)->nullable();
             $table->string('avatar')->nullable();
@@ -42,10 +43,10 @@ return new class extends Migration {
             $table->string('visa_status')->nullable();
             $table->string('visa_expiry')->nullable();
             $table->string('whatsapp_no')->nullable();
-            $table->string('exam_name',200);
-            $table->string('passing_year',50);
+            $table->string('exam_name', 200);
+            $table->string('passing_year', 50);
             $table->string('institute');
-            $table->string('result',10);
+            $table->string('result', 10)->nullable();
             $table->string('computer_skill')->nullable();
             $table->string('driving_license')->nullable();
             $table->string('driving_license_issue_date')->nullable();

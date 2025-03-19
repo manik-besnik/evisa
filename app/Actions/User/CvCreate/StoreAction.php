@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 class StoreAction
 {
-    public function execute(CVDTO $cvDTO)
+    public function execute(CVDTO $cvDTO): \Illuminate\Http\RedirectResponse
     {
         DB::beginTransaction();
         try {
@@ -81,7 +81,8 @@ class StoreAction
             $cv->save();
             DB::commit();
 
-            return redirect()->back();
+            return redirect()->back()->with('success', 'CV has been created.');
+
         } catch (\Exception $exception) {
             DB::rollBack();
             return redirect()->back()->withErrors(['message' => $exception->getMessage()]);

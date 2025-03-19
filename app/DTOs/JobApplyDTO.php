@@ -66,6 +66,7 @@ class JobApplyDTO
         $request->validate([
             'job_demand_id' => ['nullable'],
             'job_demands' => ['required_without:job_demand_id', 'array'],
+            'avatar' => 'required|file|mimes:jpg,jpeg,png,webp,svg|max:2048',
             'region' => ['required', 'string', 'min:2', 'max:250'],
             'location' => ['required', 'string', 'min:2', 'max:250'],
             'nationality' => ['required', 'min:1', 'max:250'],
