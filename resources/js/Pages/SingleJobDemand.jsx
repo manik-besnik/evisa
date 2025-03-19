@@ -1,20 +1,11 @@
 import WebLayout from "@/Layouts/WebLayout.jsx";
 import TextInput from "@/Components/TextInput.jsx";
 import Select from "@/Components/Web/Select.jsx";
-import {
-    documentTypes,
-    genders,
-    groups,
-    maritalStatuses,
-    joDemand,
-    visaTypes, regions
-} from "@/Components/Constant/index.js";
+import { regions } from "@/Components/Constant/index.js";
 import {useState} from "react";
 import {Head, useForm, usePage} from "@inertiajs/react";
-import PrimaryBtn from "@/Components/Web/PrimaryBtn.jsx";
-import {FaCameraRetro} from "react-icons/fa";
 import {toast} from "react-toastify";
-import PreviewPopup from "../Components/PreviewPopup.jsx";
+import PreviewPopup from "@/Components/PreviewPopup.jsx";
 import JobDemandBanner from "@/Components/Web/JobDemandBanner.jsx";
 import FileUpload from "@/Components/Web/FileUpload.jsx";
 
@@ -60,15 +51,16 @@ const SingleJobDemand = () => {
     // Handle form submission
     const handleSubmit = (e) => {
         e.preventDefault();
+        confirmSubmit()
+    };
 
-        // Handle form submission logic here
+    const confirmSubmit = () => {
         post(route('job-demand.store'), {
             onSuccess: () => {
                 toast.success('Job demand submitted successfully');
             }
         });
-    };
-
+    }
     // Toggle preview popup
     const togglePreview = () => {
         setShowPreview(!showPreview);
@@ -82,6 +74,7 @@ const SingleJobDemand = () => {
                 isOpen={showPreview}
                 onClose={togglePreview}
                 data={data}
+                confirmSubmit={confirmSubmit}
             />
 
             <div className="container mx-auto px-4 py-8">
@@ -89,7 +82,7 @@ const SingleJobDemand = () => {
                     <div className="bg-white rounded-lg shadow-lg overflow-hidden p-16">
                         {/* Header with "Security" and Camera Icon */}
                         <FileUpload
-                            onChange={(value) => setData('thumbnail', value)}
+                            onChange={(value,file) => setData('thumbnail', file)}
                             error={errors.thumbnail}
                             fileType="thumbnail"
                         >

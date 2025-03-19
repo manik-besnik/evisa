@@ -62,11 +62,11 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::get('dashboard', [\App\Http\Controllers\User\DashboardController::class, 'index'])->name('user.dashboard.index');
 
     Route::get('job-apply', [JobPostController::class, 'create'])->name('job-posts.create');
-    Route::get('job', [\App\Http\Controllers\User\JobPostController::class, 'job'])->name('job.create');
-    Route::get('jobs/{id}/details', [\App\Http\Controllers\User\JobPostController::class, 'jobsDetails'])->name('job.details');
-    Route::get('/job-pdf/{id}', [\App\Http\Controllers\User\JobPostController::class, 'generatePdf'])->name('job.pdf');
-    Route::get('job-directory', [\App\Http\Controllers\User\JobPostController::class, 'jobDirectory'])->name('job.directory');
-    Route::get('job-view', [\App\Http\Controllers\User\JobPostController::class, 'jobView'])->name('job.view');
+    Route::get('job', [JobPostController::class, 'job'])->name('job.create');
+    Route::get('jobs/{id}/details', [JobPostController::class, 'jobsDetails'])->name('job.details');
+    Route::get('/job-pdf/{id}', [JobPostController::class, 'generatePdf'])->name('job.pdf');
+    Route::get('job-directory', [JobPostController::class, 'jobDirectory'])->name('job.directory');
+    Route::get('job-view', [JobPostController::class, 'jobView'])->name('job.view');
     Route::post('job-apply/store', [JobPostController::class, 'store'])->name('job-posts.store');
 
     Route::get('job-applies', [JobPostController::class, 'jobApplyList'])->name('job-apply.list');

@@ -42,8 +42,8 @@ const InputFile = ({
                     accept=".pdf,.png,.jpg,.jpeg,.webp"
                     className="hidden"
                 />
-                
-                <div className="flex flex-col items-center">
+
+                <div className="flex gap-x-2 items-center">
                     <GrAttachment size={15}/>
                     <p className="text-xs break-words">{fileName ? fileName : placeholder}</p>
                 </div>

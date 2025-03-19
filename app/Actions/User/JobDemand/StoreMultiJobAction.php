@@ -37,6 +37,7 @@ class StoreMultiJobAction
                     'type_of_work' => $demandItem['type_of_work'],
                     'salary' => $demandItem['salary'],
                     'worker_quantity' => $demandItem['worker_quantity'],
+                    'available_job' => $demandItem['worker_quantity'],
                     'note' => $demandItem['note'],
                     'accommodation' => $jobDemandDTO->accommodation,
                     'job_location' => $jobDemandDTO->jobLocation,

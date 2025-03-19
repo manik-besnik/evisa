@@ -1,5 +1,5 @@
-// export const assetUrl = "https://dubaievisaservice.com/assets/"
-export const assetUrl = "http://127.0.0.1:8000/assets/"
+export const assetUrl = "https://dubaievisaservice.com/assets/"
+// export const assetUrl = "http://127.0.0.1:8000/assets/"
 // export const assetUrl = "http://127.0.0.1:8001/assets/"
 export const genders = [
     {id: 1, name: "Male"},
@@ -74,14 +74,6 @@ export const visaTypes = [
 export const jobDirectory = [
     {id: 1, name: "READY JOB"},
     {id: 2, name: "NEW JOB"},
-    {id: 3, name: "DUBAI"},
-    {id: 4, name: "ABUDHABI"},
-    {id: 5, name: "SHARJAH"},
-    {id: 6, name: "AJMAN"},
-    {id: 7, name: "UMM AL QWAIN"},
-    {id: 8, name: "RAS AL KHAIMA"},
-    {id: 9, name: "FUJAYRAH"},
-    {id: 10, name: "AL AIN"},
 ];
 
 export const languageProficiency = [
@@ -197,6 +189,7 @@ export const jobApplyDocuments = [
     {name: "Driving License (UAE)", type: "driving-license-uae", file: null},
     {name: "Certificate (Academic)", type: "certificate-academic", file: null},
     {name: "Certificate 2", type: "certificate-2", file: null},
+    {},
     {name: "Trade License | Others", type: "trade-license-others", file: null},
     {name: "Email | UAE Pass | Info", type: "email-uae-pass-info", file: null}
 ];

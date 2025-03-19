@@ -2,17 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 
 /**
  * @property int $id
  * @property int $user_id
- * @property int|null $job_demand_id
- * @property int $education_id
+ * @property int $mother_language
  * @property int $nationality
  * @property string $name
  * @property string $phone
@@ -43,25 +40,31 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string|null $visa_expiry
  * @property string|null $whatsapp_no
  * @property array|string $documents
- * @property array|string|null $job_posts
+ * @property array|string|null $experiences
  * @property string $summary
+ * @property string $exam_name
+ * @property string $passing_year
+ * @property string $institute
+ * @property string|null $result
+ * @property string $computer_skill
+ * @property string $driving_license
+ * @property string $driving_license_issue_date
+ * @property string $driving_license_expire_date
+ * @property int $english_proficiency
+ * @property int $arabic_proficiency
+ * @property int $urdu_proficiency
  *
  * @mixin Model
  *
  * @property User|null $user
- * @property JobPost|null $jobPost
- * @property JobDemand|null $jobDemand
- * @property Education|null $education
- * @property Collection<int, JobExperience> $experiences
+ * @property Language $language
  */
-class JobApply extends Model
+class UserCV extends Model
 {
-    protected $table = 'job_applies';
+    protected $table = 'user_cvs';
 
     protected $fillable = [
         'user_id',
-        'job_demand_id',
-        'education_id',
         'name',
         'phone',
         'email',
@@ -91,13 +94,13 @@ class JobApply extends Model
         'blood_group',
         'whatsapp_no',
         'documents',
-        'job_posts',
+        'experiences',
         'summary',
     ];
 
     protected $casts = [
         'documents' => 'array',
-        'job_posts' => 'array',
+        'experiences' => 'array',
     ];
 
 
@@ -106,23 +109,10 @@ class JobApply extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function jobPost(): BelongsTo
+    public function language(): BelongsTo
     {
-        return $this->belongsTo(JobPost::class);
+        return $this->belongsTo(Language::class,'mother_language','id');
     }
 
-    public function jobDemand(): BelongsTo
-    {
-        return $this->belongsTo(JobDemand::class);
-    }
 
-    public function education(): BelongsTo
-    {
-        return $this->belongsTo(Education::class);
-    }
-
-    public function experiences(): HasMany
-    {
-        return $this->hasMany(JobExperience::class);
-    }
 }

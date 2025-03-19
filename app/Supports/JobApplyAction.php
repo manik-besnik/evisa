@@ -35,6 +35,16 @@ class JobApplyAction
                 ];
             }
 
+            if ($jobApplyDTO->jobDemandId) {
+                /** @var \App\Models\JobDemand|null $jobDemand */
+                $jobDemand = \App\Models\JobDemand::query()->find($jobApplyDTO->jobDemandId);
+
+                if ($jobDemand) {
+                    $jobDemand->available_job = $jobDemand->available_job - 1;
+                    $jobDemand->update();
+                }
+            }
+
             $education = self::storeEduction($userId, $jobApplyDTO);
 
             $jobApply = new JobApply();
@@ -46,6 +56,7 @@ class JobApplyAction
             $jobApply->phone = $jobApplyDTO->phone;
             $jobApply->avatar = $avatar;
             $jobApply->gender = $jobApplyDTO->gender;
+            $jobApply->location = $jobApplyDTO->location;
             $jobApply->region = $jobApplyDTO->region;
             $jobApply->religion = $jobApplyDTO->religion;
             $jobApply->blood_group = $jobApplyDTO->bloodGroup;

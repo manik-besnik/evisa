@@ -12,7 +12,7 @@ class JobViewAction
     public function execute(): \Inertia\Response
     {
 
-        return Inertia::render('JobView', [
+        return Inertia::render('JobListView', [
             'on_demand_jobs' => $this->getOnDemandJobs(),
             'new_job_demands' => $this->getNewJobDemands(),
             'location_job_demands' => $this->getLocationJobDemands(),
