@@ -4,7 +4,7 @@ import {Link} from "@inertiajs/react"
 
 const Navbar = () => {
     return (
-        <div className="flex justify-between items-center bg-primary text-white">
+        <div className="flex justify-between items-center bg-[#C19125] text-white">
 
             <div className="flex items-center">
                 <button type="button" onClick={() => window.history.back()} className="relative flex items-center bg-warning text-white pl-20 py-2 pr-4">
