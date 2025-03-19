@@ -42,7 +42,7 @@ const InputFile = ({
 
     return (
         <div
-            className={`${defaultClasses} ${classes} ${fileName !== placeholder ? "bg-[#aec0d5]" : 'bg-[#E0EBF8]'}`}>
+            className={`${defaultClasses} ${classes}`}>
             <label className="w-full h-full cursor-pointer"
                    htmlFor={`file-upload-${fileType}`}>
                 <input
@@ -55,7 +55,7 @@ const InputFile = ({
 
                 {readFile ? (
                     <div className="flex items-center justify-center">
-                        <img src={readFile} className="w-auto h-40 text-center" alt="Uploaded file"/>
+                        <img src={readFile} className="w-auto h-44 text-center" alt="Uploaded file"/>
                     </div>
                 ) : (
                     children ? children : (

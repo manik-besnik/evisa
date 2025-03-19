@@ -10,7 +10,6 @@ use App\Actions\Admin\JobDemand\JobDemandApplicationAction;
 use App\Actions\Admin\JobDemand\StoreAction;
 use App\Actions\Admin\JobDemand\UpdateAction;
 use App\DTOs\AdminJobDemandDTO;
-use App\DTOs\JobPostDTO;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;

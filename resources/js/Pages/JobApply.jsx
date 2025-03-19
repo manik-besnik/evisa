@@ -7,47 +7,55 @@ import {
     genders,
     groups,
     maritalStatuses,
-    joDemand,
     visaTypes,
     bloodGroups,
     jobApplyDocuments,
-    regions
+    regions,
+    postForApply,
+    shirtSizes,
+    languageProficiency,
+    drivingLicenses,
+    religions
 } from "@/Components/Constant/index.js";
 import {useState, useEffect} from "react";
 import {Head, useForm, usePage} from "@inertiajs/react";
 import PrimaryBtn from "@/Components/Web/PrimaryBtn.jsx";
-import {FaCameraRetro} from "react-icons/fa";
-import {Textarea} from "flowbite-react";
+import {FaTrashAlt} from "react-icons/fa";
 import {toast} from "react-toastify";
 import MultiSelect from "@/Components/Web/MultiSelect.jsx";
-import {value} from "lodash/seq.js";
+import FileUpload from "@/Components/Web/FileUpload.jsx";
+import {FaPlus} from "react-icons/fa6";
+import PreviewJobApply from "../Components/PreviewJobApply.jsx";
 
 
 const JobDemand = () => {
 
-    const {auth, countries, job_demands, locations, languages} = usePage().props;
+    const {apply_for, countries, locations, languages} = usePage().props;
 
 
     const [nationality, setNationality] = useState('');
     const [jobDemands, setJobDemands] = useState([])
+    const [motherLanguage, setMotherLanguage] = useState(null)
     const [gender, setGender] = useState('');
     const [religion, setReligion] = useState('');
     const [bloodGroup, setBloodGroup] = useState('');
     const [maritalStatus, setMaritalStatus] = useState('');
-    const [district, setDistrict] = useState('');
-    const [applySource, setApplySource] = useState('');
     const [applyLocation, setApplyLocation] = useState('');
-    const [businessPhoto, setBusinessPhoto] = useState('');
-    const [passportPhoto, setPassportPhoto] = useState(null);
+    const [englishProficiency, setEnglishProficiency] = useState(null)
+    const [arabicProficiency, setArabicProficiency] = useState(null)
+    const [urduProficiency, setUrduProficiency] = useState(null)
+    const [drivingLicense, setDrivingLicense] = useState(null)
+    const [applyFor, setApplyFor] = useState(apply_for)
+    const [shirtSize, setShirtSize] = useState(null)
+    const [showPreview, setShowPreview] = useState(false);
 
-
-    const [locationsToDisplay, setLocationsToDisplay] = useState([]);
 
     const [region, setRegion] = useState(null)
 
 
     const {data, setData, post, errors, processing, reset} = useForm({
         job_post_id: route().params?.id ?? '',
+        job_demand_id: apply_for?.id ?? '',
         region: '',
         location: "",
         name: '',
@@ -59,10 +67,10 @@ const JobDemand = () => {
         religion: "",
         blood_group: "",
         marital_status: "",
-        current_address_state: "",
-        current_address_city: "",
-        current_address_area: "",
-        parmanent_district: "",
+        current_state: "",
+        current_city: "",
+        current_area: "",
+        permanent_district: "",
         permanent_thana: "",
         permanent_village: "",
         passport_no: "",
@@ -102,11 +110,6 @@ const JobDemand = () => {
             }
         ],
     })
-
-    const updateJobDemands = (values) => {
-        const ids = values.map(item => item.id)
-        setData('job_demands', ids)
-    }
 
     const updateJobExperience = (index, key, value) => {
         const updatedExperiences = [...data.job_experiences];
@@ -165,58 +168,42 @@ const JobDemand = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-
-        const formData = new FormData();
-
-
-        Object.keys(data).forEach(key => {
-            if (key === 'job_post') {
-                // Handle array data
-                data[key].forEach((value, index) => {
-                    formData.append(`job_post[${index}]`, value);
-                });
-            } else {
-                formData.append(key, data[key]);
-            }
-        });
-
-
-        if (passportPhoto) {
-            formData.append('passport_photo', passportPhoto);
-        }
-
-
         post(route('job-posts.store'), {
-            data: formData,
-            forceFormData: true,
             onSuccess: () => {
-                toast("Job application submitted successfully!");
+                reset()
             },
-            onError: () => {
-                alert('Error submitting job application. Please check the form.');
-            }
         });
     };
 
-    const updateNationality = (value) => {
-        setNationality(value);
-        setData('nationality', value.id);
+    const handlePreview = (e) => {
+        e.preventDefault();
+        setShowPreview(true);
     };
 
-    const updateGender = (value) => {
-        setGender(value);
-        setData('gender', value.id);
+    const getPreviewData = () => {
+        return {
+            ...data,
+            nationalityName: nationality?.nationality || "",
+            religionName: religion?.name || "",
+            bloodGroupName: bloodGroup?.name || "",
+            maritalStatusName: maritalStatus?.name || "",
+            genderName: gender?.name || "",
+            jobDemandsArray: jobDemands.map(job => job.name),
+            englishProficiencyName: englishProficiency?.name || "",
+            arabicProficiencyName: arabicProficiency?.name || "",
+            urduProficiencyName: urduProficiency?.name || "",
+        };
     };
-
-    const updateDistrict = (value) => {
-        setDistrict(value);
-        setData('permanent_address_district', value.id);
-    };
-
+    
 
     return (
         <WebLayout showBgImage={true} showServiceImage={false}>
             <Head title="Job Application Form | Dubai E-Visa"/>
+            <PreviewJobApply
+                isOpen={showPreview}
+                onClose={() => setShowPreview(false)}
+                data={getPreviewData()}
+            />
 
             <div className="container mx-auto px-4 py-6">
                 <div className="bg-white border-4 border-[#848585] p-6">
@@ -280,13 +267,13 @@ const JobDemand = () => {
 
                             <div className="md:w-1/3 flex justify-center">
                                 <div className="border-2 border-gray-300 w-56 h-full flex items-center justify-center">
-                                    {passportPhoto ? (
-                                        <img
-                                            src={URL.createObjectURL(passportPhoto)}
-                                            alt="Passport"
-                                            className="max-w-full max-h-full"
-                                        />
-                                    ) : (
+
+                                    <FileUpload
+                                        fileType="avatar"
+                                        onChange={(fileType,value) => setData('avatar', value)}
+                                        error={errors.avatar}
+
+                                    >
                                         <div className="text-center">
                                             <div className="flex justify-center">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64"
@@ -299,7 +286,8 @@ const JobDemand = () => {
                                             </div>
                                             <p className="mt-2 text-sm">Passport Size Pic</p>
                                         </div>
-                                    )}
+                                    </FileUpload>
+
                                 </div>
                             </div>
 
@@ -340,18 +328,28 @@ const JobDemand = () => {
                                     <h2 className="text-red-600 text-xs font-bold mb-3">POST FOR APPLY</h2>
                                     <div className="grid">
 
-                                        <MultiSelect
-                                            placeholder="Select Here"
-                                            items={job_demands}
-                                            selected={jobDemands}
-                                            setSelected={setJobDemands}
-                                            handleValueChange={updateJobDemands}
-                                            error={errors.job_demands}
-                                            required={true}
-                                            field="type_of_work"
-                                            selectLimit="3"
-                                            defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
-                                        />
+                                        {applyFor ? <Select
+                                                items={[]}
+                                                selected={applyFor}
+                                                setSelected={setApplyFor}
+                                                handleValueChange={(value) => setData('job_demand_id', value.id)}
+                                                field="type_of_work"
+                                                defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                                disabled={true}
+                                            /> :
+                                            <MultiSelect
+                                                placeholder="Select Here"
+                                                items={postForApply}
+                                                selected={jobDemands}
+                                                setSelected={setJobDemands}
+                                                handleValueChange={(values) => setData('job_demands', values)}
+                                                error={errors.job_demands}
+                                                required={true}
+                                                field="name"
+                                                selectLimit="3"
+                                                defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                            />}
+
                                     </div>
                                 </div>
                             </div>
@@ -408,7 +406,7 @@ const JobDemand = () => {
                                                 items={genders}
                                                 selected={gender}
                                                 setSelected={setGender}
-                                                handleValueChange={(value) => setData('gender',value.id)}
+                                                handleValueChange={(value) => setData('gender', value.id)}
                                                 error={errors.gender}
                                                 required={true}
                                                 defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
@@ -424,7 +422,7 @@ const JobDemand = () => {
                                         <div className="flex-1">
                                             <Select
                                                 placeholder="Select"
-                                                items={[]} // Add religion options
+                                                items={religions}
                                                 selected={religion}
                                                 setSelected={setReligion}
                                                 handleValueChange={(value) => setData('religion', value.id)}
@@ -478,25 +476,25 @@ const JobDemand = () => {
                                     <div className="flex-1 grid grid-cols-3 gap-2">
                                         <TextInput
                                             placeholder="State"
-                                            value={data.current_address_state}
-                                            onChange={(e) => setData('current_address_state', e.target.value)}
-                                            error={errors.current_address_state}
+                                            value={data.current_state}
+                                            onChange={(e) => setData('current_state', e.target.value)}
+                                            error={errors.current_state}
                                             required={true}
                                             defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
                                         />
                                         <TextInput
                                             placeholder="City"
-                                            value={data.current_address_city}
-                                            onChange={(e) => setData('current_address_city', e.target.value)}
-                                            error={errors.current_address_city}
+                                            value={data.current_city}
+                                            onChange={(e) => setData('current_city', e.target.value)}
+                                            error={errors.current_city}
                                             required={true}
                                             defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
                                         />
                                         <TextInput
                                             placeholder="Area"
-                                            value={data.current_address_area}
-                                            onChange={(e) => setData('current_address_area', e.target.value)}
-                                            error={errors.current_address_area}
+                                            value={data.current_area}
+                                            onChange={(e) => setData('current_area', e.target.value)}
+                                            error={errors.current_area}
                                             required={true}
                                             defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
                                         />
@@ -509,9 +507,9 @@ const JobDemand = () => {
                                     <div className="flex-1 grid grid-cols-3 gap-2">
                                         <TextInput
                                             placeholder="District"
-                                            value={data.parmanent_district}
-                                            onChange={(e) => setData('parmanent_district', e.target.value)}
-                                            error={errors.parmanent_district}
+                                            value={data.permanent_district}
+                                            onChange={(e) => setData('permanent_district', e.target.value)}
+                                            error={errors.permanent_district}
                                             required={true}
                                             defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
                                         />
@@ -708,19 +706,10 @@ const JobDemand = () => {
                                 <div className="col-span-3">
                                     <Select
                                         placeholder="Select"
-                                        items={[
-                                            {id: '1', name: 'light motor vehicle (Manual)'},
-                                            {id: '2', name: 'light motor vehicle (Auto)'},
-                                            {id: '3', name: 'Motorcycle'},
-                                            {id: '4', name: 'Heavy truck'},
-                                            {id: '5', name: 'Mini bus'},
-                                            {id: '6', name: 'Heavy bus'},
-                                            {id: '7', name: 'Fork lift'},
-                                            {id: '8', name: 'Shovel'},
-                                        ]}
-                                        selected={data.driving_license}
-                                        setSelected={(value) => setData('driving_license', value)}
-                                        handleValueChange={(value) => setData('driving_license', value)}
+                                        items={drivingLicenses}
+                                        selected={drivingLicense}
+                                        setSelected={setDrivingLicense}
+                                        handleValueChange={(value) => setData('driving_license', value.id)}
                                         error={errors.driving_license}
                                         defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
                                     />
@@ -757,13 +746,9 @@ const JobDemand = () => {
                                 <div className="col-span-3">
                                     <Select
                                         placeholder="Good | Fair | Poor"
-                                        items={[
-                                            {id: 'good', name: 'Good'},
-                                            {id: 'fair', name: 'Fair'},
-                                            {id: 'poor', name: 'Poor'}
-                                        ]}
-                                        selected={data.english_proficiency}
-                                        setSelected={(value) => setData('english_proficiency', value)}
+                                        items={languageProficiency}
+                                        selected={englishProficiency}
+                                        setSelected={setEnglishProficiency}
                                         handleValueChange={(value) => setData('english_proficiency', value.id)}
                                         error={errors.english_proficiency}
                                         defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
@@ -775,13 +760,9 @@ const JobDemand = () => {
                                 <div className="col-span-3">
                                     <Select
                                         placeholder="Good | Fair | Poor"
-                                        items={[
-                                            {id: 'good', name: 'Good'},
-                                            {id: 'fair', name: 'Fair'},
-                                            {id: 'poor', name: 'Poor'}
-                                        ]}
-                                        selected={data.urdu_proficiency}
-                                        setSelected={(value) => setData('urdu_proficiency', value)}
+                                        items={languageProficiency}
+                                        selected={urduProficiency}
+                                        setSelected={setUrduProficiency}
                                         handleValueChange={(value) => setData('urdu_proficiency', value.id)}
                                         error={errors.urdu_proficiency}
                                         defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
@@ -797,13 +778,9 @@ const JobDemand = () => {
                                 <div className="col-span-3">
                                     <Select
                                         placeholder="Good | Fair | Poor"
-                                        items={[
-                                            {id: 'good', name: 'Good'},
-                                            {id: 'fair', name: 'Fair'},
-                                            {id: 'poor', name: 'Poor'}
-                                        ]}
-                                        selected={data.arabic_proficiency}
-                                        setSelected={(value) => setData('arabic_proficiency', value)}
+                                        items={languageProficiency}
+                                        selected={arabicProficiency}
+                                        setSelected={setArabicProficiency}
                                         handleValueChange={(value) => setData('arabic_proficiency', value.id)}
                                         error={errors.arabic_proficiency}
                                         defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
@@ -813,10 +790,12 @@ const JobDemand = () => {
                                     <p className="p-[7px] border-2 border-[#848585]">Mother Language</p>
                                 </div>
                                 <div className="col-span-3">
-                                    <TextInput
-                                        placeholder="Typing Here"
-                                        value={data.mother_language}
-                                        onChange={(e) => setData('mother_language', e.target.value)}
+                                    <Select
+                                        placeholder="Select Language"
+                                        items={languages}
+                                        selected={motherLanguage}
+                                        setSelected={setMotherLanguage}
+                                        handleValueChange={(value) => setData('mother_language', value.id)}
                                         error={errors.mother_language}
                                         defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
                                     />
@@ -826,62 +805,69 @@ const JobDemand = () => {
 
                         {/* Job Experience */}
                         <div className="mb-6">
-                            <h2 className="text-xl font-bold mb-3 border-l-4 border-red-600 pl-2">JOB EXPERIENCE</h2>
+                            <div className="flex justify-between items-center mt-8">
+                                <h2 className="text-xl font-bold mb-3 border-l-4 border-red-600 pl-2">JOB
+                                    EXPERIENCE</h2>
+                                <button type="button" onClick={addNewExperience}
+                                        className="flex items-center gap-x-2 py-2 px-4 text-white bg-yellow-500 hover:bg-primary font-medium shadow-[2px_2px_4px_rgba(0,0,0,0.3)] text-xs hover:shadow-[2px_2px_6px_rgba(0,0,0,0.35)] transition-shadow duration-200">
+                                    <FaPlus className="text-white"/> Add New Experience
+                                </button>
+                            </div>
 
-                            {data.job_experiences.map((experience, index) => (
-                                <div key={index} className="grid grid-cols-12 gap-3 mb-4">
-                                    <div className="col-span-3">
+                            {data.job_experiences.map((item, i) => (
+                                <div key={i} className="flex items-center gap-3 mb-4">
+                                    <div className="w-1/4">
                                         <TextInput
-                                            placeholder="Position"
-                                            value={experience.position}
-                                            onChange={(e) => {
-                                                const updated = [...data.job_experiences];
-                                                updated[index].position = e.target.value;
-                                                setData('job_experiences', updated);
-                                            }}
-                                            error={errors[`job_experiences.${index}.position`]}
-                                            defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                            value={item.position}
+                                            onChange={(e) => updateJobExperience(i, "position", e.target.value)}
+                                            error={errors?.job_experiences ? errors?.job_experiences[i]?.position : ""}
+                                            id={`position-${i}`}
+                                            placeholder="EX: Software Enginner"
+                                            label="Position*"
+                                            defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
+                                            labelClasses="text-text-primary"
                                         />
                                     </div>
-                                    <div className="col-span-3">
+                                    <div className="w-1/4">
                                         <TextInput
-                                            placeholder="Duration"
-                                            value={experience.duration}
-                                            onChange={(e) => {
-                                                const updated = [...data.job_experiences];
-                                                updated[index].duration = e.target.value;
-                                                setData('job_experiences', updated);
-                                            }}
-                                            error={errors[`job_experiences.${index}.duration`]}
-                                            defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                            value={item.duration}
+                                            onChange={(e) => updateJobExperience(i, "duration", e.target.value)}
+                                            error={errors?.job_experiences ? errors?.job_experiences[i]?.duration : ""}// error={errors.passing_year}
+                                            id={`duration-${i}`}
+                                            placeholder="EX: 4 Years"
+                                            label="Duration*"
+                                            defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
+                                            labelClasses="text-text-primary"
                                         />
                                     </div>
-                                    <div className="col-span-3">
+                                    <div className="w-1/4">
                                         <TextInput
+                                            value={item.company}
+                                            onChange={(e) => updateJobExperience(i, "company", e.target.value)}
+                                            error={errors?.job_experiences ? errors?.job_experiences[i]?.company : ""}
+                                            id={`company-${i}`}
                                             placeholder="Company Name"
-                                            value={experience.company_name}
-                                            onChange={(e) => {
-                                                const updated = [...data.job_experiences];
-                                                updated[index].company_name = e.target.value;
-                                                setData('job_experiences', updated);
-                                            }}
-                                            error={errors[`job_experiences.${index}.company_name`]}
-                                            defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                            label="Company Name*"
+                                            defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
+                                            labelClasses="text-text-primary"
                                         />
                                     </div>
-                                    <div className="col-span-3">
-                                        <TextInput
-                                            placeholder="Country"
-                                            value={experience.country}
-                                            onChange={(e) => {
-                                                const updated = [...data.job_experiences];
-                                                updated[index].country = e.target.value;
-                                                setData('job_experiences', updated);
-                                            }}
-                                            error={errors[`job_experiences.${index}.country`]}
-                                            defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                    <div className="w-1/4">
+                                        <Select
+                                            placeholder="Select Country"
+                                            label="Country*"
+                                            items={countries}
+                                            selected={item.country}
+                                            setSelected={(value) => updateJobExperience(i, "country", value)}
+                                            handleValueChange={(value) => updateJobExperience(i, "country", value)}
+                                            error={errors?.job_experiences ? errors?.job_experiences[i]?.country_id : ""}
+                                            defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
                                         />
                                     </div>
+                                    {data.job_experiences.length > 1 && (
+                                        <button type="button" onClick={() => deleteExperience(i)}
+                                                className="bg-warning text-white text-sm w-9 text-center p-2.5 h-9 mt-5 flex item-center justify-between">
+                                            <FaTrashAlt/></button>)}
                                 </div>
                             ))}
                         </div>
@@ -910,15 +896,9 @@ const JobDemand = () => {
                                 <div className="col-span-3">
                                     <Select
                                         placeholder="Select Here"
-                                        items={[
-                                            {id: 'S', name: 'S'},
-                                            {id: 'M', name: 'M'},
-                                            {id: 'L', name: 'L'},
-                                            {id: 'XL', name: 'XL'},
-                                            {id: 'XXL', name: 'XXL'}
-                                        ]}
-                                        selected={data.shirt_size}
-                                        setSelected={(value) => setData('shirt_size', value)}
+                                        items={shirtSizes}
+                                        selected={shirtSize}
+                                        setSelected={setShirtSize}
                                         handleValueChange={(value) => setData('shirt_size', value.id)}
                                         error={errors.shirt_size}
                                         defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
@@ -978,9 +958,10 @@ const JobDemand = () => {
                                 <div className="col-span-3">
                                     <TextInput
                                         placeholder="Typing Here"
-                                        value={data.shoes_size}
-                                        onChange={(e) => setData('shoes_size', e.target.value)}
-                                        error={errors.shoes_size}
+                                        value={data.show_size}
+                                        onChange={(e) => setData('show_size', e.target.value)}
+                                        error={errors.show_size}
+                                        id="show-size"
                                         defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
                                     />
                                 </div>
@@ -1004,15 +985,22 @@ const JobDemand = () => {
 
                         {errors.documents && <span className='text-red-600 text-sm'>{errors.documents}</span>}
 
-                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4  gap-2">
+                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 place-items-center gap-2">
                             {jobApplyDocuments.map((item, i) => (
-                                <InputFile
-                                    defaultClasses="w-full h-15"
-                                    key={i} fileType={item.type}
-                                    onChange={handleFileChange} placeholder={item.name}
-                                />
+                                <div
+                                    key={i}
+                                    className="flex items-center justify-center w-full h-full"
+                                >{i !== 24 && <InputFile
+                                    defaultClasses="w-full h-12"
+                                    fileType={item.type}
+                                    onChange={handleFileChange}
+                                    placeholder={item.name}
+                                />}
+
+                                </div>
                             ))}
                         </div>
+
 
                         {/* Submit Button */}
                         <div className="flex justify-center mt-6 gap-3">
@@ -1025,8 +1013,9 @@ const JobDemand = () => {
                             />
                             <PrimaryBtn
                                 text="Preview"
-                                type="submit"
+                                type="button"
                                 classes="w-full md:w-2/12 py-3"
+                                onClick={handlePreview}
                             />
                         </div>
                     </form>

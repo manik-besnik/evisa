@@ -47,6 +47,7 @@ class JobDemand
         $jobDemand->education = $jobDemandDTO->education;
         $jobDemand->medical_insurance = $jobDemandDTO->medicalInsurance;
         $jobDemand->vacation_benefits = $jobDemandDTO->vacationBenefits;
+        $jobDemand->available_job = $jobDemandDTO->workerQuantity;
         if ($jobDemandDTO->isOnDemand) {
             $jobDemand->is_on_demand = true;
         }

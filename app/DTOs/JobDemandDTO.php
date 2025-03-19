@@ -4,6 +4,7 @@ namespace App\DTOs;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Validation\Rules\File;
 
 class JobDemandDTO
 {
@@ -39,7 +40,7 @@ class JobDemandDTO
             'region' => 'required|integer',
             'location_id' => 'nullable|exists:locations,id',
             'job_location' => 'required_if:region,2|string|max:255',
-            'thumbnail' => 'nullable|file|mimes:jpg,jpeg,png|max:2048',
+            'thumbnail' => ['required', File::types(['jpg', 'png', 'webp', 'jpeg', 'svg'])->max(2 * 1024)],
             'company_name' => 'required|string|max:255',
             'contact_person' => 'required|string|max:255',
             'phone_no' => 'required|string|max:255',
@@ -62,7 +63,7 @@ class JobDemandDTO
             'note' => 'required|string|max:255',
             'company_activities' => 'required|string|max:255',
             'worker_quantity' => 'required|integer|min:1',
-        ],[
+        ], [
             'location_id.required' => 'Job Location is required.',
             'location_id.exists' => 'Job Location does not exist.',
         ]);

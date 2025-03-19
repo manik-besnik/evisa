@@ -56,11 +56,15 @@ class JobPostController extends Controller
      */
     public function create(): \Inertia\Response
     {
-        return Inertia::render('JobApply', [
-            'job_demands' => JobDemand::query()
+        $applyFor = null;
+
+        if (request()->has('job_demand_id')) {
+            $applyFor = JobDemand::query()
                 ->select(['id', 'type_of_work'])
-//                ->where('available_job', '>', 0)
-                ->get(),
+                ->findOrFail(request()->input('job_demand_id'));
+        }
+        return Inertia::render('JobApply', [
+            'apply_for' => $applyFor,
             'languages' => Language::query()->get(),
             'locations' => Location::query()->select(['id', 'name'])->get(),
         ]);
@@ -71,23 +75,28 @@ class JobPostController extends Controller
      */
     public function store(Request $request): \Illuminate\Http\RedirectResponse
     {
-        /** @var JobApply|null $jobApplied */
-        $jobApplied = JobApply::query()
-            ->where('user_id', auth()->id())
-            ->where('job_post_id', $request->input('job_post_id'))
-            ->first();
 
-        if ($jobApplied) {
-            return redirect()->back()->with('error', "Already applied this job");
+        if ($request->input('job_demand_id')) {
+            /** @var JobApply|null $jobApplied */
+            $jobApplied = JobApply::query()
+                ->where('user_id', auth()->id())
+                ->where('job_demand_id', $request->input('job_demand_id'))
+                ->first();
+
+            if ($jobApplied) {
+                return redirect()->back()->with('error', "Already applied this job");
+            }
         }
 
-        $apply = JobApplyAction::execute(auth()->id(), JobApplyDTO::fromRequest($request));
+        $result = JobApplyAction::execute(auth()->id(), JobApplyDTO::fromRequest($request));
 
-        if ($apply) {
-            return redirect()->back()->with('success', 'Your application submitted');
+        if ($result instanceof \Exception) {
+            return redirect()->back()->withErrors(['message' => $result->getMessage()]);
         }
 
-        return redirect()->back()->withErrors(['message' => "Application Submit Failed"]);
+
+        return redirect()->back()->with('success', 'Your application submitted');
+
     }
 
     /**
@@ -125,7 +134,6 @@ class JobPostController extends Controller
     public function jobApplyList(): \Inertia\Response
     {
         $jobApplyList = JobApplyList::execute();
-
         return Inertia::render('JobApplyList', ['job_apply_list' => $jobApplyList]);
     }
 

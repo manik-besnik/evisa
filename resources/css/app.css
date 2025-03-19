@@ -133,6 +133,19 @@ body {
     scrollbar-width: thin;
 }
 
+.nav-item {
+    @apply relative flex items-center text-white
+}
+
+.navbar-triangle {
+    @apply absolute left-full w-0 h-0 border-t-[22px] border-b-[22px] border-l-[20px] border-t-transparent border-b-transparent group-hover:border-t-transparent  group-hover:border-b-transparent group-hover:border-warning
+}
+
+.navbar-triangle-left {
+    @apply absolute left-0 w-0 h-0 border-t-[22px] border-b-[22px] border-l-[20px] border-t-transparent border-b-transparent group-hover:border-t-transparent  group-hover:border-b-transparent  z-[10] border-[#C19125]
+}
+
+
 @keyframes vertical-movement-right {
     0% {
         transform: translateX(0%);
@@ -156,76 +169,3 @@ body {
         transform: translateX(0%);
     }
 }
-
-/* =============== slider start ==================  */
-
-/* .slick-active {
-  width: 80px !important;
-  height: 80px !important;
-  background-color: blue;
-} */
-
-.slick-track {
-    display: flex;
-    align-items: center;
-}
-
-.slick-cloned img, .slick-active img, .slick-slide img {
-    width: 80px !important;
-    height: 80px !important;
-    /* border: 2px solid white;
-    border-radius: 12px; */
-}
-
-.slick-current img {
-    width: 110px !important;
-    height: 110px !important;
-    /* border-radius: 16px; */
-}
-
-.slick-list {
-    max-width: 510px;
-    margin: auto;
-}
-
-.slick-prev, .slick-next {
-    top: 100% !important;
-    min-height: 30px;
-    min-width: 30px !important;
-    border-radius: 100%;
-    border: 1px solid #C7BDA8;
-}
-
-.slick-prev {
-    left: 0 !important;
-}
-
-.slick-next {
-    right: 0 !important;
-}
-
-.slick-prev:before {
-    content: url('https://i.ibb.co/rcwr4HW/arrow-left.png');
-    line-height: 0;
-    /* min-height: 30px;
-    min-width: 30px !important;
-    border-radius: 100%;
-    border: 1px solid #C7BDA8; */
-}
-
-.slick-next:before {
-    content: url('https://i.ibb.co/7NNvNjY/arrow-right.png');
-    line-height: 0;
-}
-
-/* @media screen and (max-width: 740px) {
-  .slick-prev {
-    left: 0 !important;
-  }
-  .slick-next {
-    right: 0 !important;
-  }
-} */
-
-
-/* ========================= slider end ====================== */

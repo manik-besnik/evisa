@@ -6,6 +6,8 @@ import TopSection from "@/Components/Admin/TopSection.jsx";
 import TextInput from "@/Components/TextInput.jsx";
 import {FaCameraRetro} from "react-icons/fa";
 import {usePage} from "@inertiajs/react";
+import JobDemandBanner from "@/Components/Web/JobDemandBanner.jsx";
+import FileUpload from "@/Components/Web/FileUpload.jsx";
 
 const CreateJobPost = () => {
 
@@ -50,6 +52,7 @@ const CreateJobPost = () => {
         city: '',
         area: '',
         note: '',
+        thumbnail: '',
         is_on_demand: false,
         is_new_job: false,
         is_approved: true,
@@ -86,23 +89,13 @@ const CreateJobPost = () => {
                 <form onSubmit={handleSubmit} className="flex flex-col gap-y-2">
                     <div className="p-10 h-full overflow-y-auto bg-white">
 
-                        {/* Header with "Security" and Camera Icon */}
-                        <div className="bg-gray-500 text-white p-4 flex justify-between items-center">
-                            <div className="flex items-center space-x-4">
-                                <div className="flex">
-                                    <div className="h-6 w-3 bg-yellow-500 mr-0.5"></div>
-                                    <div className="h-6 w-3 bg-yellow-500 mr-0.5"></div>
-                                    <div className="h-6 w-3 bg-yellow-500"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Camera Icon Space */}
-                        <div className="relative h-32 bg-gray-500">
-                            <div className="absolute bottom-4 right-4 text-white">
-                                <FaCameraRetro size={30} className="text-white"/>
-                            </div>
-                        </div>
+                        <FileUpload
+                            onChange={(fileType,value) => setData('thumbnail', value)}
+                            error={errors.thumbnail}
+                            fileType="thumbnail"
+                        >
+                            <JobDemandBanner/>
+                        </FileUpload>
 
                         {/* Salary and Code Section */}
                         <div className="p-4 w-4/12">

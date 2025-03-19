@@ -4,6 +4,8 @@ namespace App\Http\Controllers\User;
 
 use App\Actions\User\CvCreate\CreateAction;
 use App\Actions\User\CvCreate\IndexAction;
+use App\Actions\User\CvCreate\StoreAction;
+use App\DTOs\CVDTO;
 use App\Http\Controllers\Controller;
 use App\Models\VisaApply;
 use Illuminate\Http\Request;
@@ -31,29 +33,9 @@ class CvCreateController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, StoreAction $storeAction)
     {
-        $validated = $request->validate([
-            'date' => 'required|date',
-            'apply_from' => 'required',
-            'type_of_work' => 'required',
-            'businessPhoto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'visa_validity' => 'required',
-        ]);
-
-        // Handle file upload
-        if ($request->hasFile('businessPhoto')) {
-            $path = $request->file('businessPhoto')->store('business-photos', 'public');
-            $validated['businessPhoto'] = $path;
-        }
-
-        // Add user_id to request
-        $request->merge(['user_id' => auth()->id()]);
-
-        // Create job demand with all data
-        JobDemand::create($request->all());
-
-        return redirect()->back()->with('success', 'Job demand created successfully!');
+        return $storeAction->execute(CVDTO::fromRequest($request));
     }
 
     /**

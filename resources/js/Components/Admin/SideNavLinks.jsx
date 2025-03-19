@@ -39,13 +39,8 @@ export default function SideNavLinks() {
             isPermitted: isPermitted(permissionEnums.VIEW_JOB_POST),
             links: [
                 {
-                    name: 'Job List',
-                    route: route('admin.job-posts.index'),
-                    isPermitted: isPermitted(permissionEnums.VIEW_JOB_POST),
-                },
-                {
                     name: 'Applications',
-                    route: route('admin.job-posts.applications'),
+                    route: route('admin.job-demand.applications'),
                     isPermitted: isPermitted(permissionEnums.VIEW_JOB_POST),
                 }
             ]
@@ -62,10 +57,24 @@ export default function SideNavLinks() {
                     isPermitted: isPermitted(permissionEnums.VIEW_JOB_POST),
                 },
                 {
-                    name: 'Add Job',
+                    name: 'Add Job Demand',
                     route: route('admin.job-demands.create'),
                     isPermitted: isPermitted(permissionEnums.CREATE_JOB_POST),
                 },
+            ]
+        },
+        {
+            name: 'CV',
+            icon: <PiNetworkXBold />,
+            isOpen: false,
+            isPermitted: isPermitted(permissionEnums.VIEW_JOB_POST),
+            links: [
+                {
+                    name: 'CV List',
+                    route: route('admin.cv-list.index'),
+                    isPermitted: isPermitted(permissionEnums.VIEW_JOB_POST),
+                },
+
             ]
         },
         {

@@ -6,10 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Validation\Rule;
 
-class JobApplyDTO
+class CVDTO
 {
     /** Job Apply Info */
-    public int|null $jobDemandId;
     public UploadedFile|string|null $avatar;
     public string|null $region;
     public string|null $location;
@@ -41,7 +40,6 @@ class JobApplyDTO
     public string|null $nearestAirport;
     public string|null $summary = null;
     public array|null $documents = [];
-    public array|null $jobDemands = [];
 
     /** Education Details */
     public string $examName;
@@ -61,11 +59,9 @@ class JobApplyDTO
 
     public array|null $jobExperiences = [];
 
-    public static function fromRequest(Request $request): JobApplyDTO
+    public static function fromRequest(Request $request): CVDTO
     {
         $request->validate([
-            'job_demand_id' => ['nullable'],
-            'job_demands' => ['required_without:job_demand_id', 'array'],
             'avatar' => 'required|file|mimes:jpg,jpeg,png,webp,svg|max:2048',
             'region' => ['required', 'string', 'min:2', 'max:250'],
             'location' => ['required', 'string', 'min:2', 'max:250'],
@@ -124,7 +120,6 @@ class JobApplyDTO
 
         $instance = new self;
 
-        $instance->jobDemandId = (int)$request->input('job_demand_id');
         $instance->avatar = $request->hasFile('avatar') ? $request->file('avatar') : null;
         $instance->region = $request->input('region');
         $instance->location = $request->input('location');
@@ -156,7 +151,6 @@ class JobApplyDTO
         $instance->nearestAirport = $request->input('nearest_airport');
         $instance->summary = $request->input('summary');
         $instance->documents = $request->all()['documents'] ?? [];
-        $instance->jobDemands = $request->all()['job_demands'] ?? [];
 
         /** Educational Details */
         $instance->examName = $request->input('exam_name');

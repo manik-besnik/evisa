@@ -1,8 +1,7 @@
 import WebLayout from "@/Layouts/WebLayout.jsx";
-import { Head, Link } from "@inertiajs/react";
-import SearchContainer from "@/Components/Web/SearchContainer.jsx";
-import { assetUrl } from "@/Components/Constant/index.js";
-import { useState, useEffect } from "react";
+import {Head, Link} from "@inertiajs/react";
+import {assetUrl} from "@/Components/Constant/index.js";
+import {useState, useEffect} from "react";
 
 const JobView = () => {
     const allJobs = [
@@ -142,8 +141,8 @@ const JobView = () => {
                 if (firstVisibleJobIndex < categoryJobs.length - 3) {
                     // Remove the first job and add the next job after the current last one
                     const newVisibleJobs = [...currentVisibleJobs.slice(1),
-                    categoryJobs[firstVisibleJobIndex + 3]];
-                    return { ...prev, [category]: newVisibleJobs };
+                        categoryJobs[firstVisibleJobIndex + 3]];
+                    return {...prev, [category]: newVisibleJobs};
                 }
             }
 
@@ -223,12 +222,14 @@ const JobView = () => {
 
     // Render the component only when jobs are grouped
     if (Object.keys(visibleJobs).length === 0) {
-        return <WebLayout showBgImage={true} showServiceImage={false}><div>Loading...</div></WebLayout>;
+        return <WebLayout showBgImage={true} showServiceImage={false}>
+            <div>Loading...</div>
+        </WebLayout>;
     }
 
     return (
         <WebLayout showBgImage={true} showServiceImage={false}>
-            <Head title="Job View | Dubai E-Visa" />
+            <Head title="Job View | Dubai E-Visa"/>
             <div className="container mx-auto px-4 py-8">
                 {categories.map((category, categoryIndex) => (
                     <div key={categoryIndex} className="mb-12">
@@ -250,10 +251,11 @@ const JobView = () => {
                                             alt={job.title}
                                             className="w-full h-full object-cover"
                                         />
-                                        <div className="absolute bottom-4 left-4 bg-black bg-opacity-70 text-white px-3 py-1 text-xl font-bold">
+                                        <div
+                                            className="absolute bottom-4 left-4 bg-black bg-opacity-70 text-white px-3 py-1 text-xl font-bold">
                                             {job.title}
                                         </div>
-                                        
+
                                     </div>
 
                                     {/* Job Details */}
@@ -270,10 +272,13 @@ const JobView = () => {
 
 
                                         {/* Read More Link */}
-                                        <Link href={route('job.details', { id: job.id })} className="text-blue-600 hover:underline flex items-center justify-end">
+                                        <Link href={route('job.details', {id: job.id})}
+                                              className="text-blue-600 hover:underline flex items-center justify-end">
                                             Read More
-                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none"
+                                                 viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                                                      d="M14 5l7 7m0 0l-7 7m7-7H3"/>
                                             </svg>
                                         </Link>
                                     </div>
@@ -287,8 +292,10 @@ const JobView = () => {
                                     onClick={() => showPrevJob(category)}
                                     disabled={!canShowPrev(category)}
                                 >
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
+                                         viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                                              d="M15 19l-7-7 7-7"/>
                                     </svg>
                                 </button>
                             </div>
@@ -298,8 +305,10 @@ const JobView = () => {
                                     onClick={() => showNextJob(category)}
                                     disabled={!canShowNext(category)}
                                 >
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
+                                         viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                                              d="M9 5l7 7-7 7"/>
                                     </svg>
                                 </button>
                             </div>
