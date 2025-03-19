@@ -7,7 +7,7 @@ import Select from "@/Components/Web/Select.jsx";
 import PrimaryBtn from "@/Components/Web/PrimaryBtn.jsx";
 import {
     assetUrl,
-    visaTypes
+    visaTypesApply
 } from "@/Components/Constant/index.js";
 import { usePage, router } from "@inertiajs/react"; // Import Inertia router
 
@@ -33,7 +33,7 @@ const Visa = () => {
 
                             {/* Visa Types Buttons */}
                             <div className="mt-4 flex flex-col gap-y-3 place-items-center">
-                                {visaTypes.map((visa) => (
+                                {visaTypesApply.map((visa) => (
                                     <button
                                         key={visa.id}
                                         onClick={() => handleVisaClick(visa)}
