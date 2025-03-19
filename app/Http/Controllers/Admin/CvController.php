@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 
+use App\Actions\Admin\Cv\DeleteAction;
 use App\Actions\Admin\Cv\IndexAction;
 
 use App\Http\Controllers\Controller;
@@ -33,8 +34,9 @@ class CvController extends Controller
     {
     }
 
-    public function destroy()
+    public function destroy(int $id, DeleteAction $deleteAction): RedirectResponse
     {
+        return $deleteAction->execute($id);
     }
 
 }

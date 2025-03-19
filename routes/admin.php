@@ -30,16 +30,22 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
     Route::get('dashboard', [DashboardController::class, 'index'])
         ->name('dashboard.index');
 
-    Route::post('visa-applies/{id}/add-document', [VisaApplyController::class, 'addDocument'])->name('visa-applies.add-document');
+    Route::post('visa-applies/{id}/add-document', [VisaApplyController::class, 'addDocument'])
+        ->name('visa-applies.add-document');
 
-    Route::put('visa-applies/{id}/change-status', [VisaApplyController::class, 'changeStatus'])->name('visa-applies.change-status');
+    Route::put('visa-applies/{id}/change-status', [VisaApplyController::class, 'changeStatus'])
+        ->name('visa-applies.change-status');
 
-    Route::post('visa-applies/{visa_apply}', [VisaApplyController::class, 'update'])->name('visa-applies.update');
+    Route::post('visa-applies/{visa_apply}', [VisaApplyController::class, 'update'])
+        ->name('visa-applies.update');
+
     Route::resource('visa-applies', VisaApplyController::class)->except(['update']);
 
-    Route::get('visa-applies/download-pdf', [VisaApplyController::class, 'downloadPdf'])->name('visa-applies.download-pdf');
+    Route::get('visa-applies/download-pdf', [VisaApplyController::class, 'downloadPdf'])
+        ->name('visa-applies.download-pdf');
 
-    Route::delete('visa-applies/{visa_apply}/document-delete', [VisaApplyController::class, 'deleteDocument'])->name('visa-applies.delete.document');
+    Route::delete('visa-applies/{visa_apply}/document-delete', [VisaApplyController::class, 'deleteDocument'])
+        ->name('visa-applies.delete.document');
 
     Route::get('admins', [AdminController::class, 'index'])->name('admins.index');
 
@@ -53,11 +59,17 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
     Route::post('roles/store', [RoleController::class, 'store'])->name('roles.store');
     Route::put('roles/update/{id}', [RoleController::class, 'update'])->name('roles.update');
 
-    Route::get('job-posts/applications', [JobPostController::class, 'applications'])->name('job-posts.applications');
-    Route::get('job-demand/applications', [JobDemandController::class, 'jobDemandApplications'])->name('job-demand.applications');
+    Route::get('job-posts/applications', [JobPostController::class, 'applications'])
+        ->name('job-posts.applications');
+
+    Route::get('job-demand/applications', [JobDemandController::class, 'jobDemandApplications'])
+        ->name('job-demand.applications');
+
     Route::resource('job-posts', JobPostController::class);
 
-    Route::post('job-demands/update/{id}', [JobDemandController::class, 'update'])->name('job-demands.update');
+    Route::post('job-demands/update/{id}', [JobDemandController::class, 'update'])
+        ->name('job-demands.update');
+
     Route::resource('job-demands', JobDemandController::class)->except(['update']);
 
     Route::get('agencies', [AgencyController::class, 'index'])->name('agencies.index');
