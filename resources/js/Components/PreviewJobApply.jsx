@@ -21,23 +21,16 @@ const PreviewJobApply = ({ isOpen, onClose, data }) => {
             <div className="bg-white w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-lg shadow-lg relative p-4">
                 <button
                     onClick={onClose}
-                    className="absolute top-2 right-2 bg-black rounded-lg text-white p-1"
+                    className="absolute top-2 right-2 bg-black rounded-lg text-white p-1 z-10"
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
 
-                <div className="flex justify-end mb-2 gap-2">
-                    <button onClick={handlePrint} className="bg-blue-500 text-white px-4 py-2 rounded flex items-center gap-2">
-                        <FaPrint /> Print
-                    </button>
-                    <button className="bg-green-500 text-white px-4 py-2 rounded flex items-center gap-2">
-                        <FaShare /> Share
-                    </button>
-                </div>
+                
 
-                <div id="job-application-preview" className="border-2 border-gray-700 p-2">
+                <div id="job-application-preview" className="border-8 border-[#5D5D5D] p-4 relative">
                     {/* Header with Job Application and Photo */}
                     <div className="flex mb-4">
                         <div className="w-1/3">
@@ -82,7 +75,7 @@ const PreviewJobApply = ({ isOpen, onClose, data }) => {
                     {/* Personal Details Section */}
                     <div className="mb-4">
                         <h3 className="font-bold border-l-4 border-red-600 pl-2 mb-2">PERSONAL DETAILS</h3>
-                        <div className="grid grid-cols-2 gap-4">
+                        <div className="grid grid-cols-2 gap-4 after:absolute after:content-[''] after:w-[5px] after:h-[78px] after:bg-[#817F7F] after:left-[46%] after:-translate-x-1/2">
                             <div>
                                 <div className="flex">
                                     <p className="w-1/3 font-semibold">Date Of Birth</p>
@@ -120,13 +113,13 @@ const PreviewJobApply = ({ isOpen, onClose, data }) => {
                             </div>
                         </div>
                     </div>
-
+                    <hr className="border-2 border-[#848585] mb-3" />
                     {/* Current and Permanent Address */}
                     <div className="mb-4">
                         <div className="grid grid-cols-3 gap-4">
-                            <div>
-                                <p className="font-semibold">Current Address</p>
-                                <p>{data.current_state || "-"}</p>
+                            <div className="flex">
+                                <p className="font-semibold">Current Address <span className="ml-7">: </span></p>
+                                <p className="ml-2">{data.current_state || "-"}</p>
                             </div>
                             <div>
                                 <p>{data.current_city || "-"}</p>
@@ -136,9 +129,9 @@ const PreviewJobApply = ({ isOpen, onClose, data }) => {
                             </div>
                         </div>
                         <div className="grid grid-cols-3 gap-4 mt-2">
-                            <div>
-                                <p className="font-semibold">Permanent Address</p>
-                                <p>{data.permanent_district || "-"}</p>
+                            <div className="flex">
+                                <p className="font-semibold">Permanent Address <span className="ml-1">: </span> </p>
+                                <p className="ml-2">{data.permanent_district || "-"}</p>
                             </div>
                             <div>
                                 <p>{data.permanent_thana || "-"}</p>
@@ -148,10 +141,12 @@ const PreviewJobApply = ({ isOpen, onClose, data }) => {
                             </div>
                         </div>
                     </div>
-
+                    <hr className="border-2 border-[#848585] mb-3" />
                     {/* Passport & Visa Information */}
+                    
+
                     <div className="mb-4">
-                        <div className="grid grid-cols-2 gap-4">
+                        <div className="grid grid-cols-2 gap-4 after:absolute after:content-[''] after:w-[5px] after:h-[78px] after:bg-[#817F7F] after:left-[46%] after:-translate-x-1/2">
                             <div>
                                 <div className="flex">
                                     <p className="w-1/3 font-semibold">Passport No</p>
@@ -213,30 +208,30 @@ const PreviewJobApply = ({ isOpen, onClose, data }) => {
                         {/* Language Proficiency */}
                         <div className="grid grid-cols-2 gap-4 mt-2">
                             <div>
-                                <div className="grid grid-cols-2 gap-2">
+                                <div className="grid grid-cols-2 gap-2 mb-1">
                                     <div className="border border-gray-300 p-1">Driving License</div>
                                     <div className="border border-gray-300 p-1">{data.driving_license || "Select"}</div>
                                 </div>
-                                <div className="grid grid-cols-2 gap-2">
+                                <div className="grid grid-cols-2 gap-2 mb-1">
                                     <div className="border border-gray-300 p-1">English</div>
                                     <div className="border border-gray-300 p-1">{data.englishProficiencyName || "Select"}</div>
                                 </div>
-                                <div className="grid grid-cols-2 gap-2">
+                                <div className="grid grid-cols-2 gap-2 mb-1">
                                     <div className="border border-gray-300 p-1">Arabic</div>
                                     <div className="border border-gray-300 p-1">{data.arabicProficiencyName || "Select"}</div>
                                 </div>
                             </div>
 
                             <div>
-                                <div className="grid grid-cols-2 gap-2">
+                                <div className="grid grid-cols-2 gap-2 mb-1">
                                     <div className="border border-gray-300 p-1">Issue Date</div>
                                     <div className="border border-gray-300 p-1">{data.driving_license_issue_date || "-"}</div>
                                 </div>
-                                <div className="grid grid-cols-2 gap-2">
+                                <div className="grid grid-cols-2 gap-2 mb-1">
                                     <div className="border border-gray-300 p-1">Urdu/Hindi</div>
                                     <div className="border border-gray-300 p-1">{data.urduProficiencyName || "Select"}</div>
                                 </div>
-                                <div className="grid grid-cols-2 gap-2">
+                                <div className="grid grid-cols-2 gap-2 mb-1">
                                     <div className="border border-gray-300 p-1">Mother Language</div>
                                     <div className="border border-gray-300 p-1">{data.mother_language || "-"}</div>
                                 </div>
@@ -296,13 +291,16 @@ const PreviewJobApply = ({ isOpen, onClose, data }) => {
 
                     {/* Remarks */}
                     <div className="mb-4">
-                        <p className="text-red-600 font-bold">REMARKS:</p>
+                        <div className="flex">
+                            <p className="text-red-600 font-bold ">REMARKS: </p>
+                            <p>_____________________________________________________________________________________________</p>
+                        </div>
                         <div className="flex gap-2 mt-2">
-                            <div className="flex items-center">
+                            <div className="flex items-center mr-5">
                                 <div className="w-6 h-6 border border-gray-500"></div>
                                 <span className="ml-2">SELECTED</span>
                             </div>
-                            <div className="flex items-center">
+                            <div className="flex items-center mr-5">
                                 <div className="w-6 h-6 border border-gray-500"></div>
                                 <span className="ml-2">STANDBY</span>
                             </div>
@@ -326,7 +324,7 @@ const PreviewJobApply = ({ isOpen, onClose, data }) => {
                     </div>
 
                     {/* Copyright Footer */}
-                    <div className="text-right text-xs text-gray-600 mt-2">
+                    <div className="text-right text-xs text-gray-600 mt-2 absolute right-[-189px] bottom-[222px] rotate-[-90deg] bg-white p-[7px]">
                         Copy Right: www.dubai-visa.com - Application No. 1000
                     </div>
                 </div>
