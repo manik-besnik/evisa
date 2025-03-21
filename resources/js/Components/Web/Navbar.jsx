@@ -57,7 +57,7 @@ const Navbar = () => {
 
             </div>
             <div className="flex items-center pr-32">
-                <Link href="#"
+                <Link href={route('update.news')}
                     className="nav-item bg-[#AC8230] group hover:bg-warning text-white pl-10 pr-8 py-3">
                     <div className="navbar-triangle-left"></div>
                     <span className="text-sm font-medium">Update News</span>
@@ -71,7 +71,7 @@ const Navbar = () => {
                 </Link>
                 <Link href={route('cv.create')}
                     className={`nav-item group hover:bg-warning pl-10 pr-8 py-3 ${route().current('cv.create') ? 'bg-warning' : 'bg-[#AC8230]'}`}>
-                    <span className="text-sm font-medium">Apply List</span>
+                    <span className="text-sm font-medium">CV Create</span>
                     <div className={`navbar-triangle z-10 ${route().current('cv.create') ? 'border-warning' : 'border-[#AC8230]'}`}></div>
                 </Link>
             </div>

@@ -111,7 +111,7 @@ export const PreviewVisaApply = ({show, setShow, confirmSubmit, visa_apply,isPas
                 </div>
             </div>
             <div className="flex justify-center my-2">
-                <PrimaryBtn text="Save" type="button" classes="w-[200px]"
+                <PrimaryBtn text="Confirm Submit" type="button" classes="w-[200px]"
                             onClick={confirmSubmit}/>
             </div>
 
