@@ -74,6 +74,7 @@ Route::middleware(['auth', 'user'])->group(function () {
 
     //cvCreate
     Route::get('cv-create', [CvCreateController::class, 'create'])->name('cv.create');
+    Route::post('cv-create', [CvCreateController::class, 'store'])->name('cv.store');
     Route::get('update-news', [BlogController::class, 'create'])->name('update.news');
 });
 

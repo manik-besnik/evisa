@@ -70,9 +70,9 @@ const Navbar = () => {
                     <div className="navbar-triangle z-[10] border-[#C19125]"></div>
                 </Link>
                 <Link href={route('cv.create')}
-                    className={`nav-item group hover:bg-warning pl-10 pr-8 py-3 ${route().current('cv.create') ? 'bg-warning' : 'bg-[#AC8230]'}`}>
+                      className={`nav-item group hover:bg-warning pl-10 pr-8 py-3 ${route().current('cv.create') ? 'bg-warning' : 'bg-primary-dark'}`}>
                     <span className="text-sm font-medium">CV Create</span>
-                    <div className={`navbar-triangle z-10 ${route().current('cv.create') ? 'border-warning' : 'border-[#AC8230]'}`}></div>
+                    <div className={`navbar-triangle z-10 ${route().current('cv.create') ? 'border-warning' : 'border-primary-dark'}`}></div>
                 </Link>
             </div>
         </div>

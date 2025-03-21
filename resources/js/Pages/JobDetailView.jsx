@@ -24,8 +24,19 @@ const JobDetailView = ({job}) => {
 
 
     return (
-        <WebLayout showBgImage={false} showServiceImage={false}>
-            <Head title={`${job.type_of_work} Job Details | Dubai E-Visa`}/>
+        <WebLayout showBgImage={true} showServiceImage={false}>
+            <Head>
+                <title>
+                    {`${job.type_of_work} Job Details | Dubai E-Visa`}
+                </title>
+                <meta property="og:url"
+                      content={shareUrl}/>
+                <meta property="og:type" content="article"/>
+                <meta property="og:title" content={`${job.type_of_work} Job Details | Dubai E-Visa`}/>
+                <meta property="og:description" content={job.summary}/>
+                <meta property="og:image"
+                      content={job.thumbnail}/>
+            </Head>
             <div className="container mx-auto px-4 py-8">
                 {/* Job Header Section with Image */}
                 <div className="bg-white rounded-lg overflow-hidden mb-8 p-8 shadow-md w-[1080px] mx-auto">

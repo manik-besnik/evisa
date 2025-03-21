@@ -62,6 +62,7 @@ class CVDTO
     public static function fromRequest(Request $request): CVDTO
     {
         $request->validate([
+            'avatar' => 'required|file|mimes:jpg,jpeg,png,webp,svg|max:2048',
             'region' => ['required', 'string', 'min:2', 'max:250'],
             'location' => ['required', 'string', 'min:2', 'max:250'],
             'nationality' => ['required', 'min:1', 'max:250'],

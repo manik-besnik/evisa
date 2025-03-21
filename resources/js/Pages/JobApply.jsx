@@ -270,7 +270,7 @@ const JobDemand = () => {
 
                                     <FileUpload
                                         fileType="avatar"
-                                        onChange={(value) => setData('avatar', value)}
+                                        onChange={(fileType,value) => setData('avatar', value)}
                                         error={errors.avatar}
 
                                     >

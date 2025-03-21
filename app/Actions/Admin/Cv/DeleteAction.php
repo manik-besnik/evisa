@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Actions\Admin\JobDemand;
+namespace App\Actions\Admin\Cv;
 
 use App\Enums\Permissions;
 use App\Models\JobPost;
+use App\Models\UserCV;
 use App\Supports\FileUpload;
 use App\Supports\UserPermission;
 use Illuminate\Http\RedirectResponse;
@@ -14,16 +15,23 @@ class DeleteAction
     {
         UserPermission::isPermitted(Permissions::DELETE_JOB_POST->value);
 
+        $cv = UserCv::query()->findOrFail($id);
 
         try {
 
-            $job = JobPost::query()->findOrFail($id);
+            FileUpload::delete($cv->avatar);
 
-            FileUpload::delete($job->thumbnail);
+            foreach ($cv->documents as $doc) {
+                $file = (array)$doc;
 
-            $job->delete();
+                if (isset($file['url'])) {
+                    FileUpload::delete($file['url']);
+                }
+            }
 
-            return to_route('admin.job-posts.index')->with(['message' => "Job Post Deleted"]);
+            $cv->delete();
+
+            return redirect()->back();
 
         } catch (\Exception $exception) {
             return redirect()->back()->withErrors(['message' => $exception->getMessage()]);
