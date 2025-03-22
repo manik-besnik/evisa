@@ -1,7 +1,7 @@
 import WebLayout from "@/Layouts/WebLayout.jsx";
 import TextInput from "@/Components/TextInput.jsx";
 import Select from "@/Components/Web/Select.jsx";
-import { regions } from "@/Components/Constant/index.js";
+import {regions} from "@/Components/Constant/index.js";
 import {useState} from "react";
 import {Head, useForm, usePage} from "@inertiajs/react";
 import {toast} from "react-toastify";
@@ -19,9 +19,10 @@ const SingleJobDemand = () => {
 
 
     // Create form with useForm
-    const {data, setData, post, processing, errors} = useForm({
+    const {data, setData, post, processing, errors, reset} = useForm({
         type_of_work: '',
         region: 1,
+        location: '',
         job_location: '',
         location_id: '',
         visa_validity: '',
@@ -58,11 +59,17 @@ const SingleJobDemand = () => {
         post(route('job-demand.store'), {
             onSuccess: () => {
                 toast.success('Job demand submitted successfully');
+                reset()
+                setShowPreview(false);
             }
         });
     }
     // Toggle preview popup
     const togglePreview = () => {
+
+        if (!showPreview) {
+            setData('location', location)
+        }
         setShowPreview(!showPreview);
     };
 
@@ -79,10 +86,10 @@ const SingleJobDemand = () => {
 
             <div className="container mx-auto px-4 py-8">
                 <form onSubmit={handleSubmit}>
-                    <div className="bg-white rounded-lg shadow-lg overflow-hidden p-16">
+                    <div className="bg-white rounded-lg overflow-hidden mb-8 p-8 shadow-md w-[1080px] mx-auto">
                         {/* Header with "Security" and Camera Icon */}
                         <FileUpload
-                            onChange={(value,file) => setData('thumbnail', file)}
+                            onChange={(value, file) => setData('thumbnail', file)}
                             error={errors.thumbnail}
                             fileType="thumbnail"
                         >
@@ -106,10 +113,10 @@ const SingleJobDemand = () => {
                             <div className="grid mt-5">
                                 <div className="flex gap-4">
                                     <div
-                                        className="pr-2 border-2 border-b-0 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right  flex items-center justify-end">
+                                        className="pr-2 border-2 border-b-0 border-l-0 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right  flex items-center justify-end">
                                         Region
                                     </div>
-                                    <div className="w-full border-2 border-b-0 border-[#8A9298] bg-white">
+                                    <div className="w-full border-2 border-r-0 border-b-0 border-[#8A9298] bg-white">
 
                                         <Select
                                             items={regions}
@@ -123,10 +130,10 @@ const SingleJobDemand = () => {
                                 </div>
                                 <div className="flex gap-4">
                                     <div
-                                        className="pr-2 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right  flex items-center justify-end">
+                                        className="pr-2 border-2 border-l-0 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right  flex items-center justify-end">
                                         Job Location
                                     </div>
-                                    <div className="w-full border-2 border-[#8A9298] bg-white">
+                                    <div className="w-full border-2 border-r-0 border-[#8A9298] bg-white">
                                         {region.id === 1 && (
                                             <Select
                                                 items={locations}
@@ -151,10 +158,10 @@ const SingleJobDemand = () => {
                                 </div>
                                 <div className="flex gap-4">
                                     <div
-                                        className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                        className="pr-2 border-t-0 border-l-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                         Visa validity
                                     </div>
-                                    <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
+                                    <div className="w-full border-2 border-r-0 border-[#8A9298] bg-white border-t-0">
                                         <TextInput
                                             id="visa_validity"
                                             value={data.visa_validity}
@@ -166,10 +173,10 @@ const SingleJobDemand = () => {
                                 </div>
                                 <div className="flex gap-4">
                                     <div
-                                        className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                        className="pr-2 border-t-0 border-l-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                         Accommodation
                                     </div>
-                                    <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
+                                    <div className="w-full border-2 border-r-0 border-[#8A9298] bg-white border-t-0">
                                         <TextInput
                                             id="accommodation"
                                             value={data.accommodation}
@@ -181,10 +188,10 @@ const SingleJobDemand = () => {
                                 </div>
                                 <div className="flex gap-4">
                                     <div
-                                        className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                        className="pr-2 border-t-0 border-l-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                         Transport
                                     </div>
-                                    <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
+                                    <div className="w-full border-2 border-r-0 border-[#8A9298] bg-white border-t-0">
                                         <TextInput
                                             id="transport"
                                             value={data.transport}
@@ -196,10 +203,10 @@ const SingleJobDemand = () => {
                                 </div>
                                 <div className="flex gap-4">
                                     <div
-                                        className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                        className="pr-2 border-t-0 border-l-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                         Food
                                     </div>
-                                    <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
+                                    <div className="w-full border-2 border-r-0 border-[#8A9298] bg-white border-t-0">
                                         <TextInput
                                             id="food"
                                             value={data.food}
@@ -211,10 +218,10 @@ const SingleJobDemand = () => {
                                 </div>
                                 <div className="flex gap-4">
                                     <div
-                                        className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                        className="pr-2 border-t-0 border-l-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                         Medical Insurance
                                     </div>
-                                    <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
+                                    <div className="w-full border-2 border-r-0 border-[#8A9298] bg-white border-t-0">
                                         <TextInput
                                             id="medical_insurance"
                                             value={data.medical_insurance}
@@ -226,10 +233,10 @@ const SingleJobDemand = () => {
                                 </div>
                                 <div className="flex gap-4">
                                     <div
-                                        className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                        className="pr-2 border-t-0 border-l-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                         Daily working hours
                                     </div>
-                                    <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
+                                    <div className="w-full border-2 border-r-0 border-[#8A9298] bg-white border-t-0">
                                         <TextInput
                                             id="working_hours"
                                             value={data.working_hours}
@@ -241,10 +248,10 @@ const SingleJobDemand = () => {
                                 </div>
                                 <div className="flex gap-4">
                                     <div
-                                        className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                        className="pr-2 border-t-0 border-l-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                         Salary
                                     </div>
-                                    <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
+                                    <div className="w-full border-2 border-r-0 border-[#8A9298] bg-white border-t-0">
                                         <TextInput
                                             id="salary"
                                             value={data.salary}
@@ -256,10 +263,10 @@ const SingleJobDemand = () => {
                                 </div>
                                 <div className="flex gap-4">
                                     <div
-                                        className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                        className="pr-2 border-t-0 border-l-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                         Vacation benefits
                                     </div>
-                                    <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
+                                    <div className="w-full border-2 border-r-0 border-[#8A9298] bg-white border-t-0">
                                         <TextInput
                                             id="vacation_benefits"
                                             value={data.vacation_benefits}
@@ -271,10 +278,10 @@ const SingleJobDemand = () => {
                                 </div>
                                 <div className="flex gap-4">
                                     <div
-                                        className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                        className="pr-2 border-t-0 border-l-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                         Age limits
                                     </div>
-                                    <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
+                                    <div className="w-full border-2 border-r-0 border-[#8A9298] bg-white border-t-0">
                                         <TextInput
                                             id="age_limits"
                                             value={data.age_limits}
@@ -286,10 +293,10 @@ const SingleJobDemand = () => {
                                 </div>
                                 <div className="flex gap-4">
                                     <div
-                                        className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                        className="pr-2 border-t-0 border-l-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                         In-demand workers
                                     </div>
-                                    <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
+                                    <div className="w-full border-2 border-r-0 border-[#8A9298] bg-white border-t-0">
                                         <TextInput
                                             id="worker_quantity"
                                             value={data.worker_quantity}
@@ -301,10 +308,10 @@ const SingleJobDemand = () => {
                                 </div>
                                 <div className="flex gap-4">
                                     <div
-                                        className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                        className="pr-2 border-t-0 border-l-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                         Education
                                     </div>
-                                    <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
+                                    <div className="w-full border-2 border-r-0 border-[#8A9298] bg-white border-t-0">
                                         <TextInput
                                             id="education"
                                             value={data.education}
@@ -316,10 +323,10 @@ const SingleJobDemand = () => {
                                 </div>
                                 <div className="flex gap-4">
                                     <div
-                                        className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                        className="pr-2 border-t-0 border-l-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                         Company activities
                                     </div>
-                                    <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
+                                    <div className="w-full border-2 border-r-0 border-[#8A9298] bg-white border-t-0">
                                         <TextInput
                                             id="company_activities"
                                             value={data.company_activities}
@@ -334,7 +341,7 @@ const SingleJobDemand = () => {
 
 
                         {/* Application Requirements */}
-                        <div className="flex mt-8 mb-4">
+                        <div className="flex mt-8">
                             <div className="bg-gray-600 text-white px-8 flex items-center">
                                 <span className="font-bold">Note</span>
                             </div>
@@ -342,13 +349,13 @@ const SingleJobDemand = () => {
                                 <h3 className="font-bold text-lg">Application Requirements:</h3>
                             </div>
                         </div>
-                        <div className="px-4 py-2 border-l-4 border-red-500 mb-4 ml-28">
+                        <div className="px-4 py-2  mb-4 ml-24">
                              <textarea
                                  id="note"
                                  name="note"
                                  value={data.note}
                                  onChange={(e) => setData('note', e.target.value)}
-                                 className="w-full rounded"
+                                 className="w-full border-l-8 border-l-red-500"
                                  rows={4}
                              ></textarea>
                         </div>

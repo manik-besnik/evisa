@@ -57,7 +57,7 @@ const Navbar = () => {
 
             </div>
             <div className="flex items-center pr-32">
-                <Link href="#"
+                <Link href={route('update.news')}
                     className="nav-item bg-[#AC8230] group hover:bg-warning text-white pl-10 pr-8 py-3">
                     <div className="navbar-triangle-left"></div>
                     <span className="text-sm font-medium">Update News</span>

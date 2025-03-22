@@ -39,8 +39,8 @@ const JobDetailView = ({job}) => {
             </Head>
             <div className="container mx-auto px-4 py-8">
                 {/* Job Header Section with Image */}
-                <div className="bg-gray-100 rounded-lg overflow-hidden mb-8 p-12">
-                    <div className="relative h-64 bg-gray-300">
+                <div className="bg-white rounded-lg overflow-hidden mb-8 p-8 shadow-md w-[1080px] mx-auto">
+                    <div className="relative h-72 bg-gray-300">
                         <img
                             src={job.thumbnail}
                             alt={job.type_of_work}
@@ -54,7 +54,7 @@ const JobDetailView = ({job}) => {
                     </div>
 
                     {/* Job Title and Code Section */}
-                    <div className="p-4 bg-white border-b">
+                    <div className="p-4 bg-white" style={{ backgroundImage: `url(${assetUrl}images/viewbg.png)` }}>
                         <div className="flex justify-between items-center">
                             <div>
                                 <h2 className="text-2xl font-bold text-green-700">{job.type_of_work}</h2>
@@ -72,131 +72,131 @@ const JobDetailView = ({job}) => {
                         <div className="grid mt-5">
                             <div className="flex gap-4">
                                 <div
-                                    className="p2 border-2 p-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                    className="border-2 border-l-0 pr-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                     Job Location
                                 </div>
                                 <div
-                                    className="w-full border-2 p-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white">
+                                    className="w-full border-2 pl-2 border-r-0 border-[#8A9298] border-l-4 border-l-red-500 bg-white">
                                     {job?.location?.name ? job?.location?.name : job.job_location}
                                 </div>
                             </div>
                             <div className="flex gap-4">
                                 <div
-                                    className="p2 border-t-0 p-2 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                    className="border-t-0 pr-2 border-2 border-l-0 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                     Visa validity
                                 </div>
                                 <div
-                                    className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 p-2">
+                                    className="w-full border-2 border-r-0 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 pl-2">
                                     {job.visa_validity}
                                 </div>
                             </div>
                             <div className="flex gap-4">
                                 <div
-                                    className="p2 border-t-0 p-2 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                    className="border-t-0 border-l-0 pr-2 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                     Accommodation
                                 </div>
                                 <div
-                                    className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 p-2">
+                                    className="w-full border-2 border-r-0 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 pl-2">
                                     {job.accommodation}
                                 </div>
                             </div>
                             <div className="flex gap-4">
                                 <div
-                                    className="p2 border-t-0 p-2 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                    className="border-t-0 border-l-0 pr-2 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                     Transport
                                 </div>
                                 <div
-                                    className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 p-2">
+                                    className="w-full border-2 border-r-0 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 pl-2">
                                     {job.transport}
                                 </div>
                             </div>
                             <div className="flex gap-4">
                                 <div
-                                    className="p2 border-t-0 p-2 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                    className="border-t-0 border-l-0 pr-2 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                     Food
                                 </div>
                                 <div
-                                    className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 p-2">
+                                    className="w-full border-2 border-r-0 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 pl-2">
                                     {job.food}
                                 </div>
                             </div>
                             <div className="flex gap-4">
                                 <div
-                                    className="p2 border-t-0 p-2 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                    className="border-t-0 border-l-0 pr-2 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                     Medical Insurance
                                 </div>
                                 <div
-                                    className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 p-2">
+                                    className="w-full border-2 border-r-0 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 pl-2">
                                     {job.medical_insurance}
                                 </div>
                             </div>
                             <div className="flex gap-4">
                                 <div
-                                    className="p2 border-t-0 p-2 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                    className="border-t-0 border-l-0 pr-2 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                     Daily working hours
                                 </div>
                                 <div
-                                    className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 p-2">
+                                    className="w-full border-2 border-r-0 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 pl-2">
                                     {job.duty_hours}
                                 </div>
                             </div>
                             <div className="flex gap-4">
                                 <div
-                                    className="p2 border-t-0 p-2 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                    className="border-t-0 border-l-0 pr-2 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                     Salary
                                 </div>
                                 <div
-                                    className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 p-2">
+                                    className="w-full border-2 border-r-0 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 pl-2">
                                     {job.salary}
                                 </div>
                             </div>
                             <div className="flex gap-4">
                                 <div
-                                    className="p2 border-t-0 p-2 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                    className="border-t-0 border-l-0 pr-2 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                     Vacation benefits
                                 </div>
                                 <div
-                                    className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 p-2">
+                                    className="w-full border-2 border-r-0 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 pl-2">
                                     {job.vacation_benefits}
                                 </div>
                             </div>
                             <div className="flex gap-4">
                                 <div
-                                    className="p2 border-t-0 p-2 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                    className="border-t-0 border-l-0 pr-2 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                     Age limits
                                 </div>
                                 <div
-                                    className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 p-2">
+                                    className="w-full border-2 border-r-0 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 pl-2">
                                     {job.age_limit}
                                 </div>
                             </div>
                             <div className="flex gap-4">
                                 <div
-                                    className="p2 border-t-0 p-2 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                    className="border-t-0 border-l-0 pr-2 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                     In-demand workers
                                 </div>
                                 <div
-                                    className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 p-2">
+                                    className="w-full border-2 border-r-0 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 pl-2">
                                     {job.worker_quantity} People
                                 </div>
                             </div>
                             <div className="flex gap-4">
                                 <div
-                                    className="p2 border-t-0 p-2 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                    className="border-t-0 border-l-0 pr-2 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                     Education
                                 </div>
                                 <div
-                                    className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 p-2">
+                                    className="w-full border-2 border-r-0 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 pl-2">
                                     {job.education}
                                 </div>
                             </div>
                             <div className="flex gap-4">
                                 <div
-                                    className="p2 border-t-0 p-2 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                    className="border-t-0 border-l-0 pr-2 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                     Company activities
                                 </div>
                                 <div
-                                    className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 p-2">
+                                    className="w-full border-2 border-r-0 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 pl-2">
                                     {job.company_activities}
                                 </div>
                             </div>
@@ -205,20 +205,19 @@ const JobDetailView = ({job}) => {
                     </div>
 
                     {/* Contact Info */}
-                    <div className="bg-[#5D5E5E] text-white p-4 text-center">
+                    <div className="bg-[#5D5E5E] text-white p-1 text-center">
                         <div className="text-2xl font-bold mb-2 flex items-center justify-center">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2" fill="none"
                                  viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
                                       d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
                             </svg>
-                            {job.company.phone_no}
+                            +971 528260909, 0508074795, 0501289360
                         </div>
-                        <div>{job.company.whatsapp_no}</div>
                     </div>
 
                     {/* Application Requirements */}
-                    <div className="p-4 bg-white flex">
+                    <div className="p-4 bg-white flex" style={{ backgroundImage: `url(${assetUrl}images/viewbg.png)` }}>
                         <div className="w-10/12">
                             <h3 className="text-lg font-bold mb-2">Application Requirements:</h3>
                             <p>{job.requirements}</p>

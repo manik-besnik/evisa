@@ -276,7 +276,7 @@ const VisaApply = () => {
 
     return (
 
-        <WebLayout showBgImage={true} showServiceImage={false}>
+        <WebLayout showBgImage={false} showServiceImage={false}>
 
             <Head title="Apply For New Visa | Dubai E-Visa"/>
 
@@ -773,11 +773,11 @@ const VisaApply = () => {
                         />
 
                     </div>
-                    <div className="flex justify-center gap-x-2 mt-2">
-                        <PrimaryBtn text="Preview" disabled={processing} type="submit" classes="w-[200px]"
+                    <div className="flex justify-center gap-x-2 mt-2 ">
+                        <PrimaryBtn text="Submit" disabled={processing} type="submit" classes="w-[200px] bg-green-600"
                                     onClick={handleSubmit}/>
-                        <PrimaryBtn text="Save" disabled={processing} type="button" classes="w-[200px]"
-                                    onClick={handleConfirmSubmit}/>
+                        {/* <PrimaryBtn text="Save" disabled={processing} type="button" classes="w-[200px]"
+                                    onClick={handleConfirmSubmit}/> */}
                     </div>
                 </form>
             </div>
