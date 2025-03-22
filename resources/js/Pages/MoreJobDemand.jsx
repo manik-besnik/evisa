@@ -1,26 +1,27 @@
 import WebLayout from "@/Layouts/WebLayout.jsx";
 import TextInput from "@/Components/TextInput.jsx";
 import Select from "@/Components/Web/Select.jsx";
-import { useState } from "react";
-import { Head, useForm, usePage } from "@inertiajs/react";
-import { FaCameraRetro } from "react-icons/fa";
-import { regions } from "@/Components/Constant"
-import { toast } from "react-toastify";
+import {useState} from "react";
+import {Head, useForm, usePage} from "@inertiajs/react";
+import {FaCameraRetro} from "react-icons/fa";
+import {regions} from "@/Components/Constant"
+import {toast} from "react-toastify";
 import JobDemandBanner from "@/Components/Web/JobDemandBanner.jsx";
 import FileUpload from "@/Components/Web/FileUpload.jsx";
 import PreviewMoreJobDemandPopup from "../Components/PreviewMoreJobDemandPopup.jsx";
 
 const MoreJobDemand = () => {
 
-    const { locations } = usePage().props
+    const {locations} = usePage().props
     const [location, setLocation] = useState(null)
     const [showPreview, setShowPreview] = useState(false);
 
     const [region, setRegion] = useState(regions[0])
 
 
-    const { data, setData, post, processing, errors } = useForm({
+    const {data, setData, post, processing, errors,reset} = useForm({
         region: 1,
+        location: '',
         job_location: '',
         location_id: '',
         visa_validity: '',
@@ -46,7 +47,7 @@ const MoreJobDemand = () => {
         area: '',
         note: '',
         demand_items: [
-            { type_of_work: '', worker_quantity: '', salary: '', note: '' }
+            {type_of_work: '', worker_quantity: '', salary: '', note: ''}
         ],
 
     });
@@ -59,7 +60,7 @@ const MoreJobDemand = () => {
     };
 
     const addCategoryRow = () => {
-        const newRow = { category: '', qt: '', salaryRange: '', note: '' };
+        const newRow = {category: '', qt: '', salaryRange: '', note: ''};
         setData('demand_items', [...data.demand_items, newRow]);
     };
 
@@ -72,37 +73,46 @@ const MoreJobDemand = () => {
     // Handle form submission
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Handle form submission logic here
+        confirmSubmit()
+    };
+
+    const confirmSubmit = () => {
         post(route('job-demand.store.multiple'), {
             onSuccess: () => {
                 toast.success('Job demand submitted successfully');
+                reset();
+                setShowPreview(false);
             }
         });
-    };
+    }
 
     // Toggle preview popup
     const togglePreview = () => {
+        if (!showPreview) {
+            setData('location', location)
+        }
         setShowPreview(!showPreview);
     };
 
     return (
         <WebLayout showBgImage={true} showServiceImage={false}>
-            <Head title="Job Demand | Dubai E-Visa" />
+            <Head title="Job Demand | Dubai E-Visa"/>
             <PreviewMoreJobDemandPopup
                 isOpen={showPreview}
                 onClose={togglePreview}
                 data={data}
+                confirmSubmit={confirmSubmit}
             />
             <div className="container mx-auto px-4 py-8">
                 <form onSubmit={handleSubmit}>
                     <div className="bg-white rounded-lg overflow-hidden mb-8 p-8 shadow-md w-[1080px] mx-auto">
                         {/* Header with "Security" and Camera Icon */}
                         <FileUpload
-                            onChange={(fileType,value) => setData('thumbnail', value)}
+                            onChange={(fileType, value) => setData('thumbnail', value)}
                             error={errors.thumbnail}
                             fileType="thumbnail"
                         >
-                            <JobDemandBanner />
+                            <JobDemandBanner/>
                         </FileUpload>
 
 
@@ -314,79 +324,79 @@ const MoreJobDemand = () => {
                             {/* Category, Qty, Salary Range, Note table section */}
                             <table className="w-full mt-4">
                                 <thead>
-                                    <tr>
-                                        <th className="px-2 border-2 border-[#8A9298] font-semibold bg-red-600 text-white text-center">
-                                            CATEGORY
-                                        </th>
-                                        <th className="px-2 border-2 border-[#8A9298] font-semibold bg-red-600 text-white text-center w-[150px]">
-                                            QT
-                                        </th>
-                                        <th className="px-2 border-2 border-[#8A9298] font-semibold bg-red-600 text-white text-center">
-                                            SALARY RANGE
-                                        </th>
-                                        <th className="px-2 border-2 border-[#8A9298] font-semibold bg-red-600 text-white text-center">
-                                            NOTE
-                                        </th>
-                                        <th className="px-2 border-2 border-[#8A9298] font-semibold bg-red-600 text-white text-center w-[80px]">
-                                            ACTION
-                                        </th>
-                                    </tr>
+                                <tr>
+                                    <th className="px-2 border-2 border-[#8A9298] font-semibold bg-red-600 text-white text-center">
+                                        CATEGORY
+                                    </th>
+                                    <th className="px-2 border-2 border-[#8A9298] font-semibold bg-red-600 text-white text-center w-[150px]">
+                                        QT
+                                    </th>
+                                    <th className="px-2 border-2 border-[#8A9298] font-semibold bg-red-600 text-white text-center">
+                                        SALARY RANGE
+                                    </th>
+                                    <th className="px-2 border-2 border-[#8A9298] font-semibold bg-red-600 text-white text-center">
+                                        NOTE
+                                    </th>
+                                    <th className="px-2 border-2 border-[#8A9298] font-semibold bg-red-600 text-white text-center w-[80px]">
+                                        ACTION
+                                    </th>
+                                </tr>
                                 </thead>
                                 <tbody>
-                                    {data.demand_items.map((row, index) => (
-                                        <tr key={index}>
-                                            <td className="px-2 border-2 border-[#8A9298] bg-[#EFD79D]">
-                                                <TextInput
-                                                    value={row.type_of_work}
-                                                    onChange={(e) => handleCategoryRowChange(index, 'type_of_work', e.target.value)}
-                                                    placeholder="Category"
-                                                />
-                                            </td>
-                                            <td className="px-2 border-2 border-[#8A9298] bg-[#EFD79D]">
-                                                <TextInput
-                                                    value={row.worker_quantity}
-                                                    onChange={(e) => handleCategoryRowChange(index, 'worker_quantity', e.target.value)}
-                                                    placeholder="Qt"
-                                                />
-                                            </td>
-                                            <td className="px-2 border-2 border-[#8A9298] bg-[#EFD79D]">
-                                                <TextInput
-                                                    value={row.salary}
-                                                    onChange={(e) => handleCategoryRowChange(index, 'salary', e.target.value)}
-                                                    placeholder="Salary Range"
-                                                />
-                                            </td>
-                                            <td className="px-2 border-2 border-[#8A9298] bg-[#EFD79D]">
-                                                <TextInput
-                                                    value={row.note}
-                                                    onChange={(e) => handleCategoryRowChange(index, 'note', e.target.value)}
-                                                    placeholder="Note"
-                                                />
-                                            </td>
-                                            <td className="px-2 border-2 border-[#8A9298] bg-[#EFD79D] text-center">
-                                                <div className="flex justify-center space-x-2">
-                                                    {index === data.demand_items.length - 1 && (
-                                                        <button
-                                                            type="button"
-                                                            onClick={addCategoryRow}
-                                                            className="bg-green-500 text-white w-6 h-6 rounded-full flex items-center justify-center"
-                                                        >
-                                                            +
-                                                        </button>
-                                                    )}
-                                                    {data.demand_items.length > 1 && (
-                                                        <button
-                                                            type="button"
-                                                            onClick={() => removeCategoryRow(index)}
-                                                            className="bg-red-500 text-white w-6 h-6 rounded-full flex items-center justify-center"
-                                                        >
-                                                            -
-                                                        </button>
-                                                    )}
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    ))}
+                                {data.demand_items.map((row, index) => (
+                                    <tr key={index}>
+                                        <td className="px-2 border-2 border-[#8A9298] bg-[#EFD79D]">
+                                            <TextInput
+                                                value={row.type_of_work}
+                                                onChange={(e) => handleCategoryRowChange(index, 'type_of_work', e.target.value)}
+                                                placeholder="Category"
+                                            />
+                                        </td>
+                                        <td className="px-2 border-2 border-[#8A9298] bg-[#EFD79D]">
+                                            <TextInput
+                                                value={row.worker_quantity}
+                                                onChange={(e) => handleCategoryRowChange(index, 'worker_quantity', e.target.value)}
+                                                placeholder="Qt"
+                                            />
+                                        </td>
+                                        <td className="px-2 border-2 border-[#8A9298] bg-[#EFD79D]">
+                                            <TextInput
+                                                value={row.salary}
+                                                onChange={(e) => handleCategoryRowChange(index, 'salary', e.target.value)}
+                                                placeholder="Salary Range"
+                                            />
+                                        </td>
+                                        <td className="px-2 border-2 border-[#8A9298] bg-[#EFD79D]">
+                                            <TextInput
+                                                value={row.note}
+                                                onChange={(e) => handleCategoryRowChange(index, 'note', e.target.value)}
+                                                placeholder="Note"
+                                            />
+                                        </td>
+                                        <td className="px-2 border-2 border-[#8A9298] bg-[#EFD79D] text-center">
+                                            <div className="flex justify-center space-x-2">
+                                                {index === data.demand_items.length - 1 && (
+                                                    <button
+                                                        type="button"
+                                                        onClick={addCategoryRow}
+                                                        className="bg-green-500 text-white w-6 h-6 rounded-full flex items-center justify-center"
+                                                    >
+                                                        +
+                                                    </button>
+                                                )}
+                                                {data.demand_items.length > 1 && (
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => removeCategoryRow(index)}
+                                                        className="bg-red-500 text-white w-6 h-6 rounded-full flex items-center justify-center"
+                                                    >
+                                                        -
+                                                    </button>
+                                                )}
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))}
                                 </tbody>
                             </table>
 
@@ -419,7 +429,7 @@ const MoreJobDemand = () => {
                                     <h3 className="relative text-lg font-bold text-white bg-[#5D5E5E] py-2 px-4">
                                         <span
                                             className="absolute right-0 top-0 h-full w-4/12 bg-red-600"
-                                            style={{ clipPath: "polygon(10% 0, 100% 0, 100% 100%, 20% 100%)" }}
+                                            style={{clipPath: "polygon(10% 0, 100% 0, 100% 100%, 20% 100%)"}}
                                         ></span>
                                         COMPANY DETAILS
                                     </h3>
@@ -529,7 +539,7 @@ const MoreJobDemand = () => {
                                     <h3 className="relative text-lg font-bold text-white bg-[#5D5E5E] py-2 px-4">
                                         <span
                                             className="absolute right-0 top-0 h-full w-4/12 bg-red-600"
-                                            style={{ clipPath: "polygon(10% 0, 100% 0, 100% 100%, 20% 100%)" }}
+                                            style={{clipPath: "polygon(10% 0, 100% 0, 100% 100%, 20% 100%)"}}
                                         ></span>
                                         ADDRESS
                                     </h3>
@@ -606,11 +616,11 @@ const MoreJobDemand = () => {
                                 <span className="mr-2">Preview</span>
                                 <span className="flex items-center justify-center w-6 h-6 bg-white rounded-full">
                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-blue-600"
-                                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                         fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                              d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                                            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                              d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
                                     </svg>
                                 </span>
                             </button>

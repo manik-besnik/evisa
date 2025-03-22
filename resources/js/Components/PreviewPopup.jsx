@@ -4,17 +4,16 @@ import {useEffect, useState} from "react";
 
 const PreviewPopup = ({isOpen, onClose, data, confirmSubmit}) => {
 
-    const [previewUrl, setPreviewUrl] = useState(null);
+    const [previewUrl, setPreviewUrl] = useState('');
 
     useEffect(() => {
         if (data.thumbnail instanceof File) {
             const url = URL.createObjectURL(data.thumbnail);
             setPreviewUrl(url);
 
-            // Cleanup URL when component unmounts or data.thumbnail changes
             return () => URL.revokeObjectURL(url);
         } else {
-            setPreviewUrl(null);
+            setPreviewUrl('');
         }
     }, [data.thumbnail]);
 

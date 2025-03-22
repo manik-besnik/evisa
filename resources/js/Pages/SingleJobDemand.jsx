@@ -19,7 +19,7 @@ const SingleJobDemand = () => {
 
 
     // Create form with useForm
-    const {data, setData, post, processing, errors} = useForm({
+    const {data, setData, post, processing, errors, reset} = useForm({
         type_of_work: '',
         region: 1,
         location: '',
@@ -59,6 +59,8 @@ const SingleJobDemand = () => {
         post(route('job-demand.store'), {
             onSuccess: () => {
                 toast.success('Job demand submitted successfully');
+                reset()
+                setShowPreview(false);
             }
         });
     }
