@@ -1,5 +1,5 @@
 import WebLayout from "@/Layouts/WebLayout.jsx";
-import {Head} from "@inertiajs/react";
+import { Head } from "@inertiajs/react";
 import SearchContainer from "@/Components/Web/InqueryContainer.jsx";
 import UserRegister from "@/Components/Web/UserRegister.jsx";
 import TextInput from "@/Components/TextInput.jsx";
@@ -19,10 +19,10 @@ const Visa = () => {
 
     return (
         <WebLayout showBgImage={true} showServiceImage={true}>
-            <Head title="Other | Dubai E-Visa"/>
+            <Head title="Other | Dubai E-Visa" />
             <div className="container">
                 <div className="grid grid-cols-2 gap-x-20">
-                    <SearchContainer/>
+                    <SearchContainer />
                     <div className="w-1/2 h-[72vh]">
                         <div className="bg-[#6b7377c8] h-full relative p-5 pr-0">
                             {/* Header Section */}

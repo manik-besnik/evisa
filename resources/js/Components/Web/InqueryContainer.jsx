@@ -1,25 +1,35 @@
 import {assetUrl} from "@/Components/Constant/index.js";
 import Search from "@/Components/Web/Search.jsx";
 
-const SearchContainer = () => {
+const InqueryContainer = () => {
     return (
         <div className="flex flex-col justify-center">
+            
             <div className="relative">
-                <img src={`${assetUrl + 'images/hero1.png'}`} alt="hero"/>
-                <div className="absolute w-full flex justify-center bottom-0 left-0">
+                <div className="flex">
+                    <div className="w-[38%] h-full">
+                        <img src={`${assetUrl + 'images/inquery.png'}`} alt="hero" />
+                    </div>
+                    <div className="w-[57%] h-full">
+                        <a href={route('inquery.create')}>
+                        <div className="bg-green-600 relative text-white p-2 rounded-lg text-2xl font-bold mt-[50%] mr-5">
+                            Inquiry
+                        </div>
+                        </a>
+                        <div className="navbar-triangle-2 border-warning"></div>
+                    </div>
+                </div>
+
+                <div className="absolute w-full flex justify-center bottom-[-25%] left-0">
                     <div className="flex justify-center mx-auto">
                         <Search/>
                     </div>
                 </div>
-                {/* <div className="ml-20 w-56 absolute left-1 top-1/2">
-                    <img className="w-[240px]"
-                        src={`${assetUrl + 'images/hero-welcome.png'}`}
-                        alt="welcome to dubai e-visa" />
-                </div> */}
+                
             </div>
 
         </div>
     )
 }
 
-export default SearchContainer;
+export default InqueryContainer;
