@@ -194,7 +194,7 @@ const JobDemand = () => {
             urduProficiencyName: urduProficiency?.name || "",
         };
     };
-    
+
 
     return (
         <WebLayout showBgImage={true} showServiceImage={false}>
@@ -274,8 +274,8 @@ const JobDemand = () => {
                                         error={errors.avatar}
 
                                     >
-                                        <div className="text-center">
-                                            <div className="flex justify-center">
+                                        <div className="w-full h-60 flex flex-col justify-center items-center text-center">
+                                            <div className="">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64"
                                                      viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                      strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
