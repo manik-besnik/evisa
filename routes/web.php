@@ -6,6 +6,8 @@ use App\Http\Controllers\User\JobPostController;
 use App\Http\Controllers\User\VisaApplyController;
 use App\Http\Controllers\User\JobDemandController;
 use App\Http\Controllers\User\CvCreateController;
+use App\Http\Controllers\User\InqueryController;
+use App\Http\Controllers\User\BlogController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -74,6 +76,10 @@ Route::middleware(['auth', 'user'])->group(function () {
     //cvCreate
     Route::get('cv-create', [CvCreateController::class, 'create'])->name('cv.create');
     Route::post('cv-create', [CvCreateController::class, 'store'])->name('cv.store');
+    Route::get('update-news', [BlogController::class, 'create'])->name('update.news');
+
+    //inquery
+    Route::get('visa', [InqueryController::class, 'visa'])->name('visa.create');
 });
 
 

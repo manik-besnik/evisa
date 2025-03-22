@@ -13,7 +13,7 @@ const JobDemandBanner = () => {
         </div>
 
         {/* Camera Icon Space */}
-        <div className="relative h-32 bg-gray-500">
+        <div className="relative h-full bg-gray-500">
             <div className="absolute bottom-4 right-4 text-white">
                 <FaCameraRetro size={30} className="text-white"/>
             </div>

@@ -920,7 +920,7 @@ const CvCreate = () => {
                             </div>
                         </div>
 
-                        <h4 className="text-success text-md my-4">Add Any Type of documents</h4>
+                        {/* <h4 className="text-success text-md my-4">Add Any Type of documents</h4>
 
                         {errors.documents && <span className='text-red-600 text-sm'>{errors.documents}</span>}
 
@@ -938,7 +938,7 @@ const CvCreate = () => {
 
                                 </div>
                             ))}
-                        </div>
+                        </div> */}
 
 
                         {/* Submit Button */}
