@@ -1,6 +1,6 @@
 import WebLayout from "@/Layouts/WebLayout.jsx";
 import {Head} from "@inertiajs/react";
-import SearchContainer from "@/Components/Web/InqueryContainer.jsx";
+import SearchContainer from "@/Components/Web/SearchContainer.jsx";
 import UserRegister from "@/Components/Web/UserRegister.jsx";
 import TextInput from "@/Components/TextInput.jsx";
 import Select from "@/Components/Web/Select.jsx";
@@ -11,7 +11,7 @@ import {
 } from "@/Components/Constant/index.js";
 import { usePage, router } from "@inertiajs/react"; // Import Inertia router
 
-const Visa = () => {
+const Inquery = () => {
     const handleVisaClick = (visa) => {
         router.get(route('visa-apply.create'), { visaType: visa.id });
     };
@@ -59,4 +59,4 @@ const Visa = () => {
     );
 }
 
-export default Visa
+export default Inquery

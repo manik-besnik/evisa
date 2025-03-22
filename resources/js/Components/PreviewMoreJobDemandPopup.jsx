@@ -142,7 +142,7 @@ const PreviewMoreJobDemandPopup = ({ isOpen, onClose, data }) => {
                 </div>
 
                 {/* Category, Qty, Salary Range, Note table section */}
-                <div className="px-4 py-2">
+                <div className="py-2">
                     <h3 className="font-bold text-lg mb-2">Job Categories:</h3>
                     <table className="w-full">
                         <thead>
@@ -192,12 +192,19 @@ const PreviewMoreJobDemandPopup = ({ isOpen, onClose, data }) => {
 
 
                 {/* Contact Information */}
-                <div className="bg-gray-200 p-3 font-bold text-center text-lg">
-                    +971 {data.phone_no || "528260909"} <FaWhatsapp className="inline text-green-600 ml-2" />
+                <div className="bg-[#5D5E5E] text-white p-1 text-center">
+                    <div className="text-2xl font-bold mb-2 flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                                d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                        </svg>
+                        +971 528260909, 0508074795, 0501289360
+                    </div>
                 </div>
 
                 {/* Application Requirements */}
-                <div className="p-4">
+                <div className="p-4" style={{ backgroundImage: `url(${assetUrl}images/viewbg.png)` }}>
                     <h3 className="font-bold text-lg">Application Requirements:</h3>
                     <p className="my-2">{data.note}</p>
                 </div>
@@ -221,9 +228,15 @@ const PreviewMoreJobDemandPopup = ({ isOpen, onClose, data }) => {
                         />
                     </div>
                     <div className="flex space-x-2">
-                        <div className="bg-blue-600 w-8 h-8 rounded-full flex items-center justify-center">f</div>
-                        <div className="bg-green-600 w-8 h-8 rounded-full flex items-center justify-center">w</div>
-                        <div className="bg-gray-600 w-8 h-8 rounded-full flex items-center justify-center">s</div>
+                        <div className="w-[53px] h-[53px] mt-[-5px] rounded-full flex items-center justify-center">
+                            <img src={`${assetUrl + 'images/facebook-circled.svg'}`} className="w-full h-full" alt="" />
+                        </div>
+                        <div className="w-10 h-10 rounded-full flex items-center justify-center">
+                            <img src={`${assetUrl + 'images/whatsapp.svg'}`} className="w-full h-full" alt="" />
+                        </div>
+                        <div className="w-10 h-10 rounded-full flex items-center justify-center">
+                            <img src={`${assetUrl + 'images/share.svg'}`} className="w-full h-full" alt="" />
+                        </div>
                     </div>
                 </div>
 

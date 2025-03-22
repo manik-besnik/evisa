@@ -28,7 +28,7 @@ const PreviewPopup = ({ isOpen, onClose, data,confirmSubmit }) => {
                 </div>
 
                 {/* Camera Space */}
-                <div className="h-32 bg-gray-500 relative">
+                <div className="h-44 bg-gray-500 relative">
                     <div className="absolute bottom-4 right-4">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
@@ -38,7 +38,7 @@ const PreviewPopup = ({ isOpen, onClose, data,confirmSubmit }) => {
                 </div>
 
                 {/* Job Title and Salary */}
-                <div className="border-b border-gray-300 p-4">
+                <div className="border-gray-300 p-4" style={{ backgroundImage: `url(${assetUrl}images/viewbg.png)` }}>
                     <div className="flex justify-between items-center">
                         <div>
                             <h1 className="text-2xl font-bold text-green-800">{data.type_of_work || " "}</h1>
@@ -52,110 +52,110 @@ const PreviewPopup = ({ isOpen, onClose, data,confirmSubmit }) => {
                 </div>
 
                 {/* Job Details Table */}
-                <div className="px-4 py-2">
+                <div className="py-2">
                     <div className="grid mt-5">
                         <div className="flex gap-4">
-                            <div className="p2 border-2 p-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                            <div className="border-2 border-l-0 pr-2 text-[16px] border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                 Job Location
                             </div>
-                            <div className="w-full border-2 p-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white">
+                            <div className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-r-0 text-[16px] pl-2">
                                 {data.job_location }
                             </div>
                         </div>
                         <div className="flex gap-4">
-                            <div className="p2 border-t-0 p-2 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                            <div className="border-t-0 border-l-0 pr-2 text-[16px] border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                 Visa validity
                             </div>
-                            <div className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 p-2">
+                            <div className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 border-r-0 text-[16px] pl-2">
                                 {data.visa_validity}
                             </div>
                         </div>
                         <div className="flex gap-4">
-                            <div className="p2 border-t-0 p-2 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                            <div className="border-t-0 border-l-0 pr-2 text-[16px] border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                 Accommodation
                             </div>
-                            <div className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 p-2">
+                            <div className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 border-r-0 text-[16px] pl-2">
                                 {data.accommodation}
                             </div>
                         </div>
                         <div className="flex gap-4">
-                            <div className="p2 border-t-0 p-2 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                            <div className="border-t-0 border-l-0 pr-2 text-[16px] border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                 Transport
                             </div>
-                            <div className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 p-2">
+                            <div className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 border-r-0 text-[16px] pl-2">
                                 {data.transport }
                             </div>
                         </div>
                         <div className="flex gap-4">
-                            <div className="p2 border-t-0 p-2 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                            <div className="border-t-0 border-l-0 pr-2 text-[16px] border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                 Food
                             </div>
-                            <div className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 p-2">
+                            <div className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 border-r-0 text-[16px] pl-2">
                                 {data.food }
                             </div>
                         </div>
                         <div className="flex gap-4">
-                            <div className="p2 border-t-0 p-2 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                            <div className="border-t-0 border-l-0 pr-2 text-[16px] border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                 Medical Insurance
                             </div>
-                            <div className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 p-2">
+                            <div className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 border-r-0 text-[16px] pl-2">
                                 {data.medical_insurance }
                             </div>
                         </div>
                         <div className="flex gap-4">
-                            <div className="p2 border-t-0 p-2 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                            <div className="border-t-0 border-l-0 pr-2 text-[16px] border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                 Daily working hours
                             </div>
-                            <div className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 p-2">
-                                {data.working_hours } (As per Company Policy)
+                            <div className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 border-r-0 text-[16px] pl-2">
+                                {data.working_hours }
                             </div>
                         </div>
                         <div className="flex gap-4">
-                            <div className="p2 border-t-0 p-2 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                            <div className="border-t-0 border-l-0 pr-2 text-[16px] border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                 Salary
                             </div>
-                            <div className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 p-2">
-                                {data.salary } AED
+                            <div className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 border-r-0 text-[16px] pl-2">
+                                {data.salary || " "} 
                             </div>
                         </div>
                         <div className="flex gap-4">
-                            <div className="p2 border-t-0 p-2 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                            <div className="border-t-0 border-l-0 pr-2 text-[16px] border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                 Vacation benefits
                             </div>
-                            <div className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 p-2">
-                                {data.vacation_benefits }
+                            <div className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 border-r-0 text-[16px] pl-2">
+                                {data.vacation_benefits || " "}
                             </div>
                         </div>
                         <div className="flex gap-4">
-                            <div className="p2 border-t-0 p-2 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                            <div className="border-t-0 border-l-0 pr-2 text-[16px] border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                 Age limits
                             </div>
-                            <div className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 p-2">
-                                {data.age_limits || "20-32"}
+                            <div className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 border-r-0 text-[16px] pl-2">
+                                {data.age_limits || " "}
                             </div>
                         </div>
                         <div className="flex gap-4">
-                            <div className="p2 border-t-0 p-2 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                            <div className="border-t-0 border-l-0 pr-2 text-[16px] border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                 In-demand workers
                             </div>
-                            <div className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 p-2">
-                                {data.worker_quantity || "50 People"}
+                            <div className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 border-r-0 text-[16px] pl-2">
+                                {data.worker_quantity || " "}
                             </div>
                         </div>
                         <div className="flex gap-4">
-                            <div className="p2 border-t-0 p-2 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                            <div className="border-t-0 border-l-0 pr-2 text-[16px] border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                 Education
                             </div>
-                            <div className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 p-2">
+                            <div className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 border-r-0 text-[16px] pl-2">
                                 {data.education || " "}
                             </div>
                         </div>
                         <div className="flex gap-4">
-                            <div className="p2 border-t-0 p-2 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                            <div className="border-t-0 border-l-0 pr-2 text-[16px] border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                 Company activities
                             </div>
-                            <div className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 p-2">
-                                {data.company_activities || "Established security service company"}
+                            <div className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 border-r-0 text-[16px] pl-2">
+                                {data.company_activities || " "}
                             </div>
                         </div>
 
@@ -163,12 +163,19 @@ const PreviewPopup = ({ isOpen, onClose, data,confirmSubmit }) => {
                 </div>
 
                 {/* Contact Information */}
-                <div className="bg-gray-200 p-3 font-bold text-center text-lg">
-                    +971 {data.phone_no || "528260909"} <FaWhatsapp className="inline text-green-600 ml-2" /> {data.whatsapp_no}
+                <div className="bg-[#5D5E5E] text-white p-1 text-center">
+                    <div className="text-2xl font-bold mb-2 flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                                d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                        </svg>
+                        +971 528260909, 0508074795, 0501289360
+                    </div>
                 </div>
 
                 {/* Application Requirements */}
-                <div className="p-4">
+                <div className="p-4" style={{ backgroundImage: `url(${assetUrl}images/viewbg.png)` }}>
                     <h3 className="font-bold text-lg">Application Requirements:</h3>
                     <p className="my-2">{data.note}</p>
                 </div>
@@ -192,14 +199,20 @@ const PreviewPopup = ({ isOpen, onClose, data,confirmSubmit }) => {
                         />
                     </div>
                     <div className="flex space-x-2">
-                        <div className="bg-blue-600 w-8 h-8 rounded-full flex items-center justify-center">f</div>
-                        <div className="bg-green-600 w-8 h-8 rounded-full flex items-center justify-center">w</div>
-                        <div className="bg-gray-600 w-8 h-8 rounded-full flex items-center justify-center">s</div>
+                        <div className="w-[53px] h-[53px] mt-[-5px] rounded-full flex items-center justify-center">
+                            <img src={`${assetUrl + 'images/facebook-circled.svg'}`} className="w-full h-full" alt="" />
+                        </div>
+                        <div className="w-10 h-10 rounded-full flex items-center justify-center">
+                            <img src={`${assetUrl + 'images/whatsapp.svg'}`} className="w-full h-full" alt="" />
+                        </div>
+                        <div className="w-10 h-10 rounded-full flex items-center justify-center">
+                            <img src={`${assetUrl + 'images/share.svg'}`} className="w-full h-full" alt="" />
+                        </div>
                     </div>
                 </div>
 
                 {/* Apply Button */}
-                <div className="flex justify-center my-4">
+                <div className="flex justify-end my-4">
                     <button onClick={handleFormSubmit} className="bg-red-600 text-white font-bold py-2 px-8 rounded">
                         Submit
                     </button>

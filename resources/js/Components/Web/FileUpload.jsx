@@ -2,7 +2,7 @@ import {useState} from "react";
 import {GrAttachment} from "react-icons/gr";
 
 const InputFile = ({
-                       defaultClasses = "w-full h-auto",
+                       defaultClasses = "w-full h-60",
                        classes = '',
                        placeholder = '',
                        onChange,
