@@ -59,7 +59,7 @@ const PreviewPopup = ({ isOpen, onClose, data,confirmSubmit }) => {
                                 Job Location
                             </div>
                             <div className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-r-0 text-[16px] pl-2">
-                                {data.job_location }
+                                {data.location ? data.location.name : data.job_location }
                             </div>
                         </div>
                         <div className="flex gap-4">
@@ -115,7 +115,7 @@ const PreviewPopup = ({ isOpen, onClose, data,confirmSubmit }) => {
                                 Salary
                             </div>
                             <div className="w-full border-2 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 border-r-0 text-[16px] pl-2">
-                                {data.salary || " "} 
+                                {data.salary || " "}
                             </div>
                         </div>
                         <div className="flex gap-4">
