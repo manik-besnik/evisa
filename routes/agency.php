@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Agency\AuthController;
 use App\Http\Controllers\Agency\DashboardController;
+use App\Http\Controllers\Agency\JobDemandController;
 use App\Http\Controllers\Agency\UserController;
 use App\Http\Controllers\Agency\VisaApplyController;
 use Illuminate\Support\Facades\Route;
@@ -35,12 +36,18 @@ Route::prefix('agency')->middleware(['auth', 'agency'])->name('agency.')->group(
     Route::post('register/info-store', [AuthController::class, 'agencyInfoStore'])
         ->name('register.agency-info.store');
 
-    Route::post('visa-applies/{visa_apply}', [VisaApplyController::class,'update'])->name('visa-applies.update');
+    Route::post('visa-applies/{visa_apply}', [VisaApplyController::class, 'update'])
+        ->name('visa-applies.update');
     Route::resource('visa-applies', VisaApplyController::class)->except(['update']);
 
     Route::get('users', [UserController::class, 'index'])->name('users.index');
     Route::get('users/create', [UserController::class, 'create'])->name('users.create');
 
     Route::post('users/store', [UserController::class, 'store'])->name('users.store');
+
+    Route::get('job-demands', [JobDemandController::class, 'index'])->name('job-demands.index');
+    Route::get('job-demands/create', [JobDemandController::class, 'create'])->name('job-demands.create');
+    Route::post('job-demands/store', [JobDemandController::class, 'store'])->name('job-demands.store');
+    Route::delete('job-demands/{id}', [JobDemandController::class, 'destroy'])->name('job-demands.destroy');
 
 });
