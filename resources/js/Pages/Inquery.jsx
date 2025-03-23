@@ -2,54 +2,24 @@ import WebLayout from "@/Layouts/WebLayout.jsx";
 import { Head } from "@inertiajs/react";
 import InputFile from "@/Components/Web/InputFile.jsx";
 import TextInput from "@/Components/TextInput.jsx";
+import CustomPhoneInput from "@/Components/Web/CustomPhoneInput.jsx"; // Import the new component
 import {
     regions,
     assetUrl,
     visaTypesApply,
     visaTypes,
-    jobApplyDocuments
+    jobApplyDocuments,
+    countriesList
 } from "@/Components/Constant/index.js";
 import { usePage, router, useForm } from "@inertiajs/react";
 import { useState } from "react";
 
-// Custom phone input component
-const CustomPhoneInput = ({ value, onChange, placeholder, icon }) => {
-    return (
-        <div className="relative w-full">
-            <div className="flex rounded overflow-hidden">
-                {/* UAE Flag with country code */}
-                <div className="bg-white p-2 flex items-center space-x-1 border-r">
-                    <img
-                        src="https://flagcdn.com/ae.svg"
-                        alt="UAE flag"
-                        className="w-6 h-4"
-                    />
-                    <span className="text-sm">+971</span>
-                </div>
-
-                {/* Phone input */}
-                <input
-                    type="tel"
-                    className="flex-1 p-2 outline-none"
-                    placeholder={placeholder}
-                    value={value || ''}
-                    onChange={(e) => onChange(e.target.value)}
-                />
-
-                {/* Icon button on the right */}
-                {icon && (
-                    <div className="absolute right-2 top-1/2 transform -translate-y-1/2">
-                        {icon}
-                    </div>
-                )}
-            </div>
-        </div>
-    );
-};
-
 const Inquery = () => {
     const { apply_for, countries, locations, languages } = usePage().props;
     const [region, setRegion] = useState(null);
+
+    const [phoneCountry, setPhoneCountry] = useState(countriesList[0]);
+    const [whatsappCountry, setWhatsappCountry] = useState(countriesList[0]);
 
     // Set up the form data using useForm
     const { data, setData, errors } = useForm({
@@ -58,7 +28,9 @@ const Inquery = () => {
         visa_type: '',
         location: '',
         phone: '',
+        phone_country: countriesList[0].code, 
         whatsapp: '',
+        whatsapp_country: countriesList[0].code,
         message: '',
         documents: {}
     });
@@ -187,20 +159,32 @@ const Inquery = () => {
                                     defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
                                 />
 
-                                {/* Custom Phone input */}
+                                {/* Updated Phone input with country selection */}
                                 <CustomPhoneInput
                                     value={data.phone}
                                     onChange={(value) => setData('phone', value)}
                                     placeholder="Phone Number"
                                     icon={<PhoneIcon />}
+                                    selectedCountry={phoneCountry}
+                                    onCountryChange={(country) => {
+                                        setPhoneCountry(country);
+                                        setData('phone_country', country.code);
+                                    }}
+                                    countriesList={countriesList}
                                 />
 
-                                {/* Custom WhatsApp input */}
+                                {/* Updated WhatsApp input with country selection */}
                                 <CustomPhoneInput
                                     value={data.whatsapp}
                                     onChange={(value) => setData('whatsapp', value)}
                                     placeholder="WhatsApp Number"
                                     icon={<WhatsAppIcon />}
+                                    selectedCountry={whatsappCountry}
+                                    onCountryChange={(country) => {
+                                        setWhatsappCountry(country);
+                                        setData('whatsapp_country', country.code);
+                                    }}
+                                    countriesList={countriesList}
                                 />
 
                                 <textarea
