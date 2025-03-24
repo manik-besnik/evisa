@@ -168,12 +168,20 @@ const JobDemand = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        confirmSubmit()
+    };
+
+    const confirmSubmit = () => {
         post(route('job-posts.store'), {
             onSuccess: () => {
-                reset()
+                reset();
+                setShowPreview(false)
             },
+            onError: () => {
+                setShowPreview(false)
+            }
         });
-    };
+    }
 
     const handlePreview = (e) => {
         e.preventDefault();
@@ -194,7 +202,7 @@ const JobDemand = () => {
             urduProficiencyName: urduProficiency?.name || "",
         };
     };
-    
+
 
     return (
         <WebLayout showBgImage={true} showServiceImage={false}>
@@ -203,6 +211,7 @@ const JobDemand = () => {
                 isOpen={showPreview}
                 onClose={() => setShowPreview(false)}
                 data={getPreviewData()}
+                confirmSubmit={confirmSubmit}
             />
 
             <div className="container mx-auto px-4 py-6">
@@ -270,12 +279,13 @@ const JobDemand = () => {
 
                                     <FileUpload
                                         fileType="avatar"
-                                        onChange={(fileType,value) => setData('avatar', value)}
+                                        onChange={(fileType, value) => setData('avatar', value)}
                                         error={errors.avatar}
 
                                     >
-                                        <div className="text-center">
-                                            <div className="flex justify-center">
+                                        <div
+                                            className="w-full h-60 flex flex-col justify-center items-center text-center">
+                                            <div className="">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64"
                                                      viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                      strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">

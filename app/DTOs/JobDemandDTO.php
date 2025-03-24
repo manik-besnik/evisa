@@ -33,13 +33,16 @@ class JobDemandDTO
     public string $note;
     public string $companyActivities;
     public string $workerQuantity;
+    public bool $isOnDemand = false;
+    public bool $isNewJob = false;
+    public bool $approved = false;
 
     public static function fromRequest(Request $request): JobDemandDTO
     {
         $request->validate([
             'region' => 'required|integer',
-            'location_id' => 'nullable|exists:locations,id',
-            'job_location' => 'required_if:region,2|string|max:255',
+            'location_id' => 'nullable|required_if:region,1|exists:locations,id',
+            'job_location' => 'nullable|required_if:region,2|string|max:255',
             'thumbnail' => ['required', File::types(['jpg', 'png', 'webp', 'jpeg', 'svg'])->max(2 * 1024)],
             'company_name' => 'required|string|max:255',
             'contact_person' => 'required|string|max:255',

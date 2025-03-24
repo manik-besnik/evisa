@@ -5,6 +5,7 @@ import ArrowRight from '@/Components/SvgIcons/ArrowRight.jsx';
 import {useState} from 'react';
 import {GrVisa} from "react-icons/gr";
 import {FaPeopleGroup} from "react-icons/fa6";
+import {PiNetworkXBold} from "react-icons/pi";
 
 export default function AgencySideNavLinks() {
 
@@ -21,6 +22,21 @@ export default function AgencySideNavLinks() {
                 {
                     name: 'Add New Application',
                     route: route('agency.visa-applies.create')
+                },
+            ]
+        },
+        {
+            name: 'Job Demand',
+            icon: <PiNetworkXBold/>,
+            isOpen: route().current('agency.visa-applies.*'),
+            links: [
+                {
+                    name: 'Job Demand List',
+                    route: route('agency.job-demands.index')
+                },
+                {
+                    name: 'Add Job Demand',
+                    route: route('agency.job-demands.create')
                 },
             ]
         },

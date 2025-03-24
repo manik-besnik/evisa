@@ -1,7 +1,7 @@
 import WebLayout from "@/Layouts/WebLayout.jsx";
 import TextInput from "@/Components/TextInput.jsx";
 import Select from "@/Components/Web/Select.jsx";
-import { regions } from "@/Components/Constant/index.js";
+import {regions} from "@/Components/Constant/index.js";
 import {useState} from "react";
 import {Head, useForm, usePage} from "@inertiajs/react";
 import {toast} from "react-toastify";
@@ -19,9 +19,10 @@ const SingleJobDemand = () => {
 
 
     // Create form with useForm
-    const {data, setData, post, processing, errors} = useForm({
+    const {data, setData, post, processing, errors, reset} = useForm({
         type_of_work: '',
         region: 1,
+        location: '',
         job_location: '',
         location_id: '',
         visa_validity: '',
@@ -58,11 +59,17 @@ const SingleJobDemand = () => {
         post(route('job-demand.store'), {
             onSuccess: () => {
                 toast.success('Job demand submitted successfully');
+                reset()
+                setShowPreview(false);
             }
         });
     }
     // Toggle preview popup
     const togglePreview = () => {
+
+        if (!showPreview) {
+            setData('location', location)
+        }
         setShowPreview(!showPreview);
     };
 
@@ -82,7 +89,7 @@ const SingleJobDemand = () => {
                     <div className="bg-white rounded-lg overflow-hidden mb-8 p-8 shadow-md w-[1080px] mx-auto">
                         {/* Header with "Security" and Camera Icon */}
                         <FileUpload
-                            onChange={(value,file) => setData('thumbnail', file)}
+                            onChange={(value, file) => setData('thumbnail', file)}
                             error={errors.thumbnail}
                             fileType="thumbnail"
                         >
@@ -348,7 +355,7 @@ const SingleJobDemand = () => {
                                  name="note"
                                  value={data.note}
                                  onChange={(e) => setData('note', e.target.value)}
-                                className="w-full border-l-8 border-l-red-500"
+                                 className="w-full border-l-8 border-l-red-500"
                                  rows={4}
                              ></textarea>
                         </div>

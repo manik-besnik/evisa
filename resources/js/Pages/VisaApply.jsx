@@ -29,7 +29,7 @@ const VisaApply = () => {
     const params = new URLSearchParams(window.location.search);
     const urlVisaType = params.get('visaType');
 
-    
+
     const selectedVisaTypeObj = urlVisaType ?
         visaTypes.find(type => type.id.toString() === urlVisaType) || '' :
         '';
@@ -190,7 +190,7 @@ const VisaApply = () => {
                     'Content-Type': 'multipart/form-data',
                 }
             });
-            if (response.data.status_code === 200){
+            if (response.data.status_code === 200) {
                 setIsLoading(false)
                 const passportData = response.data.passport_data
                 if (!passportData || !passportData.passport_no) {
@@ -223,12 +223,7 @@ const VisaApply = () => {
         if (fileType === 'photo') {
             setIsPhotoRequired(false)
         }
-        // data.documents[fileType] = {
-        //     "name": documentTypes[fileType].name,
-        //     "type": fileType,
-        //     "file": file
-        // }
-        // console.log(data.documents)
+
         setData(prevData => ({
             ...prevData,
             documents: {
@@ -335,296 +330,196 @@ const VisaApply = () => {
                     </div>
 
 
-                    <div className="flex gap-x-8">
+                    <h4 className="text-success mt-2 text-md">Personal Information</h4>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 items-center gap-x-4">
 
-                        <div className="w-2/3">
-                            <h4 className="text-success mt-2 text-md">Personal Information</h4>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 items-center gap-x-4">
-
-                                <TextInput
-                                    value={data.name}
-                                    onChange={(e) => setData('name', e.target.value)}
-                                    error={errors.name}
-                                    id="fullname-english"
-                                    placeholder="Full Name English"
-                                    label="Full Name (English)" divClasses="my-3"
-                                    defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
-                                    labelClasses="text-text-primary"
-                                />
+                        <TextInput
+                            value={data.name}
+                            onChange={(e) => setData('name', e.target.value)}
+                            error={errors.name}
+                            id="fullname-english"
+                            placeholder="Full Name English"
+                            label="Full Name (English)" divClasses="my-3"
+                            defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
+                            labelClasses="text-text-primary"
+                        />
 
 
-                                <TextInput
-                                    value={data.name_arabic}
-                                    onChange={(e) => setData('name_arabic', e.target.value)}
-                                    error={errors.name_arabic}
-                                    id="fullname-arabic"
-                                    placeholder="Full Name Arabic"
-                                    label="Full Name (Arabic)" divClasses="my-3"
-                                    defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
-                                    labelClasses="text-text-primary"
-                                />
+                        <TextInput
+                            value={data.name_arabic}
+                            onChange={(e) => setData('name_arabic', e.target.value)}
+                            error={errors.name_arabic}
+                            id="fullname-arabic"
+                            placeholder="Full Name Arabic"
+                            label="Full Name (Arabic)" divClasses="my-3"
+                            defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
+                            labelClasses="text-text-primary"
+                        />
 
-                                <Select
-                                    placeholder="Select Nationality"
-                                    label="Current Nationality*"
-                                    items={countries}
-                                    selected={currentNationality}
-                                    setSelected={setCurrentNationality}
-                                    handleValueChange={updateCurrentNationality}
-                                    error={errors.current_nationality}
-                                    field='nationality'
-                                    defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
-                                />
+                        <Select
+                            placeholder="Select Nationality"
+                            label="Current Nationality*"
+                            items={countries}
+                            selected={currentNationality}
+                            setSelected={setCurrentNationality}
+                            handleValueChange={updateCurrentNationality}
+                            error={errors.current_nationality}
+                            field='nationality'
+                            defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
+                        />
 
-                                <Select
-                                    placeholder="Select Nationality"
-                                    label="Prev Nationality"
-                                    items={countries}
-                                    selected={prevNationality}
-                                    setSelected={setPrevNationality}
-                                    handleValueChange={updatePrevNationality}
-                                    error={errors.prev_nationality}
-                                    field='nationality'
-                                    defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
-                                />
+                        <Select
+                            placeholder="Select Nationality"
+                            label="Prev Nationality"
+                            items={countries}
+                            selected={prevNationality}
+                            setSelected={setPrevNationality}
+                            handleValueChange={updatePrevNationality}
+                            error={errors.prev_nationality}
+                            field='nationality'
+                            defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
+                        />
 
-                                <Select
-                                    placeholder="Select Gender"
-                                    label="Gender*"
-                                    items={genders}
-                                    selected={gender}
-                                    setSelected={setGender}
-                                    handleValueChange={updateGender}
-                                    error={errors.gender}
-                                    defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
-                                />
-
-
-                                <TextInput
-                                    value={data.date_of_birth}
-                                    onChange={(e) => setData('date_of_birth', e.target.value)}
-                                    error={errors.date_of_birth}
-                                    id="date-of-birth"
-                                    placeholder="Date Of Birth"
-                                    label="Date Of Birth" divClasses="my-3"
-                                    defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
-                                    labelClasses="text-text-primary"
-                                    type="date"
-                                />
-
-                                <Select
-                                    placeholder="Select Country"
-                                    label="Birth Country*"
-                                    items={countries}
-                                    selected={birthCountry}
-                                    setSelected={setBirthCountry}
-                                    handleValueChange={updateBirthCountry}
-                                    error={errors.birth_country}
-                                    defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
-                                />
+                        <Select
+                            placeholder="Select Gender"
+                            label="Gender*"
+                            items={genders}
+                            selected={gender}
+                            setSelected={setGender}
+                            handleValueChange={updateGender}
+                            error={errors.gender}
+                            defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
+                        />
 
 
-                                <Select
-                                    placeholder="Select Status"
-                                    label="Marital Status*"
-                                    items={maritalStatuses}
-                                    selected={maritalStatus}
-                                    setSelected={setMaritalStatus}
-                                    handleValueChange={updateMaritalStatus}
-                                    error={errors.marital_status}
-                                    defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
-                                />
+                        <TextInput
+                            value={data.date_of_birth}
+                            onChange={(e) => setData('date_of_birth', e.target.value)}
+                            error={errors.date_of_birth}
+                            id="date-of-birth"
+                            placeholder="Date Of Birth"
+                            label="Date Of Birth" divClasses="my-3"
+                            defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
+                            labelClasses="text-text-primary"
+                            type="date"
+                        />
 
-                                <TextInput
-                                    value={data.birth_place}
-                                    onChange={(e) => setData('birth_place', e.target.value)}
-                                    error={errors.birth_place}
-                                    id="birth-place-english"
-                                    placeholder="Birth Place English"
-                                    label="Birth Place (English)" divClasses="my-3"
-                                    defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
-                                    labelClasses="text-text-primary"
-                                />
-
-
-                                <TextInput
-                                    value={data.birth_place_arabic}
-                                    onChange={(e) => setData('birth_place_arabic', e.target.value)}
-                                    error={errors.birth_place_arabic}
-                                    id="birth-place-arabic"
-                                    placeholder="Birth Place Arabic"
-                                    label="Birth Place (Arabic)" divClasses="my-3"
-                                    defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
-                                    labelClasses="text-text-primary"
-                                />
-
-                                <TextInput
-                                    value={data.mother_name}
-                                    onChange={(e) => setData('mother_name', e.target.value)}
-                                    error={errors.mother_name}
-                                    id="mother-english"
-                                    placeholder="Mother Name English"
-                                    label="Mother Name (English)" divClasses="my-3"
-                                    defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
-                                    labelClasses="text-text-primary"
-                                />
+                        <Select
+                            placeholder="Select Country"
+                            label="Birth Country*"
+                            items={countries}
+                            selected={birthCountry}
+                            setSelected={setBirthCountry}
+                            handleValueChange={updateBirthCountry}
+                            error={errors.birth_country}
+                            defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
+                        />
 
 
-                                <TextInput
-                                    value={data.mother_name_arabic}
-                                    onChange={(e) => setData('mother_name_arabic', e.target.value)}
-                                    error={errors.mother_name_arabic}
-                                    id="mother-arabic"
-                                    placeholder="Mother Name Arabic"
-                                    label="Mother Name (Arabic)" divClasses="my-3"
-                                    defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
-                                    labelClasses="text-text-primary"
-                                />
+                        <Select
+                            placeholder="Select Status"
+                            label="Marital Status*"
+                            items={maritalStatuses}
+                            selected={maritalStatus}
+                            setSelected={setMaritalStatus}
+                            handleValueChange={updateMaritalStatus}
+                            error={errors.marital_status}
+                            defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
+                        />
+
+                        <TextInput
+                            value={data.birth_place}
+                            onChange={(e) => setData('birth_place', e.target.value)}
+                            error={errors.birth_place}
+                            id="birth-place-english"
+                            placeholder="Birth Place English"
+                            label="Birth Place (English)" divClasses="my-3"
+                            defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
+                            labelClasses="text-text-primary"
+                        />
 
 
-                                <TextInput
-                                    value={data.religion}
-                                    onChange={(e) => setData('religion', e.target.value)}
-                                    error={errors.religion}
-                                    id="religion"
-                                    placeholder="Religion"
-                                    label="Religion" divClasses="my-3"
-                                    defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
-                                    labelClasses="text-text-primary"
-                                />
+                        <TextInput
+                            value={data.birth_place_arabic}
+                            onChange={(e) => setData('birth_place_arabic', e.target.value)}
+                            error={errors.birth_place_arabic}
+                            id="birth-place-arabic"
+                            placeholder="Birth Place Arabic"
+                            label="Birth Place (Arabic)" divClasses="my-3"
+                            defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
+                            labelClasses="text-text-primary"
+                        />
 
-                                <TextInput
-                                    value={data.faith}
-                                    onChange={(e) => setData('faith', e.target.value)}
-                                    error={errors.faith}
-                                    id="faith"
-                                    placeholder="Faith"
-                                    label="Faith" divClasses="my-3"
-                                    defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
-                                    labelClasses="text-text-primary"
-                                />
-
-                                <TextInput
-                                    value={data.qualification}
-                                    onChange={(e) => setData('qualification', e.target.value)}
-                                    error={errors.qualification}
-                                    id="qualification"
-                                    placeholder="Qualification"
-                                    label="Qualification" divClasses="my-3"
-                                    defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
-                                    labelClasses="text-text-primary"
-                                />
-
-                                <TextInput
-                                    value={data.profession}
-                                    onChange={(e) => setData('profession', e.target.value)}
-                                    error={errors.profession}
-                                    id="profession"
-                                    placeholder="Profession"
-                                    label="Profession" divClasses="my-3"
-                                    defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
-                                    labelClasses="text-text-primary"
-                                />
-
-                            </div>
-                        </div>
-                        <div className="w-1/3">
-                            <h4 className="text-success mt-6 text-md mb-5">Documents</h4>
-                            <div className="flex gap-2 flex-wrap">
-                                <div className="flex gap-x-2">
-                                    <div>
-                                        <PassportInputFile
-                                            defaultClasses="w-[140px] h-[140px]"
-                                            placeholder="Passport Page 1"
-                                            onChange={handleFileChange}
-                                            fileType="passport"
-                                        />
-                                    </div>
-                                    <div className="flex gap-1 flex-wrap">
-
-                                        <InputFile
-                                            placeholder="Photo"
-                                            onChange={handleFileChange}
-                                            fileType="photo"
-                                        />
-
-                                        <InputFile
-                                            placeholder="Deposit Paper"
-                                            onChange={handleFileChange}
-                                            fileType="deposit"
-                                        />
-
-                                        <InputFile
-                                            placeholder="ID Card"
-                                            onChange={handleFileChange}
-                                            fileType="id"
-                                        />
-
-                                        <InputFile
-                                            placeholder="Residence Letter"
-                                            onChange={handleFileChange}
-                                            fileType="residence"
-                                        />
-
-                                        <InputFile
-                                            placeholder="Sponsor Letter"
-                                            onChange={handleFileChange}
-                                            fileType="sponsor"
-                                        />
-                                        <InputFile
-                                            placeholder="Health Insurance"
-                                            onChange={handleFileChange}
-                                            fileType="health"
-                                        />
-
-                                    </div>
-                                </div>
-
-                                <div className="flex gap-1">
-                                    <InputFile
-                                        placeholder="Return Ticket"
-                                        onChange={handleFileChange}
-                                        fileType="return_ticker"
-                                    />
+                        <TextInput
+                            value={data.mother_name}
+                            onChange={(e) => setData('mother_name', e.target.value)}
+                            error={errors.mother_name}
+                            id="mother-english"
+                            placeholder="Mother Name English"
+                            label="Mother Name (English)" divClasses="my-3"
+                            defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
+                            labelClasses="text-text-primary"
+                        />
 
 
-                                    <InputFile
-                                        placeholder="Bank Statement"
-                                        onChange={handleFileChange}
-                                        fileType="bank"
-                                    />
+                        <TextInput
+                            value={data.mother_name_arabic}
+                            onChange={(e) => setData('mother_name_arabic', e.target.value)}
+                            error={errors.mother_name_arabic}
+                            id="mother-arabic"
+                            placeholder="Mother Name Arabic"
+                            label="Mother Name (Arabic)" divClasses="my-3"
+                            defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
+                            labelClasses="text-text-primary"
+                        />
 
 
-                                    <InputFile
-                                        placeholder="Proof of Employment"
-                                        onChange={handleFileChange}
-                                        fileType="proof"
-                                    />
+                        <TextInput
+                            value={data.religion}
+                            onChange={(e) => setData('religion', e.target.value)}
+                            error={errors.religion}
+                            id="religion"
+                            placeholder="Religion"
+                            label="Religion" divClasses="my-3"
+                            defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
+                            labelClasses="text-text-primary"
+                        />
 
+                        <TextInput
+                            value={data.faith}
+                            onChange={(e) => setData('faith', e.target.value)}
+                            error={errors.faith}
+                            id="faith"
+                            placeholder="Faith"
+                            label="Faith" divClasses="my-3"
+                            defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
+                            labelClasses="text-text-primary"
+                        />
 
-                                    <InputFile
-                                        placeholder="Additional Document 1"
-                                        onChange={handleFileChange}
-                                        fileType="additional1"
-                                    />
+                        <TextInput
+                            value={data.qualification}
+                            onChange={(e) => setData('qualification', e.target.value)}
+                            error={errors.qualification}
+                            id="qualification"
+                            placeholder="Qualification"
+                            label="Qualification" divClasses="my-3"
+                            defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
+                            labelClasses="text-text-primary"
+                        />
 
-
-                                    <InputFile
-                                        placeholder="Additional Document 2"
-                                        onChange={handleFileChange}
-                                        fileType="additional1"
-                                    />
-                                </div>
-                            </div>
-
-                            {isPassportRequired &&
-                                <p className="text-warning text-sm my-2">Passport Document is required</p>}
-
-                            {isPhotoRequired && <p className="text-warning text-sm">Photo Document is required</p>}
-
-                        </div>
+                        <TextInput
+                            value={data.profession}
+                            onChange={(e) => setData('profession', e.target.value)}
+                            error={errors.profession}
+                            id="profession"
+                            placeholder="Profession"
+                            label="Profession" divClasses="my-3"
+                            defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
+                            labelClasses="text-text-primary"
+                        />
 
                     </div>
+
 
                     <h4 className="text-success mt-2 text-md">Passport Information</h4>
 
@@ -771,6 +666,124 @@ const VisaApply = () => {
                             defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                             labelClasses="text-text-primary"
                         />
+
+                    </div>
+
+                    <div >
+                        <h4 className="text-success mt-6 text-md mb-5">Documents</h4>
+                        <div className="flex gap-2 flex-wrap">
+                            <div className="flex gap-x-2">
+                                <div>
+                                    <PassportInputFile
+                                        defaultClasses="w-[240px] h-[240px]"
+                                        placeholder="Passport Page 1"
+                                        onChange={handleFileChange}
+                                        fileType="passport"
+                                        labelClasses="text-sm"
+                                    />
+                                </div>
+                                <div className="flex flex-2 gap-2 flex-wrap">
+
+                                    <InputFile
+                                        placeholder="Photo"
+                                        onChange={handleFileChange}
+                                        fileType="photo"
+                                        defaultClasses="w-40 h-28"
+                                        labelClasses="text-sm"
+                                    />
+
+                                    <InputFile
+                                        placeholder="Deposit Paper"
+                                        onChange={handleFileChange}
+                                        fileType="deposit"
+                                        defaultClasses="w-40 h-28"
+                                        labelClasses="text-sm"
+                                    />
+
+                                    <InputFile
+                                        placeholder="ID Card"
+                                        onChange={handleFileChange}
+                                        fileType="id"
+                                        defaultClasses="w-40 h-28"
+                                        labelClasses="text-sm"
+                                    />
+
+                                    <InputFile
+                                        placeholder="Residence Letter"
+                                        onChange={handleFileChange}
+                                        fileType="residence"
+                                        defaultClasses="w-40 h-28"
+                                        labelClasses="text-sm"
+                                    />
+
+                                    <InputFile
+                                        placeholder="Sponsor Letter"
+                                        onChange={handleFileChange}
+                                        fileType="sponsor"
+                                        defaultClasses="w-40 h-28"
+                                        labelClasses="text-sm"
+                                    />
+                                    <InputFile
+                                        placeholder="Health Insurance"
+                                        onChange={handleFileChange}
+                                        fileType="health"
+                                        defaultClasses="w-40 h-28"
+                                        labelClasses="text-sm"
+                                    />
+
+                                    <InputFile
+                                        placeholder="Return Ticket"
+                                        onChange={handleFileChange}
+                                        fileType="return_ticker"
+                                        defaultClasses="w-40 h-28"
+                                        labelClasses="text-sm"
+                                    />
+
+
+                                    <InputFile
+                                        placeholder="Bank Statement"
+                                        onChange={handleFileChange}
+                                        fileType="bank"
+                                        defaultClasses="w-40 h-28"
+                                        labelClasses="text-sm"
+                                    />
+
+
+                                    <InputFile
+                                        placeholder="Proof of Employment"
+                                        onChange={handleFileChange}
+                                        fileType="proof"
+                                        defaultClasses="w-40 h-28"
+                                        labelClasses="text-sm"
+                                    />
+
+
+                                    <InputFile
+                                        placeholder="Additional Document 1"
+                                        onChange={handleFileChange}
+                                        fileType="additional1"
+                                        defaultClasses="w-40 h-28"
+                                        labelClasses="text-sm"
+                                    />
+
+
+                                    <InputFile
+                                        placeholder="Additional Document 2"
+                                        onChange={handleFileChange}
+                                        fileType="additional1"
+                                        defaultClasses="w-40 h-28"
+                                        labelClasses="text-sm"
+                                    />
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        {isPassportRequired &&
+                            <p className="text-warning text-sm my-2">Passport Document is required</p>}
+
+                        {isPhotoRequired && <p className="text-warning text-sm">Photo Document is required</p>}
 
                     </div>
                     <div className="flex justify-center gap-x-2 mt-2 ">

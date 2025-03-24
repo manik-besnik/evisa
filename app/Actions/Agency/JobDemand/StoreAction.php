@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Actions\User\JobDemand;
+namespace App\Actions\Agency\JobDemand;
 
 use App\DTOs\JobDemandDTO;
-use App\Models\Company;
 use App\Supports\JobDemand;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
@@ -27,6 +26,4 @@ class StoreAction
             return redirect()->back()->withErrors(['message' => $exception->getMessage()]);
         }
     }
-
-
 }

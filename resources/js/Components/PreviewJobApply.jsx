@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FaWhatsapp, FaDownload, FaShare, FaFacebook, FaPrint } from "react-icons/fa";
 
-const PreviewJobApply = ({ isOpen, onClose, data }) => {
+const PreviewJobApply = ({ isOpen, onClose, data, confirmSubmit }) => {
     if (!isOpen) return null;
 
     const handlePrint = () => {
@@ -28,7 +28,7 @@ const PreviewJobApply = ({ isOpen, onClose, data }) => {
                     </svg>
                 </button>
 
-                
+
 
                 <div id="job-application-preview" className="border-8 border-[#5D5D5D] p-4 relative">
                     {/* Header with Job Application and Photo */}
@@ -143,7 +143,7 @@ const PreviewJobApply = ({ isOpen, onClose, data }) => {
                     </div>
                     <hr className="border-2 border-[#848585] mb-3" />
                     {/* Passport & Visa Information */}
-                    
+
 
                     <div className="mb-4">
                         <div className="grid grid-cols-2 gap-4 after:absolute after:content-[''] after:w-[5px] after:h-[78px] after:bg-[#817F7F] after:left-[46%] after:-translate-x-1/2">
@@ -321,6 +321,14 @@ const PreviewJobApply = ({ isOpen, onClose, data }) => {
                             <p className="font-semibold text-right">Authorized Sign</p>
                             <div className="h-10 border-b border-gray-400"></div>
                         </div>
+                    </div>
+
+                    <div className="flex justify-center my-4">
+                        <button onClick={() => confirmSubmit()}
+                                className="bg-red-600 text-white font-bold py-2 px-8 rounded">
+                            Confirm Submit
+                        </button>
+
                     </div>
 
                     {/* Copyright Footer */}
