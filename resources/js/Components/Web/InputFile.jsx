@@ -7,7 +7,8 @@ const InputFile = ({
                        placeholder = '',
                        onChange,
                        fileType = '',
-                       error = ""
+                       error = "",
+    labelClasses="text-xs"
                    }) => {
 
     const [fileName, setFileName] = useState(placeholder);
@@ -45,7 +46,7 @@ const InputFile = ({
 
                 <div className="flex gap-x-2 items-center">
                     <GrAttachment size={15}/>
-                    <p className="text-xs break-words">{fileName ? fileName : placeholder}</p>
+                    <p className={`${labelClasses} break-words`}>{fileName ? fileName : placeholder}</p>
                 </div>
                 {error && <p className="text-xs text-warning">{error}</p>}
             </label>
