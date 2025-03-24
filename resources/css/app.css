@@ -146,7 +146,7 @@ body {
 }
 
 .navbar-triangle-2 {
-    @apply absolute left-[94%] bottom-0 w-0 h-0 border-t-[50px] border-b-[50px] border-l-[50px] border-t-transparent border-b-transparent group-hover:border-t-transparent  group-hover:border-b-transparent group-hover:border-warning
+    @apply absolute left-full bottom-[-12px] w-0 h-0 border-t-[40px] border-b-[40px] border-l-[60px] border-t-transparent border-b-transparent group-hover:border-t-transparent  group-hover:border-b-transparent group-hover:border-warning
 }
 
 @keyframes vertical-movement-right {

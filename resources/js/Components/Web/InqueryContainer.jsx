@@ -6,15 +6,13 @@ const InqueryContainer = () => {
         <div className="flex flex-col justify-center">
             
             <div className="relative">
-                <div className="flex">
+                <div className="flex gap-2">
                     <div className="w-[38%] h-full">
-                        <img src={`${assetUrl + 'images/inquery.png'}`} alt="hero" />
+                        <img src={`${assetUrl + 'images/inquery.png'}`} alt="hero" className="w-full "/>
                     </div>
-                    <div className="w-[57%] h-full">
-                        <a href={route('inquery.create')}>
-                        <div className="bg-green-600 relative text-white p-2 rounded-lg text-2xl font-bold mt-[50%] mr-5">
+                    <div className="w-[57%] place-content-end">
+                        <a href={route('inquery.create')} className="bg-green-600 text-white p-2 rounded-lg text-[30px] font-bold w-full block">
                             Inquiry
-                        </div>
                         </a>
                         <div className="navbar-triangle-2 border-warning"></div>
                     </div>

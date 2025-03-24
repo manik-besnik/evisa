@@ -23,7 +23,7 @@ const Visa = () => {
             <div className="container">
                 <div className="grid grid-cols-2 gap-x-20">
                     <SearchContainer />
-                    <div className="w-1/2 h-[72vh]">
+                    <div className="w-7/12 h-[85vh]">
                         <div className="bg-[#6b7377c8] h-full relative p-5 pr-0">
                             {/* Header Section */}
                             <div className="text-center flex">
