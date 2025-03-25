@@ -43,6 +43,7 @@ const JobDirectoryPage = ({locations}) => {
                                 ))}
                                 {locations.map((visa) => (
                                     <Link
+                                        href={route('job.view')}
                                         key={visa.id}
                                         className="bg-white text-black font-semibold text-xs py-2 px-6 rounded-full shadow-md w-[80%] text-center hover:bg-gray-200"
                                     >
