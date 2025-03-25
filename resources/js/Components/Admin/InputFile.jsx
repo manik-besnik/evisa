@@ -1,4 +1,5 @@
 import {useState} from "react";
+import {toast} from "react-toastify";
 
 const InputFile = ({
                        classes = '',
@@ -21,6 +22,12 @@ const InputFile = ({
                 return;
             }
 
+            const maxSize = 15 * 1024 * 1024;
+
+            if (file.size > maxSize) {
+                toast.error("File too large (Max Allow : 15MB)");
+                return;
+            }
             onChange(fileType, file)
 
             setFileName(file.name);

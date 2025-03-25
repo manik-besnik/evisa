@@ -288,7 +288,7 @@ const VisaApply = () => {
                             error={errors.personal_name}
                             id="personal-name"
                             placeholder="Personal Name | Company Name"
-                            label="Personal Name | Company Name"
+                            label="Personal Name* | Company Name*"
                             divClasses="my-3"
                             defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                             labelClasses="text-text-primary"
@@ -339,7 +339,7 @@ const VisaApply = () => {
                             error={errors.name}
                             id="fullname-english"
                             placeholder="Full Name English"
-                            label="Full Name (English)" divClasses="my-3"
+                            label="Full Name* (English)" divClasses="my-3"
                             defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                             labelClasses="text-text-primary"
                         />
@@ -398,7 +398,7 @@ const VisaApply = () => {
                             error={errors.date_of_birth}
                             id="date-of-birth"
                             placeholder="Date Of Birth"
-                            label="Date Of Birth" divClasses="my-3"
+                            label="Date Of Birth*" divClasses="my-3"
                             defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                             labelClasses="text-text-primary"
                             type="date"
@@ -406,7 +406,7 @@ const VisaApply = () => {
 
                         <Select
                             placeholder="Select Country"
-                            label="Birth Country*"
+                            label="Birth Country"
                             items={countries}
                             selected={birthCountry}
                             setSelected={setBirthCountry}
@@ -418,7 +418,7 @@ const VisaApply = () => {
 
                         <Select
                             placeholder="Select Status"
-                            label="Marital Status*"
+                            label="Marital Status"
                             items={maritalStatuses}
                             selected={maritalStatus}
                             setSelected={setMaritalStatus}
@@ -480,7 +480,8 @@ const VisaApply = () => {
                             error={errors.religion}
                             id="religion"
                             placeholder="Religion"
-                            label="Religion" divClasses="my-3"
+                            label="Religion*"
+                            divClasses="my-3"
                             defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                             labelClasses="text-text-primary"
                         />
@@ -502,7 +503,7 @@ const VisaApply = () => {
                             error={errors.qualification}
                             id="qualification"
                             placeholder="Qualification"
-                            label="Qualification" divClasses="my-3"
+                            label="Qualification*" divClasses="my-3"
                             defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                             labelClasses="text-text-primary"
                         />
@@ -554,7 +555,7 @@ const VisaApply = () => {
                             error={errors.passport_issue_date}
                             id="passport-issue-date"
                             placeholder="Passport Issue Date"
-                            label="Passport Issue Date" divClasses="my-3"
+                            label="Passport Issue Date*" divClasses="my-3"
                             defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                             labelClasses="text-text-primary"
                             type="date"
@@ -565,7 +566,7 @@ const VisaApply = () => {
                             onChange={(e) => setData('passport_expire_date', e.target.value)}
                             error={errors.passport_expire_date}
                             id="passport-expire-date"
-                            placeholder="Passport Expire Date"
+                            placeholder="Passport Expire Date*"
                             label="Passport Expire Date" divClasses="my-3"
                             defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                             labelClasses="text-text-primary"
@@ -578,7 +579,7 @@ const VisaApply = () => {
                             error={errors.passport_issue_place}
                             id="passport-issue-place"
                             placeholder="Passport Issue Place"
-                            label="Passport Issue Place*" divClasses="my-3"
+                            label="Passport Issue Place" divClasses="my-3"
                             defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                             labelClasses="text-text-primary"
                         />
@@ -589,14 +590,14 @@ const VisaApply = () => {
                             error={errors.passport_issue_place_arabic}
                             id="passport-issue-place-arabic"
                             placeholder="Passport Issue Place Arabic"
-                            label="Passport Issue Place(Arabic)*" divClasses="my-3"
+                            label="Passport Issue Place(Arabic)" divClasses="my-3"
                             defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                             labelClasses="text-text-primary"
                         />
 
                         <Select
                             placeholder="Passport Issue Country"
-                            label="Passport Issue Country*"
+                            label="Passport Issue Country"
                             items={countries}
                             selected={passportIssueCountry}
                             setSelected={setPassportIssueCountry}
@@ -617,7 +618,7 @@ const VisaApply = () => {
                             error={errors.guarantor_name}
                             id="guarntor-name"
                             placeholder="Ex: Jhon Deo"
-                            label="Name*" divClasses="my-3"
+                            label="Name" divClasses="my-3"
                             defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                             labelClasses="text-text-primary"
                         />
@@ -635,7 +636,7 @@ const VisaApply = () => {
 
                         <Select
                             placeholder="Select Nationality"
-                            label="Nationality*"
+                            label="Nationality"
                             items={countries}
                             selected={guarantorNationality}
                             setSelected={setGuarantorNationality}
@@ -676,7 +677,7 @@ const VisaApply = () => {
                                 <div>
                                     <PassportInputFile
                                         defaultClasses="w-[240px] h-[240px]"
-                                        placeholder="Passport Page 1"
+                                        placeholder="Passport Page 1*"
                                         onChange={handleFileChange}
                                         fileType="passport"
                                         labelClasses="text-sm"
@@ -685,7 +686,7 @@ const VisaApply = () => {
                                 <div className="flex flex-2 gap-2 flex-wrap">
 
                                     <InputFile
-                                        placeholder="Photo"
+                                        placeholder="Photo*"
                                         onChange={handleFileChange}
                                         fileType="photo"
                                         defaultClasses="w-40 h-28"
