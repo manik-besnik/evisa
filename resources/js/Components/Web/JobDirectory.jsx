@@ -3,10 +3,10 @@ import Search from "@/Components/Web/Search.jsx";
 
 const JobDirectory = () => {
     return (
-        <div className="flex flex-col justify-center">
-            <div className="relative">
+        <div className="flex  justify-center">
+            <div className="relative h-full">
                 <img src={`${assetUrl + 'images/jobdirectry.png'}`} alt="hero"/>
-                <div className="absolute w-full flex justify-center bottom-[-80px] left-0">
+                <div className="absolute w-full flex justify-center bottom-[20%] left-0">
                     <div className="flex justify-center mx-auto">
                         <Search/>
                     </div>

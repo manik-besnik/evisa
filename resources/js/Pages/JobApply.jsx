@@ -229,7 +229,7 @@ const JobDemand = () => {
                                 </div>
 
                                 <div className="flex items-center mb-4">
-                                    <label className="text-xl font-bold mr-4">Apply From*</label>
+                                    <label className="text-xl font-bold mr-4">Apply From <span className="text-red-600">*</span></label>
                                     <div className="flex-1">
                                         <Select
                                             placeholder="Select Here"
@@ -239,7 +239,7 @@ const JobDemand = () => {
                                             handleValueChange={(value) => setData('region', value.name)}
                                             error={errors.region}
                                             required={true}
-                                            defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                            defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
                                         />
                                     </div>
                                 </div>
@@ -247,7 +247,7 @@ const JobDemand = () => {
                                 {region && (
                                     <div className="flex items-center mb-4">
                                         <label className="text-xl font-bold mr- w-4/12">
-                                            {region.id === 1 ? 'Location*' : 'Country*'}
+                                            {region.id === 1 ? 'Location' : 'Country'}<span className="text-red-600">*</span>
                                         </label>
                                         <div className="flex-1">
                                             {region.id === 1 ? <Select
@@ -258,7 +258,7 @@ const JobDemand = () => {
                                                 handleValueChange={(value) => setData('location', value.name)}
                                                 error={errors.location}
                                                 required={true}
-                                                defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                                defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
                                             /> : <Select
                                                 placeholder="Select Here"
                                                 items={countries}
@@ -267,7 +267,7 @@ const JobDemand = () => {
                                                 handleValueChange={(value) => setData('location', value.name)}
                                                 error={errors.location}
                                                 required={true}
-                                                defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                                defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
                                             />}
                                         </div>
                                     </div>
@@ -310,7 +310,7 @@ const JobDemand = () => {
                                         placeholder="Your Name"
                                         id="name"
                                         required={true}
-                                        defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                        defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
 
                                     />
                                     <TextInput
@@ -320,7 +320,7 @@ const JobDemand = () => {
                                         id="phone"
                                         placeholder="Mobile No. with country Code"
                                         required={true}
-                                        defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                        defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
                                     />
                                     <TextInput
                                         value={data.email}
@@ -344,7 +344,7 @@ const JobDemand = () => {
                                                 setSelected={setApplyFor}
                                                 handleValueChange={(value) => setData('job_demand_id', value.id)}
                                                 field="type_of_work"
-                                                defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                                defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
                                                 disabled={true}
                                             /> :
                                             <MultiSelect
@@ -357,7 +357,7 @@ const JobDemand = () => {
                                                 required={true}
                                                 field="name"
                                                 selectLimit="3"
-                                                defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                                defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
                                             />}
 
                                     </div>
@@ -374,7 +374,7 @@ const JobDemand = () => {
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div className="space-y-3">
                                     <div className="flex items-center">
-                                        <label className="w-1/3 font-bold">Nationality</label>
+                                        <label className="w-1/3 font-bold">Nationality <span className="text-red-600">*</span></label>
                                         <span className="mx-2">:</span>
                                         <div className="flex-1">
                                             <Select
@@ -386,13 +386,13 @@ const JobDemand = () => {
                                                 handleValueChange={(value) => setData('nationality', value.id)}
                                                 error={errors.nationality}
                                                 required={true}
-                                                defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                                defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
                                             />
                                         </div>
                                     </div>
 
                                     <div className="flex items-center">
-                                        <label className="w-1/3 font-bold">Date Of Birth</label>
+                                        <label className="w-1/3 font-bold">Date Of Birth <span className="text-red-600">*</span></label>
                                         <span className="mx-2">:</span>
                                         <div className="flex-1">
                                             <TextInput
@@ -402,13 +402,13 @@ const JobDemand = () => {
                                                 error={errors.date_of_birth}
                                                 required={true}
                                                 id="data-of-birth"
-                                                defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                                defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
                                             />
                                         </div>
                                     </div>
 
                                     <div className="flex items-center">
-                                        <label className="w-1/3 font-bold">Gender</label>
+                                        <label className="w-1/3 font-bold">Gender <span className="text-red-600">*</span></label>
                                         <span className="mx-2">:</span>
                                         <div className="flex-1">
                                             <Select
@@ -419,7 +419,7 @@ const JobDemand = () => {
                                                 handleValueChange={(value) => setData('gender', value.id)}
                                                 error={errors.gender}
                                                 required={true}
-                                                defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                                defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
                                             />
                                         </div>
                                     </div>
@@ -490,7 +490,7 @@ const JobDemand = () => {
                                             onChange={(e) => setData('current_state', e.target.value)}
                                             error={errors.current_state}
                                             required={true}
-                                            defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                            defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
                                         />
                                         <TextInput
                                             placeholder="City"
@@ -498,7 +498,7 @@ const JobDemand = () => {
                                             onChange={(e) => setData('current_city', e.target.value)}
                                             error={errors.current_city}
                                             required={true}
-                                            defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                            defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
                                         />
                                         <TextInput
                                             placeholder="Area"
@@ -506,7 +506,7 @@ const JobDemand = () => {
                                             onChange={(e) => setData('current_area', e.target.value)}
                                             error={errors.current_area}
                                             required={true}
-                                            defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                            defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
                                         />
                                     </div>
                                 </div>
@@ -702,7 +702,7 @@ const JobDemand = () => {
                                         onChange={(e) => setData('computer_skill', e.target.value)}
                                         error={errors.computer_skill}
                                         id="computer_skill"
-                                        defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
+                                        defaultClasses="border-2 border-[#848585] border-l-4 focus:border-[#848585]"
                                     />
                                 </div>
                             </div>
@@ -721,7 +721,7 @@ const JobDemand = () => {
                                         setSelected={setDrivingLicense}
                                         handleValueChange={(value) => setData('driving_license', value.id)}
                                         error={errors.driving_license}
-                                        defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
+                                        defaultClasses="border-2 border-[#848585] border-l-4 focus:border-[#848585]"
                                     />
                                 </div>
                                 <div className="col-span-3">
@@ -731,7 +731,7 @@ const JobDemand = () => {
                                         value={data.driving_license_issue_date}
                                         onChange={(e) => setData('driving_license_issue_date', e.target.value)}
                                         error={errors.driving_license_issue_date}
-                                        defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
+                                        defaultClasses="border-2 border-[#848585] border-l-4 focus:border-[#848585]"
                                     />
                                 </div>
                                 <div className="col-span-3">
@@ -742,7 +742,7 @@ const JobDemand = () => {
                                         onChange={(e) => setData('driving_license_expire_date', e.target.value)}
                                         error={errors.driving_license_expire_date}
                                         id="driving_license_expire_date"
-                                        defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
+                                        defaultClasses="border-2 border-[#848585] border-l-4 focus:border-[#848585]"
                                     />
                                 </div>
                             </div>
@@ -761,7 +761,7 @@ const JobDemand = () => {
                                         setSelected={setEnglishProficiency}
                                         handleValueChange={(value) => setData('english_proficiency', value.id)}
                                         error={errors.english_proficiency}
-                                        defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
+                                        defaultClasses="border-2 border-[#848585] border-l-4 focus:border-[#848585]"
                                     />
                                 </div>
                                 <div className="col-span-3">
@@ -775,7 +775,7 @@ const JobDemand = () => {
                                         setSelected={setUrduProficiency}
                                         handleValueChange={(value) => setData('urdu_proficiency', value.id)}
                                         error={errors.urdu_proficiency}
-                                        defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
+                                        defaultClasses="border-2 border-[#848585] border-l-4 focus:border-[#848585]"
                                     />
                                 </div>
                             </div>
@@ -793,7 +793,7 @@ const JobDemand = () => {
                                         setSelected={setArabicProficiency}
                                         handleValueChange={(value) => setData('arabic_proficiency', value.id)}
                                         error={errors.arabic_proficiency}
-                                        defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
+                                        defaultClasses="border-2 border-[#848585] border-l-4 focus:border-[#848585]"
                                     />
                                 </div>
                                 <div className="col-span-3">
@@ -807,7 +807,7 @@ const JobDemand = () => {
                                         setSelected={setMotherLanguage}
                                         handleValueChange={(value) => setData('mother_language', value.id)}
                                         error={errors.mother_language}
-                                        defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
+                                        defaultClasses="border-2 border-[#848585] border-l-4 focus:border-[#848585]"
                                     />
                                 </div>
                             </div>
@@ -833,7 +833,11 @@ const JobDemand = () => {
                                             error={errors?.job_experiences ? errors?.job_experiences[i]?.position : ""}
                                             id={`position-${i}`}
                                             placeholder="EX: Software Enginner"
-                                            label="Position*"
+                                            label={
+                                                <>
+                                                    Position <span className="text-red-500">*</span>
+                                                </>
+                                            }
                                             defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
                                             labelClasses="text-text-primary"
                                         />
@@ -845,7 +849,11 @@ const JobDemand = () => {
                                             error={errors?.job_experiences ? errors?.job_experiences[i]?.duration : ""}// error={errors.passing_year}
                                             id={`duration-${i}`}
                                             placeholder="EX: 4 Years"
-                                            label="Duration*"
+                                            label={
+                                                <>
+                                                    Duration <span className="text-red-500">*</span>
+                                                </>
+                                            }
                                             defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
                                             labelClasses="text-text-primary"
                                         />
@@ -857,7 +865,11 @@ const JobDemand = () => {
                                             error={errors?.job_experiences ? errors?.job_experiences[i]?.company : ""}
                                             id={`company-${i}`}
                                             placeholder="Company Name"
-                                            label="Company Name*"
+                                            label={
+                                                <>
+                                                    Company Name <span className="text-red-500">*</span>
+                                                </>
+                                            }
                                             defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
                                             labelClasses="text-text-primary"
                                         />
@@ -865,7 +877,11 @@ const JobDemand = () => {
                                     <div className="w-1/4">
                                         <Select
                                             placeholder="Select Country"
-                                            label="Country*"
+                                            label={
+                                                <>
+                                                    Country <span className="text-red-500">*</span>
+                                                </>
+                                            }
                                             items={countries}
                                             selected={item.country}
                                             setSelected={(value) => updateJobExperience(i, "country", value)}

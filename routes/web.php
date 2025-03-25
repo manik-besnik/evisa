@@ -79,7 +79,7 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::get('update-news', [BlogController::class, 'create'])->name('update.news');
 
     //inquery
-    Route::get('visa', [InqueryController::class, 'visa'])->name('visa.create');
+    Route::get('inquery', [InqueryController::class, 'create'])->name('inquery.create');
 });
 
 

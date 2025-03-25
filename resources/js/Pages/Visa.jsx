@@ -1,5 +1,5 @@
 import WebLayout from "@/Layouts/WebLayout.jsx";
-import {Head} from "@inertiajs/react";
+import { Head } from "@inertiajs/react";
 import SearchContainer from "@/Components/Web/InqueryContainer.jsx";
 import UserRegister from "@/Components/Web/UserRegister.jsx";
 import TextInput from "@/Components/TextInput.jsx";
@@ -19,16 +19,16 @@ const Visa = () => {
 
     return (
         <WebLayout showBgImage={true} showServiceImage={true}>
-            <Head title="Other | Dubai E-Visa"/>
+            <Head title="Other | Dubai E-Visa" />
             <div className="container">
                 <div className="grid grid-cols-2 gap-x-20">
-                    <SearchContainer/>
-                    <div className="w-1/2 h-[72vh]">
+                    <SearchContainer />
+                    <div className="w-7/12 h-[85vh]">
                         <div className="bg-[#6b7377c8] h-full relative p-5 pr-0">
                             {/* Header Section */}
                             <div className="text-center flex">
                                 <img alt="Visa Icon" className="w-14 h-20" src={`${assetUrl + 'images/visa.png'}`} />
-                                <h2 className="bg-red-600 text-white ml-4 w-full h-10 mt-7 text-[32px]">Visa Apply</h2>
+                                <h2 className="bg-red-600 text-white ml-4 w-full h-13 mt-7 text-[32px]">Visa Apply</h2>
                             </div>
 
                             {/* Visa Types Buttons */}
