@@ -1,5 +1,5 @@
-export const assetUrl = "https://dubaievisaservice.com/assets/"
-// export const assetUrl = "http://127.0.0.1:8000/assets/"
+// export const assetUrl = "https://dubaievisaservice.com/assets/"
+export const assetUrl = "http://127.0.0.1:8000/assets/"
 // export const assetUrl = "http://127.0.0.1:8001/assets/"
 export const genders = [
     {id: 1, name: "Male"},
@@ -321,6 +321,7 @@ export const religions = [
 
 
 export const countriesList = [
+  { name: "United Arab Emirates", code: "ae", dialCode: "+971" },
   { name: "Afghanistan", code: "af", dialCode: "+93" },
   { name: "Albania", code: "al", dialCode: "+355" },
   { name: "Algeria", code: "dz", dialCode: "+213" },
@@ -544,7 +545,6 @@ export const countriesList = [
   { name: "Tuvalu", code: "tv", dialCode: "+688" },
   { name: "Uganda", code: "ug", dialCode: "+256" },
   { name: "Ukraine", code: "ua", dialCode: "+380" },
-  { name: "United Arab Emirates", code: "ae", dialCode: "+971" },
   { name: "United Kingdom", code: "gb", dialCode: "+44" },
   { name: "United States", code: "us", dialCode: "+1" },
   { name: "Uruguay", code: "uy", dialCode: "+598" },
