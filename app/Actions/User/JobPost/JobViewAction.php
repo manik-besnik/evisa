@@ -24,6 +24,7 @@ class JobViewAction
         return Cache::remember('on_demand_jobs', now()->addDays(5), function () {
             return JobDemand::query()
                 ->where('is_on_demand', true)
+                ->where('is_approved', true)
                 ->where('available_job', '>', 0)
                 ->get();
         });
@@ -34,6 +35,7 @@ class JobViewAction
         return Cache::remember('new_job_demands', now()->addDays(5), function () {
             return JobDemand::query()
                 ->where('is_new', true)
+                ->where('is_approved', true)
                 ->where('available_job', '>', 0)
                 ->get();
         });
@@ -46,6 +48,7 @@ class JobViewAction
                 ->with(['jobs' => function ($query) {
                     $query->where('is_on_demand', false)
                         ->where('is_new', false)
+                        ->where('is_approved', true)
                         ->where('available_job', '>', 0);
                 }])
                 ->get();
