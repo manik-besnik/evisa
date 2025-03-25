@@ -97,13 +97,13 @@ const SingleJobDemand = () => {
                         </FileUpload>
 
                         {/* Salary and Code Section */}
-                        <div className="p-4 w-4/12">
+                        <div className="py-4 w-4/12 mt-16">
                             <TextInput
                                 value={data.type_of_work}
                                 onChange={(e) => setData("type_of_work", e.target.value)}
                                 error={errors.type_of_work}
-                                placeholder="Type of Work"
-                                defaultClasses="border-2 border-[#8A9298] focus:outline-none focus:ring-0"
+                                placeholder="Type of Work*"
+                                defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
                             />
 
                         </div>
@@ -114,7 +114,7 @@ const SingleJobDemand = () => {
                                 <div className="flex gap-4">
                                     <div
                                         className="pr-2 border-2 border-b-0 border-l-0 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right  flex items-center justify-end">
-                                        Region
+                                        Region <span className="text-red-600">*</span>
                                     </div>
                                     <div className="w-full border-2 border-r-0 border-b-0 border-[#8A9298] bg-white">
 
@@ -131,7 +131,7 @@ const SingleJobDemand = () => {
                                 <div className="flex gap-4">
                                     <div
                                         className="pr-2 border-2 border-l-0 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right  flex items-center justify-end">
-                                        Job Location
+                                        Job Location <span className="text-red-600">*</span>
                                     </div>
                                     <div className="w-full border-2 border-r-0 border-[#8A9298] bg-white">
                                         {region.id === 1 && (
@@ -249,7 +249,7 @@ const SingleJobDemand = () => {
                                 <div className="flex gap-4">
                                     <div
                                         className="pr-2 border-t-0 border-l-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
-                                        Salary
+                                        Salary <span className="text-red-600">*</span>
                                     </div>
                                     <div className="w-full border-2 border-r-0 border-[#8A9298] bg-white border-t-0">
                                         <TextInput
@@ -294,7 +294,7 @@ const SingleJobDemand = () => {
                                 <div className="flex gap-4">
                                     <div
                                         className="pr-2 border-t-0 border-l-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
-                                        In-demand workers
+                                        In-demand workers <span className="text-red-600">*</span>
                                     </div>
                                     <div className="w-full border-2 border-r-0 border-[#8A9298] bg-white border-t-0">
                                         <TextInput
@@ -436,7 +436,6 @@ const SingleJobDemand = () => {
                         <div className="flex gap-4 mt-2">
                             <div className="bg-gray-600 text-white p-2 w-48 flex items-center">
                                 <span className="font-bold">WHATSAPP NO.</span>
-                                <span className="text-red-500 ml-2">*</span>
                             </div>
                             <div className="flex-1 p-0 relative border-2 border-[#8A9298]">
                                 <div className="absolute top-0 bottom-0 left-0 w-1 bg-red-500"></div>
@@ -456,7 +455,6 @@ const SingleJobDemand = () => {
                         <div className="flex gap-4 mt-2">
                             <div className="bg-gray-600 text-white p-2 w-48 flex items-center">
                                 <span className="font-bold">EMAIL</span>
-                                <span className="text-red-500 ml-2">*</span>
                             </div>
                             <div className="flex-1 p-0 relative border-2 border-[#8A9298]">
                                 <div className="absolute top-0 bottom-0 left-0 w-1 bg-red-500"></div>
@@ -479,7 +477,7 @@ const SingleJobDemand = () => {
                                         className="absolute right-0 top-0 h-full w-4/12 bg-red-600"
                                         style={{clipPath: "polygon(10% 0, 100% 0, 100% 100%, 20% 100%)"}}
                                     ></span>
-                                    ADRESS
+                                    ADDRESS
                                 </h3>
                             </div>
                         </div>

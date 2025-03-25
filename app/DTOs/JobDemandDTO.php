@@ -12,27 +12,27 @@ class JobDemandDTO
     public string $companyName;
     public string $contactPerson;
     public string $phoneNo;
-    public string $whatsappNo;
-    public string $email;
-    public string $currentAddress;
-    public string $city;
-    public string $area;
+    public string|null $whatsappNo;
+    public string|null $email;
+    public string|null $currentAddress;
+    public string|null $city;
+    public string|null $area;
     public string|null $jobLocation;
     public string|int|null $locationId;
     public string $typeOfWork;
     public string $salary;
-    public string $workingHours;
-    public string $visaValidity;
-    public string $medicalInsurance;
-    public string $food;
-    public string $transport;
-    public string $accommodation;
-    public string $vacationBenefits;
-    public string $education;
-    public string $ageLimits;
-    public string $note;
-    public string $companyActivities;
-    public string $workerQuantity;
+    public string|null $workingHours;
+    public string|null $visaValidity;
+    public string|null $medicalInsurance;
+    public string|null $food;
+    public string|null $transport;
+    public string|null $accommodation;
+    public string|null $vacationBenefits;
+    public string|null $education;
+    public string|null $ageLimits;
+    public string|null $note;
+    public string|null $companyActivities;
+    public string|int $workerQuantity;
     public bool $isOnDemand = false;
     public bool $isNewJob = false;
     public bool $approved = false;
@@ -43,28 +43,28 @@ class JobDemandDTO
             'region' => 'required|integer',
             'location_id' => 'nullable|required_if:region,1|exists:locations,id',
             'job_location' => 'nullable|required_if:region,2|string|max:255',
-            'thumbnail' => ['required', File::types(['jpg', 'png', 'webp', 'jpeg', 'svg'])->max(2 * 1024)],
+            'thumbnail' => ['nullable', File::types(['jpg', 'png', 'webp', 'jpeg', 'svg'])->max(2 * 1024)],
             'company_name' => 'required|string|max:255',
             'contact_person' => 'required|string|max:255',
             'phone_no' => 'required|string|max:255',
-            'whatsapp_no' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'current_address' => 'required|string|max:255',
-            'city' => 'required|string|max:255',
-            'area' => 'required|string|max:255',
+            'whatsapp_no' => 'nullable|string|max:255',
+            'email' => 'nullable|email|max:255',
+            'current_address' => 'nullable|string|max:255',
+            'city' => 'nullable|string|max:255',
+            'area' => 'nullable|string|max:255',
             'type_of_work' => 'required|string|max:255',
             'salary' => 'required|string|max:255',
-            'working_hours' => 'required|string|max:255',
-            'visa_validity' => 'required|string|max:255',
-            'medical_insurance' => 'required|string|max:255',
-            'food' => 'required|string|max:255',
-            'transport' => 'required|string|max:255',
-            'accommodation' => 'required|string|max:255',
-            'vacation_benefits' => 'required|string|max:255',
-            'education' => 'required|string|max:255',
-            'age_limits' => 'required|string|max:255',
-            'note' => 'required|string|max:255',
-            'company_activities' => 'required|string|max:255',
+            'working_hours' => 'nullable|string|max:255',
+            'visa_validity' => 'nullable|string|max:255',
+            'medical_insurance' => 'nullable|string|max:255',
+            'food' => 'nullable|string|max:255',
+            'transport' => 'nullable|string|max:255',
+            'accommodation' => 'nullable|string|max:255',
+            'vacation_benefits' => 'nullable|string|max:255',
+            'education' => 'nullable|string|max:255',
+            'age_limits' => 'nullable|string|max:255',
+            'note' => 'nullable|string|max:255',
+            'company_activities' => 'nullable|string|max:255',
             'worker_quantity' => 'required|integer|min:1',
         ], [
             'location_id.required' => 'Job Location is required.',

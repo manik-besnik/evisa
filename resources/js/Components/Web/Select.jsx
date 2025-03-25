@@ -1,6 +1,6 @@
 import {Listbox, ListboxButton, ListboxOption, ListboxOptions, Transition} from '@headlessui/react'
 import ArrowDownSolid from "@/Components/SvgIcons/ArrowDownSolid.jsx";
-import {useState} from "react";
+import React, {useState} from "react";
 
 export default function Select({
                                    items,
@@ -14,7 +14,8 @@ export default function Select({
                                    label = "",
                                    labelClasses = "",
                                    error = "",
-                                   disabled = false
+                                   disabled = false,
+                                   isRequired = false,
 
                                }) {
 
@@ -32,9 +33,9 @@ export default function Select({
     );
 
     return (
-        <div className={`w-full ${disabled ? 'pointer-events-none opacity-50' : ''}`} >
+        <div className={`w-full ${disabled ? 'pointer-events-none opacity-50' : ''}`}>
             {label && <label className={`text-sm font-medium text-text-primary mb-1 ${labelClasses}`}>
-                {label}
+                {label}{isRequired && <span className="text-red-500">*</span>}
             </label>}
             <Listbox value={selected} onChange={handleChange} disabled={disabled}>
                 {selected?.[field] ?
