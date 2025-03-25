@@ -114,7 +114,7 @@ class VisaApplyDTO
         if (!$isUpdate) {
             $rules['documents'] = ['required', 'array'];
             $rules['documents.*.name'] = ['required', 'string', 'min:2'];
-            $rules['documents.*.file'] = ['required', 'file', 'mimes:jpg,png,jpeg,pdf', 'max:2048'];
+            $rules['documents.*.file'] = ['required', 'file', 'mimes:jpg,png,jpeg,pdf', 'max:12500'];
         }
 
         $request->validate($rules);
