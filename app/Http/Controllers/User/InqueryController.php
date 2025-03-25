@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Actions\User\VisaApply\CreateAction;
-use App\Actions\User\VisaApply\VisaAction;
-use App\Actions\User\VisaApply\IndexAction;
-use App\Actions\User\VisaApply\ShowAction;
-use App\Actions\User\VisaApply\StoreAction;
+use App\Actions\User\Inquery\CreateAction;
+use App\Actions\User\Inquery\IndexAction;
 use App\DTOs\VisaApplyDTO;
 use App\Http\Controllers\Controller;
 use App\Models\VisaApply;
@@ -33,19 +30,17 @@ class InqueryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, StoreAction $storeAction): \Illuminate\Http\RedirectResponse
+    public function store(Request $request)
     {
-        $request->merge(['user_id' => auth()->id()]);
-
-        return $storeAction->execute(VisaApplyDTO::fromRequest($request));
+        
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(int $id, ShowAction $showAction): \Inertia\Response
+    public function show(int $id, )
     {
-        return $showAction->execute($id);
+      
     }
 
     /**
