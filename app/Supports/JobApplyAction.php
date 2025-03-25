@@ -25,15 +25,18 @@ class JobApplyAction
 
             $documents = [];
 
-            foreach (request()->all()['documents'] as $document) {
+            if (isset(request()->all()['documents']) && count(request()->all()['documents']) > 0) {
+                foreach (request()->all()['documents'] as $document) {
 
-                $fullPath = FileUpload::execute($document['file']);
+                    $fullPath = FileUpload::execute($document['file']);
 
-                $documents[] = [
-                    'name' => $document['name'],
-                    'url' => $fullPath,
-                ];
+                    $documents[] = [
+                        'name' => $document['name'],
+                        'url' => $fullPath,
+                    ];
+                }
             }
+
 
             if ($jobApplyDTO->jobDemandId) {
                 /** @var \App\Models\JobDemand|null $jobDemand */
