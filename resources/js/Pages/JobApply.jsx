@@ -247,7 +247,7 @@ const JobDemand = () => {
                                 {region && (
                                     <div className="flex items-center mb-4">
                                         <label className="text-xl font-bold mr- w-4/12">
-                                            {region.id === 1 ? 'Location*' : 'Country*'}
+                                            {region.id === 1 ? 'Location' : 'Country'}<span className="text-red-600">*</span>
                                         </label>
                                         <div className="flex-1">
                                             {region.id === 1 ? <Select
