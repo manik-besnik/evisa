@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "@inertiajs/react";
+import React, {useState, useEffect} from "react";
+import {Link} from "@inertiajs/react";
+import {assetUrl} from "@/Components/Constant/index.js";
 
-const JobListSlider = ({ jobs }) => {
+const JobListSlider = ({jobs}) => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [slidesToShow, setSlidesToShow] = useState(3);
 
@@ -39,18 +40,18 @@ const JobListSlider = ({ jobs }) => {
             <div className="overflow-hidden">
                 <div
                     className="flex transition-transform ease-out duration-500"
-                    style={{ transform: `translateX(-${(currentIndex * 100) / slidesToShow}%)` }}
+                    style={{transform: `translateX(-${(currentIndex * 100) / slidesToShow}%)`}}
                 >
                     {jobs.map((job, index) => (
                         <div
                             key={job.id}
                             className="flex-shrink-0 px-2"
-                            style={{ width: `${100 / slidesToShow}%` }}
+                            style={{width: `${100 / slidesToShow}%`}}
                         >
                             <div className="w-full bg-white rounded-lg shadow-md overflow-hidden">
                                 <div className="relative h-56">
                                     <img
-                                        src={job.thumbnail}
+                                        src={job.thumbnail ? job.thumbnail : assetUrl + "images/default-job-thumbnail.43.56.jpeg"}
                                         alt={job.type_of_work}
                                         className="w-full h-full object-cover"
                                     />
@@ -68,13 +69,13 @@ const JobListSlider = ({ jobs }) => {
                                         <div className="text-gray-700 text-sm">Salary {job.salary}</div>
                                         <div className="text-red-600 font-bold">{job.job_code}</div>
                                     </div>
-                                    <Link href={route('job.details', { id: job.id })}
+                                    <Link href={route('job.details', {id: job.id})}
                                           className="text-blue-600 hover:underline flex items-center justify-end">
                                         Read More
                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none"
                                              viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                                                  d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                                  d="M14 5l7 7m0 0l-7 7m7-7H3"/>
                                         </svg>
                                     </Link>
                                 </div>
@@ -88,19 +89,21 @@ const JobListSlider = ({ jobs }) => {
             <button
                 className="absolute z-10 left-0 top-1/2 transform -translate-y-1/2 bg-red-600 text-white p-2 rounded-full shadow-md hover:bg-red-700"
                 onClick={prevSlide}
-                style={{ left: '-20px' }}
+                style={{left: '-20px'}}
             >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                     stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7"/>
                 </svg>
             </button>
             <button
                 className="absolute z-10 right-0 top-1/2 transform -translate-y-1/2 bg-red-600 text-white p-2 rounded-full shadow-md hover:bg-red-700"
                 onClick={nextSlide}
-                style={{ right: '-20px' }}
+                style={{right: '-20px'}}
             >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                     stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7"/>
                 </svg>
             </button>
         </div>
