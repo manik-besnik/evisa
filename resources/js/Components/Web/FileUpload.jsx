@@ -1,5 +1,6 @@
 import {useState} from "react";
 import {GrAttachment} from "react-icons/gr";
+import {toast} from "react-toastify";
 
 const InputFile = ({
                        defaultClasses = "w-full h-60",
@@ -22,6 +23,13 @@ const InputFile = ({
             if (!validTypes.includes(file.type)) {
 
                 setFileName(placeholder);
+                return;
+            }
+
+            const maxSize = 15 * 1024 * 1024;
+
+            if (file.size > maxSize) {
+                toast.error("File too large (Max Allow : 15MB)");
                 return;
             }
 

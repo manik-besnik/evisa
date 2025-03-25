@@ -7,7 +7,7 @@ const PreviewImage = (image = null) => {
     useEffect(() => {
         if (image instanceof File) {
             const url = URL.createObjectURL(image);
-            console.log(url)
+
             setPreviewUrl(url);
 
             return () => URL.revokeObjectURL(url);

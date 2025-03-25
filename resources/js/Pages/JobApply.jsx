@@ -229,7 +229,7 @@ const JobDemand = () => {
                                 </div>
 
                                 <div className="flex items-center mb-4">
-                                    <label className="text-xl font-bold mr-4">Apply From</label>
+                                    <label className="text-xl font-bold mr-4">Apply From*</label>
                                     <div className="flex-1">
                                         <Select
                                             placeholder="Select Here"
@@ -247,7 +247,7 @@ const JobDemand = () => {
                                 {region && (
                                     <div className="flex items-center mb-4">
                                         <label className="text-xl font-bold mr- w-4/12">
-                                            {region.id === 1 ? 'Location' : 'Country'}
+                                            {region.id === 1 ? 'Location*' : 'Country*'}
                                         </label>
                                         <div className="flex-1">
                                             {region.id === 1 ? <Select
