@@ -16,23 +16,24 @@ class JobApplyDTO
     public string|null $nationality;
     public string $name;
     public string $phone;
-    public string $email;
-    public string $gender;
-    public string $religion;
-    public string $bloodGroup;
-    public string $maritalStatus;
-    public string $passportNo;
-    public string $passportExpiry;
-    public string $countryContactNo;
-    public string $visaStatus;
-    public string $visaExpiry;
-    public string $whatsappNo;
+    public string|null $email;
+    public string|null $gender;
+    public string|null $religion;
+    public string|null $bloodGroup;
+    public string|null $maritalStatus;
+    public string|null $passportNo;
+    public string|null $passportExpiry;
+    public string|null $countryContactNo;
+    public string|null $visaStatus;
+    public string|null $dateOfBirth;
+    public string|null $visaExpiry;
+    public string|null $whatsappNo;
     public string $currentState;
     public string $currentCity;
     public string $currentArea;
-    public string $permanentDistrict;
-    public string $permanentThana;
-    public string $permanentVillage;
+    public string|null $permanentDistrict;
+    public string|null $permanentThana;
+    public string|null $permanentVillage;
     public string|null $shirtSize;
     public string|null $pantSize;
     public string|null $showSize;
@@ -44,18 +45,18 @@ class JobApplyDTO
     public array|null $jobDemands = [];
 
     /** Education Details */
-    public string $examName;
-    public string $passingYear;
-    public string $institute;
+    public string|null $examName;
+    public string|null $passingYear;
+    public string|null $institute;
     public string|null $result;
-    public string $computerSkill;
-    public string|int $drivingLicense;
-    public string $drivingLicenseIssueDate;
-    public string $drivingLicenseExpireDate;
-    public string|int $englishProficiency;
-    public string|int $arabicProficiency;
-    public string|int $urduProficiency;
-    public string|int $motherLanguage;
+    public string|null $computerSkill;
+    public string|int|null $drivingLicense;
+    public string|null $drivingLicenseIssueDate;
+    public string|null $drivingLicenseExpireDate;
+    public string|int|null $englishProficiency;
+    public string|int|null $arabicProficiency;
+    public string|int|null $urduProficiency;
+    public string|int|null $motherLanguage;
 
     /** Job Experiences */
 
@@ -71,6 +72,7 @@ class JobApplyDTO
             'location' => ['required', 'string', 'min:2', 'max:250'],
             'nationality' => ['required', 'min:1', 'max:250'],
             'gender' => ['required', 'string', 'min:1', 'max:250'],
+            'date_of_birth' => ['required', 'string', 'min:1', 'max:250'],
             'name' => ['required', 'string', 'min:2', 'max:250'],
             'phone' => ['required', 'string', 'min:9', 'max:20'],
             'email' => ['nullable', 'string', 'min:2', 'max:200'],
@@ -156,6 +158,7 @@ class JobApplyDTO
         $instance->height = $request->input('height');
         $instance->nearestAirport = $request->input('nearest_airport');
         $instance->summary = $request->input('summary');
+        $instance->dateOfBirth = $request->input('date_of_birth');
         $instance->documents = $request->all()['documents'] ?? [];
         $instance->jobDemands = $request->all()['job_demands'] ?? [];
 

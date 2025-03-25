@@ -44,6 +44,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string|null $whatsapp_no
  * @property array|string $documents
  * @property array|string|null $job_posts
+ * @property string|null $date_of_birth
  * @property string $summary
  *
  * @mixin Model
@@ -93,6 +94,7 @@ class JobApply extends Model
         'documents',
         'job_posts',
         'summary',
+        'date_of_birth',
     ];
 
     protected $casts = [

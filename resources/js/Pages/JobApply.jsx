@@ -63,6 +63,7 @@ const JobDemand = () => {
         email: '',
         avatar: '',
         nationality: "",
+        date_of_birth: "",
         gender: "",
         religion: "",
         blood_group: "",
