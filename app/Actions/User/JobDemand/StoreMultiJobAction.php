@@ -30,6 +30,9 @@ class StoreMultiJobAction
             $lastId = \App\Supports\JobDemand::lastJobId();
 
             foreach ($jobDemandDTO->demandItems as $demandItem) {
+                
+                $lastId++;
+
                 $jobDemands[] = [
                     'company_id' => $company->id,
                     'user_id' => auth()->id(),
@@ -54,8 +57,6 @@ class StoreMultiJobAction
                     'created_at' => now(),
                     'updated_at' => now(),
                 ];
-
-                $lastId++;
             }
 
 
