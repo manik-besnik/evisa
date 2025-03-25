@@ -26,14 +26,14 @@ class JobApplyDTO
     public string|null $countryContactNo;
     public string|null $visaStatus;
     public string|null $dateOfBirth;
-    public string $visaExpiry;
-    public string $whatsappNo;
+    public string|null $visaExpiry;
+    public string|null $whatsappNo;
     public string $currentState;
     public string $currentCity;
     public string $currentArea;
-    public string $permanentDistrict;
-    public string $permanentThana;
-    public string $permanentVillage;
+    public string|null $permanentDistrict;
+    public string|null $permanentThana;
+    public string|null $permanentVillage;
     public string|null $shirtSize;
     public string|null $pantSize;
     public string|null $showSize;
@@ -45,18 +45,18 @@ class JobApplyDTO
     public array|null $jobDemands = [];
 
     /** Education Details */
-    public string $examName;
-    public string $passingYear;
-    public string $institute;
+    public string|null $examName;
+    public string|null $passingYear;
+    public string|null $institute;
     public string|null $result;
-    public string $computerSkill;
-    public string|int $drivingLicense;
-    public string $drivingLicenseIssueDate;
-    public string $drivingLicenseExpireDate;
-    public string|int $englishProficiency;
-    public string|int $arabicProficiency;
-    public string|int $urduProficiency;
-    public string|int $motherLanguage;
+    public string|null $computerSkill;
+    public string|int|null $drivingLicense;
+    public string|null $drivingLicenseIssueDate;
+    public string|null $drivingLicenseExpireDate;
+    public string|int|null $englishProficiency;
+    public string|int|null $arabicProficiency;
+    public string|int|null $urduProficiency;
+    public string|int|null $motherLanguage;
 
     /** Job Experiences */
 
