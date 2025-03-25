@@ -61,12 +61,10 @@ class UpdateAction
             $jobDemand->education = $jobDemandDTO->education;
             $jobDemand->medical_insurance = $jobDemandDTO->medicalInsurance;
             $jobDemand->vacation_benefits = $jobDemandDTO->vacationBenefits;
-            if ($jobDemandDTO->isOnDemand) {
-                $jobDemand->is_on_demand = true;
-            }
-            if ($jobDemandDTO->isNewJob) {
-                $jobDemand->is_new = true;
-            }
+
+            $jobDemand->is_on_demand = $jobDemandDTO->isOnDemand;
+            $jobDemand->is_new = $jobDemandDTO->isNewJob;
+            
             if ($jobDemandDTO->approved) {
                 $jobDemand->is_approved = true;
             }
