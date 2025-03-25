@@ -28,7 +28,7 @@ const Visa = () => {
                             {/* Header Section */}
                             <div className="text-center flex">
                                 <img alt="Visa Icon" className="w-14 h-20" src={`${assetUrl + 'images/visa.png'}`} />
-                                <h2 className="bg-red-600 text-white ml-4 w-full h-10 mt-7 text-[32px]">Visa Apply</h2>
+                                <h2 className="bg-red-600 text-white ml-4 w-full h-13 mt-7 text-[32px]">Visa Apply</h2>
                             </div>
 
                             {/* Visa Types Buttons */}
