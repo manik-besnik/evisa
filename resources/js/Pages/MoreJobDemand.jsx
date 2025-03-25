@@ -122,7 +122,7 @@ const MoreJobDemand = () => {
                                 <div className="flex gap-4">
                                     <div
                                         className="border-l-0 pr-2 border-2 border-b-0 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right  flex items-center justify-end">
-                                        Region
+                                        Region <span className="text-red-600">*</span>
                                     </div>
                                     <div className="w-full border-2 border-b-0 border-[#8A9298] bg-white border-r-0">
 
@@ -140,7 +140,7 @@ const MoreJobDemand = () => {
                                 <div className="flex gap-4">
                                     <div
                                         className="border-l-0 pr-2 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right  flex items-center justify-end">
-                                        Job Location
+                                        Job Location <span className="text-red-600">*</span>
                                     </div>
                                     <div className="w-full border-2 border-[#8A9298] bg-white border-r-0">
 
@@ -498,7 +498,6 @@ const MoreJobDemand = () => {
                             <div className="flex gap-4 mt-2">
                                 <div className="bg-gray-600 text-white p-2 w-48 flex items-center">
                                     <span className="font-bold">WHATSAPP NO.</span>
-                                    <span className="text-red-500 ml-2">*</span>
                                 </div>
                                 <div className="flex-1 p-0 relative border-2 border-[#8A9298]">
                                     <div className="absolute top-0 bottom-0 left-0 w-1 bg-red-500"></div>
@@ -518,7 +517,6 @@ const MoreJobDemand = () => {
                             <div className="flex gap-4 mt-2">
                                 <div className="bg-gray-600 text-white p-2 w-48 flex items-center">
                                     <span className="font-bold">EMAIL</span>
-                                    <span className="text-red-500 ml-2">*</span>
                                 </div>
                                 <div className="flex-1 p-0 relative border-2 border-[#8A9298]">
                                     <div className="absolute top-0 bottom-0 left-0 w-1 bg-red-500"></div>

@@ -288,32 +288,35 @@ const VisaApply = () => {
                             error={errors.personal_name}
                             id="personal-name"
                             placeholder="Personal Name | Company Name"
-                            label="Personal Name* | Company Name*"
+                            label="Personal Name | Company Name"
                             divClasses="my-3"
                             defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                             labelClasses="text-text-primary"
+                            isRequired={true}
                         />
 
                         <Select
                             placeholder="Processing Type"
-                            label="Processing Type*"
+                            label="Processing Type"
                             items={visaProcessingTypes}
                             selected={processingType}
                             setSelected={setProcessingType}
                             handleValueChange={updateVisaProcessingType}
                             defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                             error={errors.processing_type}
+                            isRequired={true}
                         />
 
                         <Select
                             placeholder="Visa Type"
-                            label="Visa Type*"
+                            label="Visa Type"
                             items={visaTypes}
                             selected={visaType}
                             setSelected={setVisaType}
                             handleValueChange={updateVisaType}
                             defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                             error={errors.visa_type}
+                            isRequired={true}
                         />
 
                         <Select
@@ -339,9 +342,10 @@ const VisaApply = () => {
                             error={errors.name}
                             id="fullname-english"
                             placeholder="Full Name English"
-                            label="Full Name* (English)" divClasses="my-3"
+                            label="Full Name (English)" divClasses="my-3"
                             defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                             labelClasses="text-text-primary"
+                            isRequired={true}
                         />
 
 
@@ -358,7 +362,8 @@ const VisaApply = () => {
 
                         <Select
                             placeholder="Select Nationality"
-                            label="Current Nationality*"
+                            label="Current Nationality"
+                            isRequired={true}
                             items={countries}
                             selected={currentNationality}
                             setSelected={setCurrentNationality}
@@ -382,7 +387,8 @@ const VisaApply = () => {
 
                         <Select
                             placeholder="Select Gender"
-                            label="Gender*"
+                            label="Gender"
+                            isRequired={true}
                             items={genders}
                             selected={gender}
                             setSelected={setGender}
@@ -398,7 +404,9 @@ const VisaApply = () => {
                             error={errors.date_of_birth}
                             id="date-of-birth"
                             placeholder="Date Of Birth"
-                            label="Date Of Birth*" divClasses="my-3"
+                            label="Date Of Birth"
+                            isRequired={true}
+                            divClasses="my-3"
                             defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                             labelClasses="text-text-primary"
                             type="date"
@@ -480,7 +488,7 @@ const VisaApply = () => {
                             error={errors.religion}
                             id="religion"
                             placeholder="Religion"
-                            label="Religion*"
+                            label="Religion"
                             divClasses="my-3"
                             defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                             labelClasses="text-text-primary"
@@ -503,7 +511,9 @@ const VisaApply = () => {
                             error={errors.qualification}
                             id="qualification"
                             placeholder="Qualification"
-                            label="Qualification*" divClasses="my-3"
+                            label="Qualification"
+                            isRequired={true}
+                            divClasses="my-3"
                             defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                             labelClasses="text-text-primary"
                         />
@@ -543,7 +553,8 @@ const VisaApply = () => {
                             error={errors.passport_no}
                             id="passport-no"
                             placeholder="Passport NO"
-                            label="Passport NO*" divClasses="my-3"
+                            label="Passport NO"
+                            isRequired={true} divClasses="my-3"
                             defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                             labelClasses="text-text-primary"
                         />
@@ -555,7 +566,9 @@ const VisaApply = () => {
                             error={errors.passport_issue_date}
                             id="passport-issue-date"
                             placeholder="Passport Issue Date"
-                            label="Passport Issue Date*" divClasses="my-3"
+                            label="Passport Issue Date"
+                            isRequired={true}
+                            divClasses="my-3"
                             defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                             labelClasses="text-text-primary"
                             type="date"
@@ -566,8 +579,10 @@ const VisaApply = () => {
                             onChange={(e) => setData('passport_expire_date', e.target.value)}
                             error={errors.passport_expire_date}
                             id="passport-expire-date"
-                            placeholder="Passport Expire Date*"
-                            label="Passport Expire Date" divClasses="my-3"
+                            placeholder="Passport Expire Date"
+                            label="Passport Expire Date"
+                            isRequired={true}
+                            divClasses="my-3"
                             defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                             labelClasses="text-text-primary"
                             type="date"
@@ -579,7 +594,8 @@ const VisaApply = () => {
                             error={errors.passport_issue_place}
                             id="passport-issue-place"
                             placeholder="Passport Issue Place"
-                            label="Passport Issue Place" divClasses="my-3"
+                            label="Passport Issue Place"
+                            divClasses="my-3"
                             defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                             labelClasses="text-text-primary"
                         />
@@ -590,7 +606,8 @@ const VisaApply = () => {
                             error={errors.passport_issue_place_arabic}
                             id="passport-issue-place-arabic"
                             placeholder="Passport Issue Place Arabic"
-                            label="Passport Issue Place(Arabic)" divClasses="my-3"
+                            label="Passport Issue Place(Arabic)"
+                            divClasses="my-3"
                             defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                             labelClasses="text-text-primary"
                         />

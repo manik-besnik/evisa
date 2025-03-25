@@ -11,12 +11,14 @@ const TextInput = ({
                        defaultClasses = "bg-white focus:border-l-red-500 border-red-500",
                        inputClasses = '',
                        labelClasses = "",
-                       error = ""
+                       error = "",
+                       isRequired = false,
                    }) => {
     return (
         <div className={`flex flex-col ${divClasses}`}>
             {label && <label htmlFor={id} className={`text-sm font-medium text-gray-200 mb-1 ${labelClasses}`}>
-                {label}
+                {label}{isRequired && <span className="text-red-500">*</span>}
+
             </label>}
 
             <input
