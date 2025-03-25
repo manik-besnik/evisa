@@ -94,6 +94,10 @@ const Edit = () => {
             setData('location_id', null)
             setData('is_new_job', true)
         }
+        if (data.location_id !== 'new_job' && data.location_id !== 'ready_job') {
+            setData('is_on_demand', false)
+            setData('is_new_job', false)
+        }
 
         post(route('admin.job-demands.update', job_demand.id))
     }
