@@ -24,7 +24,7 @@ class JobDemand
             $thumbnail = FileUpload::execute($jobDemandDTO->thumbnail);
         }
 
-        $lastId = self::lastJobId();
+        $lastId = self::lastJobId() + 1;
 
         $jobDemand = new \App\Models\JobDemand();
         $jobDemand->company_id = $companyId;
