@@ -64,7 +64,7 @@ class UpdateAction
 
             $jobDemand->is_on_demand = $jobDemandDTO->isOnDemand;
             $jobDemand->is_new = $jobDemandDTO->isNewJob;
-            
+
             if ($jobDemandDTO->approved) {
                 $jobDemand->is_approved = true;
             }
