@@ -54,6 +54,7 @@ class JobApplyAction
             $jobApply->name = $jobApplyDTO->name;
             $jobApply->email = $jobApplyDTO->email;
             $jobApply->phone = $jobApplyDTO->phone;
+            $jobApply->date_of_birth = $jobApplyDTO->dateOfBirth;
             $jobApply->avatar = $avatar;
             $jobApply->gender = $jobApplyDTO->gender;
             $jobApply->location = $jobApplyDTO->location;

@@ -16,15 +16,16 @@ class JobApplyDTO
     public string|null $nationality;
     public string $name;
     public string $phone;
-    public string $email;
-    public string $gender;
-    public string $religion;
-    public string $bloodGroup;
-    public string $maritalStatus;
-    public string $passportNo;
-    public string $passportExpiry;
-    public string $countryContactNo;
-    public string $visaStatus;
+    public string|null $email;
+    public string|null $gender;
+    public string|null $religion;
+    public string|null $bloodGroup;
+    public string|null $maritalStatus;
+    public string|null $passportNo;
+    public string|null $passportExpiry;
+    public string|null $countryContactNo;
+    public string|null $visaStatus;
+    public string|null $dateOfBirth;
     public string $visaExpiry;
     public string $whatsappNo;
     public string $currentState;
@@ -71,6 +72,7 @@ class JobApplyDTO
             'location' => ['required', 'string', 'min:2', 'max:250'],
             'nationality' => ['required', 'min:1', 'max:250'],
             'gender' => ['required', 'string', 'min:1', 'max:250'],
+            'date_of_birth' => ['required', 'string', 'min:1', 'max:250'],
             'name' => ['required', 'string', 'min:2', 'max:250'],
             'phone' => ['required', 'string', 'min:9', 'max:20'],
             'email' => ['nullable', 'string', 'min:2', 'max:200'],
@@ -156,6 +158,7 @@ class JobApplyDTO
         $instance->height = $request->input('height');
         $instance->nearestAirport = $request->input('nearest_airport');
         $instance->summary = $request->input('summary');
+        $instance->dateOfBirth = $request->input('date_of_birth');
         $instance->documents = $request->all()['documents'] ?? [];
         $instance->jobDemands = $request->all()['job_demands'] ?? [];
 
