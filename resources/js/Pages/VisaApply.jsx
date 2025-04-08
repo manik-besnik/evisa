@@ -5,7 +5,7 @@ import {
     documentTypes,
     genders,
     groups,
-    maritalStatuses,
+    maritalStatuses, religions,
     visaProcessingTypes,
     visaTypes
 } from "@/Components/Constant/index.js";
@@ -28,7 +28,6 @@ const VisaApply = () => {
 
     const params = new URLSearchParams(window.location.search);
     const urlVisaType = params.get('visaType');
-
 
     const selectedVisaTypeObj = urlVisaType ?
         visaTypes.find(type => type.id.toString() === urlVisaType) || '' :
@@ -68,6 +67,7 @@ const VisaApply = () => {
         guarantorPrevNationality = countries.find(item => item.id === guarantor.nationality) ?? ''
     }
 
+
     const [isPassportRequired, setIsPassportRequired] = useState(false)
     const [isPhotoRequired, setIsPhotoRequired] = useState(false)
 
@@ -82,6 +82,7 @@ const VisaApply = () => {
     const [maritalStatus, setMaritalStatus] = useState(prevMaritalStatus)
     const [passportIssueCountry, setPassportIssueCountry] = useState(prevPassportIssueCountry)
     const [guarantorNationality, setGuarantorNationality] = useState(guarantorPrevNationality)
+    const [personReligion, setPersonReligion] = useState(religions.find(item => item.name === personal_info?.religion) ?? '')
 
     const [isLoading, setIsLoading] = useState(false);
     const [show, setShow] = useState(false)
@@ -481,18 +482,18 @@ const VisaApply = () => {
                             labelClasses="text-text-primary"
                         />
 
-
-                        <TextInput
-                            value={data.religion}
-                            onChange={(e) => setData('religion', e.target.value)}
-                            error={errors.religion}
-                            id="religion"
-                            placeholder="Religion"
+                        <Select
+                            placeholder="Select Religion"
                             label="Religion"
-                            divClasses="my-3"
+                            items={religions}
+                            selected={personReligion}
+                            setSelected={setPersonReligion}
+                            handleValueChange={(value) => setData('religion',value.name)}
+                            error={errors.religion}
                             defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
-                            labelClasses="text-text-primary"
+                            isRequired={true}
                         />
+
 
                         <TextInput
                             value={data.faith}

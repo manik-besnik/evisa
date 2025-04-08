@@ -51,6 +51,7 @@ const JobDemand = () => {
 
 
     const [region, setRegion] = useState(null)
+    const [visaStatus, setVisaStatus] = useState(null)
 
 
     const {data, setData, post, errors, processing, reset} = useForm({
@@ -605,14 +606,16 @@ const JobDemand = () => {
                                         <label className="w-1/3 font-bold">Visa Status</label>
                                         <span className="mx-2">:</span>
                                         <div className="flex-1">
-                                            <TextInput
-                                                placeholder="Typing Here"
-                                                value={data.visa_status}
-                                                onChange={(e) => setData('visa_status', e.target.value)}
+
+                                            <Select
+                                                placeholder="Select Status"
+                                                items={visaTypes}
+                                                selected={visaStatus}
+                                                setSelected={setVisaStatus}
+                                                handleValueChange={(value) => setData('visa_status', value.name)}
                                                 error={errors.visa_status}
-                                                required={true}
-                                                id="visa_status"
                                                 defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                                required={true}
                                             />
                                         </div>
                                     </div>
