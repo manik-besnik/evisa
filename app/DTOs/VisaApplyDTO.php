@@ -23,17 +23,17 @@ class VisaApplyDTO
     /** General Info */
 
     public string $name;
-    public string $nameArabic;
+    public string|null $nameArabic;
     public int $currentNationality;
     public int $prevNationality;
     public int $gender;
-    public string $dateOfBirth;
+    public string|null $dateOfBirth;
     public int $birthCountry;
     public int $maritalStatus;
-    public string $birthPlace;
-    public string $birthPlaceArabic;
-    public string $motherName;
-    public string $motherNameArabic;
+    public string|null $birthPlace;
+    public string|null $birthPlaceArabic;
+    public string|null $motherName;
+    public string|null $motherNameArabic;
     public string|null $fatherName;
     public string|null $fatherNameArabic;
     public string|null $religion;

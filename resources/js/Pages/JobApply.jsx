@@ -51,6 +51,7 @@ const JobDemand = () => {
 
 
     const [region, setRegion] = useState(null)
+    const [visaStatus, setVisaStatus] = useState(null)
 
 
     const {data, setData, post, errors, processing, reset} = useForm({
@@ -613,6 +614,17 @@ const JobDemand = () => {
                                                 required={true}
                                                 id="visa_status"
                                                 defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                            />
+
+                                            <Select
+                                                placeholder="Select Status"
+                                                items={visaTypes}
+                                                selected={visaStatus}
+                                                setSelected={setVisaStatus}
+                                                handleValueChange={(value) => setData('visa_status', value.name)}
+                                                error={errors.visa_status}
+                                                defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                                required={true}
                                             />
                                         </div>
                                     </div>
