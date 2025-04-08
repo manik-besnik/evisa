@@ -52,11 +52,11 @@ class VisaApplyDTO
 
     /** Guarantor Info */
 
-    public string $guarantorName;
-    public string $guarantorPassportNO;
-    public int $guarantorNationality;
-    public string $guarantorPhone;
-    public string $guarantorRelation;
+    public string|null $guarantorName;
+    public string|null $guarantorPassportNO;
+    public int|null $guarantorNationality;
+    public string|null $guarantorPhone;
+    public string|null $guarantorRelation;
 
     /** Documents */
     public array $documents = [];
