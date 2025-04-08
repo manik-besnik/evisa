@@ -29,7 +29,6 @@ const VisaApply = () => {
     const params = new URLSearchParams(window.location.search);
     const urlVisaType = params.get('visaType');
 
-
     const selectedVisaTypeObj = urlVisaType ?
         visaTypes.find(type => type.id.toString() === urlVisaType) || '' :
         '';
