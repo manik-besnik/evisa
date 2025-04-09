@@ -42,13 +42,13 @@ class VisaApplyDTO
     public string|null $profession;
 
     /** Passport Info */
-    public string $passportType;
+    public string|null $passportType;
     public string $passportNO;
     public string $passportIssueDate;
     public string $passportExpireDate;
-    public string $passportIssuePlace;
-    public string $passportIssuePlaceArabic;
-    public int $passportIssueCountry;
+    public string|null $passportIssuePlace;
+    public string|null $passportIssuePlaceArabic;
+    public int|null $passportIssueCountry;
 
     /** Guarantor Info */
 
