@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { FaWhatsapp, FaDownload, FaShare, FaFacebook, FaPrint } from "react-icons/fa";
+import {
+    assetUrl,
+} from "@/Components/Constant/index.js";
 
 const PreviewJobApply = ({ isOpen, onClose, data, confirmSubmit }) => {
     if (!isOpen) return null;
@@ -34,12 +37,7 @@ const PreviewJobApply = ({ isOpen, onClose, data, confirmSubmit }) => {
                     {/* Header with Job Application and Photo */}
                     <div className="flex mb-4">
                         <div className="w-1/3">
-                            <div className="bg-red-600 text-white p-2 text-center font-bold">
-                                JOB<br />APPLICATION
-                            </div>
-                            <div className="bg-gray-400 text-white p-2 text-center font-bold">
-                                FORM
-                            </div>
+                             <img src={`${assetUrl}images/job-apply-form.png`} alt="Live chat"/>
                         </div>
                         <div className="w-1/3">
                             {data.avatar ? (
@@ -273,19 +271,19 @@ const PreviewJobApply = ({ isOpen, onClose, data, confirmSubmit }) => {
                     <div className="grid grid-cols-2 gap-8 mb-4">
                         <div className="grid grid-cols-2">
                             <p className="font-semibold">Shirt Size</p>
-                            <p>: {data.shirt_size || "XL"}</p>
+                            <p>: {data.shirt_size || " "}</p>
                             <p className="font-semibold">Pant Size (Waist)</p>
-                            <p>: {data.pant_size || "28"}</p>
+                            <p>: {data.pant_size || " "}</p>
                             <p className="font-semibold">Shoes Size</p>
-                            <p>: {data.show_size || "44"}</p>
+                            <p>: {data.show_size || " "}</p>
                         </div>
                         <div className="grid grid-cols-2">
                             <p className="font-semibold">Weight (In Kgs)</p>
-                            <p>: {data.weight || "33"}</p>
+                            <p>: {data.weight || " "}</p>
                             <p className="font-semibold">Height (In Centimeters)</p>
-                            <p>: {data.height || "165"}</p>
+                            <p>: {data.height || " "}</p>
                             <p className="font-semibold">Nearest Airport</p>
-                            <p>: {data.nearest_airport || "Dhaka Airport"}</p>
+                            <p>: {data.nearest_airport || " "}</p>
                         </div>
                     </div>
 

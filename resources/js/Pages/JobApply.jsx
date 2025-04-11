@@ -5,6 +5,7 @@ import InputFile from "@/Components/Web/InputFile.jsx";
 import {
     documentTypes,
     genders,
+    assetUrl,
     groups,
     maritalStatuses,
     visaTypes,
@@ -221,13 +222,10 @@ const JobDemand = () => {
 
                     <form onSubmit={handleSubmit} className="mb-6">
                         {/* Apply From and Photo Upload */}
-                        <div className="flex flex-col md:flex-row gap-6 mb-6">
+                        <div className="flex flex-col md:flex-row gap-6 mb-6 ">
                             <div className="md:w-1/3">
-                                <div className="flex items-center mb-6">
-                                    <div className="bg-red-600 text-white text-center py-3 px-6 text-2xl font-bold">
-                                        JOB<br/>APPLICATION<br/>
-                                        <span className="bg-gray-400">FORM</span>
-                                    </div>
+                                <div className="mb-6">
+                                        <img src={`${assetUrl}images/job-apply-form.png`} alt="Live chat"/>
                                 </div>
 
                                 <div className="flex items-center mb-4">
@@ -276,7 +274,7 @@ const JobDemand = () => {
                                 )}
                             </div>
 
-                            <div className="md:w-1/3 flex justify-center">
+                            <div className="md:w-1/4 flex justify-center">
                                 <div className="border-2 border-gray-300 w-56 h-full flex items-center justify-center">
 
                                     <FileUpload
@@ -514,7 +512,7 @@ const JobDemand = () => {
                                 </div>
 
                                 <div className="flex items-center">
-                                    <label className="w-[12.90rem] font-bold">Permanent Address</label>
+                                    <label className="w-[12.90rem] font-bold">Permanent Address <span className="text-red-600">*</span></label>
                                     <span className="mx-2">:</span>
                                     <div className="flex-1 grid grid-cols-3 gap-2">
                                         <TextInput
@@ -658,7 +656,7 @@ const JobDemand = () => {
 
                         {/* Education - Enhanced Section */}
                         <div className="mb-6">
-                            <h2 className="text-xl font-bold mb-3 border-l-4 border-red-600 pl-2">EDUCATION DETAILS</h2>
+                            <h2 className="text-xl font-bold mb-3 border-l-4 border-red-600 pl-2">EDUCATION DETAILS <span className="text-red-600">*</span></h2>
 
                             {/* Original education fields */}
                             <div className="grid grid-cols-12 gap-3 mb-4">
@@ -674,7 +672,7 @@ const JobDemand = () => {
                                 </div>
                                 <div className="col-span-2">
                                     <TextInput
-                                        placeholder="Year"
+                                        placeholder="Passing Year"
                                         value={data.passing_year}
                                         onChange={(e) => setData('passing_year', e.target.value)}
                                         error={errors.passing_year}
