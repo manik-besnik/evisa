@@ -1029,15 +1029,15 @@ const JobDemand = () => {
 
                         {/* Submit Button */}
                         <div className="flex justify-center mt-6 gap-3">
+                            {/*<PrimaryBtn*/}
+                            {/*    text="Submit Application"*/}
+                            {/*    type="submit"*/}
+                            {/*    classes="w-full md:w-2/12 py-3"*/}
+                            {/*    onClick={handleSubmit}*/}
+                            {/*    disabled={processing}*/}
+                            {/*/>*/}
                             <PrimaryBtn
-                                text="Submit Application"
-                                type="submit"
-                                classes="w-full md:w-2/12 py-3"
-                                onClick={handleSubmit}
-                                disabled={processing}
-                            />
-                            <PrimaryBtn
-                                text="Preview"
+                                text="Submit"
                                 type="button"
                                 classes="w-full md:w-2/12 py-3"
                                 onClick={handlePreview}
