@@ -10,7 +10,7 @@ class JobApplyList
     {
         return JobApply::query()
             ->with([
-                'jobDemand:id,type_of_work,company_id,location_id,job_location,salary',
+                'jobDemand',
                 'jobDemand.company:id,name',
                 'jobDemand.location:id,name'
             ])
