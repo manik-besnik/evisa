@@ -1,67 +1,86 @@
 import {
-    assetUrl,
+    assetUrl, genders, maritalStatuses, religions,
 } from "@/Components/Constant/index.js";
 import {drivingLicenses} from "@/Components/Constant/index.js";
 import {usePage} from "@inertiajs/react";
 
-const PreviewJobApply = ({ isOpen, onClose, data, confirmSubmit }) => {
-    if (!isOpen) return null;
+const DownloadJobApply = ({data}) => {
 
-    const { languages} = usePage().props;
+    const {languages, countries} = usePage().props;
 
+    const getNationality = (id) => {
 
-
-    const getMotherLanguage =  (id) => {
-
-        if (!id){
+        if (!id) {
             return id;
         }
 
-        const language =languages.find( item => item.id === id);
+        const value = countries.find(item => item.id === id);
 
-        return language.name ?? id
+        return value.nationality ?? id
+    }
+    const getReligion = (id) => {
+
+        if (!id) {
+            return id;
+        }
+
+        const value = religions.find(item => item.id === Number(id));
+
+        return value.name ?? id
+    }
+    const getGender = (id) => {
+
+        if (!id) {
+            return id;
+        }
+
+        const value = genders.find(item => item.id === Number(id));
+
+        return value.name ?? id
     }
 
-    const getDrivingLicense =  (id) => {
+    const getDrivingLicense = (id) => {
 
-        if (!id){
+        if (!id) {
             return id;
         }
 
-        const drivingLicense =drivingLicenses.find( item => item.id === id);
+        const drivingLicense = drivingLicenses.find(item => item.id === id);
 
         return drivingLicense.name ?? id
+    }
+
+    const getMaritalStatus = (id) => {
+
+        if (!id) {
+            return id;
+        }
+
+        const status = maritalStatuses.find(item => item.id === Number(id));
+
+        return status.name ?? id
     }
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
             <div className="bg-white w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-lg shadow-lg relative p-4">
-                <button
-                    onClick={onClose}
-                    className="absolute top-2 right-2 bg-black rounded-lg text-white p-1 z-10"
-                >
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
-
-
 
                 <div id="job-application-preview" className="border-8 border-[#5D5D5D] p-4 relative">
                     {/* Header with Job Application and Photo */}
                     <div className="flex mb-4">
                         <div className="w-1/3">
-                             <img src={`${assetUrl}images/job-apply-form.png`} alt="Live chat"/>
+                            <img src={`${assetUrl}images/job-apply-form.png`} alt="Live chat"/>
                         </div>
                         <div className="w-1/3">
-                            {data.avatar ? (
+                            {data?.avatar ? (
                                 <img
-                                    src={URL.createObjectURL(data.avatar)}
+                                    src={data.avatar}
                                     alt="Profile"
                                     className="w-32 h-40 object-cover mx-auto border-2 border-gray-300"
                                 />
                             ) : (
-                                <div className="w-32 h-40 bg-gray-200 mx-auto border-2 border-gray-300 flex items-center justify-center">
+                                <div
+                                    className="w-32 h-40 bg-gray-200 mx-auto border-2 border-gray-300 flex items-center justify-center">
                                     <span className="text-gray-500">No Photo</span>
                                 </div>
                             )}
@@ -87,7 +106,8 @@ const PreviewJobApply = ({ isOpen, onClose, data, confirmSubmit }) => {
                     {/* Personal Details Section */}
                     <div className="mb-4">
                         <h3 className="font-bold border-l-4 border-red-600 pl-2 mb-2">PERSONAL DETAILS</h3>
-                        <div className="grid grid-cols-2 gap-4 after:absolute after:content-[''] after:w-[5px] after:h-[78px] after:bg-[#817F7F] after:left-[46%] after:-translate-x-1/2">
+                        <div
+                            className="grid grid-cols-2 gap-4 after:absolute after:content-[''] after:w-[5px] after:h-[78px] after:bg-[#817F7F] after:left-[46%] after:-translate-x-1/2">
                             <div>
                                 <div className="flex">
                                     <p className="w-1/3 font-semibold">Date Of Birth</p>
@@ -97,12 +117,12 @@ const PreviewJobApply = ({ isOpen, onClose, data, confirmSubmit }) => {
                                 <div className="flex">
                                     <p className="w-1/3 font-semibold">Gender</p>
                                     <p className="w-1/12 text-center">:</p>
-                                    <p className="flex-1">{data.genderName || "-"}</p>
+                                    <p className="flex-1">{getGender(data.gender) || "-"}</p>
                                 </div>
                                 <div className="flex">
                                     <p className="w-1/3 font-semibold">Nationality</p>
                                     <p className="w-1/12 text-center">:</p>
-                                    <p className="flex-1">{data.nationalityName || "-"}</p>
+                                    <p className="flex-1">{getNationality(data.nationality) || "-"}</p>
                                 </div>
                             </div>
 
@@ -110,22 +130,22 @@ const PreviewJobApply = ({ isOpen, onClose, data, confirmSubmit }) => {
                                 <div className="flex">
                                     <p className="w-1/3 font-semibold">Religion</p>
                                     <p className="w-1/12 text-center">:</p>
-                                    <p className="flex-1">{data.religionName || "-"}</p>
+                                    <p className="flex-1">{getReligion(data.religion) || "-"}</p>
                                 </div>
                                 <div className="flex">
                                     <p className="w-1/3 font-semibold">Blood Group</p>
                                     <p className="w-1/12 text-center">:</p>
-                                    <p className="flex-1">{data.bloodGroupName || "-"}</p>
+                                    <p className="flex-1">{data.blood_group || "-"}</p>
                                 </div>
                                 <div className="flex">
                                     <p className="w-1/3 font-semibold">Marital Status</p>
                                     <p className="w-1/12 text-center">:</p>
-                                    <p className="flex-1">{data.maritalStatusName || "-"}</p>
+                                    <p className="flex-1">{getMaritalStatus(data.marital_status) || "-"}</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <hr className="border-2 border-[#848585] mb-3" />
+                    <hr className="border-2 border-[#848585] mb-3"/>
                     {/* Current and Permanent Address */}
                     <div className="mb-4">
                         <div className="grid grid-cols-3 gap-4">
@@ -142,7 +162,7 @@ const PreviewJobApply = ({ isOpen, onClose, data, confirmSubmit }) => {
                         </div>
                         <div className="grid grid-cols-3 gap-4 mt-2">
                             <div className="flex">
-                                <p className="font-semibold">Permanent Address <span className="ml-1">: </span> </p>
+                                <p className="font-semibold">Permanent Address <span className="ml-1">: </span></p>
                                 <p className="ml-2">{data.permanent_district || "-"}</p>
                             </div>
                             <div>
@@ -153,12 +173,13 @@ const PreviewJobApply = ({ isOpen, onClose, data, confirmSubmit }) => {
                             </div>
                         </div>
                     </div>
-                    <hr className="border-2 border-[#848585] mb-3" />
+                    <hr className="border-2 border-[#848585] mb-3"/>
                     {/* Passport & Visa Information */}
 
 
                     <div className="mb-4">
-                        <div className="grid grid-cols-2 gap-4 after:absolute after:content-[''] after:w-[5px] after:h-[78px] after:bg-[#817F7F] after:left-[46%] after:-translate-x-1/2">
+                        <div
+                            className="grid grid-cols-2 gap-4 after:absolute after:content-[''] after:w-[5px] after:h-[78px] after:bg-[#817F7F] after:left-[46%] after:-translate-x-1/2">
                             <div>
                                 <div className="flex">
                                     <p className="w-1/3 font-semibold">Passport No</p>
@@ -173,7 +194,7 @@ const PreviewJobApply = ({ isOpen, onClose, data, confirmSubmit }) => {
                                 <div className="flex">
                                     <p className="w-1/3 font-semibold">Country Contact No</p>
                                     <p className="w-1/12 text-center">:</p>
-                                    <p className="flex-1">{data.country_contact_no || "-"}</p>
+                                    <p className="flex-1">{data.phone || "-"}</p>
                                 </div>
                             </div>
 
@@ -222,22 +243,26 @@ const PreviewJobApply = ({ isOpen, onClose, data, confirmSubmit }) => {
                             <div>
                                 <div className="grid grid-cols-2 gap-2 mb-1">
                                     <div className="border border-gray-300 p-1">Driving License</div>
-                                    <div className="border border-gray-300 p-1">{getDrivingLicense(data.driving_license) || "Select"}</div>
+                                    <div
+                                        className="border border-gray-300 p-1">{getDrivingLicense(data.driving_license) || "Select"}</div>
                                 </div>
                                 <div className="grid grid-cols-2 gap-2 mb-1">
                                     <div className="border border-gray-300 p-1">English</div>
-                                    <div className="border border-gray-300 p-1">{data.englishProficiencyName || "Select"}</div>
+                                    <div
+                                        className="border border-gray-300 p-1">{data.englishProficiencyName || "Select"}</div>
                                 </div>
                                 <div className="grid grid-cols-2 gap-2 mb-1">
                                     <div className="border border-gray-300 p-1">Arabic</div>
-                                    <div className="border border-gray-300 p-1">{data.arabicProficiencyName || "Select"}</div>
+                                    <div
+                                        className="border border-gray-300 p-1">{data.arabicProficiencyName || "Select"}</div>
                                 </div>
                             </div>
 
                             <div>
                                 <div className="grid grid-cols-2 gap-2 mb-1">
                                     <div className="border border-gray-300 p-1">Issue Date</div>
-                                    <div className="border border-gray-300 p-1">{data.driving_license_issue_date || "-"}</div>
+                                    <div
+                                        className="border border-gray-300 p-1">{data.driving_license_issue_date || "-"}</div>
                                 </div>
                                 <div className="grid grid-cols-2 gap-2 mb-1">
                                     <div className="border border-gray-300 p-1">Urdu/Hindi</div>
@@ -245,7 +270,7 @@ const PreviewJobApply = ({ isOpen, onClose, data, confirmSubmit }) => {
                                 </div>
                                 <div className="grid grid-cols-2 gap-2 mb-1">
                                     <div className="border border-gray-300 p-1">Mother Language</div>
-                                    <div className="border border-gray-300 p-1">{getMotherLanguage(data.mother_language) || "-"}</div>
+                                    <div className="border border-gray-300 p-1">{data.mother_language || "-"}</div>
                                 </div>
                             </div>
                         </div>
@@ -335,16 +360,9 @@ const PreviewJobApply = ({ isOpen, onClose, data, confirmSubmit }) => {
                         </div>
                     </div>
 
-                    <div className="flex justify-center my-4">
-                        <button onClick={() => confirmSubmit()}
-                                className="bg-red-600 text-white font-bold py-2 px-8 rounded">
-                            Confirm Submit
-                        </button>
-
-                    </div>
-
                     {/* Copyright Footer */}
-                    <div className="text-right text-xs text-gray-600 mt-2 absolute right-[-189px] bottom-[222px] rotate-[-90deg] bg-white p-[7px]">
+                    <div
+                        className="text-right text-xs text-gray-600 mt-2 absolute right-[-189px] bottom-[222px] rotate-[-90deg] bg-white p-[7px]">
                         Copy Right: www.dubai-visa.com - Application No. 1000
                     </div>
                 </div>
@@ -353,4 +371,4 @@ const PreviewJobApply = ({ isOpen, onClose, data, confirmSubmit }) => {
     );
 };
 
-export default PreviewJobApply;
+export default DownloadJobApply;
