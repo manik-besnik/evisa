@@ -3,10 +3,8 @@ import TextInput from "@/Components/TextInput.jsx";
 import Select from "@/Components/Web/Select.jsx";
 import InputFile from "@/Components/Web/InputFile.jsx";
 import {
-    documentTypes,
     genders,
     assetUrl,
-    groups,
     maritalStatuses,
     visaTypes,
     bloodGroups,
@@ -18,11 +16,10 @@ import {
     drivingLicenses,
     religions
 } from "@/Components/Constant/index.js";
-import {useState, useEffect} from "react";
+import {useState} from "react";
 import {Head, useForm, usePage} from "@inertiajs/react";
 import PrimaryBtn from "@/Components/Web/PrimaryBtn.jsx";
 import {FaTrashAlt} from "react-icons/fa";
-import {toast} from "react-toastify";
 import MultiSelect from "@/Components/Web/MultiSelect.jsx";
 import FileUpload from "@/Components/Web/FileUpload.jsx";
 import {FaPlus} from "react-icons/fa6";

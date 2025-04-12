@@ -1,23 +1,37 @@
-import { useState } from "react";
-import { FaWhatsapp, FaDownload, FaShare, FaFacebook, FaPrint } from "react-icons/fa";
 import {
     assetUrl,
 } from "@/Components/Constant/index.js";
+import {drivingLicenses} from "@/Components/Constant/index.js";
+import {usePage} from "@inertiajs/react";
 
 const PreviewJobApply = ({ isOpen, onClose, data, confirmSubmit }) => {
     if (!isOpen) return null;
 
-    const handlePrint = () => {
-        const printContent = document.getElementById('job-application-preview');
-        const originalContents = document.body.innerHTML;
+    const { languages} = usePage().props;
 
-        document.body.innerHTML = printContent.innerHTML;
-        window.print();
-        document.body.innerHTML = originalContents;
 
-        // Re-add event listeners if needed
-        window.location.reload();
-    };
+
+    const getMotherLanguage =  (id) => {
+
+        if (!id){
+            return id;
+        }
+
+        const language =languages.find( item => item.id === id);
+
+        return language.name ?? id
+    }
+
+    const getDrivingLicense =  (id) => {
+
+        if (!id){
+            return id;
+        }
+
+        const drivingLicense =drivingLicenses.find( item => item.id === id);
+
+        return drivingLicense.name ?? id
+    }
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -208,7 +222,7 @@ const PreviewJobApply = ({ isOpen, onClose, data, confirmSubmit }) => {
                             <div>
                                 <div className="grid grid-cols-2 gap-2 mb-1">
                                     <div className="border border-gray-300 p-1">Driving License</div>
-                                    <div className="border border-gray-300 p-1">{data.driving_license || "Select"}</div>
+                                    <div className="border border-gray-300 p-1">{getDrivingLicense(data.driving_license) || "Select"}</div>
                                 </div>
                                 <div className="grid grid-cols-2 gap-2 mb-1">
                                     <div className="border border-gray-300 p-1">English</div>
@@ -227,11 +241,11 @@ const PreviewJobApply = ({ isOpen, onClose, data, confirmSubmit }) => {
                                 </div>
                                 <div className="grid grid-cols-2 gap-2 mb-1">
                                     <div className="border border-gray-300 p-1">Urdu/Hindi</div>
-                                    <div className="border border-gray-300 p-1">{data.urduProficiencyName || "Select"}</div>
+                                    <div className="border border-gray-300 p-1">{data.urduProficiencyName || "-"}</div>
                                 </div>
                                 <div className="grid grid-cols-2 gap-2 mb-1">
                                     <div className="border border-gray-300 p-1">Mother Language</div>
-                                    <div className="border border-gray-300 p-1">{data.mother_language || "-"}</div>
+                                    <div className="border border-gray-300 p-1">{getMotherLanguage(data.mother_language) || "-"}</div>
                                 </div>
                             </div>
                         </div>
