@@ -12,7 +12,7 @@ const JobApplyList = () => {
 
     const handleDownloadPdf = (jobApplyData) => {
         console.log(jobApplyData);
-        return
+        // return
         setJobApply(jobApplyData);
         setTimeout(() => {
             const printContents = componentRef.current.innerHTML;
