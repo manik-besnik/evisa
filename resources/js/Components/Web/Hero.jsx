@@ -26,7 +26,7 @@ const services = [
     {
         title: "Agency",
         img: "images/agency.png",
-        link: "others",
+        link: "agency.create",
     },
     {
         title: "Others",
