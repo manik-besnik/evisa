@@ -63,7 +63,7 @@ class UpdateAction
             $jobDemand->vacation_benefits = $jobDemandDTO->vacationBenefits;
 
             $jobDemand->is_on_demand = $jobDemandDTO->isOnDemand;
-            $jobDemand->is_new = $jobDemandDTO->isNewJob;
+            $jobDemand->is_new = $jobDemandDTO->isNewJob ? 1 : 0;
 
             if ($jobDemandDTO->approved) {
                 $jobDemand->is_approved = true;
