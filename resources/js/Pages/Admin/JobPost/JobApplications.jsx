@@ -46,7 +46,7 @@ export const JobApplications = ({job_applies}) => {
                         <td>{item.phone}</td>
                         <td>{getFormattedDate(item.created_at)}</td>
                         <td className="flex gap-x-2">
-                            <Link href={route('admin.job-posts.applications.show', item.id)} className='btn-primary'>
+                            <Link href={route('admin.job-demand.applications.show', item.id)} className='btn-primary'>
                                 <FaEye/>
                             </Link>
                             {/*<DangerButton onClick={() => handleDelete(jobPost)}>*/}

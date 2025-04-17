@@ -65,6 +65,12 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
     Route::get('job-demand/applications', [JobDemandController::class, 'jobDemandApplications'])
         ->name('job-demand.applications');
 
+    Route::get('job-demand/applications', [JobDemandController::class, 'jobDemandApplications'])
+        ->name('job-demand.applications');
+
+    Route::get('job-demand/applications/{id}', [JobDemandController::class, 'singleApplication'])
+        ->name('job-demand.applications.show');
+
     Route::resource('job-posts', JobPostController::class);
 
     Route::post('job-demands/update/{id}', [JobDemandController::class, 'update'])
