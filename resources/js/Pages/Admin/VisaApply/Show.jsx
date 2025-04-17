@@ -11,7 +11,6 @@ import AddDocumentsModal from "@/Components/Admin/AddDocumentsModal.jsx";
 const Show = () => {
     const [show, setShow] = useState(false)
 
-
     return (
         <Authenticated>
             <Head title="Visa Details"/>
