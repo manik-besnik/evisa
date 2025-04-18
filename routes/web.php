@@ -91,6 +91,7 @@ Route::inertia('search', 'Search');
 
 route::view('cv','pdfs.single-column-cv');
 route::view('cv2','pdfs.two-column-cv');
+route::inertia('resume','Resume');
 
 require __DIR__ . '/auth.php';
 require __DIR__ . '/admin.php';

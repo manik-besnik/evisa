@@ -3,7 +3,7 @@ import ArrowDownSolid from "@/Components/SvgIcons/ArrowDownSolid.jsx";
 import {LiaTimesSolid} from "react-icons/lia";
 import {useState} from "react";
 
-export default function Select({
+export default function MultiSelect({
                                    items,
                                    selected,
                                    setSelected,
