@@ -15,6 +15,7 @@ import {toast} from "react-toastify";
 import FileUpload from "@/Components/Web/FileUpload.jsx";
 import {FaPlus} from "react-icons/fa6";
 import MultiSelect from "@/Components/Web/MultiSelect.jsx";
+import {Checkbox} from "flowbite-react";
 
 
 const CvCreate = () => {
@@ -498,7 +499,7 @@ const CvCreate = () => {
                                         <TextInput
                                             value={item.position}
                                             onChange={(e) => updateJobExperience(i, "position", e.target.value)}
-                                            error={errors?.job_experiences ? errors?.job_experiences[i]?.position : ""}
+                                            error={errors?.job_experiences ? errors?.job_experiences[i]['position'] : ""}
                                             id={`position-${i}`}
                                             placeholder="EX: Software Enginner"
                                             label="Position*"
@@ -508,21 +509,9 @@ const CvCreate = () => {
                                     </div>
                                     <div className="w-1/4">
                                         <TextInput
-                                            value={item.duration}
-                                            onChange={(e) => updateJobExperience(i, "duration", e.target.value)}
-                                            error={errors?.job_experiences ? errors?.job_experiences[i]?.duration : ""}// error={errors.passing_year}
-                                            id={`duration-${i}`}
-                                            placeholder="EX: 4 Years"
-                                            label="Duration*"
-                                            defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
-                                            labelClasses="text-text-primary"
-                                        />
-                                    </div>
-                                    <div className="w-1/4">
-                                        <TextInput
                                             value={item.company}
                                             onChange={(e) => updateJobExperience(i, "company", e.target.value)}
-                                            error={errors?.job_experiences ? errors?.job_experiences[i]?.company : ""}
+                                            error={errors?.job_experiences ? errors?.job_experiences[i]['company'] : ""}
                                             id={`company-${i}`}
                                             placeholder="Company Name"
                                             label="Company Name*"
@@ -531,16 +520,35 @@ const CvCreate = () => {
                                         />
                                     </div>
                                     <div className="w-1/4">
-                                        <Select
-                                            placeholder="Select Country"
-                                            label="Country*"
-                                            items={countries}
-                                            selected={item.country}
-                                            setSelected={(value) => updateJobExperience(i, "country", value)}
-                                            handleValueChange={(value) => updateJobExperience(i, "country", value)}
-                                            error={errors?.job_experiences ? errors?.job_experiences[i]?.country_id : ""}
+                                        <TextInput
+                                            value={item.start_date}
+                                            onChange={(e) => updateJobExperience(i, "start_date", e.target.value)}
+                                            error={errors?.job_experiences ? errors?.job_experiences[i]['start_date'] : ""}
+                                            id={`start-date-${i}`}
+                                            label="Start Date*"
+                                            type="date"
                                             defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
+                                            labelClasses="text-text-primary"
                                         />
+                                    </div>
+                                    <div className="w-1/4">
+                                        <TextInput
+                                            value={item.end_date}
+                                            onChange={(e) => updateJobExperience(i, "end_date", e.target.value)}
+                                            error={errors?.job_experiences ? errors?.job_experiences[i]['end_date'] : ""}
+                                            id={`end-date-${i}`}
+                                            label="End Date"
+                                            type="date"
+                                            defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
+                                            labelClasses="text-text-primary"
+                                        />
+                                    </div>
+
+                                    <div className="w-1/4">
+                                        <label className="flex items-center mt-5" htmlFor={`current-working-${i}`}>
+                                            <Checkbox id={`current-working-${i}`} />
+                                            <span className="ml-1"> Currently Working here</span>
+                                        </label>
                                     </div>
                                     {data.job_experiences.length > 1 && (
                                         <button type="button" onClick={() => deleteExperience(i)}
