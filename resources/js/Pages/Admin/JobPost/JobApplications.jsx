@@ -1,9 +1,7 @@
 import Authenticated from "@/Layouts/AuthenticatedLayout.jsx";
 import {Head, Link, router} from "@inertiajs/react";
-import {FiEdit, FiPlus} from "react-icons/fi";
 import Table from "@/Components/Table.jsx";
 import {getFormattedDate} from "@/Components/Helper/index.js";
-import DangerButton from "@/Components/DangerButton.jsx";
 import { FaEye } from "react-icons/fa6";
 import {useState} from "react";
 import DeleteConfirmModal from "@/Components/DeleteConfirmModal.jsx";
