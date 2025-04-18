@@ -49,7 +49,6 @@
         .profile-container {
             position: relative;
             z-index: 2;
-            margin-top: 30px;
             margin-left: 30px;
         }
 
@@ -187,14 +186,30 @@
             text-align: justify;
         }
 
+        .timeline-item {
+            position: relative;
+            display: flex;
+            margin-bottom: 30px;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 135px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #1a222e;
+        }
+
         /* Timeline sections */
-        .timeline {
+        .timeline-separator {
             position: relative;
             margin-left: 20px;
             padding-left: 30px;
         }
 
-        .timeline::before {
+        .timeline-separator::before {
             content: '';
             position: absolute;
             left: 0;
@@ -204,25 +219,11 @@
             background-color: #1a222e;
         }
 
-        .timeline-item {
-            position: relative;
-            margin-bottom: 30px;
-        }
-
-        .timeline-dot {
-            position: absolute;
-            left: -36px;
-            top: 5px;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background-color: #1a222e;
-        }
-
         .timeline-date {
             font-weight: bold;
             margin-bottom: 5px;
-            font-size: 16px;
+            font-size: 15px;
+            min-width: 120px;
         }
 
         .timeline-company {
@@ -241,6 +242,7 @@
         .timeline-description {
             margin-top: 5px;
             line-height: 1.4;
+            font-size: 15px;
         }
 
         /* Language section */
@@ -249,6 +251,8 @@
             flex-direction: column;
             gap: 12px;
             font-size: 16px;
+            margin-left: 50px;
+            font-weight: bold;
         }
 
         /* Reference section */
@@ -256,6 +260,7 @@
             display: flex;
             flex-direction: column;
             gap: 20px;
+            margin-left: 50px;
         }
 
         .reference-item {
@@ -283,6 +288,11 @@
             font-size: 12px;
             color: #666;
             margin: 20px 0 0;
+        }
+
+        .flex {
+            display: flex;
+            justify-content: space-between;
         }
     </style>
 </head>
@@ -420,21 +430,16 @@
             <div class="timeline">
                 <div class="timeline-item">
                     <div class="timeline-date">2030 - PRESENT</div>
+                    <div class="timeline-separator"></div>
                     <div class="timeline-dot"></div>
-                    <div class="timeline-company">Borcelle Studio</div>
-                    <div class="timeline-position">Marketing Manager & Specialist</div>
-                    <div class="timeline-description">
-                        • Develop and execute comprehensive marketing strategies and campaigns that align with the company's goals and objectives.
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-date">2025 - 2029</div>
-                    <div class="timeline-company">Borcelle Studio</div>
-                    <div class="timeline-position">Marketing Manager & Specialist</div>
-                    <div class="timeline-description">
-                        • Develop and execute comprehensive marketing strategiesand campaigns that align with the company's goals and objectives.
+                    <div>
+                        <div class="flex">
+                            <div class="timeline-company">Borcelle Studio</div>
+                            <div class="timeline-position">Marketing Manager & Specialist</div>
+                        </div>
+                        <div class="timeline-description">
+                            • Develop and execute comprehensive marketing strategies and campaigns that align with the company's goals and objectives.
+                        </div>
                     </div>
                 </div>
             </div>
@@ -450,23 +455,19 @@
 
             <div class="timeline">
                 <div class="timeline-item">
-                    <div class="timeline-dot"></div>
                     <div class="timeline-date">2029 - 2030</div>
-                    <div class="timeline-company">WARDIERE UNIVERSITY</div>
-                    <div class="timeline-description">
-                        • Master of Business Management
+                    <div class="timeline-separator"></div>
+                    <div class="timeline-dot"></div>
+                    <div>
+                        <div class="flex">
+                            <div class="timeline-company">WARDIERE UNIVERSITY</div>
+                        </div>
+                        <div class="timeline-description">
+                            • Master of Business Management
+                        </div>
                     </div>
                 </div>
 
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-date">2029 - 2030</div>
-                    <div class="timeline-company">WARDIERE UNIVERSITY</div>
-                    <div class="timeline-description">
-                        • Bachelor of Business<br>
-                        • GPA: 3.8 /4.0
-                    </div>
-                </div>
             </div>
         </div>
 
