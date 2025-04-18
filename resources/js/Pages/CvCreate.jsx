@@ -16,6 +16,7 @@ import FileUpload from "@/Components/Web/FileUpload.jsx";
 import {FaPlus} from "react-icons/fa6";
 import MultiSelect from "@/Components/Web/MultiSelect.jsx";
 import {Checkbox} from "flowbite-react";
+import ResumePreview from "@/Components/Web/ResumePreview.jsx";
 
 
 const CvCreate = () => {
@@ -29,6 +30,7 @@ const CvCreate = () => {
     const [bloodGroup, setBloodGroup] = useState('');
     const [maritalStatus, setMaritalStatus] = useState('');
     const [selectedLanguages, setSelectedLanguages] = useState([])
+    const [resumePreview, setResumePreview] = useState(false)
 
 
     const {data, setData, post, errors, processing, reset} = useForm({
@@ -576,21 +578,19 @@ const CvCreate = () => {
                         {/* Submit Button */}
                         <div className="flex justify-center mt-6 gap-3">
                             <PrimaryBtn
-                                text="Submit Application"
+                                text="Submit"
                                 type="submit"
                                 classes="w-full md:w-2/12 py-3"
-                                onClick={handleSubmit}
+                                onClick={() => setResumePreview(true)}
                                 disabled={processing}
                             />
-                            <PrimaryBtn
-                                text="Preview"
-                                type="submit"
-                                classes="w-full md:w-2/12 py-3"
-                            />
+
                         </div>
                     </form>
                 </div>
             </div>
+
+            {/*<ResumePreview />*/}
         </WebLayout>
     );
 };
