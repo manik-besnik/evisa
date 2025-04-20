@@ -12,6 +12,13 @@ class StoreAction
     public function execute(CVDTO $cvDTO): \Illuminate\Http\RedirectResponse
     {
 
+        /** @var UserCV|null $cv */
+        $cv= UserCV::query()->where('user_id',auth()->id())->first();
+
+        if ($cv){
+            return redirect()->back()->withErrors(['message' => "Already You have created your CV"]);
+        }
+
         DB::beginTransaction();
 
         try {

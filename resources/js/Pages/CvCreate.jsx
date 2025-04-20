@@ -824,7 +824,7 @@ const CvCreate = () => {
                         <div className="flex justify-center mt-6 gap-3">
                             <PrimaryBtn
                                 text="Submit"
-                                type="submit"
+                                type="button"
                                 classes="w-full md:w-2/12 py-3"
                                 onClick={() => setResumePreview(true)}
                                 disabled={processing}
