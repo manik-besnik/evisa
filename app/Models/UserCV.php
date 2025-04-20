@@ -46,6 +46,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string $summary
  * @property string|null $website
  * @property string|null $personal_skills
+ * @property string|null $interests
  * @property string|null $languages
  * @property string $passing_year
  * @property string $institute

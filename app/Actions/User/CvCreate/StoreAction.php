@@ -65,6 +65,7 @@ class StoreAction
             $cv->references = $cvDTO->references;
             $cv->website = $cvDTO->website;
             $cv->personal_skills = $cvDTO->personalSkills;
+            $cv->interests = $cvDTO->interests;
             $cv->languages = $languages;
             $cv->save();
             DB::commit();

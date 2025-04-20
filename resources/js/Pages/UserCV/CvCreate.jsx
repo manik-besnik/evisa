@@ -625,13 +625,26 @@ const CvCreate = () => {
 
                             <div>
                                 <p className="mt-2 mb-1 text-sm border-[#848585]">
-                                    Typing Here (Add Multiple Item separate by comma)
+                                    Personal Skills (Add Multiple Item separate by comma)
                                 </p>
                                 <TextInput
                                     value={data.personal_skills}
                                     onChange={(e) => setData('personal_skills', e.target.value)}
                                     error={errors.personal_skills}
                                     id="personal_skills"
+                                    placeholder="Ex: Swaiming,Travikibg,Reading"
+                                    defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
+                                />
+                            </div>
+                            <div>
+                                <p className="mt-2 mb-1 text-sm border-[#848585]">
+                                    Interests (Add Multiple Item separate by comma)
+                                </p>
+                                <TextInput
+                                    value={data.interests}
+                                    onChange={(e) => setData('interests', e.target.value)}
+                                    error={errors.interests}
+                                    id="interests"
                                     placeholder="Ex: Swaiming,Travikibg,Reading"
                                     defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
                                 />

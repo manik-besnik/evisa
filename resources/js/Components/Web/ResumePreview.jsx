@@ -215,9 +215,7 @@ const ResumePreview = ({show, setShow, cvData, confirmSubmit}) => {
                         className="bg-red-600 text-white font-bold py-2 px-8 rounded">
                     Confirm Submit
                 </button>
-
             </div>
-
         </Modal>
     );
 };

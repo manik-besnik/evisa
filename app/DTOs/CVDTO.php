@@ -17,6 +17,7 @@ class CVDTO
     public string|int $gender;
     public string|int $religion;
     public string|null $website;
+    public string|null $interests;
     public string $bloodGroup;
     public string|int $maritalStatus;
     public string $passportNo;
@@ -63,6 +64,7 @@ class CVDTO
             'visa_status' => ['required', 'string', 'min:2', 'max:200'],
             'visa_expiry' => ['required', 'string', 'min:2', 'max:200'],
             'personal_skills' => ['required', 'string', 'min:2', 'max:200'],
+            'interests' => ['nullable', 'string', 'min:2', 'max:200'],
             'current_state' => ['nullable', 'string', 'min:2', 'max:200'],
             'current_city' => ['nullable', 'string', 'min:2', 'max:200'],
             'current_area' => ['nullable', 'string', 'min:2', 'max:200'],
@@ -116,6 +118,7 @@ class CVDTO
         $instance->personalSkills = $request->input('personal_skills');
         $instance->languages = $request->input('languages');
         $instance->website = $request->input('website');
+        $instance->interests = $request->input('interests');
 
         /** Educational Details */
         $instance->educations = $request->input('educations');

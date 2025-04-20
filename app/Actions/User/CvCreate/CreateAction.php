@@ -10,7 +10,7 @@ class CreateAction
 {
     public function execute(): \Inertia\Response
     {
-        return Inertia::render('CvCreate', [
+        return Inertia::render('UserCV/CvCreate', [
             'locations' => Location::query()->select(['id', 'name'])->get(),
             'languages' => Language::query()->select(['id', 'name'])->get(),
         ]);
