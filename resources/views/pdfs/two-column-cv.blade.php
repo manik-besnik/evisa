@@ -1,28 +1,3 @@
-@php
-    $genders = [
-       '1' => 'Male',
-        '2' => 'Female',
-        '3' => 'Others',
-    ];
-
-    $maritalStatuses = [
-        '1' => 'Single',
-        '2' => 'Married',
-        '3' => 'Divorced',
-    ];
-
-    $religions = [
-        '1' =>'Sunni Muslim',
-        '2' =>'Shiite Muslim',
-        '3' =>'Christian',
-        '4' =>'Hindu',
-        '5' => 'Sikh',
-        '6' =>'Buddhist',
-    ];
-
-@endphp
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -329,7 +304,7 @@
         <div class="profile-container">
             <div class="profile-circle">
                 <div class="profile-inner-circle">
-                    <img src="/placeholder.svg?height=140&width=140" alt="Profile" class="profile-image">
+                    <img src="{{ public_path(str_replace(url('/'), '', $cv->avatar)) }}" alt="Profile" class="profile-image">
                 </div>
             </div>
         </div>
@@ -376,10 +351,12 @@
             </div>
 
             <div class="skills-list">
+                @foreach(array_map('trim', explode(',', $cv->personal_skills)) as $item)
                 <div class="skill-item">
                     <span class="bullet">•</span>
-                    <span>Personal Banking</span>
+                    <span>{{$item}}</span>
                 </div>
+                @endforeach
 
             </div>
         </div>
@@ -393,10 +370,12 @@
             </div>
 
             <div class="interest-list">
+                @foreach(array_map('trim', explode(',', $cv->interests)) as $item)
                 <div class="interest-item">
                     <span class="bullet">•</span>
-                    <span>Swaiming</span>
+                    <span>{{$item}}</span>
                 </div>
+                @endforeach
             </div>
         </div>
     </div>
@@ -423,23 +402,26 @@
                 </div>
                 <div class="header-text">Experience</div>
             </div>
-
+            @foreach($cv->experiences as $exp)
             <div class="timeline">
                 <div class="timeline-item">
-                    <div class="timeline-date">2030 - PRESENT</div>
+                    <div class="timeline-date">
+                        {{ $exp['start_date'] ?? '' }} - {{(bool)$exp['is_present'] ? 'PRESENT' : ($exp['end_date'] ?? '')}}
+                    </div>
                     <div class="timeline-separator"></div>
                     <div class="timeline-dot"></div>
                     <div>
                         <div class="flex">
-                            <div class="timeline-company">Borcelle Studio</div>
-                            <div class="timeline-position">Marketing Manager & Specialist</div>
+                            <div class="timeline-company">{{ $exp['company'] ?? '' }}</div>
+                            <div class="timeline-position">{{ $exp['position'] ?? '' }}</div>
                         </div>
                         <div class="timeline-description">
-                            • Develop and execute comprehensive marketing strategies and campaigns that align with the company's goals and objectives.
+                            • {{ $exp['description'] ?? '' }}
                         </div>
                     </div>
                 </div>
             </div>
+            @endforeach
         </div>
 
         <div class="section">
@@ -449,23 +431,28 @@
                 </div>
                 <div class="header-text">Education</div>
             </div>
-
+            @foreach($cv->educations as $edu)
             <div class="timeline">
                 <div class="timeline-item">
-                    <div class="timeline-date">2029 - 2030</div>
+                    <div class="timeline-date">
+                        {{$edu['start_date'] ?? ''}}
+                        -{{$edu['end-date'] ?? ''}}
+                    </div>
                     <div class="timeline-separator"></div>
                     <div class="timeline-dot"></div>
                     <div>
                         <div class="flex">
-                            <div class="timeline-company">WARDIERE UNIVERSITY</div>
+                            <div class="timeline-company">{{$edu['institute'] ?? ''}}</div>
                         </div>
                         <div class="timeline-description">
-                            • Master of Business Management
+                            • {{$edu['department'] ?? ''}}
                         </div>
                     </div>
                 </div>
 
             </div>
+
+            @endforeach
         </div>
 
         <div class="section">
@@ -477,11 +464,9 @@
             </div>
 
             <div class="language-list">
-                <div>Arabic</div>
-                <div>English</div>
-                <div>Hindi</div>
-                <div>Urdu</div>
-                <div>French</div>
+                @foreach(array_map('trim', explode(',', $cv->interests)) as $item)
+                <div>{{$item}}</div>
+                @endforeach
             </div>
         </div>
 
