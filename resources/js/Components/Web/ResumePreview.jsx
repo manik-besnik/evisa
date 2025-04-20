@@ -82,7 +82,7 @@ const ResumePreview = ({show, setShow,cvData, confirmSubmit}) => {
                             <div
                                 className="w-44 h-44 rounded-full bg-primary border-4 border-white flex items-center justify-center">
                                 <div className="w-40 h-40 rounded-full bg-white overflow-hidden">
-                                    {cvData.avatar &&= <img
+                                    {cvData.avatar && <img
                                         src={URL.createObjectURL(cvData.avatar)}
                                         alt="Profile"
                                         className="w-full h-full object-cover"
