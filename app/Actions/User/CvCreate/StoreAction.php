@@ -65,6 +65,7 @@ class StoreAction
             $cv->website = $cvDTO->website;
             $cv->personal_skills = $cvDTO->personalSkills;
             $cv->interests = $cvDTO->interests;
+            $cv->designation = $cvDTO->designation;
             $cv->date_of_birth = $cvDTO->dateOfBirth;
             $cv->languages = $languages;
             $cv->save();

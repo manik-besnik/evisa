@@ -1,3 +1,28 @@
+@php
+    $genders = [
+       '1' => 'Male',
+        '2' => 'Female',
+        '3' => 'Others',
+    ];
+
+    $maritalStatuses = [
+        '1' => 'Single',
+        '2' => 'Married',
+        '3' => 'Divorced',
+    ];
+
+    $religions = [
+        '1' =>'Sunni Muslim',
+        '2' =>'Shiite Muslim',
+        '3' =>'Christian',
+        '4' =>'Hindu',
+        '5' => 'Sikh',
+        '6' =>'Buddhist',
+    ];
+
+@endphp
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

@@ -17,7 +17,7 @@ export const bloodGroups = [
     {id: "O+", name: "O+"},
     {id: "O-", name: "O-"}
 ];
-;
+
 export const groups = [
     {id: 1, name: "Main Person"},
     {id: 2, name: "Son Of Main Person"},
