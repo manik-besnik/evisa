@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Curriculum Vitae</title>
+    <title>Curriculum Vitae of {{$cv->name}}</title>
     <style>
 
         body {
@@ -206,10 +206,10 @@
                 <span>Curriculum Vitae</span>
             </div>
             <div class="personal-info">
-                <h1 class="text-uppercase">MOHAMMAD MEZBAHUDDIN</h1>
+                <h1 class="text-uppercase">{{$cv->name}}</h1>
                 <p>Mobile: No. 000000000 (UAE)</p>
                 <p>Email: <span class="email">mezbadblab@gmail.com</span></p>
-                <p>Dubai, UAE</p>
+{{--                <p>Dubai, UAE</p>--}}
             </div>
         </div>
         <div class="photo">
