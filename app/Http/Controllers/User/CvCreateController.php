@@ -8,6 +8,7 @@ use App\Actions\User\CvCreate\StoreAction;
 use App\DTOs\CVDTO;
 use App\Http\Controllers\Controller;
 use App\Models\VisaApply;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\JobDemand;
 use Illuminate\Support\Facades\Storage;
@@ -25,7 +26,7 @@ class CvCreateController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(CreateAction $createAction): \Inertia\Response
+    public function create(CreateAction $createAction): \Inertia\Response|RedirectResponse
     {
         return $createAction->execute();
     }

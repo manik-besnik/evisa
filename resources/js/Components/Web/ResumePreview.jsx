@@ -66,13 +66,13 @@ const Timeline = ({title, subTitle, description, startDate, endDate = null, isPr
 };
 
 
-const ResumePreview = ({show, setShow,cvData, confirmSubmit}) => {
+const ResumePreview = ({show, setShow, cvData, confirmSubmit}) => {
 
     if (!show) return;
 
     return (
 
-        <Modal show={show} maxWidth='3xl' onClose={() => setShow(false)}>
+        <Modal show={show} maxWidth='4xl' onClose={() => setShow(false)}>
             <div className="flex justify-center bg-gray-100 p-5">
                 <div className="w-full max-w-5xl bg-white flex shadow-lg overflow-hidden">
                     {/* Left Section */}
@@ -93,8 +93,8 @@ const ResumePreview = ({show, setShow,cvData, confirmSubmit}) => {
 
                         {/* Name and Title */}
                         <div className="text-center mb-6">
-                            <h1 className="text-4xl font-bold text-primary leading-tight">Esther Smith</h1>
-                            <h2 className="text-lg font-semibold mt-2">MARKETING MANAGER</h2>
+                            <h1 className="text-4xl font-bold text-primary leading-tight text-uppercase">{cvData.name}</h1>
+                            <h2 className="text-lg font-semibold mt-2">{cvData.designation}</h2>
                         </div>
 
                         {/* Contact Information */}
@@ -102,16 +102,16 @@ const ResumePreview = ({show, setShow,cvData, confirmSubmit}) => {
                             <SectionHeader icon="👤" text="Contact Me"/>
                             <ul className="space-y-2 ml-10">
                                 <li className="flex items-center">
-                                    <span className="mr-2">📞</span> +123-456-7890
+                                    <span className="mr-2">📞</span> {cvData.phone}
                                 </li>
                                 <li className="flex items-center">
-                                    <span className="mr-2">✉️</span> hello@reallygreatsite.com
+                                    <span className="mr-2">✉️</span> {cvData.email}
                                 </li>
+                                {/*<li className="flex items-center">*/}
+                                {/*    <span className="mr-2">📍</span> 123 Anywhere St., Any City*/}
+                                {/*</li>*/}
                                 <li className="flex items-center">
-                                    <span className="mr-2">📍</span> 123 Anywhere St., Any City
-                                </li>
-                                <li className="flex items-center">
-                                    <span className="mr-2">🔗</span> www.reallygreatsite.com
+                                    <span className="mr-2">🔗</span> {cvData.website}
                                 </li>
                             </ul>
                         </div>
@@ -121,11 +121,10 @@ const ResumePreview = ({show, setShow,cvData, confirmSubmit}) => {
 
                             <SectionHeader icon="✓" text="Personal Skills"/>
                             <ul className="list-disc list-inside space-y-1 ml-10">
-                                <li>Personal Banking</li>
-                                <li>Customer Service</li>
-                                <li>Finance</li>
-                                <li>Communication</li>
-                                <li>Negotiation</li>
+
+                                {cvData.personal_skills.split(',').map((item, index) => (
+                                    <li key={index}>{item.trim()}</li>
+                                ))}
                             </ul>
                         </div>
 
@@ -133,10 +132,9 @@ const ResumePreview = ({show, setShow,cvData, confirmSubmit}) => {
                         <div>
                             <SectionHeader icon="❤" text="Interests"/>
                             <ul className="list-disc list-inside space-y-1 ml-10">
-                                <li>Swimming</li>
-                                <li>Traveling</li>
-                                <li>Songs</li>
-                                <li>Reading</li>
+                                {cvData.interests.split(',').map((item, index) => (
+                                    <li key={index}>{item.trim()}</li>
+                                ))}
                             </ul>
                         </div>
                     </div>
@@ -148,13 +146,7 @@ const ResumePreview = ({show, setShow,cvData, confirmSubmit}) => {
 
                             <SectionHeader icon="👤" text="About Me"/>
                             <p className="text-justify">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed diam nonummy nibh euismod
-                                tincidunt ut
-                                laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud
-                                exerci tation
-                                ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum
-                                iriure dolor
-                                in hendrerit in vulputate velit.
+                                {cvData.summary}
                             </p>
                         </div>
 
@@ -162,54 +154,57 @@ const ResumePreview = ({show, setShow,cvData, confirmSubmit}) => {
                         <div className="mb-10">
 
                             <SectionHeader icon="💼" text="Experience"/>
-                            <Timeline
-                                title="Borcelle Studio"
-                                subTitle="Marketing Manager & Specialist"
-                                startDate="2030"
-                                isPresent={true}
-                                description="Develop and execute comprehensive marketing strategies and campaigns that align with the company's goals and objectives."
-                            />
+
+                            {cvData.job_experiences.map((item) => (
+                                <Timeline
+                                    title={item.company}
+                                    subTitle={item.position}
+                                    startDate={item.start_date}
+                                    endDate={item.end_date}
+                                    isPresent={item.is_present}
+                                    description={item.description}
+                                />
+                            ))}
+
                         </div>
 
                         {/* Education */}
                         <div className="mb-6">
                             <SectionHeader icon="📚" text="Education"/>
-                            <Timeline
-                                title="WARDIERE UNIVERSITY"
-                                startDate="2029"
-                                endDate="2030"
-                                description="Master of Business Management"
-                            />
 
+                            {cvData.educations.map((item) => (
+                                <Timeline
+                                    title={item.institute}
+                                    startDate={item.start_date}
+                                    endDate={item.end_date}
+                                    description={item.result}
+                                />
+                            ))}
                         </div>
 
                         {/* Languages */}
                         <div className="mb-6">
                             <SectionHeader icon="🗣️" text="Languages"/>
                             <ul className="list-disc font-bold list-inside space-y-1 ml-10">
-                                <li>Arabic</li>
-                                <li>English</li>
-                                <li>Hindi</li>
-                                <li>Urdu</li>
-                                <li>French</li>
+                                {cvData.languages.map((item, index) => (
+                                    <li key={index}>{item.name}</li>
+                                ))}
                             </ul>
                         </div>
 
                         {/* References */}
                         <div>
                             <SectionHeader icon="👥" text="References"/>
-                            <div className="mb-4 ml-10">
-                                <div className="font-bold">Estelle Darcy</div>
-                                <div>Wardiere Inc. / CTO</div>
-                                <div>Phone: 123-456-7890</div>
-                                <div>Email: hello@reallygreatsite.com</div>
-                            </div>
-                            <div className='ml-10'>
-                                <div className="font-bold">Harper Richard</div>
-                                <div>Wardiere Inc. / CEO</div>
-                                <div>Phone: 123-456-7890</div>
-                                <div>Email: hello@reallygreatsite.com</div>
-                            </div>
+
+                            {cvData.references.map((item, index) => (
+                                <div key={index} className="mb-4 ml-10">
+                                    <div className="font-bold">{item.name}</div>
+                                    <div>{item.designation} / {item.designation}</div>
+                                    <div>Phone: {item.phone}</div>
+                                    <div>Email: {item.email}</div>
+                                </div>
+                            ))}
+
                         </div>
                     </div>
                 </div>
@@ -220,9 +215,7 @@ const ResumePreview = ({show, setShow,cvData, confirmSubmit}) => {
                         className="bg-red-600 text-white font-bold py-2 px-8 rounded">
                     Confirm Submit
                 </button>
-
             </div>
-
         </Modal>
     );
 };

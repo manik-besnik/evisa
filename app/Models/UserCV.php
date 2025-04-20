@@ -39,13 +39,15 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string|null $passport_expiry
  * @property string|null $visa_expiry
  * @property string|null $whatsapp_no
- * @property array|string $documents
+ * @property string|null $date_of_birth
  * @property array|string|null $experiences
  * @property array|string|null $references
  * @property array|string|null $educations
  * @property string $summary
  * @property string|null $website
  * @property string|null $personal_skills
+ * @property string|null $designation
+ * @property string|null $interests
  * @property string|null $languages
  * @property string $passing_year
  * @property string $institute
@@ -72,6 +74,7 @@ class UserCV extends Model
         'name',
         'phone',
         'email',
+        'designation',
         'shirt_size',
         'pant_size',
         'show_size',
@@ -79,6 +82,7 @@ class UserCV extends Model
         'height',
         'nearest_airport',
         'region',
+        'date_of_birth',
         'avatar',
         'gender',
         'religion',

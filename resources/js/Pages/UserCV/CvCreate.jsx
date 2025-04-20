@@ -16,43 +16,48 @@ import {FaPlus} from "react-icons/fa6";
 import MultiSelect from "@/Components/Web/MultiSelect.jsx";
 import Checkbox from "@/Components/Checkbox.jsx";
 import ResumePreview from "@/Components/Web/ResumePreview.jsx";
+import {getValue} from "@/Components/Helper/index.js";
 
 
 const CvCreate = () => {
 
-    const {countries, languages} = usePage().props;
+    const {countries, languages,cv} = usePage().props;
 
+    const userSelectedLanguages = languages.filter(lang =>
+        cv.languages.split(',').map(name => name.trim()).includes(lang.name)
+    );
 
-    const [nationality, setNationality] = useState('');
-    const [gender, setGender] = useState('');
-    const [religion, setReligion] = useState('');
-    const [bloodGroup, setBloodGroup] = useState('');
-    const [maritalStatus, setMaritalStatus] = useState('');
-    const [selectedLanguages, setSelectedLanguages] = useState([])
+    const [nationality, setNationality] = useState(countries.find(item => item.id === cv.nationality) ?? '');
+    const [gender, setGender] = useState(genders.find(item => item.id == cv.gender) ?? '');
+    const [religion, setReligion] = useState(religions.find(item => item.id == cv.religion) ?? '');
+    const [bloodGroup, setBloodGroup] = useState(bloodGroups.find(item => item.id == cv.blood_group) ?? '');
+    const [maritalStatus, setMaritalStatus] = useState(maritalStatuses.find(item => item.id == cv.marital_status) ?? '');
+    const [selectedLanguages, setSelectedLanguages] = useState(userSelectedLanguages ?? [])
     const [resumePreview, setResumePreview] = useState(false)
 
-
     const {data, setData, post, errors, processing, reset} = useForm({
-        name: '',
-        designation: '',
-        phone: '',
-        email: '',
-        website: '',
+        name: cv.name,
+        designation: cv.designation,
+        phone: cv.phone,
+        email: cv.email,
+        website: cv.website,
         avatar: '',
-        nationality: "",
-        gender: "",
-        religion: "",
-        blood_group: "",
-        marital_status: "",
-        passport_no: "",
-        passport_expiry: "",
-        visa_status: "",
-        visa_expiry: "",
-        computer_skill: '',
-        personal_skills: '',
-        languages: [],
-        summary: '',
-        job_experiences: [
+        nationality: countries.find(item => item.id === cv.nationality),
+        gender: cv.gender,
+        date_of_birth: cv.date_of_birth,
+        religion: cv.religion,
+        blood_group: cv.blood_group,
+        marital_status: cv.marital_status,
+        passport_no: cv.passport_no,
+        passport_expiry: cv.passport_expiry,
+        visa_status: cv.visa_status,
+        visa_expiry: cv.visa_expiry,
+        computer_skill: cv.computer_skill,
+        personal_skills: cv.personal_skills,
+        interests: cv.interests,
+        languages: userSelectedLanguages ?? [],
+        summary: cv.summary,
+        job_experiences: cv?.experiences?.length > 0 ? cv.experiences : [
             {
                 position: "",
                 start_date: "",
@@ -62,7 +67,7 @@ const CvCreate = () => {
                 description: "",
             }
         ],
-        educations: [
+        educations: cv?.educations?.length ? cv.educations :  [
             {
                 institute: "",
                 start_date: "",
@@ -71,15 +76,17 @@ const CvCreate = () => {
                 result: "",
             }
         ],
-        references: [
+        references: cv?.references?.length ? cv.references : [
             {
                 name: "",
+                company: "",
                 designation: "",
                 phone: "",
                 email: "",
             }
         ]
     })
+
 
     const updateJobExperience = (index, key, value) => {
         const updatedExperiences = [...data.job_experiences];
@@ -158,6 +165,7 @@ const CvCreate = () => {
     const addNewReference = () => {
         const reference = {
             name: "",
+            company: "",
             designation: "",
             phone: "",
             email: "",
@@ -624,13 +632,26 @@ const CvCreate = () => {
 
                             <div>
                                 <p className="mt-2 mb-1 text-sm border-[#848585]">
-                                    Typing Here (Add Multiple Item separate by comma)
+                                    Personal Skills (Add Multiple Item separate by comma)
                                 </p>
                                 <TextInput
                                     value={data.personal_skills}
                                     onChange={(e) => setData('personal_skills', e.target.value)}
                                     error={errors.personal_skills}
                                     id="personal_skills"
+                                    placeholder="Ex: Swaiming,Travikibg,Reading"
+                                    defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
+                                />
+                            </div>
+                            <div>
+                                <p className="mt-2 mb-1 text-sm border-[#848585]">
+                                    Interests (Add Multiple Item separate by comma)
+                                </p>
+                                <TextInput
+                                    value={data.interests}
+                                    onChange={(e) => setData('interests', e.target.value)}
+                                    error={errors.interests}
+                                    id="interests"
                                     placeholder="Ex: Swaiming,Travikibg,Reading"
                                     defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
                                 />
@@ -753,12 +774,24 @@ const CvCreate = () => {
                                         </div>
                                         <div className="w-1/4">
                                             <TextInput
+                                                value={item.company}
+                                                onChange={(e) => updateReference(i, "company", e.target.value)}
+                                                error={errors?.references ? errors?.references[i]['company'] : ""}
+                                                id={`company-${i}`}
+                                                placeholder="EX: CEO"
+                                                label="Company"
+                                                defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
+                                                labelClasses="text-text-primary"
+                                            />
+                                        </div>
+                                        <div className="w-1/4">
+                                            <TextInput
                                                 value={item.designation}
                                                 onChange={(e) => updateReference(i, "designation", e.target.value)}
                                                 error={errors?.references ? errors?.references[i]['designation'] : ""}
                                                 id={`designation-${i}`}
                                                 placeholder="EX: CEO"
-                                                label="Result*"
+                                                label="Designation"
                                                 defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
                                                 labelClasses="text-text-primary"
                                             />
