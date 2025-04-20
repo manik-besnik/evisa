@@ -14,8 +14,10 @@ class CVDTO
     public string $name;
     public string $phone;
     public string $email;
+    public string $designation;
     public string|int $gender;
     public string|int $religion;
+    public string|null $dateOfBirth;
     public string|null $website;
     public string|null $interests;
     public string $bloodGroup;
@@ -48,12 +50,22 @@ class CVDTO
 
     public static function fromRequest(Request $request): CVDTO
     {
+
+        $hasCv = \App\Models\UserCv::query()->where('user_id', auth()->id())->exists();
+
         $request->validate([
-            'avatar' => 'required|file|mimes:jpg,jpeg,png,webp,svg|max:2048',
+            'avatar' => [
+                Rule::requiredIf(!$hasCv),
+                'file',
+                'mimes:jpg,jpeg,png,webp,svg',
+                'max:2048',
+            ],
             'nationality' => ['required', 'min:1', 'max:250'],
             'gender' => ['required', 'min:1', 'max:250'],
             'name' => ['required', 'string', 'min:2', 'max:250'],
             'phone' => ['required', 'string', 'min:9', 'max:20'],
+            'designation' => ['required', 'string', 'min:9', 'max:20'],
+            'date_of_birth' => ['required', 'string', 'min:9', 'max:20'],
             'email' => ['required', 'string', 'min:2', 'max:200'],
             'website' => ['nullable', 'string', 'min:2', 'max:200'],
             'religion' => ['required', 'min:1', 'max:200'],
@@ -119,6 +131,8 @@ class CVDTO
         $instance->languages = $request->input('languages');
         $instance->website = $request->input('website');
         $instance->interests = $request->input('interests');
+        $instance->designation = $request->input('designation');
+        $instance->dateOfBirth = $request->input('date_of_birth');
 
         /** Educational Details */
         $instance->educations = $request->input('educations');
