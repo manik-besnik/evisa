@@ -25,35 +25,22 @@ class CVDTO
     public string $countryContactNo;
     public string $visaStatus;
     public string $visaExpiry;
-    public string $whatsappNo;
-    public string $currentState;
-    public string $currentCity;
-    public string $currentArea;
-    public string $permanentDistrict;
-    public string $permanentThana;
-    public string $permanentVillage;
-    public string|null $shirtSize;
-    public string|null $pantSize;
-    public string|null $showSize;
-    public string|null $weight;
-    public string|null $height;
-    public string|null $nearestAirport;
+    public string|null $currentState;
+    public string|null $currentCity;
+    public string|null $currentArea;
+    public string|null $permanentDistrict;
+    public string|null $permanentThana;
+    public string |null$permanentVillage;
+
     public string|null $summary = null;
-    public array|null $documents = [];
+    public string|null $personalSkills = null;
+    public array|null $educations = [];
+    public array|null $references = [];
 
     /** Education Details */
-    public string $examName;
-    public string $passingYear;
-    public string $institute;
-    public string|null $result;
+    public array|string|null $languages = [];
     public string $computerSkill;
-    public string|int $drivingLicense;
-    public string $drivingLicenseIssueDate;
-    public string $drivingLicenseExpireDate;
-    public string|int $englishProficiency;
-    public string|int $arabicProficiency;
-    public string|int $urduProficiency;
-    public string|int $motherLanguage;
+
 
     /** Job Experiences */
 
@@ -70,46 +57,28 @@ class CVDTO
             'name' => ['required', 'string', 'min:2', 'max:250'],
             'phone' => ['required', 'string', 'min:9', 'max:20'],
             'email' => ['required', 'string', 'min:2', 'max:200'],
+            'website' => ['nullable', 'string', 'min:2', 'max:200'],
             'religion' => ['required', 'string', 'min:1', 'max:200'],
             'blood_group' => ['required', 'string', 'min:2', 'max:200'],
             'marital_status' => ['required', 'string', 'min:1', 'max:200'],
             'passport_no' => ['required', 'string', 'min:2', 'max:200'],
             'passport_expiry' => ['required', 'string', 'min:2', 'max:200'],
-            'country_contact_no' => ['required', 'string', 'min:2', 'max:200'],
             'visa_status' => ['required', 'string', 'min:2', 'max:200'],
             'visa_expiry' => ['required', 'string', 'min:2', 'max:200'],
-            'whatsapp_no' => ['required', 'string', 'min:2', 'max:200'],
-            'current_state' => ['required', 'string', 'min:2', 'max:200'],
-            'current_city' => ['required', 'string', 'min:2', 'max:200'],
-            'current_area' => ['required', 'string', 'min:2', 'max:200'],
-            'permanent_district' => ['required', 'string', 'min:2', 'max:200'],
-            'permanent_thana' => ['required', 'string', 'min:2', 'max:200'],
-            'permanent_village' => ['required', 'string', 'min:2', 'max:200'],
-            'shirt_size' => ['required', 'string', 'max:200'],
-            'pant_size' => ['required', 'string', 'max:200'],
-            'show_size' => ['required', 'string', 'max:200'],
-            'weight' => ['required', 'string', 'max:200'],
-            'height' => ['required', 'string', 'max:200'],
-            'nearest_airport' => ['required', 'string', 'max:250'],
+            'current_state' => ['nullable', 'string', 'min:2', 'max:200'],
+            'current_city' => ['nullable', 'string', 'min:2', 'max:200'],
+            'current_area' => ['nullable', 'string', 'min:2', 'max:200'],
+            'permanent_district' => ['nullable', 'string', 'min:2', 'max:200'],
+            'permanent_thana' => ['nullable', 'string', 'min:2', 'max:200'],
+            'permanent_village' => ['nullable', 'string', 'min:2', 'max:200'],
             'summary' => ['nullable', 'string', 'max:500'],
             'documents' => ['required', 'array'],
 
             /** Education Details */
-            'exam_name' => ['required', 'string', 'min:2', 'max:200'],
-            'passing_year' => ['required', 'string', 'min:2', 'max:200'],
-            'institute' => ['required', 'string', 'min:2', 'max:200'],
-            'result' => ['nullable', 'string'],
             'computer_skill' => ['required', 'string', 'min:2', 'max:200'],
-            'driving_license' => ['required', 'min:1', 'max:200'],
-            'driving_license_issue_date' => ['required', 'string', 'min:2', 'max:200'],
-            'english_proficiency' => ['required', 'string', 'max:200'],
-            'arabic_proficiency' => ['required', 'string', 'max:200'],
-            'urdu_proficiency' => ['required', 'string', 'max:200'],
-            'mother_language' => ['required', 'integer'],
 
             /** Job Experience */
             'job_experiences' => ['required', 'array'],
-            'job_experiences.*.id' => ['nullable', 'int'],
             'job_experiences.*.country_id' => ['required', 'int'],
             'job_experiences.*.position' => ['required', 'string'],
             'job_experiences.*.duration' => ['required', 'string'],

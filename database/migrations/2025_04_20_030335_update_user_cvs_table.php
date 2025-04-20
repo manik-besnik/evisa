@@ -17,6 +17,8 @@ return new class extends Migration
             $table->json('educations')->after('experiences')->nullable();
             $table->json('references')->after('educations')->nullable();
             $table->string('website')->after('email')->nullable();
+            $table->string('languages')->after('website')->nullable();
+            $table->string('personal_skills')->after('languages')->nullable();
         });
     }
 
