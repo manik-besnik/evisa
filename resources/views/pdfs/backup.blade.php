@@ -310,8 +310,9 @@
         </div>
 
         <div class="name-title">
-            <h1 class="name">{{$cv->name}}</h1>
-            <h2 class="title">{{$cv->designation}}</h2>
+            <h1 class="name">Esther</h1>
+            <h1 class="name">Smith</h1>
+            <h2 class="title">MARKETING MANAGER</h2>
         </div>
 
         <div class="section">
@@ -325,19 +326,19 @@
             <div class="contact-info">
                 <div class="contact-item">
                     <div class="contact-icon">📞</div>
-                    <div class="contact-text">{{$cv->phone}}</div>
+                    <div class="contact-text">+123-456-7890</div>
                 </div>
                 <div class="contact-item">
                     <div class="contact-icon">✉️</div>
-                    <div class="contact-text">{{$cv->email}}</div>
+                    <div class="contact-text">hello@reallygreatsite.com</div>
                 </div>
-{{--                <div class="contact-item">--}}
-{{--                    <div class="contact-icon">📍</div>--}}
-{{--                    <div class="contact-text">123 Anywhere St., Any City</div>--}}
-{{--                </div>--}}
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <div class="contact-text">123 Anywhere St., Any City</div>
+                </div>
                 <div class="contact-item">
                     <div class="contact-icon">🔗</div>
-                    <div class="contact-text">{{$cv->website}}</div>
+                    <div class="contact-text">www.reallygreatsite.com</div>
                 </div>
             </div>
         </div>
@@ -355,7 +356,22 @@
                     <span class="bullet">•</span>
                     <span>Personal Banking</span>
                 </div>
-
+                <div class="skill-item">
+                    <span class="bullet">•</span>
+                    <span>Customer Service</span>
+                </div>
+                <div class="skill-item">
+                    <span class="bullet">•</span>
+                    <span>Finance</span>
+                </div>
+                <div class="skill-item">
+                    <span class="bullet">•</span>
+                    <span>Communication</span>
+                </div>
+                <div class="skill-item">
+                    <span class="bullet">•</span>
+                    <span>Negotiation</span>
+                </div>
             </div>
         </div>
 
@@ -372,6 +388,18 @@
                     <span class="bullet">•</span>
                     <span>Swaiming</span>
                 </div>
+                <div class="interest-item">
+                    <span class="bullet">•</span>
+                    <span>Travikibg</span>
+                </div>
+                <div class="interest-item">
+                    <span class="bullet">•</span>
+                    <span>Songs</span>
+                </div>
+                <div class="interest-item">
+                    <span class="bullet">•</span>
+                    <span>Reading</span>
+                </div>
             </div>
         </div>
     </div>
@@ -387,7 +415,7 @@
             </div>
 
             <div class="about-text">
-                {{$cv->summary}}
+                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure autem vel eum iriure dolor in hendrerit in vulputate velit
             </div>
         </div>
 
@@ -469,18 +497,19 @@
             </div>
 
             <div class="reference-list">
-                @foreach($cv->references as $reference)
                 <div class="reference-item">
-
-                    <div class="reference-name">{{$reference['name']}}</div>
-                    <div class="reference-position">
-                        {{$reference['company'] ?? '' }} / {{$reference['designation'] ?? '' }}
-                    </div>
-                    <div>Phone: {{$reference['phone'] ?? ''}}</div>
-                    <div>Email: {{$reference['email'] ?? ''}}</div>
+                    <div class="reference-name">Estelle Darcy</div>
+                    <div class="reference-position">Wardiere Inc. / CTO</div>
+                    <div>Phone: 123-456-7890</div>
+                    <div>Email: hello@reallygreatsite.com</div>
                 </div>
 
-                @endforeach
+                <div class="reference-item">
+                    <div class="reference-name">Harper Richard</div>
+                    <div class="reference-position">Wardiere Inc. / CEO</div>
+                    <div>Phone: 123-456-7890</div>
+                    <div>Email: hello@reallygreatsite.com</div>
+                </div>
             </div>
         </div>
 
@@ -489,7 +518,7 @@
 </div>
 
 <div class="footer">
-    Copy Right : https://dubaievisaservice.com _ Apply Date : {{$cv->created_at}}   Application No. {{$cv->id}}
+    Copy Right : www.evisaservice.com _ Apply Date : 22/11/2022   Application No. 3000
 </div>
 </body>
 </html>

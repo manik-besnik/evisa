@@ -16,7 +16,6 @@ import {FaPlus} from "react-icons/fa6";
 import MultiSelect from "@/Components/Web/MultiSelect.jsx";
 import Checkbox from "@/Components/Checkbox.jsx";
 import ResumePreview from "@/Components/Web/ResumePreview.jsx";
-import {getValue} from "@/Components/Helper/index.js";
 
 
 const CvCreate = () => {
@@ -24,39 +23,39 @@ const CvCreate = () => {
     const {countries, languages,cv} = usePage().props;
 
     const userSelectedLanguages = languages.filter(lang =>
-        cv.languages.split(',').map(name => name.trim()).includes(lang.name)
+        cv?.languages?.split(',').map(name => name.trim()).includes(lang.name)
     );
 
-    const [nationality, setNationality] = useState(countries.find(item => item.id === cv.nationality) ?? '');
-    const [gender, setGender] = useState(genders.find(item => item.id == cv.gender) ?? '');
-    const [religion, setReligion] = useState(religions.find(item => item.id == cv.religion) ?? '');
-    const [bloodGroup, setBloodGroup] = useState(bloodGroups.find(item => item.id == cv.blood_group) ?? '');
-    const [maritalStatus, setMaritalStatus] = useState(maritalStatuses.find(item => item.id == cv.marital_status) ?? '');
+    const [nationality, setNationality] = useState(countries.find(item => item.id === cv?.nationality) ?? '');
+    const [gender, setGender] = useState(genders.find(item => item.id == cv?.gender) ?? '');
+    const [religion, setReligion] = useState(religions.find(item => item.id == cv?.religion) ?? '');
+    const [bloodGroup, setBloodGroup] = useState(bloodGroups.find(item => item.id == cv?.blood_group) ?? '');
+    const [maritalStatus, setMaritalStatus] = useState(maritalStatuses.find(item => item.id == cv?.marital_status) ?? '');
     const [selectedLanguages, setSelectedLanguages] = useState(userSelectedLanguages ?? [])
     const [resumePreview, setResumePreview] = useState(false)
 
     const {data, setData, post, errors, processing, reset} = useForm({
-        name: cv.name,
-        designation: cv.designation,
-        phone: cv.phone,
-        email: cv.email,
-        website: cv.website,
+        name: cv?.name,
+        designation: cv?.designation,
+        phone: cv?.phone,
+        email: cv?.email,
+        website: cv?.website,
         avatar: '',
-        nationality: countries.find(item => item.id === cv.nationality),
-        gender: cv.gender,
-        date_of_birth: cv.date_of_birth,
-        religion: cv.religion,
-        blood_group: cv.blood_group,
-        marital_status: cv.marital_status,
-        passport_no: cv.passport_no,
-        passport_expiry: cv.passport_expiry,
-        visa_status: cv.visa_status,
-        visa_expiry: cv.visa_expiry,
-        computer_skill: cv.computer_skill,
-        personal_skills: cv.personal_skills,
-        interests: cv.interests,
+        nationality: countries.find(item => item.id === cv?.nationality),
+        gender: cv?.gender,
+        date_of_birth: cv?.date_of_birth,
+        religion: cv?.religion,
+        blood_group: cv?.blood_group,
+        marital_status: cv?.marital_status,
+        passport_no: cv?.passport_no,
+        passport_expiry: cv?.passport_expiry,
+        visa_status: cv?.visa_status,
+        visa_expiry: cv?.visa_expiry,
+        computer_skill: cv?.computer_skill,
+        personal_skills: cv?.personal_skills,
+        interests: cv?.interests,
         languages: userSelectedLanguages ?? [],
-        summary: cv.summary,
+        summary: cv?.summary,
         job_experiences: cv?.experiences?.length > 0 ? cv.experiences : [
             {
                 position: "",
