@@ -11,7 +11,6 @@ import {useState, useEffect} from "react";
 import {Head, useForm, usePage} from "@inertiajs/react";
 import PrimaryBtn from "@/Components/Web/PrimaryBtn.jsx";
 import {FaTrashAlt} from "react-icons/fa";
-import {toast} from "react-toastify";
 import FileUpload from "@/Components/Web/FileUpload.jsx";
 import {FaPlus} from "react-icons/fa6";
 import MultiSelect from "@/Components/Web/MultiSelect.jsx";
@@ -204,13 +203,18 @@ const CvCreate = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        confirmSubmit()
 
+    };
+
+    const confirmSubmit = () => {
+        setResumePreview(false);
         post(route('cv.store'), {
             onSuccess: () => {
                 reset()
             },
         });
-    };
+    }
 
 
     return (
@@ -774,7 +778,7 @@ const CvCreate = () => {
                                             <TextInput
                                                 value={item.email}
                                                 onChange={(e) => updateReference(i, "email", e.target.value)}
-                                                error={errors?.email ? errors?.references[i]['email'] : ""}
+                                                error={errors?.references ? errors?.references[i]['email'] : ""}
                                                 id={`email-${i}`}
                                                 label="Email Address"
                                                 type="email"
@@ -822,8 +826,7 @@ const CvCreate = () => {
                                 text="Submit"
                                 type="submit"
                                 classes="w-full md:w-2/12 py-3"
-                                // onClick={() => handleSubmit()}
-                                onClick={handleSubmit}
+                                onClick={() => setResumePreview(true)}
                                 disabled={processing}
                             />
 
@@ -832,7 +835,7 @@ const CvCreate = () => {
                 </div>
             </div>
 
-            {/*<ResumePreview />*/}
+            <ResumePreview show={resumePreview} setShow={setResumePreview}  cvData={data} confirmSubmit={confirmSubmit}/>
         </WebLayout>
     );
 };
