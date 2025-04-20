@@ -69,7 +69,7 @@ class StoreAction
             $cv->save();
             DB::commit();
 
-            return redirect()->back()->with('success', 'CV has been created.');
+            return to_route('cv.index')->with('success', 'CV has been created.');
 
         } catch (\Exception $exception) {
             DB::rollBack();
