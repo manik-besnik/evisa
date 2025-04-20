@@ -50,6 +50,7 @@ const CvCreate = () => {
         visa_expiry: "",
         computer_skill: '',
         personal_skills: '',
+        interests: '',
         languages: [],
         summary: '',
         job_experiences: [

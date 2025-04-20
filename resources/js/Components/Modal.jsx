@@ -15,6 +15,7 @@ export default function Modal({ children, show = false, maxWidth = '2xl', closea
         xl: 'sm:max-w-xl',
         '2xl': 'sm:max-w-2xl',
         '3xl': 'sm:max-w-3xl',
+        '4xl': 'sm:max-w-4xl',
         'admin-size': 'sm:max-w-[1150px]',
     }[maxWidth];
 
