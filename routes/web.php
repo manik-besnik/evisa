@@ -89,6 +89,10 @@ Route::get('google', function () {})->name('task.create');
 Route::inertia('others', 'Other')->name('others');
 Route::inertia('search', 'Search');
 
+route::view('cv','pdfs.single-column-cv');
+route::view('cv2','pdfs.two-column-cv');
+route::inertia('resume','Resume');
+
 require __DIR__ . '/auth.php';
 require __DIR__ . '/admin.php';
 require __DIR__ . '/agency.php';
