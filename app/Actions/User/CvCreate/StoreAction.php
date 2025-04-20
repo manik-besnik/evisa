@@ -20,7 +20,7 @@ class StoreAction
 
         try {
 
-            $avatar = null;
+            $avatar = $cv?->avatar;
 
             if ($cvDTO->avatar) {
                 $avatar = FileUpload::execute($cvDTO->avatar);
