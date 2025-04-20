@@ -14,11 +14,11 @@ class CVDTO
     public string $name;
     public string $phone;
     public string $email;
-    public string $gender;
-    public string $religion;
+    public string|int $gender;
+    public string|int $religion;
     public string|null $website;
     public string $bloodGroup;
-    public string $maritalStatus;
+    public string|int $maritalStatus;
     public string $passportNo;
     public string $passportExpiry;
 
@@ -50,16 +50,16 @@ class CVDTO
         $request->validate([
             'avatar' => 'required|file|mimes:jpg,jpeg,png,webp,svg|max:2048',
             'nationality' => ['required', 'min:1', 'max:250'],
-            'gender' => ['required', 'string', 'min:1', 'max:250'],
+            'gender' => ['required', 'min:1', 'max:250'],
             'name' => ['required', 'string', 'min:2', 'max:250'],
             'phone' => ['required', 'string', 'min:9', 'max:20'],
             'email' => ['required', 'string', 'min:2', 'max:200'],
             'website' => ['nullable', 'string', 'min:2', 'max:200'],
-            'religion' => ['required', 'string', 'min:1', 'max:200'],
+            'religion' => ['required', 'min:1', 'max:200'],
             'blood_group' => ['required', 'string', 'min:2', 'max:200'],
-            'marital_status' => ['required', 'string', 'min:1', 'max:200'],
+            'marital_status' => ['required', 'min:1', 'max:200'],
             'passport_no' => ['required', 'string', 'min:2', 'max:200'],
-            'passport_expiry' => ['required', 'string', 'min:2', 'max:200'],
+            'passport_expiry' => ['required', 'string', 'min:1', 'max:200'],
             'visa_status' => ['required', 'string', 'min:2', 'max:200'],
             'visa_expiry' => ['required', 'string', 'min:2', 'max:200'],
             'personal_skills' => ['required', 'string', 'min:2', 'max:200'],
