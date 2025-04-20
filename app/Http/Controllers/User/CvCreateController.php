@@ -7,7 +7,9 @@ use App\Actions\User\CvCreate\IndexAction;
 use App\Actions\User\CvCreate\StoreAction;
 use App\DTOs\CVDTO;
 use App\Http\Controllers\Controller;
+use App\Models\UserCV;
 use App\Models\VisaApply;
+use Barryvdh\DomPDF\Facade\Pdf as DomPDF;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\JobDemand;
@@ -18,7 +20,7 @@ class CvCreateController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(IndexAction $indexAction): \Inertia\Response
+    public function index(IndexAction $indexAction): \Inertia\Response|RedirectResponse
     {
         return $indexAction->execute();
     }
@@ -69,5 +71,27 @@ class CvCreateController extends Controller
     public function destroy(VisaApply $visaApply)
     {
         //
+    }
+
+    public function download(): \Illuminate\Http\Response
+    {
+        $type = request()->input('type');
+
+        $cv = UserCv::query()->where('user_id', auth()->id())->firstOrFail();
+
+        if ($type === '1') {
+            $pdf = DomPDF::loadView('pdfs.single-column-cv', compact('cv'));
+
+            $pdf->setPaper('a4', 'portrait');
+
+            return $pdf->download("cv" . $cv->name . ".pdf");
+        }
+
+        $pdf = DomPDF::loadView('pdfs.two-column-cv', compact('cv'));
+
+        $pdf->setPaper('a4', 'portrait');
+
+        return $pdf->download("resume" . $cv->name . ".pdf");
+
     }
 }
