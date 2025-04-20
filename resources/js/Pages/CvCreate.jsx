@@ -71,6 +71,14 @@ const CvCreate = () => {
                 is_present: false,
                 result: "",
             }
+        ],
+        references: [
+            {
+                name: "",
+                designation: "",
+                phone: "",
+                email: "",
+            }
         ]
     })
 
@@ -148,6 +156,41 @@ const CvCreate = () => {
 
     }
 
+    const addNewReference = () => {
+        const reference = {
+            name: "",
+            designation: "",
+            phone: "",
+            email: "",
+        }
+
+        const references = [
+            ...data.references,
+            reference
+        ]
+
+        setData('references', references)
+    }
+
+    const updateReference = (index, key, value) => {
+        const updatedEducations = [...data.references];
+
+        updatedEducations[index] = {
+            ...updatedEducations[index],
+            [key]: value
+        };
+
+        setData('references', updatedEducations);
+    };
+
+    const deleteReference = (i) => {
+
+        data.references.splice(i, 1)
+
+        setData('references', data.references)
+
+    }
+
     const updateCheckboxField = (field, index) => {
         const updatedData = [...data[field]];
 
@@ -161,10 +204,6 @@ const CvCreate = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        console.log(data);
-
-        return;
 
         post(route('cv.store'), {
             onSuccess: () => {
@@ -579,15 +618,20 @@ const CvCreate = () => {
                                 defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
                             />
 
-                            <TextInput
-                                label="Typing Here (Add Multiple Item separate by commna)"
-                                value={data.personal_skills}
-                                onChange={(e) => setData('personal_skills', e.target.value)}
-                                error={errors.personal_skills}
-                                id="personal_skills"
-                                placeholder="Ex: Swaiming,Travikibg,Reading"
-                                defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
-                            />
+                            <div>
+                                <p className="mt-2 mb-1 text-sm border-[#848585]">
+                                    Typing Here (Add Multiple Item separate by comma)
+                                </p>
+                                <TextInput
+                                    value={data.personal_skills}
+                                    onChange={(e) => setData('personal_skills', e.target.value)}
+                                    error={errors.personal_skills}
+                                    id="personal_skills"
+                                    placeholder="Ex: Swaiming,Travikibg,Reading"
+                                    defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
+                                />
+                            </div>
+
 
                         </div>
 
@@ -681,6 +725,76 @@ const CvCreate = () => {
                                             <button type="button" onClick={() => deleteExperience(i)}
                                                     className="bg-warning text-white text-sm w-9 text-center p-2.5 h-9 mt-5 flex item-center justify-between">
                                                 <FaTrashAlt/></button>)}
+                                    </div>
+
+                                </div>
+                            ))}
+
+                            <h2 className="text-xl font-bold mb-3 border-l-4 border-red-600 pl-2">REFENENCES</h2>
+
+                            {data.references.map((item, i) => (
+                                <div key={i} className="mb-4">
+                                    <div className="flex items-center gap-3 ">
+                                        <div className="w-1/4">
+                                            <TextInput
+                                                value={item.name}
+                                                onChange={(e) => updateReference(i, "name", e.target.value)}
+                                                error={errors?.references ? errors?.references[i]['name'] : ""}
+                                                id={`name-${i}`}
+                                                placeholder="EX: John Doe"
+                                                label="Name*"
+                                                defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
+                                                labelClasses="text-text-primary"
+                                            />
+                                        </div>
+                                        <div className="w-1/4">
+                                            <TextInput
+                                                value={item.designation}
+                                                onChange={(e) => updateReference(i, "designation", e.target.value)}
+                                                error={errors?.references ? errors?.references[i]['designation'] : ""}
+                                                id={`designation-${i}`}
+                                                placeholder="EX: CEO"
+                                                label="Result*"
+                                                defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
+                                                labelClasses="text-text-primary"
+                                            />
+                                        </div>
+                                        <div className="w-1/4">
+                                            <TextInput
+                                                value={item.phone}
+                                                onChange={(e) => updateReference(i, "phone", e.target.value)}
+                                                error={errors?.references ? errors?.references[i]['phone'] : ""}
+                                                id={`reference-phone-${i}`}
+                                                label="Phone Number"
+                                                defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
+                                                labelClasses="text-text-primary"
+                                            />
+                                        </div>
+                                        <div className="w-1/4">
+                                            <TextInput
+                                                value={item.email}
+                                                onChange={(e) => updateReference(i, "email", e.target.value)}
+                                                error={errors?.email ? errors?.references[i]['email'] : ""}
+                                                id={`email-${i}`}
+                                                label="Email Address"
+                                                type="email"
+                                                defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
+                                                labelClasses="text-text-primary"
+                                            />
+                                        </div>
+
+
+                                        {data.references.length - 1 === i && (
+                                            <button type="button" onClick={() => addNewReference()}
+                                                    className="bg-primary text-white text-sm w-9 text-center p-2.5 h-9 mt-5 flex item-center justify-between">
+                                                <FaPlus className="text-white"/>
+                                            </button>)}
+
+                                        {data.references.length > 1 && (
+                                            <button type="button" onClick={() => deleteReference(i)}
+                                                    className="bg-warning text-white text-sm w-9 text-center p-2.5 h-9 mt-5 flex item-center justify-between">
+                                                <FaTrashAlt/></button>)}
+
                                     </div>
 
                                 </div>

@@ -41,8 +41,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string|null $whatsapp_no
  * @property array|string $documents
  * @property array|string|null $experiences
+ * @property array|string|null $references
+ * @property array|string|null $educations
  * @property string $summary
- * @property string $exam_name
+ * @property string|null $website
+ * @property string|null $personal_skills
+ * @property string|null $languages
  * @property string $passing_year
  * @property string $institute
  * @property string|null $result
@@ -57,7 +61,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @mixin Model
  *
  * @property User|null $user
- * @property Language $language
+ *
  */
 class UserCV extends Model
 {
@@ -99,7 +103,8 @@ class UserCV extends Model
     ];
 
     protected $casts = [
-        'documents' => 'array',
+        'educations' => 'array',
+        'references' => 'array',
         'experiences' => 'array',
     ];
 
@@ -107,11 +112,6 @@ class UserCV extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
-    }
-
-    public function language(): BelongsTo
-    {
-        return $this->belongsTo(Language::class,'mother_language','id');
     }
 
 

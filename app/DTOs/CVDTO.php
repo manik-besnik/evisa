@@ -10,19 +10,18 @@ class CVDTO
 {
     /** Job Apply Info */
     public UploadedFile|string|null $avatar;
-    public string|null $region;
-    public string|null $location;
     public string|null $nationality;
     public string $name;
     public string $phone;
     public string $email;
     public string $gender;
     public string $religion;
+    public string|null $website;
     public string $bloodGroup;
     public string $maritalStatus;
     public string $passportNo;
     public string $passportExpiry;
-    public string $countryContactNo;
+
     public string $visaStatus;
     public string $visaExpiry;
     public string|null $currentState;
@@ -50,8 +49,6 @@ class CVDTO
     {
         $request->validate([
             'avatar' => 'required|file|mimes:jpg,jpeg,png,webp,svg|max:2048',
-            'region' => ['required', 'string', 'min:2', 'max:250'],
-            'location' => ['required', 'string', 'min:2', 'max:250'],
             'nationality' => ['required', 'min:1', 'max:250'],
             'gender' => ['required', 'string', 'min:1', 'max:250'],
             'name' => ['required', 'string', 'min:2', 'max:250'],
@@ -65,6 +62,7 @@ class CVDTO
             'passport_expiry' => ['required', 'string', 'min:2', 'max:200'],
             'visa_status' => ['required', 'string', 'min:2', 'max:200'],
             'visa_expiry' => ['required', 'string', 'min:2', 'max:200'],
+            'personal_skills' => ['required', 'string', 'min:2', 'max:200'],
             'current_state' => ['nullable', 'string', 'min:2', 'max:200'],
             'current_city' => ['nullable', 'string', 'min:2', 'max:200'],
             'current_area' => ['nullable', 'string', 'min:2', 'max:200'],
@@ -72,26 +70,30 @@ class CVDTO
             'permanent_thana' => ['nullable', 'string', 'min:2', 'max:200'],
             'permanent_village' => ['nullable', 'string', 'min:2', 'max:200'],
             'summary' => ['nullable', 'string', 'max:500'],
-            'documents' => ['required', 'array'],
 
             /** Education Details */
+            'educations' => ['required', 'array'],
+            'educations.*.institute' => ['required', 'string', 'min:2', 'max:200'],
             'computer_skill' => ['required', 'string', 'min:2', 'max:200'],
+            'languages' => ['required', 'array', 'min:2', 'max:200'],
+            'languages.*.name' => ['required', 'string', 'min:2', 'max:200'],
+            'references' => ['required', 'array'],
+            'references.*.name' => ['required', 'string', 'min:2', 'max:200'],
 
             /** Job Experience */
             'job_experiences' => ['required', 'array'],
-            'job_experiences.*.country_id' => ['required', 'int'],
             'job_experiences.*.position' => ['required', 'string'],
-            'job_experiences.*.duration' => ['required', 'string'],
+            'job_experiences.*.start_date' => ['required', 'string'],
             'job_experiences.*.company' => ['required', 'string'],
 
+        ],[
+            'visa_expiry.required' => "Passport issue date is required",
         ]);
 
 
         $instance = new self;
 
         $instance->avatar = $request->hasFile('avatar') ? $request->file('avatar') : null;
-        $instance->region = $request->input('region');
-        $instance->location = $request->input('location');
         $instance->nationality = $request->input('nationality');
         $instance->name = $request->input('name');
         $instance->phone = $request->input('phone');
@@ -102,38 +104,23 @@ class CVDTO
         $instance->maritalStatus = $request->input('marital_status');
         $instance->passportNo = $request->input('passport_no');
         $instance->passportExpiry = $request->input('passport_expiry');
-        $instance->countryContactNo = $request->input('country_contact_no');
         $instance->visaStatus = $request->input('visa_status');
         $instance->visaExpiry = $request->input('visa_expiry');
-        $instance->whatsappNo = $request->input('whatsapp_no');
         $instance->currentState = $request->input('current_state');
         $instance->currentCity = $request->input('current_city');
         $instance->currentArea = $request->input('current_area');
         $instance->permanentDistrict = $request->input('permanent_district');
         $instance->permanentThana = $request->input('permanent_thana');
         $instance->permanentVillage = $request->input('permanent_village');
-        $instance->shirtSize = $request->input('shirt_size');
-        $instance->pantSize = $request->input('pant_size');
-        $instance->showSize = $request->input('show_size');
-        $instance->weight = $request->input('weight');
-        $instance->height = $request->input('height');
-        $instance->nearestAirport = $request->input('nearest_airport');
         $instance->summary = $request->input('summary');
-        $instance->documents = $request->all()['documents'] ?? [];
+        $instance->personalSkills = $request->input('personal_skills');
+        $instance->languages = $request->input('languages');
+        $instance->website = $request->input('website');
 
         /** Educational Details */
-        $instance->examName = $request->input('exam_name');
-        $instance->passingYear = $request->input('passing_year');
-        $instance->institute = $request->input('institute');
-        $instance->result = $request->input('result');
+        $instance->educations = $request->input('educations');
+        $instance->references = $request->input('references');
         $instance->computerSkill = $request->input('computer_skill');
-        $instance->drivingLicense = $request->input('driving_license');
-        $instance->drivingLicenseIssueDate = $request->input('driving_license_issue_date');
-        $instance->drivingLicenseExpireDate = $request->input('driving_license_expire_date');
-        $instance->englishProficiency = $request->input('english_proficiency');
-        $instance->arabicProficiency = $request->input('arabic_proficiency');
-        $instance->urduProficiency = $request->input('urdu_proficiency');
-        $instance->motherLanguage = (int)$request->input('mother_language');
         $instance->jobExperiences = $request->input('job_experiences');
 
         return $instance;
