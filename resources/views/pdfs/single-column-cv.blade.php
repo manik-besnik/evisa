@@ -1,3 +1,28 @@
+@php
+    $genders = [
+       '1' => 'Male',
+        '2' => 'Female',
+        '3' => 'Others',
+    ];
+
+    $maritalStatuses = [
+        '1' => 'Single',
+        '2' => 'Married',
+        '3' => 'Divorced',
+    ];
+
+    $religions = [
+        '1' =>'Sunni Muslim',
+        '2' =>'Shiite Muslim',
+        '3' =>'Christian',
+        '4' =>'Hindu',
+        '5' => 'Sikh',
+        '6' =>'Buddhist',
+    ];
+
+
+@endphp
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,7 +65,7 @@
             text-align: center;
         }
 
-        .cv-title span{
+        .cv-title span {
             background-color: #2b4380;
             color: white;
             padding: 8px 30px;
@@ -49,6 +74,7 @@
             margin: 10px auto;
             text-align: center;
         }
+
         .photo {
             position: absolute;
             top: 15px;
@@ -101,6 +127,7 @@
             width: 100%;
             border-bottom: 1px solid #000;
         }
+
         .center-header {
             background-color: #1d2951;
             color: white;
@@ -207,22 +234,24 @@
             </div>
             <div class="personal-info">
                 <h1 class="text-uppercase">{{$cv->name}}</h1>
-                <p>Mobile: No. 000000000 (UAE)</p>
-                <p>Email: <span class="email">mezbadblab@gmail.com</span></p>
-{{--                <p>Dubai, UAE</p>--}}
+                <p>Mobile: {{$cv->phone}}</p>
+                <p>Email:
+                    <span class="email">{{$cv->email}}</span>
+                </p>
+                {{-- <p>Dubai, UAE</p>--}}
             </div>
         </div>
         <div class="photo">
-            <img src="/placeholder.svg?height=150&width=150" alt="Profile Photo" style="width:100%; height:100%;">
+            <img src="{{ public_path(str_replace(url('/'), '', $cv->avatar)) }}" alt="Profile Photo" style="width:100%; height:100%;">
         </div>
     </div>
 
-    <div class="center-header">POST APPLIED FOR  ANY SUITABLE JOB</div>
+    <div class="center-header">POST APPLIED FOR ANY SUITABLE JOB</div>
 
     <div>
         <h3>PROFILE</h3>
         <div class="profile-text">
-            A Suitable position with an organization where I can utilize the best of my skills and abilities that fit to my education, skills and experience a place where an encourage and permitted to be an active participant as well vital contribute on development of the company.
+            {{$cv->summary}}
         </div>
     </div>
 
@@ -230,10 +259,9 @@
         <span>PERSONAL SKILLS</span>
     </div>
     <div class="skills-list">
-        <p>Very energetic oriented</p>
-        <p>Physical mobility and stamina to do all tasks environment under supervision</p>
-        <p>Extremely hardworking self motivated and able to work independently in a team environment under supervision</p>
-        <p>Keep excellent inter personal relation with colleagues and ready to help them</p>
+        @foreach(array_map('trim', explode(',', $cv->personal_skills)) as $item)
+            <p>{{ $item }}</p>
+        @endforeach
     </div>
 
     <div class="section-header">
@@ -243,37 +271,37 @@
         <tr>
             <td><span class="bullet"></span> Name</td>
             <td>:</td>
-            <td>MOHAMMAD MEZBAHUDDIN</td>
+            <td>{{$cv->name}}</td>
         </tr>
         <tr>
             <td><span class="bullet"></span> Nationality</td>
             <td>:</td>
-            <td>Bangladeshi</td>
+            <td>{{$cv->country->nationality}}</td>
         </tr>
         <tr>
             <td><span class="bullet"></span> Date of Birth</td>
             <td>:</td>
-            <td>1988/10/10</td>
+            <td>{{$cv->date_of_birth}}</td>
         </tr>
         <tr>
             <td><span class="bullet"></span> Gender</td>
             <td>:</td>
-            <td>Male</td>
+            <td>{{$genders[$cv->gender]}}</td>
         </tr>
         <tr>
             <td><span class="bullet"></span> Marital Status</td>
             <td>:</td>
-            <td>Married</td>
+            <td>{{$maritalStatuses[$cv->marital_status]}}</td>
         </tr>
         <tr>
             <td><span class="bullet"></span> Religion</td>
             <td>:</td>
-            <td>Muslim</td>
+            <td>{{$religions[$cv->religion]}}</td>
         </tr>
         <tr>
             <td><span class="bullet"></span> Language Known</td>
             <td>:</td>
-            <td>Arabic, English, Hindi, Bengali</td>
+            <td>{{$cv->languages}}</td>
         </tr>
     </table>
 
@@ -281,16 +309,24 @@
         <span>EDUCATIONAL QUALIFICATION</span>
     </div>
     <table class="details-table">
-        <tr>
-            <td><span class="bullet"></span> Academic</td>
-            <td>:</td>
-            <td>BBA (Accounting) - 2011-2007 passed</td>
-        </tr>
-        <tr>
-            <td><span class="bullet"></span> Computer</td>
-            <td>:</td>
-            <td>Basic Computer Course</td>
-        </tr>
+        @foreach($cv->educations as $edu)
+            <tr>
+                <td style="min-width: 200px"><span class="bullet"></span> {{$edu['institute'] ?? ''}}</td>
+                <td>:</td>
+                <td>{{$edu['department'] ?? ''}} - {{$edu['start_date'] ?? ''}}
+                    -{{$edu['end-date'] ?? ''}} {{$edu['result'] ?? ''}}
+                </td>
+            </tr>
+
+        @endforeach
+
+        @if($cv->computer_skill)
+            <tr>
+                <td><span class="bullet"></span> Computer</td>
+                <td>:</td>
+                <td>{{$cv->computer_skill}}</td>
+            </tr>
+        @endif
     </table>
 
     <div class="section-header">
@@ -299,14 +335,31 @@
         </span>
     </div>
     <div class="work-experience">
-        <div class="work-item">
-            <div class="work-bullet">❖</div>
-            <div>Bell Boy with WesteenHotel Dhaka, Bangladesh from March 2019 to January 2022</div>
-        </div>
-        <div class="work-item">
-            <div class="work-bullet">❖</div>
-            <div>Worked as a Marketing Executive in Bangladesh (4 years)</div>
-        </div>
+
+        @foreach($cv->experiences as $exp)
+            <div class="work-item">
+                <div>
+                    <span class="bullet"></span>
+                    {{ $exp['description'] ?? '' }}
+                    @if(!empty($exp['description']) && !empty($exp['company']))
+                        -
+                    @endif
+                    {{ $exp['company'] ?? '' }}
+
+                    @if(!empty($exp['start_date']))
+                        from {{ $exp['start_date'] }}
+                    @endif
+
+                    @if($exp['is_present'] ?? false)
+                        – PRESENT
+                    @elseif(!empty($exp['end_date']))
+                        – to {{ $exp['end_date'] }}
+                    @endif
+                </div>
+            </div>
+        @endforeach
+
+
     </div>
 
     <div class="section-header">
@@ -316,27 +369,23 @@
         <tr>
             <td>Passport No</td>
             <td>:</td>
-            <td>A 03570809</td>
+            <td>{{$cv->passport_no}}</td>
         </tr>
-        <tr>
-            <td>Place of Issue</td>
-            <td>:</td>
-            <td>Bangladesh</td>
-        </tr>
+
         <tr>
             <td>Date of issue</td>
             <td>:</td>
-            <td>2022/04/28</td>
+            <td>{{$cv->visa_expiry}}</td>
         </tr>
         <tr>
             <td>Date of expiry</td>
             <td>:</td>
-            <td>27/04/2032</td>
+            <td>{{$cv->passport_expiry}}</td>
         </tr>
         <tr>
             <td>Visa Status</td>
             <td>:</td>
-            <td>Visit Visa</td>
+            <td>{{$cv->visa_status}}</td>
         </tr>
     </table>
 
@@ -346,10 +395,12 @@
         </span>
     </div>
     <div class="declaration">
-        I hereby certify that the above information are true and correct according to the best of my knowledge & My Experience. If selected I assure that I would perform to the best of my abilities, early awaiting a Positive response
+        I hereby certify that the above information are true and correct according to the best of my knowledge & My
+        Experience. If selected I assure that I would perform to the best of my abilities, early awaiting a Positive
+        response
     </div>
 
-    <div class="signature text-uppercase">MOHAMMAD MEZBAHUDDIN</div>
+    <div class="signature text-uppercase">{{$cv->name}}</div>
 </div>
 </body>
 </html>

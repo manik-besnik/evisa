@@ -63,6 +63,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @mixin Model
  *
  * @property User|null $user
+ * @property Country|null $country
  *
  */
 class UserCV extends Model
@@ -71,6 +72,7 @@ class UserCV extends Model
 
     protected $fillable = [
         'user_id',
+        'nationality',
         'name',
         'phone',
         'email',
@@ -112,6 +114,11 @@ class UserCV extends Model
         'experiences' => 'array',
     ];
 
+
+    public function country(): BelongsTo
+    {
+        return $this->belongsTo(Country::class,'nationality','id');
+    }
 
     public function user(): BelongsTo
     {
