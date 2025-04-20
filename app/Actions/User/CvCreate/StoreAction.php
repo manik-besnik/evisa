@@ -5,19 +5,16 @@ namespace App\Actions\User\CvCreate;
 use App\DTOs\CVDTO;
 use App\Models\UserCV;
 use App\Supports\FileUpload;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 
 class StoreAction
 {
-    public function execute(CVDTO $cvDTO): \Illuminate\Http\RedirectResponse
+    public function execute(CVDTO $cvDTO): RedirectResponse
     {
 
         /** @var UserCV|null $cv */
-        $cv= UserCV::query()->where('user_id',auth()->id())->first();
-
-        if ($cv){
-            return redirect()->back()->withErrors(['message' => "Already You have created your CV"]);
-        }
+        $cv = UserCV::query()->where('user_id',auth()->id())->first();
 
         DB::beginTransaction();
 
@@ -36,8 +33,10 @@ class StoreAction
                 $languages = implode(', ', $names);
             }
 
+            if (!$cv){
+                $cv = new UserCV();
+            }
 
-            $cv = new UserCV();
             $cv->user_id = auth()->id();
             $cv->nationality = $cvDTO->nationality;
             $cv->name = $cvDTO->name;

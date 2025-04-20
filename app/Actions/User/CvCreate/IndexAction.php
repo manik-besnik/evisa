@@ -12,12 +12,12 @@ class IndexAction
     public function execute(): RedirectResponse|Response
     {
         /** @var UserCV $cv */
-        $cv = UserCv::query()->where('user_id',auth()->id())->first();
+        $cv = UserCv::query()->where('user_id', auth()->id())->first();
 
-        if (!$cv){
+        if (!$cv) {
             return to_route('cv.create');
         }
 
-        return Inertia::render('UserCV/CvCreate');
+        return Inertia::render('UserCV/Index', ['cv' => $cv]);
     }
 }
