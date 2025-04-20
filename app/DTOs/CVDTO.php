@@ -55,6 +55,7 @@ class CVDTO
 
         $request->validate([
             'avatar' => [
+                'nullable',
                 Rule::requiredIf(!$hasCv),
                 'file',
                 'mimes:jpg,jpeg,png,webp,svg',
@@ -103,7 +104,6 @@ class CVDTO
         ],[
             'visa_expiry.required' => "Passport issue date is required",
         ]);
-
 
         $instance = new self;
 
