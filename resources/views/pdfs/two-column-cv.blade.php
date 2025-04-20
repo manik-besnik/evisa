@@ -2,504 +2,209 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Esther Smith - Marketing Manager Resume</title>
+    <title>Resume</title>
     <style>
-        * {
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            color: #222;
+            background: #fff;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
         }
 
-        body {
-            background-color: #f5f5f5;
-            justify-content: center;
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
             padding: 20px;
         }
 
-        .resume-container {
+        .header-table {
             width: 100%;
-            max-width: 1000px;
-            background-color: white;
-            display: flex;
-            position: relative;
-            margin: 0 auto;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
+            border-collapse: collapse;
         }
 
-        .left-section {
-            width: 30%;
-            background-color: #1a222e;
-            color: white;
-            position: relative;
-            z-index: 1;
-            padding: 30px;
-        }
-
-        .right-section {
-            width: 70%;
-            padding: 30px 40px;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Profile section */
-        .profile-container {
-            position: relative;
-            z-index: 2;
-            margin-left: 30px;
-        }
-
-        .profile-circle {
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            background-color: #c08b45;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border: 5px solid white;
-        }
-
-        .profile-inner-circle {
-            width: 160px;
-            height: 160px;
-            border-radius: 50%;
-            background-color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-        }
-
-        .profile-image {
-            width: 140px;
-            height: 140px;
-            object-fit: cover;
-        }
-
-        .name-title {
-            padding: 20px 0;
-            margin-top: 20px;
+        .profile-pic {
+            width: 120px;
+            height: 120px;
+            border: 3px solid #c08b45;
         }
 
         .name {
-            font-size: 48px;
+            font-size: 28px;
             color: #c08b45;
             font-weight: bold;
-            line-height: 1;
-            margin-bottom: 5px;
         }
 
         .title {
-            font-size: 18px;
+            font-size: 16px;
+            margin-top: 4px;
             font-weight: bold;
-            letter-spacing: 1px;
-            margin-top: 10px;
         }
 
-        .section {
-            margin-bottom: 30px;
-            position: relative;
-        }
-
-        /* Section headers */
-        .section-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-            position: relative;
-        }
-
-        .icon-circle {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background-color: #c08b45;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border: 2px solid white;
-            z-index: 2;
-            position: relative;
-        }
-
-        .icon {
-            color: white;
-            font-size: 18px;
-        }
-
-        .header-text {
+        .section-title {
             background-color: #c08b45;
             color: white;
-            padding: 7px 20px 7px 30px;
-            border-radius: 0 20px 20px 0;
-            font-size: 20px;
+            padding: 6px 10px;
             font-weight: bold;
-            margin-left: -18px;
-            z-index: 1;
-            position: relative;
-        }
-
-        .right-section .header-text {
-            padding: 6px 20px 6px 30px;
-        }
-        /* Contact section */
-        .contact-info {
             margin-top: 20px;
+            font-size: 16px;
+        }
+
+        .section-content {
+            padding: 10px 0;
         }
 
         .contact-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 5px;
         }
 
-        .contact-icon {
-            width: 30px;
-            margin-right: 15px;
+        .skills-table, .education-table, .experience-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .skills-table td, .education-table td, .experience-table td {
+            padding: 6px 4px;
+            vertical-align: top;
+        }
+
+        .skills-table td:first-child,
+        .education-table td:first-child,
+        .experience-table td:first-child {
+            width: 120px;
+            font-weight: bold;
+        }
+
+        .footer {
+            font-size: 12px;
+            color: #777;
             text-align: center;
-            font-size: 20px;
-        }
-
-        .contact-text {
-            font-size: 16px;
-        }
-
-        .skill-item, .interest-item {
-            margin-bottom: 12px;
-            display: flex;
-            align-items: baseline;
+            margin-top: 20px;
+            border-top: 1px solid #ccc;
+            padding-top: 10px;
         }
 
         .bullet {
-            margin-right: 10px;
-            font-size: 20px;
-        }
-
-        /* About section */
-        .about-text {
-            line-height: 1.6;
-            margin-bottom: 30px;
-            text-align: justify;
-        }
-
-        .timeline-item {
-            position: relative;
-            display: flex;
-            margin-bottom: 30px;
-        }
-
-        .timeline-dot {
-            position: absolute;
-            left: 135px;
-            top: 5px;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background-color: #1a222e;
-        }
-
-        /* Timeline sections */
-        .timeline-separator {
-            position: relative;
-            margin-left: 20px;
-            padding-left: 30px;
-        }
-
-        .timeline-separator::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 10px;
-            height: calc(100% - 10px);
-            width: 2px;
-            background-color: #1a222e;
-        }
-
-        .timeline-date {
+            display: inline-block;
+            margin-right: 4px;
             font-weight: bold;
-            margin-bottom: 5px;
-            font-size: 15px;
-            min-width: 120px;
-        }
-
-        .timeline-company {
-            font-weight: bold;
-            margin-bottom: 5px;
-            font-size: 16px;
-        }
-
-        .timeline-position {
-            color: #1a222e;
-            font-weight: bold;
-            margin-bottom: 5px;
-            font-size: 16px;
-        }
-
-        .timeline-description {
-            margin-top: 5px;
-            line-height: 1.4;
-            font-size: 15px;
-        }
-
-        /* Language section */
-        .language-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            font-size: 16px;
-            margin-left: 50px;
-            font-weight: bold;
-        }
-
-        /* Reference section */
-        .reference-list {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            margin-left: 50px;
-        }
-
-        .reference-item {
-            margin-bottom: 10px;
-        }
-
-        .reference-name {
-            font-weight: bold;
-            font-size: 16px;
-        }
-
-        .reference-position {
-            margin-bottom: 5px;
-        }
-
-        .interest-list,
-        .skills-list{
-            margin-left: 50px;
-        }
-
-        /* Footer */
-        .footer {
-            width: 100%;
-            text-align: center;
-            font-size: 12px;
-            color: #666;
-            margin: 20px 0 0;
-        }
-
-        .flex {
-            display: flex;
-            justify-content: space-between;
         }
     </style>
 </head>
 <body>
-<div class="resume-container">
+<div class="container">
 
-    <!-- Left Section -->
-    <div class="left-section">
-        <div class="profile-container">
-            <div class="profile-circle">
-                <div class="profile-inner-circle">
-                    <img src="{{ public_path(str_replace(url('/'), '', $cv->avatar)) }}" alt="Profile" class="profile-image">
-                </div>
-            </div>
-        </div>
+    <!-- Header -->
+    <table class="header-table">
+        <tr>
+            <td width="140">
+                <img src="{{ public_path(str_replace(url('/'), '', $cv->avatar)) }}" alt="Profile Picture" class="profile-pic">
+            </td>
+            <td>
+                <div class="name">{{ $cv->name }}</div>
+                <div class="title">{{ $cv->designation }}</div>
+            </td>
+        </tr>
+    </table>
 
-        <div class="name-title">
-            <h1 class="name">{{$cv->name}}</h1>
-            <h2 class="title">{{$cv->designation}}</h2>
-        </div>
-
-        <div class="section">
-            <div class="section-header">
-                <div class="icon-circle">
-                    <span class="icon">👤</span>
-                </div>
-                <div class="header-text">Contact Me</div>
-            </div>
-
-            <div class="contact-info">
-                <div class="contact-item">
-                    <div class="contact-icon">📞</div>
-                    <div class="contact-text">{{$cv->phone}}</div>
-                </div>
-                <div class="contact-item">
-                    <div class="contact-icon">✉️</div>
-                    <div class="contact-text">{{$cv->email}}</div>
-                </div>
-{{--                <div class="contact-item">--}}
-{{--                    <div class="contact-icon">📍</div>--}}
-{{--                    <div class="contact-text">123 Anywhere St., Any City</div>--}}
-{{--                </div>--}}
-                <div class="contact-item">
-                    <div class="contact-icon">🔗</div>
-                    <div class="contact-text">{{$cv->website}}</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="section">
-            <div class="section-header">
-                <div class="icon-circle">
-                    <span class="icon">✓</span>
-                </div>
-                <div class="header-text">Personal Skills</div>
-            </div>
-
-            <div class="skills-list">
-                @foreach(array_map('trim', explode(',', $cv->personal_skills)) as $item)
-                <div class="skill-item">
-                    <span class="bullet">•</span>
-                    <span>{{$item}}</span>
-                </div>
-                @endforeach
-
-            </div>
-        </div>
-
-        <div class="section">
-            <div class="section-header">
-                <div class="icon-circle">
-                    <span class="icon">❤</span>
-                </div>
-                <div class="header-text">Interest</div>
-            </div>
-
-            <div class="interest-list">
-                @foreach(array_map('trim', explode(',', $cv->interests)) as $item)
-                <div class="interest-item">
-                    <span class="bullet">•</span>
-                    <span>{{$item}}</span>
-                </div>
-                @endforeach
-            </div>
-        </div>
+    <!-- Contact -->
+    <div class="section-title">Contact Me</div>
+    <div class="section-content">
+        <div class="contact-item">📞 {{ $cv->phone }}</div>
+        <div class="contact-item">✉️ {{ $cv->email }}</div>
+        <div class="contact-item">🔗 {{ $cv->website }}</div>
     </div>
 
-    <!-- Right Section -->
-    <div class="right-section">
-        <div class="section">
-            <div class="section-header">
-                <div class="icon-circle">
-                    <span class="icon">👤</span>
-                </div>
-                <div class="header-text">About Me</div>
-            </div>
+    <!-- About Me -->
+    <div class="section-title">About Me</div>
+    <div class="section-content">
+        {{ $cv->summary }}
+    </div>
 
-            <div class="about-text">
-                {{$cv->summary}}
-            </div>
-        </div>
+    <!-- Skills -->
+    <div class="section-title">Personal Skills</div>
+    <div class="section-content">
+        <table class="skills-table">
+            @foreach(array_map('trim', explode(',', $cv->personal_skills)) as $item)
+                <tr><td><span class="bullet">•</span> {{ $item }}</td></tr>
+            @endforeach
+        </table>
+    </div>
 
-        <div class="section">
-            <div class="section-header">
-                <div class="icon-circle">
-                    <span class="icon">💼</span>
-                </div>
-                <div class="header-text">Experience</div>
-            </div>
+    <!-- Interests -->
+    <div class="section-title">Interests</div>
+    <div class="section-content">
+        <table class="skills-table">
+            @foreach(array_map('trim', explode(',', $cv->interests)) as $item)
+                <tr><td><span class="bullet">•</span> {{ $item }}</td></tr>
+            @endforeach
+        </table>
+    </div>
+
+    <!-- Experience -->
+    <div class="section-title">Experience</div>
+    <div class="section-content">
+        <table class="experience-table">
             @foreach($cv->experiences as $exp)
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-date">
-                        {{ $exp['start_date'] ?? '' }} - {{(bool)$exp['is_present'] ? 'PRESENT' : ($exp['end_date'] ?? '')}}
-                    </div>
-                    <div class="timeline-separator"></div>
-                    <div class="timeline-dot"></div>
-                    <div>
-                        <div class="flex">
-                            <div class="timeline-company">{{ $exp['company'] ?? '' }}</div>
-                            <div class="timeline-position">{{ $exp['position'] ?? '' }}</div>
-                        </div>
-                        <div class="timeline-description">
-                            • {{ $exp['description'] ?? '' }}
-                        </div>
-                    </div>
-                </div>
-            </div>
+                <tr>
+                    <td>{{ $exp['start_date'] }} - {{ (bool)$exp['is_present'] ? 'PRESENT' : $exp['end_date'] }}</td>
+                    <td>
+                        <strong>{{ $exp['company'] }}</strong> / <strong>{{ $exp['position'] }}</strong><br>
+                        <span class="bullet">•</span> {{ $exp['description'] }}
+                    </td>
+                </tr>
             @endforeach
-        </div>
-
-        <div class="section">
-            <div class="section-header">
-                <div class="icon-circle">
-                    <span class="icon">📚</span>
-                </div>
-                <div class="header-text">Education</div>
-            </div>
-            @foreach($cv->educations as $edu)
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-date">
-                        {{$edu['start_date'] ?? ''}}
-                        -{{$edu['end-date'] ?? ''}}
-                    </div>
-                    <div class="timeline-separator"></div>
-                    <div class="timeline-dot"></div>
-                    <div>
-                        <div class="flex">
-                            <div class="timeline-company">{{$edu['institute'] ?? ''}}</div>
-                        </div>
-                        <div class="timeline-description">
-                            • {{$edu['department'] ?? ''}}
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            @endforeach
-        </div>
-
-        <div class="section">
-            <div class="section-header">
-                <div class="icon-circle">
-                    <span class="icon">🗣️</span>
-                </div>
-                <div class="header-text">Language</div>
-            </div>
-
-            <div class="language-list">
-                @foreach(array_map('trim', explode(',', $cv->interests)) as $item)
-                <div>{{$item}}</div>
-                @endforeach
-            </div>
-        </div>
-
-        <div class="section">
-            <div class="section-header">
-                <div class="icon-circle">
-                    <span class="icon">👥</span>
-                </div>
-                <div class="header-text">Reference</div>
-            </div>
-
-            <div class="reference-list">
-                @foreach($cv->references as $reference)
-                <div class="reference-item">
-
-                    <div class="reference-name">{{$reference['name']}}</div>
-                    <div class="reference-position">
-                        {{$reference['company'] ?? '' }} / {{$reference['designation'] ?? '' }}
-                    </div>
-                    <div>Phone: {{$reference['phone'] ?? ''}}</div>
-                    <div>Email: {{$reference['email'] ?? ''}}</div>
-                </div>
-
-                @endforeach
-            </div>
-        </div>
-
+        </table>
     </div>
 
-</div>
+    <!-- Education -->
+    <div class="section-title">Education</div>
+    <div class="section-content">
+        <table class="education-table">
+            @foreach($cv->educations as $edu)
+                <tr>
+                    <td>{{ $edu['start_date'] ?? '' }} - {{ $edu['end_date'] ?? '' }}</td>
+                    <td>
+                        <strong>{{ $edu['institute'] }}</strong><br>
+                        <span class="bullet">•</span> {{ $edu['department'] ?? '' }}
+                    </td>
+                </tr>
+            @endforeach
+        </table>
+    </div>
 
-<div class="footer">
-    Copy Right : https://dubaievisaservice.com _ Apply Date : {{$cv->created_at}}   Application No. {{$cv->id}}
+    <!-- Language -->
+    <div class="section-title">Languages</div>
+    <div class="section-content">
+        <table class="skills-table">
+            @foreach(array_map('trim', explode(',', $cv->languages)) as $item)
+                <tr><td><span class="bullet">•</span> {{ $item }}</td></tr>
+            @endforeach
+        </table>
+    </div>
+
+    <!-- References -->
+    <div class="section-title">References</div>
+    <div class="section-content">
+        @foreach($cv->references as $reference)
+            <div style="margin-bottom: 10px;">
+                <strong>{{ $reference['name'] }}</strong><br>
+                {{ $reference['company'] }} / {{ $reference['designation'] }}<br>
+                Phone: {{ $reference['phone'] }}<br>
+                Email: {{ $reference['email'] }}
+            </div>
+        @endforeach
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        Copy Right : https://dubaievisaservice.com &nbsp;&nbsp; | &nbsp;&nbsp;
+        Apply Date: {{ $cv->created_at }} &nbsp;&nbsp; | &nbsp;&nbsp;
+        Application No: {{ $cv->id }}
+    </div>
+
 </div>
 </body>
 </html>
