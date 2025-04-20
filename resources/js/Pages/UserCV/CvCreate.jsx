@@ -41,7 +41,7 @@ const CvCreate = () => {
         email: cv?.email,
         website: cv?.website,
         avatar: '',
-        nationality: countries.find(item => item.id === cv?.nationality),
+        nationality: cv?.nationality,
         gender: cv?.gender,
         date_of_birth: cv?.date_of_birth,
         religion: cv?.religion,
@@ -216,6 +216,7 @@ const CvCreate = () => {
 
     const confirmSubmit = () => {
         setResumePreview(false);
+
         post(route('cv.store'), {
             onSuccess: () => {
                 reset()
