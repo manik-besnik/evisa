@@ -1,7 +1,4 @@
-import {Link, usePage} from "@inertiajs/react";
-import {MdOutlineRemoveRedEye} from "react-icons/md";
-import {FiRefreshCw} from "react-icons/fi";
-import { FaRegEdit } from "react-icons/fa";
+import {Head, Link, usePage} from "@inertiajs/react";
 import WebLayout from "@/Layouts/WebLayout.jsx";
 
 const Index = () => {
@@ -10,6 +7,7 @@ const Index = () => {
 
     return (
         <WebLayout showServiceImage={false} showBgImage={false}>
+            <Head title="CV Crate" />
             <div className="container">
                 <div className="overflow-x-auto mt-5">
                     <table className="min-w-full bg-white text-sm mb-4">
@@ -31,17 +29,17 @@ const Index = () => {
                                 <td className="px-3 py-2 text-sm border-r border-b border-gray-200">{cv.phone}</td>
                                 <td className="px-3 py-2 text-center border-r border-b border-gray-200">
                                     <div className="flex items-center justify-center space-x-2">
-                                        <Link href={route('visa-apply.show', cv.id)}
-                                              className="text-gray-600 hover:text-gray-800">
-                                            <MdOutlineRemoveRedEye size={18}/>
-                                        </Link>
-                                        <Link href={route('visa-apply.index')}
-                                              className="text-gray-600 hover:text-gray-800">
-                                            <FiRefreshCw/>
-                                        </Link>
+                                        <a href={route('cv.download',{type:1})}
+                                           className="text-white px-2 py-1 rounded text-sm bg-primary-dark ">
+                                            CV
+                                        </a>
+                                        <a href={route('cv.download')}
+                                           className="text-white px-2 py-1 rounded text-sm bg-primary">
+                                            Resume
+                                        </a>
                                         <Link href={route('cv.create')}
-                                              className="text-gray-600 hover:text-gray-800">
-                                            <FaRegEdit />
+                                              className="text-white px-2 py-1 rounded text-sm bg-primary-dark">
+                                            Edit
                                         </Link>
 
                                     </div>
