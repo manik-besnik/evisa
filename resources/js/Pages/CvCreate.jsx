@@ -15,7 +15,7 @@ import {toast} from "react-toastify";
 import FileUpload from "@/Components/Web/FileUpload.jsx";
 import {FaPlus} from "react-icons/fa6";
 import MultiSelect from "@/Components/Web/MultiSelect.jsx";
-import {Checkbox} from "flowbite-react";
+import Checkbox from "@/Components/Checkbox.jsx";
 import ResumePreview from "@/Components/Web/ResumePreview.jsx";
 
 
@@ -50,6 +50,7 @@ const CvCreate = () => {
         visa_status: "",
         visa_expiry: "",
         computer_skill: '',
+        personal_skills: '',
         languages: [],
         summary: '',
         job_experiences: [
@@ -57,7 +58,7 @@ const CvCreate = () => {
                 position: "",
                 start_date: "",
                 end_date: "",
-                is_present:false,
+                is_present: false,
                 company: "",
                 description: "",
             }
@@ -67,7 +68,7 @@ const CvCreate = () => {
                 institute: "",
                 start_date: "",
                 end_date: "",
-                is_present:false,
+                is_present: false,
                 result: "",
             }
         ]
@@ -97,7 +98,7 @@ const CvCreate = () => {
             position: "",
             start_date: "",
             end_date: "",
-            is_present:false,
+            is_present: false,
             company: "",
             description: "",
         }
@@ -111,9 +112,59 @@ const CvCreate = () => {
     }
 
 
+    const addNewEducation = () => {
+        const education = {
+            institute: "",
+            start_date: "",
+            end_date: "",
+            is_present: false,
+            result: "",
+        }
+
+        const educations = [
+            ...data.educations,
+            education
+        ]
+
+        setData('educations', educations)
+    }
+
+    const updateEducation = (index, key, value) => {
+        const updatedEducations = [...data.educations];
+
+        updatedEducations[index] = {
+            ...updatedEducations[index],
+            [key]: value
+        };
+
+        setData('educations', updatedEducations);
+    };
+
+    const deleteEducation = (i) => {
+
+        data.educations.splice(i, 1)
+
+        setData('educations', data.educations)
+
+    }
+
+    const updateCheckboxField = (field, index) => {
+        const updatedData = [...data[field]];
+
+        updatedData[index] = {
+            ...updatedData[index],
+            ['is_present']: !updatedData[index]['is_present'],
+        };
+
+        setData(field, updatedData);
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        console.log(data);
+
+        return;
 
         post(route('cv.store'), {
             onSuccess: () => {
@@ -147,7 +198,7 @@ const CvCreate = () => {
 
                                     <FileUpload
                                         fileType="avatar"
-                                        onChange={(fileType,value) => setData('avatar', value)}
+                                        onChange={(fileType, value) => setData('avatar', value)}
                                         error={errors.avatar}
 
                                     >
@@ -420,39 +471,85 @@ const CvCreate = () => {
                         <div className="mb-6">
                             <h2 className="text-xl font-bold mb-3 border-l-4 border-red-600 pl-2">EDUCATION DETAILS</h2>
 
-                            {/* Original education fields */}
-                            <div className="grid grid-cols-12 gap-3 mb-4">
-                                <div className="col-span-3">
-                                    <TextInput
-                                        placeholder="Certificate"
-                                        value={data.exam_name}
-                                        onChange={(e) => setData('exam_name', e.target.value)}
-                                        error={errors.exam_name}
-                                        id="exam_name"
-                                        defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
-                                    />
+                            {data.educations.map((item, i) => (
+                                <div key={i} className="mb-4">
+                                    <div className="flex items-center gap-3 ">
+                                        <div className="w-1/4">
+                                            <TextInput
+                                                value={item.institute}
+                                                onChange={(e) => updateEducation(i, "institute", e.target.value)}
+                                                error={errors?.educations ? errors?.educations[i]['institute'] : ""}
+                                                id={`institute-${i}`}
+                                                placeholder="EX: Institute Name"
+                                                label="Institute*"
+                                                defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
+                                                labelClasses="text-text-primary"
+                                            />
+                                        </div>
+                                        <div className="w-1/4">
+                                            <TextInput
+                                                value={item.result}
+                                                onChange={(e) => updateEducation(i, "result", e.target.value)}
+                                                error={errors?.educations ? errors?.educations[i]['result'] : ""}
+                                                id={`result-${i}`}
+                                                placeholder="Result(GPA/CGPA)"
+                                                label="Result*"
+                                                defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
+                                                labelClasses="text-text-primary"
+                                            />
+                                        </div>
+                                        <div className="w-1/4">
+                                            <TextInput
+                                                value={item.start_date}
+                                                onChange={(e) => updateEducation(i, "start_date", e.target.value)}
+                                                error={errors?.educations ? errors?.educations[i]['start_date'] : ""}
+                                                id={`start-date-${i}`}
+                                                label="Start Date*"
+                                                type="date"
+                                                defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
+                                                labelClasses="text-text-primary"
+                                            />
+                                        </div>
+                                        <div className="w-1/4">
+                                            <TextInput
+                                                value={item.end_date}
+                                                onChange={(e) => updateEducation(i, "end_date", e.target.value)}
+                                                error={errors?.educations ? errors?.educations[i]['end_date'] : ""}
+                                                id={`end-date-${i}`}
+                                                label="End Date"
+                                                type="date"
+                                                defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
+                                                labelClasses="text-text-primary"
+                                            />
+                                        </div>
+
+                                        <div className="w-1/4">
+                                            <label className="flex items-center mt-5"
+                                                   htmlFor={`current-institute-${i}`}>
+                                                <Checkbox
+                                                    value={item.is_present}
+                                                    onChange={() => updateCheckboxField('educations', i)}
+                                                    id={`current-institute-${i}`}
+                                                />
+                                                <span className="ml-1"> Current Institute</span>
+                                            </label>
+                                        </div>
+
+                                        {data.educations.length - 1 === i && (
+                                            <button type="button" onClick={() => addNewEducation()}
+                                                    className="bg-primary text-white text-sm w-9 text-center p-2.5 h-9 mt-5 flex item-center justify-between">
+                                                <FaPlus className="text-white"/>
+                                            </button>)}
+
+                                        {data.educations.length > 1 && (
+                                            <button type="button" onClick={() => deleteEducation(i)}
+                                                    className="bg-warning text-white text-sm w-9 text-center p-2.5 h-9 mt-5 flex item-center justify-between">
+                                                <FaTrashAlt/></button>)}
+
+                                    </div>
+
                                 </div>
-                                <div className="col-span-2">
-                                    <TextInput
-                                        placeholder="Year"
-                                        value={data.passing_year}
-                                        onChange={(e) => setData('passing_year', e.target.value)}
-                                        error={errors.passing_year}
-                                        id="passing_year"
-                                        defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
-                                    />
-                                </div>
-                                <div className="col-span-7">
-                                    <TextInput
-                                        placeholder="Board | University"
-                                        value={data.institute}
-                                        onChange={(e) => setData('institute', e.target.value)}
-                                        error={errors.institute}
-                                        id="institute"
-                                        defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
-                                    />
-                                </div>
-                            </div>
+                            ))}
 
                             {/* Computer Skills */}
                             <div className="grid grid-cols-12 gap-3 mb-4">
@@ -475,10 +572,20 @@ const CvCreate = () => {
                                 items={languages}
                                 selected={selectedLanguages}
                                 setSelected={setSelectedLanguages}
-                                handleValueChange={(value) => setData('languages', value) }
+                                handleValueChange={(value) => setData('languages', value)}
                                 placeholder="Select Languages"
                                 label="Select Language*"
                                 error={errors.languages}
+                                defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
+                            />
+
+                            <TextInput
+                                label="Typing Here (Add Multiple Item separate by commna)"
+                                value={data.personal_skills}
+                                onChange={(e) => setData('personal_skills', e.target.value)}
+                                error={errors.personal_skills}
+                                id="personal_skills"
+                                placeholder="Ex: Swaiming,Travikibg,Reading"
                                 defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
                             />
 
@@ -496,66 +603,86 @@ const CvCreate = () => {
                             </div>
 
                             {data.job_experiences.map((item, i) => (
-                                <div key={i} className="flex items-center gap-3 mb-4">
-                                    <div className="w-1/4">
-                                        <TextInput
-                                            value={item.position}
-                                            onChange={(e) => updateJobExperience(i, "position", e.target.value)}
-                                            error={errors?.job_experiences ? errors?.job_experiences[i]['position'] : ""}
-                                            id={`position-${i}`}
-                                            placeholder="EX: Software Enginner"
-                                            label="Position*"
-                                            defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
-                                            labelClasses="text-text-primary"
-                                        />
-                                    </div>
-                                    <div className="w-1/4">
-                                        <TextInput
-                                            value={item.company}
-                                            onChange={(e) => updateJobExperience(i, "company", e.target.value)}
-                                            error={errors?.job_experiences ? errors?.job_experiences[i]['company'] : ""}
-                                            id={`company-${i}`}
-                                            placeholder="Company Name"
-                                            label="Company Name*"
-                                            defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
-                                            labelClasses="text-text-primary"
-                                        />
-                                    </div>
-                                    <div className="w-1/4">
-                                        <TextInput
-                                            value={item.start_date}
-                                            onChange={(e) => updateJobExperience(i, "start_date", e.target.value)}
-                                            error={errors?.job_experiences ? errors?.job_experiences[i]['start_date'] : ""}
-                                            id={`start-date-${i}`}
-                                            label="Start Date*"
-                                            type="date"
-                                            defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
-                                            labelClasses="text-text-primary"
-                                        />
-                                    </div>
-                                    <div className="w-1/4">
-                                        <TextInput
-                                            value={item.end_date}
-                                            onChange={(e) => updateJobExperience(i, "end_date", e.target.value)}
-                                            error={errors?.job_experiences ? errors?.job_experiences[i]['end_date'] : ""}
-                                            id={`end-date-${i}`}
-                                            label="End Date"
-                                            type="date"
-                                            defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
-                                            labelClasses="text-text-primary"
-                                        />
+                                <div key={i} className="mb-4">
+                                    <div className="flex items-center gap-3 ">
+                                        <div className="w-1/4">
+                                            <TextInput
+                                                value={item.position}
+                                                onChange={(e) => updateJobExperience(i, "position", e.target.value)}
+                                                error={errors?.job_experiences ? errors?.job_experiences[i]['position'] : ""}
+                                                id={`position-${i}`}
+                                                placeholder="EX: Software Enginner"
+                                                label="Position*"
+                                                defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
+                                                labelClasses="text-text-primary"
+                                            />
+                                        </div>
+                                        <div className="w-1/4">
+                                            <TextInput
+                                                value={item.company}
+                                                onChange={(e) => updateJobExperience(i, "company", e.target.value)}
+                                                error={errors?.job_experiences ? errors?.job_experiences[i]['company'] : ""}
+                                                id={`company-${i}`}
+                                                placeholder="Company Name"
+                                                label="Company Name*"
+                                                defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
+                                                labelClasses="text-text-primary"
+                                            />
+                                        </div>
+                                        <div className="w-1/4">
+                                            <TextInput
+                                                value={item.start_date}
+                                                onChange={(e) => updateJobExperience(i, "start_date", e.target.value)}
+                                                error={errors?.job_experiences ? errors?.job_experiences[i]['start_date'] : ""}
+                                                id={`start-date-${i}`}
+                                                label="Start Date*"
+                                                type="date"
+                                                defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
+                                                labelClasses="text-text-primary"
+                                            />
+                                        </div>
+                                        <div className="w-1/4">
+                                            <TextInput
+                                                value={item.end_date}
+                                                onChange={(e) => updateJobExperience(i, "end_date", e.target.value)}
+                                                error={errors?.job_experiences ? errors?.job_experiences[i]['end_date'] : ""}
+                                                id={`end-date-${i}`}
+                                                label="End Date"
+                                                type="date"
+                                                defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
+                                                labelClasses="text-text-primary"
+                                            />
+                                        </div>
+
+                                        <div className="w-1/4">
+                                            <label className="flex items-center mt-5" htmlFor={`current-working-${i}`}>
+                                                <Checkbox
+                                                    value={item.is_present}
+                                                    onChange={() => updateCheckboxField('job_experiences', i)}
+                                                    id={`current-working-${i}`}/>
+                                                <span className="ml-1"> Currently Working here</span>
+                                            </label>
+                                        </div>
                                     </div>
 
-                                    <div className="w-1/4">
-                                        <label className="flex items-center mt-5" htmlFor={`current-working-${i}`}>
-                                            <Checkbox id={`current-working-${i}`} />
-                                            <span className="ml-1"> Currently Working here</span>
-                                        </label>
+                                    <div className="flex items-center mt-2 gap-x-3 w-full">
+                                        <div className="w-[95%]">
+                                            <TextInput
+                                                value={item.description}
+                                                onChange={(e) => updateJobExperience(i, "description", e.target.value)}
+                                                error={errors?.job_experiences ? errors?.job_experiences[i]['description'] : ""}
+                                                id={`description-${i}`}
+                                                label="Job Description"
+                                                defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
+                                                labelClasses="text-text-primary"
+                                            />
+                                        </div>
+                                        {data.job_experiences.length > 1 && (
+                                            <button type="button" onClick={() => deleteExperience(i)}
+                                                    className="bg-warning text-white text-sm w-9 text-center p-2.5 h-9 mt-5 flex item-center justify-between">
+                                                <FaTrashAlt/></button>)}
                                     </div>
-                                    {data.job_experiences.length > 1 && (
-                                        <button type="button" onClick={() => deleteExperience(i)}
-                                                className="bg-warning text-white text-sm w-9 text-center p-2.5 h-9 mt-5 flex item-center justify-between">
-                                            <FaTrashAlt/></button>)}
+
                                 </div>
                             ))}
                         </div>
@@ -581,7 +708,8 @@ const CvCreate = () => {
                                 text="Submit"
                                 type="submit"
                                 classes="w-full md:w-2/12 py-3"
-                                onClick={() => setResumePreview(true)}
+                                // onClick={() => handleSubmit()}
+                                onClick={handleSubmit}
                                 disabled={processing}
                             />
 
