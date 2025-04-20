@@ -2,7 +2,7 @@
 
 namespace App\DTOs;
 
-use App\Models\UserCv;
+use App\Models\UserCV;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Validation\Rule;
@@ -52,7 +52,7 @@ class CVDTO
     public static function fromRequest(Request $request): CVDTO
     {
 
-        $hasCv = UserCv::query()->where('user_id', auth()->id())->exists();
+        $hasCv = UserCV::query()->where('user_id', auth()->id())->exists();
 
         $request->validate([
             'avatar' => [
