@@ -72,6 +72,7 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::post('job-apply/store', [JobPostController::class, 'store'])->name('job-posts.store');
 
     Route::get('job-applies', [JobPostController::class, 'jobApplyList'])->name('job-apply.list');
+    Route::get('job-applies/{id}', [JobPostController::class, 'jobApplyDownload'])->name('job-apply.download');
 
     //cvCreate
     Route::get('cvs', [CvCreateController::class, 'index'])->name('cv.index');

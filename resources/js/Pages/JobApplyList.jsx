@@ -1,29 +1,13 @@
-import React, { useRef, useState } from 'react';
+import React from 'react';
 import WebLayout from "@/Layouts/WebLayout.jsx";
-import { Head, usePage } from "@inertiajs/react";
+import {Head, Link, usePage} from "@inertiajs/react";
 import { getFormattedDate } from "@/Components/Helper/index.js";
 import { FaDownload } from "react-icons/fa6";
-import DownloadJobApply from "@/Components/Web/DownloadJobApply.jsx";
 
 const JobApplyList = () => {
+
     const { job_apply_list } = usePage().props;
-    const [jobApply, setJobApply] = useState({});
-    const componentRef = useRef();
 
-    const handleDownloadPdf = (jobApplyData) => {
-        setJobApply(jobApplyData);
-        setTimeout(() => {
-            const printContents = componentRef.current.innerHTML;
-            const originalContents = document.body.innerHTML;
-
-            document.body.innerHTML = printContents;
-
-            window.print();
-
-            document.body.innerHTML = originalContents;
-            window.location.reload();
-        }, 300);
-    };
 
     return (
         <WebLayout showServiceImage={false} showBgImage={false}>
@@ -56,9 +40,9 @@ const JobApplyList = () => {
                                 <td className="px-3 py-2 text-sm border-r border-b border-gray-200">{row?.location}</td>
                                 <td className="px-3 py-2 text-sm border-r border-b border-gray-200">{getFormattedDate(row.created_at)}</td>
                                 <td className="px-3 py-2 text-sm border-r border-b border-gray-200 text-center">
-                                    <button type="button" onClick={() => handleDownloadPdf(row)}>
+                                    <Link href={route('job-apply.download',row.id)}>
                                         <FaDownload />
-                                    </button>
+                                    </Link>
                                 </td>
                             </tr>
                         )) : <p>Data Not Found</p>}
@@ -67,12 +51,6 @@ const JobApplyList = () => {
                 </div>
             </div>
 
-            {/* Hidden component to print */}
-            <div className="hidden">
-                <div ref={componentRef}>
-                    <DownloadJobApply data={jobApply} />
-                </div>
-            </div>
         </WebLayout>
     );
 };

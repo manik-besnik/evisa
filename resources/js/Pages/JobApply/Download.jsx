@@ -2,70 +2,83 @@ import {
     assetUrl, genders, maritalStatuses, religions,
 } from "@/Components/Constant/index.js";
 import {drivingLicenses} from "@/Components/Constant/index.js";
-import {usePage} from "@inertiajs/react";
+import {usePage, router} from "@inertiajs/react";
+import { useRef, useEffect, useState } from 'react';
+import generatePDF from 'react-to-pdf';
 
-const DownloadJobApply = ({data}) => {
-
-    const { countries} = usePage().props;
+const Download = () => {
+    const targetRef = useRef();
+    const [isPdfReady, setIsPdfReady] = useState(false);
+    const { countries, data } = usePage().props;
 
     const getNationality = (id) => {
-
         if (!id) {
             return id;
         }
-
         const value = countries.find(item => item.id === id);
+        return value.nationality ?? id;
+    };
 
-        return value.nationality ?? id
-    }
     const getReligion = (id) => {
-
         if (!id) {
             return id;
         }
-
         const value = religions.find(item => item.id === Number(id));
+        return value.name ?? id;
+    };
 
-        return value.name ?? id
-    }
     const getGender = (id) => {
-
         if (!id) {
             return id;
         }
-
         const value = genders.find(item => item.id === Number(id));
-
-        return value.name ?? id
-    }
+        return value.name ?? id;
+    };
 
     const getDrivingLicense = (id) => {
-
         if (!id) {
             return id;
         }
-
         const drivingLicense = drivingLicenses.find(item => item.id === id);
-
-        return drivingLicense.name ?? id
-    }
+        return drivingLicense.name ?? id;
+    };
 
     const getMaritalStatus = (id) => {
-
         if (!id) {
             return id;
         }
-
         const status = maritalStatuses.find(item => item.id === Number(id));
+        return status.name ?? id;
+    };
 
-        return status.name ?? id
-    }
+    const downloadPdf = () => {
+        const options = {
+            filename: 'page.pdf',
+            margin: 0.8, // Margin in inches
+        };
+        generatePDF(targetRef, options).then(r => 'ok');
+        router.get(route('job-apply.list'));
+    };
+
+    useEffect(() => {
+        setIsPdfReady(true);
+        const timeout = setTimeout(() => {
+            downloadPdf();
+        }, 1000);
+
+        return () => clearTimeout(timeout);
+    }, []);
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div className="bg-white w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-lg shadow-lg relative p-4">
-
-                <div id="job-application-preview" className="border-8 border-[#5D5D5D] p-4 relative">
+            <div className="bg-white w-full max-w-5xl max-h-[90vh] overflow-y-auto rounded-lg shadow-lg relative p-4">
+                <div
+                    id="job-application-preview"
+                    className="border-8 border-[#5D5D5D] p-4 relative"
+                    ref={targetRef}
+                    style={{ overflow: 'visible', height: 'auto' }}
+                >
+                    {/* Your component content here */}
                     {/* Header with Job Application and Photo */}
                     <div className="flex mb-4">
                         <div className="w-1/3">
@@ -175,7 +188,6 @@ const DownloadJobApply = ({data}) => {
                     </div>
                     <hr className="border-2 border-[#848585] mb-3"/>
                     {/* Passport & Visa Information */}
-
 
                     <div className="mb-4">
                         <div
@@ -371,4 +383,4 @@ const DownloadJobApply = ({data}) => {
     );
 };
 
-export default DownloadJobApply;
+export default Download;

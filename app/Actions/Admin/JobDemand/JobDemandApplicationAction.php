@@ -4,7 +4,6 @@ namespace App\Actions\Admin\JobDemand;
 
 use App\Enums\Permissions;
 use App\Models\JobApply;
-use App\Models\JobDemand;
 use App\Supports\UserPermission;
 use Inertia\Inertia;
 
