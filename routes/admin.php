@@ -65,8 +65,8 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
     Route::get('job-demand/applications', [JobDemandController::class, 'jobDemandApplications'])
         ->name('job-demand.applications');
 
-    Route::get('job-demand/applications', [JobDemandController::class, 'jobDemandApplications'])
-        ->name('job-demand.applications');
+    Route::delete('job-demand/applications/{id}', [JobDemandController::class, 'deleteApplication'])
+        ->name('job-demand.applications.delete');
 
     Route::get('job-demand/applications/{id}', [JobDemandController::class, 'singleApplication'])
         ->name('job-demand.applications.show');

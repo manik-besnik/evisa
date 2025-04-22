@@ -11,7 +11,7 @@ class SingleJobApplication
     public function execute(int $id): \Inertia\Response
     {
         $jobApply = JobApply::query()
-            ->with(['education.language'])
+            ->with(['education.language','experiences.country:id,name'])
             ->findOrFail($id);
 
         $experiences = JobExperience::query()

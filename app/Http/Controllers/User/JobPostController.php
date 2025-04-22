@@ -175,4 +175,18 @@ class JobPostController extends Controller
 
         return $pdf->download("job_" . $job->code . ".pdf");
     }
+
+    public function jobApplyDownload(int $id): \Inertia\Response
+    {
+        $data = JobApply::query()
+            ->with([
+                'jobDemand:id,type_of_work,company_id,location_id,job_location,salary',
+                'jobDemand.company:id,name',
+                'jobDemand.location:id,name'
+            ])
+            ->where('user_id', auth()->id())
+            ->findOrFail($id);
+
+        return Inertia::render('JobApply/Download', ['data' => $data]);
+    }
 }
