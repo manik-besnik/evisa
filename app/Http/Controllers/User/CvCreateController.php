@@ -102,6 +102,9 @@ class CvCreateController extends Controller
         return pdf()
             ->format(Format::A4)
             ->margins(.5, .5, .5, .5, Unit::Inch)
+            ->withBrowsershot(function(Browsershot $browsershot) {
+                $browsershot->setChromePath('/usr/bin/chromium-browser');
+            })
             ->view('pdfs.two-column-cv', compact('cv'))
             ->name("cv" . $cv->name . ".pdf")->download();
 
