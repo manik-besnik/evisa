@@ -12,8 +12,9 @@ use App\Models\VisaApply;
 use Barryvdh\DomPDF\Facade\Pdf as DomPDF;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use App\Models\JobDemand;
-use Illuminate\Support\Facades\Storage;
+use Spatie\LaravelPdf\Enums\Format;
+use function Spatie\LaravelPdf\Support\pdf;
+use Spatie\LaravelPdf\Enums\Unit;
 
 class CvCreateController extends Controller
 {
@@ -73,7 +74,7 @@ class CvCreateController extends Controller
         //
     }
 
-    public function download(): \Illuminate\Http\Response
+    public function download(): \Spatie\LaravelPdf\PdfBuilder|\Illuminate\Http\Response
     {
         $type = request()->input('type');
 
@@ -85,13 +86,17 @@ class CvCreateController extends Controller
             $pdf->setPaper('a4', 'portrait');
 
             return $pdf->download("cv" . $cv->name . ".pdf");
+//            return pdf()
+//                ->format(Format::A4)
+//                ->margins(.5, .5, .5, .5, Unit::Inch)
+//                ->view('pdfs.single-column-cv', compact('cv'))
+//                ->name("cv" . $cv->name . ".pdf")->download();
         }
-
-        $pdf = DomPDF::loadView('pdfs.two-column-cv', compact('cv'));
-
-        $pdf->setPaper('a4', 'portrait');
-
-        return $pdf->download("resume" . $cv->name . ".pdf");
+        return pdf()
+            ->format(Format::A4)
+            ->margins(.5, .5, .5, .5, Unit::Inch)
+            ->view('pdfs.two-column-cv', compact('cv'))
+            ->name("cv" . $cv->name . ".pdf")->download();
 
     }
 }
