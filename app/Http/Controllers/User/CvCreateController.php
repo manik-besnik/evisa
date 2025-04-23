@@ -101,20 +101,26 @@ class CvCreateController extends Controller
         }
         return pdf()
             ->format(Format::A4)
-            ->margins(.5, .5, .5, .5, Unit::Inch)
+            ->margins(0.5, 0.5, 0.5, 0.5, Unit::Inch)
             ->withBrowsershot(function(Browsershot $browsershot) {
-                $browsershot->setChromePath('/usr/bin/chromium-browser')
+                $browsershot
+                    ->setChromePath('/usr/bin/chromium-browser')
                     ->setNodeBinary('/usr/bin/node')
                     ->setNpmBinary('/usr/bin/npm')
+                    ->timeout(300) // 300 seconds (5 minutes)
                     ->noSandbox()
                     ->addChromiumArguments([
                         '--disable-gpu',
                         '--disable-dev-shm-usage',
                         '--single-process',
+                        '--no-zygote', // Faster initialization
+                        '--disable-software-rasterizer',
+                        '--disable-extensions'
                     ]);
             })
             ->view('pdfs.two-column-cv', compact('cv'))
-            ->name("cv" . $cv->name . ".pdf")->download();
+            ->name("cv-{$cv->name}.pdf")
+            ->download();
 
 //        $html = view('pdfs.two-column-cv', compact('cv'))->render();
 //
