@@ -8,6 +8,8 @@ use App\Http\Controllers\User\JobDemandController;
 use App\Http\Controllers\User\CvCreateController;
 use App\Http\Controllers\User\InqueryController;
 use App\Http\Controllers\User\BlogController;
+use App\Http\Controllers\User\AgencyController;
+use App\Http\Controllers\User\ContactController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Spatie\LaravelPdf\Enums\Format;
@@ -87,6 +89,8 @@ Route::middleware(['auth', 'user'])->group(function () {
 
     //inquery
     Route::get('inquery', [InqueryController::class, 'create'])->name('inquery.create');
+    Route::get('agency', [AgencyController::class, 'index'])->name('agency.create');
+    Route::get('contact', [ContactController::class, 'index'])->name('contact.index');
 });
 
 

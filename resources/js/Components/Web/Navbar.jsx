@@ -47,6 +47,11 @@ const Navbar = () => {
                     <span className="text-sm font-medium">Apply List</span>
                     <div className={`navbar-triangle z-10 ${route().current('job-apply.list') ? 'border-warning' : 'border-[#AC8230]'}`}></div>
                 </Link>
+                <Link href={route('contact.index')}
+                    className={`nav-item hover:bg-warning group pl-10 pr-8 py-3 ${route().current('contact.index') ? 'bg-warning' : 'bg-[#C19125]'}`}>
+                    <span className="text-sm font-medium">Contact</span>
+                    <div className={`navbar-triangle z-10 ${route().current('contact.index') ? 'border-warning' : 'border-[#C19125]'}`}></div>
+                </Link>
                {/*
                 <Link href={route('visa-apply.index')} className="relative flex items-center bg-primary text-white pl-10 pr-8 py-3">
                     <span className="text-sm font-medium">Search Visa</span>
