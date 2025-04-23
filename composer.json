@@ -14,6 +14,7 @@
         "laravel/sanctum": "^4.0",
         "laravel/socialite": "^5.17",
         "laravel/tinker": "^2.9",
+        "spatie/laravel-pdf": "^1.5",
         "spatie/pdf-to-image": "^1.2",
         "thiagoalessio/tesseract_ocr": "^2.13",
         "tightenco/ziggy": "^2.5"

@@ -15,12 +15,10 @@
         body {
             background-color: #f5f5f5;
             justify-content: center;
-            padding: 20px;
         }
 
         .resume-container {
             width: 100%;
-            max-width: 1000px;
             background-color: white;
             display: flex;
             position: relative;
@@ -30,7 +28,7 @@
         }
 
         .left-section {
-            width: 30%;
+            width: 35%;
             background-color: #1a222e;
             color: white;
             position: relative;
@@ -39,7 +37,7 @@
         }
 
         .right-section {
-            width: 70%;
+            width: 65%;
             padding: 30px 40px;
             position: relative;
             z-index: 1;
