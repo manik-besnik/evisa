@@ -12,9 +12,13 @@ use App\Models\VisaApply;
 use Barryvdh\DomPDF\Facade\Pdf as DomPDF;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Spatie\Browsershot\Exceptions\CouldNotTakeBrowsershot;
 use Spatie\LaravelPdf\Enums\Format;
 use function Spatie\LaravelPdf\Support\pdf;
 use Spatie\LaravelPdf\Enums\Unit;
+use Spatie\Browsershot\Browsershot;
+use Illuminate\Support\Facades\Response;
 
 class CvCreateController extends Controller
 {
@@ -74,7 +78,10 @@ class CvCreateController extends Controller
         //
     }
 
-    public function download(): \Spatie\LaravelPdf\PdfBuilder|\Illuminate\Http\Response
+    /**
+     * @throws CouldNotTakeBrowsershot
+     */
+    public function download()
     {
         $type = request()->input('type');
 
@@ -92,11 +99,27 @@ class CvCreateController extends Controller
 //                ->view('pdfs.single-column-cv', compact('cv'))
 //                ->name("cv" . $cv->name . ".pdf")->download();
         }
-        return pdf()
-            ->format(Format::A4)
-            ->margins(.5, .5, .5, .5, Unit::Inch)
-            ->view('pdfs.two-column-cv', compact('cv'))
-            ->name("cv" . $cv->name . ".pdf")->download();
+//        return pdf()
+//            ->format(Format::A4)
+//            ->margins(.5, .5, .5, .5, Unit::Inch)
+//            ->view('pdfs.two-column-cv', compact('cv'))
+//            ->name("cv" . $cv->name . ".pdf")->download();
+
+        $html = view('pdfs.two-column-cv', compact('cv'))->render();
+
+        // Generate a temporary path
+        $path = storage_path('app/public/cv_' . Str::random(10) . '.pdf');
+
+        // Generate the PDF
+        Browsershot::html($html)
+            ->setOption('executablePath', '/usr/bin/chromium-browser')
+            ->format('A4')
+            ->margins(0.5,0.5,0.5,0.5,'inch')
+            ->showBackground()
+            ->save($path); // Save instead of pdf()
+
+        // Return as downloadable response
+        return response()->download($path)->deleteFileAfterSend(true);
 
     }
 }
