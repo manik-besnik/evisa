@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cc482e018827d8ac69c5539155a1cdf8",
+    "content-hash": "784c743727a970c195551a237b791cb9",
     "packages": [
         {
             "name": "aymanrb/php-unstructured-text-parser",
