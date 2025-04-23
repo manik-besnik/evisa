@@ -99,28 +99,42 @@ class CvCreateController extends Controller
 //                ->view('pdfs.single-column-cv', compact('cv'))
 //                ->name("cv" . $cv->name . ".pdf")->download();
         }
-        return pdf()
-            ->format(Format::A4)
-            ->margins(0.5, 0.5, 0.5, 0.5, Unit::Inch)
-            ->withBrowsershot(function(Browsershot $browsershot) {
-                $browsershot
-                    ->setChromePath('/usr/bin/chromium-browser')
-                    ->setNodeBinary('/usr/bin/node')
-                    ->setNpmBinary('/usr/bin/npm')
-                    ->timeout(300) // 300 seconds (5 minutes)
-                    ->noSandbox()
-                    ->addChromiumArguments([
-                        '--disable-gpu',
-                        '--disable-dev-shm-usage',
-                        '--single-process',
-                        '--no-zygote', // Faster initialization
-                        '--disable-software-rasterizer',
-                        '--disable-extensions'
-                    ]);
-            })
-            ->view('pdfs.two-column-cv', compact('cv'))
-            ->name("cv-{$cv->name}.pdf")
-            ->download();
+
+        $pdf = DomPDF::loadView('pdfs.test', compact('cv'));
+
+        $pdf->setPaper('a4', 'portrait');
+
+        return $pdf->download("cv" . $cv->name . ".pdf");
+
+//
+//        return pdf()
+//            ->format(Format::A4)
+//            ->margins(0.5, 0.5, 0.5, 0.5, Unit::Inch)
+//            ->withBrowsershot(function (Browsershot $browsershot) {
+//                $browsershot
+//                    ->setChromePath('/usr/bin/chromium-browser')
+//                    ->setNodeBinary('/usr/bin/node')
+//                    ->setNpmBinary('/usr/bin/npm')
+//                    ->timeout(300) // 5 minutes timeout
+//                    ->noSandbox()
+//                    ->deviceScaleFactor(1) // Reduces render complexity
+//                    ->addChromiumArguments([
+//                        '--disable-gpu',
+//                        '--disable-dev-shm-usage', // Critical for Docker/Limited RAM
+//                        '--single-process', // Reduces memory usage
+//                        '--no-zygote',
+//                        '--disable-software-rasterizer',
+//                        '--disable-extensions',
+//                        '--disable-background-networking',
+//                        '--disable-default-apps',
+//                        '--disable-translate',
+//                        '--disable-setuid-sandbox',
+//                        '--headless=new' // New headless mode (faster)
+//                    ]);
+//            })
+//            ->view('pdfs.two-column-cv', compact('cv'))
+//            ->name("cv-{$cv->name}.pdf")
+//            ->download();
 
 //        $html = view('pdfs.two-column-cv', compact('cv'))->render();
 //
