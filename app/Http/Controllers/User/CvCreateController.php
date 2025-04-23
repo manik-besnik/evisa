@@ -12,13 +12,6 @@ use App\Models\VisaApply;
 use Barryvdh\DomPDF\Facade\Pdf as DomPDF;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
-use Spatie\Browsershot\Exceptions\CouldNotTakeBrowsershot;
-use Spatie\LaravelPdf\Enums\Format;
-use function Spatie\LaravelPdf\Support\pdf;
-use Spatie\LaravelPdf\Enums\Unit;
-use Spatie\Browsershot\Browsershot;
-use Illuminate\Support\Facades\Response;
 
 class CvCreateController extends Controller
 {
@@ -78,9 +71,7 @@ class CvCreateController extends Controller
         //
     }
 
-    /**
-     * @throws CouldNotTakeBrowsershot
-     */
+
     public function download()
     {
         $type = request()->input('type');
@@ -90,67 +81,18 @@ class CvCreateController extends Controller
         if ($type === '1') {
             $pdf = DomPDF::loadView('pdfs.single-column-cv', compact('cv'));
 
-            $pdf->setPaper('a4', 'portrait');
+            $pdf->setPaper('a4', );
 
             return $pdf->download("cv" . $cv->name . ".pdf");
-//            return pdf()
-//                ->format(Format::A4)
-//                ->margins(.5, .5, .5, .5, Unit::Inch)
-//                ->view('pdfs.single-column-cv', compact('cv'))
-//                ->name("cv" . $cv->name . ".pdf")->download();
         }
+
 
         $pdf = DomPDF::loadView('pdfs.test', compact('cv'));
 
-        $pdf->setPaper('a4', 'portrait');
+        $pdf->setPaper('a4', );
 
         return $pdf->download("cv" . $cv->name . ".pdf");
 
-//
-//        return pdf()
-//            ->format(Format::A4)
-//            ->margins(0.5, 0.5, 0.5, 0.5, Unit::Inch)
-//            ->withBrowsershot(function (Browsershot $browsershot) {
-//                $browsershot
-//                    ->setChromePath('/usr/bin/chromium-browser')
-//                    ->setNodeBinary('/usr/bin/node')
-//                    ->setNpmBinary('/usr/bin/npm')
-//                    ->timeout(300) // 5 minutes timeout
-//                    ->noSandbox()
-//                    ->deviceScaleFactor(1) // Reduces render complexity
-//                    ->addChromiumArguments([
-//                        '--disable-gpu',
-//                        '--disable-dev-shm-usage', // Critical for Docker/Limited RAM
-//                        '--single-process', // Reduces memory usage
-//                        '--no-zygote',
-//                        '--disable-software-rasterizer',
-//                        '--disable-extensions',
-//                        '--disable-background-networking',
-//                        '--disable-default-apps',
-//                        '--disable-translate',
-//                        '--disable-setuid-sandbox',
-//                        '--headless=new' // New headless mode (faster)
-//                    ]);
-//            })
-//            ->view('pdfs.two-column-cv', compact('cv'))
-//            ->name("cv-{$cv->name}.pdf")
-//            ->download();
-
-//        $html = view('pdfs.two-column-cv', compact('cv'))->render();
-//
-//        // Generate a temporary path
-//        $path = storage_path('app/public/cv_' . Str::random(10) . '.pdf');
-//
-//        // Generate the PDF
-//        Browsershot::html($html)
-//            ->setOption('executablePath', '/usr/bin/chromium-browser')
-//            ->format('A4')
-//            ->margins(0.5,0.5,0.5,0.5,'inch')
-//            ->showBackground()
-//            ->save($path); // Save instead of pdf()
-//
-//        // Return as downloadable response
-//        return response()->download($path)->deleteFileAfterSend(true);
 
     }
 }

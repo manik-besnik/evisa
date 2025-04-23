@@ -61,11 +61,12 @@
             align-items: center;
             justify-content: center;
             overflow: hidden;
+            margin: 5px 0 0 5px;
         }
 
         .profile-image {
-            max-width: 160px;
-            max-height: 160px;
+            width: 160px;
+            height: 160px;
             border-radius: 50%;
         }
 
@@ -199,24 +200,17 @@
         .timeline-content {
             position: relative;
             padding-left: 20px;
+            border-left: 2px solid #1a222e;
+            padding-bottom: 20px;
         }
 
         .timeline-dot {
             position: absolute;
-            left: 10px;
-            top: 5px;
+            left: -6px;
+            top: 0;
             width: 10px;
             height: 10px;
             border-radius: 50%;
-            background-color: #1a222e;
-        }
-
-        .timeline-line {
-            position: absolute;
-            left: 15px;
-            top: 15px;
-            bottom: -25px;
-            width: 2px;
             background-color: #1a222e;
         }
 
@@ -431,7 +425,6 @@
                         <div class="timeline-date">{{ $exp['start_date'] ?? '' }} - {{ ((bool)$exp['is_present'] ?? false) ? 'PRESENT' : $exp['end_date'] ?? '' }}</div>
                         <div class="timeline-content">
                             <div class="timeline-dot"></div>
-                            <div class="timeline-line"></div>
                             <div class="timeline-company">{{ $exp['company'] ?? '' }}</div>
                             <div class="timeline-position">{{ $exp['position'] ?? '' }}</div>
                             <div class="timeline-description">
@@ -460,7 +453,6 @@
                         <div class="timeline-date">{{ $edu['start_date'] ?? '' }} - {{ $edu['end_date'] ?? '' }}</div>
                         <div class="timeline-content">
                             <div class="timeline-dot"></div>
-                            <div class="timeline-line"></div>
                             <div class="timeline-company">{{ $edu['institute'] ?? ''}}</div>
                             <div class="timeline-description">
                                 • {{ $edu['department'] ?? '' }}
