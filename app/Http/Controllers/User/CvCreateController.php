@@ -103,19 +103,14 @@ class CvCreateController extends Controller
             ->format(Format::A4)
             ->margins(.5, .5, .5, .5, Unit::Inch)
             ->withBrowsershot(function(Browsershot $browsershot) {
-                $browsershot->setChromePath( '/usr/bin/chromium-browser')
+                $browsershot->setChromePath('/usr/bin/chromium-browser')
                     ->setNodeBinary('/usr/bin/node')
                     ->setNpmBinary('/usr/bin/npm')
-                    ->timeout(120)
-                    ->waitUntilNetworkIdle()
-                    ->ignoreHttpsErrors()
                     ->noSandbox()
-                    ->disableJavascript()
                     ->addChromiumArguments([
                         '--disable-gpu',
                         '--disable-dev-shm-usage',
-                        '--disable-setuid-sandbox',
-                        '--disable-extensions',
+                        '--single-process',
                     ]);
             })
             ->view('pdfs.two-column-cv', compact('cv'))
