@@ -414,7 +414,7 @@
                         <div>
                             <div class="flex">
                                 <div class="timeline-company">{{ $exp['company'] ?? '' }}</div>
-                                <div class="timeline-position">{ $exp['position'] ?? ' }}</div>
+                                <div class="timeline-position">{{ $exp['position'] ?? '' }}</div>
                             </div>
                             <div class="timeline-description">
                                 • {{ $exp['description'] ?? '' }}
