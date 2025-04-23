@@ -10,6 +10,10 @@ use App\Http\Controllers\User\InqueryController;
 use App\Http\Controllers\User\BlogController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Spatie\LaravelPdf\Enums\Format;
+use function Spatie\LaravelPdf\Support\pdf;
+use Spatie\LaravelPdf\Enums\Unit;
+
 
 Route::get('/', function () {
     return Inertia::render('Home');
@@ -93,7 +97,13 @@ Route::inertia('others', 'Other')->name('others');
 Route::inertia('search', 'Search');
 
 route::view('cv','pdfs.single-column-cv');
-route::view('cv2','pdfs.two-column-cv');
+route::get('cv2',function (){
+    return pdf()
+        ->format(Format::A4)
+        ->margins(.5, .5, .5, .5, Unit::Inch)
+        ->view('pdfs.backup')
+        ->name('invoice-2023-04-10.pdf')->download();
+});
 route::inertia('resume','Resume');
 
 require __DIR__ . '/auth.php';
