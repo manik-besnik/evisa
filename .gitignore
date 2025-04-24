@@ -24,11 +24,11 @@ Homestead.json
 
 bootstrap/ssr
 
-/public/uploads
-/public/public
-/public/build
-/storage/pail
-/storage
+public/uploads
+public/public
+public/build
+storage/pail
+storage
 .env.backup
 .env.production
 .phpactor.json
