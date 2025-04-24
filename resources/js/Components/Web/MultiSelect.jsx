@@ -22,18 +22,17 @@ export default function MultiSelect({
 
     const handleChange = (item) => {
 
-        if (selected.length >= selectLimit) {
+        if (selected?.length >= selectLimit) {
             return;
         }
-        const isSelected = selected.some(s => s === item);
+        const isSelected = selected?.some(s => s === item);
 
-        let newSelected;
-        if (!isSelected) {
-            newSelected = [...selected, item];
+        if (isSelected) {
+            return;
         }
 
-        setSelected(newSelected);
-        handleValueChange(newSelected);
+        setSelected([...selected, item]);
+        handleValueChange([...selected, item]);
     };
 
     const handleRemoveItem = (index) => {
@@ -60,9 +59,9 @@ export default function MultiSelect({
                             className={`h-[26px] sm:h-[36px] w-full flex items-center justify-between leading-[14px] sm:leading-[20px] text-xs sm:text-sm px-3 border-0 border-l-4 ${defaultClasses} ${classes}`}
                         >
 
-                            {selected.length > 0 ? (
+                            {selected?.length > 0 ? (
                                 <span className="flex gap-x-1 text-xs">
-                                    {selected.map((item, index) => (
+                                    {selected?.map((item, index) => (
                                         <span key={index}
                                               className="flex gap-x-2 items-center bg-gray-200 px-2 py-1 rounded-md">
                                             <span>
@@ -103,7 +102,7 @@ export default function MultiSelect({
                                         key={i}
                                         value={person}
                                         onClick={() => handleChange(person)}
-                                        className={`group flex items-center gap-2 rounded-md py-2 px-2.5 select-none cursor-pointer data-[focus]:bg-gray-200 ${selected.some(s => s === person) ? 'bg-gray-200' : ''}`}
+                                        className={`group flex items-center gap-2 rounded-md py-2 px-2.5 select-none cursor-pointer data-[focus]:bg-gray-200 ${selected?.some(s => s === person) ? 'bg-gray-200' : ''}`}
                                     >
                                         <div
                                             className="text-xs leading-[14px] text-text-primary">{person?.[field]}</div>

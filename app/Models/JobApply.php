@@ -63,6 +63,7 @@ class JobApply extends Model
         'user_id',
         'job_demand_id',
         'education_id',
+        'nationality',
         'name',
         'phone',
         'email',
@@ -123,8 +124,16 @@ class JobApply extends Model
         return $this->belongsTo(Education::class);
     }
 
+
+    public function country(): BelongsTo
+    {
+        return $this->belongsTo(Country::class, 'nationality','id');
+    }
+
+
+
     public function experiences(): HasMany
     {
-        return $this->hasMany(JobExperience::class);
+        return $this->hasMany(JobExperience::class, 'job_apply_id','id');
     }
 }

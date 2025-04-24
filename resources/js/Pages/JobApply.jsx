@@ -196,7 +196,7 @@ const JobDemand = () => {
             bloodGroupName: bloodGroup?.name || "",
             maritalStatusName: maritalStatus?.name || "",
             genderName: gender?.name || "",
-            jobDemandsArray: jobDemands.map(job => job.name),
+            jobDemandsArray: jobDemands?.map(job => job.name),
             englishProficiencyName: englishProficiency?.name || "",
             arabicProficiencyName: arabicProficiency?.name || "",
             urduProficiencyName: urduProficiency?.name || "",

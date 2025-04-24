@@ -6,8 +6,9 @@ import {FaRegEye} from "react-icons/fa6";
 import TopSection from "@/Components/Admin/TopSection.jsx";
 import Pagination from "@/Components/Admin/Pagination.jsx";
 import DeleteConfirmModal from "@/Components/DeleteConfirmModal.jsx";
-import { FaTrashAlt } from "react-icons/fa";
+import {FaTrashAlt} from "react-icons/fa";
 import {useState} from "react";
+
 export const JobDemandApplications = () => {
 
     const {job_applies} = usePage().props
@@ -46,11 +47,14 @@ export const JobDemandApplications = () => {
                         <td>{jobApply.location}</td>
                         <td>{getFormattedDate(jobApply.created_at)}</td>
                         <td className="flex gap-x-2">
-                            <Link href={route('admin.job-demands.edit', jobApply.id)} className='btn-primary'>
+                            <Link href={route('admin.job-demand.applications.show', jobApply.id)} className='btn-primary'>
                                 <FaRegEye/>
                             </Link>
-                            <button className="bg-warning px-4 py-1 rounded text-white" type={'button'} onClick={() => handleDelete(jobApply)}>
-                                <FaTrashAlt />
+                            <button
+                                className="bg-warning px-4 py-1 rounded text-white"
+                                type={'button'}
+                                onClick={() => handleDelete(jobApply)}>
+                                <FaTrashAlt/>
                             </button>
                         </td>
                     </tr>

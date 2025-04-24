@@ -11,17 +11,12 @@ class SingleJobApplication
     public function execute(int $id): \Inertia\Response
     {
         $jobApply = JobApply::query()
-            ->with(['education.language','experiences.country:id,name'])
+            ->with(['education.language','experiences.country:id,name','country:id,nationality'])
             ->findOrFail($id);
-
-        $experiences = JobExperience::query()
-            ->with(['country:id,name'])
-            ->where('user_id', $jobApply->user_id)
-            ->get();
 
         return Inertia::render('Admin/JobPost/JobApplicationShow', [
             'job_apply' => $jobApply,
-            'experiences' => $experiences
+            'experiences' => $jobApply->experiences
         ]);
     }
 }

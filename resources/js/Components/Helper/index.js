@@ -12,7 +12,7 @@ export const getFormattedDate = (dateTime) => {
 }
 
 export const getValue = (items, id) => {
-    return items.find(item => item.id === id)?.name ?? ''
+    return items.find(item => item.id === Number(id))?.name ?? ''
 }
 export const isPermitted = (permission) => {
     const role = usePage().props?.admin_role;
