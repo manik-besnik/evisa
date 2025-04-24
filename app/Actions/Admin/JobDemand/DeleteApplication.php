@@ -14,11 +14,20 @@ class DeleteApplication
 
         $jobApply = JobApply::query()->findOrFail($id);
 
-        dd($jobApply);
 
         try {
 
             FileUpload::delete($jobApply->avatar);
+
+            foreach ($jobApply->documents as $doc) {
+
+                $url = $doc['url'] ?? null;
+
+                if ($url){
+                    FileUpload::delete($url);
+                }
+
+            }
 
             JobExperience::query()->where('job_apply_id', $jobApply->id)->delete();
 
@@ -26,7 +35,7 @@ class DeleteApplication
 
             $jobApply->delete();
 
-            return redirect()->back()->with('success', 'Application has been deleted');
+            return redirect()->back()->with('success', 'Job Application deleted successfully');
         }catch (\Exception $exception){
             return redirect()->back()->withErrors([$exception->getMessage()]);
         }
