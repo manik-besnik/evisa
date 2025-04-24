@@ -1,14 +1,30 @@
 import Authenticated from "@/Layouts/AuthenticatedLayout.jsx";
-import {Head, Link, usePage} from "@inertiajs/react";
+import {Head, Link, usePage, router} from "@inertiajs/react";
 import Table from "@/Components/Table.jsx";
 import {getFormattedDate} from "@/Components/Helper/index.js";
 import {FaRegEye} from "react-icons/fa6";
 import TopSection from "@/Components/Admin/TopSection.jsx";
 import Pagination from "@/Components/Admin/Pagination.jsx";
-
+import DeleteConfirmModal from "@/Components/DeleteConfirmModal.jsx";
+import { FaTrashAlt } from "react-icons/fa";
+import {useState} from "react";
 export const JobDemandApplications = () => {
 
     const {job_applies} = usePage().props
+
+    const [jobApply, setJobApply] = useState(null);
+    const [show, setShow] = useState(false);
+
+    const handleDelete = (jobApply) => {
+        setJobApply(jobApply);
+        setShow(true);
+    }
+
+    const confirmDelete = () => {
+        setShow(false);
+
+        router.delete(route('admin.job-demand.applications.delete', {id: jobApply.id}))
+    }
 
 
     return (
@@ -33,12 +49,22 @@ export const JobDemandApplications = () => {
                             <Link href={route('admin.job-demands.edit', jobApply.id)} className='btn-primary'>
                                 <FaRegEye/>
                             </Link>
+                            <button className="bg-warning px-4 py-1 rounded text-white" type={'button'} onClick={() => handleDelete(jobApply)}>
+                                <FaTrashAlt />
+                            </button>
                         </td>
                     </tr>
                 ))}
             </Table>
 
             <Pagination links={job_applies.links}/>
+
+            <DeleteConfirmModal
+                show={show}
+                setShow={setShow}
+                handleConfirmDelete={confirmDelete}
+            />
+
         </Authenticated>
     )
 }
