@@ -22,7 +22,7 @@ export default function MultiSelect({
 
     const handleChange = (item) => {
 
-        if (selected.length >= selectLimit) {
+        if (selected?.length >= selectLimit) {
             return;
         }
         const isSelected = selected.some(s => s === item);
@@ -37,7 +37,7 @@ export default function MultiSelect({
     };
 
     const handleRemoveItem = (index) => {
-        selected.splice(index, 1);
+        selected?.splice(index, 1);
 
         setSelected(selected);
         handleValueChange(selected);
@@ -60,9 +60,9 @@ export default function MultiSelect({
                             className={`h-[26px] sm:h-[36px] w-full flex items-center justify-between leading-[14px] sm:leading-[20px] text-xs sm:text-sm px-3 border-0 border-l-4 ${defaultClasses} ${classes}`}
                         >
 
-                            {selected.length > 0 ? (
+                            {selected?.length > 0 ? (
                                 <span className="flex gap-x-1 text-xs">
-                                    {selected.map((item, index) => (
+                                    {selected?.map((item, index) => (
                                         <span key={index}
                                               className="flex gap-x-2 items-center bg-gray-200 px-2 py-1 rounded-md">
                                             <span>
