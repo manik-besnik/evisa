@@ -25,19 +25,18 @@ export default function MultiSelect({
         if (selected?.length >= selectLimit) {
             return;
         }
-        const isSelected = selected.some(s => s === item);
+        const isSelected = selected?.some(s => s === item);
 
-        let newSelected;
-        if (!isSelected) {
-            newSelected = [...selected, item];
+        if (isSelected) {
+            return;
         }
 
-        setSelected(newSelected);
-        handleValueChange(newSelected);
+        setSelected([...selected, item]);
+        handleValueChange([...selected, item]);
     };
 
     const handleRemoveItem = (index) => {
-        selected?.splice(index, 1);
+        selected.splice(index, 1);
 
         setSelected(selected);
         handleValueChange(selected);
@@ -103,7 +102,7 @@ export default function MultiSelect({
                                         key={i}
                                         value={person}
                                         onClick={() => handleChange(person)}
-                                        className={`group flex items-center gap-2 rounded-md py-2 px-2.5 select-none cursor-pointer data-[focus]:bg-gray-200 ${selected.some(s => s === person) ? 'bg-gray-200' : ''}`}
+                                        className={`group flex items-center gap-2 rounded-md py-2 px-2.5 select-none cursor-pointer data-[focus]:bg-gray-200 ${selected?.some(s => s === person) ? 'bg-gray-200' : ''}`}
                                     >
                                         <div
                                             className="text-xs leading-[14px] text-text-primary">{person?.[field]}</div>
