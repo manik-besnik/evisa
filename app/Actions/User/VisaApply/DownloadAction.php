@@ -12,10 +12,10 @@ class DownloadAction
         $visaApply = VisaApply::query()->findOrFail($id);
 
 
-        $pdf = DomPDF::loadView('pdfs.jobs', compact('visaApply'));
+        $pdf = DomPDF::loadView('pdfs.visa-apply', compact('visaApply'));
 
-        $pdf->setPaper('a4', 'portrait');
+        $pdf->setPaper('a4');
 
-        return $pdf->download("job_" . $visaApply->code . ".pdf");
+        return $pdf->download("visa_apply_" . $visaApply->code . ".pdf");
     }
 }
