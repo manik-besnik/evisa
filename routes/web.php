@@ -58,6 +58,7 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::get('visa-apply/{id}/details', [VisaApplyController::class, 'show'])->name('visa-apply.show');
 
     Route::get('visa-apply', [VisaApplyController::class, 'create'])->name('visa-apply.create');
+    Route::get('visa-apply/download/{id}', [VisaApplyController::class, 'download'])->name('visa-apply.download');
     Route::get('visa', [VisaApplyController::class, 'visa'])->name('visa.create');
     Route::get('job-demand', [JobDemandController::class, 'create'])->name('job-demand.create');
     Route::get('single-job-demand', [JobDemandController::class, 'singleJobDemand'])->name('single-job-demand.create');

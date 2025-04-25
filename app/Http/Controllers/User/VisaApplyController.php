@@ -77,4 +77,9 @@ class VisaApplyController extends Controller
     {
         return $visaAction->execute();
     }
+
+    public function download(int $id)
+    {
+
+    }
 }
