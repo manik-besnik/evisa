@@ -12,6 +12,10 @@ use App\Http\Controllers\User\AgencyController;
 use App\Http\Controllers\User\ContactController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Spatie\LaravelPdf\Enums\Format;
+use function Spatie\LaravelPdf\Support\pdf;
+use Spatie\LaravelPdf\Enums\Unit;
+
 
 Route::get('/', function () {
     return Inertia::render('Home');
@@ -54,6 +58,7 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::get('visa-apply/{id}/details', [VisaApplyController::class, 'show'])->name('visa-apply.show');
 
     Route::get('visa-apply', [VisaApplyController::class, 'create'])->name('visa-apply.create');
+    Route::get('visa-apply/download/{id}', [VisaApplyController::class, 'download'])->name('visa-apply.download');
     Route::get('visa', [VisaApplyController::class, 'visa'])->name('visa.create');
     Route::get('job-demand', [JobDemandController::class, 'create'])->name('job-demand.create');
     Route::get('single-job-demand', [JobDemandController::class, 'singleJobDemand'])->name('single-job-demand.create');
@@ -74,8 +79,11 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::post('job-apply/store', [JobPostController::class, 'store'])->name('job-posts.store');
 
     Route::get('job-applies', [JobPostController::class, 'jobApplyList'])->name('job-apply.list');
+    Route::get('job-applies/{id}', [JobPostController::class, 'jobApplyDownload'])->name('job-apply.download');
 
     //cvCreate
+    Route::get('cvs', [CvCreateController::class, 'index'])->name('cv.index');
+    Route::get('cv/download', [CvCreateController::class, 'download'])->name('cv.download');
     Route::get('cv-create', [CvCreateController::class, 'create'])->name('cv.create');
     Route::post('cv-create', [CvCreateController::class, 'store'])->name('cv.store');
     Route::get('update-news', [BlogController::class, 'create'])->name('update.news');
@@ -92,6 +100,16 @@ Route::get('google', function () {})->name('task.create');
 
 Route::inertia('others', 'Other')->name('others');
 Route::inertia('search', 'Search');
+
+route::view('cv','pdfs.single-column-cv');
+route::get('cv2',function (){
+    return pdf()
+        ->format(Format::A4)
+        ->margins(.5, .5, .5, .5, Unit::Inch)
+        ->view('pdfs.backup')
+        ->name('invoice-2023-04-10.pdf')->download();
+});
+route::inertia('resume','Resume');
 
 require __DIR__ . '/auth.php';
 require __DIR__ . '/admin.php';

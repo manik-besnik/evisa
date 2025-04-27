@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Actions\User\VisaApply\CreateAction;
+use App\Actions\User\VisaApply\DownloadAction;
 use App\Actions\User\VisaApply\VisaAction;
 use App\Actions\User\VisaApply\IndexAction;
 use App\Actions\User\VisaApply\ShowAction;
@@ -76,5 +77,10 @@ class VisaApplyController extends Controller
     public function visa(VisaAction $visaAction): \Inertia\Response
     {
         return $visaAction->execute();
+    }
+
+    public function download(int $id, DownloadAction $downloadAction)
+    {
+        return $downloadAction->execute($id);
     }
 }

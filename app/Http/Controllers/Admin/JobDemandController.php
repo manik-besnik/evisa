@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Actions\Admin\JobDemand\CreateAction;
 use App\Actions\Admin\JobDemand\DeleteAction;
+use App\Actions\Admin\JobDemand\DeleteApplication;
 use App\Actions\Admin\JobDemand\EditAction;
 use App\Actions\Admin\JobDemand\IndexAction;
 use App\Actions\Admin\JobDemand\JobDemandApplicationAction;
 use App\Actions\Admin\JobDemand\StoreAction;
 use App\Actions\Admin\JobDemand\UpdateAction;
+use App\Actions\Admin\JobPost\SingleJobApplication;
 use App\DTOs\AdminJobDemandDTO;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
@@ -50,5 +52,15 @@ class JobDemandController extends Controller
     public function jobDemandApplications(JobDemandApplicationAction $jobDemandApplicationAction): Response
     {
         return $jobDemandApplicationAction->execute();
+    }
+
+    public function singleApplication(int $id, SingleJobApplication $singleJobApplication): Response
+    {
+        return $singleJobApplication->execute($id);
+    }
+
+    public function deleteApplication(int $id, DeleteApplication $deleteApplicationAction): RedirectResponse
+    {
+        return $deleteApplicationAction->execute($id);
     }
 }

@@ -39,10 +39,16 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string|null $passport_expiry
  * @property string|null $visa_expiry
  * @property string|null $whatsapp_no
- * @property array|string $documents
+ * @property string|null $date_of_birth
  * @property array|string|null $experiences
+ * @property array|string|null $references
+ * @property array|string|null $educations
  * @property string $summary
- * @property string $exam_name
+ * @property string|null $website
+ * @property string|null $personal_skills
+ * @property string|null $designation
+ * @property string|null $interests
+ * @property string|null $languages
  * @property string $passing_year
  * @property string $institute
  * @property string|null $result
@@ -57,7 +63,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @mixin Model
  *
  * @property User|null $user
- * @property Language $language
+ * @property Country|null $country
+ *
  */
 class UserCV extends Model
 {
@@ -65,9 +72,11 @@ class UserCV extends Model
 
     protected $fillable = [
         'user_id',
+        'nationality',
         'name',
         'phone',
         'email',
+        'designation',
         'shirt_size',
         'pant_size',
         'show_size',
@@ -75,6 +84,7 @@ class UserCV extends Model
         'height',
         'nearest_airport',
         'region',
+        'date_of_birth',
         'avatar',
         'gender',
         'religion',
@@ -99,19 +109,20 @@ class UserCV extends Model
     ];
 
     protected $casts = [
-        'documents' => 'array',
+        'educations' => 'array',
+        'references' => 'array',
         'experiences' => 'array',
     ];
 
 
+    public function country(): BelongsTo
+    {
+        return $this->belongsTo(Country::class,'nationality','id');
+    }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
-    }
-
-    public function language(): BelongsTo
-    {
-        return $this->belongsTo(Language::class,'mother_language','id');
     }
 
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\User\CvCreate;
+namespace App\Actions\User\Blog;
 
 use App\DTOs\CVDTO;
 use App\Models\UserCV;

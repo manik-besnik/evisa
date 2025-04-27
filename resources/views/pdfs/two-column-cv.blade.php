@@ -81,7 +81,7 @@ class CvCreateController extends Controller
         if ($type === '1') {
             $pdf = DomPDF::loadView('pdfs.single-column-cv', compact('cv'));
 
-            $pdf->setPaper('a4', );
+            $pdf->setPaper('a4', 'portrait');
 
             return $pdf->download("cv" . $cv->name . ".pdf");
         }
@@ -89,7 +89,7 @@ class CvCreateController extends Controller
 
         $pdf = DomPDF::loadView('pdfs.test', compact('cv'));
 
-        $pdf->setPaper('a4', );
+        $pdf->setPaper('a4', 'portrait');
 
         return $pdf->download("cv" . $cv->name . ".pdf");
 
