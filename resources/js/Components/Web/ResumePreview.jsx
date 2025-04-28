@@ -1,24 +1,25 @@
-import React, {useRef, useEffect, useState} from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import Modal from "@/Components/Modal.jsx";
+import { assetUrl } from "@/Components/Constant/index.js";
 
-const SectionHeader = ({icon, text}) => {
+const SectionHeader = ({ icon, text }) => {
     return (
         <div className="section-header flex items-center relative mb-5">
-            <div className='bg-primary rounded-l-full'>
+            <div className='bg-[#DD9227] rounded-l-full'>
                 <div
-                    className="icon-circle w-10 h-10  text-white flex items-center justify-center border-2 border-white rounded-full  relative z-10">
+                    className="icon-circle w-10 h-10  flex items-center justify-center border-2 border-white rounded-full bg-[#111827]  relative z-10">
                     <span className="icon text-base">{icon}</span>
                 </div>
             </div>
             <div
-                className="flex items-center bg-primary text-white h-10 min-w-max px-4 text-xl font-bold rounded-r-full">
+                className="flex items-center bg-[#DD9227] text-white h-10 min-w-max px-4 text-xl font-bold rounded-r-full">
                 {text}
             </div>
         </div>
     );
 };
 
-const Timeline = ({title, subTitle, description, startDate, endDate = null, isPresent = false}) => {
+const Timeline = ({ title, subTitle, description, startDate, endDate = null, isPresent = false }) => {
     const contentRef = useRef(null);
     const [lineHeight, setLineHeight] = useState(0);
 
@@ -38,10 +39,10 @@ const Timeline = ({title, subTitle, description, startDate, endDate = null, isPr
             {/* Timeline vertical line & dot */}
             <div className="relative flex flex-col">
                 <div
-                    className="w-3 h-3 rounded-full bg-[#1a222e] absolute top-1.5 left-1/2 transform -translate-x-1/2 z-10"/>
+                    className="w-3 h-3 rounded-full bg-[#1a222e] absolute top-1.5 left-1/2 transform -translate-x-1/2 z-10" />
                 <div
                     className="w-[1.5px] bg-[#1a222e] absolute left-1/2 top-4 transform -translate-x-1/2"
-                    style={{height: lineHeight}}
+                    style={{ height: lineHeight }}
                 />
             </div>
 
@@ -66,7 +67,7 @@ const Timeline = ({title, subTitle, description, startDate, endDate = null, isPr
 };
 
 
-const ResumePreview = ({show, setShow, cvData, confirmSubmit}) => {
+const ResumePreview = ({ show, setShow, cvData, confirmSubmit }) => {
 
     if (!show) return;
 
@@ -99,19 +100,19 @@ const ResumePreview = ({show, setShow, cvData, confirmSubmit}) => {
 
                         {/* Contact Information */}
                         <div className="mb-6">
-                            <SectionHeader icon="👤" text="Contact Me"/>
+                            <SectionHeader icon={<img src={`${assetUrl}images/cv/contact.png`} alt="contact" className='w-5 h-5' />} text="Contact Me" />
                             <ul className="space-y-2 ml-10">
                                 <li className="flex items-center">
-                                    <span className="mr-2">📞</span> {cvData.phone}
+                                    <img className="mr-2" src={`${assetUrl + 'images/cv/call.png'}`} alt="hero" /> {cvData.phone}
                                 </li>
                                 <li className="flex items-center">
-                                    <span className="mr-2">✉️</span> {cvData.email}
+                                    <img className="mr-2" src={`${assetUrl + 'images/cv/message.png'}`} alt="email" /> {cvData.email}
                                 </li>
                                 {/*<li className="flex items-center">*/}
                                 {/*    <span className="mr-2">📍</span> 123 Anywhere St., Any City*/}
                                 {/*</li>*/}
                                 <li className="flex items-center">
-                                    <span className="mr-2">🔗</span> {cvData.website}
+                                    <img className="mr-2" src={`${assetUrl + 'images/cv/link.png'}`} alt="link" />{cvData.website}
                                 </li>
                             </ul>
                         </div>
@@ -119,7 +120,7 @@ const ResumePreview = ({show, setShow, cvData, confirmSubmit}) => {
                         {/* Personal Skills */}
                         <div className="mb-6">
 
-                            <SectionHeader icon="✓" text="Personal Skills"/>
+                            <SectionHeader icon={<img src={`${assetUrl}images/cv/tik.png`} alt="contact" className='w-5 h-5' />} text="Personal Skills" />
                             <ul className="list-disc list-inside space-y-1 ml-10">
 
                                 {cvData.personal_skills.split(',').map((item, index) => (
@@ -130,7 +131,7 @@ const ResumePreview = ({show, setShow, cvData, confirmSubmit}) => {
 
                         {/* Interests */}
                         <div>
-                            <SectionHeader icon="❤" text="Interests"/>
+                            <SectionHeader icon={<img src={`${assetUrl}images/cv/love.png`} alt="contact" className='w-5 h-5' />} text="Interests" />
                             <ul className="list-disc list-inside space-y-1 ml-10">
                                 {cvData.interests.split(',').map((item, index) => (
                                     <li key={index}>{item.trim()}</li>
@@ -144,7 +145,7 @@ const ResumePreview = ({show, setShow, cvData, confirmSubmit}) => {
                         {/* About Me */}
                         <div className="mb-6">
 
-                            <SectionHeader icon="👤" text="About Me"/>
+                            <SectionHeader icon={<img src={`${assetUrl}images/cv/user.png`} alt="contact" className='w-5 h-5' />} text="About Me" />
                             <p className="text-justify">
                                 {cvData.summary}
                             </p>
@@ -153,7 +154,7 @@ const ResumePreview = ({show, setShow, cvData, confirmSubmit}) => {
                         {/* Experience */}
                         <div className="mb-10">
 
-                            <SectionHeader icon="💼" text="Experience"/>
+                            <SectionHeader icon={<img src={`${assetUrl}images/cv/officebag.png`} alt="contact" className='w-5 h-5' />} text="Experience" />
 
                             {cvData.job_experiences.map((item) => (
                                 <Timeline
@@ -170,7 +171,7 @@ const ResumePreview = ({show, setShow, cvData, confirmSubmit}) => {
 
                         {/* Education */}
                         <div className="mb-6">
-                            <SectionHeader icon="📚" text="Education"/>
+                            <SectionHeader icon={<img src={`${assetUrl}images/cv/book.png`} alt="contact" className='w-5 h-5' />} text="Education" />
 
                             {cvData.educations.map((item) => (
                                 <Timeline
@@ -184,7 +185,7 @@ const ResumePreview = ({show, setShow, cvData, confirmSubmit}) => {
 
                         {/* Languages */}
                         <div className="mb-6">
-                            <SectionHeader icon="🗣️" text="Languages"/>
+                            <SectionHeader icon={<img src={`${assetUrl}images/cv/flug.png`} alt="contact" className='w-5 h-5' />} text="Languages" />
                             <ul className="list-disc font-bold list-inside space-y-1 ml-10">
                                 {cvData.languages.map((item, index) => (
                                     <li key={index}>{item.name}</li>
@@ -194,7 +195,7 @@ const ResumePreview = ({show, setShow, cvData, confirmSubmit}) => {
 
                         {/* References */}
                         <div>
-                            <SectionHeader icon="👥" text="References"/>
+                            <SectionHeader icon={<img src={`${assetUrl}images/cv/useryellow.png`} alt="contact" className='w-5 h-5' />} text="References" />
 
                             {cvData.references.map((item, index) => (
                                 <div key={index} className="mb-4 ml-10">
@@ -211,8 +212,8 @@ const ResumePreview = ({show, setShow, cvData, confirmSubmit}) => {
             </div>
             <div className="flex justify-center my-4">
                 <button onClick={confirmSubmit}
-                        type={"button"}
-                        className="bg-red-600 text-white font-bold py-2 px-8 rounded">
+                    type={"button"}
+                    className="bg-red-600 text-white font-bold py-2 px-8 rounded">
                     Confirm Submit
                 </button>
             </div>
