@@ -90,6 +90,8 @@ Route::middleware(['auth', 'user'])->group(function () {
 
     //inquery
     Route::get('inquery', [InqueryController::class, 'create'])->name('inquery.create');
+    Route::post('/query/store', [InqueryController::class, 'store'])->name('query.store');
+
     Route::get('agency', [AgencyController::class, 'index'])->name('agency.create');
     Route::get('contact', [ContactController::class, 'index'])->name('contact.index');
 });

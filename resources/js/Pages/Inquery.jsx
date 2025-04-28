@@ -2,7 +2,7 @@ import WebLayout from "@/Layouts/WebLayout.jsx";
 import { Head } from "@inertiajs/react";
 import InputFile from "@/Components/Web/InputFile.jsx";
 import TextInput from "@/Components/TextInput.jsx";
-import CustomPhoneInput from "@/Components/Web/CustomPhoneInput.jsx"; // Import the new component
+import CustomPhoneInput from "@/Components/Web/CustomPhoneInput.jsx";
 import {
     regions,
     assetUrl,
@@ -12,11 +12,15 @@ import {
     countriesList
 } from "@/Components/Constant/index.js";
 import { usePage, router, useForm } from "@inertiajs/react";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import { toast } from "react-toastify";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const Inquery = () => {
-    const { apply_for, countries, locations, languages } = usePage().props;
+    const { apply_for, countries = [], locations = [], languages } = usePage().props;
     const [region, setRegion] = useState(null);
+    const [showLocationDropdown, setShowLocationDropdown] = useState(false);
+    const [locationOptions, setLocationOptions] = useState([]);
 
     const [phoneCountry, setPhoneCountry] = useState(countriesList[0]);
     const [whatsappCountry, setWhatsappCountry] = useState(countriesList[0]);
@@ -28,7 +32,7 @@ const Inquery = () => {
         visa_type: '',
         location: '',
         phone: '',
-        phone_country: countriesList[0].code, 
+        phone_country: countriesList[0].code,
         whatsapp: '',
         whatsapp_country: countriesList[0].code,
         message: '',
@@ -45,7 +49,6 @@ const Inquery = () => {
         visaTypes.find(type => type.id.toString() === urlVisaType) || '' :
         '';
     const [visaType, setVisaType] = useState(selectedVisaTypeObj);
-    const [applyLocation, setApplyLocation] = useState(null);
 
     const updateVisaType = (value) => {
         setData('visa_type', value.id);
@@ -65,6 +68,120 @@ const Inquery = () => {
 
         setData('documents', updatedDocuments);
     };
+
+    const [recaptchaToken, setRecaptchaToken] = useState('');
+    const recaptchaRef = useRef(null);
+
+    // Function to verify recaptcha
+    const verifyCallback = (token) => {
+        setRecaptchaToken(token);
+    };
+
+    // Reset recaptcha on form submission
+    const resetRecaptcha = () => {
+        if (window.grecaptcha && recaptchaRef.current) {
+            window.grecaptcha.reset();
+            setRecaptchaToken('');
+        }
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        // Check if recaptcha is completed
+        if (!recaptchaToken) {
+            alert('Please complete the reCAPTCHA verification.');
+            return;
+        }
+
+        // Create FormData
+        const formData = new FormData();
+
+        // Add basic fields
+        formData.append('name', data.name);
+        formData.append('email', data.email);
+        formData.append('visa_type', data.visa_type);
+        formData.append('location', data.location);
+        formData.append('phone', data.phone);
+        formData.append('phone_country', data.phone_country);
+        formData.append('whatsapp', data.whatsapp);
+        formData.append('whatsapp_country', data.whatsapp_country);
+        formData.append('message', data.message);
+        formData.append('g-recaptcha-response', recaptchaToken);
+
+        // Add documents
+        Object.keys(data.documents).forEach(key => {
+            const document = data.documents[key];
+            formData.append(`documents[${key}][name]`, document.name);
+            formData.append(`documents[${key}][file]`, document.file);
+        });
+
+        // Submit the form data
+        router.post(route('query.store'), formData, {
+            forceFormData: true,
+            onSuccess: () => {
+                // Reset form
+                setData({
+                    name: '',
+                    email: '',
+                    visa_type: '',
+                    location: '',
+                    phone: '',
+                    phone_country: countriesList[0].code,
+                    whatsapp: '',
+                    whatsapp_country: countriesList[0].code,
+                    message: '',
+                    documents: {}
+                });
+
+                resetRecaptcha();
+                 toast.success('Your query has been submitted successfully!');
+            }
+        });
+    };
+    
+
+    // Handle Region Change with more detailed logging
+    const handleRegionChange = (e) => {
+        const selectedRegionId = parseInt(e.target.value);
+        const selectedRegion = regions.find(r => r.id === selectedRegionId);
+
+        setRegion(selectedRegion);
+        setShowLocationDropdown(selectedRegionId > 0); // Show location dropdown if any region is selected
+
+        // Reset location when region changes
+        setData('location', '');
+
+        // Update location options based on selected region
+        updateLocationOptions(selectedRegion);
+    };
+
+    // Update location options based on selected region
+    const updateLocationOptions = (selectedRegion) => {
+        if (!selectedRegion) {
+            setLocationOptions([]);
+            return;
+        }
+
+        if (selectedRegion.name === "Inside UAE") {
+            // Use locations from props if available, otherwise use fallback data
+            const uaeLocations = locations.length > 0 ? locations : [
+                { id: 1, name: "DUBAI" },
+                { id: 2, name: "ABUDHABI" },
+                { id: 3, name: "SHARJAH" },
+                { id: 4, name: "AJMAN" },
+                { id: 5, name: "UMM AL QWAIN" },
+                { id: 6, name: "RAS AL KHAIMA" },
+            ];
+            setLocationOptions(uaeLocations);
+        } else {
+            setLocationOptions(countries || []);
+        }
+    };
+    const onChange = (value) =>{
+        console.log(value);
+     
+    }
 
     // Phone icon component
     const PhoneIcon = () => (
@@ -86,9 +203,12 @@ const Inquery = () => {
     );
 
     return (
+        
         <WebLayout showBgImage={true} showServiceImage={true}>
             <Head title="Other | Dubai E-Visa" />
+            <script src="https://www.google.com/recaptcha/api.js" async defer></script>
             <div className="container">
+                    <form onSubmit={handleSubmit}>
                 <div className="grid grid-cols-2 gap-x-20">
                     <div className="w-12/12">
                         <h4 className="text-success text-md my-4">Add Any Type of documents</h4>
@@ -108,7 +228,7 @@ const Inquery = () => {
                             ))}
                         </div>
                     </div>
-                    <div className="w-6/12 h-[72vh]">
+                    <div className="w-6/12 h-[80vh]">
                         <div className="bg-[#6b7377c8] h-full relative p-5">
                             <h4 className="text-white font-medium text-lg mb-4">Feel free to get in touch</h4>
 
@@ -140,7 +260,8 @@ const Inquery = () => {
                                 <div className="relative w-full">
                                     <select
                                         className="w-full p-2 rounded"
-                                        onChange={(e) => setRegion(regions.find(r => r.id === parseInt(e.target.value)))}
+                                        onChange={handleRegionChange}
+                                        value={region?.id || ''}
                                     >
                                         <option value="">Apply From</option>
                                         {regions && regions.map((r, i) => (
@@ -148,6 +269,26 @@ const Inquery = () => {
                                         ))}
                                     </select>
                                 </div>
+
+                                {/* Conditional Location dropdown */}
+                                {showLocationDropdown && (
+                                    <div className="relative w-full">
+                                        <select
+                                            className="w-full p-2 rounded"
+                                            onChange={(e) => setData('location', e.target.value)}
+                                            value={data.location}
+                                        >
+                                            <option value="">Select Location</option>
+                                            {locationOptions && locationOptions.length > 0 ? (
+                                                locationOptions.map((item, i) => (
+                                                    <option key={i} value={item.id}>{item.name}</option>
+                                                ))
+                                            ) : (
+                                                <option value="" disabled>No options available</option>
+                                            )}
+                                        </select>
+                                    </div>
+                                )}
 
                                 <TextInput
                                     value={data.email}
@@ -195,7 +336,10 @@ const Inquery = () => {
                                 ></textarea>
 
                                 <div>
-                                    <div className="g-recaptcha"></div>
+                                        <ReCAPTCHA
+                                            sitekey="6LeTeScrAAAAAKSFD731Y2cxiy5D3sqodmTKbNa4"
+                                            onChange={onChange}
+                                        />
                                 </div>
 
                                 <div className="mt-4">
@@ -207,6 +351,8 @@ const Inquery = () => {
                         </div>
                     </div>
                 </div>
+                </form>
+                
             </div>
         </WebLayout>
     );
