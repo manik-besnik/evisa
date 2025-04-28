@@ -51,31 +51,9 @@
             vertical-align: top;
             padding-right: 15px;
         }
-        .btn-confirm {
-            display: inline-block;
-            padding: 8px 20px;
-            background-color: #3490dc;
-            color: white;
-            text-align: center;
-            margin-top: 20px;
-            border-radius: 5px;
-            font-size: 14px;
-        }
     </style>
 </head>
 <body>
-
-<h2>View Apply Preview</h2>
-
-<!-- If passport required -->
-@if($isPassportRequired)
-    <div class="warning">Passport Document is required</div>
-@endif
-
-<!-- If photo required -->
-@if($isPhotoRequired)
-    <div class="warning">Photo Document is required</div>
-@endif
 
 <div class="row">
     <div class="col">
@@ -92,15 +70,15 @@
                 </div>
                 <div class="info-item">
                     <span class="info-label">Current Nationality</span>
-                    <span class="info-value">{{ getNationality($visa_apply->current_nationality) }}</span>
+                    <span class="info-value">{{ $visa_apply->current_nationality }}</span>
                 </div>
                 <div class="info-item">
                     <span class="info-label">Previous Nationality</span>
-                    <span class="info-value">{{ getNationality($visa_apply->prev_nationality) }}</span>
+                    <span class="info-value">{{ $visa_apply->prev_nationality }}</span>
                 </div>
                 <div class="info-item">
                     <span class="info-label">Gender</span>
-                    <span class="info-value">{{ getValue($genders, $visa_apply->gender) }}</span>
+                    <span class="info-value">{{ $visa_apply->gender }}</span>
                 </div>
                 <div class="info-item">
                     <span class="info-label">Date of Birth</span>
@@ -108,11 +86,11 @@
                 </div>
                 <div class="info-item">
                     <span class="info-label">Birth Country</span>
-                    <span class="info-value">{{ getCountry($visa_apply->birth_country) }}</span>
+                    <span class="info-value">{{ $visa_apply->birth_country }}</span>
                 </div>
                 <div class="info-item">
                     <span class="info-label">Marital Status</span>
-                    <span class="info-value">{{ getValue($maritalStatuses, $visa_apply->marital_status) }}</span>
+                    <span class="info-value">{{ $visa_apply->marital_status }}</span>
                 </div>
                 <div class="info-item">
                     <span class="info-label">Birth Place</span>
@@ -160,15 +138,15 @@
                 </div>
                 <div class="info-item">
                     <span class="info-label">Processing Type</span>
-                    <span class="info-value">{{ getValue($visaProcessingTypes, $visa_apply->processing_type) }}</span>
+                    <span class="info-value">{{ $visa_apply->processing_type }}</span>
                 </div>
                 <div class="info-item">
                     <span class="info-label">Visa Type</span>
-                    <span class="info-value">{{ getValue($visaTypes, $visa_apply->visa_type) }}</span>
+                    <span class="info-value">{{  $visa_apply->visa_type }}</span>
                 </div>
                 <div class="info-item">
                     <span class="info-label">Group</span>
-                    <span class="info-value">{{ getValue($groups, $visa_apply->group) }}</span>
+                    <span class="info-value">{{  $visa_apply->group }}</span>
                 </div>
             </div>
         </div>
@@ -202,7 +180,7 @@
                 </div>
                 <div class="info-item">
                     <span class="info-label">Issue Country</span>
-                    <span class="info-value">{{ getCountry($visa_apply->passport_issue_country) }}</span>
+                    <span class="info-value">{{ $visa_apply->passport_issue_country }}</span>
                 </div>
             </div>
         </div>
@@ -220,7 +198,7 @@
                 </div>
                 <div class="info-item">
                     <span class="info-label">Guarantor Nationality</span>
-                    <span class="info-value">{{ getNationality($visa_apply->guarantor_nationality) }}</span>
+                    <span class="info-value">{{ $visa_apply->guarantor_nationality }}</span>
                 </div>
                 <div class="info-item">
                     <span class="info-label">Guarantor Phone</span>
@@ -232,12 +210,6 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
-
-<div style="text-align: center;">
-    <div class="btn-confirm">
-        Confirm Submit
     </div>
 </div>
 
