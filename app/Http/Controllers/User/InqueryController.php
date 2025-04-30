@@ -10,6 +10,7 @@ use App\Models\VisaApply;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Inquery;
+use Illuminate\Support\Facades\Http;
 
 class InqueryController extends Controller
 {
@@ -34,9 +35,9 @@ class InqueryController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
-        // Validate the request data
+        // First validate the form inputs
         $validator = Validator::make($request->all(), [
+            'recaptcha_token' => 'required|string', // Updated name to standard reCAPTCHA response field
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'visa_type' => 'required',
@@ -51,6 +52,27 @@ class InqueryController extends Controller
 
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
+        }
+
+        $recaptchaToken = $request->input('recaptcha_token');
+        $secretKey = '6LeTeScrAAAAAE5BjjM4qXFCXsV9R4NiiOMi-Fwn';
+        $ip = $request->ip();
+
+        try {
+            $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+                'secret' => $secretKey,
+                'response' => $recaptchaToken,
+                'remoteip' => $ip
+            ]);
+
+            $responseData = $response->json();
+            if (!isset($responseData['success']) || $responseData['success'] !== true) {
+                $errorCodes = $responseData['error-codes'] ?? ['unknown-error'];
+                
+                return back()->withErrors(['captcha' => 'reCAPTCHA verification failed: ' . implode(', ', $errorCodes)])->withInput();
+            }
+        } catch (\Exception $e) {
+            return back()->withErrors(['captcha' => 'Error verifying reCAPTCHA. Please try again.'])->withInput();
         }
 
         // Process documents if any
@@ -76,7 +98,6 @@ class InqueryController extends Controller
             }
         }
 
-        // Create a new query record with documents as JSON
         $query = Inquery::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -125,9 +146,4 @@ class InqueryController extends Controller
         //
     }
 
-
-    public function visa(VisaAction $visaAction): \Inertia\Response
-    {
-        return $visaAction->execute();
-    }
 }

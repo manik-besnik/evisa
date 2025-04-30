@@ -5,8 +5,6 @@ import TextInput from "@/Components/TextInput.jsx";
 import CustomPhoneInput from "@/Components/Web/CustomPhoneInput.jsx";
 import {
     regions,
-    assetUrl,
-    visaTypesApply,
     visaTypes,
     jobApplyDocuments,
     countriesList
@@ -21,6 +19,9 @@ const Inquery = () => {
     const [region, setRegion] = useState(null);
     const [showLocationDropdown, setShowLocationDropdown] = useState(false);
     const [locationOptions, setLocationOptions] = useState([]);
+    const [captchaToken, setCaptchaToken] = useState(null);
+    const [captchaError, setCaptchaError] = useState("");
+    const recaptchaRef = useRef(null);
 
     const [phoneCountry, setPhoneCountry] = useState(countriesList[0]);
     const [whatsappCountry, setWhatsappCountry] = useState(countriesList[0]);
@@ -36,7 +37,8 @@ const Inquery = () => {
         whatsapp: '',
         whatsapp_country: countriesList[0].code,
         message: '',
-        documents: {}
+        documents: {},
+        recaptcha_token: ''
     });
 
     const handleVisaClick = (visa) => {
@@ -69,32 +71,27 @@ const Inquery = () => {
         setData('documents', updatedDocuments);
     };
 
-    const [recaptchaToken, setRecaptchaToken] = useState('');
-    const recaptchaRef = useRef(null);
-
-    // Function to verify recaptcha
-    const verifyCallback = (token) => {
-        setRecaptchaToken(token);
+    const handleCaptchaChange = (token) => {
+        setCaptchaToken(token);
+        setData('recaptcha_token', token);
+        setCaptchaError("");
     };
 
-    // Reset recaptcha on form submission
-    const resetRecaptcha = () => {
-        if (window.grecaptcha && recaptchaRef.current) {
-            window.grecaptcha.reset();
-            setRecaptchaToken('');
-        }
+    const handleCaptchaExpired = () => {
+        setCaptchaToken(null);
+        setData('recaptcha_token', '');
+        setCaptchaError("reCAPTCHA has expired, please verify again");
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        // Check if recaptcha is completed
-        if (!recaptchaToken) {
-            alert('Please complete the reCAPTCHA verification.');
+        // Validate reCAPTCHA
+        if (!captchaToken) {
+            setCaptchaError("Please complete the reCAPTCHA verification");
             return;
         }
 
-        // Create FormData
         const formData = new FormData();
 
         // Add basic fields
@@ -107,7 +104,7 @@ const Inquery = () => {
         formData.append('whatsapp', data.whatsapp);
         formData.append('whatsapp_country', data.whatsapp_country);
         formData.append('message', data.message);
-        formData.append('g-recaptcha-response', recaptchaToken);
+        formData.append('recaptcha_token', captchaToken);
 
         // Add documents
         Object.keys(data.documents).forEach(key => {
@@ -116,11 +113,9 @@ const Inquery = () => {
             formData.append(`documents[${key}][file]`, document.file);
         });
 
-        // Submit the form data
         router.post(route('query.store'), formData, {
-            forceFormData: true,
+            forceFormData: true,  // Important for Inertia to send as FormData
             onSuccess: () => {
-                // Reset form
                 setData({
                     name: '',
                     email: '',
@@ -131,32 +126,42 @@ const Inquery = () => {
                     whatsapp: '',
                     whatsapp_country: countriesList[0].code,
                     message: '',
-                    documents: {}
+                    documents: {},
+                    recaptcha_token: ''
                 });
 
-                resetRecaptcha();
-                 toast.success('Your query has been submitted successfully!');
+                // Reset reCAPTCHA
+                setCaptchaToken(null);
+                if (recaptchaRef.current) {
+                    recaptchaRef.current.reset();
+                }
+
+                toast.success('Your query has been submitted successfully!');
+            },
+            onError: (errors) => {
+                if (errors.recaptcha_token) {
+                    setCaptchaError(errors.recaptcha_token);
+                    // Reset reCAPTCHA on error
+                    if (recaptchaRef.current) {
+                        recaptchaRef.current.reset();
+                    }
+                }
             }
         });
     };
-    
 
-    // Handle Region Change with more detailed logging
     const handleRegionChange = (e) => {
         const selectedRegionId = parseInt(e.target.value);
         const selectedRegion = regions.find(r => r.id === selectedRegionId);
 
         setRegion(selectedRegion);
-        setShowLocationDropdown(selectedRegionId > 0); // Show location dropdown if any region is selected
+        setShowLocationDropdown(selectedRegionId > 0);
 
-        // Reset location when region changes
         setData('location', '');
 
-        // Update location options based on selected region
         updateLocationOptions(selectedRegion);
     };
 
-    // Update location options based on selected region
     const updateLocationOptions = (selectedRegion) => {
         if (!selectedRegion) {
             setLocationOptions([]);
@@ -164,7 +169,6 @@ const Inquery = () => {
         }
 
         if (selectedRegion.name === "Inside UAE") {
-            // Use locations from props if available, otherwise use fallback data
             const uaeLocations = locations.length > 0 ? locations : [
                 { id: 1, name: "DUBAI" },
                 { id: 2, name: "ABUDHABI" },
@@ -178,10 +182,6 @@ const Inquery = () => {
             setLocationOptions(countries || []);
         }
     };
-    const onChange = (value) =>{
-        console.log(value);
-     
-    }
 
     // Phone icon component
     const PhoneIcon = () => (
@@ -203,156 +203,159 @@ const Inquery = () => {
     );
 
     return (
-        
         <WebLayout showBgImage={true} showServiceImage={true}>
             <Head title="Other | Dubai E-Visa" />
             <script src="https://www.google.com/recaptcha/api.js" async defer></script>
             <div className="container">
-                    <form onSubmit={handleSubmit}>
-                <div className="grid grid-cols-2 gap-x-20">
-                    <div className="w-12/12">
-                        <h4 className="text-success text-md my-4">Add Any Type of documents</h4>
+                <form onSubmit={handleSubmit}>
+                    <div className="grid grid-cols-2 gap-x-20">
+                        <div className="w-12/12">
+                            <h4 className="text-success text-md my-4">Add Any Type of documents</h4>
 
-                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 place-items-center gap-2 mt-10">
-                            {jobApplyDocuments.map((item, i) => (
-                                <div
-                                    key={i}
-                                    className="flex items-center justify-center w-full h-full"
-                                >{i !== 24 && <InputFile
-                                    defaultClasses="w-full h-12"
-                                    fileType={item.type}
-                                    onChange={handleFileChange}
-                                    placeholder={item.name}
-                                />}
-                                </div>
-                            ))}
+                            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 place-items-center gap-2 mt-10">
+                                {jobApplyDocuments.map((item, i) => (
+                                    <div
+                                        key={i}
+                                        className="flex items-center justify-center w-full h-full"
+                                    >{i !== 24 && <InputFile
+                                        defaultClasses="w-full h-12"
+                                        fileType={item.type}
+                                        onChange={handleFileChange}
+                                        placeholder={item.name}
+                                    />}
+                                    </div>
+                                ))}
+                            </div>
                         </div>
-                    </div>
-                    <div className="w-6/12 h-[80vh]">
-                        <div className="bg-[#6b7377c8] h-full relative p-5">
-                            <h4 className="text-white font-medium text-lg mb-4">Feel free to get in touch</h4>
+                        <div className="w-6/12 h-[80vh]">
+                            <div className="bg-[#6b7377c8] h-full relative p-5">
+                                <h4 className="text-white font-medium text-lg mb-4">Feel free to get in touch</h4>
 
-                            {/* Contact form */}
-                            <div className="space-y-3">
-                                <TextInput
-                                    value={data.name}
-                                    onChange={(e) => setData('name', e.target.value)}
-                                    error={errors.name}
-                                    placeholder="Your Name"
-                                    id="name"
-                                    required={true}
-                                    defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
-                                />
+                                {/* Contact form */}
+                                <div className="space-y-3">
+                                    <TextInput
+                                        value={data.name}
+                                        onChange={(e) => setData('name', e.target.value)}
+                                        error={errors.name}
+                                        placeholder="Your Name"
+                                        id="name"
+                                        required={true}
+                                        defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                    />
 
-                                <div className="relative w-full">
-                                    <select
-                                        className="w-full p-2 rounded"
-                                        onChange={(e) => setData('visa_type', e.target.value)}
-                                        value={data.visa_type}
-                                    >
-                                        <option value="">Apply For</option>
-                                        {visaTypes && visaTypes.map((type, i) => (
-                                            <option key={i} value={type.id}>{type.name}</option>
-                                        ))}
-                                    </select>
-                                </div>
-
-                                <div className="relative w-full">
-                                    <select
-                                        className="w-full p-2 rounded"
-                                        onChange={handleRegionChange}
-                                        value={region?.id || ''}
-                                    >
-                                        <option value="">Apply From</option>
-                                        {regions && regions.map((r, i) => (
-                                            <option key={i} value={r.id}>{r.name}</option>
-                                        ))}
-                                    </select>
-                                </div>
-
-                                {/* Conditional Location dropdown */}
-                                {showLocationDropdown && (
                                     <div className="relative w-full">
                                         <select
                                             className="w-full p-2 rounded"
-                                            onChange={(e) => setData('location', e.target.value)}
-                                            value={data.location}
+                                            onChange={(e) => setData('visa_type', e.target.value)}
+                                            value={data.visa_type}
                                         >
-                                            <option value="">Select Location</option>
-                                            {locationOptions && locationOptions.length > 0 ? (
-                                                locationOptions.map((item, i) => (
-                                                    <option key={i} value={item.id}>{item.name}</option>
-                                                ))
-                                            ) : (
-                                                <option value="" disabled>No options available</option>
-                                            )}
+                                            <option value="">Apply For</option>
+                                            {visaTypes && visaTypes.map((type, i) => (
+                                                <option key={i} value={type.id}>{type.name}</option>
+                                            ))}
                                         </select>
                                     </div>
-                                )}
 
-                                <TextInput
-                                    value={data.email}
-                                    onChange={(e) => setData('email', e.target.value)}
-                                    error={errors.email}
-                                    placeholder="Your Email"
-                                    id="email"
-                                    required={true}
-                                    defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
-                                />
+                                    <div className="relative w-full">
+                                        <select
+                                            className="w-full p-2 rounded"
+                                            onChange={handleRegionChange}
+                                            value={region?.id || ''}
+                                        >
+                                            <option value="">Apply From</option>
+                                            {regions && regions.map((r, i) => (
+                                                <option key={i} value={r.id}>{r.name}</option>
+                                            ))}
+                                        </select>
+                                    </div>
 
-                                {/* Updated Phone input with country selection */}
-                                <CustomPhoneInput
-                                    value={data.phone}
-                                    onChange={(value) => setData('phone', value)}
-                                    placeholder="Phone Number"
-                                    icon={<PhoneIcon />}
-                                    selectedCountry={phoneCountry}
-                                    onCountryChange={(country) => {
-                                        setPhoneCountry(country);
-                                        setData('phone_country', country.code);
-                                    }}
-                                    countriesList={countriesList}
-                                />
+                                    {/* Conditional Location dropdown */}
+                                    {showLocationDropdown && (
+                                        <div className="relative w-full">
+                                            <select
+                                                className="w-full p-2 rounded"
+                                                onChange={(e) => setData('location', e.target.value)}
+                                                value={data.location}
+                                            >
+                                                <option value="">Select Location</option>
+                                                {locationOptions && locationOptions.length > 0 ? (
+                                                    locationOptions.map((item, i) => (
+                                                        <option key={i} value={item.name}>{item.name}</option>
+                                                    ))
+                                                ) : (
+                                                    <option value="" disabled>No options available</option>
+                                                )}
+                                            </select>
+                                        </div>
+                                    )}
 
-                                {/* Updated WhatsApp input with country selection */}
-                                <CustomPhoneInput
-                                    value={data.whatsapp}
-                                    onChange={(value) => setData('whatsapp', value)}
-                                    placeholder="WhatsApp Number"
-                                    icon={<WhatsAppIcon />}
-                                    selectedCountry={whatsappCountry}
-                                    onCountryChange={(country) => {
-                                        setWhatsappCountry(country);
-                                        setData('whatsapp_country', country.code);
-                                    }}
-                                    countriesList={countriesList}
-                                />
+                                    <TextInput
+                                        value={data.email}
+                                        onChange={(e) => setData('email', e.target.value)}
+                                        error={errors.email}
+                                        placeholder="Your Email"
+                                        id="email"
+                                        required={true}
+                                        defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                    />
 
-                                <textarea
-                                    placeholder="Write Message..."
-                                    className="w-full p-2 rounded h-24"
-                                    onChange={(e) => setData('message', e.target.value)}
-                                    value={data.message || ''}
-                                ></textarea>
+                                    {/* Updated Phone input with country selection */}
+                                    <CustomPhoneInput
+                                        value={data.phone}
+                                        onChange={(value) => setData('phone', value)}
+                                        placeholder="Phone Number"
+                                        icon={<PhoneIcon />}
+                                        selectedCountry={phoneCountry}
+                                        onCountryChange={(country) => {
+                                            setPhoneCountry(country);
+                                            setData('phone_country', country.code);
+                                        }}
+                                        countriesList={countriesList}
+                                    />
 
-                                <div>
+                                    {/* Updated WhatsApp input with country selection */}
+                                    <CustomPhoneInput
+                                        value={data.whatsapp}
+                                        onChange={(value) => setData('whatsapp', value)}
+                                        placeholder="WhatsApp Number"
+                                        icon={<WhatsAppIcon />}
+                                        selectedCountry={whatsappCountry}
+                                        onCountryChange={(country) => {
+                                            setWhatsappCountry(country);
+                                            setData('whatsapp_country', country.code);
+                                        }}
+                                        countriesList={countriesList}
+                                    />
+
+                                    <textarea
+                                        placeholder="Write Message..."
+                                        className="w-full p-2 rounded h-24"
+                                        onChange={(e) => setData('message', e.target.value)}
+                                        value={data.message || ''}
+                                    ></textarea>
+
+                                    <div>
                                         <ReCAPTCHA
+                                            ref={recaptchaRef}
                                             sitekey="6LeTeScrAAAAAKSFD731Y2cxiy5D3sqodmTKbNa4"
-                                            onChange={onChange}
+                                            onChange={handleCaptchaChange}
+                                            onExpired={handleCaptchaExpired}
                                         />
-                                </div>
+                                        {captchaError && (
+                                            <div className="text-red-500 text-sm mt-1">{captchaError}</div>
+                                        )}
+                                    </div>
 
-                                <div className="mt-4">
-                                    <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">
-                                        Submit
-                                    </button>
+                                    <div className="mt-4">
+                                        <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">
+                                            Submit
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 </form>
-                
             </div>
         </WebLayout>
     );
