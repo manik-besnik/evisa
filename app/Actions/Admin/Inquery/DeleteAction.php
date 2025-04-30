@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Actions\Admin\Cv;
+namespace App\Actions\Admin\Inquery;
 
 use App\Enums\Permissions;
 use App\Models\JobPost;
-use App\Models\UserCV;
+use App\Models\Inquery;
 use App\Supports\FileUpload;
 use App\Supports\UserPermission;
 use Illuminate\Http\RedirectResponse;
@@ -15,7 +15,7 @@ class DeleteAction
     {
         UserPermission::isPermitted(Permissions::DELETE_JOB_POST->value);
 
-        $cv = UserCv::query()->findOrFail($id);
+        $cv = Inquery::query()->findOrFail($id);
 
         try {
 

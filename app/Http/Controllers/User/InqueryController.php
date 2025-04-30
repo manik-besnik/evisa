@@ -55,7 +55,7 @@ class InqueryController extends Controller
         }
 
         $recaptchaToken = $request->input('recaptcha_token');
-        $secretKey = '6LeTeScrAAAAAE5BjjM4qXFCXsV9R4NiiOMi-Fwn';
+        $secretKey = config('services.recaptcha.secret');
         $ip = $request->ip();
 
         try {

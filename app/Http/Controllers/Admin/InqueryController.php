@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 
-use App\Actions\Admin\Cv\DeleteAction;
+use App\Actions\Admin\Inquery\DeleteAction;
 use App\Actions\Admin\Inquery\IndexAction;
 
 use App\Http\Controllers\Controller;

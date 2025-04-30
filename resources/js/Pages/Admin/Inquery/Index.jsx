@@ -11,10 +11,24 @@ import {toast} from "react-toastify";
 
 export const JobDemandApplications = () => {
     const [show, setShow] = useState(false)
-    const [selectCV, setSelectCV] = useState(null)
+    const [selectId, setSelectCV] = useState(null)
 
     const { inquery } = usePage().props
 
+    const handleDelete = (inquery) => {
+        setSelectCV(inquery)
+        setShow(true)
+    }
+
+    const handleConfirmDelete = () => {
+
+        return router.delete(route('admin.inquery-list.destroy', selectId.id), {
+            onSuccess: () => {
+                toast('Inquery Deleted Successfully')
+                setShow(false)
+            }
+        })
+    }
     
 
 
@@ -44,14 +58,16 @@ export const JobDemandApplications = () => {
                             >
                                 Pdf
                             </a>
+                            <button type="button" onClick={() => handleDelete(inquerys)} className='btn-primary'>
+                                <FaTrashAlt />
+                            </button>
                         </td>
                     </tr>
                 ))}
             </Table>
 
             <Pagination links={inquery.links}/>
-
-            
+            <DeleteConfirmModal show={show} setShow={setShow} handleConfirmDelete={handleConfirmDelete} />
 
         </Authenticated>
     )
