@@ -78,6 +78,20 @@ export default function SideNavLinks() {
             ]
         },
         {
+            name: 'Inquery',
+            icon: <PiNetworkXBold />,
+            isOpen: false,
+            isPermitted: isPermitted(permissionEnums.VIEW_JOB_POST),
+            links: [
+                {
+                    name: 'Inquery List',
+                    route: route('admin.inquery-list.index'),
+                    isPermitted: isPermitted(permissionEnums.VIEW_JOB_POST),
+                },
+
+            ]
+        },
+        {
             name: 'Agency',
             icon: <FaPeopleRoof/>,
             isOpen: false,

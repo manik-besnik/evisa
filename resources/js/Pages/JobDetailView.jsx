@@ -267,21 +267,30 @@ const JobDetailView = ({job}) => {
                                 onClick={handleFacebookShare}
                                 className="bg-blue-600 w-8 h-8 rounded-full flex items-center justify-center text-white"
                             >
-                                f
+                                <img
+                                    src={`${assetUrl + 'images/facebook-jobdemand.png'}`}
+                                    alt="Job Directory"
+                                />
                             </button>
                             <button
                                 type="button"
                                 onClick={handleWhatsAppShare}
                                 className="bg-green-600 w-8 h-8 rounded-full flex items-center justify-center text-white"
                             >
-                                w
+                                <img
+                                    src={`${assetUrl + 'images/whatsapp-jobdemand.png'}`}
+                                    alt="Job Directory"
+                                />
                             </button>
                             <button
                                 type="button"
                                 onClick={handleCopyLink}
                                 className="bg-gray-600 w-8 h-8 rounded-full flex items-center justify-center text-white"
                             >
-                                s
+                                <img
+                                    src={`${assetUrl + 'images/share-jobdemand.png'}`}
+                                    alt="Job Directory"
+                                />
                             </button>
                         </div>
                     </div>
