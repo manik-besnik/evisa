@@ -1,25 +1,25 @@
 @php
-    $genders = [
-       '1' => 'Male',
-        '2' => 'Female',
-        '3' => 'Others',
-    ];
+    use Carbon\Carbon;
+        $genders = [
+           '1' => 'Male',
+            '2' => 'Female',
+            '3' => 'Others',
+        ];
 
-    $maritalStatuses = [
-        '1' => 'Single',
-        '2' => 'Married',
-        '3' => 'Divorced',
-    ];
+        $maritalStatuses = [
+            '1' => 'Single',
+            '2' => 'Married',
+            '3' => 'Divorced',
+        ];
 
-    $religions = [
-        '1' =>'Sunni Muslim',
-        '2' =>'Shiite Muslim',
-        '3' =>'Christian',
-        '4' =>'Hindu',
-        '5' => 'Sikh',
-        '6' =>'Buddhist',
-    ];
-
+        $religions = [
+            '1' =>'Sunni Muslim',
+            '2' =>'Shiite Muslim',
+            '3' =>'Christian',
+            '4' =>'Hindu',
+            '5' => 'Sikh',
+            '6' =>'Buddhist',
+        ];
 
 @endphp
 
@@ -242,7 +242,8 @@
             </div>
         </div>
         <div class="photo">
-            <img src="{{ public_path(str_replace(url('/'), '', $cv->avatar)) }}" alt="Profile Photo" style="width:100%; height:100%;">
+            <img src="{{ public_path(str_replace(url('/'), '', $cv->avatar)) }}" alt="Profile Photo"
+                 style="width:100%; height:100%;">
         </div>
     </div>
 
@@ -313,8 +314,8 @@
             <tr>
                 <td style="min-width: 200px"><span class="bullet"></span> {{$edu['institute'] ?? ''}}</td>
                 <td>:</td>
-                <td>{{$edu['department'] ?? ''}} - {{$edu['start_date'] ?? ''}}
-                    -{{$edu['end-date'] ?? ''}} {{$edu['result'] ?? ''}}
+                <td>{{$edu['department'] ?? ''}} - {{Carbon::parse($edu['start_date'])->format('Y') ?? ''}}
+                    -{{Carbon::parse($edu['end-date'])->format('Y') ?? ''}} {{$edu['result'] ?? ''}}
                 </td>
             </tr>
 
@@ -347,13 +348,13 @@
                     {{ $exp['company'] ?? '' }}
 
                     @if(!empty($exp['start_date']))
-                        from {{ $exp['start_date'] }}
+                        from {{ Carbon::parse($exp['start_date'])->format('Y') }}
                     @endif
 
                     @if($exp['is_present'] ?? false)
                         – PRESENT
                     @elseif(!empty($exp['end_date']))
-                        – to {{ $exp['end_date'] }}
+                        – to {{ Carbon::parse($exp['end_date'])->format('Y') }}
                     @endif
                 </div>
             </div>
