@@ -58,6 +58,7 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::get('visa-apply/{id}/details', [VisaApplyController::class, 'show'])->name('visa-apply.show');
 
     Route::get('visa-apply', [VisaApplyController::class, 'create'])->name('visa-apply.create');
+    Route::get('visa-apply/download/{id}', [VisaApplyController::class, 'download'])->name('visa-apply.download');
     Route::get('visa', [VisaApplyController::class, 'visa'])->name('visa.create');
     Route::get('job-demand', [JobDemandController::class, 'create'])->name('job-demand.create');
     Route::get('single-job-demand', [JobDemandController::class, 'singleJobDemand'])->name('single-job-demand.create');
@@ -89,6 +90,8 @@ Route::middleware(['auth', 'user'])->group(function () {
 
     //inquery
     Route::get('inquery', [InqueryController::class, 'create'])->name('inquery.create');
+    Route::post('/query/store', [InqueryController::class, 'store'])->name('query.store');
+
     Route::get('agency', [AgencyController::class, 'index'])->name('agency.create');
     Route::get('contact', [ContactController::class, 'index'])->name('contact.index');
 });

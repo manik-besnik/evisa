@@ -3,6 +3,8 @@ import WebLayout from "@/Layouts/WebLayout.jsx";
 import {Head, Link, usePage} from "@inertiajs/react";
 import { getFormattedDate } from "@/Components/Helper/index.js";
 import { FaDownload } from "react-icons/fa6";
+import DownloadJobApply from "@/Components/Web/DownloadJobApply.jsx";
+import {assetUrl} from "@/Components/Constant/index.js";
 
 const JobApplyList = () => {
 

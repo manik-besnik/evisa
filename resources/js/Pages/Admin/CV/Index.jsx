@@ -8,6 +8,7 @@ import DeleteConfirmModal from "@/Components/DeleteConfirmModal.jsx";
 import {useState} from "react";
 import {FaTrashAlt} from "react-icons/fa";
 import {toast} from "react-toastify";
+import { FaArrowCircleDown } from "react-icons/fa";
 
 export const JobDemandApplications = () => {
     const [show, setShow] = useState(false)
@@ -52,6 +53,9 @@ export const JobDemandApplications = () => {
                             <button type="button" onClick={() => handleDelete(cv)} className='btn-primary'>
                                 <FaTrashAlt/>
                             </button>
+                            <a href={route('admin.cv-list.download', cv.id)} className='btn-primary'>
+                                <FaArrowCircleDown />
+                            </a>
                         </td>
                     </tr>
                 ))}

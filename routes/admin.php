@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\VisaApplyController;
 use App\Http\Controllers\Admin\CvController;
+use App\Http\Controllers\Admin\InqueryController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -88,7 +89,10 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
     Route::get('users/create', [UserController::class, 'create'])->name('users.create');
     Route::post('users/store', [UserController::class, 'store'])->name('users.store');
 
+    Route::get('cv-list/download/{id}', [CvController::class,'download'])->name('cv-list.download');
     Route::resource('cv-list', CvController::class);
+    Route::resource('inquery-list', InqueryController::class);
+    Route::get('inquery/{id}/pdf', [InqueryController::class, 'downloadPdf'])->name('inquery.pdf');
 
     Route::get('notifications/{id}', [NotificationController::class, 'show'])->name('notifications.show');
 });

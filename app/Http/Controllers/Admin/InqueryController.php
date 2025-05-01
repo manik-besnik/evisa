@@ -3,16 +3,17 @@
 namespace App\Http\Controllers\Admin;
 
 
-use App\Actions\Admin\Cv\DeleteAction;
-use App\Actions\Admin\Cv\IndexAction;
-use App\Actions\Admin\Cv\DownloadAction;
+use App\Actions\Admin\Inquery\DeleteAction;
+use App\Actions\Admin\Inquery\IndexAction;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Response;
+use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\Inquery;
 
-class CvController extends Controller
+class InqueryController extends Controller
 {
     public function index(IndexAction $indexAction): Response
     {
@@ -21,6 +22,7 @@ class CvController extends Controller
 
     public function create()
     {
+
     }
 
     public function store(Request $request)
@@ -40,9 +42,13 @@ class CvController extends Controller
         return $deleteAction->execute($id);
     }
 
-    public function download(int $id, DownloadAction $downloadAction)
+    public function downloadPdf($id)
     {
-        return $downloadAction->execute($id);
-    }
+        $inquery = Inquery::findOrFail($id);
+        $pdf = Pdf::loadView('pdfs.inquery', compact('inquery'));
 
+
+
+        return $pdf->download('inquery_' . $inquery->id . '.pdf');
+    }
 }

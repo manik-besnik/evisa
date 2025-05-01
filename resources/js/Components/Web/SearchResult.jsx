@@ -42,10 +42,10 @@ const SearchResult = () => {
                                           className="text-gray-600 hover:text-gray-800">
                                         <MdOutlineRemoveRedEye size={18}/>
                                     </Link>
-                                    <Link href={route('visa-apply.index')}
+                                    <a href={route('visa-apply.download',row.id)}
                                           className="text-gray-600 hover:text-gray-800">
                                         <FiRefreshCw/>
-                                    </Link>
+                                    </a>
 
                                 </div>
                             </td>

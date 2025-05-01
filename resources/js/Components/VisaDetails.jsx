@@ -80,6 +80,27 @@ export const VisaDetails = ({isAdmin}) => {
                         <InfoItem label="Profession" value={visa_apply.personal_info.profession}/>
                     </InfoSection>
 
+                    <InfoSection title="Visa Info">
+                        <InfoItem label="App ID" value={visa_apply.app_id} />
+                        <InfoItem label="Personal Name | Company Name" value={visa_apply.name} />
+                        <InfoItem label="Processing Type"
+                            value={getValue(visaProcessingTypes, visa_apply.processing_type)} />
+                        <InfoItem label="Visa Type" value={getValue(visaTypes, visa_apply.visa_type)} />
+                        <InfoItem label="Group" value={getValue(groups, visa_apply.group)} />
+                        {isAdmin ?
+                            <Select
+                                items={visaStatuses}
+                                selected={status}
+                                label="Visa Status"
+                                setSelected={setStatus}
+                                handleValueChange={changeStatus}
+                                placeholder="Select Status"
+                            /> : <InfoItem label="Status" value={getValue(visaStatuses, visa_apply.status)} />
+                        }
+                    </InfoSection>
+                </div>
+
+                <div className="w-full lg:w-1/2">
                     <InfoSection title="Documents">
                         {JSON.parse(visa_apply.documents) && JSON.parse(visa_apply.documents.length) > 0 ? (
                             <ul className="list-disc list-inside text-gray-800 text-sm">
@@ -115,12 +136,12 @@ export const VisaDetails = ({isAdmin}) => {
 
                                 {visaDocuments(visa_apply.visa_document).map((doc, index) => (
                                     <li key={index} className="mb-2 flex justify-between items-center">
-                                    <span>
-                                        {doc.name}
-                                    </span>
+                                        <span>
+                                            {doc.name}
+                                        </span>
                                         <p className="flex gap-x-4 items-center">
                                             <a href={doc.url} download={doc.url} target="_blank">
-                                                <MdFileDownload className="text-lg"/>
+                                                <MdFileDownload className="text-lg" />
                                             </a>
                                             {doc.url.endsWith('.pdf') ? (
                                                 <a href={doc.url} target="_blank" rel="noopener noreferrer">
@@ -133,7 +154,7 @@ export const VisaDetails = ({isAdmin}) => {
                                             )}
                                             {(isPermitted(permissionEnums.DELETE_DOCUMENT_VISA) && isAdmin) &&
                                                 <DangerButton onClick={() => deleteDocument(doc.url)}>
-                                                    <FaTrashAlt/>
+                                                    <FaTrashAlt />
                                                 </DangerButton>
                                             }
                                         </p>
@@ -143,27 +164,8 @@ export const VisaDetails = ({isAdmin}) => {
 
                         </InfoSection>
                     }
-                </div>
 
-                <div className="w-full lg:w-1/2">
-                    <InfoSection title="Visa Info">
-                        <InfoItem label="App ID" value={visa_apply.app_id}/>
-                        <InfoItem label="Personal Name | Company Name" value={visa_apply.name}/>
-                        <InfoItem label="Processing Type"
-                                  value={getValue(visaProcessingTypes, visa_apply.processing_type)}/>
-                        <InfoItem label="Visa Type" value={getValue(visaTypes, visa_apply.visa_type)}/>
-                        <InfoItem label="Group" value={getValue(groups, visa_apply.group)}/>
-                        {isAdmin ?
-                            <Select
-                                items={visaStatuses}
-                                selected={status}
-                                label="Visa Status"
-                                setSelected={setStatus}
-                                handleValueChange={changeStatus}
-                                placeholder="Select Status"
-                            /> : <InfoItem label="Status" value={getValue(visaStatuses, visa_apply.status)}/>
-                        }
-                    </InfoSection>
+                    
 
                     <InfoSection title="Passport Info">
                         <InfoItem label="Passport Type" value={visa_apply.passport.passport_type}/>

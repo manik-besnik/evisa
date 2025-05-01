@@ -149,6 +149,20 @@ body {
     @apply absolute left-full bottom-[-12px] w-0 h-0 border-t-[40px] border-b-[40px] border-l-[60px] border-t-transparent border-b-transparent group-hover:border-t-transparent  group-hover:border-b-transparent group-hover:border-warning
 }
 
+.icon-circle {
+  @apply relative; /* parent must be relative */
+}
+
+.icon-circle::after {
+  content: '';
+  @apply absolute w-[50px] h-[50px] bg-[#111827] rounded-full -z-10;
+}
+
+.icon-circle::before {
+  content: '';
+  @apply absolute w-[40px] h-[40px]  rounded-full z-20 border-4 border-[#D68B27];
+}
+
 @keyframes vertical-movement-right {
     0% {
         transform: translateX(0%);
