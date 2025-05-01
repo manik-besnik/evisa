@@ -1,4 +1,8 @@
-<!DOCTYPE html>
+@php
+    use Carbon\Carbon;
+@endphp
+
+    <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -422,7 +426,7 @@
             <div class="timeline">
                 @foreach($cv->experiences as $exp)
                     <div class="timeline-item">
-                        <div class="timeline-date">{{ $exp['start_date'] ?? '' }} - {{ ((bool)$exp['is_present'] ?? false) ? 'PRESENT' : $exp['end_date'] ?? '' }}</div>
+                        <div class="timeline-date">{{ Carbon::parse($exp['start_date'])->format('Y') ?? '' }} - {{ ((bool)$exp['is_present'] ?? false) ? 'PRESENT' : Carbon::parse($exp['end_date'])->format('Y') ?? '' }}</div>
                         <div class="timeline-content">
                             <div class="timeline-dot"></div>
                             <div class="timeline-company">{{ $exp['company'] ?? '' }}</div>
@@ -450,7 +454,7 @@
             <div class="timeline">
                 @foreach($cv->educations as $edu)
                     <div class="timeline-item">
-                        <div class="timeline-date">{{ $edu['start_date'] ?? '' }} - {{ $edu['end_date'] ?? '' }}</div>
+                        <div class="timeline-date">{{ Carbon::parse($edu['start_date'])->format('Y') ?? '' }} - {{ Carbon::parse($edu['end_date'])->format('Y') ?? '' }}</div>
                         <div class="timeline-content">
                             <div class="timeline-dot"></div>
                             <div class="timeline-company">{{ $edu['institute'] ?? ''}}</div>
