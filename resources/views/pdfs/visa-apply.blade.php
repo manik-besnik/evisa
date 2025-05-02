@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Visa Application Details - {{ $visaApply->id }}</title>
+    <title>Visa Application Details - {{ $visa_apply->id }}</title>
     <style>
         body {
             font-family: DejaVu Sans, sans-serif;

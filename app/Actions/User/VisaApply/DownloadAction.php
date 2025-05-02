@@ -9,13 +9,17 @@ class DownloadAction
 {
     public function execute(int $id)
     {
-        $visaApply = VisaApply::query()->findOrFail($id);
+        $visa_apply = VisaApply::query()->with([
+            'personalInfo.currentNationality',
+            'personalInfo.prevNationality',
+            'personalInfo.birthCountry'
+        ])->findOrFail($id);
 
 
-        $pdf = DomPDF::loadView('pdfs.visa-apply', compact('visaApply'));
+        $pdf = DomPDF::loadView('pdfs.visa-apply', compact('visa_apply'));
 
         $pdf->setPaper('a4');
 
-        return $pdf->download("visa_apply_" . $visaApply->code . ".pdf");
+        return $pdf->download("visa_apply_" . $visa_apply->code . ".pdf");
     }
 }
