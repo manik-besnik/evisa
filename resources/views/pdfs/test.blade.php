@@ -312,7 +312,7 @@
         <div class="section">
             <div class="section-header">
                 <div class="icon-circle">
-                    <img src="{{ public_path(str_replace(url('/'), '', '/assets/images/cvcontact.png')) }}" alt="{{$cv->name}}" class="profile-image">
+                    <img src="{{ public_path(str_replace(url('/'), '', 'assets/images/cv/contact.png')) }}" alt="{{$cv->name}}" class="profile-image">
                 </div>
                 <div class="header-text">Contact Me</div>
             </div>
