@@ -91,7 +91,7 @@ class CvCreateController extends Controller
 
         $pdf->setPaper('a4', );
 
-        return $pdf->download("cv" . $cv->name . ".pdf");
+        return $pdf->stream("cv" . $cv->name . ".pdf");
 
 
     }

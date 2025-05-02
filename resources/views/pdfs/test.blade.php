@@ -143,7 +143,7 @@
         }
 
         .contact-icon {
-            width: 30px;
+            width: 50px;
             display: table-cell;
             vertical-align: middle;
             text-align: center;
@@ -312,7 +312,7 @@
         <div class="section">
             <div class="section-header">
                 <div class="icon-circle">
-                    <img src="{{ public_path(str_replace(url('/'), '', 'assets/images/cv/contact.png')) }}" alt="{{$cv->name}}" class="profile-image">
+                    <img src="{{ public_path(str_replace(url('/'), '', 'assets/images/cv/contact.png')) }}" alt="{{$cv->name}}" class="profile-image" style="width: 24px; height: 24px; margin-top: 6px;">
                 </div>
                 <div class="header-text">Contact Me</div>
             </div>
@@ -320,28 +320,19 @@
             <div class="contact-info">
                 <div class="contact-item">
                     <div class="contact-icon">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M22 17.0999C22 15.8999 21.1 14.9999 20 14.9999H17V18.9999C17 19.5599 16.55 20.0099 16 20.0099H14V18.9999C14 18.4399 13.58 17.9999 13.08 17.7999L12 18.9999L10.92 17.7999C10.42 17.9999 10 18.4399 10 18.9999V20.0099H8C7.45 20.0099 7 19.5599 7 18.9999V14.9999H4C2.9 14.9999 2 15.8999 2 17.0999V20.9999C2 22.2099 3.8 22.9999 5 22.9999H19C20.2 22.9999 22 22.2099 22 20.9999V17.0999Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M12 12.9999C13.6569 12.9999 15 11.6568 15 9.99988C15 8.34293 13.6569 6.99984 12 6.99984C10.3431 6.99984 9 8.34293 9 9.99988C9 11.6568 10.3431 12.9999 12 12.9999Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
+                        <img src="{{ public_path(str_replace(url('/'), '', 'assets/images/cv/call.png')) }}" alt="{{$cv->name}}" class="profile-image" style="width: 20px; height: 20px; margin-top: 4px;">
                     </div>
                     <div class="contact-text">{{$cv->phone}}</div>
                 </div>
                 <div class="contact-item">
                     <div class="contact-icon">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M22 6.99988C22 5.34304 20.6569 4.00004 19 4.00004H5C3.34315 4.00004 2 5.34304 2 6.99988V17.9999C2 19.6568 3.34315 20.9999 5 20.9999H19C20.6569 20.9999 22 19.6568 22 17.9999V6.99988ZM20 8.00004L12 13.0001L4 8.00004V8.99998L12 14.0001L20 8.99998V8.00004Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
+                        <img src="{{ public_path(str_replace(url('/'), '', 'assets/images/cv/message.png')) }}" alt="{{$cv->name}}" class="profile-image" >
                     </div>
                     <div class="contact-text">{{$cv->email}}</div>
                 </div>
                 <div class="contact-item">
                     <div class="contact-icon">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M21 13.0001V16.0001C21 19.3001 20.3 20.0001 17 20.0001H7C3.7 20.0001 3 19.3001 3 16.0001V13.0001C3 9.70009 3.7 9.00009 7 9.00009H17C20.3 9.00009 21 9.70009 21 13.0001Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M17 8.00004C15.9 8.00004 15 7.10004 15 6.00004C15 4.90004 15.9 4.00004 17 4.00004C18.1 4.00004 19 4.90004 19 6.00004C19 7.10004 18.1 8.00004 17 8.00004Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M7 21.0001H17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
+                        <img src="{{ public_path(str_replace(url('/'), '', 'assets/images/cv/link.png')) }}" alt="{{$cv->name}}" class="profile-image" >
                     </div>
                     <div class="contact-text">{{$cv->website}}</div>
                 </div>
