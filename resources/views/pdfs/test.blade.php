@@ -308,10 +308,7 @@
         <div class="section">
             <div class="section-header">
                 <div class="icon-circle">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M20.5899 22.0001C20.5899 18.6867 17.8987 15.9998 14.5899 15.9998C13.583 15.9998 12.6604 16.171 11.8489 16.4865C11.0374 16.171 10.1148 15.9998 9.1079 15.9998C5.80002 15.9998 3.09993 18.6867 3.09993 22.0001" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
+                    <img src="{{ public_path(str_replace(url('/'), '', '/assets/images/cvcontact.png')) }}" alt="{{$cv->name}}" class="profile-image">
                 </div>
                 <div class="header-text">Contact Me</div>
             </div>

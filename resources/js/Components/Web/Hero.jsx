@@ -31,7 +31,7 @@ const services = [
     {
         title: "Others",
         img: "images/others.png",
-        link: "others",
+        link: "home",
     }
 ]
 
