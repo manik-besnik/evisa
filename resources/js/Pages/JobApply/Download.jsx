@@ -57,7 +57,7 @@ const Download = () => {
             margin: 0.8, // Margin in inches
         };
         generatePDF(targetRef, options).then(r => 'ok');
-        router.get(route('job-apply.list'));
+        // router.get(route('job-apply.list'));
     };
 
     useEffect(() => {
@@ -105,9 +105,9 @@ const Download = () => {
 
                             <div className="mt-4">
                                 <h3 className="text-red-600 font-bold text-sm">POST FOR APPLY</h3>
-                                {data.jobDemandsArray && data.jobDemandsArray.length > 0 ? (
-                                    data.jobDemandsArray.map((job, index) => (
-                                        <p key={index} className="font-semibold">{index + 1}. {job}</p>
+                                {data.job_posts && data.job_posts.length > 0 ? (
+                                    data.job_posts.map((job, index) => (
+                                        <p key={index} className="font-semibold">{index + 1}. {job.name}</p>
                                     ))
                                 ) : (
                                     <p>1. No positions selected</p>
@@ -298,7 +298,7 @@ const Download = () => {
                             <div className="p-1 font-semibold">Country</div>
                         </div>
 
-                        {data.job_experiences && data.job_experiences.map((exp, index) => (
+                        {data.experiences && data.experiences.map((exp, index) => (
                             <div key={index} className="grid grid-cols-4 gap-2 border border-gray-300 border-t-0">
                                 <div className="border-r border-gray-300 p-1">{exp.position || "-"}</div>
                                 <div className="border-r border-gray-300 p-1">{exp.duration || "-"}</div>
