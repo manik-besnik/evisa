@@ -57,7 +57,7 @@ const Download = () => {
             margin: 0.8, // Margin in inches
         };
         generatePDF(targetRef, options).then(r => 'ok');
-        // router.get(route('job-apply.list'));
+        router.get(route('job-apply.list'));
     };
 
     useEffect(() => {
