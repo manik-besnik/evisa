@@ -34,13 +34,13 @@ const Index = () => {
                         <FiPlus /> Add New Application
                     </Link>
                 }
-                <button
+                {/* <button
                     onClick={handleDownloadPdf}
                     className='btn-primary'
                     disabled={selectedApplications.length === 0}
                 >
                     <FiDownload /> Download Excel
-                </button>
+                </button> */}
             </div>
         </TopSection>
 

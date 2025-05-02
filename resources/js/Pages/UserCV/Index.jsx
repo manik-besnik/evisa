@@ -30,11 +30,11 @@ const Index = () => {
                                 <td className="px-3 py-2 text-center border-r border-b border-gray-200">
                                     <div className="flex items-center justify-center space-x-2">
                                         <a href={route('cv.download',{type:1})}
-                                           className="text-white px-2 py-1 rounded text-sm bg-primary-dark ">
+                                           className="text-white px-2 py-1 rounded text-sm bg-primary-dark">
                                             CV
                                         </a>
                                         <a href={route('cv.download')}
-                                           className="text-white px-2 py-1 rounded text-sm bg-primary">
+                                           className="text-white px-2 py-1 rounded text-sm bg-primary" >
                                             Resume
                                         </a>
                                         <Link href={route('cv.create')}
