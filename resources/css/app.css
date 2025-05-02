@@ -163,6 +163,11 @@ body {
   @apply absolute w-[40px] h-[40px]  rounded-full z-20 border-4 border-[#D68B27];
 }
 
+.icon-circle-white::after {
+  content: '';
+  @apply absolute w-[50px] h-[50px] bg-[#fff] rounded-full -z-10;
+}
+
 @keyframes vertical-movement-right {
     0% {
         transform: translateX(0%);

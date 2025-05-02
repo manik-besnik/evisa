@@ -46,6 +46,7 @@
             text-align: center;
             margin-bottom: 30px;
         }
+        
 
         .profile-circle {
             width: 180px;
@@ -54,6 +55,16 @@
             background-color: #c08b45;
             display: inline-block;
             padding: 5px;
+            position: relative;
+            z-index: 9999;
+            margin-top: 35px;
+        }
+
+        .shape{
+            position: absolute;
+            left: -5px;
+            top: -5px;
+            z-index: -1;
         }
 
         .profile-inner-circle {
@@ -301,6 +312,9 @@
                 <div class="profile-inner-circle">
                     <img src="{{ public_path(str_replace(url('/'), '', $cv->avatar)) }}" alt="{{$cv->name}}" class="profile-image">
                 </div>
+            </div>
+            <div class="shape">
+                 <img src="{{ public_path(str_replace(url('/'), '', 'assets/images/cv/cvshape.png')) }}" alt="Image" style="width: 330px; height: 360px;">
             </div>
         </div>
 
