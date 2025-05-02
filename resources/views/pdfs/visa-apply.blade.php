@@ -70,59 +70,59 @@
                 </div>
                 <div class="info-item">
                     <span class="info-label">Current Nationality</span>
-                    <span class="info-value">{{ $visa_apply->current_nationality }}</span>
+                    <span class="info-value">{{ $visa_apply?->personal_info?->current_nationality?->name }}</span>
                 </div>
                 <div class="info-item">
                     <span class="info-label">Previous Nationality</span>
-                    <span class="info-value">{{ $visa_apply->prev_nationality }}</span>
+                    <span class="info-value">{{ $visa_apply?->personal_info?->prev_nationality?->name }}</span>
                 </div>
                 <div class="info-item">
                     <span class="info-label">Gender</span>
-                    <span class="info-value">{{ $visa_apply->gender }}</span>
+                    <span class="info-value">{{ $visa_apply?->personal_info?->gender }}</span>
                 </div>
                 <div class="info-item">
                     <span class="info-label">Date of Birth</span>
-                    <span class="info-value">{{ $visa_apply->date_of_birth ?? 'N/A' }}</span>
+                    <span class="info-value">{{ $visa_apply?->personal_info?->date_of_birth ?? 'N/A' }}</span>
                 </div>
                 <div class="info-item">
                     <span class="info-label">Birth Country</span>
-                    <span class="info-value">{{ $visa_apply->birth_country }}</span>
+                    <span class="info-value">{{ $visa_apply?->personal_info?->birth_country }}</span>
                 </div>
                 <div class="info-item">
                     <span class="info-label">Marital Status</span>
-                    <span class="info-value">{{ $visa_apply->marital_status }}</span>
+                    <span class="info-value">{{ $visa_apply?->personal_info?->marital_status }}</span>
                 </div>
                 <div class="info-item">
                     <span class="info-label">Birth Place</span>
-                    <span class="info-value">{{ $visa_apply->birth_place ?? 'N/A' }}</span>
+                    <span class="info-value">{{ $visa_apply?->personal_info?->birth_place ?? 'N/A' }}</span>
                 </div>
                 <div class="info-item">
                     <span class="info-label">Birth Place (Arabic)</span>
-                    <span class="info-value">{{ $visa_apply->birth_place_arabic ?? 'N/A' }}</span>
+                    <span class="info-value">{{ $visa_apply?->personal_info?->birth_place_arabic ?? 'N/A' }}</span>
                 </div>
                 <div class="info-item">
                     <span class="info-label">Mother's Name</span>
-                    <span class="info-value">{{ $visa_apply->mother_name ?? 'N/A' }}</span>
+                    <span class="info-value">{{ $visa_apply?->personal_info?->mother_name ?? 'N/A' }}</span>
                 </div>
                 <div class="info-item">
                     <span class="info-label">Mother's Name (Arabic)</span>
-                    <span class="info-value">{{ $visa_apply->mother_name_arabic ?? 'N/A' }}</span>
+                    <span class="info-value">{{ $visa_apply?->personal_info?->mother_name_arabic ?? 'N/A' }}</span>
                 </div>
                 <div class="info-item">
                     <span class="info-label">Religion</span>
-                    <span class="info-value">{{ $visa_apply->religion ?? 'N/A' }}</span>
+                    <span class="info-value">{{ $visa_apply?->personal_info?->religion ?? 'N/A' }}</span>
                 </div>
                 <div class="info-item">
                     <span class="info-label">Faith</span>
-                    <span class="info-value">{{ $visa_apply->faith ?? 'N/A' }}</span>
+                    <span class="info-value">{{ $visa_apply?->personal_info?->faith ?? 'N/A' }}</span>
                 </div>
                 <div class="info-item">
                     <span class="info-label">Qualification</span>
-                    <span class="info-value">{{ $visa_apply->qualification ?? 'N/A' }}</span>
+                    <span class="info-value">{{ $visa_apply?->personal_info?->qualification ?? 'N/A' }}</span>
                 </div>
                 <div class="info-item">
                     <span class="info-label">Profession</span>
-                    <span class="info-value">{{ $visa_apply->profession ?? 'N/A' }}</span>
+                    <span class="info-value">{{ $visa_apply?->personal_info?->profession ?? 'N/A' }}</span>
                 </div>
             </div>
         </div>
@@ -156,31 +156,31 @@
             <div class="box">
                 <div class="info-item">
                     <span class="info-label">Passport Type</span>
-                    <span class="info-value">{{ $visa_apply->passport_type ?? 'N/A' }}</span>
+                    <span class="info-value">{{ $visa_apply?->passport?->passport_type ?? 'N/A' }}</span>
                 </div>
                 <div class="info-item">
                     <span class="info-label">Passport Number</span>
-                    <span class="info-value">{{ $visa_apply->passport_no ?? 'N/A' }}</span>
+                    <span class="info-value">{{ $visa_apply?->passport?->passport_no ?? 'N/A' }}</span>
                 </div>
                 <div class="info-item">
                     <span class="info-label">Issue Date</span>
-                    <span class="info-value">{{ $visa_apply->passport_issue_date ?? 'N/A' }}</span>
+                    <span class="info-value">{{ $visa_apply?->passport?->passport_issue_date ?? 'N/A' }}</span>
                 </div>
                 <div class="info-item">
                     <span class="info-label">Expiry Date</span>
-                    <span class="info-value">{{ $visa_apply->passport_expire_date ?? 'N/A' }}</span>
+                    <span class="info-value">{{ $visa_apply?->passport?->passport_expire_date ?? 'N/A' }}</span>
                 </div>
                 <div class="info-item">
                     <span class="info-label">Issue Place</span>
-                    <span class="info-value">{{ $visa_apply->passport_issue_place ?? 'N/A' }}</span>
+                    <span class="info-value">{{ $visa_apply?->passport?->passport_issue_place ?? 'N/A' }}</span>
                 </div>
                 <div class="info-item">
                     <span class="info-label">Issue Place (Arabic)</span>
-                    <span class="info-value">{{ $visa_apply->passport_issue_place_arabic ?? 'N/A' }}</span>
+                    <span class="info-value">{{ $visa_apply?->passport?->passport_issue_place_arabic ?? 'N/A' }}</span>
                 </div>
                 <div class="info-item">
                     <span class="info-label">Issue Country</span>
-                    <span class="info-value">{{ $visa_apply->passport_issue_country }}</span>
+                    <span class="info-value">{{ $visa_apply?->passport?->issue_country?->name }}</span>
                 </div>
             </div>
         </div>
@@ -190,23 +190,23 @@
             <div class="box">
                 <div class="info-item">
                     <span class="info-label">Guarantor Name</span>
-                    <span class="info-value">{{ $visa_apply->guarantor_name ?? 'N/A' }}</span>
+                    <span class="info-value">{{ $visa_apply?->guarantor?->guarantor_name ?? 'N/A' }}</span>
                 </div>
                 <div class="info-item">
                     <span class="info-label">Guarantor Passport Number</span>
-                    <span class="info-value">{{ $visa_apply->guarantor_passport_no ?? 'N/A' }}</span>
+                    <span class="info-value">{{ $visa_apply?->guarantor?->guarantor_passport_no ?? 'N/A' }}</span>
                 </div>
                 <div class="info-item">
                     <span class="info-label">Guarantor Nationality</span>
-                    <span class="info-value">{{ $visa_apply->guarantor_nationality }}</span>
+                    <span class="info-value">{{ $visa_apply?->guarantor?->guarantor_nationality?->name }}</span>
                 </div>
                 <div class="info-item">
                     <span class="info-label">Guarantor Phone</span>
-                    <span class="info-value">{{ $visa_apply->guarantor_phone ?? 'N/A' }}</span>
+                    <span class="info-value">{{ $visa_apply?->guarantor?->guarantor_phone ?? 'N/A' }}</span>
                 </div>
                 <div class="info-item">
                     <span class="info-label">Guarantor Relation</span>
-                    <span class="info-value">{{ $visa_apply->guarantor_relation ?? 'N/A' }}</span>
+                    <span class="info-value">{{ $visa_apply?->guarantor?->guarantor_relation ?? 'N/A' }}</span>
                 </div>
             </div>
         </div>

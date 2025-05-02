@@ -12,7 +12,9 @@ class DownloadAction
         $visa_apply = VisaApply::query()->with([
             'personalInfo.currentNationality',
             'personalInfo.prevNationality',
-            'personalInfo.birthCountry'
+            'personalInfo.birthCountry',
+            'passport.issueCountry',
+            'guarantor'
         ])->findOrFail($id);
 
 
