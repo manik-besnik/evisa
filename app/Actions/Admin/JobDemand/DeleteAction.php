@@ -24,7 +24,7 @@ class DeleteAction
 
             $job->delete();
 
-            return to_route('admin.job-posts.index')->with(['message' => "Job Post Deleted"]);
+            return to_route('admin.job-demands.index')->with(['message' => "Job Demand Deleted"]);
 
         } catch (\Exception $exception) {
             return redirect()->back()->withErrors(['message' => $exception->getMessage()]);
