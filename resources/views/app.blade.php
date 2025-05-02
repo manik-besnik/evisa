@@ -4,7 +4,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title inertia>{{ config('app.name', 'Laravel') }}</title>
+    <title inertia>{{ config('app.name', 'Dubai Evisa Service') }}</title>
+    <meta name="description" content="The Dubai eVisa is an electronic travel authorization that allows eligible foreign nationals to enter the United Arab Emirates (UAE) for tourism, business, or transit purposes. The application process is entirely online, offering a convenient and fast way to obtain a visa without visiting an embassy. Applicants must submit required documents such as a passport copy and photograph, and upon approval, the eVisa is sent via email. Depending on nationality and purpose of visit, various eVisa types are available, including 14-day, 30-day, and 90-day options.">
+
+    <meta name="keywords" content="Online Visa, Evisa, Dubai, Dubai Evisa, Dubai Evisa Service, Evisa Service">
+
+    <meta name="author" content="Dubai Evisa Service">
+    <meta property="og:title" content="Dubai Evisa Service">
+    <meta property="og:description" content="The Dubai eVisa is an electronic travel authorization that allows eligible foreign nationals to enter the United Arab Emirates (UAE) for tourism, business, or transit purposes. The application process is entirely online, offering a convenient and fast way to obtain a visa without visiting an embassy. Applicants must submit required documents such as a passport copy and photograph, and upon approval, the eVisa is sent via email. Depending on nationality and purpose of visit, various eVisa types are available, including 14-day, 30-day, and 90-day options.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://dubaievisaservice.com/">
+    <meta property="og:image" content="https://dubaievisaservice.com/assets/images/logo.png">
+
 
     <link rel="shortcut icon" href="{{asset('favicon.ico')}}" type="image/x-icon">
     <!-- Fonts -->
