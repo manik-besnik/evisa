@@ -870,7 +870,7 @@ const CvCreate = () => {
                 </div>
             </div>
 
-            <ResumePreview show={resumePreview} setShow={setResumePreview}  cvData={data} confirmSubmit={confirmSubmit}/>
+            <ResumePreview show={resumePreview} setShow={setResumePreview}  cvData={data} oldAvatar={cv?.avatar} confirmSubmit={confirmSubmit}/>
         </WebLayout>
     );
 };
