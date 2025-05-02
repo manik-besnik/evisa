@@ -177,7 +177,7 @@ const JobDetailView = ({job}) => {
                                 </div>
                                 <div
                                     className="w-full border-2 border-r-0 border-[#8A9298] border-l-4 border-l-red-500 bg-white border-t-0 pl-2">
-                                    {job.worker_quantity} People
+                                    {job.available_job} People
                                 </div>
                             </div>
                             <div className="flex gap-4">
