@@ -1,3 +1,32 @@
+@php
+
+    $groups = [
+        1 => 'Main Person',
+        2 => 'Son Of Main Person',
+        3 => 'Daughter Of Main Person',
+        4 => 'Wife Of Main Person',
+    ];
+
+    $visaProcessingTypes = [
+        1 => 'Normal',
+        2 => 'Urgent',
+        3 => 'A2A',
+        4 => 'Renewal',
+    ];
+    $visaTypes = [
+        1 => 'VISIT VISA',
+        2 => 'EMPLOYMENT VISA',
+        3 => 'INVESTOR / PARTNER VISA',
+        4 => 'DOMESTIC WORKER',
+        5 => 'FREE ZONE / FREELANCER',
+        6 => 'FAMILY VISA',
+        7 => 'STUDENT VISA',
+        8 => 'GOLDEN VISA',
+        9 => 'GREEN VISA',
+    ];
+
+
+@endphp
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,12 +64,6 @@
         .info-value {
             color: #222;
         }
-        .warning {
-            color: #d9534f;
-            font-size: 12px;
-            margin-top: 5px;
-            margin-bottom: 5px;
-        }
         .row {
             width: 100%;
             display: table;
@@ -62,11 +85,11 @@
             <div class="box">
                 <div class="info-item">
                     <span class="info-label">Name</span>
-                    <span class="info-value">{{ $visa_apply->name ?? 'N/A' }}</span>
+                    <span class="info-value">{{ $visa_apply?->personal_info?->name ?? 'N/A' }}</span>
                 </div>
                 <div class="info-item">
                     <span class="info-label">Name (Arabic)</span>
-                    <span class="info-value">{{ $visa_apply->name_arabic ?? 'N/A' }}</span>
+                    <span class="info-value">{{ $visa_apply?->personal_info?->name_arabic ?? 'N/A' }}</span>
                 </div>
                 <div class="info-item">
                     <span class="info-label">Current Nationality</span>
@@ -134,19 +157,19 @@
             <div class="box">
                 <div class="info-item">
                     <span class="info-label">Personal Name | Company Name</span>
-                    <span class="info-value">{{ $visa_apply->personal_name ?? 'N/A' }}</span>
+                    <span class="info-value">{{ $visa_apply->name ?? 'N/A' }}</span>
                 </div>
                 <div class="info-item">
                     <span class="info-label">Processing Type</span>
-                    <span class="info-value">{{ $visa_apply->processing_type }}</span>
+                    <span class="info-value">{{ $visaProcessingTypes[$visa_apply->processing_type] }}</span>
                 </div>
                 <div class="info-item">
                     <span class="info-label">Visa Type</span>
-                    <span class="info-value">{{  $visa_apply->visa_type }}</span>
+                    <span class="info-value">{{  $visaTypes[$visa_apply->visa_type] }}</span>
                 </div>
                 <div class="info-item">
                     <span class="info-label">Group</span>
-                    <span class="info-value">{{  $visa_apply->group }}</span>
+                    <span class="info-value">{{  $groups[$visa_apply->group] }}</span>
                 </div>
             </div>
         </div>
