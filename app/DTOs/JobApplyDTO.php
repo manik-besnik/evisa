@@ -122,6 +122,11 @@ class JobApplyDTO
             'job_experiences.*.duration' => ['required', 'string'],
             'job_experiences.*.company' => ['required', 'string'],
 
+        ],[
+            'job_experiences.*.country_id.required' => 'Country is required for each job experience.',
+            'job_experiences.*.position.required' => 'Position is required for each job experience.',
+            'job_experiences.*.duration.required' => 'Duration is required for each job experience.',
+            'job_experiences.*.company.required' => 'Company name is required for each job experience.',
         ]);
 
 
