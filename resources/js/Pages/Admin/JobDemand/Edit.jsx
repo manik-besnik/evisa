@@ -82,8 +82,8 @@ const Edit = () => {
 
     const handleApprove = () => {
 
-        setData('is_approved', true)
-        confirmFormSubmit()
+        data.is_approved = true
+        confirmFormSubmit();
     }
     const confirmFormSubmit = () => {
         if (data.location_id === 'ready_job') {
