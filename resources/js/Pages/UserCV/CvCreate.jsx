@@ -253,18 +253,20 @@ const CvCreate = () => {
                                         error={errors.avatar}
 
                                     >
-                                        <div className="text-center">
-                                            <div className="flex justify-center">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64"
-                                                     viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                     strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                                                    <path
-                                                        d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
-                                                    <circle cx="12" cy="13" r="4"></circle>
-                                                </svg>
+                                        {cv?.avatar ? (<img src={cv.avatar} className="w-auto h-44 text-center" alt="Uploaded file"/>) :
+                                            <div className="flex flex-col items-center text-center">
+                                                <div className="flex items-center justify-center">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64"
+                                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                         strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                                                        <path
+                                                            d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                                                        <circle cx="12" cy="13" r="4"></circle>
+                                                    </svg>
+                                                </div>
+                                                <p className="mt-2 text-sm">Passport Size Pic</p>
                                             </div>
-                                            <p className="mt-2 text-sm">Passport Size Pic</p>
-                                        </div>
+                                        }
                                     </FileUpload>
 
                                 </div>
