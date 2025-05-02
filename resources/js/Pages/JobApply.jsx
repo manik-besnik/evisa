@@ -16,7 +16,7 @@ import {
     drivingLicenses,
     religions
 } from "@/Components/Constant/index.js";
-import {useState} from "react";
+import React, {useState} from "react";
 import {Head, useForm, usePage} from "@inertiajs/react";
 import PrimaryBtn from "@/Components/Web/PrimaryBtn.jsx";
 import {FaTrashAlt} from "react-icons/fa";
@@ -829,7 +829,7 @@ const JobDemand = () => {
                                             <TextInput
                                                 value={item.position}
                                                 onChange={(e) => updateJobExperience(i, "position", e.target.value)}
-                                                error={errors?.job_experiences ? errors['job_experiences'][i]['position'] : ""}
+                                                error={errors?.[`job_experiences.${i}.position`] || ''}
                                                 id={`position-${i}`}
                                                 placeholder="EX: Software Enginner"
                                                 label={
@@ -845,7 +845,7 @@ const JobDemand = () => {
                                             <TextInput
                                                 value={item.duration}
                                                 onChange={(e) => updateJobExperience(i, "duration", e.target.value)}
-                                                error={errors?.job_experiences ? errors['job_experiences'][i]['duration'] : ""}// error={errors.passing_year}
+                                                error={errors?.[`job_experiences.${i}.duration`] || ''}
                                                 id={`duration-${i}`}
                                                 placeholder="EX: 4 Years"
                                                 label={
@@ -861,7 +861,7 @@ const JobDemand = () => {
                                             <TextInput
                                                 value={item.company}
                                                 onChange={(e) => updateJobExperience(i, "company", e.target.value)}
-                                                error={errors?.job_experiences ? errors['job_experiences'][i]['company'] : ""}
+                                                error={errors?.[`job_experiences.${i}.company`] || ''}
                                                 id={`company-${i}`}
                                                 placeholder="Company Name"
                                                 label={
@@ -885,7 +885,7 @@ const JobDemand = () => {
                                                 selected={item.country}
                                                 setSelected={(value) => updateJobExperience(i, "country", value)}
                                                 handleValueChange={(value) => updateJobExperience(i, "country", value)}
-                                                error={errors?.job_experiences ? errors['job_experiences'][i]['country_id'] : ""}
+                                                error={errors?.[`job_experiences.${i}.country_id`] || ''}
                                                 defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
                                             />
                                         </div>
@@ -895,6 +895,8 @@ const JobDemand = () => {
                                                 <FaTrashAlt /></button>)}
                                     </div>
                                 ))}
+
+
                             </div>
 
                             {/* Summary for application */}

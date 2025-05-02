@@ -680,7 +680,7 @@ const CvCreate = () => {
                                             <TextInput
                                                 value={item.position}
                                                 onChange={(e) => updateJobExperience(i, "position", e.target.value)}
-                                                error={errors?.job_experiences ? errors?.job_experiences[i]['position'] : ""}
+                                                error={errors?.[`job_experiences.${i}.position`] || ''}
                                                 id={`position-${i}`}
                                                 placeholder="EX: Software Enginner"
                                                 label="Position*"
@@ -692,7 +692,7 @@ const CvCreate = () => {
                                             <TextInput
                                                 value={item.company}
                                                 onChange={(e) => updateJobExperience(i, "company", e.target.value)}
-                                                error={errors?.job_experiences ? errors?.job_experiences[i]['company'] : ""}
+                                                error={errors?.[`job_experiences.${i}.company`] || ''}
                                                 id={`company-${i}`}
                                                 placeholder="Company Name"
                                                 label="Company Name*"
@@ -704,7 +704,7 @@ const CvCreate = () => {
                                             <TextInput
                                                 value={item.start_date}
                                                 onChange={(e) => updateJobExperience(i, "start_date", e.target.value)}
-                                                error={errors?.job_experiences ? errors?.job_experiences[i]['start_date'] : ""}
+                                                error={errors?.[`job_experiences.${i}.start_date`] || ''}
                                                 id={`start-date-${i}`}
                                                 label="Start Date*"
                                                 type="date"
@@ -716,7 +716,7 @@ const CvCreate = () => {
                                             <TextInput
                                                 value={item.end_date}
                                                 onChange={(e) => updateJobExperience(i, "end_date", e.target.value)}
-                                                error={errors?.job_experiences ? errors?.job_experiences[i]['end_date'] : ""}
+                                                error={errors?.[`job_experiences.${i}.end_date`] || ''}
                                                 id={`end-date-${i}`}
                                                 label="End Date"
                                                 type="date"
@@ -741,7 +741,7 @@ const CvCreate = () => {
                                             <TextInput
                                                 value={item.description}
                                                 onChange={(e) => updateJobExperience(i, "description", e.target.value)}
-                                                error={errors?.job_experiences ? errors?.job_experiences[i]['description'] : ""}
+                                                error={errors?.[`job_experiences.${i}.description`] || ''}
                                                 id={`description-${i}`}
                                                 label="Job Description"
                                                 defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
@@ -766,7 +766,7 @@ const CvCreate = () => {
                                             <TextInput
                                                 value={item.name}
                                                 onChange={(e) => updateReference(i, "name", e.target.value)}
-                                                error={errors?.references ? errors?.references[i]['name'] : ""}
+                                                error={errors?.[`references.${i}.name`] || ''}
                                                 id={`name-${i}`}
                                                 placeholder="EX: John Doe"
                                                 label="Name*"
@@ -778,7 +778,7 @@ const CvCreate = () => {
                                             <TextInput
                                                 value={item.company}
                                                 onChange={(e) => updateReference(i, "company", e.target.value)}
-                                                error={errors?.references ? errors?.references[i]['company'] : ""}
+                                                error={errors?.[`references.${i}.company`] || ''}
                                                 id={`company-${i}`}
                                                 placeholder="EX: CEO"
                                                 label="Company"
@@ -790,7 +790,7 @@ const CvCreate = () => {
                                             <TextInput
                                                 value={item.designation}
                                                 onChange={(e) => updateReference(i, "designation", e.target.value)}
-                                                error={errors?.references ? errors?.references[i]['designation'] : ""}
+                                                error={errors?.[`references.${i}.designation`] || ''}
                                                 id={`designation-${i}`}
                                                 placeholder="EX: CEO"
                                                 label="Designation"
@@ -802,7 +802,7 @@ const CvCreate = () => {
                                             <TextInput
                                                 value={item.phone}
                                                 onChange={(e) => updateReference(i, "phone", e.target.value)}
-                                                error={errors?.references ? errors?.references[i]['phone'] : ""}
+                                                error={errors?.[`references.${i}.phone`] || ''}
                                                 id={`reference-phone-${i}`}
                                                 label="Phone Number"
                                                 defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
@@ -813,7 +813,7 @@ const CvCreate = () => {
                                             <TextInput
                                                 value={item.email}
                                                 onChange={(e) => updateReference(i, "email", e.target.value)}
-                                                error={errors?.references ? errors?.references[i]['email'] : ""}
+                                                error={errors?.[`references.${i}.email`] || ''}
                                                 id={`email-${i}`}
                                                 label="Email Address"
                                                 type="email"

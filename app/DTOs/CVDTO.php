@@ -33,7 +33,7 @@ class CVDTO
     public string|null $currentArea;
     public string|null $permanentDistrict;
     public string|null $permanentThana;
-    public string |null$permanentVillage;
+    public string|null $permanentVillage;
 
     public string|null $summary = null;
     public string|null $personalSkills = null;
@@ -102,8 +102,13 @@ class CVDTO
             'job_experiences.*.start_date' => ['required', 'string'],
             'job_experiences.*.company' => ['required', 'string'],
 
-        ],[
+        ], [
             'visa_expiry.required' => "Passport issue date is required",
+            'job_experiences.*.position.required' => 'Position is required for each job experience.',
+            'job_experiences.*.start_date.required' => 'Duration is required for each job experience.',
+            'job_experiences.*.company.required' => 'Company name is required for each job experience.',
+            'references.*.name.required' => 'Reference Name is required',
+
         ]);
 
         $instance = new self;
