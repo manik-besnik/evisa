@@ -1,5 +1,5 @@
 import {MdOutlineRemoveRedEye} from "react-icons/md";
-import {FiRefreshCw} from "react-icons/fi";
+import { IoCloudDownload } from "react-icons/io5";
 import {getValue} from "@/Components/Helper/index.js";
 import {visaStatuses, visaTypes} from "@/Components/Constant/index.js";
 import {Link, usePage} from "@inertiajs/react";
@@ -44,7 +44,7 @@ const SearchResult = () => {
                                     </Link>
                                     <a href={route('visa-apply.download',row.id)}
                                           className="text-gray-600 hover:text-gray-800">
-                                        <FiRefreshCw/>
+                                        <IoCloudDownload/>
                                     </a>
 
                                 </div>
