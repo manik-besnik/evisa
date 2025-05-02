@@ -3,6 +3,7 @@
 namespace App\Actions\Admin\JobDemand;
 
 use App\Enums\Permissions;
+use App\Models\JobDemand;
 use App\Models\JobPost;
 use App\Supports\FileUpload;
 use App\Supports\UserPermission;
@@ -17,7 +18,7 @@ class DeleteAction
 
         try {
 
-            $job = JobPost::query()->findOrFail($id);
+            $job = JobDemand::query()->findOrFail($id);
 
             FileUpload::delete($job->thumbnail);
 
