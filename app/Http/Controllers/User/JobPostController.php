@@ -93,9 +93,8 @@ class JobPostController extends Controller
         if ($result instanceof \Exception) {
             return redirect()->back()->withErrors(['message' => $result->getMessage()]);
         }
-
-
-        return redirect()->back()->with('success', 'Your application submitted');
+        
+        return to_route('job-apply.list')->with('success', "Your job applied successfully");
 
     }
 
