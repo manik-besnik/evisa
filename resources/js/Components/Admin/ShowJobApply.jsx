@@ -53,7 +53,9 @@ const ShowJobApply = ({data,experiences}) => {
                                     <p key={index} className="font-semibold">{index + 1}. {job.name}</p>
                                 ))
                             ) : (
-                                <p>1. No positions selected</p>
+
+                                <p>{data.job_demand.data ? data.job_demand.data : "1. No positions selected"}</p>
+
                             )}
                         </div>
                     </div>
