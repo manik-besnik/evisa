@@ -44,7 +44,7 @@ export const Index = ({job_demands}) => {
                         <td>{(job_demands.current_page > 1 ? job_demands.current_page * job_demands.per_page : 0) + index + 1}</td>
                         <td>{jobPost.type_of_work}</td>
                         <td>{jobPost.company.name}</td>
-                        <td>{jobPost.worker_quantity}</td>
+                        <td>{jobPost.available_job}</td>
                         <td>{getFormattedDate(jobPost.created_at)}</td>
                         <td className="flex gap-x-2">
                             <Link href={route('admin.job-demands.edit', jobPost.id)} className='btn-primary'>
