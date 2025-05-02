@@ -131,7 +131,6 @@ class JobApply extends Model
     }
 
 
-
     public function experiences(): HasMany
     {
         return $this->hasMany(JobExperience::class, 'job_apply_id','id');

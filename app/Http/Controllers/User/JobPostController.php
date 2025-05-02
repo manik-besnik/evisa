@@ -93,7 +93,7 @@ class JobPostController extends Controller
         if ($result instanceof \Exception) {
             return redirect()->back()->withErrors(['message' => $result->getMessage()]);
         }
-        
+
         return to_route('job-apply.list')->with('success', "Your job applied successfully");
 
     }
@@ -181,7 +181,9 @@ class JobPostController extends Controller
             ->with([
                 'jobDemand:id,type_of_work,company_id,location_id,job_location,salary',
                 'jobDemand.company:id,name',
-                'jobDemand.location:id,name'
+                'jobDemand.location:id,name',
+                'experiences',
+                'education'
             ])
             ->where('user_id', auth()->id())
             ->findOrFail($id);
