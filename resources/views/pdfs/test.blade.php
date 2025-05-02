@@ -326,13 +326,13 @@
                 </div>
                 <div class="contact-item">
                     <div class="contact-icon">
-                        <img src="{{ public_path(str_replace(url('/'), '', 'assets/images/cv/message.png')) }}" alt="{{$cv->name}}" class="profile-image" >
+                        <img src="{{ public_path(str_replace(url('/'), '', 'assets/images/cv/message.png')) }}" alt="{{$cv->name}}" class="profile-image" style="width: 20px; height: 20px; margin-top: 4px; border-radius: 0">
                     </div>
                     <div class="contact-text">{{$cv->email}}</div>
                 </div>
                 <div class="contact-item">
                     <div class="contact-icon">
-                        <img src="{{ public_path(str_replace(url('/'), '', 'assets/images/cv/link.png')) }}" alt="{{$cv->name}}" class="profile-image" >
+                        <img src="{{ public_path(str_replace(url('/'), '', 'assets/images/cv/link.png')) }}" alt="{{$cv->name}}" class="profile-image" style="width: 20px; height: 20px; margin-top: 4px;">
                     </div>
                     <div class="contact-text">{{$cv->website}}</div>
                 </div>
