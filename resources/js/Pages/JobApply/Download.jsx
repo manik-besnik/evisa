@@ -256,17 +256,17 @@ const Download = () => {
                                 <div className="grid grid-cols-2 gap-2 mb-1">
                                     <div className="border border-gray-300 p-1">Driving License</div>
                                     <div
-                                        className="border border-gray-300 p-1">{getDrivingLicense(data.driving_license) || "Select"}</div>
+                                        className="border border-gray-300 p-1">{getDrivingLicense(data.driving_license) || "-"}</div>
                                 </div>
                                 <div className="grid grid-cols-2 gap-2 mb-1">
                                     <div className="border border-gray-300 p-1">English</div>
                                     <div
-                                        className="border border-gray-300 p-1">{data.englishProficiencyName || "Select"}</div>
+                                        className="border border-gray-300 p-1">{data.englishProficiencyName || "-"}</div>
                                 </div>
                                 <div className="grid grid-cols-2 gap-2 mb-1">
                                     <div className="border border-gray-300 p-1">Arabic</div>
                                     <div
-                                        className="border border-gray-300 p-1">{data.arabicProficiencyName || "Select"}</div>
+                                        className="border border-gray-300 p-1">{data.arabicProficiencyName || "-"}</div>
                                 </div>
                             </div>
 
