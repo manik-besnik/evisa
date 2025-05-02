@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Actions\Admin\Cv\DeleteAction;
 use App\Actions\Admin\Cv\IndexAction;
+use App\Actions\Admin\Cv\DownloadAction;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
@@ -37,6 +38,11 @@ class CvController extends Controller
     public function destroy(int $id, DeleteAction $deleteAction): RedirectResponse
     {
         return $deleteAction->execute($id);
+    }
+
+    public function download(int $id, DownloadAction $downloadAction)
+    {
+        return $downloadAction->execute($id);
     }
 
 }

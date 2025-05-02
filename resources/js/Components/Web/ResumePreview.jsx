@@ -29,11 +29,20 @@ const Timeline = ({ title, subTitle, description, startDate, endDate = null, isP
         }
     }, []);
 
+    const getYear = (date) => {
+
+        if (!date){
+            return date
+        }
+        const parseData = new Date(date);
+        return parseData.getFullYear();
+    }
+
     return (
         <div className="flex items-start relative mb-4">
             {/* Date */}
-            <div className="w-1/4 text-right pr-6 font-bold text-sm text-gray-800">
-                {startDate} - {isPresent ? "PRESENT" : endDate}
+            <div className="w-1/4 flex text-right pr-6 font-bold text-sm text-gray-800">
+                {getYear(startDate)} - {isPresent ? "PRESENT" : getYear(endDate)}
             </div>
 
             {/* Timeline vertical line & dot */}
@@ -67,13 +76,13 @@ const Timeline = ({ title, subTitle, description, startDate, endDate = null, isP
 };
 
 
-const ResumePreview = ({ show, setShow, cvData, confirmSubmit }) => {
+const ResumePreview = ({ show, setShow, cvData, confirmSubmit,oldAvatar }) => {
 
     if (!show) return;
 
     return (
 
-        <Modal show={show} maxWidth='4xl' onClose={() => setShow(false)}>
+        <Modal show={show} maxWidth='5xl' onClose={() => setShow(false)}>
             <div className="flex justify-center bg-gray-100 p-5">
                 <div className="w-full max-w-5xl bg-white flex shadow-lg overflow-hidden">
                     {/* Left Section */}
@@ -83,11 +92,15 @@ const ResumePreview = ({ show, setShow, cvData, confirmSubmit }) => {
                             <div
                                 className="w-44 h-44 rounded-full bg-primary border-4 border-white flex items-center justify-center">
                                 <div className="w-40 h-40 rounded-full bg-white overflow-hidden">
-                                    {cvData.avatar && <img
+                                    {cvData.avatar ? <img
                                         src={URL.createObjectURL(cvData.avatar)}
                                         alt="Profile"
                                         className="w-full h-full object-cover"
-                                    />}
+                                    /> : <img
+                                        src={oldAvatar}
+                                        alt="Profile"
+                                        className="w-full h-full object-cover"
+                                    /> }
                                 </div>
                             </div>
                         </div>
