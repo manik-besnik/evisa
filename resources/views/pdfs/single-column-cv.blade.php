@@ -315,7 +315,7 @@
                 <td style="min-width: 200px"><span class="bullet"></span> {{$edu['institute'] ?? ''}}</td>
                 <td>:</td>
                 <td>{{$edu['department'] ?? ''}} - {{Carbon::parse($edu['start_date'])->format('Y') ?? ''}}
-                    -{{Carbon::parse($edu['end-date'])->format('Y') ?? ''}} {{$edu['result'] ?? ''}}
+                    -{{Carbon::parse($edu['end_date'])->format('Y') ?? ''}} {{$edu['result'] ?? ''}}
                 </td>
             </tr>
 

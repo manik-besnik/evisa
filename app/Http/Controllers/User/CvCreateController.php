@@ -78,6 +78,7 @@ class CvCreateController extends Controller
 
         $cv = UserCv::query()->with(['country'])->where('user_id', auth()->id())->firstOrFail();
 
+        // dd($cv);
         if ($type === '1') {
             $pdf = DomPDF::loadView('pdfs.single-column-cv', compact('cv'));
 
