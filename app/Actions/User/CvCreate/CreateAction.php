@@ -15,7 +15,6 @@ class CreateAction
 
         $cv = UserCv::query()->where('user_id', auth()->id())->first();
 
-
         return Inertia::render('UserCV/CvCreate', [
             'locations' => Location::query()->select(['id', 'name'])->get(),
             'languages' => Language::query()->select(['id', 'name'])->get(),

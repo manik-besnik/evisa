@@ -161,15 +161,15 @@
                 </div>
                 <div class="info-item">
                     <span class="info-label">Processing Type</span>
-                    <span class="info-value">{{ $visaProcessingTypes[$visa_apply->processing_type] }}</span>
+                    <span class="info-value">{{ $visaProcessingTypes[$visa_apply->processing_type] ?? 'N/A' }}</span>
                 </div>
                 <div class="info-item">
                     <span class="info-label">Visa Type</span>
-                    <span class="info-value">{{  $visaTypes[$visa_apply->visa_type] }}</span>
+                    <span class="info-value">{{  $visaTypes[$visa_apply->visa_type] ?? 'N/A' }}</span>
                 </div>
                 <div class="info-item">
                     <span class="info-label">Group</span>
-                    <span class="info-value">{{  $groups[$visa_apply->group] }}</span>
+                    <span class="info-value">{{  $groups[$visa_apply->group] ?? 'N/A' }}</span>
                 </div>
             </div>
         </div>

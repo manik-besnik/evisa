@@ -2,22 +2,22 @@ import React, { useRef, useEffect, useState } from 'react';
 import Modal from "@/Components/Modal.jsx";
 import { assetUrl } from "@/Components/Constant/index.js";
 
-const SectionHeader = ({ icon, text }) => {
+const SectionHeader = ({ icon, text, iconClassName = "" }) => {
     return (
         <div className="section-header flex items-center relative mb-5">
             <div className='bg-[#DD9227] rounded-l-full'>
                 <div
-                    className="icon-circle w-10 h-10  flex items-center justify-center border-2 border-white rounded-full bg-[#111827]  relative z-10">
+                    className={`icon-circle w-10 h-10 flex items-center justify-center border-2 border-white rounded-full bg-[#111827] relative z-10 ${iconClassName}`}>
                     <span className="icon text-base">{icon}</span>
                 </div>
             </div>
-            <div
-                className="flex items-center bg-[#DD9227] text-white h-10 min-w-max px-4 text-xl font-bold rounded-r-full">
+            <div className="flex items-center bg-[#DD9227] text-white h-10 min-w-max px-4 text-xl font-bold rounded-r-full">
                 {text}
             </div>
         </div>
     );
 };
+
 
 const Timeline = ({ title, subTitle, description, startDate, endDate = null, isPresent = false }) => {
     const contentRef = useRef(null);
@@ -88,7 +88,7 @@ const ResumePreview = ({ show, setShow, cvData, confirmSubmit,oldAvatar }) => {
                     {/* Left Section */}
                     <div className="w-1/3 bg-gray-900 text-white p-6">
                         {/* Profile Image */}
-                        <div className="flex justify-center mb-6">
+                        <div className="flex justify-center mb-6 relative">
                             <div
                                 className="w-44 h-44 rounded-full bg-primary border-4 border-white flex items-center justify-center">
                                 <div className="w-40 h-40 rounded-full bg-white overflow-hidden">
@@ -104,7 +104,9 @@ const ResumePreview = ({ show, setShow, cvData, confirmSubmit,oldAvatar }) => {
                                 </div>
                             </div>
                         </div>
-
+                        <div className='absolute top-[23px] left-[20px]'>
+                            <img src={`${assetUrl}images/cv/cvshape.png`} alt="contact" className='w-[391px] h-[366px]' />
+                        </div>
                         {/* Name and Title */}
                         <div className="text-center mb-6">
                             <h1 className="text-4xl font-bold text-primary leading-tight text-uppercase">{cvData.name}</h1>
@@ -158,7 +160,7 @@ const ResumePreview = ({ show, setShow, cvData, confirmSubmit,oldAvatar }) => {
                         {/* About Me */}
                         <div className="mb-6">
 
-                            <SectionHeader icon={<img src={`${assetUrl}images/cv/user.png`} alt="contact" className='w-5 h-5' />} text="About Me" />
+                            <SectionHeader icon={<img src={`${assetUrl}images/cv/user.png`} alt="contact" className='w-5 h-5' />} text="About Me" iconClassName="icon-circle-white" />
                             <p className="text-justify">
                                 {cvData.summary}
                             </p>
@@ -167,7 +169,7 @@ const ResumePreview = ({ show, setShow, cvData, confirmSubmit,oldAvatar }) => {
                         {/* Experience */}
                         <div className="mb-10">
 
-                            <SectionHeader icon={<img src={`${assetUrl}images/cv/officebag.png`} alt="contact" className='w-5 h-5' />} text="Experience" />
+                            <SectionHeader icon={<img src={`${assetUrl}images/cv/officebag.png`} alt="contact" className='w-5 h-5' />} text="Experience" iconClassName="icon-circle-white" />
 
                             {cvData.job_experiences.map((item) => (
                                 <Timeline
@@ -184,7 +186,7 @@ const ResumePreview = ({ show, setShow, cvData, confirmSubmit,oldAvatar }) => {
 
                         {/* Education */}
                         <div className="mb-6">
-                            <SectionHeader icon={<img src={`${assetUrl}images/cv/book.png`} alt="contact" className='w-5 h-5' />} text="Education" />
+                            <SectionHeader icon={<img src={`${assetUrl}images/cv/book.png`} alt="contact" className='w-5 h-5' />} text="Education" iconClassName="icon-circle-white" />
 
                             {cvData.educations.map((item) => (
                                 <Timeline
@@ -198,7 +200,7 @@ const ResumePreview = ({ show, setShow, cvData, confirmSubmit,oldAvatar }) => {
 
                         {/* Languages */}
                         <div className="mb-6">
-                            <SectionHeader icon={<img src={`${assetUrl}images/cv/flug.png`} alt="contact" className='w-5 h-5' />} text="Languages" />
+                            <SectionHeader icon={<img src={`${assetUrl}images/cv/flug.png`} alt="contact" className='w-5 h-5' />} text="Languages" iconClassName="icon-circle-white" />
                             <ul className="list-disc font-bold list-inside space-y-1 ml-10">
                                 {cvData.languages.map((item, index) => (
                                     <li key={index}>{item.name}</li>
@@ -208,7 +210,7 @@ const ResumePreview = ({ show, setShow, cvData, confirmSubmit,oldAvatar }) => {
 
                         {/* References */}
                         <div>
-                            <SectionHeader icon={<img src={`${assetUrl}images/cv/useryellow.png`} alt="contact" className='w-5 h-5' />} text="References" />
+                            <SectionHeader icon={<img src={`${assetUrl}images/cv/useryellow.png`} alt="contact" className='w-5 h-5' />} text="References" iconClassName="icon-circle-white" />
 
                             {cvData.references.map((item, index) => (
                                 <div key={index} className="mb-4 ml-10">
