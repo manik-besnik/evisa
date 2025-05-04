@@ -559,3 +559,27 @@ export const countriesList = [
   { name: "Zambia", code: "zm", dialCode: "+260" },
   { name: "Zimbabwe", code: "zw", dialCode: "+263" }
 ];
+
+
+export const educationQualifications = [
+    { id: "SSC", name: "SSC (CLASS 10)" },
+    { id: "HSC", name: "HSC (CLASS 12)" },
+    { id: "ENGINEER", name: "ENGINEER" },
+    { id: "DIPLOMA_ENGR", name: "DIPLOMA ENGR" },
+    { id: "CIVIL_ENGNR", name: "CIVIL ENGNR" },
+    { id: "MECHANICAL_ENGR", name: "MECHANICAL ENGR" },
+    { id: "ELECTRO_MECH_ENGR", name: "ELECTRO MECHANICAL ENGR" },
+    { id: "DOCTORS", name: "DOCTORS" },
+    { id: "BSS_HONOURS", name: "BSS HONOURS" },
+    { id: "BA", name: "BA" },
+    { id: "MA", name: "MA" },
+    { id: "BA_HONOURS", name: "BA HONOURS" },
+    { id: "BBA", name: "BBA" },
+    { id: "MBA", name: "MBA" },
+    { id: "DIPLOMA", name: "DIPLOMA" },
+    { id: "DAKHIL", name: "DAKHIL (HSC)" },
+    { id: "ALIM", name: "ALIM (HSC)" },
+    { id: "FADHIL", name: "FADHIL (BA)" },
+    { id: "KAMIL", name: "KAMIL (MA)" },
+    { id: "PSD_HOLDER", name: "PSD HOLDER" }
+];

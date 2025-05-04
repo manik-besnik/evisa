@@ -19,7 +19,7 @@ const SectionHeader = ({ icon, text, iconClassName = "" }) => {
 };
 
 
-const Timeline = ({ title, subTitle, description, startDate, endDate = null, isPresent = false }) => {
+const Timeline = ({ title, qualification, subTitle, description, startDate, endDate = null, isPresent = false }) => {
     const contentRef = useRef(null);
     const [lineHeight, setLineHeight] = useState(0);
 
@@ -57,7 +57,11 @@ const Timeline = ({ title, subTitle, description, startDate, endDate = null, isP
 
             {/* Content */}
             <div ref={contentRef} className="w-3/4 pl-6">
-                <div className="flex justify-between items-start">
+                <div className="font-bold text-lg text-gray-900">
+                    {qualification ? <div className="font-semibold text-lg text-[#1a222e]">
+                        {qualification}
+                    </div> : ''}
+
                     <div className="font-bold text-lg text-gray-900">
                         {title}
                     </div>
@@ -190,6 +194,7 @@ const ResumePreview = ({ show, setShow, cvData, confirmSubmit,oldAvatar }) => {
 
                             {cvData.educations.map((item) => (
                                 <Timeline
+                                    qualification={item.qualification}
                                     title={item.institute}
                                     startDate={item.start_date}
                                     endDate={item.end_date}
