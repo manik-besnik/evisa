@@ -15,10 +15,12 @@ const VisaApplicationTable = ({
     selectedApplications = [],
     setSelectedApplications = () => { }
 }) => {
-    const visa_applies = usePage().props.visa_applies;
+    const {visa_applies, auth} = usePage().props;
     const [visaApply, setVisaApply] = useState(null);
     const [show, setShow] = useState(false);
     const [selectAll, setSelectAll] = useState(false);
+
+    console.log(auth)
 
     // Update headings to include checkbox
     const tableHeadings = ["Select", ...VisaApplyTableHeading];
@@ -90,7 +92,7 @@ const VisaApplicationTable = ({
     return (
         <>
             <Table heading={tableHeadings}>
-                
+
                 {visa_applies.data.length > 0 && visa_applies.data.map((application, index) => (
                     <tr key={index}>
                         <td>
@@ -107,7 +109,7 @@ const VisaApplicationTable = ({
                         <td>{getValue(visaStatuses, application.status)}</td>
                         <td>{getFormattedDate(application.created_at)}</td>
                         <td className="flex gap-x-2">
-                            {isPermitted(permissionEnums.VIEW_SINGLE_VISA) &&
+                            {(isPermitted(permissionEnums.VIEW_SINGLE_VISA) || Number(auth.user.role) === 2) &&
                                 <button type="button" className='btn-primary' onClick={() => handleView(application)}>
                                     <FaRegEye />
                                 </button>
