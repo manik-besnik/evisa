@@ -4,7 +4,6 @@ import Select from "@/Components/Web/Select.jsx";
 import {useState} from "react";
 import TopSection from "@/Components/Admin/TopSection.jsx";
 import TextInput from "@/Components/TextInput.jsx";
-import {FaCameraRetro} from "react-icons/fa";
 import {usePage} from "@inertiajs/react";
 import JobDemandBanner from "@/Components/Web/JobDemandBanner.jsx";
 import FileUpload from "@/Components/Web/FileUpload.jsx";
