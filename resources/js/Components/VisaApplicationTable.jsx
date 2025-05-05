@@ -20,8 +20,6 @@ const VisaApplicationTable = ({
     const [show, setShow] = useState(false);
     const [selectAll, setSelectAll] = useState(false);
 
-    console.log(auth)
-
     // Update headings to include checkbox
     const tableHeadings = ["Select", ...VisaApplyTableHeading];
 
@@ -124,9 +122,11 @@ const VisaApplicationTable = ({
                                     <FaTrashAlt />
                                 </DangerButton>
                             }
-                            <button type="button" className='btn-primary' onClick={() => handleDownloadSinglePdf(application)}>
+                            {isAdmin && <button type="button"
+                                    className='btn-primary'
+                                    onClick={() => handleDownloadSinglePdf(application)}>
                                 <FiDownload />
-                            </button>
+                            </button> }
                         </td>
                     </tr>
                 ))}
