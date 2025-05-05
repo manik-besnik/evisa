@@ -13,7 +13,8 @@ class IndexAction
 
 
         $jobDemands = JobDemand::query()
-            ->with(['company'])->where('user_id', auth()->id())->paginate(20);
+            ->with(['company'])->where('user_id', auth()->id())
+            ->paginate(20);
 
         return Inertia::render('Agency/JobDemandList', [
             'job_demands' => $jobDemands
