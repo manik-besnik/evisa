@@ -6,6 +6,7 @@ import {
     genders,
     maritalStatuses,
     bloodGroups,
+    educationQualifications,
     religions
 } from "@/Components/Constant/index.js";
 import {useState, useEffect} from "react";
@@ -69,6 +70,7 @@ const CvCreate = () => {
         ],
         educations: cv?.educations?.length ? cv.educations :  [
             {
+                qualification: "",
                 institute: "",
                 start_date: "",
                 end_date: "",
@@ -128,6 +130,7 @@ const CvCreate = () => {
 
     const addNewEducation = () => {
         const education = {
+            qualification: "",
             institute: "",
             start_date: "",
             end_date: "",
@@ -254,7 +257,7 @@ const CvCreate = () => {
                                         error={errors.avatar}
 
                                     >
-                                        {cv?.avatar ? (<img src={cv.avatar} className="w-auto h-44 text-center" alt="Uploaded file"/>) :
+                                        {cv?.avatar ? (<img src={cv.avatar} className="w-auto m-auto h-full p-2 text-center" alt="Uploaded file"/>) :
                                             <div className="flex flex-col items-center text-center">
                                                 <div className="flex items-center justify-center">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64"
@@ -528,6 +531,20 @@ const CvCreate = () => {
                             {data.educations.map((item, i) => (
                                 <div key={i} className="mb-4">
                                     <div className="flex items-center gap-3 ">
+                                        <div className="w-1/4">
+                                            <label className="w-1/3">Exam*</label>
+                                            <div className="flex-1">
+                                                <Select
+                                                    placeholder="Select Qualification"
+                                                    items={educationQualifications}
+                                                    selected={item.qualification ? educationQualifications.find(qual => qual.id === item.qualification) : ''}
+                                                    setSelected={(value) => updateEducation(i, "qualification", value.id)}
+                                                    handleValueChange={(value) => updateEducation(i, "qualification", value.id)}
+                                                    error={errors?.educations ? errors?.educations[i]['qualification'] : ""}
+                                                    defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585] p-3"
+                                                />
+                                            </div>
+                                        </div>
                                         <div className="w-1/4">
                                             <TextInput
                                                 value={item.institute}
