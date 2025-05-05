@@ -39,7 +39,7 @@ Route::get('/job-details', function () {
     return Inertia::render('JobDetails');
 })->name('job-details');
 
-
+Route::get('contact', [ContactController::class, 'index'])->name('contact.index');
 
 // Route::get('job-demand', [JobPostController::class, 'index'])->name('job-demand');
 // Route::get('job-demand/{job}', [JobPostController::class, 'show'])->name('job-demand.show');
@@ -93,7 +93,7 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::post('/query/store', [InqueryController::class, 'store'])->name('query.store');
 
     Route::get('agency', [AgencyController::class, 'index'])->name('agency.create');
-    Route::get('contact', [ContactController::class, 'index'])->name('contact.index');
+    
 });
 
 

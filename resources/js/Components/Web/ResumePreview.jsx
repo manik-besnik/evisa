@@ -108,7 +108,7 @@ const ResumePreview = ({ show, setShow, cvData, confirmSubmit,oldAvatar }) => {
                                 </div>
                             </div>
                         </div>
-                        <div className='absolute top-[23px] left-[20px]'>
+                        <div className='absolute top-[23px] left-[20px] z-[-1]'>
                             <img src={`${assetUrl}images/cv/cvshape.png`} alt="contact" className='w-[391px] h-[366px]' />
                         </div>
                         {/* Name and Title */}

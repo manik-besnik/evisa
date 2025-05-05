@@ -227,7 +227,7 @@ const Inquery = () => {
                                 ))}
                             </div>
                         </div>
-                        <div className="w-6/12 h-[80vh]">
+                        <div className="w-6/12 h-[85vh]">
                             <div className="bg-[#6b7377c8] h-full relative p-5">
                                 <h4 className="text-white font-medium text-lg mb-4">Feel free to get in touch</h4>
 
