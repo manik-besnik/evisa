@@ -47,9 +47,9 @@ export const JobDemandList = ({job_demands}) => {
                         <td>{jobPost.worker_quantity}</td>
                         <td>{getFormattedDate(jobPost.created_at)}</td>
                         <td className="flex gap-x-2">
-                            <Link href={route('admin.job-demands.edit', jobPost.id)} className='btn-primary'>
-                                <FiEdit/>
-                            </Link>
+                            {/*<Link href={route('agency.job-demands.edit', jobPost.id)} className='btn-primary'>*/}
+                            {/*    <FiEdit/>*/}
+                            {/*</Link>*/}
                             <DangerButton onClick={() => handleDelete(jobPost)}>
                                 <FaTrashAlt/>
                             </DangerButton>
