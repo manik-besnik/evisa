@@ -30,7 +30,7 @@ class StoreAction
 
             DB::commit();
 
-            return to_route('agency.visa-applies.index');
+            return to_route('agency.visa-applies.index')->with('success', 'Visa Application Added');
 
         } catch (\Exception $exception) {
             DB::rollBack();
