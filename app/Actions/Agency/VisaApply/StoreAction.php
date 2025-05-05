@@ -30,7 +30,7 @@ class StoreAction
 
             DB::commit();
 
-            return redirect()->back();
+            return to_route('agency.visa-applies.index');
 
         } catch (\Exception $exception) {
             DB::rollBack();
