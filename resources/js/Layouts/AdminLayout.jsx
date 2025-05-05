@@ -1,12 +1,25 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {usePage} from '@inertiajs/react';
 import SideNav from '@/Components/Admin/SideNav';
+import {toast} from "react-toastify";
 
 export default function Authenticated({header, children}) {
-    const user = usePage().props.auth.user;
+
+    const {flash, errors} = usePage().props;
+
+    useEffect(() => {
+        if (flash?.success) {
+            toast(flash.success);
+        }
+        if (flash?.error) {
+            toast.error(flash.error);
+        }
+        if (errors?.message) {
+            toast.error(errors.message);
+        }
+    }, [flash, errors]);
 
 
-    const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
     const [toggleSideNav, useToggleSideNav] = useState(false)
 
     return (
