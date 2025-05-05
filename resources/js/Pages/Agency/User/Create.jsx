@@ -8,10 +8,10 @@ const Create = () => {
         <Authenticated>
             <Head title="Agencies | Dubai E-Visa"/>
             <TopSection title='Add User'>
-                <Link href={route('admin.users.index')} className='btn-primary'> User List
+                <Link href={route('agency.users.index')} className='btn-primary'> User List
                 </Link>
             </TopSection>
-            <AddUserForm submitRoute={route('admin.users.store')}/>
+            <AddUserForm submitRoute={route('agency.users.store')}/>
         </Authenticated>
     )
 }
