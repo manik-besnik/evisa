@@ -19,7 +19,8 @@ class StoreAction
             JobDemand::storeJobDemand($jobDemandDTO, $company->id);
 
             DB::commit();
-            return redirect()->back();
+
+            return to_route('agency.job-demands.index')->with('success', 'New Job Demand Added Successfully');
 
         } catch (\Exception $exception) {
             DB::rollBack();

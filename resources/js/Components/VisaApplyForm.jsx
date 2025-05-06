@@ -344,7 +344,7 @@ const VisaApplyForm = ({submitUrl}) => {
                                 error={errors.name}
                                 id="fullname-english"
                                 placeholder="Full Name English"
-                                label="Full Name (English)" divClasses="my-3"
+                                label="Full Name* (English)" divClasses="my-3"
                                 defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                                 labelClasses="text-text-primary"
                             />
@@ -411,7 +411,7 @@ const VisaApplyForm = ({submitUrl}) => {
 
                             <Select
                                 placeholder="Select Country"
-                                label="Birth Country*"
+                                label="Birth Country"
                                 items={countries}
                                 selected={birthCountry}
                                 setSelected={setBirthCountry}
@@ -423,7 +423,7 @@ const VisaApplyForm = ({submitUrl}) => {
 
                             <Select
                                 placeholder="Select Status"
-                                label="Marital Status*"
+                                label="Marital Status"
                                 items={maritalStatuses}
                                 selected={maritalStatus}
                                 setSelected={setMaritalStatus}
@@ -485,7 +485,7 @@ const VisaApplyForm = ({submitUrl}) => {
                                 error={errors.religion}
                                 id="religion"
                                 placeholder="Religion"
-                                label="Religion" divClasses="my-3"
+                                label="Religion*" divClasses="my-3"
                                 defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                                 labelClasses="text-text-primary"
                             />
@@ -507,7 +507,7 @@ const VisaApplyForm = ({submitUrl}) => {
                                 error={errors.qualification}
                                 id="qualification"
                                 placeholder="Qualification"
-                                label="Qualification" divClasses="my-3"
+                                label="Qualification*" divClasses="my-3"
                                 defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                                 labelClasses="text-text-primary"
                             />
@@ -650,7 +650,7 @@ const VisaApplyForm = ({submitUrl}) => {
                                 error={errors.passport_issue_date}
                                 id="passport-issue-date"
                                 placeholder="Passport Issue Date"
-                                label="Passport Issue Date" divClasses="my-3"
+                                label="Passport Issue Date*" divClasses="my-3"
                                 defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                                 labelClasses="text-text-primary"
                                 type="date"
@@ -661,7 +661,7 @@ const VisaApplyForm = ({submitUrl}) => {
                                 onChange={(e) => setData('passport_expire_date', e.target.value)}
                                 error={errors.passport_expire_date}
                                 id="passport-expire-date"
-                                placeholder="Passport Expire Date"
+                                placeholder="Passport Expire Date*"
                                 label="Passport Expire Date" divClasses="my-3"
                                 defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                                 labelClasses="text-text-primary"

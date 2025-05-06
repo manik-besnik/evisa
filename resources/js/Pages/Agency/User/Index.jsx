@@ -9,7 +9,7 @@ const Index = ({users}) => {
         <Authenticated>
             <Head title="Agencies | Dubai E-Visa"/>
             <TopSection title='Users'>
-                <Link href={route('admin.users.create')} className='btn-primary'><FiPlus/> Add New User
+                <Link href={route('agency.users.create')} className='btn-primary'><FiPlus/> Add New User
                 </Link>
             </TopSection>
 

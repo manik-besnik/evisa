@@ -28,7 +28,7 @@ export default function AgencySideNavLinks() {
         {
             name: 'Job Demand',
             icon: <PiNetworkXBold/>,
-            isOpen: route().current('agency.visa-applies.*'),
+            isOpen: route().current('agency.job-demands.*'),
             links: [
                 {
                     name: 'Job Demand List',

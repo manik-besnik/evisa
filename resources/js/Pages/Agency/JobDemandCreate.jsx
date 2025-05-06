@@ -1,33 +1,27 @@
-import Authenticated from "@/Layouts/AuthenticatedLayout.jsx";
-import {Head, Link, useForm} from "@inertiajs/react";
+import {Head, Link, useForm, usePage} from "@inertiajs/react";
+import TopSection from "@/Components/Admin/TopSection.jsx";
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.jsx';
+import FileUpload from "@/Components/Web/FileUpload.jsx";
+import JobDemandBanner from "@/Components/Web/JobDemandBanner.jsx";
+import TextInput from "@/Components/TextInput.jsx";
 import Select from "@/Components/Web/Select.jsx";
 import {useState} from "react";
-import TopSection from "@/Components/Admin/TopSection.jsx";
-import TextInput from "@/Components/TextInput.jsx";
-import {usePage} from "@inertiajs/react";
-import JobDemandBanner from "@/Components/Web/JobDemandBanner.jsx";
-import FileUpload from "@/Components/Web/FileUpload.jsx";
+import {regions} from "@/Components/Constant/index.js";
+import {toast} from "react-toastify";
 
-const CreateJobPost = () => {
+const JobDemandCreate = () => {
 
     const {locations} = usePage().props
-    const jobLocations = [
-        ...[
-            {
-                id: "ready_job",
-                name: "READY JOB",
-            }, {
-                id: "new_job",
-                name: "NEW JOB",
-            }
-        ],
-        ...locations
-    ]
+    const [showPreview, setShowPreview] = useState(false);
     const [location, setLocation] = useState(null)
+    const [region, setRegion] = useState(regions[0])
 
-    const {data, setData, post, processing, errors} = useForm({
-        // Job details
-        type_of_work: '', // Default value
+
+    // Create form with useForm
+    const {data, setData, post, processing, errors, reset} = useForm({
+        type_of_work: '',
+        region: 1,
+        location: '',
         job_location: '',
         location_id: '',
         visa_validity: '',
@@ -42,6 +36,7 @@ const CreateJobPost = () => {
         worker_quantity: '',
         education: '',
         company_activities: '',
+        thumbnail: "",
         company_name: '',
         contact_person: '',
         phone_no: '',
@@ -50,46 +45,49 @@ const CreateJobPost = () => {
         current_address: '',
         city: '',
         area: '',
-        note: '',
-        thumbnail: '',
-        is_on_demand: false,
-        is_new_job: false,
-        is_approved: true,
+        note: ''
     });
 
-
+    // Handle form submission
     const handleSubmit = (e) => {
-        e.preventDefault()
+        e.preventDefault();
+        confirmSubmit()
+    };
 
-        if (data.location_id === 'ready_job') {
-            setData('location_id', null)
-            setData('is_on_demand', true)
-        }
-        if (data.location_id === 'new_job') {
-            setData('location_id', null)
-            setData('is_new_job', true)
-        }
-
-        post(route('admin.job-demands.store'))
+    const confirmSubmit = () => {
+        post(route('agency.job-demands.store'), {
+            onSuccess: () => {
+                toast.success('Job demand submitted successfully');
+                reset()
+                setShowPreview(false);
+            }
+        });
     }
 
+    const togglePreview = () => {
+
+        if (!showPreview) {
+            setData('location', location)
+        }
+        setShowPreview(!showPreview);
+    };
 
     return (
-        <Authenticated>
-            <Head title="Add New Job | Dubai E-Visa"/>
+        <AuthenticatedLayout>
 
-            <TopSection title='Add New Job Post'>
-                <Link href={route('admin.job-demands.index')} className='btn-primary'> Job Post List
+            <Head title="Job Demand List | Dubai E-Visa"/>
+
+            <TopSection title='Create Job Demand'>
+                <Link href={route('agency.job-demands.index')} className='btn-primary'>
+                    Job Demand List
                 </Link>
             </TopSection>
-
-            <div className="mt-1">
-
-                <form onSubmit={handleSubmit} className="flex flex-col gap-y-2">
-                    <div className="p-10 h-full overflow-y-auto bg-white">
-
+            <div className="container mx-auto px-4 py-8">
+                <form onSubmit={handleSubmit}>
+                    <div className="bg-white rounded-lg overflow-hidden mb-8 p-8 shadow-md w-[1080px] mx-auto">
+                        {/* Header with "Security" and Camera Icon */}
                         <FileUpload
-                            onChange={(fileType,value) => setData('thumbnail', value)}
+                            onChange={(value, file) => setData('thumbnail', file)}
                             error={errors.thumbnail}
                             fileType="thumbnail"
                         >
@@ -97,13 +95,13 @@ const CreateJobPost = () => {
                         </FileUpload>
 
                         {/* Salary and Code Section */}
-                        <div className="p-4 w-4/12">
+                        <div className="py-4 w-4/12 mt-16">
                             <TextInput
                                 value={data.type_of_work}
                                 onChange={(e) => setData("type_of_work", e.target.value)}
                                 error={errors.type_of_work}
-                                placeholder="Type of Work"
-                                defaultClasses="border-2 border-[#8A9298] focus:outline-none focus:ring-0"
+                                placeholder="Type of Work*"
+                                defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
                             />
 
                         </div>
@@ -111,31 +109,57 @@ const CreateJobPost = () => {
                         {/* Job Details Table with TextInput */}
                         <div className="w-full">
                             <div className="grid mt-5">
-
                                 <div className="flex gap-4">
                                     <div
-                                        className="pr-2 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right  flex items-center justify-end">
-                                        Job Location
+                                        className="pr-2 border-2 border-b-0 border-l-0 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right  flex items-center justify-end">
+                                        Region <span className="text-red-600">*</span>
                                     </div>
-                                    <div className="w-full border-2 border-[#8A9298] bg-white">
+                                    <div className="w-full border-2 border-r-0 border-b-0 border-[#8A9298] bg-white">
 
                                         <Select
-                                            items={jobLocations}
-                                            selected={location}
-                                            setSelected={setLocation}
-                                            handleValueChange={(value) => setData('location_id', value.id)}
-                                            error={errors.location_id}
+                                            items={regions}
+                                            selected={region}
+                                            setSelected={setRegion}
+                                            handleValueChange={(value) => setData('region', value.id)}
+                                            error={errors.region}
 
                                         />
+                                    </div>
+                                </div>
+                                <div className="flex gap-4">
+                                    <div
+                                        className="pr-2 border-2 border-l-0 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right  flex items-center justify-end">
+                                        Job Location <span className="text-red-600">*</span>
+                                    </div>
+                                    <div className="w-full border-2 border-r-0 border-[#8A9298] bg-white">
+                                        {region.id === 1 && (
+                                            <Select
+                                                items={locations}
+                                                selected={location}
+                                                setSelected={setLocation}
+                                                handleValueChange={(value) => setData('location_id', value.id)}
+                                                error={errors.location_id}
+
+                                            />)}
+                                        {region.id === 2 && (
+                                            <TextInput
+                                                id="job_location"
+                                                value={data.job_location}
+                                                onChange={(e) => setData("job_location", e.target.value)}
+                                                error={errors.job_location}
+                                                placeholder="Type Here"
+                                            />
+                                        )}
+
 
                                     </div>
                                 </div>
                                 <div className="flex gap-4">
                                     <div
-                                        className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                        className="pr-2 border-t-0 border-l-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                         Visa validity
                                     </div>
-                                    <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
+                                    <div className="w-full border-2 border-r-0 border-[#8A9298] bg-white border-t-0">
                                         <TextInput
                                             id="visa_validity"
                                             value={data.visa_validity}
@@ -147,10 +171,10 @@ const CreateJobPost = () => {
                                 </div>
                                 <div className="flex gap-4">
                                     <div
-                                        className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                        className="pr-2 border-t-0 border-l-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                         Accommodation
                                     </div>
-                                    <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
+                                    <div className="w-full border-2 border-r-0 border-[#8A9298] bg-white border-t-0">
                                         <TextInput
                                             id="accommodation"
                                             value={data.accommodation}
@@ -162,10 +186,10 @@ const CreateJobPost = () => {
                                 </div>
                                 <div className="flex gap-4">
                                     <div
-                                        className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                        className="pr-2 border-t-0 border-l-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                         Transport
                                     </div>
-                                    <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
+                                    <div className="w-full border-2 border-r-0 border-[#8A9298] bg-white border-t-0">
                                         <TextInput
                                             id="transport"
                                             value={data.transport}
@@ -177,10 +201,10 @@ const CreateJobPost = () => {
                                 </div>
                                 <div className="flex gap-4">
                                     <div
-                                        className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                        className="pr-2 border-t-0 border-l-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                         Food
                                     </div>
-                                    <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
+                                    <div className="w-full border-2 border-r-0 border-[#8A9298] bg-white border-t-0">
                                         <TextInput
                                             id="food"
                                             value={data.food}
@@ -192,10 +216,10 @@ const CreateJobPost = () => {
                                 </div>
                                 <div className="flex gap-4">
                                     <div
-                                        className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                        className="pr-2 border-t-0 border-l-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                         Medical Insurance
                                     </div>
-                                    <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
+                                    <div className="w-full border-2 border-r-0 border-[#8A9298] bg-white border-t-0">
                                         <TextInput
                                             id="medical_insurance"
                                             value={data.medical_insurance}
@@ -207,10 +231,10 @@ const CreateJobPost = () => {
                                 </div>
                                 <div className="flex gap-4">
                                     <div
-                                        className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                        className="pr-2 border-t-0 border-l-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                         Daily working hours
                                     </div>
-                                    <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
+                                    <div className="w-full border-2 border-r-0 border-[#8A9298] bg-white border-t-0">
                                         <TextInput
                                             id="working_hours"
                                             value={data.working_hours}
@@ -222,10 +246,10 @@ const CreateJobPost = () => {
                                 </div>
                                 <div className="flex gap-4">
                                     <div
-                                        className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
-                                        Salary
+                                        className="pr-2 border-t-0 border-l-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                        Salary <span className="text-red-600">*</span>
                                     </div>
-                                    <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
+                                    <div className="w-full border-2 border-r-0 border-[#8A9298] bg-white border-t-0">
                                         <TextInput
                                             id="salary"
                                             value={data.salary}
@@ -237,10 +261,10 @@ const CreateJobPost = () => {
                                 </div>
                                 <div className="flex gap-4">
                                     <div
-                                        className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                        className="pr-2 border-t-0 border-l-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                         Vacation benefits
                                     </div>
-                                    <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
+                                    <div className="w-full border-2 border-r-0 border-[#8A9298] bg-white border-t-0">
                                         <TextInput
                                             id="vacation_benefits"
                                             value={data.vacation_benefits}
@@ -252,10 +276,10 @@ const CreateJobPost = () => {
                                 </div>
                                 <div className="flex gap-4">
                                     <div
-                                        className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                        className="pr-2 border-t-0 border-l-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                         Age limits
                                     </div>
-                                    <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
+                                    <div className="w-full border-2 border-r-0 border-[#8A9298] bg-white border-t-0">
                                         <TextInput
                                             id="age_limits"
                                             value={data.age_limits}
@@ -267,10 +291,10 @@ const CreateJobPost = () => {
                                 </div>
                                 <div className="flex gap-4">
                                     <div
-                                        className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
-                                        In-demand workers
+                                        className="pr-2 border-t-0 border-l-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                        In-demand workers <span className="text-red-600">*</span>
                                     </div>
-                                    <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
+                                    <div className="w-full border-2 border-r-0 border-[#8A9298] bg-white border-t-0">
                                         <TextInput
                                             id="worker_quantity"
                                             value={data.worker_quantity}
@@ -282,10 +306,10 @@ const CreateJobPost = () => {
                                 </div>
                                 <div className="flex gap-4">
                                     <div
-                                        className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                        className="pr-2 border-t-0 border-l-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                         Education
                                     </div>
-                                    <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
+                                    <div className="w-full border-2 border-r-0 border-[#8A9298] bg-white border-t-0">
                                         <TextInput
                                             id="education"
                                             value={data.education}
@@ -297,10 +321,10 @@ const CreateJobPost = () => {
                                 </div>
                                 <div className="flex gap-4">
                                     <div
-                                        className="pr-2 border-t-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
+                                        className="pr-2 border-t-0 border-l-0 border-2 border-[#8A9298] w-1/3 font-semibold bg-[#EFD79D] text-right flex items-center justify-end">
                                         Company activities
                                     </div>
-                                    <div className="w-full border-2 border-[#8A9298] bg-white border-t-0">
+                                    <div className="w-full border-2 border-r-0 border-[#8A9298] bg-white border-t-0">
                                         <TextInput
                                             id="company_activities"
                                             value={data.company_activities}
@@ -315,7 +339,7 @@ const CreateJobPost = () => {
 
 
                         {/* Application Requirements */}
-                        <div className="flex mt-8 mb-4">
+                        <div className="flex mt-8">
                             <div className="bg-gray-600 text-white px-8 flex items-center">
                                 <span className="font-bold">Note</span>
                             </div>
@@ -323,13 +347,13 @@ const CreateJobPost = () => {
                                 <h3 className="font-bold text-lg">Application Requirements:</h3>
                             </div>
                         </div>
-                        <div className="px-4 py-2 border-l-4 border-red-500 mb-4 ml-28">
+                        <div className="px-4 py-2  mb-4 ml-24">
                              <textarea
                                  id="note"
                                  name="note"
                                  value={data.note}
                                  onChange={(e) => setData('note', e.target.value)}
-                                 className="w-full rounded"
+                                 className="w-full border-l-8 border-l-red-500"
                                  rows={4}
                              ></textarea>
                         </div>
@@ -410,7 +434,6 @@ const CreateJobPost = () => {
                         <div className="flex gap-4 mt-2">
                             <div className="bg-gray-600 text-white p-2 w-48 flex items-center">
                                 <span className="font-bold">WHATSAPP NO.</span>
-                                <span className="text-red-500 ml-2">*</span>
                             </div>
                             <div className="flex-1 p-0 relative border-2 border-[#8A9298]">
                                 <div className="absolute top-0 bottom-0 left-0 w-1 bg-red-500"></div>
@@ -430,7 +453,6 @@ const CreateJobPost = () => {
                         <div className="flex gap-4 mt-2">
                             <div className="bg-gray-600 text-white p-2 w-48 flex items-center">
                                 <span className="font-bold">EMAIL</span>
-                                <span className="text-red-500 ml-2">*</span>
                             </div>
                             <div className="flex-1 p-0 relative border-2 border-[#8A9298]">
                                 <div className="absolute top-0 bottom-0 left-0 w-1 bg-red-500"></div>
@@ -461,7 +483,7 @@ const CreateJobPost = () => {
                         {/* Current Address */}
                         <div className="flex gap-4">
                             <div className="bg-gray-600 text-white p-2 w-48 flex items-center">
-                                <span className="font-bold">CURRENT ADDRESS</span>
+                                <span className="font-bold">CURRENT ADRESS</span>
                             </div>
                             <div className="flex-1 p-0 relative border-2 border-[#8A9298]">
                                 <div className="absolute top-0 bottom-0 left-0 w-1 bg-red-500"></div>
@@ -509,7 +531,8 @@ const CreateJobPost = () => {
                             </div>
                         </div>
 
-                        <div className="flex justify-end mt-4">
+                        {/* Submit and Preview Buttons */}
+                        <div className="p-4 flex justify-end space-x-4">
                             <button
                                 type="submit"
                                 disabled={processing}
@@ -517,13 +540,30 @@ const CreateJobPost = () => {
                             >
                                 Submit
                             </button>
+                            <button
+                                type="button"
+                                onClick={togglePreview}
+                                className="bg-blue-600 text-white px-4 py-2 rounded font-bold flex items-center"
+                            >
+                                <span className="mr-2">Preview</span>
+                                <span className="flex items-center justify-center w-6 h-6 bg-white rounded-full">
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-blue-600"
+                                         fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                                              d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                                              d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                    </svg>
+                                </span>
+                            </button>
                         </div>
                     </div>
-
                 </form>
             </div>
-        </Authenticated>
+
+
+        </AuthenticatedLayout>
     )
 }
 
-export default CreateJobPost
+export default JobDemandCreate;

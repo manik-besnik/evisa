@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Agency;
 use App\Actions\Agency\VisaApply\CreateAction;
 use App\Actions\Agency\VisaApply\EditAction;
 use App\Actions\Agency\VisaApply\IndexAction;
+use App\Actions\Agency\VisaApply\ShowAction;
 use App\Actions\Agency\VisaApply\StoreAction;
 use App\Actions\Agency\VisaApply\UpdateAction;
 use App\DTOs\VisaApplyDTO;
@@ -43,9 +44,9 @@ class VisaApplyController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(VisaApply $visaApply)
+    public function show(VisaApply $visaApply, ShowAction $showAction): Response
     {
-        //
+        return $showAction->execute($visaApply);
     }
 
     /**
