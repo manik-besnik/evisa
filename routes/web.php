@@ -32,8 +32,8 @@ Route::get('/terms-conditions', function () {
 })->name('terms-conditions');
 
 Route::get('facebook-deletion', function () {
-    return \App\Supports\ApiResponse::success('Data has been deleted');
-});
+    return Inertia::render('DataDeletation');
+})->name('facebook-deletion');
 
 Route::get('/job-details', function () {
     return Inertia::render('JobDetails');
