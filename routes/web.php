@@ -43,7 +43,7 @@ Route::get('contact', [ContactController::class, 'index'])->name('contact.index'
 
 // Route::get('job-demand', [JobPostController::class, 'index'])->name('job-demand');
 // Route::get('job-demand/{job}', [JobPostController::class, 'show'])->name('job-demand.show');
-
+Route::get('jobs/{id}/details', [JobPostController::class, 'jobsDetails'])->name('job.details');
 Route::middleware(['auth', 'user'])->group(function () {
 
     Route::get('user-info', [ProfileController::class, 'userInfo'])->name('user.info');
@@ -72,7 +72,6 @@ Route::middleware(['auth', 'user'])->group(function () {
 
     Route::get('job-apply', [JobPostController::class, 'create'])->name('job-posts.create');
     Route::get('job', [JobPostController::class, 'job'])->name('job.create');
-    Route::get('jobs/{id}/details', [JobPostController::class, 'jobsDetails'])->name('job.details');
     Route::get('/job-pdf/{id}', [JobPostController::class, 'generatePdf'])->name('job.pdf');
     Route::get('job-directory', [JobPostController::class, 'jobDirectory'])->name('job.directory');
     Route::get('job-view', [JobPostController::class, 'jobView'])->name('job.view');
