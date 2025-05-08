@@ -76,7 +76,8 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
 
     Route::post('job-demands/update/{id}', [JobDemandController::class, 'update'])
         ->name('job-demands.update');
-
+    Route::get('job-demands/view/{id}', [JobDemandController::class, 'getDetails'])
+        ->name('job-demands.view');
     Route::resource('job-demands', JobDemandController::class)->except(['update']);
 
     Route::get('agencies', [AgencyController::class, 'index'])->name('agencies.index');
