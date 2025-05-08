@@ -11,11 +11,12 @@
 
     <meta name="author" content="Dubai Evisa Service">
     <meta property="og:title" content="Dubai Evisa Service">
-    <meta property="og:description" content="The Dubai eVisa is an electronic travel authorization that allows eligible foreign nationals to enter the United Arab Emirates (UAE) for tourism, business, or transit purposes. The application process is entirely online, offering a convenient and fast way to obtain a visa without visiting an embassy. Applicants must submit required documents such as a passport copy and photograph, and upon approval, the eVisa is sent via email. Depending on nationality and purpose of visit, various eVisa types are available, including 14-day, 30-day, and 90-day options.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://dubaievisaservice.com/">
-    <meta property="og:image" content="https://dubaievisaservice.com/assets/images/logo.png">
-
+    @if (isset($page['props']['meta']))
+    <meta property="og:title" content="{{ $page['props']['meta']['title'] }}" />
+    <meta property="og:description" content="{{ $page['props']['meta']['requirements'] }}" />
+    <meta property="og:image" content="{{ $page['props']['meta']['image'] }}" />
+    <meta property="og:url" content="{{ $page['props']['meta']['url'] }}" />
+   @endif
 
     <link rel="shortcut icon" href="{{asset('favicon.ico')}}" type="image/x-icon">
     <!-- Fonts -->
