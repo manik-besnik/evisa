@@ -10,7 +10,6 @@
     <meta name="keywords" content="Online Visa, Evisa, Dubai, Dubai Evisa, Dubai Evisa Service, Evisa Service">
 
     <meta name="author" content="Dubai Evisa Service">
-    <meta property="og:title" content="Dubai Evisa Service">
     @if (isset($page['props']['meta']))
     <meta property="og:title" content="{{ $page['props']['meta']['title'] }}" />
     <meta property="og:description" content="{{ $page['props']['meta']['requirements'] }}" />
