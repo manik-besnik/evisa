@@ -1,5 +1,5 @@
 export const assetUrl = "https://dubaievisaservice.com/assets/"
-// export const assetUrl = "http://127.0.0.1:8001/assets/"
+//export const assetUrl = "http://127.0.0.1:8000/assets/"
 export const genders = [
     {id: 1, name: "Male"},
     {id: 2, name: "Female"},

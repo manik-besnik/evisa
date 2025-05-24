@@ -27,7 +27,7 @@ export default function WebLayout({children, showServiceImage = true, showBgImag
             <Topbar/>
             <Navbar/>
 
-            <div
+            <div className='relative' 
                 style={{
                     backgroundImage: showBgImage
                         ? `url(${assetUrl}images/bg.png)`
@@ -42,6 +42,12 @@ export default function WebLayout({children, showServiceImage = true, showBgImag
                         <ServiceImage/>
                     </div>
                 </div>}
+
+                <div className="fixed  w-[52px] h-[52px] -bottom-[1%] left-[4%]">
+                    <button onClick={() => window.history.back()}>
+                        <img src={`${assetUrl + 'images/back.png'}`} alt="Back" className="w-7 h-7" />
+                    </button>
+                </div>
             </div>
 
             <ToastContainer/>
