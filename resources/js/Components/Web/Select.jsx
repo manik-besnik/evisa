@@ -64,7 +64,7 @@ export default function Select({
                             leaveTo="opacity-0">
                     <ListboxOptions
                         anchor="bottom"
-                        className="w-[var(--button-width)] border bg-white p-2.5 [--anchor-gap:var(--spacing-1)] focus:outline-none max-h-[450px] overflow-y-scroll"
+                        className="w-[var(--button-width)] border bg-white p-2.5 [--anchor-gap:var(--spacing-1)] focus:outline-none max-h-[450px] overflow-y-scroll z-[99]"
                     >
 
                         <div className="p-2">

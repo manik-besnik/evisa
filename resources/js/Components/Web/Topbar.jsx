@@ -8,7 +8,7 @@ const RightNoneAuthPart = () => {
             <img className="w-20" src={`${assetUrl + 'images/logo2.png'}`} alt="logo" />
             <p className="flex items-center ml-6">
                 <FaWhatsapp className="text-success" />
-                <span className="text-primary">+971528260909</span>
+                <span className="text-primary">+971 567 040 050</span>
             </p>
         </div>
         <div className="flex justify-between items-center">

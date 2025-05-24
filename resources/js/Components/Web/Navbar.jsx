@@ -11,7 +11,7 @@ const Navbar = () => {
         <div className="flex justify-between items-center bg-[#C19125] text-white">
 
             <div className="flex items-center">
-                <button type="button" onClick={() => window.history.back()}
+                <Link href={route('home')}
                         className={`nav-item group hover:bg-warning pl-20 py-2 pr-4 ${route().current('home') ? 'bg-warning' : 'bg-primary'}`}>
                     <span className={`p-1 rounded-full border group-hover:bg-warning border-white ${route().current('home') ? 'bg-warning' : 'bg-primary'}`}>
                         <RiHome2Fill />
@@ -19,7 +19,7 @@ const Navbar = () => {
 
                     <div className={`navbar-triangle z-10 ${route().current('home') ? 'border-warning' : 'border-primary'}`}></div>
 
-                </button>
+                </Link>
                 <Link href={route('visa.create')}
                     className={`nav-item group hover:bg-warning pl-10 py-3 pr-4 ${route().current('visa.create') ? 'bg-warning' : 'bg-[#AC8230]'}`}>
                     <span className="text-sm font-medium">Visa</span>
@@ -32,26 +32,28 @@ const Navbar = () => {
                     <span className="text-sm font-medium">Job</span>
                     <div className={`navbar-triangle z-10 ${route().current('job.create') ? 'border-warning' : 'border-[#C19125]'}`}></div>
                 </Link>
-                {isLoggedIn && (
-                    <>
+
                 <Link
                     className="nav-item bg-[#AC8230] group hover:bg-warning text-white pl-10 pr-8 py-3">
                     <span className="text-sm font-medium">Ticket</span>
                     <div className="navbar-triangle z-[10] border-[#AC8230]"></div>
                 </Link>
 
+                {isLoggedIn && (
+                    <>
                 <Link href={route('visa-apply.index')}
                     className={`nav-item hover:bg-warning group pl-10 pr-8 py-3 ${route().current('visa-apply.index') ? 'bg-warning' : 'bg-[#C19125]'}`}>
                     <span className="text-sm font-medium">Reports</span>
                     <div className={`navbar-triangle z-10 ${route().current('visa-apply.index') ? 'border-warning' : 'border-[#C19125]'}`}></div>
                 </Link>
-                    </>
-                )}
+                  
                 <Link href={route('job-apply.list')}
                     className={`nav-item group hover:bg-warning pl-10 pr-8 py-3 ${route().current('job-apply.list') ? 'bg-warning' : 'bg-[#AC8230]'}`}>
                     <span className="text-sm font-medium">Apply List</span>
                     <div className={`navbar-triangle z-10 ${route().current('job-apply.list') ? 'border-warning' : 'border-[#AC8230]'}`}></div>
                 </Link>
+                    </>
+                )}
                 <Link href={route('contact.index')}
                     className={`nav-item hover:bg-warning group pl-10 pr-8 py-3 ${route().current('contact.index') ? 'bg-warning' : 'bg-[#C19125]'}`}>
                     <span className="text-sm font-medium">Contact</span>
