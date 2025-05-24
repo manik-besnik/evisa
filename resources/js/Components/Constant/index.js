@@ -142,6 +142,8 @@ export const permissionEnums = {
     CREATE_JOB_POST: "job-post.create",
     EDIT_JOB_POST: "job-post.edit",
     DELETE_JOB_POST: "job-post.delete",
+    VIEW_JOB_DEMAND_POST: "job-demand.view",
+    VIEW_JOB_DEMAND_DOWNLOAD: "job-demand.download",
     VIEW_USER: "user.view",
     CREATE_USER: "user.create"
 };

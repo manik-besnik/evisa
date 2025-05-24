@@ -29,13 +29,6 @@ const JobDetailView = ({job}) => {
                 <title>
                     {`${job.type_of_work} Job Details | Dubai E-Visa`}
                 </title>
-                <meta property="og:url"
-                      content={shareUrl}/>
-                <meta property="og:type" content="article"/>
-                <meta property="og:title" content={`${job.type_of_work} Job Details | Dubai E-Visa`}/>
-                <meta property="og:description" content={job.summary}/>
-                <meta property="og:image"
-                      content={job.thumbnail}/>
             </Head>
             <div className="container mx-auto px-4 py-8">
                 {/* Job Header Section with Image */}
@@ -221,7 +214,6 @@ const JobDetailView = ({job}) => {
                         <div className="w-10/12">
                             <h3 className="text-lg font-bold mb-2">Application Requirements:</h3>
                             <p>{job.requirements}</p>
-                            <p className="mt-2 mb-4 font-semibold">Apply today, interview required.</p>
 
                         </div>
                         <div className="flex flex-col mt-2 w-2/12">

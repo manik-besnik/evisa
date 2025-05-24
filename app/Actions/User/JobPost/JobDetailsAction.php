@@ -12,7 +12,13 @@ class JobDetailsAction
         $job = JobDemand::query()->with(['location', 'company'])->findOrFail($id);
 
         return Inertia::render('JobDetailView', [
-            'job' => $job
+            'job' => $job,
+            'meta' => [
+                'title' => "{$job->type_of_work} Job Details | Dubai E-Visa",
+                'requirements' => $job->requirements,
+                'image' => $job->thumbnail,
+                'url' => route('job.details', $job->id),
+            ]
         ]);
     }
 }

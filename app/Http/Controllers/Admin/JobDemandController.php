@@ -16,6 +16,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Response;
+use App\Models\JobDemand;
 
 class JobDemandController extends Controller
 {
@@ -62,5 +63,19 @@ class JobDemandController extends Controller
     public function deleteApplication(int $id, DeleteApplication $deleteApplicationAction): RedirectResponse
     {
         return $deleteApplicationAction->execute($id);
+    }
+
+    /**
+     * Get detailed information for a specific job demand
+     *
+     * @param int $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+
+    public function getDetails($id): \Illuminate\Http\JsonResponse
+    {
+        $jobDetails = JobDemand::with('company')->findOrFail($id);
+        return response()->json($jobDetails);
+
     }
 }
