@@ -290,8 +290,8 @@ const VisaApply = () => {
                                 onChange={(e) => setData('personal_name', e.target.value)}
                                 error={errors.personal_name}
                                 id="personal-name"
-                                placeholder="Personal Name | Company Name"
-                                label="Personal Name | Company Name"
+                                placeholder="Personal Name "
+                                label="Personal Name"
                                 divClasses="my-3"
                                 defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                                 labelClasses="text-text-primary"
@@ -423,6 +423,7 @@ const VisaApply = () => {
                                 setSelected={setBirthCountry}
                                 handleValueChange={updateBirthCountry}
                                 error={errors.birth_country}
+                                isRequired={true}
                                 defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                             />
 
@@ -466,6 +467,7 @@ const VisaApply = () => {
                                 onChange={(e) => setData('mother_name', e.target.value)}
                                 error={errors.mother_name}
                                 id="mother-english"
+                                 isRequired={true}
                                 placeholder="Mother Name English"
                                 label="Mother Name (English)" divClasses="my-3"
                                 defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
@@ -697,7 +699,7 @@ const VisaApply = () => {
                                     <div>
                                         <PassportInputFile
                                             defaultClasses="w-[240px] h-[240px]"
-                                            placeholder="Passport Page 1*"
+                                            placeholder="Passport Page 1 *"
                                             onChange={handleFileChange}
                                             fileType="passport"
                                             labelClasses="text-sm"
@@ -706,7 +708,7 @@ const VisaApply = () => {
                                     <div className="flex flex-2 gap-2 flex-wrap">
 
                                         <InputFile
-                                            placeholder="Photo*"
+                                            placeholder="Photo *"
                                             onChange={handleFileChange}
                                             fileType="photo"
                                             defaultClasses="w-40 h-28"
@@ -781,15 +783,6 @@ const VisaApply = () => {
 
                                         <InputFile
                                             placeholder="Additional Document 1"
-                                            onChange={handleFileChange}
-                                            fileType="additional1"
-                                            defaultClasses="w-40 h-28"
-                                            labelClasses="text-sm"
-                                        />
-
-
-                                        <InputFile
-                                            placeholder="Additional Document 2"
                                             onChange={handleFileChange}
                                             fileType="additional1"
                                             defaultClasses="w-40 h-28"

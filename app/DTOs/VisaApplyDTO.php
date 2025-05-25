@@ -32,7 +32,7 @@ class VisaApplyDTO
     public int $maritalStatus;
     public string|null $birthPlace;
     public string|null $birthPlaceArabic;
-    public string|null $motherName;
+    public string $motherName;
     public string|null $motherNameArabic;
     public string|null $fatherName;
     public string|null $fatherNameArabic;
@@ -80,11 +80,11 @@ class VisaApplyDTO
             'prev_nationality' => ['nullable', 'integer', Rule::exists('countries', 'id')->whereNull('deleted_at')],
             'gender' => ['required', Rule::in(array_column(Gender::cases(), 'value'))],
             'date_of_birth' => ['required', 'date'],
-            'birth_country' => ['nullable', 'integer', Rule::exists('countries', 'id')->whereNull('deleted_at')],
+            'birth_country' => ['required', 'integer', Rule::exists('countries', 'id')->whereNull('deleted_at')],
             'marital_status' => ['nullable', 'integer', Rule::in(array_column(MaritalStatus::cases(), 'value'))],
             'birth_place' => ['nullable', 'string'],
             'birth_place_arabic' => ['nullable', 'string'],
-            'mother_name' => ['nullable', 'string'],
+            'mother_name' => ['required', 'string'],
             'mother_name_arabic' => ['nullable', 'string'],
             'father_name' => ['nullable', 'string'],
             'father_name_arabic' => ['nullable', 'string'],
