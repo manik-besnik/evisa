@@ -674,7 +674,9 @@ const VisaApply = () => {
                                 error={errors.guarantor_phone}
                                 id="guarantor-phone"
                                 placeholder="Mobile"
-                                label="Mobile" divClasses="my-3"
+                                label="Mobile (Whatsapp)" 
+                                divClasses="my-3"
+                                isRequired={true}
                                 defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                                 labelClasses="text-text-primary"
                             />

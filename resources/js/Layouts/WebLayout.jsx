@@ -43,11 +43,7 @@ export default function WebLayout({children, showServiceImage = true, showBgImag
                     </div>
                 </div>}
 
-                <div className="fixed  w-[52px] h-[52px] -bottom-[1%] left-[4%]">
-                    <button onClick={() => window.history.back()}>
-                        <img src={`${assetUrl + 'images/back.png'}`} alt="Back" className="w-7 h-7" />
-                    </button>
-                </div>
+                
             </div>
 
             <ToastContainer/>
