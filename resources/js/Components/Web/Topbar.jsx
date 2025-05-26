@@ -8,7 +8,7 @@ const RightNoneAuthPart = () => {
             <img className="w-20" src={`${assetUrl + 'images/logo2.png'}`} alt="logo" />
             <p className="flex items-center ml-6">
                 <FaWhatsapp className="text-success" />
-                <span className="text-primary">+971 567 040 050</span>
+                <span className="text-[#748A96]">+971 567 040 050</span>
             </p>
         </div>
         <div className="flex justify-between items-center">
@@ -16,12 +16,21 @@ const RightNoneAuthPart = () => {
                 <span className="border-r border-primary pr-2">عربي</span>
                 <span>English</span>
             </div>
-            <div>
-                <Link href={route('register')} className="pr-2">Register</Link>
-                <Link href={route('login')}
-                    className='bg-primary px-4 py-1 text-2xl rounded font-semibold text-white '>
-                    Login</Link>
-            </div>
+            <div className="flex items-center bg-[#FECB05]" style={{ borderTopLeftRadius: '10px', borderBottomLeftRadius: '10px', borderTopRightRadius: '10px', borderBottomRightRadius: '10px', }}>
+                <Link
+                    href={route('agency.register')}
+                    className="text-black font-medium text-xl px-6 py-2"
+                >
+                    Agency Register
+                </Link>
+                <Link
+                    href={route('login')}
+                    className="bg-[#C29224] text-white font-medium text-xl px-6 py-2" style={{ borderTopRightRadius: '10px', borderBottomRightRadius: '10px', borderTopLeftRadius: '5px', borderBottomLeftRadius: '5px' }}
+                >
+                    LOGIN
+                </Link>
+                </div>
+
         </div>
     </>)
 }

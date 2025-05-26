@@ -79,8 +79,8 @@ class JobApplyDTO
             'religion' => ['nullable', 'string', 'min:1', 'max:200'],
             'blood_group' => ['nullable', 'string', 'min:2', 'max:200'],
             'marital_status' => ['nullable', 'string', 'min:1', 'max:200'],
-            'passport_no' => ['nullable', 'string', 'min:2', 'max:200'],
-            'passport_expiry' => ['nullable', 'string', 'min:2', 'max:200'],
+            'passport_no' => ['required', 'string', 'min:2', 'max:200'],
+            'passport_expiry' => ['required', 'string', 'min:2', 'max:200'],
             'country_contact_no' => ['nullable', 'string', 'min:2', 'max:200'],
             'visa_status' => ['nullable', 'string', 'min:2', 'max:200'],
             'visa_expiry' => ['nullable', 'string', 'min:2', 'max:200'],
@@ -115,18 +115,13 @@ class JobApplyDTO
             'mother_language' => ['nullable', 'integer'],
 
             /** Job Experience */
-            'job_experiences' => ['required', 'array'],
+            'job_experiences' => ['nullable', 'array'],
             'job_experiences.*.id' => ['nullable', 'int'],
-            'job_experiences.*.country_id' => ['required', 'int'],
-            'job_experiences.*.position' => ['required', 'string'],
-            'job_experiences.*.duration' => ['required', 'string'],
-            'job_experiences.*.company' => ['required', 'string'],
+            'job_experiences.*.country_id' => ['nullable', 'int'],
+            'job_experiences.*.position' => ['nullable', 'string'],
+            'job_experiences.*.duration' => ['nullable', 'string'],
+            'job_experiences.*.company' => ['nullable', 'string'],
 
-        ],[
-            'job_experiences.*.country_id.required' => 'Country is required for each job experience.',
-            'job_experiences.*.position.required' => 'Position is required for each job experience.',
-            'job_experiences.*.duration.required' => 'Duration is required for each job experience.',
-            'job_experiences.*.company.required' => 'Company name is required for each job experience.',
         ]);
 
 

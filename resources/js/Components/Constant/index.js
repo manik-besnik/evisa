@@ -1,5 +1,5 @@
 export const assetUrl = "https://dubaievisaservice.com/assets/"
-//export const assetUrl = "http://127.0.0.1:8000/assets/"
+// export const assetUrl = "http://127.0.0.1:8000/assets/"
 export const genders = [
     {id: 1, name: "Male"},
     {id: 2, name: "Female"},
@@ -297,6 +297,46 @@ export const postForApply = [
     {id: 81, value: "archive_clerk", name: "Archive Clerk"},
     {id: 82, value: "quantity_surveyor", name: "Quantity Surveyor"},
     {id: 83, value: "computer_operator", name: "Computer Operator"},
+    {id: 84, value: "advertising_designer", name: "Advertising Designer"},
+    {id: 85, value: "graphics_designer", name: "Graphics Designer"},
+    {id: 86, value: "3d_designer", name: "3D Designer"},
+    {id: 87, value: "video_editor", name: "Video Editor"},
+    {id: 88, value: "printing_press", name: "Printing Press"},
+    {id: 89, value: "screen_print", name: "Screen Print"},
+    {id: 90, value: "event_management", name: "Event Management"},
+    {id: 91, value: "singer", name: "Singer"},
+    {id: 92, value: "musician", name: "Musician"},
+    {id: 93, value: "draughtsman", name: "Draughtsman"},
+    {id: 94, value: "auto_cad", name: "Auto CAD"},
+    {id: 95, value: "software_developers", name: "Software Developers"},
+    {id: 96, value: "web_developer", name: "Web Developer"},
+    {id: 97, value: "telecom_technicians", name: "Telecom Technicians"},
+    {id: 98, value: "architectural_technicians", name: "Architectural Technicians"},
+    {id: 99, value: "ticketing_clerk", name: "Ticketing Clerk"},
+    {id: 100, value: "tourist_guide", name: "Tourist Guide"},
+    {id: 101, value: "cashier", name: "Cashier"},
+    {id: 102, value: "receptionist", name: "Receptionist"},
+    {id: 103, value: "switch_board_operator", name: "Switch Board Operator"},
+    {id: 104, value: "store_keeper", name: "Store Keeper"},
+    {id: 105, value: "typist", name: "Typist"},
+    {id: 106, value: "documents_controller", name: "Documents Controller"},
+    {id: 107, value: "documentation_in_charge", name: "Documentation In charge"},
+    {id: 108, value: "bank", name: "Bank"},
+    {id: 109, value: "exchange", name: "Exchange"},
+    {id: 110, value: "engineer", name: "Engineer"},
+    {id: 111, value: "diploma_engineer", name: "Diploma Engineer"},
+    {id: 112, value: "doctors", name: "Doctors"},
+    {id: 113, value: "surgeons", name: "Surgeons"},
+    {id: 114, value: "physicians", name: "Physicians"},
+    {id: 115, value: "clinicians", name: "Clinicians"},
+    {id: 116, value: "pharmacist", name: "Pharmacist"},
+    {id: 117, value: "lawyers", name: "Lawyers"},
+    {id: 118, value: "teachers", name: "Teachers"},
+    {id: 119, value: "professors", name: "Professors"},
+    {id: 120, value: "technicians", name: "Technicians"},
+    {id: 121, value: "mechanics", name: "Mechanics"},
+    {id: 122, value: "auto_mechanics", name: "Auto Mechanics"},
+
 ];
 
 
