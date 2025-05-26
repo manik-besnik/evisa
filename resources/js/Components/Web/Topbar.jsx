@@ -19,7 +19,7 @@ const RightNoneAuthPart = () => {
             <div className="flex items-center bg-[#FECB05]" style={{ borderTopLeftRadius: '10px', borderBottomLeftRadius: '10px', borderTopRightRadius: '10px', borderBottomRightRadius: '10px', }}>
                 <Link
                     href={route('agency.register')}
-                    className="text-black font-medium text-xl px-6 py-2"
+                    className="text-black font-medium px-4 py-1 text-[15px]"
                 >
                     Agency Register
                 </Link>
