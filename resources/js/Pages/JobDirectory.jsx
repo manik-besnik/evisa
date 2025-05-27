@@ -19,12 +19,12 @@ const JobDirectoryPage = ({locations}) => {
                 <div className="grid grid-cols-2 gap-x-20">
                     <JobDirectory/>
                     <div className="w-8/12 h-[93vh]">
-                        <div className="bg-[#6b7377c8] h-full relative p-5 pr-0">
+                        <div className="bg-[#6b7377c8] h-full relative">
                             {/* Header Section */}
-                            <div className="text-center flex relative">
-                                <img alt="Visa Icon" className="w-20 h-20"
+                            <div className="text-center flex relative pt-4">
+                                <img alt="Visa Icon" className="w-20 h-20 ml-4"
                                      src={`${assetUrl + 'images/jobapplysearch.png'}`}/>
-                                <h2 className="bg-red-600 text-white ml-4 w-full h-12 mt-7 text-[32px] pb-6" style={{position: 'absolute',right: '-20px',width: '76%',top: '-8px'}}>Job Apply</h2>
+                                <h2 className="bg-red-600 text-white ml-4 w-full h-12 mt-7 text-[32px] pb-6" style={{position: 'absolute',right: '-1px',width: '68%',top: '5px'}}>Job Apply</h2>
                             </div>
 
                             {/* Visa Types Buttons */}

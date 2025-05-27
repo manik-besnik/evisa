@@ -8,7 +8,8 @@ import {
     groups,
     maritalStatuses, religions,
     visaProcessingTypes,
-    visaTypes
+    visaTypes,
+    passportTypes
 } from "@/Components/Constant/index.js";
 import {useState} from "react";
 import {Head, useForm, usePage} from "@inertiajs/react";
@@ -57,6 +58,11 @@ const VisaApply = () => {
         prevMaritalStatus = maritalStatuses.find(item => item.id === personal_info.marital_status)
     }
 
+    let prevPassportTypes = ""
+    if (personal_info?.passport_type) {
+        prevPassportTypes = passportTypes.find(item => item.id === personal_info.passport_type)
+    }
+
     let prevPassportIssueCountry = ""
     if (passport?.passport_issue_country) {
         prevPassportIssueCountry = countries.find(item => item.id === passport.passport_issue_country)
@@ -81,6 +87,7 @@ const VisaApply = () => {
     const [gender, setGender] = useState(prevGender)
     const [birthCountry, setBirthCountry] = useState(prevBirthCountry)
     const [maritalStatus, setMaritalStatus] = useState(prevMaritalStatus)
+    const [passportType, setPassportTypes] = useState(prevPassportTypes)
     const [passportIssueCountry, setPassportIssueCountry] = useState(prevPassportIssueCountry)
     const [guarantorNationality, setGuarantorNationality] = useState(guarantorPrevNationality)
     const [personReligion, setPersonReligion] = useState(religions.find(item => item.name === personal_info?.religion) ?? '')
@@ -167,6 +174,10 @@ const VisaApply = () => {
 
     const updateMaritalStatus = (value) => {
         setData('marital_status', value.id)
+    }
+
+   const updatePassportTypes = (value) => {
+        setData('passport_type', value.id)
     }
 
 
@@ -541,7 +552,18 @@ const VisaApply = () => {
 
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-x-4 items-center">
 
-                            <TextInput
+                            <Select
+                                placeholder="Select Passport Type"
+                                label="Passport Type"
+                                items={passportTypes}
+                                selected={passportType}
+                                setSelected={setPassportTypes}
+                                handleValueChange={updatePassportTypes}
+                                error={errors.passport_type}
+                                defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
+                            />
+
+                            {/* <TextInput
                                 value={data.passport_type}
                                 onChange={(e) => setData('passport_type', e.target.value)}
                                 error={errors.passport_type}
@@ -550,7 +572,7 @@ const VisaApply = () => {
                                 label="Passport Type" divClasses="my-3"
                                 defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                                 labelClasses="text-text-primary"
-                            />
+                            /> */}
 
                             <TextInput
                                 value={data.passport_no}
@@ -827,6 +849,7 @@ const VisaApply = () => {
                 confirmSubmit={handleConfirmSubmit}
                 isPassportRequired={isPassportRequired}
                 isPhotoRequired={isPhotoRequired}
+                photoFile={data.documents['photo']?.file}
             />
         </WebLayout>
     )

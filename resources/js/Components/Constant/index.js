@@ -58,6 +58,14 @@ export const visaTypesApply = [
     {id: 7, name: "STUDENT VISA"},
 ];
 
+export const passportTypes= [
+    {id: 1, name: "Ordinary Passport"},
+    {id: 2, name: "Diplomatic Passport"},
+    {id: 3, name: "Official / Service Passport"},
+    {id: 4, name: "Emergency / Temporary Passport"},
+    {id: 5, name: "Refugee / Stateless Passport"},
+];
+
 export const visaTypes = [
     {id: 1, name: "VISIT VISA"},
     {id: 2, name: "EMPLOYMENT VISA"},
