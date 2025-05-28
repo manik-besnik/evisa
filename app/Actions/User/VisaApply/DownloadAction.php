@@ -18,6 +18,8 @@ class DownloadAction
         ])->findOrFail($id);
 
 
+        // dd($visa_apply);
+
         $pdf = DomPDF::loadView('pdfs.visa-apply', compact('visa_apply'));
 
         $pdf->setPaper('a4', 'portrait');

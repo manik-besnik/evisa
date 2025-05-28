@@ -13,6 +13,18 @@
         4 => 'Renewal',
     ];
 
+    $genders = [
+        1 => 'Male',
+        2 => 'Female',
+        3 => 'Female',
+    ];
+
+    $maritalStatuses = [
+        1 => 'Single',
+        2 => 'Married',
+        3 => 'Divorced',
+    ];
+
     $visaTypes = [
         1 => 'VISIT VISA',
         2 => 'EMPLOYMENT VISA',
@@ -38,8 +50,9 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
-        html, body {
+
+        html,
+        body {
             margin: 0;
             padding: 0px;
             width: 100%;
@@ -54,9 +67,10 @@
             background-size: cover;
         }
 
-        .container{
+        .container {
             padding: 50px;
         }
+
         .header {
             width: 100%;
             padding-bottom: 15px;
@@ -120,11 +134,25 @@
 
         .date-code-section {
             text-align: center;
+        }
+
+        .date-code-section-code {
+            text-align: center;
             margin-bottom: 20px;
         }
 
         .date-box,
         .code-box {
+            width: 110px;
+            display: inline-block;
+            border: 1px solid #000;
+            padding: 5px 15px;
+            margin: 0 10px;
+            font-weight: bold;
+        }
+
+        .code-box2 {
+            width: 110px;
             display: inline-block;
             border: 1px solid #000;
             padding: 5px 15px;
@@ -147,6 +175,31 @@
             border-collapse: collapse;
             margin-bottom: 15px;
         }
+
+        .form-table-top {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .form-table-top td {
+            border: 1px solid #000;
+            padding: 6px 8px;
+            vertical-align: top;
+        }
+
+        .form-table-top .label {
+            background-color: #f5f5f5;
+            font-weight: bold;
+            width: 120px;
+            font-size: 10px;
+        }
+
+        .form-table-top .value {
+            background-color: white;
+            color: #0066cc;
+            font-weight: bold;
+        }
+
 
         .form-table td {
             border: 1px solid #000;
@@ -198,8 +251,9 @@
                 margin: 0 !important;
                 padding: 0 !important;
             }
-            
-            html, body {
+
+            html,
+            body {
                 margin: 0 !important;
                 padding: 0 !important;
                 width: 100% !important;
@@ -220,126 +274,150 @@
 
 <body>
 
+    @php
+        $documents = json_decode($visa_apply->documents, true);
+        $photo = collect($documents)->firstWhere('type', 'photo');
+        $photoPath = null;
+
+        if (!empty($photo)) {
+            // Strip the base URL to get the relative path
+            $relativePath = str_replace(url('/'), '', $photo['url']);
+            $photoPath = public_path($relativePath);
+        }
+    @endphp
+
     <div class="container">
-    <!-- Header Section -->
-    <div class="header">
-        <div class="passport-box">
-            Passport<br>Pic
+
+        <!-- Header Section -->
+        <div class="header">
+            <div class="passport-box">
+                @if (file_exists($photoPath))
+                    <img src="{{ $photoPath }}" alt="Passport Photo"
+                        style="width: 100%; height: auto; margin-top: -40px;padding:5px">
+                @else
+                    <div style="margin-top: 10px;">No Photo</div>
+                @endif
+            </div>
+
+            <div class="logo-section" style="margin-left: -150px">
+                <img src="{{ public_path('assets/images/logo.png') }}" alt="Job Directory">
+            </div>
+
+        </div>
+        <div style="clear: both; margin-top: -150px;"></div>
+        <div class="form-title">APPLICATION FORM</div>
+        <div class="service-name">({{ $visaTypes[$visa_apply->visa_type] ?? 'Service Name' }})</div>
+
+        <!-- Date and Code Section -->
+        <div class="date-code-section">
+            <div class="date-box">Date:
+                {{ $visa_apply?->created_at ? date('d/m/Y', strtotime($visa_apply->created_at)) : 'N/A' }}</div>
+        </div>
+        <div class="date-code-section-code">
+            <div class="code-box2">{{ $visa_apply->code ?? 'V0000000' }}</div>
         </div>
 
-        <div class="logo-section" style="margin-left: -150px">
-            <img src="{{ public_path('assets/images/logo.png') }}" alt="Job Directory">
-        </div>
+        <!-- Applicant Information Section -->
+        <div class="section-header">Applicant Information</div>
 
-    </div>
-    <div style="clear: both; margin-top: -150px;"></div>
-    <div class="form-title">APPLICATION FORM</div>
-    <div class="service-name">({{ $visaTypes[$visa_apply->visa_type] ?? 'Service Name' }})</div>
+        <table class="form-table-top">
+            <tr>
+                <td class="label">Given Name</td>
+                <td class="value">{{ strtoupper($visa_apply->name ?? 'N/A') }}</td>
+            </tr>
+            <tr>
+                <td class="label">Surname</td>
+                <td class="value">{{ strtoupper($visa_apply?->personalInfo?->surname ?? 'N/A') }}</td>
+            </tr>
+            <tr>
+                <td class="label">Father's Name</td>
+                <td class="value">{{ strtoupper($visa_apply->personalInfo->father_name ?? 'N/A') }}</td>
+            </tr>
+            <tr>
+                <td class="label">Mother's Name</td>
+                <td class="value">{{ strtoupper($visa_apply->personalInfo->mother_name ?? 'N/A') }}</td>
+            </tr>
+        </table>
 
-    <!-- Date and Code Section -->
-    <div class="date-code-section">
-        <div class="date-box">Date: {{ date('d/m/Y') }}</div>
-        <div class="code-box">{{ $visa_apply->code ?? 'V0000000' }}</div>
-    </div>
+        <table class="form-table">
 
-    <!-- Applicant Information Section -->
-    <div class="section-header">Applicant Information</div>
+            <tr>
+                <td class="label">Gender</td>
+                <td class="value">{{ strtoupper($genders[$visa_apply->personalInfo->gender] ?? ' ') }}</td>
+                <td class="label">Date of Birth</td>
+                <td class="value">
+                    {{ $visa_apply?->personalInfo?->date_of_birth ? date('d/m/Y', strtotime($visa_apply->personalInfo->date_of_birth)) : 'N/A' }}
+                </td>
+            </tr>
+            <tr>
+                <td class="label">Place of Birth</td>
+                <td class="value" colspan="3">{{ strtoupper($visa_apply?->personalInfo?->birth_place ?? 'N/A') }}
+                </td>
+            </tr>
+            <tr>
+                <td class="label">Profession</td>
+                <td class="value">{{ strtoupper($visa_apply->personalInfo->profession ?? 'N/A') }}</td>
+                <td class="label">Religion</td>
+                <td class="value">{{ strtoupper($visa_apply->personalInfo->religion ?? 'N/A') }}</td>
+            </tr>
+            <tr>
+                <td class="label">Marital Status</td>
+                <td class="value">
+                    {{ strtoupper($maritalStatuses[$visa_apply->personalInfo->marital_status] ?? ' ') }}</td>
+                <td class="label">Nationality</td>
+                <td class="value">{{ strtoupper($visa_apply->personalInfo->current_nationality?->name ?? 'N/A') }}
+                </td>
+            </tr>
+            <tr>
+                <td class="label">Passport No.</td>
+                <td class="value">{{ strtoupper($visa_apply?->passport?->passport_no ?? 'N/A') }}</td>
+                <td class="label">Place of Issue</td>
+                <td class="value">{{ strtoupper($visa_apply?->passport?->passport_issue_place ?? 'N/A') }}</td>
+            </tr>
+            <tr>
+                <td class="label">Date of Issue</td>
+                <td class="value">
+                    {{ $visa_apply?->passport?->passport_issue_date ? date('d/m/Y', strtotime($visa_apply->passport->passport_issue_date)) : 'N/A' }}
+                </td>
+                <td class="label">Date of Expiry</td>
+                <td class="value">
+                    {{ $visa_apply?->passport?->passport_expire_date ? date('d/m/Y', strtotime($visa_apply->passport->passport_expire_date)) : 'N/A' }}
+                </td>
+            </tr>
+        </table>
 
-    <table class="form-table">
-        <tr>
-            <td class="label">Given Name</td>
-            <td class="value">{{ strtoupper($visa_apply?->personal_info?->name ?? 'N/A') }}</td>
-            <td class="label">Surname</td>
-            <td class="value">{{ strtoupper($visa_apply?->personal_info?->surname ?? 'N/A') }}</td>
-        </tr>
-        <tr>
-            <td class="label">Father's Name</td>
-            <td class="value">{{ strtoupper($visa_apply?->personal_info?->father_name ?? 'N/A') }}</td>
-            <td class="label">Mother's Name</td>
-            <td class="value">{{ strtoupper($visa_apply?->personal_info?->mother_name ?? 'N/A') }}</td>
-        </tr>
-        <tr>
-            <td class="label">Gender</td>
-            <td class="value">{{ strtoupper($visa_apply?->personal_info?->gender ?? 'N/A') }}</td>
-            <td class="label">Date of Birth</td>
-            <td class="value">
-                {{ $visa_apply?->personal_info?->date_of_birth ? date('d/m/Y', strtotime($visa_apply->personal_info->date_of_birth)) : 'N/A' }}
-            </td>
-        </tr>
-        <tr>
-            <td class="label">Place of Birth</td>
-            <td class="value" colspan="3">{{ strtoupper($visa_apply?->personal_info?->birth_place ?? 'N/A') }}</td>
-        </tr>
-        <tr>
-            <td class="label">Profession</td>
-            <td class="value">{{ strtoupper($visa_apply?->personal_info?->profession ?? 'N/A') }}</td>
-            <td class="label">Religion</td>
-            <td class="value">{{ strtoupper($visa_apply?->personal_info?->religion ?? 'N/A') }}</td>
-        </tr>
-        <tr>
-            <td class="label">Marital Status</td>
-            <td class="value">{{ strtoupper($visa_apply?->personal_info?->marital_status ?? 'N/A') }}</td>
-            <td class="label">Nationality</td>
-            <td class="value">{{ strtoupper($visa_apply?->personal_info?->current_nationality?->name ?? 'N/A') }}</td>
-        </tr>
-        <tr>
-            <td class="label">Passport No.</td>
-            <td class="value">{{ strtoupper($visa_apply?->passport?->passport_no ?? 'N/A') }}</td>
-            <td class="label">Place of Issue</td>
-            <td class="value">{{ strtoupper($visa_apply?->passport?->passport_issue_place ?? 'N/A') }}</td>
-        </tr>
-        <tr>
-            <td class="label">Date of Issue</td>
-            <td class="value">
-                {{ $visa_apply?->passport?->passport_issue_date ? date('d/m/Y', strtotime($visa_apply->passport->passport_issue_date)) : 'N/A' }}
-            </td>
-            <td class="label">Date of Expiry</td>
-            <td class="value">
-                {{ $visa_apply?->passport?->passport_expire_date ? date('d/m/Y', strtotime($visa_apply->passport->passport_expire_date)) : 'N/A' }}
-            </td>
-        </tr>
-    </table>
+        <!-- Guarantor Details Section -->
+        <div class="section-header">Guarantor Details</div>
 
-    <!-- Guarantor Details Section -->
-    <div class="section-header">Guarantor Details</div>
 
-    <div class="two-column">
-        <div class="column">
-            <table class="form-table small-table">
-                <tr>
-                    <td class="label">Name</td>
-                    <td class="value">{{ strtoupper($visa_apply?->guarantor?->guarantor_name ?? 'N/A') }}</td>
-                    <td class="label">Relation</td>
-                    <td class="value">{{ strtoupper($visa_apply?->guarantor?->guarantor_relation ?? 'N/A') }}</td>
-                </tr>
-                <tr>
-                    <td class="label">Nationality</td>
-                    <td class="value">
-                        {{ strtoupper($visa_apply?->guarantor?->guarantor_nationality?->name ?? 'N/A') }}</td>
-                    <td class="label">PPT or E-ID No</td>
-                    <td class="value">{{ strtoupper($visa_apply?->guarantor?->guarantor_passport_no ?? 'N/A') }}</td>
-                </tr>
-                <tr>
-                    <td class="label">Guarantor Type</td>
-                    <td class="value">Individual/Company</td>
-                    <td class="label">Agency No.</td>
-                    <td class="value">{{ $visa_apply?->agency_no ?? '6942088' }}</td>
-                </tr>
-                <tr>
-                    <td class="label">Mobile No.</td>
-                    <td class="value">{{ $visa_apply?->guarantor?->guarantor_phone ?? 'N/A' }}</td>
-                    <td class="label">E-mail</td>
-                    <td class="value">{{ $visa_apply?->email ?? 'N/A' }}</td>
-                </tr>
-            </table>
-        </div>
+        <table class="form-table">
+            <tr>
+                <td class="label">Name</td>
+                <td class="value">{{ strtoupper($visa_apply->guarantor->name ?? ' ') }}</td>
+                <td class="label">Relation</td>
+                <td class="value">{{ strtoupper($visa_apply->guarantor->relation ?? ' ') }}</td>
+            </tr>
+            <tr>
+                <td class="label">Nationality</td>
+                <td class="value">
+                    {{ strtoupper($visa_apply?->guarantor?->guarantor_nationality?->name ?? ' ') }}</td>
+                <td class="label">PPT or E-ID No</td>
+                <td class="value">{{ strtoupper($visa_apply?->guarantor?->guarantor_passport_no ?? ' ') }}</td>
+            </tr>
+            <tr>
+                <td class="label">Guarantor Type</td>
+                <td class="value">{{ strtoupper($visa_apply->guarantor->relation ?? ' ') }}</td>
+                <td class="label">Agency No.</td>
+                <td class="value">{{ $visa_apply?->agency_no ?? ' ' }}</td>
+            </tr>
+            <tr>
+                <td class="label">Mobile No.</td>
+                <td class="value">{{ $visa_apply?->guarantor?->phone ?? 'N/A' }}</td>
+                <td class="label">E-mail</td>
+                <td class="value">{{ $visa_apply?->email ?? '' }}</td>
+            </tr>
+        </table>
 
-        <div class="column">
-            <table class="form-table small-table">
-
-            </table>
-        </div>
-    </div>
     </div>
 
 </body>
