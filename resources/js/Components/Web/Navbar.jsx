@@ -27,11 +27,14 @@ const Navbar = () => {
 
                 </Link>
                 <Link href={route('visa.create')}
-                    className={`nav-item group hover:bg-warning pl-10 py-3 pr-4 ${route().current('visa.create') ? 'bg-warning' : 'bg-[#647882]'}`}>
+                    className={`nav-item group hover:bg-warning pl-10 py-3 pr-4 
+                        ${route().current('visa.create') || route().current('visa-apply.create') ? 'bg-warning' : 'bg-[#647882]'}`}>
+                    
                     <span className="text-sm font-medium">Visa</span>
 
-                    <div className={`navbar-triangle z-10 ${route().current('visa.create') ? 'border-warning' : 'border-[#647882]'}`}></div>
-
+                    <div className={`navbar-triangle z-10 
+                        ${route().current('visa.create') || route().current('visa-apply.create') ? 'border-warning' : 'border-[#647882]'}`}>
+                    </div>
                 </Link>
                 <Link href={route('job.create')}
                     className={`nav-item hover:bg-warning group pl-10 pr-8 py-3 ${route().current('job.create') ? 'bg-warning' : 'bg-[#748A96]'}`}>

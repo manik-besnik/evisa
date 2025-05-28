@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import {usePage} from "@inertiajs/react";
 
 import {
     genders,
@@ -10,13 +11,11 @@ import {
     assetUrl
 } from "@/Components/Constant/index.js";
 
-const mockCountries = [
-  { id: 1, name: "BANGLADESH", nationality: "BANGLADESHI" }
-];
 
 export const getValue = (items, id) => {
     return items.find(item => item.id === Number(id))?.name ?? ''
 }
+
 
 const PreviewVisaApply = ({ 
   show = true, 
@@ -27,7 +26,7 @@ const PreviewVisaApply = ({
   isPhotoRequired = true,
   photoFile = null  // Add this prop
 }) => {
-  const countries = mockCountries;
+  const {countries} = usePage().props;
   const [photoPreviewUrl, setPhotoPreviewUrl] = useState(null);
 
   // Create preview URL for the uploaded photo
@@ -45,10 +44,14 @@ const PreviewVisaApply = ({
     }
   }, [photoFile]);
 
+
+
   const getNationality = (itemId) => {
-    if (!itemId) return "";
-    return countries.find(item => item.id === itemId)?.nationality || "";
-  };
+        if (!itemId){
+            return "";
+        }
+        return countries.find(item => item.id === itemId)?.nationality
+    }
 
   const getCountry = (itemId) => {
     if (!itemId) return "";
@@ -109,7 +112,7 @@ const PreviewVisaApply = ({
           
           <div className="flex items-center justify-between p-6">
             {/* Passport Photo Section - Updated */}
-            <div className="border-2 border-gray-400 w-24 h-32 flex items-center justify-center bg-gray-50 overflow-hidden">
+            <div className="border-2 border-gray-400 w-36 h-40 flex items-center justify-center bg-gray-50 overflow-hidden mt-[-44px]">
               {photoPreviewUrl ? (
                 <img 
                   src={photoPreviewUrl} 
@@ -125,19 +128,19 @@ const PreviewVisaApply = ({
             </div>
 
             {/* Logo and Title Section */}
-            <div className="flex-1 text-center mx-6">
+            <div className="flex-1 text-center mx-6 ml-[-64px]">
               <div className="flex items-center justify-center mb-2">
                 <div className="text-right mr-4">
                   <img  src={`${assetUrl + 'images/logo.png'}`} alt="logo" />
                 </div>
                 
               </div>
-              <h1 className="text-xl font-bold text-gray-800 mb-1">APPLICATION FORM</h1>
-              <p className="text-blue-600 font-medium">(Service Name)</p>
+              <h1 className="text-[30px] font-bold text-gray-800 mb-1 mt-9">APPLICATION FORM</h1>
+              <p className="text-blue-600 font-medium">{getValue(visaTypes, visa_apply.visa_type)}</p>
               <div className="flex items-center justify-center w-6/12 m-auto mt-3">
                 <div className="border border-gray-400 mb-2 bg-white">
-                    <div className="text-xs font-medium border border-gray-400 py-2 px-8">Date: dd/mm/yyyy</div>
-                    <div className="text-xs font-medium border border-gray-400 py-2 px-8">V00000000</div>
+                    <div className="text-xs font-medium border border-gray-400 py-2 px-8">Date: {new Date().toLocaleDateString()}</div>
+                    <div className="text-xs font-medium border border-gray-400 py-2 px-8"> </div>
                 </div>
             </div>
             </div>
@@ -224,19 +227,19 @@ const PreviewVisaApply = ({
                 label1="Nationality" 
                 value1={getNationality(visa_apply.guarantor_nationality)} 
                 label2="PPT or E-ID No." 
-                value2={visa_apply.guarantor_passport_no} 
+                value2=" "
               />
               <DoubleInfoRow 
                 label1="Guarantor Type" 
                 value1={visa_apply.guarantor_relation} 
                 label2="Agency No." 
-                value2="6942088" 
+                value2=" " 
               />
               <DoubleInfoRow 
                 label1="Mobile No." 
                 value1={visa_apply.guarantor_phone} 
                 label2="E-mail" 
-                value2="nrbcare4gulf@gmail.com" 
+                value2=" " 
               />
             </tbody>
           </table>
