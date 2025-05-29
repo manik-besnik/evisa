@@ -293,7 +293,7 @@
             <div class="passport-box">
                 @if (file_exists($photoPath))
                     <img src="{{ $photoPath }}" alt="Passport Photo"
-                        style="width: 100%; height: auto; margin-top: -40px;padding:5px">
+                        style="width: 100%; height: 165px; margin-top: -40px;padding:5px">
                 @else
                     <div style="margin-top: 10px;">No Photo</div>
                 @endif

@@ -18,6 +18,7 @@ class VisaApplyDTO
     public string $personalName;
     public int $processingType;
     public int $visaType;
+    public string $visaCategory;
     public int $group;
 
     /** General Info */
@@ -69,6 +70,7 @@ class VisaApplyDTO
             /** Visa Info */
             'user_id' => ['required'],
             'personal_name' => ['required', 'string', 'min:2'],
+            'visa_category' => ['required', 'string'],
             'processing_type' => ['required', Rule::in(array_column(VisaProcessingType::cases(), 'value'))],
             'visa_type' => ['required', Rule::in(array_column(VisaType::cases(), 'value'))],
             'group' => ['nullable', Rule::in(array_column(Group::cases(), 'value'))],
@@ -126,6 +128,7 @@ class VisaApplyDTO
         $instance->personalName = $request->input('personal_name');
         $instance->processingType = (int)$request->input('processing_type');
         $instance->visaType = (int)$request->input('visa_type');
+        $instance->visaCategory = $request->input('visa_category');
         $instance->group = (int)$request->input('group');
 
         /** Personal Info */
