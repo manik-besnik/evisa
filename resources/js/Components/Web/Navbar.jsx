@@ -55,19 +55,29 @@ const Navbar = () => {
                     <span className="text-sm font-medium">Reports</span>
                     <div className={`navbar-triangle z-10 ${route().current('visa-apply.index') ? 'border-warning' : 'border-[#748A96]'}`}></div>
                 </Link>
-                  
-                <Link href={route('job-apply.list')}
+                
+                <Link href={route('contact.index')}
+                    className={`nav-item hover:bg-warning group pl-10 pr-8 py-3 ${route().current('contact.index') ? 'bg-warning' : 'bg-[#647882]'}`}>
+                    <span className="text-sm font-medium">Contact</span>
+                    <div className={`navbar-triangle z-10 ${route().current('contact.index') ? 'border-warning' : 'border-[#647882]'}`}></div>
+                </Link>
+
+                {/* <Link href={route('job-apply.list')}
                     className={`nav-item group hover:bg-warning pl-10 pr-8 py-3 ${route().current('job-apply.list') ? 'bg-warning' : 'bg-[#647882]'}`}>
                     <span className="text-sm font-medium">Apply List</span>
                     <div className={`navbar-triangle z-10 ${route().current('job-apply.list') ? 'border-warning' : 'border-[#647882]'}`}></div>
-                </Link>
+                </Link> */}
                     </>
                 )}
+                 {!isLoggedIn && (
+                    <>
                 <Link href={route('contact.index')}
                     className={`nav-item hover:bg-warning group pl-10 pr-8 py-3 ${route().current('contact.index') ? 'bg-warning' : 'bg-[#748A96]'}`}>
                     <span className="text-sm font-medium">Contact</span>
                     <div className={`navbar-triangle z-10 ${route().current('contact.index') ? 'border-warning' : 'border-[#748A96]'}`}></div>
                 </Link>
+                 </>
+                )}
                {/*
                 <Link href={route('visa-apply.index')} className="relative flex items-center bg-primary text-white pl-10 pr-8 py-3">
                     <span className="text-sm font-medium">Search Visa</span>

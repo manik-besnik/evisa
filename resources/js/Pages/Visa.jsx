@@ -12,9 +12,12 @@ import {
 import { usePage, router } from "@inertiajs/react"; // Import Inertia router
 
 const Visa = () => {
-    const handleVisaClick = (visa) => {
-        router.get(route('visa-apply.create'), { visaType: visa.id });
-    };
+const handleVisaClick = (visa) => {
+    router.get(route('visa-apply.create'), { 
+        visaType: visa.id,
+        visaName: visa.name 
+    });
+};
 
 
     return (
