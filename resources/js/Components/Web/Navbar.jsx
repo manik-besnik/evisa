@@ -12,14 +12,15 @@ const Navbar = () => {
         <div className="flex justify-between items-center bg-[#748A96] text-white">
 
             <div className="flex items-center">
-                <Link href={route('home')}
-                        className={`nav-item relative group hover:bg-warning pl-20 py-2 pr-4 ${route().current('home') ? 'bg-warning' : 'bg-[#748A96]'}`}>
-                    <div className="absolute ml-[-27px] mt-[5px]">
+                <div className="absolute z-10 ml-[45px] mt-[5px]">
                     <button onClick={() => window.history.back()}>
                         <img src={`${assetUrl + 'images/back.png'}`} alt="Back" className="w-4 h-5" />
                     </button>
-                  </div>
-                    <span className={`p-1 rounded-full border group-hover:bg-warning border-white ${route().current('home') ? 'bg-warning' : 'bg-primary'}`}>
+                </div>
+                <Link href={route('home')}
+                        className={`nav-item relative group hover:bg-warning pl-20 py-2 pr-4 ${route().current('home') ? 'bg-warning' : 'bg-[#748A96]'}`}>
+                 
+                    <span className={`p-1 rounded-full border group-hover:bg-warning border-white ${route().current('home') ? 'bg-warning' : ' '}`}>
                         <RiHome2Fill />
                     </span>
                    
