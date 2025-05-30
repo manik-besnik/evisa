@@ -13,7 +13,6 @@ use App\Http\Controllers\Controller;
 use App\Models\VisaApply;
 use Illuminate\Http\Request;
 
-
 class VisaApplyController extends Controller
 {
     /**
