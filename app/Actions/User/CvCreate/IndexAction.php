@@ -9,15 +9,22 @@ use Inertia\Response;
 
 class IndexAction
 {
+    // public function execute(): RedirectResponse|Response
+    // {
+    //     /** @var UserCV $cv */
+    //     $cv = UserCv::query()->where('user_id', auth()->id())->first();
+
+    //     if (!$cv) {
+    //         return to_route('cv.create');
+    //     }
+
+    //     return Inertia::render('UserCV/Index', ['cv' => $cv]);
+    // }
+
     public function execute(): RedirectResponse|Response
     {
-        /** @var UserCV $cv */
-        $cv = UserCv::query()->where('user_id', auth()->id())->first();
 
-        if (!$cv) {
-            return to_route('cv.create');
-        }
-
-        return Inertia::render('UserCV/Index', ['cv' => $cv]);
+        return Inertia::render('UserCV/CvCreateFormate');
     }
+
 }

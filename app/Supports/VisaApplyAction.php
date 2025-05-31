@@ -61,6 +61,7 @@ class VisaApplyAction
         $visaApply->name = $visaApplyDTO->personalName;
         $visaApply->processing_type = $visaApplyDTO->processingType;
         $visaApply->visa_type = $visaApplyDTO->visaType;
+        $visaApply->visa_category = $visaApplyDTO->visaCategory;
         $visaApply->group = $visaApplyDTO->group;
         $visaApply->status = VisaStatus::PENDING->value;
         $visaApply->applied_by = auth()->id();

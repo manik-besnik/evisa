@@ -26,9 +26,9 @@ class CvCreateController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(CreateAction $createAction): \Inertia\Response|RedirectResponse
+    public function create(CreateAction $createAction, $formate): \Inertia\Response|RedirectResponse
     {
-        return $createAction->execute();
+        return $createAction->execute($formate);
     }
 
     /**

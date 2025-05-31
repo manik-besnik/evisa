@@ -8,7 +8,6 @@ const SearchResult = () => {
 
     const visa_applies = usePage().props.visa_applies
 
-
     return (
         <div className="">
             <div className="overflow-x-auto">
@@ -54,6 +53,7 @@ const SearchResult = () => {
                     </tbody>
                 </table>
             </div>
+            
         </div>
     )
 }

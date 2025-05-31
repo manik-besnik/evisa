@@ -12,13 +12,13 @@ const Job = () => {
             <div className="container">
                 <div className="grid grid-cols-2 gap-x-20">
                     <SearchContainer/>
-                    <div className="w-1/2 h-[80vh]">
+                    <div className="w-1/2 h-[90vh]">
                         <div className="bg-[#6b7377c8] h-full relative p-5">
                             {/* Job Directory Card 1 */}
                             <Link href={route('job.directory')} className="block mb-8">
                                 <div className="flex flex-col items-center mb-8">
                                     <div
-                                        className="bg-white w-36 h-40 relative rounded-[6px] border-2 border-[#5A5B5A]">
+                                        className="bg-white w-36 h-44 relative rounded-[6px] border-2 border-[#5A5B5A]">
                                         <img
                                             src={`${assetUrl + 'images/jobdirectory.png'}`}
                                             alt="Job Directory"
@@ -26,8 +26,8 @@ const Job = () => {
                                         />
 
                                         <div
-                                            className="bg-red-600 mt-1 p-2 text-white w-full text-center absolute bottom-0 rounded-bl-[4px] rounded-br-[4px]">
-                                            <span className="font-bold text-[16px]">Job Directory</span>
+                                            className="bg-red-600 mt-1 p-1 text-white w-full text-center absolute bottom-0 rounded-bl-[4px] rounded-br-[4px]">
+                                            <span className="font-bold text-[15px]">Job Directory (With Job Apply)</span>
                                         </div>
                                     </div>
 
@@ -37,15 +37,15 @@ const Job = () => {
                             <Link href={route('job-demand.create')} className="block mb-8">
                                 <div className="flex flex-col items-center mb-8">
                                     <div
-                                        className="bg-white w-36 h-36 relative rounded-[6px] border-2 border-[#5A5B5A]">
+                                        className="bg-white w-36 h-44 relative rounded-[6px] border-2 border-[#5A5B5A]">
                                         <img
                                             src={`${assetUrl + 'images/jodemand.png'}`}
                                             alt="Job Directory"
                                             className="m-auto mt-2"
                                         />
                                         <div
-                                            className="bg-red-600 p-2 text-white w-full text-center  absolute bottom-0 rounded-bl-[4px] rounded-br-[4px]">
-                                            <span className="font-bold text-[16px]">Job Demand</span>
+                                            className="bg-red-600 p-1 text-white w-full text-center  absolute bottom-0 rounded-bl-[4px] rounded-br-[4px]">
+                                            <span className="font-bold text-[15px]">Job Demand (With Job Hire)</span>
                                         </div>
                                     </div>
 

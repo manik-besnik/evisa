@@ -213,7 +213,7 @@ const JobDemand = () => {
                 data={getPreviewData()}
                 confirmSubmit={confirmSubmit}
             />
-            <div style={{ backgroundImage: `url(${assetUrl}images/background-all.png)` }}>
+            <div style={{ backgroundImage: `url(${assetUrl}images/job-bg.png)` }}>
                 <div className="container mx-auto px-4 py-6">
                     <div className="bg-[#ffffffd0] border-4 border-[#848585] p-6">
 
@@ -332,7 +332,7 @@ const JobDemand = () => {
 
                                     </div>
                                     <div className="mb-6 mt-3">
-                                        <h2 className="text-red-600 text-xs font-bold mb-3">POST FOR APPLY</h2>
+                                        <h2 className="text-red-600 text-xs font-bold mb-3">POST FOR APPLY (Maximum 3 Select)</h2>
                                         <div className="grid">
 
                                             {applyFor ? <Select
@@ -478,7 +478,7 @@ const JobDemand = () => {
                             <div className="mb-6">
                                 <div className="grid grid-cols-1 gap-3">
                                     <div className="flex items-center">
-                                        <label className="w-[12.90rem] font-bold">Current Address</label>
+                                        <label className="w-[12.90rem] font-bold">Current Address <span className="text-red-600">*</span></label>
                                         <span className="mx-2">:</span>
                                         <div className="flex-1 grid grid-cols-3 gap-2">
                                             <TextInput
@@ -509,7 +509,7 @@ const JobDemand = () => {
                                     </div>
 
                                     <div className="flex items-center">
-                                        <label className="w-[12.90rem] font-bold">Permanent Address <span className="text-red-600">*</span></label>
+                                        <label className="w-[12.90rem] font-bold">Permanent Address </label>
                                         <span className="mx-2">:</span>
                                         <div className="flex-1 grid grid-cols-3 gap-2">
                                             <TextInput
@@ -547,7 +547,7 @@ const JobDemand = () => {
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div className="space-y-3">
                                         <div className="flex items-center">
-                                            <label className="w-1/3 font-bold">Passport No</label>
+                                            <label className="w-1/3 font-bold">Passport No <span className="text-red-600">*</span></label>
                                             <span className="mx-2">:</span>
                                             <div className="flex-1">
                                                 <TextInput
@@ -557,13 +557,13 @@ const JobDemand = () => {
                                                     error={errors.passport_no}
                                                     required={true}
                                                     id="passport_no"
-                                                    defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                                    defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
                                                 />
                                             </div>
                                         </div>
 
                                         <div className="flex items-center">
-                                            <label className="w-1/3 font-bold">Expiry Date</label>
+                                            <label className="w-1/3 font-bold">Expiry Date <span className="text-red-600">*</span></label>
                                             <span className="mx-2">:</span>
                                             <div className="flex-1">
                                                 <TextInput
@@ -574,7 +574,7 @@ const JobDemand = () => {
                                                     error={errors.passport_expiry}
                                                     required={true}
                                                     id="passport_expiry"
-                                                    defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                                    defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
                                                 />
                                             </div>
                                         </div>
@@ -659,7 +659,7 @@ const JobDemand = () => {
                                 <div className="grid grid-cols-12 gap-3 mb-4">
                                     <div className="col-span-3">
                                         <TextInput
-                                            placeholder="Certificate"
+                                            placeholder="Current Certificate"
                                             value={data.exam_name}
                                             onChange={(e) => setData('exam_name', e.target.value)}
                                             error={errors.exam_name}
@@ -834,7 +834,7 @@ const JobDemand = () => {
                                                 placeholder="EX: Software Enginner"
                                                 label={
                                                     <>
-                                                        Position <span className="text-red-500">*</span>
+                                                        Position 
                                                     </>
                                                 }
                                                 defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
@@ -850,7 +850,7 @@ const JobDemand = () => {
                                                 placeholder="EX: 4 Years"
                                                 label={
                                                     <>
-                                                        Duration <span className="text-red-500">*</span>
+                                                        Duration 
                                                     </>
                                                 }
                                                 defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
@@ -866,7 +866,7 @@ const JobDemand = () => {
                                                 placeholder="Company Name"
                                                 label={
                                                     <>
-                                                        Company Name <span className="text-red-500">*</span>
+                                                        Company Name 
                                                     </>
                                                 }
                                                 defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
@@ -878,7 +878,7 @@ const JobDemand = () => {
                                                 placeholder="Select Country"
                                                 label={
                                                     <>
-                                                        Country <span className="text-red-500">*</span>
+                                                        Country 
                                                     </>
                                                 }
                                                 items={countries}

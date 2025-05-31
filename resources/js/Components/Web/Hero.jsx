@@ -39,7 +39,7 @@ const ServiceCard = ({ img, title, link }) => {
     return (
         <Link href={route(link)}>
             <div
-                className="flex flex-col items-center justify-center w-[100px] h-[100px] bg-primary text-center text-white rounded-sm shadow-md hover:bg-primary-dark transition">
+                className="flex flex-col items-center justify-center w-[100px] h-[100px] bg-[#748A96] text-center text-white rounded-sm shadow-md hover:bg-primary-dark transition">
                 <img className="w-10 h-10 mb-2" src={assetUrl + img} alt={title} />
                 <p className="text-xs font-medium">{title}</p>
             </div>

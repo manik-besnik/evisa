@@ -142,7 +142,7 @@ body {
 }
 
 .navbar-triangle-left {
-    @apply absolute left-0 w-0 h-0 border-t-[22px] border-b-[22px] border-l-[20px] border-t-transparent border-b-transparent group-hover:border-t-transparent  group-hover:border-b-transparent  z-[10] border-[#C19125]
+    @apply absolute left-0 w-0 h-0 border-t-[22px] border-b-[22px] border-l-[20px] border-t-transparent border-b-transparent group-hover:border-t-transparent  group-hover:border-b-transparent  z-[10] border-[#748A96]
 }
 
 .navbar-triangle-2 {

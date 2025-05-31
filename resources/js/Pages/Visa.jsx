@@ -12,9 +12,12 @@ import {
 import { usePage, router } from "@inertiajs/react"; // Import Inertia router
 
 const Visa = () => {
-    const handleVisaClick = (visa) => {
-        router.get(route('visa-apply.create'), { visaType: visa.id });
-    };
+const handleVisaClick = (visa) => {
+    router.get(route('visa-apply.create'), { 
+        visaType: visa.id,
+        visaName: visa.name 
+    });
+};
 
 
     return (
@@ -24,10 +27,10 @@ const Visa = () => {
                 <div className="grid grid-cols-2 gap-x-20">
                     <SearchContainer />
                     <div className="w-7/12 h-[85vh]">
-                        <div className="bg-[#6b7377c8] h-full relative p-5 pr-0">
+                        <div className="bg-[#6b7377c8] h-full relative ">
                             {/* Header Section */}
                             <div className="text-center flex">
-                                <img alt="Visa Icon" className="w-14 h-20" src={`${assetUrl + 'images/visa.png'}`} />
+                                <img alt="Visa Icon" className="w-14 h-20 ml-2 mt-4" src={`${assetUrl + 'images/visa.png'}`} />
                                 <h2 className="bg-red-600 text-white ml-4 w-full h-13 mt-7 text-[32px]">Visa Apply</h2>
                             </div>
 

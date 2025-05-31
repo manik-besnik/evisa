@@ -12,6 +12,7 @@ const PassportInputFile = ({
                            }) => {
 
     const [fileName, setFileName] = useState(placeholder);
+    const [hasFile, setHasFile] = useState(false);
 
     const handleUploadFile = (e) => {
         const file = e.target.files[0]
@@ -35,14 +36,19 @@ const PassportInputFile = ({
             onChange(fileType, file)
 
             setFileName("Attached");
+            setHasFile(true);
         } else {
             setFileName(placeholder);
+            setHasFile(false);
         }
     }
 
     return (
         <div
-            className={`${defaultClasses} ${classes} border-l-4 border-l-primary p-2 ${fileName !== placeholder ? "bg-[#aec0d5]" : 'bg-[#E0EBF8]'}`}>
+            className={`${defaultClasses} ${classes} border-l-4 border-l-primary p-2 ${
+                hasFile ? "bg-[#aec0d5]" : "bg-[#E0EBF8]"
+            }`}
+            >
             <label className="flex items-center justify-center w-full h-full cursor-pointer"
                    htmlFor={`file-upload-${fileType}`}>
                 <input
@@ -54,7 +60,7 @@ const PassportInputFile = ({
                 />
                 <div className="flex flex-col items-center">
                     <GrAttachment size={30}/>
-                    <p className="text-xs break-words mt-3">{fileName ? fileName : placeholder}</p>
+                    <p className="text-[13px] break-words mt-3">{fileName ? fileName : placeholder}</p>
                 </div>
 
                 {error && <p className="text-xs text-warning">{error}</p>}
