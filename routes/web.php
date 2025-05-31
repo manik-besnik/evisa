@@ -83,7 +83,7 @@ Route::middleware(['auth', 'user'])->group(function () {
     //cvCreate
     Route::get('cvs', [CvCreateController::class, 'index'])->name('cv.index');
     Route::get('cv/download', [CvCreateController::class, 'download'])->name('cv.download');
-    Route::get('cv-create', [CvCreateController::class, 'create'])->name('cv.create');
+    Route::get('cv-create/{formate}', [CvCreateController::class, 'create'])->name('cv.create');
     Route::post('cv-create', [CvCreateController::class, 'store'])->name('cv.store');
     Route::get('update-news', [BlogController::class, 'create'])->name('update.news');
 
