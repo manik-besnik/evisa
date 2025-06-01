@@ -18,6 +18,7 @@ class VisaApplyDTO
     public string $personalName;
     public int $processingType;
     public int $visaType;
+    public string $visaCategory;
     public int $group;
 
     /** General Info */
@@ -32,7 +33,7 @@ class VisaApplyDTO
     public int $maritalStatus;
     public string|null $birthPlace;
     public string|null $birthPlaceArabic;
-    public string|null $motherName;
+    public string $motherName;
     public string|null $motherNameArabic;
     public string|null $fatherName;
     public string|null $fatherNameArabic;
@@ -69,6 +70,7 @@ class VisaApplyDTO
             /** Visa Info */
             'user_id' => ['required'],
             'personal_name' => ['required', 'string', 'min:2'],
+            'visa_category' => ['required', 'string'],
             'processing_type' => ['required', Rule::in(array_column(VisaProcessingType::cases(), 'value'))],
             'visa_type' => ['required', Rule::in(array_column(VisaType::cases(), 'value'))],
             'group' => ['nullable', Rule::in(array_column(Group::cases(), 'value'))],
@@ -80,11 +82,11 @@ class VisaApplyDTO
             'prev_nationality' => ['nullable', 'integer', Rule::exists('countries', 'id')->whereNull('deleted_at')],
             'gender' => ['required', Rule::in(array_column(Gender::cases(), 'value'))],
             'date_of_birth' => ['required', 'date'],
-            'birth_country' => ['nullable', 'integer', Rule::exists('countries', 'id')->whereNull('deleted_at')],
+            'birth_country' => ['required', 'integer', Rule::exists('countries', 'id')->whereNull('deleted_at')],
             'marital_status' => ['nullable', 'integer', Rule::in(array_column(MaritalStatus::cases(), 'value'))],
             'birth_place' => ['nullable', 'string'],
             'birth_place_arabic' => ['nullable', 'string'],
-            'mother_name' => ['nullable', 'string'],
+            'mother_name' => ['required', 'string'],
             'mother_name_arabic' => ['nullable', 'string'],
             'father_name' => ['nullable', 'string'],
             'father_name_arabic' => ['nullable', 'string'],
@@ -126,6 +128,7 @@ class VisaApplyDTO
         $instance->personalName = $request->input('personal_name');
         $instance->processingType = (int)$request->input('processing_type');
         $instance->visaType = (int)$request->input('visa_type');
+        $instance->visaCategory = $request->input('visa_category');
         $instance->group = (int)$request->input('group');
 
         /** Personal Info */

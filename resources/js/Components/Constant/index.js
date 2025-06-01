@@ -1,5 +1,5 @@
 export const assetUrl = "https://dubaievisaservice.com/assets/"
-// export const assetUrl = "http://127.0.0.1:8001/assets/"
+// export const assetUrl = "http://127.0.0.1:8000/assets/"
 export const genders = [
     {id: 1, name: "Male"},
     {id: 2, name: "Female"},
@@ -56,6 +56,14 @@ export const visaTypesApply = [
     {id: 5, name: "FREE ZONE / FREELANCER"},
     {id: 6, name: "FAMILY VISA"},
     {id: 7, name: "STUDENT VISA"},
+];
+
+export const passportTypes= [
+    {id: 1, name: "Ordinary Passport"},
+    {id: 2, name: "Diplomatic Passport"},
+    {id: 3, name: "Official / Service Passport"},
+    {id: 4, name: "Emergency / Temporary Passport"},
+    {id: 5, name: "Refugee / Stateless Passport"},
 ];
 
 export const visaTypes = [
@@ -297,6 +305,46 @@ export const postForApply = [
     {id: 81, value: "archive_clerk", name: "Archive Clerk"},
     {id: 82, value: "quantity_surveyor", name: "Quantity Surveyor"},
     {id: 83, value: "computer_operator", name: "Computer Operator"},
+    {id: 84, value: "advertising_designer", name: "Advertising Designer"},
+    {id: 85, value: "graphics_designer", name: "Graphics Designer"},
+    {id: 86, value: "3d_designer", name: "3D Designer"},
+    {id: 87, value: "video_editor", name: "Video Editor"},
+    {id: 88, value: "printing_press", name: "Printing Press"},
+    {id: 89, value: "screen_print", name: "Screen Print"},
+    {id: 90, value: "event_management", name: "Event Management"},
+    {id: 91, value: "singer", name: "Singer"},
+    {id: 92, value: "musician", name: "Musician"},
+    {id: 93, value: "draughtsman", name: "Draughtsman"},
+    {id: 94, value: "auto_cad", name: "Auto CAD"},
+    {id: 95, value: "software_developers", name: "Software Developers"},
+    {id: 96, value: "web_developer", name: "Web Developer"},
+    {id: 97, value: "telecom_technicians", name: "Telecom Technicians"},
+    {id: 98, value: "architectural_technicians", name: "Architectural Technicians"},
+    {id: 99, value: "ticketing_clerk", name: "Ticketing Clerk"},
+    {id: 100, value: "tourist_guide", name: "Tourist Guide"},
+    {id: 101, value: "cashier", name: "Cashier"},
+    {id: 102, value: "receptionist", name: "Receptionist"},
+    {id: 103, value: "switch_board_operator", name: "Switch Board Operator"},
+    {id: 104, value: "store_keeper", name: "Store Keeper"},
+    {id: 105, value: "typist", name: "Typist"},
+    {id: 106, value: "documents_controller", name: "Documents Controller"},
+    {id: 107, value: "documentation_in_charge", name: "Documentation In charge"},
+    {id: 108, value: "bank", name: "Bank"},
+    {id: 109, value: "exchange", name: "Exchange"},
+    {id: 110, value: "engineer", name: "Engineer"},
+    {id: 111, value: "diploma_engineer", name: "Diploma Engineer"},
+    {id: 112, value: "doctors", name: "Doctors"},
+    {id: 113, value: "surgeons", name: "Surgeons"},
+    {id: 114, value: "physicians", name: "Physicians"},
+    {id: 115, value: "clinicians", name: "Clinicians"},
+    {id: 116, value: "pharmacist", name: "Pharmacist"},
+    {id: 117, value: "lawyers", name: "Lawyers"},
+    {id: 118, value: "teachers", name: "Teachers"},
+    {id: 119, value: "professors", name: "Professors"},
+    {id: 120, value: "technicians", name: "Technicians"},
+    {id: 121, value: "mechanics", name: "Mechanics"},
+    {id: 122, value: "auto_mechanics", name: "Auto Mechanics"},
+
 ];
 
 
@@ -584,4 +632,131 @@ export const educationQualifications = [
     { id: "FADHIL", name: "FADHIL (BA)" },
     { id: "KAMIL", name: "KAMIL (MA)" },
     { id: "PSD_HOLDER", name: "PSD HOLDER" }
+];
+
+export const employmentVisaTypes = [
+    { id: "Standard Employment", name: "Standard Employment" },
+    { id: "Skilled Employment", name: "Skilled Employment" },
+    { id: "Mission Work Permit", name: "Mission Work Permit" },
+    { id: "Government Employment", name: "Government Employment" },
+    { id: "Semi Government Employment", name: "Semi Government Employment" },
+];
+
+export const domesticWorkerProfessionTypes = [
+    { id: "Housemaid/Servant", name: "Housemaid/Servant" },
+    { id: "Sailor", name: "Sailor" },
+    { id: "Guard", name: "Guard" },
+    { id: "Shepherd", name: "Shepherd" },
+    { id: "Jockey", name: "Jockey" },
+    { id: "Tamer", name: "Tamer" },
+    { id: "Falcon care-taker", name: "Falcon care-taker" },
+    { id: "Worker", name: "Worker" },
+    { id: "Housekeeper", name: "Housekeeper" },
+    { id: "Cook", name: "Cook" },
+    { id: "Nanny/Babysitter", name: "Nanny/Babysitter" },
+    { id: "Farm worker/Grower", name: "Farm worker/Grower" },
+    { id: "Gardener", name: "Gardener" },
+    { id: "Personal trainer/coach", name: "Personal trainer/coach" },
+    { id: "Private tutor", name: "Private tutor" },
+    { id: "Home nurse", name: "Home nurse" },
+    { id: "Personal assistant", name: "Personal assistant" },
+    { id: "Private agricultural engineer", name: "Private agricultural engineer" },
+    { id: "Personal/family driver", name: "Personal/family driver" },
+    { id: "Private Representative", name: "Private Representative" },
+    { id: "Other", name: "Other" },
+];
+
+export const visitVisaTypes = [
+    { id: "Transit Visa - 48 Hours", name: "Transit Visa - 48 Hours" },
+    { id: "Transit Visa - 96 Hours", name: "Transit Visa - 96 Hours" },
+    { id: "30 days - Single Entry", name: "30 days - Single Entry" },
+    { id: "60 days - Single Entry", name: "60 days - Single Entry" },
+    { id: "90 days - Single Entry", name: "90 days - Single Entry" },
+    { id: "30 days - Multiple Entry", name: "30 days - Multiple Entry" },
+    { id: "60 days - Multiple Entry", name: "60 days - Multiple Entry" },
+    { id: "90 days - Multiple Entry", name: "90 days - Multiple Entry" },
+    { id: "30 days - Leasure", name: "30 days - Leasure" },
+    { id: "90 days - Leasure", name: "90 days - Leasure" },
+    { id: "5 Years Multiple Entry", name: "5 Years Multiple Entry" },
+    { id: "Relative or friend - 30 days - Single Entry", name: "Relative or friend - 30 days - Single Entry" },
+    { id: "Relative or friend - 60 days - Single Entry", name: "Relative or friend - 60 days - Single Entry" },
+    { id: "Relative or friend - 90 days - Single Entry", name: "Relative or friend - 90 days - Single Entry" },
+    { id: "Relative or friend - 30 days - Multiple Entry", name: "Relative or friend - 30 days - Multiple Entry" },
+    { id: "Relative or friend - 60 days - Multiple Entry", name: "Relative or friend - 60 days - Multiple Entry" },
+    { id: "Relative or friend - 90 days - Multiple Entry", name: "Relative or friend - 90 days - Multiple Entry" },
+    { id: "Job Seeker - 60 days", name: "Job Seeker - 60 days" },
+    { id: "Job Seeker - 90 days", name: "Job Seeker - 90 days" },
+    { id: "Job Seeker - 120 Days", name: "Job Seeker - 120 Days" },
+    { id: "Search for Investment Oppurtunities - 60 Days", name: "Search for Investment Oppurtunities - 60 Days" },
+    { id: "Search for Investment Oppurtunities - 90 Days", name: "Search for Investment Oppurtunities - 90 Days" },
+    { id: "Search for Investment Oppurtunities - 120 Days", name: "Search for Investment Oppurtunities - 120 Days" },
+];
+
+export const investorVisaTypes = [
+    { id: "General Investor/Partner - Mainland", name: "General Investor/Partner - Mainland" },
+    { id: "General Investor/Partner - Free Zone", name: "General Investor/Partner - Free Zone" },
+    { id: "Property Investor", name: "Property Investor" },
+];
+
+export const familyVisaTypes = [
+    { id: "Spouse", name: "Spouse" },
+    { id: "Child", name: "Child" },
+    { id: "Parent", name: "Parent" },
+    { id: "Newborn", name: "Newborn" },
+    { id: "Other", name: "Other" },
+];
+
+export const greenVisaTypes = [
+    { id: "High Level Skilled Worker", name: "High Level Skilled Worker" },
+    { id: "Investor/Partner", name: "Investor/Partner" },
+    { id: "Self Employed", name: "Self Employed" },
+];
+
+export const studentVisaTypes = [
+    { id: "STUDENT VISA", name: "STUDENT VISA" },
+];
+
+export const freeZoneVisaTypes = [
+    { id: "FREE ZONE / FREELANCER", name: "FREE ZONE / FREELANCER" },
+];
+
+export const goldenVisaTypes = [
+    { id: "Investor - General Investor - Capital in an industrial or commercial company Worth 2 Million AED", name: "Investor - General Investor - Capital in an industrial or commercial company Worth 2 Million AED" },
+    { id: "Investor - General Investor - Investment in UAE Accredited Investment Fund Worth 2 Million AED", name: "Investor - General Investor - Investment in UAE Accredited Investment Fund Worth 2 Million AED" },
+    { id: "Investor - General Investor - Company Business Financial Share Worth 2 Million AED", name: "Investor - General Investor - Company Business Financial Share Worth 2 Million AED" },
+    { id: "Investor - General Investor - Deposit in an National Bank Worth 2 Million AED", name: "Investor - General Investor - Deposit in an National Bank Worth 2 Million AED" },
+    { id: "Investor - General Investor - Partner Tax Contribution of no less than 250 thousand AED to a company's annual taxes", name: "Investor - General Investor - Partner Tax Contribution of no less than 250 thousand AED to a company's annual taxes" },
+    { id: "Investor - General Investor - Owner of a Company that pays taxes no less than 250 thousand AED", name: "Investor - General Investor - Owner of a Company that pays taxes no less than 250 thousand AED" },
+    { id: "Investor - Real Estate Investor - Owning Property(s) of value no less than 2 Million AED", name: "Investor - Real Estate Investor - Owning Property(s) of value no less than 2 Million AED" },
+    { id: "Persons who are talented - Creative People of Culture and the Arts - Pioneer", name: "Persons who are talented - Creative People of Culture and the Arts - Pioneer" },
+    { id: "Persons who are talented - Creative People of Culture and the Arts - Prominent", name: "Persons who are talented - Creative People of Culture and the Arts - Prominent" },
+    { id: "Persons who are talented - Creative People of Culture and the Arts - Distinguished Professional", name: "Persons who are talented - Creative People of Culture and the Arts - Distinguished Professional" },
+    { id: "Persons who are talented - Innovators and Inventors", name: "Persons who are talented - Innovators and Inventors" },
+    { id: "Persons who are talented - Athletes - Outstanding sports talents", name: "Persons who are talented - Athletes - Outstanding sports talents" },
+    { id: "Persons who are talented - Athletes - Individuals who have achieved remarkable sports excellence", name: "Persons who are talented - Athletes - Individuals who have achieved remarkable sports excellence" },
+    { id: "Persons who are talented - Athletes - Those holding leadership positions in international sports federations, committees, or organizations", name: "Persons who are talented - Athletes - Those holding leadership positions in international sports federations, committees, or organizations" },
+    { id: "Persons who are talented - Athletes - Specialists in sports medicine.", name: "Persons who are talented - Athletes - Specialists in sports medicine." },
+    { id: "Persons who are talented - Talent in Digital Technology", name: "Persons who are talented - Talent in Digital Technology" },
+    { id: "Persons who are talented - Exceptional Talents", name: "Persons who are talented - Exceptional Talents" },
+    { id: "HIGH SCHOOL'S TOP RANKED STUDENTS IN UAE", name: "HIGH SCHOOL'S TOP RANKED STUDENTS IN UAE" },
+    { id: "Humanitarian Pioneers", name: "Humanitarian Pioneers" },
+    { id: "Scientists and Specialists - Specialists - Specialists in Culture", name: "Scientists and Specialists - Specialists - Specialists in Culture" },
+    { id: "Scientists and Specialists - Specialists - Professionals in Education", name: "Scientists and Specialists - Specialists - Professionals in Education" },
+    { id: "Scientists and Specialists - Specialists - Specialists in Science", name: "Scientists and Specialists - Specialists - Specialists in Science" },
+    { id: "Scientists and Specialists - Specialists - Engineering Professionals", name: "Scientists and Specialists - Specialists - Engineering Professionals" },
+    { id: "Scientists and Specialists - Specialists - Elite Health Fields", name: "Scientists and Specialists - Specialists - Elite Health Fields" },
+    { id: "Scientists and Specialists - Specialists - Health Professionals", name: "Scientists and Specialists - Specialists - Health Professionals" },
+    { id: "Scientists and Specialists - Specialists - Elite Educational Fields", name: "Scientists and Specialists - Specialists - Elite Educational Fields" },
+    { id: "Scientists and Specialists - Specialists - Information Technology Professionals", name: "Scientists and Specialists - Specialists - Information Technology Professionals" },
+    { id: "Scientists and Specialists - Specialists - Specialists in Law and Sociology", name: "Scientists and Specialists - Specialists - Specialists in Law and Sociology" },
+    { id: "Scientists and Specialists - Specialists - Business and Management Professionals", name: "Scientists and Specialists - Specialists - Business and Management Professionals" },
+    { id: "Scientists and Specialists - Presidents and CEOs", name: "Scientists and Specialists - Presidents and CEOs" },
+    { id: "Scientists and Specialists - Scientists - Elite Fields of Industry and the Fourth Industrial Revolution", name: "Scientists and Specialists - Scientists - Elite Fields of Industry and the Fourth Industrial Revolution" },
+    { id: "Scientists and Specialists - Scientists - Scientists and Researchers with Achievements", name: "Scientists and Specialists - Scientists - Scientists and Researchers with Achievements" },
+    { id: "Scientists and Specialists - Scientists - Senior Scholars and Clerics", name: "Scientists and Specialists - Scientists - Senior Scholars and Clerics" },
+    { id: "Digital Content Creators", name: "Digital Content Creators" },
+    { id: "Luxury Yacht Owners", name: "Luxury Yacht Owners" },
+    { id: "Gaming Professionals", name: "Gaming Professionals" },
+    { id: "Outstanding Educators", name: "Outstanding Educators" },
+    { id: "Nurses with Long Term Service of minimum of 15 years", name: "Nurses with Long Term Service of minimum of 15 years" },
 ];

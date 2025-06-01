@@ -27,7 +27,7 @@ export default function WebLayout({children, showServiceImage = true, showBgImag
             <Topbar/>
             <Navbar/>
 
-            <div
+            <div className='relative' 
                 style={{
                     backgroundImage: showBgImage
                         ? `url(${assetUrl}images/bg.png)`
@@ -42,6 +42,8 @@ export default function WebLayout({children, showServiceImage = true, showBgImag
                         <ServiceImage/>
                     </div>
                 </div>}
+
+                
             </div>
 
             <ToastContainer/>

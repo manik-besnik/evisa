@@ -8,9 +8,19 @@ import {
     groups,
     maritalStatuses, religions,
     visaProcessingTypes,
-    visaTypes
+    visaTypes,
+    passportTypes,
+    employmentVisaTypes,
+    domesticWorkerProfessionTypes,
+    visitVisaTypes,
+    investorVisaTypes,
+    familyVisaTypes,
+    greenVisaTypes,
+    goldenVisaTypes,
+    studentVisaTypes,
+    freeZoneVisaTypes
 } from "@/Components/Constant/index.js";
-import {useState} from "react";
+import {useState,useEffect} from "react";
 import {Head, useForm, usePage} from "@inertiajs/react";
 import PrimaryBtn from "@/Components/Web/PrimaryBtn.jsx";
 import InputFile from "@/Components/Web/InputFile.jsx";
@@ -29,6 +39,33 @@ const VisaApply = () => {
 
     const params = new URLSearchParams(window.location.search);
     const urlVisaType = params.get('visaType');
+    const urlVisaName = params.get('visaName');
+
+       const visaCategoryMap = {
+        'VISIT VISA': visitVisaTypes,
+        'EMPLOYMENT VISA': employmentVisaTypes,
+        'INVESTOR / PARTNER VISA': investorVisaTypes,
+        'DOMESTIC WORKER': domesticWorkerProfessionTypes,
+        'FREE ZONE / FREELANCER': freeZoneVisaTypes,
+        'FAMILY VISA': familyVisaTypes,
+        'STUDENT VISA': studentVisaTypes,
+        'GOLDEN VISA': goldenVisaTypes,
+        'GREEN VISA': greenVisaTypes
+    };
+
+    const [visaCategoryOptions, setVisaCategoryOptions] = useState([]);
+    const [selectedVisaCategory, setSelectedVisaCategory] = useState('');
+
+    useEffect(() => {
+        if (urlVisaName) {
+            const options = visaCategoryMap[urlVisaName] || [];
+            setVisaCategoryOptions(options);
+        }
+    }, [urlVisaName]);
+
+    const updateVisaCategory = (value) => {
+        setData('visa_category', value.id);
+    };
 
     const selectedVisaTypeObj = urlVisaType ?
         visaTypes.find(type => type.id.toString() === urlVisaType) || '' :
@@ -57,6 +94,11 @@ const VisaApply = () => {
         prevMaritalStatus = maritalStatuses.find(item => item.id === personal_info.marital_status)
     }
 
+    let prevPassportTypes = ""
+    if (personal_info?.passport_type) {
+        prevPassportTypes = passportTypes.find(item => item.id === personal_info.passport_type)
+    }
+
     let prevPassportIssueCountry = ""
     if (passport?.passport_issue_country) {
         prevPassportIssueCountry = countries.find(item => item.id === passport.passport_issue_country)
@@ -81,6 +123,7 @@ const VisaApply = () => {
     const [gender, setGender] = useState(prevGender)
     const [birthCountry, setBirthCountry] = useState(prevBirthCountry)
     const [maritalStatus, setMaritalStatus] = useState(prevMaritalStatus)
+    const [passportType, setPassportTypes] = useState(prevPassportTypes)
     const [passportIssueCountry, setPassportIssueCountry] = useState(prevPassportIssueCountry)
     const [guarantorNationality, setGuarantorNationality] = useState(guarantorPrevNationality)
     const [personReligion, setPersonReligion] = useState(religions.find(item => item.name === personal_info?.religion) ?? '')
@@ -91,6 +134,7 @@ const VisaApply = () => {
     const [passportData, setPassportData] = useState({})
 
     const {data, setData, post, errors, processing} = useForm({
+        visa_category: null,
         personal_name: '',
         processing_type: null,
         visa_type: urlVisaType || null,
@@ -167,6 +211,10 @@ const VisaApply = () => {
 
     const updateMaritalStatus = (value) => {
         setData('marital_status', value.id)
+    }
+
+   const updatePassportTypes = (value) => {
+        setData('passport_type', value.id)
     }
 
 
@@ -277,7 +325,15 @@ const VisaApply = () => {
 
             <Head title="Apply For New Visa | Dubai E-Visa"/>
 
-            <div className="w-full h-full" style={{backgroundImage: `url(${assetUrl}images/background-all.png)`, backgroundSize: 'cover'}}>
+            <div
+  className="w-full h-full"
+  style={{
+    backgroundImage: `linear-gradient(to bottom, rgba(255,255,255,0.7), rgba(255,255,255,0.6)), url(${assetUrl}images/background-all.png)`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+  }}
+>
                 <div className="container">
                     <h3 className="text-text-primary text-lg font-semibold mt-3">Apply Visa</h3>
 
@@ -290,8 +346,8 @@ const VisaApply = () => {
                                 onChange={(e) => setData('personal_name', e.target.value)}
                                 error={errors.personal_name}
                                 id="personal-name"
-                                placeholder="Personal Name | Company Name"
-                                label="Personal Name | Company Name"
+                                placeholder="Personal Name "
+                                label="Personal Name"
                                 divClasses="my-3"
                                 defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                                 labelClasses="text-text-primary"
@@ -320,7 +376,22 @@ const VisaApply = () => {
                                 defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                                 error={errors.visa_type}
                                 isRequired={true}
+                                disabled={true}
                             />
+
+                             {visaCategoryOptions.length > 0 && (
+                                <Select
+                                    placeholder="Visa Category"
+                                    label="Visa Category"
+                                    items={visaCategoryOptions}
+                                    selected={selectedVisaCategory}
+                                    setSelected={setSelectedVisaCategory}
+                                    handleValueChange={updateVisaCategory}
+                                    defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
+                                    error={errors.visa_category}
+                                    isRequired={true}
+                                />
+                            )}
 
                             <Select
                                 placeholder="Select Group"
@@ -423,6 +494,7 @@ const VisaApply = () => {
                                 setSelected={setBirthCountry}
                                 handleValueChange={updateBirthCountry}
                                 error={errors.birth_country}
+                                isRequired={true}
                                 defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                             />
 
@@ -466,6 +538,7 @@ const VisaApply = () => {
                                 onChange={(e) => setData('mother_name', e.target.value)}
                                 error={errors.mother_name}
                                 id="mother-english"
+                                 isRequired={true}
                                 placeholder="Mother Name English"
                                 label="Mother Name (English)" divClasses="my-3"
                                 defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
@@ -539,7 +612,18 @@ const VisaApply = () => {
 
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-x-4 items-center">
 
-                            <TextInput
+                            <Select
+                                placeholder="Select Passport Type"
+                                label="Passport Type"
+                                items={passportTypes}
+                                selected={passportType}
+                                setSelected={setPassportTypes}
+                                handleValueChange={updatePassportTypes}
+                                error={errors.passport_type}
+                                defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
+                            />
+
+                            {/* <TextInput
                                 value={data.passport_type}
                                 onChange={(e) => setData('passport_type', e.target.value)}
                                 error={errors.passport_type}
@@ -548,7 +632,7 @@ const VisaApply = () => {
                                 label="Passport Type" divClasses="my-3"
                                 defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                                 labelClasses="text-text-primary"
-                            />
+                            /> */}
 
                             <TextInput
                                 value={data.passport_no}
@@ -672,7 +756,9 @@ const VisaApply = () => {
                                 error={errors.guarantor_phone}
                                 id="guarantor-phone"
                                 placeholder="Mobile"
-                                label="Mobile" divClasses="my-3"
+                                label="Mobile (Whatsapp)" 
+                                divClasses="my-3"
+                                isRequired={true}
                                 defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                                 labelClasses="text-text-primary"
                             />
@@ -697,7 +783,7 @@ const VisaApply = () => {
                                     <div>
                                         <PassportInputFile
                                             defaultClasses="w-[240px] h-[240px]"
-                                            placeholder="Passport Page 1*"
+                                            placeholder={<>Passport Page 1 <span className="text-red-500">*</span></>}
                                             onChange={handleFileChange}
                                             fileType="passport"
                                             labelClasses="text-sm"
@@ -706,7 +792,7 @@ const VisaApply = () => {
                                     <div className="flex flex-2 gap-2 flex-wrap">
 
                                         <InputFile
-                                            placeholder="Photo*"
+                                            placeholder={<>Photo <span className="text-red-500">*</span></>}
                                             onChange={handleFileChange}
                                             fileType="photo"
                                             defaultClasses="w-40 h-28"
@@ -787,15 +873,6 @@ const VisaApply = () => {
                                             labelClasses="text-sm"
                                         />
 
-
-                                        <InputFile
-                                            placeholder="Additional Document 2"
-                                            onChange={handleFileChange}
-                                            fileType="additional1"
-                                            defaultClasses="w-40 h-28"
-                                            labelClasses="text-sm"
-                                        />
-
                                     </div>
                                 </div>
 
@@ -832,6 +909,7 @@ const VisaApply = () => {
                 confirmSubmit={handleConfirmSubmit}
                 isPassportRequired={isPassportRequired}
                 isPhotoRequired={isPhotoRequired}
+                photoFile={data.documents['photo']?.file}
             />
         </WebLayout>
     )

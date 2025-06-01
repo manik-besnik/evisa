@@ -18,13 +18,13 @@ const JobDirectoryPage = ({locations}) => {
             <div className="container">
                 <div className="grid grid-cols-2 gap-x-20">
                     <JobDirectory/>
-                    <div className="w-7/12 h-[90vh]">
-                        <div className="bg-[#6b7377c8] h-full relative p-5 pr-0">
+                    <div className="w-8/12 h-[93vh]">
+                        <div className="bg-[#6b7377c8] h-full relative">
                             {/* Header Section */}
-                            <div className="text-center flex">
-                                <img alt="Visa Icon" className="w-20 h-20"
+                            <div className="text-center flex relative pt-4">
+                                <img alt="Visa Icon" className="w-20 h-20 ml-4"
                                      src={`${assetUrl + 'images/jobapplysearch.png'}`}/>
-                                <h2 className="bg-red-600 text-white ml-4 w-full h-12 mt-7 text-[32px] pb-6">Job Apply</h2>
+                                <h2 className="bg-red-600 text-white ml-4 w-full h-12 mt-7 text-[32px] pb-6" style={{position: 'absolute',right: '-1px',width: '68%',top: '5px'}}>Job Apply</h2>
                             </div>
 
                             {/* Visa Types Buttons */}
@@ -34,7 +34,7 @@ const JobDirectoryPage = ({locations}) => {
                                         key={visa.id}
                                         onClick={() => handleVisaClick(visa)}
                                         className={`${visa.name === "READY JOB" || visa.name === "NEW JOB"
-                                            ? "bg-[#C29E25] text-white"
+                                            ? "bg-[#C29E25] text-black"
                                             : "bg-white text-black"
                                         } font-semibold text-xs py-2 px-6 rounded-full shadow-md w-[80%] text-center hover:bg-gray-200`}
                                     >
