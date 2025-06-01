@@ -376,6 +376,7 @@ const VisaApply = () => {
                                 defaultClasses="bg-[#E0EBF8] border-l-primary focus:border-l-primary"
                                 error={errors.visa_type}
                                 isRequired={true}
+                                disabled={true}
                             />
 
                              {visaCategoryOptions.length > 0 && (

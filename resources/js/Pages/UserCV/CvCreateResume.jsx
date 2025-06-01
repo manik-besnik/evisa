@@ -17,7 +17,7 @@ import FileUpload from "@/Components/Web/FileUpload.jsx";
 import {FaPlus} from "react-icons/fa6";
 import MultiSelect from "@/Components/Web/MultiSelect.jsx";
 import Checkbox from "@/Components/Checkbox.jsx";
-import ResumePreview from "@/Components/Web/ResumePreview.jsx";
+import ResumePreview from "@/Components/Web/CvPreview.jsx";
 
 
 const CvCreate = () => {
