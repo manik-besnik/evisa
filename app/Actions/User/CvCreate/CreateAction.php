@@ -10,15 +10,31 @@ use Inertia\Response;
 
 class CreateAction
 {
-    public function execute(): Response
+    public function execute($format): Response
     {
-
         $cv = UserCv::query()->where('user_id', auth()->id())->first();
 
-        return Inertia::render('UserCV/CvCreate', [
+        $commonData = [
             'locations' => Location::query()->select(['id', 'name'])->get(),
             'languages' => Language::query()->select(['id', 'name'])->get(),
-            'cv' => $cv
-        ]);
+            'cv' => $cv,
+            'format' => $format
+        ];
+
+        // Determine which page to render based on format
+        switch ($format) {
+            case 'jobFormat':
+                return Inertia::render('UserCV/CvCreateJob', $commonData);
+
+            case 'cvFormat':
+                return Inertia::render('UserCV/CvCreate', $commonData);
+
+            case 'resumeFormat':
+                return Inertia::render('UserCV/CvCreateResume', $commonData);
+
+            default:
+                // Handle invalid format - you can redirect or show default page
+                return Inertia::render('UserCV/CvCreate', $commonData);
+        }
     }
 }

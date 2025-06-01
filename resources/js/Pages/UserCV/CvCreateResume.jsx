@@ -17,12 +17,12 @@ import FileUpload from "@/Components/Web/FileUpload.jsx";
 import {FaPlus} from "react-icons/fa6";
 import MultiSelect from "@/Components/Web/MultiSelect.jsx";
 import Checkbox from "@/Components/Checkbox.jsx";
-import ResumePreview from "@/Components/Web/ResumePreview.jsx";
+import ResumePreview from "@/Components/Web/CvPreview.jsx";
 
 
 const CvCreate = () => {
 
-    const {countries, languages,cv} = usePage().props;
+    const { countries, languages, cv, format } = usePage().props;
 
     const userSelectedLanguages = languages.filter(lang =>
         cv?.languages?.split(',').map(name => name.trim()).includes(lang.name)
@@ -49,8 +49,11 @@ const CvCreate = () => {
         religion: cv?.religion,
         blood_group: cv?.blood_group,
         marital_status: cv?.marital_status,
-        
-        
+        passport_no: cv?.passport_no,
+        passport_expiry: cv?.passport_expiry,
+        visa_status: cv?.visa_status,
+        visa_expiry: cv?.visa_expiry,
+        computer_skill: cv?.computer_skill,
         personal_skills: cv?.personal_skills,
         interests: cv?.interests,
         languages: userSelectedLanguages ?? [],
@@ -239,7 +242,7 @@ const CvCreate = () => {
                             <div className="md:w-1/3">
                                 <div className="flex items-center mb-6">
                                     <div className="bg-red-600 text-white text-center py-3 px-6 text-2xl font-bold">
-                                        <span className="bg-gray-400">CV CREATE</span>
+                                        <span className="bg-gray-400">Curriculum Vitae </span>
                                     </div>
                                 </div>
 
@@ -444,7 +447,83 @@ const CvCreate = () => {
                             </div>
                         </div>
                         <hr className="border-2 border-[#848585] mb-3"/>
-                       
+                        {/* Passport & Visa Information */}
+                        <div className="mb-6">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div className="space-y-3">
+                                    <div className="flex items-center">
+                                        <label className="w-1/3 font-bold">Passport No</label>
+                                        <span className="mx-2">:</span>
+                                        <div className="flex-1">
+                                            <TextInput
+                                                placeholder="Typing Here"
+                                                value={data.passport_no}
+                                                onChange={(e) => setData('passport_no', e.target.value)}
+                                                error={errors.passport_no}
+                                                required={true}
+                                                id="passport_no"
+                                                defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <div className="flex items-center">
+                                        <label className="w-1/3 font-bold">Expiry Date</label>
+                                        <span className="mx-2">:</span>
+                                        <div className="flex-1">
+                                            <TextInput
+                                                type="date"
+                                                placeholder="Typing Here"
+                                                value={data.passport_expiry}
+                                                onChange={(e) => setData('passport_expiry', e.target.value)}
+                                                error={errors.passport_expiry}
+                                                required={true}
+                                                id="passport_expiry"
+                                                defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                            />
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div className="space-y-3">
+
+                                    <div className="flex items-center">
+                                        <label className="w-1/3 font-bold">Issue Date</label>
+                                        <span className="mx-2">:</span>
+                                        <div className="flex-1">
+                                            <TextInput
+                                                type="date"
+                                                placeholder="Typing Here"
+                                                value={data.visa_expiry}
+                                                onChange={(e) => setData('visa_expiry', e.target.value)}
+                                                error={errors.visa_expiry}
+                                                id="visa_expiry"
+                                                defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className="flex items-center">
+                                        <label className="w-1/3 font-bold">Visa Status</label>
+                                        <span className="mx-2">:</span>
+                                        <div className="flex-1">
+                                            <TextInput
+                                                placeholder="Typing Here"
+                                                value={data.visa_status}
+                                                onChange={(e) => setData('visa_status', e.target.value)}
+                                                error={errors.visa_status}
+                                                required={true}
+                                                id="visa_status"
+                                                defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                            />
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
                         {/* Education - Enhanced Section */}
                         <div className="mb-6">
                             <h2 className="text-xl font-bold mb-3 border-l-4 border-red-600 pl-2">EDUCATION DETAILS</h2>
@@ -544,7 +623,21 @@ const CvCreate = () => {
                             ))}
 
                             {/* Computer Skills */}
-                          
+                            <div className="grid grid-cols-12 gap-3 mb-4">
+                                <div className="col-span-3">
+                                    <p className="p-[7px] border-2 border-[#848585]">Computer Skills</p>
+                                </div>
+                                <div className="col-span-9">
+                                    <TextInput
+                                        placeholder="Typing Here"
+                                        value={data.computer_skill}
+                                        onChange={(e) => setData('computer_skill', e.target.value)}
+                                        error={errors.computer_skill}
+                                        id="computer_skill"
+                                        defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
+                                    />
+                                </div>
+                            </div>
 
                             <MultiSelect
                                 items={languages}
