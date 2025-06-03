@@ -28,34 +28,35 @@ const CvCreate = () => {
         cv?.languages?.split(',').map(name => name.trim()).includes(lang.name)
     );
 
-    const [nationality, setNationality] = useState( '');
-    const [gender, setGender] = useState( '');
-    const [religion, setReligion] = useState('');
-    const [bloodGroup, setBloodGroup] = useState('');
-    const [maritalStatus, setMaritalStatus] = useState( '');
-    const [selectedLanguages, setSelectedLanguages] = useState( [])
+    const [nationality, setNationality] = useState(countries.find(item => item.id === cv?.nationality) ?? '');
+    const [gender, setGender] = useState(genders.find(item => item.id == cv?.gender) ?? '');
+    const [religion, setReligion] = useState(religions.find(item => item.id == cv?.religion) ?? '');
+    const [bloodGroup, setBloodGroup] = useState(bloodGroups.find(item => item.id == cv?.blood_group) ?? '');
+    const [maritalStatus, setMaritalStatus] = useState(maritalStatuses.find(item => item.id == cv?.marital_status) ?? '');
+    const [selectedLanguages, setSelectedLanguages] = useState(userSelectedLanguages ?? [])
     const [resumePreview, setResumePreview] = useState(false)
 
     const {data, setData, post, errors, processing, reset} = useForm({
-        name: '',
-        designation: '',
-        phone: '',
-        website: '',
+        name: cv?.name,
+        designation: cv?.designation,
+        phone: cv?.phone,
+        email: cv?.email,
+        website: cv?.website,
         avatar: '',
-        nationality: '',
-        gender: '',
-        date_of_birth: '',
-        religion: '',
-        blood_group: '',
-        marital_status: '',
+        nationality: cv?.nationality,
+        gender: cv?.gender,
+        date_of_birth: cv?.date_of_birth,
+        religion: cv?.religion,
+        blood_group: cv?.blood_group,
+        marital_status: cv?.marital_status,
         cv_type: format,
         
         
-        personal_skills: '',
-        interests: '',
-        languages: [],
-        summary: '',
-        job_experiences:  [
+        personal_skills: cv?.personal_skills,
+        interests: cv?.interests,
+        languages: userSelectedLanguages ?? [],
+        summary: cv?.summary,
+        job_experiences: cv?.experiences?.length > 0 ? cv.experiences : [
             {
                 position: "",
                 start_date: "",
@@ -65,7 +66,7 @@ const CvCreate = () => {
                 description: "",
             }
         ],
-        educations:  [
+        educations: cv?.educations?.length ? cv.educations :  [
             {
                 qualification: "",
                 institute: "",
@@ -75,7 +76,7 @@ const CvCreate = () => {
                 result: "",
             }
         ],
-        references: [
+        references: cv?.references?.length ? cv.references : [
             {
                 name: "",
                 company: "",

@@ -58,6 +58,12 @@ const CvCreate = () => {
         interests: cv?.interests,
         languages: userSelectedLanguages ?? [],
         summary: cv?.summary,
+        current_state: "",
+        current_city: "",
+        current_area: "",
+        permanent_district: "",
+        permanent_thana: "",
+        permanent_village: "",
         job_experiences: cv?.experiences?.length > 0 ? cv.experiences : [
             {
                 position: "",
@@ -447,6 +453,74 @@ const CvCreate = () => {
                             </div>
                         </div>
                         <hr className="border-2 border-[#848585] mb-3"/>
+                        {/* Address */}
+                        <div className="mb-6">
+                            <div className="grid grid-cols-1 gap-3">
+                                <div className="flex items-center">
+                                    <label className="w-[12.90rem] font-bold">Current Address</label>
+                                    <span className="mx-2">:</span>
+                                    <div className="flex-1 grid grid-cols-3 gap-2">
+                                        <TextInput
+                                            placeholder="State"
+                                            value={data.current_state}
+                                            onChange={(e) => setData('current_state', e.target.value)}
+                                            error={errors.current_state}
+                                            required={true}
+                                            defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                        />
+                                        <TextInput
+                                            placeholder="City"
+                                            value={data.current_city}
+                                            onChange={(e) => setData('current_city', e.target.value)}
+                                            error={errors.current_city}
+                                            required={true}
+                                            defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                        />
+                                        <TextInput
+                                            placeholder="Area"
+                                            value={data.current_area}
+                                            onChange={(e) => setData('current_area', e.target.value)}
+                                            error={errors.current_area}
+                                            required={true}
+                                            defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                        />
+                                    </div>
+                                </div>
+
+                                <div className="flex items-center">
+                                    <label className="w-[12.90rem] font-bold">Permanent Address</label>
+                                    <span className="mx-2">:</span>
+                                    <div className="flex-1 grid grid-cols-3 gap-2">
+                                        <TextInput
+                                            placeholder="District"
+                                            value={data.permanent_district}
+                                            onChange={(e) => setData('permanent_district', e.target.value)}
+                                            error={errors.permanent_district}
+                                            required={true}
+                                            defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                        />
+                                        <TextInput
+                                            placeholder="Thana"
+                                            value={data.permanent_thana}
+                                            onChange={(e) => setData('permanent_thana', e.target.value)}
+                                            error={errors.permanent_thana}
+                                            required={true}
+                                            defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                        />
+                                        <TextInput
+                                            placeholder="Village"
+                                            value={data.permanent_village}
+                                            onChange={(e) => setData('permanent_village', e.target.value)}
+                                            error={errors.permanent_village}
+                                            required={true}
+                                            id="permanent_village"
+                                            defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr className="border-2 border-[#848585] mb-3" />
                         {/* Passport & Visa Information */}
                         <div className="mb-6">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

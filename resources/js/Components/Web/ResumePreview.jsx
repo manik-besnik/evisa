@@ -96,15 +96,23 @@ const ResumePreview = ({ show, setShow, cvData, confirmSubmit,oldAvatar }) => {
                             <div
                                 className="w-44 h-44 rounded-full bg-primary border-4 border-white flex items-center justify-center">
                                 <div className="w-40 h-40 rounded-full bg-white overflow-hidden">
-                                    {cvData.avatar ? <img
-                                        src={URL.createObjectURL(cvData.avatar)}
-                                        alt="Profile"
-                                        className="w-full h-full object-cover"
-                                    /> : <img
-                                        src={oldAvatar}
-                                        alt="Profile"
-                                        className="w-full h-full object-cover"
-                                    /> }
+                                    {cvData.avatar ? (
+                                        <img
+                                            src={URL.createObjectURL(cvData.avatar)}
+                                            alt="Profile"
+                                            className="w-full h-full object-cover"
+                                        />
+                                    ) : oldAvatar ? (
+                                        <img
+                                            src={oldAvatar}
+                                            alt="Profile"
+                                            className="w-full h-full object-cover"
+                                        />
+                                    ) : (
+                                        <div className="w-full h-full bg-gray-300 flex items-center justify-center">
+                                            <span>No Image</span>
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         </div>

@@ -14,8 +14,7 @@ class StoreAction
     public function execute(CVDTO $cvDTO): RedirectResponse
     {
         // Get the existing CV or initialize a new one
-        // $cv = UserCV::query()->where('user_id', auth()->id())->first() ?? new UserCV();
-        $cv = new UserCV();
+        $cv = UserCV::query()->where('user_id', auth()->id())->first() ?? new UserCV();
 
         DB::beginTransaction();
 
