@@ -254,7 +254,7 @@ const CvCreate = () => {
                                         error={errors.avatar}
 
                                     >
-                                        {cv?.avatar ? (<img src={cv.avatar} className="w-auto m-auto h-full p-2 text-center" alt="Uploaded file"/>) :
+                                       
                                             <div className="flex flex-col items-center text-center">
                                                 <div className="flex items-center justify-center">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64"
@@ -267,7 +267,7 @@ const CvCreate = () => {
                                                 </div>
                                                 <p className="mt-2 text-sm">Passport Size Pic</p>
                                             </div>
-                                        }
+                                        
                                     </FileUpload>
 
                                 </div>

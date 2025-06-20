@@ -7,7 +7,9 @@ import {
     maritalStatuses,
     bloodGroups,
     educationQualifications,
-    religions
+    religions,
+    languageProficiency,
+    drivingLicenses,
 } from "@/Components/Constant/index.js";
 import {useState, useEffect} from "react";
 import {Head, useForm, usePage} from "@inertiajs/react";
@@ -17,54 +19,65 @@ import FileUpload from "@/Components/Web/FileUpload.jsx";
 import {FaPlus} from "react-icons/fa6";
 import MultiSelect from "@/Components/Web/MultiSelect.jsx";
 import Checkbox from "@/Components/Checkbox.jsx";
-import ResumePreview from "@/Components/Web/ResumePreview.jsx";
+import ResumePreview from "@/Components/Web/CvJobPreview.jsx";
 
 
-const CvCreate = () => {
+const CvJobPreview = () => {
 
-    const {countries, languages,cv} = usePage().props;
+    const { countries, languages, cv, format } = usePage().props;
 
     const userSelectedLanguages = languages.filter(lang =>
         cv?.languages?.split(',').map(name => name.trim()).includes(lang.name)
     );
 
-    const [nationality, setNationality] = useState(countries.find(item => item.id === cv?.nationality) ?? '');
-    const [gender, setGender] = useState(genders.find(item => item.id == cv?.gender) ?? '');
-    const [religion, setReligion] = useState(religions.find(item => item.id == cv?.religion) ?? '');
-    const [bloodGroup, setBloodGroup] = useState(bloodGroups.find(item => item.id == cv?.blood_group) ?? '');
-    const [maritalStatus, setMaritalStatus] = useState(maritalStatuses.find(item => item.id == cv?.marital_status) ?? '');
-    const [selectedLanguages, setSelectedLanguages] = useState(userSelectedLanguages ?? [])
-    const [resumePreview, setResumePreview] = useState(false)
+    const [nationality, setNationality] = useState();
+    const [gender, setGender] = useState();
+    const [religion, setReligion] = useState();
+    const [bloodGroup, setBloodGroup] = useState();
+    const [maritalStatus, setMaritalStatus] = useState();
+    const [selectedLanguages, setSelectedLanguages] = useState( [])
+    const [resumePreview, setResumePreview] = useState(false);
+    const [englishProficiency, setEnglishProficiency] = useState(null)
+    const [arabicProficiency, setArabicProficiency] = useState(null)
+    const [urduProficiency, setUrduProficiency] = useState(null)
+    const [drivingLicense, setDrivingLicense] = useState(null)
+    const [motherLanguage, setMotherLanguage] = useState(null)
 
     const {data, setData, post, errors, processing, reset} = useForm({
-        name: cv?.name,
-        designation: cv?.designation,
-        phone: cv?.phone,
-        email: cv?.email,
-        website: cv?.website,
+        name: '',
+        designation: '',
+        phone: '',
+        email: '',
+        website: '',
         avatar: '',
-        nationality: cv?.nationality,
-        gender: cv?.gender,
-        date_of_birth: cv?.date_of_birth,
-        religion: cv?.religion,
-        blood_group: cv?.blood_group,
-        marital_status: cv?.marital_status,
-        passport_no: cv?.passport_no,
-        passport_expiry: cv?.passport_expiry,
-        visa_status: cv?.visa_status,
-        visa_expiry: cv?.visa_expiry,
-        computer_skill: cv?.computer_skill,
-        personal_skills: cv?.personal_skills,
-        interests: cv?.interests,
-        languages: userSelectedLanguages ?? [],
-        summary: cv?.summary,
+        nationality: '',
+        gender: '',
+        date_of_birth: '',
+        religion: '',
+        blood_group: '',
+        marital_status: '',
+        passport_no: '',
+        passport_expiry: '',
+        visa_status: '',
+        visa_expiry: '',
+        computer_skill: '',
+        cv_type: format,
+        languages: [],
+        summary: '',
         current_state: "",
         current_city: "",
         current_area: "",
         permanent_district: "",
         permanent_thana: "",
         permanent_village: "",
-        job_experiences: cv?.experiences?.length > 0 ? cv.experiences : [
+        driving_license:"",
+        driving_license_issue_date: "",
+        driving_license_expire_date: "",
+        english_proficiency: "",
+        urdu_proficiency: "",
+        arabic_proficiency: "",
+        mother_language: "",
+        job_experiences: [
             {
                 position: "",
                 start_date: "",
@@ -74,7 +87,7 @@ const CvCreate = () => {
                 description: "",
             }
         ],
-        educations: cv?.educations?.length ? cv.educations :  [
+        educations: [
             {
                 qualification: "",
                 institute: "",
@@ -84,7 +97,7 @@ const CvCreate = () => {
                 result: "",
             }
         ],
-        references: cv?.references?.length ? cv.references : [
+        references: [
             {
                 name: "",
                 company: "",
@@ -263,7 +276,7 @@ const CvCreate = () => {
                                         error={errors.avatar}
 
                                     >
-                                        {cv?.avatar ? (<img src={cv.avatar} className="w-auto m-auto h-full p-2 text-center" alt="Uploaded file"/>) :
+                                       
                                             <div className="flex flex-col items-center text-center">
                                                 <div className="flex items-center justify-center">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64"
@@ -276,7 +289,7 @@ const CvCreate = () => {
                                                 </div>
                                                 <p className="mt-2 text-sm">Passport Size Pic</p>
                                             </div>
-                                        }
+                                        
                                     </FileUpload>
 
                                 </div>
@@ -724,7 +737,7 @@ const CvCreate = () => {
                                 defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
                             />
 
-                            <div>
+                            {/* <div>
                                 <p className="mt-2 mb-1 text-sm border-[#848585]">
                                     Personal Skills (Add Multiple Item separate by comma)
                                 </p>
@@ -749,9 +762,114 @@ const CvCreate = () => {
                                     placeholder="Ex: Swaiming,Travikibg,Reading"
                                     defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
                                 />
+                            </div> */}
+
+
+                        </div>
+
+                        {/* Driving License */}
+                        <div className="grid grid-cols-12 gap-3 mb-4">
+                            <div className="col-span-3">
+                                <p className="p-[7px] border-2 border-[#848585]">Driving License</p>
+
                             </div>
+                            <div className="col-span-3">
+                                <Select
+                                    placeholder="Select"
+                                    items={drivingLicenses}
+                                    selected={drivingLicense}
+                                    setSelected={setDrivingLicense}
+                                    handleValueChange={(value) => setData('driving_license', value.id)}
+                                    error={errors.driving_license}
+                                    defaultClasses="border-2 border-[#848585] border-l-4 focus:border-[#848585]"
+                                />
+                            </div>
+                            <div className="col-span-3">
+                                <TextInput
+                                    type="date"
+                                    placeholder="Issue Date"
+                                    value={data.driving_license_issue_date}
+                                    onChange={(e) => setData('driving_license_issue_date', e.target.value)}
+                                    error={errors.driving_license_issue_date}
+                                    defaultClasses="border-2 border-[#848585] border-l-4 focus:border-[#848585]"
+                                />
+                            </div>
+                            <div className="col-span-3">
+                                <TextInput
+                                    type="date"
+                                    placeholder="Expire Date"
+                                    value={data.driving_license_expire_date}
+                                    onChange={(e) => setData('driving_license_expire_date', e.target.value)}
+                                    error={errors.driving_license_expire_date}
+                                    id="driving_license_expire_date"
+                                    defaultClasses="border-2 border-[#848585] border-l-4 focus:border-[#848585]"
+                                />
+                            </div>
+                        </div>
 
+                         {/* Language Proficiency */}
+                        <div className="grid grid-cols-12 gap-3 mb-4">
+                            <div className="col-span-3">
+                                <p className="p-[7px] border-2 border-[#848585]">English</p>
 
+                            </div>
+                            <div className="col-span-3">
+                                <Select
+                                    placeholder="Good | Fair | Poor"
+                                    items={languageProficiency}
+                                    selected={englishProficiency}
+                                    setSelected={setEnglishProficiency}
+                                    handleValueChange={(value) => setData('english_proficiency', value.id)}
+                                    error={errors.english_proficiency}
+                                    defaultClasses="border-2 border-[#848585] border-l-4 focus:border-[#848585]"
+                                />
+                            </div>
+                            <div className="col-span-3">
+                                <p className="p-[7px] border-2 border-[#848585]">Urdu | Hindi</p>
+                            </div>
+                            <div className="col-span-3">
+                                <Select
+                                    placeholder="Good | Fair | Poor"
+                                    items={languageProficiency}
+                                    selected={urduProficiency}
+                                    setSelected={setUrduProficiency}
+                                    handleValueChange={(value) => setData('urdu_proficiency', value.id)}
+                                    error={errors.urdu_proficiency}
+                                    defaultClasses="border-2 border-[#848585] border-l-4 focus:border-[#848585]"
+                                />
+                            </div>
+                        </div>
+
+                        <div className="grid grid-cols-12 gap-3 mb-4">
+                            <div className="col-span-3">
+
+                                <p className="p-[7px] border-2 border-[#848585]">Arabic</p>
+                            </div>
+                            <div className="col-span-3">
+                                <Select
+                                    placeholder="Good | Fair | Poor"
+                                    items={languageProficiency}
+                                    selected={arabicProficiency}
+                                    setSelected={setArabicProficiency}
+                                    handleValueChange={(value) => setData('arabic_proficiency', value.id)}
+                                    error={errors.arabic_proficiency}
+                                    defaultClasses="border-2 border-[#848585] border-l-4 focus:border-[#848585]"
+                                />
+                            </div>
+                            <div className="col-span-3">
+                                <p className="p-[7px] border-2 border-[#848585]">Mother Language</p>
+                            </div>
+                            <div className="col-span-3">
+                                <Select
+                                    placeholder="Select Language"
+                                    items={languages}
+                                    selected={motherLanguage}
+                                    setSelected={setMotherLanguage}
+                                    handleValueChange={(value) => setData('mother_language', value.id)}
+                                    error={errors.mother_language}
+                                    defaultClasses="border-2 border-[#848585] border-l-4 focus:border-[#848585]"
+                                />
+                            </div>
                         </div>
 
                         {/* Job Experience */}
@@ -962,9 +1080,9 @@ const CvCreate = () => {
                 </div>
             </div>
 
-            <ResumePreview show={resumePreview} setShow={setResumePreview}  cvData={data} oldAvatar={cv?.avatar} confirmSubmit={confirmSubmit}/>
+            <ResumePreview show={resumePreview} setShow={setResumePreview} cvData={data} countries={countries} languages={languages} oldAvatar={cv?.avatar} confirmSubmit={confirmSubmit}/>
         </WebLayout>
     );
 };
 
-export default CvCreate;
+export default CvJobPreview;

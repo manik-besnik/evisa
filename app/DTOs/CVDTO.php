@@ -44,7 +44,14 @@ class CVDTO
     /** Education Details */
     public array|string|null $languages = [];
     public string|null $computerSkill;
-
+    
+    public string|null $drivinglicense;
+    public string|null $drivinglicenseissuedate;
+    public string|null $drivinglicenseexpiredate;
+    public string|null $englishproficiency;
+    public string|null $urduproficiency;
+    public string|null $arabicproficiency;
+    public string|null $motherlanguage;
 
     /** Job Experiences */
 
@@ -78,7 +85,7 @@ class CVDTO
             'passport_expiry' => ['nullable', 'string', 'min:1', 'max:200'],
             'visa_status' => ['nullable', 'string', 'min:2', 'max:200'],
             'visa_expiry' => ['nullable', 'string', 'min:2', 'max:200'],
-            'personal_skills' => ['required', 'string', 'min:2', 'max:200'],
+            'personal_skills' => ['nullable', 'string', 'min:2', 'max:200'],
             'interests' => ['nullable', 'string', 'min:2', 'max:200'],
             'current_state' => ['nullable', 'string', 'min:2', 'max:200'],
             'cv_type' => ['nullable', 'string', 'min:2', 'max:200'],
@@ -88,6 +95,13 @@ class CVDTO
             'permanent_thana' => ['nullable', 'string', 'min:2', 'max:200'],
             'permanent_village' => ['nullable', 'string', 'min:2', 'max:200'],
             'summary' => ['nullable', 'string', 'max:500'],
+            'driving_license' => ['nullable', 'string', 'max:500'],
+            'driving_license_issue_date' => ['nullable', 'string', 'max:500'],
+            'driving_license_expire_date' => ['nullable', 'string', 'max:500'],
+            'english_proficiency' => ['nullable', 'string', 'max:500'],
+            'urdu_proficiency' => ['nullable', 'string', 'max:500'],
+            'arabic_proficiency' => ['nullable', 'string', 'max:500'],
+            'mother_language' => ['nullable', 'string', 'max:500'],
 
             /** Education Details */
             'educations' => ['required', 'array'],
@@ -148,6 +162,14 @@ class CVDTO
         $instance->references = $request->input('references');
         $instance->computerSkill = $request->input('computer_skill');
         $instance->jobExperiences = $request->input('job_experiences');
+
+        $instance->drivinglicense = $request->input('driving_license');
+        $instance->drivinglicenseissuedate = $request->input('driving_license_issue_date');
+        $instance->drivinglicenseexpiredate = $request->input('driving_license_expire_date');
+        $instance->englishproficiency = $request->input('english_proficiency');
+        $instance->urduproficiency = $request->input('urdu_proficiency');
+        $instance->arabicproficiency = $request->input('arabic_proficiency');
+        $instance->motherlanguage = $request->input('mother_language');
         // dd($instance);
         return $instance;
     }
