@@ -72,23 +72,29 @@ class CvCreateController extends Controller
     }
 
 
-    public function download()
+    public function download($id)
     {
         $type = request()->input('type');
-
-        $cv = UserCv::query()->with(['country'])->where('user_id', auth()->id())->firstOrFail();
+        $cv = UserCv::query()->with(['country', 'language'])->where('id', $id)->firstOrFail();
 
         // dd($cv);
-        if ($type === '1') {
+        if ($type === 'resumeFormat') {
             $pdf = DomPDF::loadView('pdfs.single-column-cv', compact('cv'));
 
             $pdf->setPaper('a4', );
 
-            return $pdf->download("cv" . $cv->name . ".pdf");
+            return $pdf->stream("cv" . $cv->name . ".pdf");
+        }else if ($type === 'cvFormat') {
+            $pdf = DomPDF::loadView('pdfs.two-column-cv', compact('cv'));
+
+            $pdf->setPaper('a4', );
+
+           $pdf = DomPDF::loadView('pdfs.test', compact('cv'));
+            return $pdf->stream("cv" . $cv->name . ".pdf");
         }
 
 
-        $pdf = DomPDF::loadView('pdfs.test', compact('cv'));
+        $pdf = DomPDF::loadView('pdfs.job-cv', compact('cv'));
 
         $pdf->setPaper('a4', );
 

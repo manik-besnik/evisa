@@ -22,40 +22,40 @@ import ResumePreview from "@/Components/Web/ResumePreview.jsx";
 
 const CvCreate = () => {
 
-    const {countries, languages,cv} = usePage().props;
+    const { countries, languages, cv, format } = usePage().props;
 
     const userSelectedLanguages = languages.filter(lang =>
         cv?.languages?.split(',').map(name => name.trim()).includes(lang.name)
     );
 
-    const [nationality, setNationality] = useState(countries.find(item => item.id === cv?.nationality) ?? '');
-    const [gender, setGender] = useState(genders.find(item => item.id == cv?.gender) ?? '');
-    const [religion, setReligion] = useState(religions.find(item => item.id == cv?.religion) ?? '');
-    const [bloodGroup, setBloodGroup] = useState(bloodGroups.find(item => item.id == cv?.blood_group) ?? '');
-    const [maritalStatus, setMaritalStatus] = useState(maritalStatuses.find(item => item.id == cv?.marital_status) ?? '');
-    const [selectedLanguages, setSelectedLanguages] = useState(userSelectedLanguages ?? [])
+    const [nationality, setNationality] = useState( '');
+    const [gender, setGender] = useState( '');
+    const [religion, setReligion] = useState('');
+    const [bloodGroup, setBloodGroup] = useState('');
+    const [maritalStatus, setMaritalStatus] = useState( '');
+    const [selectedLanguages, setSelectedLanguages] = useState( [])
     const [resumePreview, setResumePreview] = useState(false)
 
     const {data, setData, post, errors, processing, reset} = useForm({
-        name: cv?.name,
-        designation: cv?.designation,
-        phone: cv?.phone,
-        email: cv?.email,
-        website: cv?.website,
+        name: '',
+        designation: '',
+        phone: '',
+        website: '',
         avatar: '',
-        nationality: cv?.nationality,
-        gender: cv?.gender,
-        date_of_birth: cv?.date_of_birth,
-        religion: cv?.religion,
-        blood_group: cv?.blood_group,
-        marital_status: cv?.marital_status,
+        nationality: '',
+        gender: '',
+        date_of_birth: '',
+        religion: '',
+        blood_group: '',
+        marital_status: '',
+        cv_type: format,
         
         
-        personal_skills: cv?.personal_skills,
-        interests: cv?.interests,
-        languages: userSelectedLanguages ?? [],
-        summary: cv?.summary,
-        job_experiences: cv?.experiences?.length > 0 ? cv.experiences : [
+        personal_skills: '',
+        interests: '',
+        languages: [],
+        summary: '',
+        job_experiences:  [
             {
                 position: "",
                 start_date: "",
@@ -65,7 +65,7 @@ const CvCreate = () => {
                 description: "",
             }
         ],
-        educations: cv?.educations?.length ? cv.educations :  [
+        educations:  [
             {
                 qualification: "",
                 institute: "",
@@ -75,7 +75,7 @@ const CvCreate = () => {
                 result: "",
             }
         ],
-        references: cv?.references?.length ? cv.references : [
+        references: [
             {
                 name: "",
                 company: "",
@@ -239,7 +239,7 @@ const CvCreate = () => {
                             <div className="md:w-1/3">
                                 <div className="flex items-center mb-6">
                                     <div className="bg-red-600 text-white text-center py-3 px-6 text-2xl font-bold">
-                                        <span className="bg-gray-400">CV CREATE</span>
+                                        <span className="bg-gray-400">RESUME CREATE</span>
                                     </div>
                                 </div>
 
@@ -254,7 +254,7 @@ const CvCreate = () => {
                                         error={errors.avatar}
 
                                     >
-                                        {cv?.avatar ? (<img src={cv.avatar} className="w-auto m-auto h-full p-2 text-center" alt="Uploaded file"/>) :
+                                       
                                             <div className="flex flex-col items-center text-center">
                                                 <div className="flex items-center justify-center">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64"
@@ -267,7 +267,7 @@ const CvCreate = () => {
                                                 </div>
                                                 <p className="mt-2 text-sm">Passport Size Pic</p>
                                             </div>
-                                        }
+                                        
                                     </FileUpload>
 
                                 </div>
@@ -795,7 +795,7 @@ const CvCreate = () => {
                 </div>
             </div>
 
-            <ResumePreview show={resumePreview} setShow={setResumePreview}  cvData={data} oldAvatar={cv?.avatar} confirmSubmit={confirmSubmit}/>
+            <ResumePreview show={resumePreview} setShow={setResumePreview} cvData={data} oldAvatar={cv?.avatar || ''} confirmSubmit={confirmSubmit}/>
         </WebLayout>
     );
 };

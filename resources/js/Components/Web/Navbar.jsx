@@ -90,10 +90,10 @@ const Navbar = () => {
             </div>
             <div className="flex items-center pr-32">
                 <Link href={route('update.news')}
-                    className="nav-item bg-[#647882] group hover:bg-warning text-white pl-10 pr-8 py-3">
+                    className={`nav-item group hover:bg-warning pl-10 pr-8 py-3 ${route().current('update.news') ? 'bg-warning' : 'bg-[#647882]'}`}>
                     <div className="navbar-triangle-left"></div>
                     <span className="text-sm font-medium">Update News</span>
-                    <div className="navbar-triangle z-[10] border-[#647882]"></div>
+                    <div className={`navbar-triangle z-10 ${route().current('update.news') ? 'border-warning' : 'border-[#647882]'}`}></div>
                 </Link>
                 {isLoggedIn && (
                     <>

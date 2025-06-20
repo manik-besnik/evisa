@@ -7,9 +7,7 @@ import {
     maritalStatuses,
     bloodGroups,
     educationQualifications,
-    religions,
-    languageProficiency,
-    drivingLicenses,
+    religions
 } from "@/Components/Constant/index.js";
 import {useState, useEffect} from "react";
 import {Head, useForm, usePage} from "@inertiajs/react";
@@ -19,10 +17,10 @@ import FileUpload from "@/Components/Web/FileUpload.jsx";
 import {FaPlus} from "react-icons/fa6";
 import MultiSelect from "@/Components/Web/MultiSelect.jsx";
 import Checkbox from "@/Components/Checkbox.jsx";
-import ResumePreview from "@/Components/Web/CvJobPreview.jsx";
+import ResumePreview from "@/Components/Web/ResumePreview.jsx";
 
 
-const CvJobPreview = () => {
+const CvCreate = () => {
 
     const { countries, languages, cv, format } = usePage().props;
 
@@ -30,54 +28,35 @@ const CvJobPreview = () => {
         cv?.languages?.split(',').map(name => name.trim()).includes(lang.name)
     );
 
-    const [nationality, setNationality] = useState();
-    const [gender, setGender] = useState();
-    const [religion, setReligion] = useState();
-    const [bloodGroup, setBloodGroup] = useState();
-    const [maritalStatus, setMaritalStatus] = useState();
-    const [selectedLanguages, setSelectedLanguages] = useState( [])
-    const [resumePreview, setResumePreview] = useState(false);
-    const [englishProficiency, setEnglishProficiency] = useState(null)
-    const [arabicProficiency, setArabicProficiency] = useState(null)
-    const [urduProficiency, setUrduProficiency] = useState(null)
-    const [drivingLicense, setDrivingLicense] = useState(null)
-    const [motherLanguage, setMotherLanguage] = useState(null)
+    const [nationality, setNationality] = useState(countries.find(item => item.id === cv?.nationality) ?? '');
+    const [gender, setGender] = useState(genders.find(item => item.id == cv?.gender) ?? '');
+    const [religion, setReligion] = useState(religions.find(item => item.id == cv?.religion) ?? '');
+    const [bloodGroup, setBloodGroup] = useState(bloodGroups.find(item => item.id == cv?.blood_group) ?? '');
+    const [maritalStatus, setMaritalStatus] = useState(maritalStatuses.find(item => item.id == cv?.marital_status) ?? '');
+    const [selectedLanguages, setSelectedLanguages] = useState(userSelectedLanguages ?? [])
+    const [resumePreview, setResumePreview] = useState(false)
 
     const {data, setData, post, errors, processing, reset} = useForm({
-        name: '',
-        designation: '',
-        phone: '',
-        email: '',
-        website: '',
+        name: cv?.name,
+        designation: cv?.designation,
+        phone: cv?.phone,
+        email: cv?.email,
+        website: cv?.website,
         avatar: '',
-        nationality: '',
-        gender: '',
-        date_of_birth: '',
-        religion: '',
-        blood_group: '',
-        marital_status: '',
-        passport_no: '',
-        passport_expiry: '',
-        visa_status: '',
-        visa_expiry: '',
-        computer_skill: '',
+        nationality: cv?.nationality,
+        gender: cv?.gender,
+        date_of_birth: cv?.date_of_birth,
+        religion: cv?.religion,
+        blood_group: cv?.blood_group,
+        marital_status: cv?.marital_status,
         cv_type: format,
-        languages: [],
-        summary: '',
-        current_state: "",
-        current_city: "",
-        current_area: "",
-        permanent_district: "",
-        permanent_thana: "",
-        permanent_village: "",
-        driving_license:"",
-        driving_license_issue_date: "",
-        driving_license_expire_date: "",
-        english_proficiency: "",
-        urdu_proficiency: "",
-        arabic_proficiency: "",
-        mother_language: "",
-        job_experiences: [
+        
+        
+        personal_skills: cv?.personal_skills,
+        interests: cv?.interests,
+        languages: userSelectedLanguages ?? [],
+        summary: cv?.summary,
+        job_experiences: cv?.experiences?.length > 0 ? cv.experiences : [
             {
                 position: "",
                 start_date: "",
@@ -87,7 +66,7 @@ const CvJobPreview = () => {
                 description: "",
             }
         ],
-        educations: [
+        educations: cv?.educations?.length ? cv.educations :  [
             {
                 qualification: "",
                 institute: "",
@@ -97,7 +76,7 @@ const CvJobPreview = () => {
                 result: "",
             }
         ],
-        references: [
+        references: cv?.references?.length ? cv.references : [
             {
                 name: "",
                 company: "",
@@ -261,7 +240,7 @@ const CvJobPreview = () => {
                             <div className="md:w-1/3">
                                 <div className="flex items-center mb-6">
                                     <div className="bg-red-600 text-white text-center py-3 px-6 text-2xl font-bold">
-                                        <span className="bg-gray-400">CV CREATE</span>
+                                        <span className="bg-gray-400">RESUME CREATE</span>
                                     </div>
                                 </div>
 
@@ -276,7 +255,7 @@ const CvJobPreview = () => {
                                         error={errors.avatar}
 
                                     >
-                                       
+                                        {cv?.avatar ? (<img src={cv.avatar} className="w-auto m-auto h-full p-2 text-center" alt="Uploaded file"/>) :
                                             <div className="flex flex-col items-center text-center">
                                                 <div className="flex items-center justify-center">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64"
@@ -289,7 +268,7 @@ const CvJobPreview = () => {
                                                 </div>
                                                 <p className="mt-2 text-sm">Passport Size Pic</p>
                                             </div>
-                                        
+                                        }
                                     </FileUpload>
 
                                 </div>
@@ -466,151 +445,7 @@ const CvJobPreview = () => {
                             </div>
                         </div>
                         <hr className="border-2 border-[#848585] mb-3"/>
-                        {/* Address */}
-                        <div className="mb-6">
-                            <div className="grid grid-cols-1 gap-3">
-                                <div className="flex items-center">
-                                    <label className="w-[12.90rem] font-bold">Current Address</label>
-                                    <span className="mx-2">:</span>
-                                    <div className="flex-1 grid grid-cols-3 gap-2">
-                                        <TextInput
-                                            placeholder="State"
-                                            value={data.current_state}
-                                            onChange={(e) => setData('current_state', e.target.value)}
-                                            error={errors.current_state}
-                                            required={true}
-                                            defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
-                                        />
-                                        <TextInput
-                                            placeholder="City"
-                                            value={data.current_city}
-                                            onChange={(e) => setData('current_city', e.target.value)}
-                                            error={errors.current_city}
-                                            required={true}
-                                            defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
-                                        />
-                                        <TextInput
-                                            placeholder="Area"
-                                            value={data.current_area}
-                                            onChange={(e) => setData('current_area', e.target.value)}
-                                            error={errors.current_area}
-                                            required={true}
-                                            defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
-                                        />
-                                    </div>
-                                </div>
-
-                                <div className="flex items-center">
-                                    <label className="w-[12.90rem] font-bold">Permanent Address</label>
-                                    <span className="mx-2">:</span>
-                                    <div className="flex-1 grid grid-cols-3 gap-2">
-                                        <TextInput
-                                            placeholder="District"
-                                            value={data.permanent_district}
-                                            onChange={(e) => setData('permanent_district', e.target.value)}
-                                            error={errors.permanent_district}
-                                            required={true}
-                                            defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
-                                        />
-                                        <TextInput
-                                            placeholder="Thana"
-                                            value={data.permanent_thana}
-                                            onChange={(e) => setData('permanent_thana', e.target.value)}
-                                            error={errors.permanent_thana}
-                                            required={true}
-                                            defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
-                                        />
-                                        <TextInput
-                                            placeholder="Village"
-                                            value={data.permanent_village}
-                                            onChange={(e) => setData('permanent_village', e.target.value)}
-                                            error={errors.permanent_village}
-                                            required={true}
-                                            id="permanent_village"
-                                            defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <hr className="border-2 border-[#848585] mb-3" />
-                        {/* Passport & Visa Information */}
-                        <div className="mb-6">
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div className="space-y-3">
-                                    <div className="flex items-center">
-                                        <label className="w-1/3 font-bold">Passport No</label>
-                                        <span className="mx-2">:</span>
-                                        <div className="flex-1">
-                                            <TextInput
-                                                placeholder="Typing Here"
-                                                value={data.passport_no}
-                                                onChange={(e) => setData('passport_no', e.target.value)}
-                                                error={errors.passport_no}
-                                                required={true}
-                                                id="passport_no"
-                                                defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
-                                            />
-                                        </div>
-                                    </div>
-
-                                    <div className="flex items-center">
-                                        <label className="w-1/3 font-bold">Expiry Date</label>
-                                        <span className="mx-2">:</span>
-                                        <div className="flex-1">
-                                            <TextInput
-                                                type="date"
-                                                placeholder="Typing Here"
-                                                value={data.passport_expiry}
-                                                onChange={(e) => setData('passport_expiry', e.target.value)}
-                                                error={errors.passport_expiry}
-                                                required={true}
-                                                id="passport_expiry"
-                                                defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
-                                            />
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                                <div className="space-y-3">
-
-                                    <div className="flex items-center">
-                                        <label className="w-1/3 font-bold">Issue Date</label>
-                                        <span className="mx-2">:</span>
-                                        <div className="flex-1">
-                                            <TextInput
-                                                type="date"
-                                                placeholder="Typing Here"
-                                                value={data.visa_expiry}
-                                                onChange={(e) => setData('visa_expiry', e.target.value)}
-                                                error={errors.visa_expiry}
-                                                id="visa_expiry"
-                                                defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className="flex items-center">
-                                        <label className="w-1/3 font-bold">Visa Status</label>
-                                        <span className="mx-2">:</span>
-                                        <div className="flex-1">
-                                            <TextInput
-                                                placeholder="Typing Here"
-                                                value={data.visa_status}
-                                                onChange={(e) => setData('visa_status', e.target.value)}
-                                                error={errors.visa_status}
-                                                required={true}
-                                                id="visa_status"
-                                                defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
-                                            />
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-
-
+                       
                         {/* Education - Enhanced Section */}
                         <div className="mb-6">
                             <h2 className="text-xl font-bold mb-3 border-l-4 border-red-600 pl-2">EDUCATION DETAILS</h2>
@@ -710,21 +545,7 @@ const CvJobPreview = () => {
                             ))}
 
                             {/* Computer Skills */}
-                            <div className="grid grid-cols-12 gap-3 mb-4">
-                                <div className="col-span-3">
-                                    <p className="p-[7px] border-2 border-[#848585]">Computer Skills</p>
-                                </div>
-                                <div className="col-span-9">
-                                    <TextInput
-                                        placeholder="Typing Here"
-                                        value={data.computer_skill}
-                                        onChange={(e) => setData('computer_skill', e.target.value)}
-                                        error={errors.computer_skill}
-                                        id="computer_skill"
-                                        defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
-                                    />
-                                </div>
-                            </div>
+                          
 
                             <MultiSelect
                                 items={languages}
@@ -737,7 +558,7 @@ const CvJobPreview = () => {
                                 defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
                             />
 
-                            {/* <div>
+                            <div>
                                 <p className="mt-2 mb-1 text-sm border-[#848585]">
                                     Personal Skills (Add Multiple Item separate by comma)
                                 </p>
@@ -762,114 +583,9 @@ const CvJobPreview = () => {
                                     placeholder="Ex: Swaiming,Travikibg,Reading"
                                     defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
                                 />
-                            </div> */}
+                            </div>
 
 
-                        </div>
-
-                        {/* Driving License */}
-                        <div className="grid grid-cols-12 gap-3 mb-4">
-                            <div className="col-span-3">
-                                <p className="p-[7px] border-2 border-[#848585]">Driving License</p>
-
-                            </div>
-                            <div className="col-span-3">
-                                <Select
-                                    placeholder="Select"
-                                    items={drivingLicenses}
-                                    selected={drivingLicense}
-                                    setSelected={setDrivingLicense}
-                                    handleValueChange={(value) => setData('driving_license', value.id)}
-                                    error={errors.driving_license}
-                                    defaultClasses="border-2 border-[#848585] border-l-4 focus:border-[#848585]"
-                                />
-                            </div>
-                            <div className="col-span-3">
-                                <TextInput
-                                    type="date"
-                                    placeholder="Issue Date"
-                                    value={data.driving_license_issue_date}
-                                    onChange={(e) => setData('driving_license_issue_date', e.target.value)}
-                                    error={errors.driving_license_issue_date}
-                                    defaultClasses="border-2 border-[#848585] border-l-4 focus:border-[#848585]"
-                                />
-                            </div>
-                            <div className="col-span-3">
-                                <TextInput
-                                    type="date"
-                                    placeholder="Expire Date"
-                                    value={data.driving_license_expire_date}
-                                    onChange={(e) => setData('driving_license_expire_date', e.target.value)}
-                                    error={errors.driving_license_expire_date}
-                                    id="driving_license_expire_date"
-                                    defaultClasses="border-2 border-[#848585] border-l-4 focus:border-[#848585]"
-                                />
-                            </div>
-                        </div>
-
-                         {/* Language Proficiency */}
-                        <div className="grid grid-cols-12 gap-3 mb-4">
-                            <div className="col-span-3">
-                                <p className="p-[7px] border-2 border-[#848585]">English</p>
-
-                            </div>
-                            <div className="col-span-3">
-                                <Select
-                                    placeholder="Good | Fair | Poor"
-                                    items={languageProficiency}
-                                    selected={englishProficiency}
-                                    setSelected={setEnglishProficiency}
-                                    handleValueChange={(value) => setData('english_proficiency', value.id)}
-                                    error={errors.english_proficiency}
-                                    defaultClasses="border-2 border-[#848585] border-l-4 focus:border-[#848585]"
-                                />
-                            </div>
-                            <div className="col-span-3">
-                                <p className="p-[7px] border-2 border-[#848585]">Urdu | Hindi</p>
-                            </div>
-                            <div className="col-span-3">
-                                <Select
-                                    placeholder="Good | Fair | Poor"
-                                    items={languageProficiency}
-                                    selected={urduProficiency}
-                                    setSelected={setUrduProficiency}
-                                    handleValueChange={(value) => setData('urdu_proficiency', value.id)}
-                                    error={errors.urdu_proficiency}
-                                    defaultClasses="border-2 border-[#848585] border-l-4 focus:border-[#848585]"
-                                />
-                            </div>
-                        </div>
-
-                        <div className="grid grid-cols-12 gap-3 mb-4">
-                            <div className="col-span-3">
-
-                                <p className="p-[7px] border-2 border-[#848585]">Arabic</p>
-                            </div>
-                            <div className="col-span-3">
-                                <Select
-                                    placeholder="Good | Fair | Poor"
-                                    items={languageProficiency}
-                                    selected={arabicProficiency}
-                                    setSelected={setArabicProficiency}
-                                    handleValueChange={(value) => setData('arabic_proficiency', value.id)}
-                                    error={errors.arabic_proficiency}
-                                    defaultClasses="border-2 border-[#848585] border-l-4 focus:border-[#848585]"
-                                />
-                            </div>
-                            <div className="col-span-3">
-                                <p className="p-[7px] border-2 border-[#848585]">Mother Language</p>
-                            </div>
-                            <div className="col-span-3">
-                                <Select
-                                    placeholder="Select Language"
-                                    items={languages}
-                                    selected={motherLanguage}
-                                    setSelected={setMotherLanguage}
-                                    handleValueChange={(value) => setData('mother_language', value.id)}
-                                    error={errors.mother_language}
-                                    defaultClasses="border-2 border-[#848585] border-l-4 focus:border-[#848585]"
-                                />
-                            </div>
                         </div>
 
                         {/* Job Experience */}
@@ -1080,9 +796,9 @@ const CvJobPreview = () => {
                 </div>
             </div>
 
-            <ResumePreview show={resumePreview} setShow={setResumePreview} cvData={data} countries={countries} languages={languages} oldAvatar={cv?.avatar} confirmSubmit={confirmSubmit}/>
+            <ResumePreview show={resumePreview} setShow={setResumePreview} cvData={data} oldAvatar={cv?.avatar || ''} confirmSubmit={confirmSubmit}/>
         </WebLayout>
     );
 };
 
-export default CvJobPreview;
+export default CvCreate;

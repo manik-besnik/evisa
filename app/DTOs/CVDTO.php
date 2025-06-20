@@ -23,11 +23,12 @@ class CVDTO
     public string|null $interests;
     public string $bloodGroup;
     public string|int $maritalStatus;
-    public string $passportNo;
-    public string $passportExpiry;
+    public string|null $passportNo;
+    public string|null $passportExpiry;
+    public string|null $cvTtype;
 
-    public string $visaStatus;
-    public string $visaExpiry;
+    public string|null $visaStatus;
+    public string|null $visaExpiry;
     public string|null $currentState;
     public string|null $currentCity;
     public string|null $currentArea;
@@ -42,8 +43,15 @@ class CVDTO
 
     /** Education Details */
     public array|string|null $languages = [];
-    public string $computerSkill;
-
+    public string|null $computerSkill;
+    
+    public string|null $drivinglicense;
+    public string|null $drivinglicenseissuedate;
+    public string|null $drivinglicenseexpiredate;
+    public string|null $englishproficiency;
+    public string|null $urduproficiency;
+    public string|null $arabicproficiency;
+    public string|null $motherlanguage;
 
     /** Job Experiences */
 
@@ -73,24 +81,32 @@ class CVDTO
             'religion' => ['required', 'min:1', 'max:200'],
             'blood_group' => ['required', 'string', 'min:2', 'max:200'],
             'marital_status' => ['required', 'min:1', 'max:200'],
-            'passport_no' => ['required', 'string', 'min:2', 'max:200'],
-            'passport_expiry' => ['required', 'string', 'min:1', 'max:200'],
-            'visa_status' => ['required', 'string', 'min:2', 'max:200'],
-            'visa_expiry' => ['required', 'string', 'min:2', 'max:200'],
-            'personal_skills' => ['required', 'string', 'min:2', 'max:200'],
+            'passport_no' => ['nullable', 'string', 'min:2', 'max:200'],
+            'passport_expiry' => ['nullable', 'string', 'min:1', 'max:200'],
+            'visa_status' => ['nullable', 'string', 'min:2', 'max:200'],
+            'visa_expiry' => ['nullable', 'string', 'min:2', 'max:200'],
+            'personal_skills' => ['nullable', 'string', 'min:2', 'max:200'],
             'interests' => ['nullable', 'string', 'min:2', 'max:200'],
             'current_state' => ['nullable', 'string', 'min:2', 'max:200'],
+            'cv_type' => ['nullable', 'string', 'min:2', 'max:200'],
             'current_city' => ['nullable', 'string', 'min:2', 'max:200'],
             'current_area' => ['nullable', 'string', 'min:2', 'max:200'],
             'permanent_district' => ['nullable', 'string', 'min:2', 'max:200'],
             'permanent_thana' => ['nullable', 'string', 'min:2', 'max:200'],
             'permanent_village' => ['nullable', 'string', 'min:2', 'max:200'],
             'summary' => ['nullable', 'string', 'max:500'],
+            'driving_license' => ['nullable', 'string', 'max:500'],
+            'driving_license_issue_date' => ['nullable', 'string', 'max:500'],
+            'driving_license_expire_date' => ['nullable', 'string', 'max:500'],
+            'english_proficiency' => ['nullable', 'string', 'max:500'],
+            'urdu_proficiency' => ['nullable', 'string', 'max:500'],
+            'arabic_proficiency' => ['nullable', 'string', 'max:500'],
+            'mother_language' => ['nullable', 'string', 'max:500'],
 
             /** Education Details */
             'educations' => ['required', 'array'],
             'educations.*.institute' => ['required', 'string', 'min:2', 'max:200'],
-            'computer_skill' => ['required', 'string', 'min:2', 'max:200'],
+            'computer_skill' => ['nullable', 'string', 'min:2', 'max:200'],
             'languages' => ['required', 'array', 'min:2', 'max:200'],
             'languages.*.name' => ['required', 'string', 'min:2', 'max:200'],
             'references' => ['required', 'array'],
@@ -119,6 +135,7 @@ class CVDTO
         $instance->phone = $request->input('phone');
         $instance->email = $request->input('email');
         $instance->gender = $request->input('gender');
+        $instance->cvTtype = $request->input('cv_type');
         $instance->religion = $request->input('religion');
         $instance->bloodGroup = $request->input('blood_group');
         $instance->maritalStatus = $request->input('marital_status');
@@ -146,6 +163,14 @@ class CVDTO
         $instance->computerSkill = $request->input('computer_skill');
         $instance->jobExperiences = $request->input('job_experiences');
 
+        $instance->drivinglicense = $request->input('driving_license');
+        $instance->drivinglicenseissuedate = $request->input('driving_license_issue_date');
+        $instance->drivinglicenseexpiredate = $request->input('driving_license_expire_date');
+        $instance->englishproficiency = $request->input('english_proficiency');
+        $instance->urduproficiency = $request->input('urdu_proficiency');
+        $instance->arabicproficiency = $request->input('arabic_proficiency');
+        $instance->motherlanguage = $request->input('mother_language');
+        // dd($instance);
         return $instance;
     }
 }
