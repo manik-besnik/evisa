@@ -97,7 +97,7 @@ const Navbar = () => {
                 </Link>
                 {isLoggedIn && (
                     <>
-                <Link href="#"
+                <Link href={route('visa-apply.index')}
                     className="nav-item bg-[#748A96] group hover:bg-warning text-white pl-10 pr-8 py-2">
                     <IoPersonCircleOutline size={28} />
                     <div className="navbar-triangle z-[10] border-[#748A96]"></div>

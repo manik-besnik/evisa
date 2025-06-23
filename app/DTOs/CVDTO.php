@@ -21,7 +21,7 @@ class CVDTO
     public string|null $dateOfBirth;
     public string|null $website;
     public string|null $interests;
-    public string $bloodGroup;
+    public string|null $bloodGroup;
     public string|int $maritalStatus;
     public string|null $passportNo;
     public string|null $passportExpiry;
@@ -74,12 +74,12 @@ class CVDTO
             'gender' => ['required', 'min:1', 'max:250'],
             'name' => ['required', 'string', 'min:2', 'max:250'],
             'phone' => ['required', 'string', 'min:9', 'max:20'],
-            'designation' => ['required', 'string', 'min:2', 'max:20'],
-            'date_of_birth' => ['required', 'string', 'min:2', 'max:20'],
+            'designation' => ['nullable', 'string', 'min:2', 'max:20'],
+            'date_of_birth' => ['nullable', 'string', 'min:2', 'max:20'],
             'email' => ['required', 'string', 'min:2', 'max:200'],
             'website' => ['nullable', 'string', 'min:2', 'max:200'],
             'religion' => ['required', 'min:1', 'max:200'],
-            'blood_group' => ['required', 'string', 'min:2', 'max:200'],
+            'blood_group' => ['nullable', 'string', 'min:2', 'max:200'],
             'marital_status' => ['required', 'min:1', 'max:200'],
             'passport_no' => ['nullable', 'string', 'min:2', 'max:200'],
             'passport_expiry' => ['nullable', 'string', 'min:1', 'max:200'],
@@ -105,18 +105,18 @@ class CVDTO
 
             /** Education Details */
             'educations' => ['required', 'array'],
-            'educations.*.institute' => ['required', 'string', 'min:2', 'max:200'],
-            'computer_skill' => ['nullable', 'string', 'min:2', 'max:200'],
-            'languages' => ['required', 'array', 'min:2', 'max:200'],
-            'languages.*.name' => ['required', 'string', 'min:2', 'max:200'],
-            'references' => ['required', 'array'],
-            'references.*.name' => ['required', 'string', 'min:2', 'max:200'],
+            'educations' => ['nullable', 'string', 'max:200'],
+            'computer_skill' => ['nullable', 'string','max:200'],
+            'languages' => ['nullable', 'array','max:200'],
+            'languagese' => ['nullable', 'string','max:200'],
+            'references' => ['nullable', 'array'],
+            'references' => ['nullable', 'string', 'max:200'],
 
             /** Job Experience */
-            'job_experiences' => ['required', 'array'],
-            'job_experiences.*.position' => ['required', 'string'],
-            'job_experiences.*.start_date' => ['required', 'string'],
-            'job_experiences.*.company' => ['required', 'string'],
+            'job_experiences' => ['nullable', 'array'],
+            'job_experiences' => ['nullable', 'string'],
+            'job_experiences' => ['nullable', 'string'],
+            'job_experiences' => ['nullable', 'string'],
 
         ], [
             'visa_expiry.required' => "Passport issue date is required",
