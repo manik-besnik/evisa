@@ -55,6 +55,7 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('report', [VisaApplyController::class, 'index'])->name('visa-apply.index');
+    Route::get('report-profile', [VisaApplyController::class, 'index'])->name('visa-apply-cv.index');
     Route::get('visa-apply/{id}/details', [VisaApplyController::class, 'show'])->name('visa-apply.show');
 
     Route::get('visa-apply', [VisaApplyController::class, 'create'])->name('visa-apply.create');

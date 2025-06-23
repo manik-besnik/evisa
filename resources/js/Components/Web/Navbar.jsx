@@ -97,10 +97,10 @@ const Navbar = () => {
                 </Link>
                 {isLoggedIn && (
                     <>
-                <Link href={route('visa-apply.index')}
-                    className="nav-item bg-[#748A96] group hover:bg-warning text-white pl-10 pr-8 py-2">
+                <Link href={route('visa-apply-cv.index')}
+                            className={`nav-item hover:bg-warning group pl-10 pr-8 py-3 ${route().current('visa-apply-cv.index') ? 'bg-warning' : 'bg-[#748A96]'}`}>
                     <IoPersonCircleOutline size={28} />
-                    <div className="navbar-triangle z-[10] border-[#748A96]"></div>
+                            <div className={`navbar-triangle z-10 ${route().current('visa-apply-cv.index') ? 'border-warning' : 'border-[#748A96]'}`}></div>
                 </Link>
                 <Link href={route('cv.index')}
                             className={`nav-item group hover:bg-warning pl-10 pr-8 py-3 ${route().current('cv.index') || route().current('cv.create') ? 'bg-warning' : 'bg-[#647882]'}`}>
