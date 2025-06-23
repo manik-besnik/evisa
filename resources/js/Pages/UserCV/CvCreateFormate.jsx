@@ -6,7 +6,7 @@ import {router} from "@inertiajs/react";
 
 const CvCreateFormate = () => {
     const handleCreateCV = (formatType) => {
-    //    router.visit(`/cv-create/${formatType}`)
+       router.visit(`/cv-create/${formatType}`)
     };
 
     return (

@@ -17,47 +17,48 @@ import FileUpload from "@/Components/Web/FileUpload.jsx";
 import {FaPlus} from "react-icons/fa6";
 import MultiSelect from "@/Components/Web/MultiSelect.jsx";
 import Checkbox from "@/Components/Checkbox.jsx";
-import ResumePreview from "@/Components/Web/CvPreview.jsx";
+import ResumePreview from "@/Components/Web/ResumePreview.jsx";
 
 
 const CvCreate = () => {
 
-    const { countries, languages, cv, format } = usePage().props;
+    const {countries, languages,cv} = usePage().props;
 
+    const userSelectedLanguages = languages.filter(lang =>
+        cv?.languages?.split(',').map(name => name.trim()).includes(lang.name)
+    );
 
-
-    const [nationality, setNationality] = useState();
-    const [gender, setGender] = useState();
-    const [religion, setReligion] = useState();
-    const [bloodGroup, setBloodGroup] = useState();
-    const [maritalStatus, setMaritalStatus] = useState();
-    const [selectedLanguages, setSelectedLanguages] = useState([])
+    const [nationality, setNationality] = useState(countries.find(item => item.id === cv?.nationality) ?? '');
+    const [gender, setGender] = useState(genders.find(item => item.id == cv?.gender) ?? '');
+    const [religion, setReligion] = useState(religions.find(item => item.id == cv?.religion) ?? '');
+    const [bloodGroup, setBloodGroup] = useState(bloodGroups.find(item => item.id == cv?.blood_group) ?? '');
+    const [maritalStatus, setMaritalStatus] = useState(maritalStatuses.find(item => item.id == cv?.marital_status) ?? '');
+    const [selectedLanguages, setSelectedLanguages] = useState(userSelectedLanguages ?? [])
     const [resumePreview, setResumePreview] = useState(false)
 
     const {data, setData, post, errors, processing, reset} = useForm({
-        name: '',
-        designation: '',
-        phone: '',
-        email: '',
-        website: '',
+        name: cv?.name,
+        designation: cv?.designation,
+        phone: cv?.phone,
+        email: cv?.email,
+        website: cv?.website,
         avatar: '',
-        nationality: '',
-        gender: '',
-        date_of_birth: '',
-        religion: '',
-        blood_group: '',
-        marital_status: '',
-        passport_no: '',
-        passport_expiry: '',
-        visa_status: '',
-        visa_expiry: '',
-        computer_skill: '',
-        personal_skills: '',
-        interests: '',
-        languages: [],
-        summary: '',
-        cv_type: format,
-        job_experiences: [
+        nationality: cv?.nationality,
+        gender: cv?.gender,
+        date_of_birth: cv?.date_of_birth,
+        religion: cv?.religion,
+        blood_group: cv?.blood_group,
+        marital_status: cv?.marital_status,
+        passport_no: cv?.passport_no,
+        passport_expiry: cv?.passport_expiry,
+        visa_status: cv?.visa_status,
+        visa_expiry: cv?.visa_expiry,
+        computer_skill: cv?.computer_skill,
+        personal_skills: cv?.personal_skills,
+        interests: cv?.interests,
+        languages: userSelectedLanguages ?? [],
+        summary: cv?.summary,
+        job_experiences: cv?.experiences?.length > 0 ? cv.experiences : [
             {
                 position: "",
                 start_date: "",
@@ -67,7 +68,7 @@ const CvCreate = () => {
                 description: "",
             }
         ],
-        educations: [
+        educations: cv?.educations?.length ? cv.educations :  [
             {
                 qualification: "",
                 institute: "",
@@ -77,7 +78,7 @@ const CvCreate = () => {
                 result: "",
             }
         ],
-        references: [
+        references: cv?.references?.length ? cv.references : [
             {
                 name: "",
                 company: "",
@@ -241,7 +242,7 @@ const CvCreate = () => {
                             <div className="md:w-1/3">
                                 <div className="flex items-center mb-6">
                                     <div className="bg-red-600 text-white text-center py-3 px-6 text-2xl font-bold">
-                                        <span className="bg-gray-400">Curriculum Vitae</span>
+                                        <span className="bg-gray-400">CV CREATE</span>
                                     </div>
                                 </div>
 
@@ -256,7 +257,7 @@ const CvCreate = () => {
                                         error={errors.avatar}
 
                                     >
-                                        
+                                        {cv?.avatar ? (<img src={cv.avatar} className="w-auto m-auto h-full p-2 text-center" alt="Uploaded file"/>) :
                                             <div className="flex flex-col items-center text-center">
                                                 <div className="flex items-center justify-center">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64"
@@ -269,7 +270,7 @@ const CvCreate = () => {
                                                 </div>
                                                 <p className="mt-2 text-sm">Passport Size Pic</p>
                                             </div>
-                                        
+                                        }
                                     </FileUpload>
 
                                 </div>
@@ -284,7 +285,7 @@ const CvCreate = () => {
                                         placeholder="Your Name"
                                         id="name"
                                         required={true}
-                                        defaultClasses="border-2 border-[#848585] border-l-red-500 focus:border-[#848585]"
+                                        defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
                                         divClasses="mb-2"
 
                                     />
@@ -295,7 +296,7 @@ const CvCreate = () => {
                                         placeholder="Designation"
                                         id="name"
                                         required={true}
-                                        defaultClasses="border-2 border-[#848585] border-l-red-500 focus:border-[#848585]"
+                                        defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
                                         divClasses="mb-2"
 
                                     />
@@ -306,7 +307,7 @@ const CvCreate = () => {
                                         id="phone"
                                         placeholder="Mobile No. with country Code"
                                         required={true}
-                                        defaultClasses="border-2 border-[#848585] border-l-red-500 focus:border-[#848585]"
+                                        defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
                                         divClasses="mb-2"
                                     />
                                     <TextInput
@@ -317,7 +318,7 @@ const CvCreate = () => {
                                         type="email"
                                         id="email"
                                         required={true}
-                                        defaultClasses="border-2 border-[#848585] border-l-red-500 focus:border-[#848585]"
+                                        defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
                                         divClasses="mb-2"
                                     />
 
@@ -343,7 +344,7 @@ const CvCreate = () => {
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div className="space-y-3">
                                     <div className="flex items-center">
-                                        <label className="w-1/3 font-bold">Nationality <span className='text-red-500'>*</span></label>
+                                        <label className="w-1/3 font-bold">Nationality</label>
                                         <span className="mx-2">:</span>
                                         <div className="flex-1">
                                             <Select
@@ -355,7 +356,7 @@ const CvCreate = () => {
                                                 handleValueChange={(value) => setData('nationality', value.id)}
                                                 error={errors.nationality}
                                                 required={true}
-                                                defaultClasses="border-2 border-[#848585] border-l-red-500 focus:border-[#848585]"
+                                                defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
                                             />
                                         </div>
                                     </div>
@@ -377,7 +378,7 @@ const CvCreate = () => {
                                     </div>
 
                                     <div className="flex items-center">
-                                        <label className="w-1/3 font-bold">Gender <span className='text-red-500'>*</span></label>
+                                        <label className="w-1/3 font-bold">Gender</label>
                                         <span className="mx-2">:</span>
                                         <div className="flex-1">
                                             <Select
@@ -388,7 +389,7 @@ const CvCreate = () => {
                                                 handleValueChange={(value) => setData('gender', value.id)}
                                                 error={errors.gender}
                                                 required={true}
-                                                defaultClasses="border-2 border-[#848585] border-l-red-500 focus:border-[#848585]"
+                                                defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
                                             />
                                         </div>
                                     </div>
@@ -396,7 +397,7 @@ const CvCreate = () => {
 
                                 <div className="space-y-3">
                                     <div className="flex items-center">
-                                        <label className="w-1/3 font-bold">Religion <span className='text-red-500'>*</span></label>
+                                        <label className="w-1/3 font-bold">Religion</label>
                                         <span className="mx-2">:</span>
                                         <div className="flex-1">
                                             <Select
@@ -406,7 +407,7 @@ const CvCreate = () => {
                                                 setSelected={setReligion}
                                                 handleValueChange={(value) => setData('religion', value.id)}
                                                 error={errors.religion}
-                                                defaultClasses="border-2 border-[#848585] border-l-red-500 focus:border-[#848585]"
+                                                defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
                                             />
                                         </div>
                                     </div>
@@ -428,7 +429,7 @@ const CvCreate = () => {
                                     </div>
 
                                     <div className="flex items-center">
-                                        <label className="w-1/3 font-bold">Marital Status <span className='text-red-500'>*</span></label>
+                                        <label className="w-1/3 font-bold">Marital Status</label>
                                         <span className="mx-2">:</span>
                                         <div className="flex-1">
                                             <Select
@@ -438,7 +439,7 @@ const CvCreate = () => {
                                                 setSelected={setMaritalStatus}
                                                 handleValueChange={(value) => setData('marital_status', value.id)}
                                                 error={errors.marital_status}
-                                                defaultClasses="border-2 border-[#848585] border-l-red-500 focus:border-[#848585]"
+                                                defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
                                             />
                                         </div>
                                     </div>
@@ -451,7 +452,7 @@ const CvCreate = () => {
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div className="space-y-3">
                                     <div className="flex items-center">
-                                        <label className="w-1/3 font-bold">Passport No <span className='text-red-500'>*</span></label>
+                                        <label className="w-1/3 font-bold">Passport No</label>
                                         <span className="mx-2">:</span>
                                         <div className="flex-1">
                                             <TextInput
@@ -461,13 +462,13 @@ const CvCreate = () => {
                                                 error={errors.passport_no}
                                                 required={true}
                                                 id="passport_no"
-                                                defaultClasses="border-2 border-[#848585] border-l-red-500 focus:border-[#848585]"
+                                                defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
                                             />
                                         </div>
                                     </div>
 
                                     <div className="flex items-center">
-                                        <label className="w-1/3 font-bold">Expiry Date <span className='text-red-500'>*</span></label>
+                                        <label className="w-1/3 font-bold">Expiry Date</label>
                                         <span className="mx-2">:</span>
                                         <div className="flex-1">
                                             <TextInput
@@ -478,7 +479,7 @@ const CvCreate = () => {
                                                 error={errors.passport_expiry}
                                                 required={true}
                                                 id="passport_expiry"
-                                                defaultClasses="border-2 border-[#848585] border-l-red-500 focus:border-[#848585]"
+                                                defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
                                             />
                                         </div>
                                     </div>
@@ -488,7 +489,7 @@ const CvCreate = () => {
                                 <div className="space-y-3">
 
                                     <div className="flex items-center">
-                                        <label className="w-1/3 font-bold">Issue Date <span className='text-red-500'>*</span></label>
+                                        <label className="w-1/3 font-bold">Issue Date</label>
                                         <span className="mx-2">:</span>
                                         <div className="flex-1">
                                             <TextInput
@@ -498,7 +499,7 @@ const CvCreate = () => {
                                                 onChange={(e) => setData('visa_expiry', e.target.value)}
                                                 error={errors.visa_expiry}
                                                 id="visa_expiry"
-                                                defaultClasses="border-2 border-[#848585] border-l-red-500 focus:border-[#848585]"
+                                                defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
                                             />
                                         </div>
                                     </div>
@@ -551,8 +552,8 @@ const CvCreate = () => {
                                                 error={errors?.educations ? errors?.educations[i]['institute'] : ""}
                                                 id={`institute-${i}`}
                                                 placeholder="EX: Institute Name"
-                                                label="Institute"
-                                                defaultClasses="border-2 border-[#848585] border-l-4 focus:border-[#848585]"
+                                                label="Institute*"
+                                                defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
                                                 labelClasses="text-text-primary"
                                             />
                                         </div>
@@ -563,8 +564,8 @@ const CvCreate = () => {
                                                 error={errors?.educations ? errors?.educations[i]['result'] : ""}
                                                 id={`result-${i}`}
                                                 placeholder="Result(GPA/CGPA)"
-                                                label="Result"
-                                                defaultClasses="border-2 border-[#848585] border-l-4 focus:border-[#848585]"
+                                                label="Result*"
+                                                defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
                                                 labelClasses="text-text-primary"
                                             />
                                         </div>
@@ -574,9 +575,9 @@ const CvCreate = () => {
                                                 onChange={(e) => updateEducation(i, "start_date", e.target.value)}
                                                 error={errors?.educations ? errors?.educations[i]['start_date'] : ""}
                                                 id={`start-date-${i}`}
-                                                label="Start Date"
+                                                label="Start Date*"
                                                 type="date"
-                                                defaultClasses="border-2 border-[#848585] border-l-4 focus:border-[#848585]"
+                                                defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
                                                 labelClasses="text-text-primary"
                                             />
                                         </div>
@@ -588,7 +589,7 @@ const CvCreate = () => {
                                                 id={`end-date-${i}`}
                                                 label="End Date"
                                                 type="date"
-                                                defaultClasses="border-2 border-[#848585] border-l-4 focus:border-[#848585]"
+                                                defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
                                                 labelClasses="text-text-primary"
                                             />
                                         </div>
@@ -633,7 +634,7 @@ const CvCreate = () => {
                                         onChange={(e) => setData('computer_skill', e.target.value)}
                                         error={errors.computer_skill}
                                         id="computer_skill"
-                                        defaultClasses="border-2 border-[#848585] border-l-4 focus:border-[#848585]"
+                                        defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
                                     />
                                 </div>
                             </div>
@@ -644,9 +645,9 @@ const CvCreate = () => {
                                 setSelected={setSelectedLanguages}
                                 handleValueChange={(value) => setData('languages', value)}
                                 placeholder="Select Languages"
-                                label="Select Language"
+                                label="Select Language*"
                                 error={errors.languages}
-                                defaultClasses="border-2 border-[#848585] border-l-4 focus:border-[#848585]"
+                                defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
                             />
 
                             <div>
@@ -659,7 +660,7 @@ const CvCreate = () => {
                                     error={errors.personal_skills}
                                     id="personal_skills"
                                     placeholder="Ex: Swaiming,Travikibg,Reading"
-                                    defaultClasses="border-2 border-[#848585] border-l-4 focus:border-[#848585]"
+                                    defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
                                 />
                             </div>
                             <div>
@@ -672,7 +673,7 @@ const CvCreate = () => {
                                     error={errors.interests}
                                     id="interests"
                                     placeholder="Ex: Swaiming,Travikibg,Reading"
-                                    defaultClasses="border-2 border-[#848585] border-l-4 focus:border-[#848585]"
+                                    defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
                                 />
                             </div>
 
@@ -700,8 +701,8 @@ const CvCreate = () => {
                                                 error={errors?.[`job_experiences.${i}.position`] || ''}
                                                 id={`position-${i}`}
                                                 placeholder="EX: Software Enginner"
-                                                label="Position"
-                                                defaultClasses="border-2 border-[#848585] border-l-4 focus:border-[#848585]"
+                                                label="Position*"
+                                                defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
                                                 labelClasses="text-text-primary"
                                             />
                                         </div>
@@ -712,8 +713,8 @@ const CvCreate = () => {
                                                 error={errors?.[`job_experiences.${i}.company`] || ''}
                                                 id={`company-${i}`}
                                                 placeholder="Company Name"
-                                                label="Company Name"
-                                                defaultClasses="border-2 border-[#848585] border-l-4 focus:border-[#848585]"
+                                                label="Company Name*"
+                                                defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
                                                 labelClasses="text-text-primary"
                                             />
                                         </div>
@@ -723,9 +724,9 @@ const CvCreate = () => {
                                                 onChange={(e) => updateJobExperience(i, "start_date", e.target.value)}
                                                 error={errors?.[`job_experiences.${i}.start_date`] || ''}
                                                 id={`start-date-${i}`}
-                                                label="Start Date"
+                                                label="Start Date*"
                                                 type="date"
-                                                defaultClasses="border-2 border-[#848585] border-l-4 focus:border-[#848585]"
+                                                defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
                                                 labelClasses="text-text-primary"
                                             />
                                         </div>
@@ -737,7 +738,7 @@ const CvCreate = () => {
                                                 id={`end-date-${i}`}
                                                 label="End Date"
                                                 type="date"
-                                                defaultClasses="border-2 border-[#848585] border-l-4 focus:border-[#848585]"
+                                                defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
                                                 labelClasses="text-text-primary"
                                             />
                                         </div>
@@ -761,7 +762,7 @@ const CvCreate = () => {
                                                 error={errors?.[`job_experiences.${i}.description`] || ''}
                                                 id={`description-${i}`}
                                                 label="Job Description"
-                                                defaultClasses="border-2 border-[#848585] border-l-4 focus:border-[#848585]"
+                                                defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
                                                 labelClasses="text-text-primary"
                                             />
                                         </div>
@@ -786,8 +787,8 @@ const CvCreate = () => {
                                                 error={errors?.[`references.${i}.name`] || ''}
                                                 id={`name-${i}`}
                                                 placeholder="EX: John Doe"
-                                                label="Name"
-                                                defaultClasses="border-2 border-[#848585] border-l-4 focus:border-[#848585]"
+                                                label="Name*"
+                                                defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
                                                 labelClasses="text-text-primary"
                                             />
                                         </div>
@@ -799,7 +800,7 @@ const CvCreate = () => {
                                                 id={`company-${i}`}
                                                 placeholder="EX: CEO"
                                                 label="Company"
-                                                defaultClasses="border-2 border-[#848585] border-l-4 focus:border-[#848585]"
+                                                defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
                                                 labelClasses="text-text-primary"
                                             />
                                         </div>
@@ -811,7 +812,7 @@ const CvCreate = () => {
                                                 id={`designation-${i}`}
                                                 placeholder="EX: CEO"
                                                 label="Designation"
-                                                defaultClasses="border-2 border-[#848585] border-l-4 focus:border-[#848585]"
+                                                defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
                                                 labelClasses="text-text-primary"
                                             />
                                         </div>
@@ -822,7 +823,7 @@ const CvCreate = () => {
                                                 error={errors?.[`references.${i}.phone`] || ''}
                                                 id={`reference-phone-${i}`}
                                                 label="Phone Number"
-                                                defaultClasses="border-2 border-[#848585] border-l-4 focus:border-[#848585]"
+                                                defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
                                                 labelClasses="text-text-primary"
                                             />
                                         </div>
@@ -834,7 +835,7 @@ const CvCreate = () => {
                                                 id={`email-${i}`}
                                                 label="Email Address"
                                                 type="email"
-                                                defaultClasses="border-2 border-[#848585] border-l-4 focus:border-[#848585]"
+                                                defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
                                                 labelClasses="text-text-primary"
                                             />
                                         </div>

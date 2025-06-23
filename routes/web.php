@@ -55,6 +55,7 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('report', [VisaApplyController::class, 'index'])->name('visa-apply.index');
+    Route::get('report-profile', [VisaApplyController::class, 'index'])->name('visa-apply-cv.index');
     Route::get('visa-apply/{id}/details', [VisaApplyController::class, 'show'])->name('visa-apply.show');
 
     Route::get('visa-apply', [VisaApplyController::class, 'create'])->name('visa-apply.create');
@@ -82,7 +83,7 @@ Route::middleware(['auth', 'user'])->group(function () {
 
     //cvCreate
     Route::get('cvs', [CvCreateController::class, 'index'])->name('cv.index');
-    Route::get('cv/download', [CvCreateController::class, 'download'])->name('cv.download');
+    Route::get('cv/download/{id}', [CvCreateController::class, 'download'])->name('cv.download');
     Route::get('cv-create/{formate}', [CvCreateController::class, 'create'])->name('cv.create');
     Route::post('cv-create', [CvCreateController::class, 'store'])->name('cv.store');
     Route::get('update-news', [BlogController::class, 'create'])->name('update.news');

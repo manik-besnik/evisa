@@ -14,8 +14,7 @@ class StoreAction
     public function execute(CVDTO $cvDTO): RedirectResponse
     {
         // Get the existing CV or initialize a new one
-        // $cv = UserCV::query()->where('user_id', auth()->id())->first() ?? new UserCV();
-        $cv = new UserCV();
+        $cv = UserCV::query()->where('user_id', auth()->id())->first() ?? new UserCV();
 
         DB::beginTransaction();
 
@@ -29,7 +28,7 @@ class StoreAction
             }
 
             // Handle languages (implode array to string)
-            $languages = $cvDTO->languages ? implode(', ', array_column($cvDTO->languages, 'name')) : null;
+            $languages = $cvDTO->languages? implode(', ', array_column($cvDTO->languages, 'name')): null;
 
             // Update CV data
             $cv->user_id = auth()->id();
@@ -64,14 +63,6 @@ class StoreAction
             $cv->designation = $cvDTO->designation;
             $cv->date_of_birth = $cvDTO->dateOfBirth;
             $cv->languages = $languages;
-
-            $cv->driving_license =  $cvDTO->drivinglicense;
-            $cv->driving_license_issue_date =  $cvDTO->drivinglicenseissuedate;
-            $cv->driving_license_expire_date =  $cvDTO->drivinglicenseexpiredate;
-            $cv->english_proficiency =  $cvDTO->englishproficiency;
-            $cv->urdu_proficiency =  $cvDTO->urduproficiency;
-            $cv->arabic_proficiency =  $cvDTO->arabicproficiency;
-            $cv->mother_language =  $cvDTO->motherlanguage;
 
             $cv->save();
             DB::commit();
