@@ -24,14 +24,16 @@ class DownloadAction
 
         $pdf->setPaper('a4', 'portrait');
     
-    // Set margins to 0 using the modern approach
-    $pdf->getDomPDF()->getOptions()->set([
-        'margin_top' => 0,
-        'margin_right' => 0,
-        'margin_bottom' => 0,
-        'margin_left' => 0
-    ]);
+        // Set margins to 0 using the modern approach
+        $pdf->getDomPDF()->getOptions()->set([
+            'margin_top' => 0,
+            'margin_right' => 0,
+            'margin_bottom' => 0,
+            'margin_left' => 0
+        ]);
+
         return $pdf->stream("visa_apply_" . $visa_apply->code . ".pdf");
+
         // return $pdf->download("visa_apply_" . $visa_apply->code . ".pdf");
     }
 }
