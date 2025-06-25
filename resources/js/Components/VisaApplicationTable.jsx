@@ -124,7 +124,7 @@ const VisaApplicationTable = ({
                             }
                             {isAdmin && <button type="button"
                                     className='btn-primary'
-                                    onClick={() => handleDownloadSinglePdf(application)}>
+                                    onClick={() => handleDownloadSinglePdf(application)} target="_blank">
                                 <FiDownload />
                             </button> }
                         </td>

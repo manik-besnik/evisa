@@ -7,6 +7,7 @@ use App\Models\VisaApply;
 use App\Supports\UserPermission;
 use Inertia\Inertia;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Barryvdh\DomPDF\Facade\Pdf as DomPDF;
 
 class ShowAction
 {
@@ -38,14 +39,24 @@ class ShowAction
     private function downloadPdf(VisaApply $visaApply): \Illuminate\Http\Response
     {
         // Generate PDF
-        $pdf = PDF::loadView('pdfs.visa-applications', [
-            'visaApply' => $visaApply
+        $pdf = DomPDF::loadView('pdfs.visa-apply', [
+            'visa_apply' => $visaApply
         ]);
 
-        // Generate filename
+
+
+        $pdf->setPaper('a4', 'portrait');
+
+        // Set margins to 0 using the modern approach
+        $pdf->getDomPDF()->getOptions()->set([
+            'margin_top' => 0,
+            'margin_right' => 0,
+            'margin_bottom' => 0,
+            'margin_left' => 0
+        ]);
         $filename = 'visa-application-' . $visaApply->id . '-' . now()->format('Y-m-d-H-i-s') . '.pdf';
 
-        // Download the PDF
-        return $pdf->download($filename);
+        return $pdf->stream("visa_apply_" . $filename . ".pdf");
     }
+    
 }
