@@ -1,13 +1,13 @@
-import {assetUrl} from "@/Components/Constant/index.js";
+import { assetUrl } from "@/Components/Constant/index.js";
 import TextInput from "@/Components/TextInput.jsx";
 import Switch from "@/Components/Web/Switch.jsx";
-import {Link, useForm} from "@inertiajs/react";
+import { Link, useForm } from "@inertiajs/react";
 import PrimaryBtn from "@/Components/Web/PrimaryBtn.jsx";
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import SocialLogin from "@/Components/Web/SocialLogin.jsx";
 
-const UserLogin = ({isRegister = false}) => {
-    const {data, setData, post, errors} = useForm({
+const UserLogin = ({ isRegister = false }) => {
+    const { data, setData, post, errors } = useForm({
         email: '',
         password: '',
         remember: false,
@@ -21,15 +21,15 @@ const UserLogin = ({isRegister = false}) => {
         const checkAutofill = () => {
             const passwordInput = document.getElementById('password');
             const emailInput = document.getElementById('username');
-            
+
             // Check if inputs are autofilled
             if (passwordInput && emailInput) {
-                const isPasswordAutofilled = passwordInput.matches(':-webkit-autofill') || 
-                                           passwordInput.value !== '' || 
-                                           passwordInput.getAttribute('autocomplete') === 'current-password';
-                
-                const isEmailAutofilled = emailInput.matches(':-webkit-autofill') || 
-                                        emailInput.value !== '';
+                const isPasswordAutofilled = passwordInput.matches(':-webkit-autofill') ||
+                    passwordInput.value !== '' ||
+                    passwordInput.getAttribute('autocomplete') === 'current-password';
+
+                const isEmailAutofilled = emailInput.matches(':-webkit-autofill') ||
+                    emailInput.value !== '';
 
                 // If both email and password are autofilled, check remember me
                 if (isPasswordAutofilled && isEmailAutofilled && !data.remember) {
@@ -40,24 +40,24 @@ const UserLogin = ({isRegister = false}) => {
 
         // Check immediately
         checkAutofill();
-        
+
         // Also check after a short delay to catch slower autofill
         const timeoutId = setTimeout(checkAutofill, 500);
-        
+
         // Check when inputs change (for autofill detection)
         const passwordInput = document.getElementById('password');
         const emailInput = document.getElementById('username');
-        
+
         if (passwordInput && emailInput) {
             const handleInputChange = () => {
                 if (passwordInput.value !== '' && emailInput.value !== '' && !data.remember) {
                     setData('remember', true);
                 }
             };
-            
+
             passwordInput.addEventListener('input', handleInputChange);
             emailInput.addEventListener('input', handleInputChange);
-            
+
             // Cleanup
             return () => {
                 clearTimeout(timeoutId);
@@ -65,7 +65,7 @@ const UserLogin = ({isRegister = false}) => {
                 emailInput.removeEventListener('input', handleInputChange);
             };
         }
-        
+
         return () => clearTimeout(timeoutId);
     }, [data.remember, setData]);
 
@@ -97,12 +97,19 @@ const UserLogin = ({isRegister = false}) => {
     }
 
     return (
-        <div className="bg-black/70 w-1/2 pr-5 pt-3 pb-8" style={{minHeight: "calc(100vh - 140px)"}}>
-            <img className="w-full h-auto" src={`${assetUrl + 'images/sign-in.png'}`} alt=""/>
+        <div className="bg-black/70 w-full md:w-1/2 pr-2 md:pr-5 pt-3 pb-8 min-h-screen md:min-h-0 md:custom-height">
+            <style jsx>{`
+                @media (min-width: 768px) {
+                    .md\\:custom-height {
+                        min-height: calc(100vh - 140px);
+                    }
+                }
+            `}</style>
+            <img className="w-full h-auto" src={`${assetUrl + 'images/sign-in.png'}`} alt="" />
 
-            <SocialLogin/>
+            <SocialLogin />
 
-            <form onSubmit={handleSubmit} className="pl-5">
+            <form onSubmit={handleSubmit} className="pl-2 md:pl-5">
                 <TextInput
                     label="Username*"
                     id="username"
@@ -112,7 +119,7 @@ const UserLogin = ({isRegister = false}) => {
                     onChange={(e) => setData('email', e.target.value)}
                     error={errors.email}
                 />
-                
+
                 {/* Password field with eye icon */}
                 <div className="my-2 relative">
                     <TextInput
@@ -131,18 +138,18 @@ const UserLogin = ({isRegister = false}) => {
                         type="button"
                         onClick={togglePasswordVisibility}
                         className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 focus:outline-none"
-                        style={{marginTop: '13px'}} // Adjust based on your TextInput component styling
+                        style={{ marginTop: '13px' }} // Adjust based on your TextInput component styling
                     >
                         {showPassword ? (
                             // Beautiful eye slash icon (password visible - click to hide)
                             <svg className="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
-                                <path d="M2 2L22 22" stroke="currentColor" strokeWidth="2" strokeLinecap="round" fill="none"/>
+                                <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                                <path d="M2 2L22 22" stroke="currentColor" strokeWidth="2" strokeLinecap="round" fill="none" />
                             </svg>
                         ) : (
                             // Beautiful eye icon (password hidden - click to show)
                             <svg className="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+                                <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
                             </svg>
                         )}
                     </button>
@@ -150,7 +157,7 @@ const UserLogin = ({isRegister = false}) => {
 
                 <div className="flex items-center justify-between mt-4">
                     <Link href={route('home')} className="block text-sm font-semibold text-white">Forget
-                    Password</Link>
+                        Password</Link>
                     <Switch
                         classes="mr-1"
                         value={data.remember}
@@ -158,11 +165,11 @@ const UserLogin = ({isRegister = false}) => {
                     />
                 </div>
 
-                
 
-                {isRegister && <PrimaryBtn classes="mt-3" type="submit" text="Next" onClick={handleSubmit}/>}
 
-                {!isRegister && <PrimaryBtn classes="mt-3" type="submit" text="Login" onClick={handleSubmit}/>}
+                {isRegister && <PrimaryBtn classes="mt-3" type="submit" text="Next" onClick={handleSubmit} />}
+
+                {!isRegister && <PrimaryBtn classes="mt-3" type="submit" text="Login" onClick={handleSubmit} />}
                 {!isRegister && <p className="mt-3 text-white">Don't Have an Account ? <a href={route('register')} className="text-yellow-600 font-bold">REGISTER NOW</a></p>}
             </form>
         </div>
