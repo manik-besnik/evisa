@@ -52,16 +52,16 @@ const Search = () => {
     return (
         <>
             <div className="flex gap-x-1 items-center">
-                <div className="bg-primary p-2.5 text-2xl text-white">
+                <div className="bg-primary p-2.5 text-2xl text-white hidden md:block">
                     <a href="https://m.me/339940379192870" target="_blank">
                         <img className="w-7 h-7" src={`${assetUrl}images/livechat.svg`} alt="Live chat"/>
                     </a>
 
                 </div>
-                <div className="bg-primary p-2.5 text-2xl text-white">
+                <div className="bg-primary p-2.5 text-2xl text-white hidden md:block">
                     <img className="w-7 h-7" src={`${assetUrl}images/whatsapp.svg`} alt="Live chat"/>
                 </div>
-                <div className="bg-primary p-2.5 text-2xl text-white">
+                <div className="bg-primary p-2.5 text-2xl text-white hidden md:block">
                     <img className="w-7 h-7" src={`${assetUrl}images/call.svg`} alt="Live chat"/>
                 </div>
                 <div className="flex gap-x-2 bg-[#767A7C] p-1.5">

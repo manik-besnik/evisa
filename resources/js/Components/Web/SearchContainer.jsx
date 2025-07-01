@@ -3,16 +3,15 @@ import Search from "@/Components/Web/Search.jsx";
 
 const SearchContainer = () => {
     return (
-        <div className="flex flex-col justify-center">
+        <div className="hidden md:flex flex-col justify-center">
             <div className="relative">
-                <img src={`${assetUrl + 'images/hero1.png'}`} alt="hero"/>
+                <img src={`${assetUrl + 'images/hero1.png'}`} alt="hero" />
                 <div className="absolute w-full flex justify-center bottom-0 left-0">
                     <div className="flex justify-center mx-auto">
-                        <Search/>
+                        <Search />
                     </div>
                 </div>
             </div>
-
         </div>
     )
 }

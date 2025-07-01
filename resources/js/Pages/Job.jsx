@@ -1,5 +1,5 @@
 import WebLayout from "@/Layouts/WebLayout.jsx";
-import {Head, Link} from "@inertiajs/react";
+import { Head, Link } from "@inertiajs/react";
 import SearchContainer from "@/Components/Web/SearchContainer.jsx";
 import {
     assetUrl,
@@ -8,11 +8,15 @@ import {
 const Job = () => {
     return (
         <WebLayout showBgImage={true} showServiceImage={true}>
-            <Head title="Other | Dubai E-Visa"/>
+            <Head title="Other | Dubai E-Visa" />
             <div className="container">
-                <div className="grid grid-cols-2 gap-x-20">
-                    <SearchContainer/>
-                    <div className="w-1/2 h-[90vh]">
+                <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-x-20">
+                    {/* SearchContainer - Hidden on mobile, shown on large screens */}
+                   
+                        <SearchContainer />
+
+                    {/* Main content - Full width on mobile, half width on large screens */}
+                    <div className="w-full lg:w-1/2 h-[90vh]">
                         <div className="bg-[#6b7377c8] h-full relative p-5">
                             {/* Job Directory Card 1 */}
                             <Link href={route('job.directory')} className="block mb-8">

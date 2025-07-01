@@ -37,11 +37,13 @@ export default function WebLayout({children, showServiceImage = true, showBgImag
                 }}>
                 {children}
 
-                {showServiceImage && <div className="container relative">
-                    <div className="absolute bottom-5 right-0">
-                        <ServiceImage/>
+                {showServiceImage && (
+                    <div className="container relative">
+                        <div className="absolute bottom-5 right-0 hidden md:block">
+                            <ServiceImage />
+                        </div>
                     </div>
-                </div>}
+                )}
 
                 
             </div>

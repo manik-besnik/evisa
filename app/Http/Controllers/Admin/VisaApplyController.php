@@ -114,7 +114,6 @@ class VisaApplyController extends Controller
 
     public function downloadPdf(Request $request)
     {
-        dd($request);
         $applicationIds = $request->input('ids', []);
 
         // Validate that IDs are provided
