@@ -214,14 +214,14 @@ const JobDemand = () => {
                 confirmSubmit={confirmSubmit}
             />
             <div style={{ backgroundImage: `url(${assetUrl}images/job-bg.png)` }}>
-                <div className="container mx-auto px-4 py-6">
+                <div className="container mx-auto lg:px-4 lg:py-6">
                     <div className="bg-[#ffffffd0] border-4 border-[#848585] p-6">
 
                         <form onSubmit={handleSubmit} className="mb-6">
                             {/* Apply From and Photo Upload */}
                             <div className="flex flex-col md:flex-row gap-6 mb-6 ">
                                 <div className="md:w-1/3">
-                                    <div className="mb-6">
+                                    <div className="mb-6 hidden md:block">
                                         <img src={`${assetUrl}images/job-apply-form.png`} alt="Live chat" />
                                     </div>
 
@@ -477,10 +477,12 @@ const JobDemand = () => {
                             {/* Address */}
                             <div className="mb-6">
                                 <div className="grid grid-cols-1 gap-3">
-                                    <div className="flex items-center">
-                                        <label className="w-[12.90rem] font-bold">Current Address <span className="text-red-600">*</span></label>
-                                        <span className="mx-2">:</span>
-                                        <div className="flex-1 grid grid-cols-3 gap-2">
+                                    <div className="flex flex-col md:flex-row md:items-center">
+                                        <label className="w-full md:w-[12.90rem] font-bold mb-2 md:mb-0">
+                                            Current Address <span className="text-red-600">*</span>
+                                        </label>
+                                        <span className="hidden md:block mx-2">:</span>
+                                        <div className="w-full md:flex-1 grid grid-cols-1 md:grid-cols-3 gap-2">
                                             <TextInput
                                                 placeholder="State"
                                                 value={data.current_state}
@@ -508,10 +510,10 @@ const JobDemand = () => {
                                         </div>
                                     </div>
 
-                                    <div className="flex items-center">
+                                    <div className="flex flex-col md:flex-row md:items-center">
                                         <label className="w-[12.90rem] font-bold">Permanent Address </label>
-                                        <span className="mx-2">:</span>
-                                        <div className="flex-1 grid grid-cols-3 gap-2">
+                                        <span className="hidden md:block mx-2">:</span>
+                                        <div className="w-full md:flex-1 grid grid-cols-1 md:grid-cols-3 gap-2">
                                             <TextInput
                                                 placeholder="District"
                                                 value={data.permanent_district}
@@ -656,8 +658,8 @@ const JobDemand = () => {
                                 <h2 className="text-xl font-bold mb-3 border-l-4 border-red-600 pl-2">EDUCATION DETAILS <span className="text-red-600">*</span></h2>
 
                                 {/* Original education fields */}
-                                <div className="grid grid-cols-12 gap-3 mb-4">
-                                    <div className="col-span-3">
+                                <div className="grid grid-cols-1 gap-3 mb-4 md:grid-cols-12 md:gap-3">
+                                    <div className="md:col-span-3">
                                         <TextInput
                                             placeholder="Current Certificate"
                                             value={data.exam_name}
@@ -667,7 +669,7 @@ const JobDemand = () => {
                                             defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
                                         />
                                     </div>
-                                    <div className="col-span-2">
+                                    <div className="md:col-span-2">
                                         <TextInput
                                             placeholder="Passing Year"
                                             value={data.passing_year}
@@ -677,7 +679,7 @@ const JobDemand = () => {
                                             defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
                                         />
                                     </div>
-                                    <div className="col-span-7">
+                                    <div className="md:col-span-7">
                                         <TextInput
                                             placeholder="Board | University"
                                             value={data.institute}
@@ -690,11 +692,11 @@ const JobDemand = () => {
                                 </div>
 
                                 {/* Computer Skills */}
-                                <div className="grid grid-cols-12 gap-3 mb-4">
-                                    <div className="col-span-3">
+                                <div className="grid grid-cols-1 gap-3 mb-4 md:grid-cols-12 md:gap-3">
+                                    <div className="md:col-span-3">
                                         <p className="p-[7px] border-2 border-[#848585]">Computer Skills</p>
                                     </div>
-                                    <div className="col-span-9">
+                                    <div className="md:col-span-9">
                                         <TextInput
                                             placeholder="Typing Here"
                                             value={data.computer_skill}
@@ -707,12 +709,11 @@ const JobDemand = () => {
                                 </div>
 
                                 {/* Driving License */}
-                                <div className="grid grid-cols-12 gap-3 mb-4">
-                                    <div className="col-span-3">
+                                <div className="grid grid-cols-1 gap-3 mb-4 sm:grid-cols-2 md:grid-cols-12">
+                                    <div className="md:col-span-3">
                                         <p className="p-[7px] border-2 border-[#848585]">Driving License</p>
-
                                     </div>
-                                    <div className="col-span-3">
+                                    <div className="sm:col-span-1 md:col-span-3">
                                         <Select
                                             placeholder="Select"
                                             items={drivingLicenses}
@@ -723,7 +724,7 @@ const JobDemand = () => {
                                             defaultClasses="border-2 border-[#848585] border-l-4 focus:border-[#848585]"
                                         />
                                     </div>
-                                    <div className="col-span-3">
+                                    <div className="sm:col-span-1 md:col-span-3">
                                         <TextInput
                                             type="date"
                                             placeholder="Issue Date"
@@ -733,7 +734,7 @@ const JobDemand = () => {
                                             defaultClasses="border-2 border-[#848585] border-l-4 focus:border-[#848585]"
                                         />
                                     </div>
-                                    <div className="col-span-3">
+                                    <div className="sm:col-span-1 md:col-span-3">
                                         <TextInput
                                             type="date"
                                             placeholder="Expire Date"
@@ -746,13 +747,13 @@ const JobDemand = () => {
                                     </div>
                                 </div>
 
-                                {/* Language Proficiency */}
-                                <div className="grid grid-cols-12 gap-3 mb-4">
-                                    <div className="col-span-3">
-                                        <p className="p-[7px] border-2 border-[#848585]">English</p>
 
+                                {/* Language Proficiency */}
+                                <div className="grid grid-cols-1 gap-3 mb-4 sm:grid-cols-2 md:grid-cols-12">
+                                    <div className="md:col-span-3">
+                                        <p className="p-[7px] border-2 border-[#848585]">English</p>
                                     </div>
-                                    <div className="col-span-3">
+                                    <div className="sm:col-span-1 md:col-span-3">
                                         <Select
                                             placeholder="Good | Fair | Poor"
                                             items={languageProficiency}
@@ -763,10 +764,10 @@ const JobDemand = () => {
                                             defaultClasses="border-2 border-[#848585] border-l-4 focus:border-[#848585]"
                                         />
                                     </div>
-                                    <div className="col-span-3">
+                                    <div className="md:col-span-3">
                                         <p className="p-[7px] border-2 border-[#848585]">Urdu | Hindi</p>
                                     </div>
-                                    <div className="col-span-3">
+                                    <div className="sm:col-span-1 md:col-span-3">
                                         <Select
                                             placeholder="Good | Fair | Poor"
                                             items={languageProficiency}
@@ -779,12 +780,11 @@ const JobDemand = () => {
                                     </div>
                                 </div>
 
-                                <div className="grid grid-cols-12 gap-3 mb-4">
-                                    <div className="col-span-3">
-
+                                <div className="grid grid-cols-1 gap-3 mb-4 sm:grid-cols-2 md:grid-cols-12">
+                                    <div className="md:col-span-3">
                                         <p className="p-[7px] border-2 border-[#848585]">Arabic</p>
                                     </div>
-                                    <div className="col-span-3">
+                                    <div className="sm:col-span-1 md:col-span-3">
                                         <Select
                                             placeholder="Good | Fair | Poor"
                                             items={languageProficiency}
@@ -795,10 +795,10 @@ const JobDemand = () => {
                                             defaultClasses="border-2 border-[#848585] border-l-4 focus:border-[#848585]"
                                         />
                                     </div>
-                                    <div className="col-span-3">
+                                    <div className="md:col-span-3">
                                         <p className="p-[7px] border-2 border-[#848585]">Mother Language</p>
                                     </div>
-                                    <div className="col-span-3">
+                                    <div className="sm:col-span-1 md:col-span-3">
                                         <Select
                                             placeholder="Select Language"
                                             items={languages}

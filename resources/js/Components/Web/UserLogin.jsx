@@ -7,6 +7,7 @@ import React, { useState, useEffect } from "react";
 import SocialLogin from "@/Components/Web/SocialLogin.jsx";
 
 const UserLogin = ({ isRegister = false }) => {
+    
     const { data, setData, post, errors } = useForm({
         email: '',
         password: '',
