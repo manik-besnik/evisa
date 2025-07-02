@@ -3,7 +3,7 @@ import Search from "@/Components/Web/Search.jsx";
 
 const JobDirectory = () => {
     return (
-        <div className="flex  justify-center">
+        <div className="flex  justify-center hidden md:block">
             <div className="relative h-full">
                 <img src={`${assetUrl + 'images/jobdirectry.png'}`} alt="hero"/>
                 <div className="absolute w-full flex justify-center bottom-[20%] left-0">

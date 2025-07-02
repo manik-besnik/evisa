@@ -814,89 +814,80 @@ const JobDemand = () => {
 
                             {/* Job Experience */}
                             <div className="mb-6">
-                                <div className="flex justify-between items-center mt-8">
-                                    <h2 className="text-xl font-bold mb-3 border-l-4 border-red-600 pl-2">JOB
-                                        EXPERIENCE</h2>
-                                    <button type="button" onClick={addNewExperience}
-                                        className="flex items-center gap-x-2 py-2 px-4 text-white bg-yellow-500 hover:bg-primary font-medium shadow-[2px_2px_4px_rgba(0,0,0,0.3)] text-xs hover:shadow-[2px_2px_6px_rgba(0,0,0,0.35)] transition-shadow duration-200">
+                                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mt-8 gap-3 sm:gap-0">
+                                    <h2 className="text-xl font-bold border-l-4 border-red-600 pl-2">JOB EXPERIENCE</h2>
+                                    <button
+                                        type="button"
+                                        onClick={addNewExperience}
+                                        className="flex items-center gap-x-2 py-2 px-4 text-white bg-yellow-500 hover:bg-primary font-medium shadow-[2px_2px_4px_rgba(0,0,0,0.3)] text-xs hover:shadow-[2px_2px_6px_rgba(0,0,0,0.35)] transition-shadow duration-200 w-full sm:w-auto justify-center"
+                                    >
                                         <FaPlus className="text-white" /> Add New Experience
                                     </button>
                                 </div>
 
                                 {data.job_experiences.map((item, i) => (
-                                    <div key={i} className="flex items-center gap-3 mb-4">
-                                        <div className="w-1/4">
+                                    <div key={i} className="flex flex-col sm:flex-row items-stretch gap-3 mb-4">
+                                        <div className="w-full sm:w-1/4">
                                             <TextInput
                                                 value={item.position}
                                                 onChange={(e) => updateJobExperience(i, "position", e.target.value)}
                                                 error={errors?.[`job_experiences.${i}.position`] || ''}
                                                 id={`position-${i}`}
-                                                placeholder="EX: Software Enginner"
-                                                label={
-                                                    <>
-                                                        Position 
-                                                    </>
-                                                }
+                                                placeholder="EX: Software Engineer"
+                                                label="Position"
                                                 defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
                                                 labelClasses="text-text-primary"
                                             />
                                         </div>
-                                        <div className="w-1/4">
+                                        <div className="w-full sm:w-1/4">
                                             <TextInput
                                                 value={item.duration}
                                                 onChange={(e) => updateJobExperience(i, "duration", e.target.value)}
                                                 error={errors?.[`job_experiences.${i}.duration`] || ''}
                                                 id={`duration-${i}`}
                                                 placeholder="EX: 4 Years"
-                                                label={
-                                                    <>
-                                                        Duration 
-                                                    </>
-                                                }
+                                                label="Duration"
                                                 defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
                                                 labelClasses="text-text-primary"
                                             />
                                         </div>
-                                        <div className="w-1/4">
+                                        <div className="w-full sm:w-1/4">
                                             <TextInput
                                                 value={item.company}
                                                 onChange={(e) => updateJobExperience(i, "company", e.target.value)}
                                                 error={errors?.[`job_experiences.${i}.company`] || ''}
                                                 id={`company-${i}`}
                                                 placeholder="Company Name"
-                                                label={
-                                                    <>
-                                                        Company Name 
-                                                    </>
-                                                }
+                                                label="Company Name"
                                                 defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
                                                 labelClasses="text-text-primary"
                                             />
                                         </div>
-                                        <div className="w-1/4">
-                                            <Select
-                                                placeholder="Select Country"
-                                                label={
-                                                    <>
-                                                        Country 
-                                                    </>
-                                                }
-                                                items={countries}
-                                                selected={item.country}
-                                                setSelected={(value) => updateJobExperience(i, "country", value)}
-                                                handleValueChange={(value) => updateJobExperience(i, "country", value)}
-                                                error={errors?.[`job_experiences.${i}.country_id`] || ''}
-                                                defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
-                                            />
+                                        <div className="w-full sm:w-1/4 flex flex-col sm:flex-row gap-2">
+                                            <div className="flex-grow">
+                                                <Select
+                                                    placeholder="Select Country"
+                                                    label="Country"
+                                                    items={countries}
+                                                    selected={item.country}
+                                                    setSelected={(value) => updateJobExperience(i, "country", value)}
+                                                    handleValueChange={(value) => updateJobExperience(i, "country", value)}
+                                                    error={errors?.[`job_experiences.${i}.country_id`] || ''}
+                                                    defaultClasses="border-2 border-[#848585] border-l-4 border-l-red-500 focus:border-[#848585]"
+                                                />
+                                            </div>
+                                            {data.job_experiences.length > 1 && (
+                                                <button
+                                                    type="button"
+                                                    onClick={() => deleteExperience(i)}
+                                                    className="bg-warning text-white text-sm p-2 h-[42px] mt-6 sm:mt-0 flex items-center justify-center sm:w-9"
+                                                >
+                                                    <FaTrashAlt />
+                                                </button>
+                                            )}
                                         </div>
-                                        {data.job_experiences.length > 1 && (
-                                            <button type="button" onClick={() => deleteExperience(i)}
-                                                className="bg-warning text-white text-sm w-9 text-center p-2.5 h-9 mt-5 flex item-center justify-between">
-                                                <FaTrashAlt /></button>)}
                                     </div>
                                 ))}
-
-
                             </div>
 
                             {/* Summary for application */}
@@ -915,12 +906,13 @@ const JobDemand = () => {
 
                             {/* Physical Details */}
                             <div className="mb-6">
-                                <div className="grid grid-cols-12 gap-3 mb-1">
-                                    <div className="col-span-2 flex items-center">
+                                {/* Row 1 */}
+                                <div className="grid grid-cols-1 md:grid-cols-12 gap-3 mb-3">
+                                    <div className="md:col-span-2 flex items-center">
                                         <span className="font-bold">Shirt Size</span>
                                         <span className="mx-2">:</span>
                                     </div>
-                                    <div className="col-span-3">
+                                    <div className="md:col-span-3">
                                         <Select
                                             placeholder="Select Here"
                                             items={shirtSizes}
@@ -928,85 +920,88 @@ const JobDemand = () => {
                                             setSelected={setShirtSize}
                                             handleValueChange={(value) => setData('shirt_size', value.id)}
                                             error={errors.shirt_size}
-                                            defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                            defaultClasses="border-2 border-[#848585] focus:border-[#848585] w-full"
                                         />
                                     </div>
-                                    <div className="col-span-3 flex items-center">
+                                    <div className="md:col-span-3 flex items-center">
                                         <span className="font-bold">Weight (In Kgs)</span>
                                         <span className="mx-2">:</span>
                                     </div>
-                                    <div className="col-span-4">
+                                    <div className="md:col-span-4">
                                         <TextInput
                                             placeholder="Typing Here"
                                             value={data.weight}
                                             onChange={(e) => setData('weight', e.target.value)}
                                             error={errors.weight}
                                             required={true}
-                                            defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                            defaultClasses="border-2 border-[#848585] focus:border-[#848585] w-full"
                                         />
                                     </div>
                                 </div>
 
-                                <div className="grid grid-cols-12 gap-3 mb-1">
-                                    <div className="col-span-2 flex items-center">
+                                {/* Row 2 */}
+                                <div className="grid grid-cols-1 md:grid-cols-12 gap-3 mb-3">
+                                    <div className="md:col-span-2 flex items-center">
                                         <span className="font-bold">Pant Size (Waist)</span>
                                         <span className="mx-2">:</span>
                                     </div>
-                                    <div className="col-span-3">
+                                    <div className="md:col-span-3">
                                         <TextInput
                                             placeholder="Typing Here"
                                             value={data.pant_size}
                                             onChange={(e) => setData('pant_size', e.target.value)}
                                             error={errors.pant_size}
-                                            defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                            defaultClasses="border-2 border-[#848585] focus:border-[#848585] w-full"
                                         />
                                     </div>
-                                    <div className="col-span-3 flex items-center">
+                                    <div className="md:col-span-3 flex items-center">
                                         <span className="font-bold">Height (In Centimeters)</span>
                                         <span className="mx-2">:</span>
                                     </div>
-                                    <div className="col-span-4">
+                                    <div className="md:col-span-4">
                                         <TextInput
                                             placeholder="Typing Here"
                                             value={data.height}
                                             onChange={(e) => setData('height', e.target.value)}
                                             error={errors.height}
                                             required={true}
-                                            defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                            defaultClasses="border-2 border-[#848585] focus:border-[#848585] w-full"
                                         />
                                     </div>
                                 </div>
 
-                                <div className="grid grid-cols-12 gap-3 mb-1">
-                                    <div className="col-span-2 flex items-center">
+                                {/* Row 3 */}
+                                <div className="grid grid-cols-1 md:grid-cols-12 gap-3 mb-1">
+                                    <div className="md:col-span-2 flex items-center">
                                         <span className="font-bold">Shoes Size</span>
                                         <span className="mx-2">:</span>
                                     </div>
-                                    <div className="col-span-3">
+                                    <div className="md:col-span-3">
                                         <TextInput
                                             placeholder="Typing Here"
                                             value={data.show_size}
                                             onChange={(e) => setData('show_size', e.target.value)}
                                             error={errors.show_size}
                                             id="show-size"
-                                            defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                            defaultClasses="border-2 border-[#848585] focus:border-[#848585] w-full"
                                         />
                                     </div>
-                                    <div className="col-span-3 flex items-center">
+                                    <div className="md:col-span-3 flex items-center">
                                         <span className="font-bold">Nearest Airport</span>
                                         <span className="mx-2">:</span>
                                     </div>
-                                    <div className="col-span-4">
+                                    <div className="md:col-span-4">
                                         <TextInput
                                             placeholder="Typing Here"
                                             value={data.nearest_airport}
                                             onChange={(e) => setData('nearest_airport', e.target.value)}
                                             error={errors.nearest_airport}
-                                            defaultClasses="border-2 border-[#848585] focus:border-[#848585]"
+                                            defaultClasses="border-2 border-[#848585] focus:border-[#848585] w-full"
                                         />
                                     </div>
                                 </div>
                             </div>
+
 
                             <h4 className="text-success text-md my-4">Add Any Type of documents</h4>
 
