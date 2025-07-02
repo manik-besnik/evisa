@@ -24,9 +24,9 @@ const handleVisaClick = (visa) => {
         <WebLayout showBgImage={true} showServiceImage={true}>
             <Head title="Other | Dubai E-Visa" />
             <div className="container">
-                <div className="grid grid-cols-2 gap-x-20">
-                    <SearchContainer />
-                    <div className="w-7/12 h-[85vh]">
+                <div className="flex flex-col lg:grid lg:grid-cols-2 lg:gap-x-20 gap-y-8 lg:gap-y-0">
+                   
+                    <div className="order-1 lg:order-2 w-full lg:w-7/12 h-auto lg:h-[85vh]">
                         <div className="bg-[#6b7377c8] h-full relative ">
                             {/* Header Section */}
                             <div className="text-center flex">
@@ -55,7 +55,7 @@ const handleVisaClick = (visa) => {
                             </div>
                         </div>
                     </div>
-
+                    <SearchContainer />
                 </div>
             </div>
         </WebLayout>

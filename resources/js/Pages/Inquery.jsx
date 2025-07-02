@@ -208,8 +208,8 @@ const Inquery = () => {
             <script src="https://www.google.com/recaptcha/api.js" async defer></script>
             <div className="container">
                 <form onSubmit={handleSubmit}>
-                    <div className="grid grid-cols-2 gap-x-20">
-                        <div className="w-12/12">
+                    <div className="flex flex-col-reverse lg:flex-row lg:gap-x-20">
+                        <div className="w-full lg:w-1/2">
                             <h4 className="text-success text-md my-4">Add Any Type of documents</h4>
 
                             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 place-items-center gap-2 mt-10">
@@ -227,7 +227,7 @@ const Inquery = () => {
                                 ))}
                             </div>
                         </div>
-                        <div className="w-6/12 h-[85vh]">
+                        <div className="w-full lg:w-3/12 h-auto lg:h-[85vh] mb-6 lg:mb-0">
                             <div className="bg-[#6b7377c8] h-full relative p-5">
                                 <h4 className="text-white font-medium text-lg mb-4">Feel free to get in touch</h4>
 
